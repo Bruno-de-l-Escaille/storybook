@@ -1,0 +1,99 @@
+
+    .Toastify__toast--error {
+        border-radius: 5px;
+        box-shadow: 0 0.5rem 1rem rgba(#000, 0.2);
+        align-items: center;
+        color: #FFF;
+        width: 295px;
+        height: 90px;
+        background: rgba(223, 0, 41, .85);
+
+        i{
+          font-size: 1.9rem;
+          font-weight: bold;
+          margin-left: 1rem;
+        }
+  
+          h5 {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: .25rem;
+            margin-top : -2.3rem;
+            margin-left: 5rem
+          }
+          p {
+            margin-top: 0.5rem;
+            font-size: .8rem;
+            color: #FFF;
+            margin-left: 1.2rem;
+          }
+    }
+
+    .Toastify__toast--success{
+        border-radius: 5px;
+        box-shadow: 0 0.5rem 1rem rgba(#000, 0.2);
+        align-items: center;
+        color: #FFF;
+        width: 295px;
+        height: 90px;
+        background: rgba(76, 175, 80, .85);
+        i{
+          font-size: 1.9rem;
+          font-weight: bold;
+          margin-left: 1rem;
+        }
+  
+          h5 {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: .25rem;
+            margin-top : -2.3rem;
+            margin-left: 5rem
+          }
+          p {
+            margin-top: 0.5rem;
+            font-size: .8rem;
+            color: #FFF;
+            margin-left: 2rem;
+          }
+    }
+
+    .Toastify__toast--warning{
+        border-radius: 5px;
+        box-shadow: 0 0.5rem 1rem rgba(#000, 0.2);
+        align-items: center;
+        color: #FFF;
+        height: 90px;
+        background: rgba(255, 184, 34, .85);
+
+        i{
+          font-size: 1.9rem;
+          font-weight: bold;
+          margin-left: 1rem;
+        }
+  
+          h5 {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: .25rem;
+            margin-top : -2.3rem;
+            margin-left: 5rem
+          }
+          p {
+            margin-top: 0.5rem;
+            font-size: .8rem;
+            color: #FFF;
+            margin-left: 1.7rem;
+          }
+    }
+
+
+
+  
+
+      
+  
+      
+
+
+

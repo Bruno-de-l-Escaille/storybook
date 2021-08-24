@@ -1,0 +1,53 @@
+.flashMessage {
+  position: fixed;
+  top: 4rem;
+  right: 0.5rem;
+  padding: 1rem 1.5rem;
+  background-color: #e7e7e7;
+  border-radius: 4px;
+  width: 18%;
+  box-shadow: 0 0.5rem 1rem rgba(#000, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  transition: transform 0.3s ease-in-out;
+  z-index: 10;
+  transform: translateX(110%);
+  &.error {
+    background-color: rgba(223, 0, 41, 0.85);
+  }
+  &.warning {
+    background-color: rgba(255, 184, 34, 0.85);
+  }
+  &.success {
+    background-color: rgba(76, 175, 80, 0.85);
+  }
+  &.opened {
+    transform: translateX(0);
+  }
+  i {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+
+  h5 {
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0;
+    margin-bottom: 0.25rem;
+  }
+  p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #fff;
+  }
+
+  span {
+    margin-top: -3.4rem;
+    font-size: 0.9rem;
+    color: #fff;
+    margin-right: -1.2rem;
+  }
+}

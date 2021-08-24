@@ -1,0 +1,269 @@
+@import "../../styles/variables";
+@import "~foundation-sites/scss/foundation";
+
+.nav {
+  height: 100%;
+  width: 100%;
+}
+.container {
+  color: #c7e8fe;
+  background: #29394d;
+  padding-left: 60px;
+  position: relative;
+}
+.vertical {
+  display: flex;
+  flex-direction: row;
+  .container {
+    padding-left: 0;
+    width: 3.7rem;
+    height: 9000px;
+    transition: width 0.5s cubic-bezier(0, 0, 0.2, 1);
+    .control {
+      visibility: hidden;
+    }
+    .item a {
+      visibility: hidden;
+    }
+    &:hover {
+      width: 20rem;
+      .item {
+        width: 92%;
+        div {
+          opacity: 1;
+          visibility: visible;
+          display: inline-block;
+        }
+        a {
+          visibility: visible;
+        }
+      }
+
+      .subitemvertical {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+        width: 86%;
+        margin-left: 6%;
+
+        &:hover {
+          background-color: #3c4e64;
+        }
+        a {
+          color: #c7e8fe;
+          display: flex;
+          font-size: 0.8rem;
+          text-transform: uppercase;
+          margin-left: 15px;
+        }
+      }
+
+      .control {
+        visibility: visible;
+      }
+    }
+  }
+
+  .control {
+    border-radius: 15px;
+    top: 15px;
+    right: -15px;
+    left: auto;
+    bottom: auto;
+    i {
+      transform: rotate(90deg);
+    }
+    &:hover i {
+      transform: rotate(0deg);
+    }
+  }
+  .item {
+    div {
+      opacity: 0;
+      visibility: hidden;
+      display: none;
+      white-space: nowrap;
+    }
+  }
+  .menu {
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+    margin-top: 30px;
+  }
+  .dropdown > div {
+    position: relative;
+    width: auto;
+  }
+}
+.control {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  left: 15px;
+  bottom: -15px;
+  z-index: 99;
+
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #29394d;
+  border: 2px solid #ffffff;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 12px;
+  i {
+    transition: 0.7s;
+  }
+  &:hover i {
+    transform: rotate(90deg);
+  }
+}
+.menu {
+  display: flex;
+  margin: 0;
+}
+.dropdown {
+  margin: 0;
+  > .more {
+    text-transform: uppercase;
+    text-align: right;
+    padding: 15px;
+    color: #95959f !important;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin: 0;
+    float: right;
+  }
+}
+
+.more {
+  text-transform: uppercase;
+  text-align: right;
+  padding: 15px;
+  color: #95959f !important;
+  font-size: 0.7rem;
+  cursor: pointer;
+  margin: 0;
+  float: right;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background: #29394d;
+  color: #c7e8fe;
+  &:hover {
+    color: #c7e8fe;
+    background: #3c4e64;
+  }
+
+  img {
+    margin-right: 10px;
+  }
+  i {
+    transition: transform 0.2s, -webkit-transform 0.2s;
+    margin-left: 2rem;
+  }
+  a {
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 14px;
+    padding-left: 0.1rem;
+    color: #c7e8fe;
+  }
+}
+
+.subitem {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+
+  &:hover {
+    background-color: #3c4e64;
+  }
+  a {
+    color: #c7e8fe;
+    display: flex;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-left: 15px;
+  }
+}
+.dropdown > div {
+  display: none;
+  padding: 0;
+  position: absolute;
+  z-index: 101;
+  display: none;
+  right: 0;
+  left: 0;
+  background: #29394d;
+  width: 24rem;
+  ul {
+    margin: 0;
+  }
+}
+.dropdown:hover {
+  position: relative;
+  i {
+    transform: rotate(180deg);
+  }
+  > div {
+    display: block;
+  }
+}
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #6d7f92;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-right: 6px;
+}
+.vertical > div {
+  flex: 1;
+}
+
+@include breakpoint(small only) {
+  .container {
+    padding-left: 0;
+    padding-right: 1rem;
+  }
+  .menu {
+    display: none;
+  }
+  .control {
+    bottom: 15px;
+  }
+
+  .vertical {
+    position: relative;
+    display: block;
+    .menu {
+      display: flex;
+    }
+    .container {
+      position: absolute;
+      z-index: 9991;
+      left: 0;
+      width: 100% !important;
+      padding-bottom: 1rem;
+
+      .item a {
+        opacity: 1;
+        visibility: visible;
+        display: inline-block;
+      }
+    }
+    .control {
+      right: 15px;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+@import "./colors";
+@import "./spacing";
+
+$transitions: ();
+@for $i from 1 through 20 {
+  $transitions: append($transitions, #{$i * 0.1}s all ease-in-out);
+}
+
+$h-font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$main-header-font: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$main-body-font: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$h-color: rgb(63, 63, 63);
+
+$main-color: #8d8d8d;
+// $main-blue: rgb(80, 129, 190); //#5081BE
+$main-blue: rgb(24, 160, 251);
+$main-orange: rgb(244, 150, 73); //#F49649
+$main-light-gray: #f3f3f3;
+$main-medium-gray: #9a9a9a;
+$main-dark-gray: #505050;
+$gray-dark: #505050;
+$reveal-bg: #f2f2f2;
+$main-box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06),
+  0 1px 4px rgba(0, 0, 0, 0.08);
+$portal-color: #373c54;
+$portal-blue: #2f47c2;
+$portal-new-blue: #18a0fb;
+$portal-new-light-blue: #c7e8fe;
+$icon-color: #69719d;
+$new-title-color: #29394d;
+$new-main-color: #3c4e64;
+$new-gray: #6d7f92;
+$new-light-gray: #f1f2f4;
+$new-very-light-gray: #f8f9fa;
+$image-shadow: 0 1px 15px 1px rgba(0, 0, 0, 0.24), 0 1px 6px rgba(0, 0, 0, 0.04);
+$shadow-color: rgba(41, 57, 77, 0.1);
+$bg-new-light-blue: rgba(199, 232, 254, 0.1);
+
+$tag-color: #18a0fb;
+
+$bg-empty-avatar: linear-gradient(
+  to bottom right,
+  #ddd,
+  #ccc,
+  #c5c5c5,
+  #bbb,
+  #b5b5b5,
+  #aaa
+);

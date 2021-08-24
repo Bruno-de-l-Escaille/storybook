@@ -1,0 +1,34 @@
+@import "~foundation-sites/scss/foundation";
+
+.articleList1 {
+  margin-bottom: 1.625rem;
+  .articleTpl1 {
+    padding-left: 0.75rem;
+  }
+}
+
+.articleTpl1_btm {
+  margin-bottom: 0.95rem;
+}
+
+.articleTpl2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@include breakpoint(small only) {
+  .articleList1 {
+    margin-bottom: 0;
+    .articleTpl1 {
+      padding-left: 0;
+      // margin-bottom: 1.625rem;
+    }
+  }
+
+  // .articleTpl2 {
+  //   > div {
+  //     margin-top: 1.625rem;
+  //   }
+  // }
+}

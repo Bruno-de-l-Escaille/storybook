@@ -1,0 +1,452 @@
+{
+    "enabled": true,
+    "firstName": "Rolf",
+    "lastName": "DECLERCK",
+    "language": "nl",
+    "type": "USER",
+    "status": "CREATED",
+    "situation": "active",
+    "institute": "IEC",
+    "numeroAgreation": "",
+    "gender": "MALE",
+    "title": "De heer",
+    "salutation": "Geachte confrater",
+    "function": "Raadslid IAB",
+    "isSecure": true,
+    "hasAgreedTerms": false,
+    "id": 19979,
+    "mainEmail": "rolf.declerck@be.gt.com",
+    "mainPhone": "+32475265581",
+    "email": [
+    {
+    "id": 17477,
+    "email": "rdeclerck@dwva.be",
+    "main": 0,
+    "ranking": 2,
+    "type": "PROFESSIONAL",
+    "isBounced": 0,
+    "isInternal": false
+    },
+    {
+    "id": 22774,
+    "email": "rdeclerck@kpmg.com",
+    "main": 0,
+    "ranking": 1,
+    "type": "PROFESSIONAL",
+    "description": "",
+    "isBounced": 0,
+    "isInternal": false
+    },
+    {
+    "id": 66022,
+    "email": "info@radianceconsult.be",
+    "main": 0,
+    "ranking": 1,
+    "type": "PROFESSIONAL",
+    "isBounced": 0,
+    "isInternal": false
+    },
+    {
+    "id": 71958,
+    "email": "rolf.declerck@be.gt.com",
+    "main": 1,
+    "ranking": 1,
+    "type": "PROFESSIONAL",
+    "isBounced": 0,
+    "isInternal": false
+    }
+    ],
+    "userMobilePhone": {
+    "intlFormat": "+32 475 26 55 81",
+    "countryCode": "be"
+    },
+    "role": {
+    "id": 31,
+    "function": "",
+    "type": "EXTERNAL",
+    "typeStatus": "",
+    "validated": false,
+    "internal": false,
+    "createdAt": {
+    "date": "2017-08-01 12:27:50.000000",
+    "timezone_type": 3,
+    "timezone": "UTC"
+    },
+    "updatedAt": {
+    "date": "2018-07-26 09:47:53.000000",
+    "timezone_type": 3,
+    "timezone": "UTC"
+    },
+    "organization": {
+    "id": 8,
+    "name": "Institute for Tax Advisors and Accountants",
+    "abbreviation": "ITAA",
+    "avatarWebPath": "storage/media/IMAGE/2753/AVATAR_67e577576a7d51acc622dc82bd73e99af88451b0.png",
+    "avatarUrl": "https://s3.tamtam.pro/prod/storage/media/IMAGE/2753/AVATAR_67e577576a7d51acc622dc82bd73e99af88451b0.png",
+    "btbPreferences": {
+    "authorizations": [
+    {
+    "role": "MANAGER",
+    "auth": [
+    "*"
+    ]
+    },
+    {
+    "role": "LEGAL_REPRESENTATIVE_ADMIN",
+    "auth": [
+    "*"
+    ]
+    },
+    {
+    "role": "LEGAL_REPRESENTATIVE_MANAGER",
+    "auth": [
+    "*"
+    ]
+    },
+    {
+    "role": "OFFICIAL",
+    "auth": [
+    "approver",
+    "inbox_viewer",
+    "outbox_viewer",
+    "handle_filter_document_task"
+    ]
+    }
+    ]
+    },
+    "directoryActivated": 1,
+    "dirPreferences": {
+    "btbEmail": "emmanuel.degreve+bvn@degandpartners.com",
+    "appliedChannelsStatus": [
+    {
+    "id": "BILLTOBOX_INIT_ID",
+    "name": "billtobox",
+    "status": "deactivated"
+    },
+    {
+    "id": "BILLTOBOXFILES_INIT_ID",
+    "name": "billtoboxfiles",
+    "status": "activated"
+    }
+    ]
+    },
+    "directBilling": true,
+    "blogActivated": 1,
+    "mediaActivated": 0,
+    "forumActivated": 0,
+    "webtoolsActivated": 0,
+    "eventActivated": 1,
+    "paymentActivated": 0,
+    "dataActivated": 1,
+    "teamActivated": 0,
+    "surveyActivated": 0,
+    "fluxActivated": 1,
+    "chatActivated": 0,
+    "synetonActivated": 0,
+    "socialNetworks": [],
+    "emailingPreferences": {
+    "from_email": "communication@iec-iab.be",
+    "base_url": "http://tamtam.pro/emailsIec/",
+    "from_name": "IEC - IAB"
+    },
+    "emailingTestingPreferences": {
+    "autoSend": true,
+    "mandatoryTest": true
+    },
+    "emailingActivated": 1,
+    "appsValidationStatus": {
+    "wtb": [],
+    "btb": [],
+    "btbfiles": []
+    },
+    "mediaPreferences": {
+    "languages": "FR,NL",
+    "generalTypes": "IMAGE,VIDEO,PDF,PPT",
+    "publicProfile": "1",
+    "defaultData": "{}"
+    },
+    "hubPreferences": {
+    "layout_settings": [
+    {
+    "sectionId": "blog",
+    "order": 1,
+    "enabled": true
+    },
+    {
+    "sectionId": "event",
+    "order": 2,
+    "enabled": true
+    },
+    {
+    "sectionId": "forum",
+    "order": 3,
+    "enabled": true
+    },
+    {
+    "sectionId": "media",
+    "order": 4,
+    "enabled": true
+    }
+    ]
+    },
+    "blogPreferences": {
+    "layout_settings": [
+    {
+    "sectionId": "section-type-4",
+    "order": 1,
+    "enabled": true
+    },
+    {
+    "sectionId": "section-type-5",
+    "order": 2,
+    "enabled": false
+    },
+    {
+    "sectionId": "section-type-1",
+    "order": 3,
+    "enabled": true
+    },
+    {
+    "sectionId": "section-type-2",
+    "order": 4,
+    "enabled": false
+    },
+    {
+    "sectionId": "section-type-3",
+    "order": 5,
+    "enabled": false
+    },
+    {
+    "sectionId": "section-type-6",
+    "order": 6,
+    "enabled": true
+    },
+    {
+    "sectionId": "section-type-7",
+    "order": 7,
+    "enabled": false
+    },
+    {
+    "sectionId": "section-type-8",
+    "order": 8,
+    "enabled": false
+    },
+    {
+    "sectionId": "section-type-9",
+    "order": 9,
+    "enabled": false
+    }
+    ]
+    },
+    "smsCredit": 0,
+    "profitMargin": 0,
+    "defaultMemberAuthorisationMode": "",
+    "defaultProspectAuthorisationMode": "",
+    "gdprAlertEnabled": 0,
+    "csGeneralScope": "",
+    "portalActivatedApps": "",
+    "portalCustomApps": "",
+    "portalClientActivated": 0,
+    "portalOfficialActivated": 0,
+    "verifiedEmails": [
+    {
+    "email": "communication@itaa.be",
+    "name": "- ITAA -",
+    "main": 1
+    },
+    {
+    "email": "communication@iec-iab.be",
+    "name": "IEC - IAB",
+    "main": 0
+    }
+    ],
+    "organizationSettingsId": 6,
+    "appsState": [
+    {
+    "code": "blog",
+    "name": {
+    "fr": "Blog",
+    "en": "Blog",
+    "nl": "Blog"
+    },
+    "url": "https://blog.v2.tamtam.pro/",
+    "icon": "https://s3.tamtam.pro/v2/apps/blog.png",
+    "activated": true
+    },
+    {
+    "code": "media",
+    "name": {
+    "fr": "Media",
+    "en": "Media",
+    "nl": "Media"
+    },
+    "url": "https://media.v2.tamtam.pro/",
+    "icon": "https://s3.tamtam.pro/v2/apps/media.png",
+    "activated": false
+    },
+    {
+    "code": "forum",
+    "name": {
+    "fr": "Forum",
+    "en": "Forum",
+    "nl": "Forum"
+    },
+    "url": "https://forum.v2.tamtam.pro/",
+    "icon": "https://s3.tamtam.pro/v2/apps/forum.png",
+    "activated": false
+    },
+    {
+    "code": "emailing",
+    "name": {
+    "fr": "Emailing",
+    "en": "Emailing",
+    "nl": "Emailing"
+    },
+    "url": "https://sending.tamtam.pro/",
+    "icon": "https://s3.tamtam.pro/v2/apps/emailing.png",
+    "activated": true
+    },
+    {
+    "code": "ebox",
+    "name": {
+    "fr": "E-Box",
+    "en": "E-Box",
+    "nl": "E-Box"
+    },
+    "url": "https://sending.tamtam.pro/e_box",
+    "icon": "https://s3.tamtam.pro/v2/apps/ebox.png",
+    "activated": true
+    },
+    {
+    "code": "sms",
+    "name": {
+    "fr": "SMS",
+    "en": "SMS",
+    "nl": "SMS"
+    },
+    "url": "https://sending.tamtam.pro/sms",
+    "icon": "https://s3.tamtam.pro/v2/apps/sms.png",
+    "activated": true
+    },
+    {
+    "code": "talk",
+    "name": {
+    "fr": "Talk",
+    "en": "Talk",
+    "nl": "Talk"
+    },
+    "url": "https://talk.v2.tamtam.pro/",
+    "icon": "https://s3.tamtam.pro/v2/apps/talk.png",
+    "activated": false
+    },
+    {
+    "code": "data",
+    "name": {
+    "fr": "Accounting",
+    "en": "Accounting",
+    "nl": "Accounting"
+    },
+    "url": "https://accounting.v2.tamtam.pro/",
+    "icon": "https://s3.tamtam.pro/v2/apps/accounting.png",
+    "activated": true
+    },
+    {
+    "code": "team",
+    "name": {
+    "fr": "Powerteam",
+    "en": "Powerteam",
+    "nl": "Powerteam"
+    },
+    "url": "https://powerteam.v2.tamtam.pro/",
+    "icon": "https://s3.tamtam.pro/prod/apps/powerteam.png",
+    "activated": false
+    },
+    {
+    "code": "webtools",
+    "name": {
+    "fr": "Webtools",
+    "en": "Webtools",
+    "nl": "Webtools"
+    },
+    "url": "https://webtool.v2.tamtam.pro/",
+    "icon": "https://s3.tamtam.pro/v2/apps/webtools.png",
+    "activated": false
+    },
+    {
+    "code": "survey",
+    "name": {
+    "fr": "Survey",
+    "en": "Survey",
+    "nl": "Survey"
+    },
+    "url": "https://survey.v2.tamtam.pro/",
+    "icon": "https://s3.tamtam.pro/v2/apps/survey.png",
+    "activated": false
+    },
+    {
+    "code": "event",
+    "name": {
+    "fr": "Event",
+    "en": "Event",
+    "nl": "Event"
+    },
+    "url": "https://event.v2.tamtam.pro/",
+    "icon": "https://s3.tamtam.pro/v2/apps/event.png",
+    "activated": true
+    },
+    {
+    "code": "directory",
+    "name": {
+    "fr": "Directory (HQ)",
+    "en": "Directory (HQ)",
+    "nl": "Directory (HQ)"
+    },
+    "url": "https://v2.tamtam.pro/folders",
+    "icon": "https://s3.tamtam.pro/v2/apps/directory.png",
+    "activated": true
+    },
+    {
+    "code": "payment",
+    "name": {
+    "fr": "Payment",
+    "en": "Payment",
+    "nl": "Payment"
+    },
+    "url": "https://payment.v2.tamtam.pro/",
+    "icon": "https://s3.tamtam.pro/v2/apps/payment.png",
+    "activated": false
+    },
+    {
+    "code": "portal",
+    "name": {
+    "fr": "Portal",
+    "en": "Portal",
+    "nl": "Portal"
+    },
+    "url": "https://portal.v2.tamtam.pro/",
+    "icon": "https://s3.tamtam.pro/v2/apps/portal.png",
+    "activated": false
+    }
+    ],
+    "startDate": null,
+    "hasFiduciariesAdmin": true
+    }
+    },
+    "blogRoleInOrganization": [
+    {
+    "blogId": 6,
+    "headlines": [],
+    "contactEmail": null,
+    "id": 27,
+    "role": "AUTHOR",
+    "preferences": {
+    "allowCreateTags": 0,
+    "allowedLanguages": [
+    "nl"
+    ]
+    },
+    "mandated": false
+    }
+    ],
+    "defaultSignature": null
+    }
