@@ -225,6 +225,7 @@ export const prepareArticle = (article, env = "", host) => {
     countComments,
     publishedAt,
     social,
+    language,
   } = article;
 
   let socialData = { countLikes, countDislikes, countComments };
@@ -265,5 +266,6 @@ export const prepareArticle = (article, env = "", host) => {
     countComments,
     publishedAt,
     socialData,
+    language,
   };
 };

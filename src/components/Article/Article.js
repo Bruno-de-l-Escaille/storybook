@@ -57,9 +57,23 @@ export const Article = ({
     authors,
     socialData,
     hasRelativePath,
+    language,
   } = data;
   const hasActions = onDelete || onEdit || onPublish ? true : false;
   const mediaUrl = medias && medias.length > 0 ? medias[0].path : mainMedia;
+
+  let atText = "";
+  switch (language) {
+    case "fr":
+      atText = "à";
+      break;
+    case "nl":
+      atText = "bij";
+      break;
+    default:
+      atText = "at";
+      break;
+  }
 
   const renderAvatar = () => {
     if (isExternal) {
@@ -237,7 +251,7 @@ export const Article = ({
           {publishedAt && (
             <div className={styles.publishedAt}>
               {moment(publishedAt, API_DATE_FORMAT).format(
-                "DD MMM YYYY [at] hh:mm"
+                "DD MMM YYYY " + atText + " hh:mm"
               )}
             </div>
           )}
@@ -312,7 +326,7 @@ export const Article = ({
               {publishedAt && (
                 <div className={styles.publishedAt}>
                   {moment(publishedAt, API_DATE_FORMAT).format(
-                    "DD MMM YYYY [at] hh:mm"
+                    "DD MMM YYYY " + atText + " hh:mm"
                   )}
                 </div>
               )}
@@ -356,7 +370,7 @@ export const Article = ({
           {publishedAt && (
             <div className={styles.publishedAt}>
               {moment(publishedAt, API_DATE_FORMAT).format(
-                "DD MMM YYYY [at] hh:mm"
+                "DD MMM YYYY " + atText + " hh:mm"
               )}
             </div>
           )}
@@ -437,7 +451,7 @@ export const Article = ({
           {publishedAt && (
             <div className={styles.publishedAt}>
               {moment(publishedAt, API_DATE_FORMAT).format(
-                "DD MMM YYYY [at] hh:mm"
+                "DD MMM YYYY " + atText + " hh:mm"
               )}
             </div>
           )}

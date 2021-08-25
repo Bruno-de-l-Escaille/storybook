@@ -86,7 +86,7 @@ export class SubMenu extends Component {
   };
 
   render() {
-    const { lng, menu, currentCommunity } = this.props;
+    const { menu, currentCommunity } = this.props;
     return (
       <div className={this.state.isVertical ? style.vertical : ""}>
         <nav className={style.container}>

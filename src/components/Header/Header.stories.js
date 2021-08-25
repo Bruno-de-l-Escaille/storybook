@@ -14,7 +14,7 @@ const App = {
 
 const AppPrivate = {
   appName: "Blog",
-  appLogoUrl: "http://blog.degandpartners.com/img/deg2.png",
+  appLogoUrl: "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/logo/deg.png",
   appUrl: "https://blog.tamtam.pro/fr",
   homeUrl: "https://one.tamtam.pro",
   isPrivateBlog: true,
@@ -334,6 +334,12 @@ const notifications = [
 ];
 
 const menu = [
+  {
+    title: "Acceuil",
+    url: `/fr`,
+    iconUrl: "/img/icons/home.svg",
+    community: false,
+  },
   {
     title: "mes articles",
     url: `/articles/my_articles`,
