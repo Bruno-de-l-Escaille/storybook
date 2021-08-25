@@ -16,7 +16,6 @@ export * from "./components/Header/SubMenu";
 export * from "./components/Article/Article";
 export * from "./components/Article/ArticleList";
 export * from "./components/Article/ArticleListCarousel";
-export * from "./components/Article/ArticleModal";
 export * from "./components/Avatar/Avatar";
 export * from "./components/AvatarCard/AvatarCard";
 export * from "./components/Modal/ModalConfirm";

@@ -1,1 +1,23 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# TamTam Storybook
+
+Current version: 0.1.0
+
+# Setup
+
+- 1 - Add to package.json:
+  "tamtam-components": "https://github.com/Bruno-de-l-Escaille/storybook.git#v0.1.0"
+
+## Note: you can change the version
+
+- 2 - Include the css file to the global style
+  @import "tamtam-components/build/css/main.css";
+
+- 3 - Start using components
+  Ex: Header component :
+  import { Header } from "tamtam-components";
+
+  <Header
+    auth={{ navCommunity: null, user: null, }}
+    lng={lng}
+    onLanguageChange={(lang) => changeLng(lang)}
+    app={App} />

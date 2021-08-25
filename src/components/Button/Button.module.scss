@@ -1,26 +1,26 @@
-.button{
-    border: none;
-    color: white;
-    //padding: 15px 20px;
-    text-align : center;
-    text-decoration : none;
-    display: inline-block;
-    font-size: 20px;
-    border-radius : 4px;
-    cursor: pointer;
-    width: 230px;
-    height: 40px;
+.button {
+  border: none;
+  color: white;
+  //padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  min-width: 230px;
+  height: 40px;
 }
 
-.primary{
-    background :#008CBA;
+.primary {
+  background: #18a0fb;
 }
-.secondary{
-    background : #e7e7e7;
+.secondary {
+  background: #e7e7e7;
 }
-.success{
-    background : #4CAF50;
+.success {
+  background: #4caf50;
 }
-.danger{
-    background: #f44336;
+.danger {
+  background: #f44336;
 }
