@@ -29,3 +29,10 @@ Ex: Header component :
     onLanguageChange={(lang) => changeLng(lang)}
     app={App} />
 ```
+
+## Pour accèder au différents composants: 
+https://bruno-de-l-escaille.github.io/storybook
+
+Puis vous cliquez sur l'onglet story en bas pour voir le code du composant
+
+![](https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/wiki/storybook.png)
