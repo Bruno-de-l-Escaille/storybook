@@ -390,6 +390,7 @@ export const HeaderLogedIn = () => (
     rightIcons={rightIcons}
     app={App}
     auth={authLogin}
+    env={"local"}
     settings={[]}
     menu={menu}
     lng={select("language", ["fr", "nl", "en"], "fr")}
@@ -397,9 +398,6 @@ export const HeaderLogedIn = () => (
     onLogoutClick={(e) => console.log("Logout", e)}
     onSearchClick={() => alert("searching")}
     notifications={notifications}
-    handleNotificationClick={(e) => console.log("notif", e)}
-    handleNotificationEditClick={() => alert("Edit notif")}
-    onFaqClick={() => alert("FAQ")}
     onSelectAllCommunities={() => console.log("Communities select all")}
   />
 );
@@ -408,6 +406,7 @@ export const HeaderPrivateBlogLogedIn = () => (
     rightIcons={rightIcons}
     app={AppPrivate}
     auth={authLogin}
+    env={"local"}
     settings={[]}
     menu={menu}
     lng={select("language", ["fr", "nl", "en"], "fr")}
@@ -415,9 +414,6 @@ export const HeaderPrivateBlogLogedIn = () => (
     onLogoutClick={(e) => console.log("Logout", e)}
     onSearchClick={() => alert("searching")}
     notifications={notifications}
-    handleNotificationClick={(e) => console.log("notif", e)}
-    handleNotificationEditClick={() => alert("Edit notif")}
-    onFaqClick={() => alert("FAQ")}
     onSelectAllCommunities={() => console.log("Communities select all")}
   />
 );

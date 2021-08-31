@@ -4,7 +4,6 @@ import moment from "moment";
 import "moment/locale/fr";
 import "moment/locale/nl";
 
-import { truncateWithHTML } from "../../utils";
 import MenuItem from "./MenuItem";
 import IconClose from "../Icons/IconClose";
 import styles from "./Header.module.scss";
@@ -28,9 +27,8 @@ export default function Notifs({
   notifications,
   lng,
   auth,
-  handleNotificationClick,
-  handleEditClick,
   rightIcon,
+  appName,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentNotif, setCurrentNotif] = useState(null);
@@ -84,8 +82,17 @@ export default function Notifs({
     setCurrentNotif(notification);
     setIsOpen(true);
     if (!notification.isRead) {
-      handleNotificationClick(notification);
+      if (window.handleViewNotification) {
+        window.handleViewNotification(notification);
+      }
+
       notification.isRead = true;
+    }
+  };
+
+  const handleEditClick = () => {
+    if (window.showNotifications) {
+      window.showNotifications(appName);
     }
   };
 

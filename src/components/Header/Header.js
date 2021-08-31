@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AppendHead from "react-append-head";
 
 import styles from "./Header.module.scss";
 import MenuItem from "./MenuItem";
@@ -7,6 +8,7 @@ import Apps from "./Apps";
 import MenuProfile from "./MenuProfile";
 import Communities from "./Communities";
 import Notifs from "./Notifs";
+import TTPFaqWidget from "../TTPFaqWidget";
 
 const I18N = {
   en: {
@@ -25,7 +27,24 @@ export class Header extends Component {
     super(props);
     this.state = {
       showSettings: false,
+      isFaqWidgetLoaded: false,
     };
+  }
+
+  componentDidMount() {
+    // if (process.browser) {
+    if (window.TTPFAQWidget !== undefined) {
+      this.setState({ isFaqWidgetLoaded: true });
+    }
+    // }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      if (window.TTPFAQWidget !== undefined) {
+        this.setState({ isFaqWidgetLoaded: true });
+      }
+    }
   }
 
   _Search() {
@@ -37,12 +56,35 @@ export class Header extends Component {
     this.setState({ showSettings: !showSettings });
   };
 
+  handleShowFaqWidget = () => {
+    setTimeout(() => this.setState({ isFaqWidgetLoaded: true }), 400);
+  };
+
+  handleFaqClick = () => {
+    const { app } = this.props;
+    if (window.showFAQ) {
+      window.showFAQ(app.appName);
+    }
+  };
+
   renderLoggedIn() {
-    const { rightIcons, auth, lng, notifications } = this.props;
+    const { rightIcons, auth, lng, env, notifications, app } = this.props;
     const { navCommunity, user } = auth;
+    const { isFaqWidgetLoaded } = this.state;
 
     return (
       <>
+        <AppendHead onLoad={this.handleShowFaqWidget.bind(this)} debug>
+          <link
+            name="faq-widget"
+            rel="stylesheet"
+            href={`https://tamtam.s3-eu-west-1.amazonaws.com/cdn/faq/${env}/static/css/widget.css`}
+          ></link>
+          <script
+            name="faq-widget-script"
+            src={`https://tamtam.s3-eu-west-1.amazonaws.com/cdn/faq/${env}/static/js/widget.js`}
+          />
+        </AppendHead>
         <div className={styles.headerRight}>
           <ul className={`${styles.menu} ${styles.buttons}`}>
             {rightIcons.backoffice?.activated && (
@@ -77,14 +119,11 @@ export class Header extends Component {
                 lng={lng}
                 auth={auth}
                 rightIcon={rightIcons.notifs}
-                handleNotificationClick={(e) =>
-                  this.props.handleNotificationClick(e)
-                }
-                handleEditClick={() => this.props.handleNotificationEditClick()}
+                appName={app.appName}
               />
             )}
             {rightIcons.faq?.activated && (
-              <div onClick={() => this.props.onFaqClick()}>
+              <div onClick={this.handleFaqClick.bind(this)}>
                 <MenuItem icon={rightIcons.faq.icon} />
               </div>
             )}
@@ -109,6 +148,7 @@ export class Header extends Component {
             }
           />
         </div>
+        {isFaqWidgetLoaded && <TTPFaqWidget language={lng} auth={auth} faq />}
       </>
     );
   }

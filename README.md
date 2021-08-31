@@ -1,10 +1,11 @@
 # TamTam Storybook
 
-Current version: 0.1.0
+Current version: 0.1.1
 
 ## Setup
 
 - 1 Add to package.json:
+
 ```json
   "tamtam-components": "https://github.com/Bruno-de-l-Escaille/storybook.git#v0.1.0"
 ```
@@ -12,7 +13,8 @@ Current version: 0.1.0
 Note: you can change the version
 
 - 2 Include the css file to the global style
-```js  
+
+```js
   @import "tamtam-components/build/css/main.css";
 ```
 
@@ -21,16 +23,18 @@ Note: you can change the version
 Ex: Header component :
 
 ```js
-  import { Header } from "tamtam-components";
+import { Header } from "tamtam-components";
 
-  <Header
-    auth={{ navCommunity: null, user: null, }}
-    lng={lng}
-    onLanguageChange={(lang) => changeLng(lang)}
-    app={App} />
+<Header
+  auth={{ navCommunity: null, user: null }}
+  lng={lng}
+  onLanguageChange={(lang) => changeLng(lang)}
+  app={App}
+/>;
 ```
 
-## Pour accèder au différents composants: 
+## Pour accèder au différents composants:
+
 https://bruno-de-l-escaille.github.io/storybook
 
 Puis vous cliquez sur l'onglet story en bas pour voir le code du composant
