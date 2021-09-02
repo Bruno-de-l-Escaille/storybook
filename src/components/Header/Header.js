@@ -72,59 +72,51 @@ export class Header extends Component {
     const { navCommunity, user } = auth;
     const { isFaqWidgetLoaded } = this.state;
 
+    const loadNotifWidget =
+      rightIcons.notifs?.activated || rightIcons.faq?.activated;
+
     return (
       <>
-        <AppendHead onLoad={this.handleShowFaqWidget.bind(this)} debug>
-          <link
-            name="faq-widget"
-            rel="stylesheet"
-            href={`https://tamtam.s3-eu-west-1.amazonaws.com/cdn/faq/${env}/static/css/widget.css`}
-          ></link>
-          <script
-            name="faq-widget-script"
-            src={`https://tamtam.s3-eu-west-1.amazonaws.com/cdn/faq/${env}/static/js/widget.js`}
-          />
-        </AppendHead>
+        {loadNotifWidget && (
+          <AppendHead onLoad={this.handleShowFaqWidget.bind(this)} debug>
+            <link
+              name="faq-widget"
+              rel="stylesheet"
+              href={`https://tamtam.s3-eu-west-1.amazonaws.com/cdn/faq/${env}/static/css/widget.css`}
+            ></link>
+            <script
+              name="faq-widget-script"
+              src={`https://tamtam.s3-eu-west-1.amazonaws.com/cdn/faq/${env}/static/js/widget.js`}
+            />
+          </AppendHead>
+        )}
         <div className={styles.headerRight}>
           <ul className={`${styles.menu} ${styles.buttons}`}>
             {rightIcons.backoffice?.activated && (
-              <MenuLink
-                icon={rightIcons.backoffice.icon}
-                href={`${rightIcons.backoffice.url}`}
-              >
+              <MenuLink icon="Settings" href={`${rightIcons.backoffice.url}`}>
                 {rightIcons.backoffice.label}
               </MenuLink>
             )}
             {rightIcons.home.activated && (
-              <MenuItem
-                icon={rightIcons.home.icon}
-                href={`${rightIcons.home.url}`}
-              />
+              <MenuItem icon="Portal" href={`${rightIcons.home.url}`} />
             )}
             {rightIcons.profile.activated && (
-              <MenuItem
-                icon={rightIcons.profile.icon}
-                href={`${rightIcons.profile.url}`}
-              />
+              <MenuItem icon="Profile" href={`${rightIcons.profile.url}`} />
             )}
             {rightIcons.ebox.activated && (
-              <MenuItem
-                icon={rightIcons.ebox.icon}
-                href={`${rightIcons.ebox.url}`}
-              />
+              <MenuItem icon="Ebox" href={`${rightIcons.ebox.url}`} />
             )}
             {rightIcons.notifs.activated && (
               <Notifs
                 notifications={notifications}
                 lng={lng}
                 auth={auth}
-                rightIcon={rightIcons.notifs}
                 appName={app.appName}
               />
             )}
             {rightIcons.faq?.activated && (
               <div onClick={this.handleFaqClick.bind(this)}>
-                <MenuItem icon={rightIcons.faq.icon} />
+                <MenuItem icon="Help" />
               </div>
             )}
             {rightIcons.apps?.activated && navCommunity && (
@@ -133,7 +125,7 @@ export class Header extends Component {
 
             {rightIcons.search.activated && (
               <div onClick={this._Search.bind(this)}>
-                <MenuItem icon={rightIcons.search.icon} />
+                <MenuItem icon="Search" />
               </div>
             )}
           </ul>
@@ -148,7 +140,9 @@ export class Header extends Component {
             }
           />
         </div>
-        {isFaqWidgetLoaded && <TTPFaqWidget language={lng} auth={auth} faq />}
+        {loadNotifWidget && isFaqWidgetLoaded && (
+          <TTPFaqWidget language={lng} auth={auth} faq />
+        )}
       </>
     );
   }
@@ -266,7 +260,7 @@ export class Header extends Component {
   }
 
   render() {
-    const { auth, lng, menu } = this.props;
+    const { auth } = this.props;
     return (
       <>
         <header className={styles.header}>

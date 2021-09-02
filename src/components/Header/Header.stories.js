@@ -1,7 +1,13 @@
 import React from "react";
 import { Header } from "./Header";
 import { SubMenu } from "./SubMenu";
-import { withKnobs, text, boolean, select } from "@storybook/addon-knobs";
+import {
+  withKnobs,
+  text,
+  object,
+  boolean,
+  select,
+} from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 
 const App = {
@@ -23,38 +29,31 @@ const AppPrivate = {
 const rightIcons = {
   home: {
     activated: true,
-    icon: "Portal",
     url: "https://blog.tamtam.pro/fr",
   },
   profile: {
     activated: true,
-    icon: "Profile",
     url: "https://blog.tamtam.pro/fr",
   },
   ebox: {
     activated: true,
-    icon: "Ebox",
     url: "https://blog.tamtam.pro/fr",
   },
   search: {
     activated: true,
-    icon: "Search",
   },
   notifs: {
     activated: true,
-    icon: "Notifs",
   },
   apps: {
     activated: true,
   },
   faq: {
     activated: true,
-    icon: "Help",
   },
   backoffice: {
-    label: "Back office",
     activated: true,
-    icon: "Settings",
+    label: "Back office",
     url: "https://blog.tamtam.pro/fr",
   },
 };
@@ -71,6 +70,7 @@ const settings = [
 ];
 
 const authLogin = {
+  token: "e987dcc6bc3f059d1ae69e80c85b90242a59e498",
   navCommunity: {
     id: 9,
     name: "Forum For The Future",
@@ -180,7 +180,6 @@ const authLogin = {
       },
     ],
   },
-
   user: {
     type: "ADMIN",
     firstName: "Emmanuel",
@@ -252,6 +251,7 @@ const authLogin = {
 const authLogout = {
   navCommunity: null,
   user: null,
+  token: null,
 };
 
 const notifications = [
@@ -337,18 +337,21 @@ const menu = [
   {
     title: "Acceuil",
     url: `/fr`,
-    iconUrl: "/img/icons/home.svg",
+    iconUrl:
+      "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/icon/header/home.svg",
     community: false,
   },
   {
     title: "mes articles",
     url: `/articles/my_articles`,
-    iconUrl: "/img/icons/articles.svg",
+    iconUrl:
+      "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/icon/header/articles.svg",
     community: false,
   },
   {
     title: "auteurs",
-    iconUrl: "/img/icons/authors.svg",
+    iconUrl:
+      "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/icon/header/authors.svg",
     submenu: "AUTEURS",
     community: false,
     submenu: [
@@ -373,7 +376,8 @@ const menu = [
   {
     title: "library",
     url: `/library`,
-    iconUrl: "/img/icons/categories.svg",
+    iconUrl:
+      "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/icon/header/categories.svg",
     community: true,
     className: "hide-for-small-only",
   },
@@ -385,15 +389,32 @@ export default {
   decorators: [StoryRouter(), (story) => <div>{story()}</div>, withKnobs],
 };
 
-export const HeaderLogedIn = () => (
+export const HeaderLoggedIn = () => (
   <Header
-    rightIcons={rightIcons}
-    app={App}
+    app={object("app", App)}
+    // auth={object("auth", authLogin)}
     auth={authLogin}
-    env={"local"}
-    settings={[]}
-    menu={menu}
+    env={text("env", "local")}
+    settings={object("settings", settings)}
+    menu={object("menu", menu)}
     lng={select("language", ["fr", "nl", "en"], "fr")}
+    rightIcons={rightIcons}
+    onLanguageChange={(langue) => alert(langue)}
+    onLogoutClick={(e) => console.log("Logout", e)}
+    onSearchClick={() => alert("searching")}
+    notifications={object("notifications", notifications)}
+    onSelectAllCommunities={() => console.log("Communities select all")}
+  />
+);
+export const HeaderPrivateBlogLoggedIn = () => (
+  <Header
+    app={object("app", AppPrivate)}
+    auth={object("auth", authLogin)}
+    env={text("env", "local")}
+    settings={object("settings", settings)}
+    menu={object("menu", menu)}
+    lng={select("language", ["fr", "nl", "en"], "fr")}
+    rightIcons={object("rightIcons", rightIcons)}
     onLanguageChange={(langue) => alert(langue)}
     onLogoutClick={(e) => console.log("Logout", e)}
     onSearchClick={() => alert("searching")}
@@ -401,28 +422,12 @@ export const HeaderLogedIn = () => (
     onSelectAllCommunities={() => console.log("Communities select all")}
   />
 );
-export const HeaderPrivateBlogLogedIn = () => (
+export const HeaderLoggedOut = () => (
   <Header
-    rightIcons={rightIcons}
-    app={AppPrivate}
-    auth={authLogin}
-    env={"local"}
-    settings={[]}
-    menu={menu}
+    app={object("app", App)}
+    auth={text("auth", JSON.stringify(authLogout))}
     lng={select("language", ["fr", "nl", "en"], "fr")}
     onLanguageChange={(langue) => alert(langue)}
-    onLogoutClick={(e) => console.log("Logout", e)}
-    onSearchClick={() => alert("searching")}
-    notifications={notifications}
-    onSelectAllCommunities={() => console.log("Communities select all")}
-  />
-);
-export const HeaderLogedOut = () => (
-  <Header
-    auth={authLogout}
-    lng={select("language", ["fr", "nl", "en"], "fr")}
-    onLanguageChange={(langue) => alert(langue)}
-    app={App}
   />
 );
 
@@ -430,10 +435,10 @@ export const SubMenuHeader = () => (
   <div style={{ padding: "3rem" }}>
     <SubMenu
       lng={select("language", ["fr", "nl", "en"], "fr")}
-      menu={menu}
-      currentCommunity={authLogin.navCommunity}
+      menu={object("menu", menu)}
+      currentCommunity={object("currentCommunity", authLogin.navCommunity)}
     >
-      <div>Content</div>
+      <div style={{ padding: "3rem" }}>Content</div>
     </SubMenu>
   </div>
 );

@@ -23,13 +23,7 @@ const I18N = {
   },
 };
 
-export default function Notifs({
-  notifications,
-  lng,
-  auth,
-  rightIcon,
-  appName,
-}) {
+export default function Notifs({ notifications, lng, auth, appName }) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentNotif, setCurrentNotif] = useState(null);
   const isAdmin = auth && auth.user?.type === "ADMIN" ? true : false;
@@ -102,7 +96,7 @@ export default function Notifs({
 
   return (
     <MenuItem
-      icon={rightIcon.icon}
+      icon="Notifs"
       className={styles.notif}
       count={unreadNotifs.length}
     >
