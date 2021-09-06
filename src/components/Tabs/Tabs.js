@@ -7,26 +7,35 @@ class Tabs extends Component {
   selectTab = (ev, tabId) => {
     ev.preventDefault();
     this.props.selectTab(tabId);
+    this.props.onChange(tabId);
   }
 
   render() {
-    const { tabs, activeTab, type } = this.props;
+    let { tabs, activeTab = tabs[0]["id"], type, chooseType="primary" } = this.props;
 
     return (
-      <div className={styles.tabs}>
-        <div className={styles.tabItem}>
-          <nav>
-            {tabs.map(tab => {
-              return (
-                <button key={tab.id} href="#" className={`${activeTab == tab.id ? "active" : ""}`} onClick={(ev) => this.selectTab(ev, tab.id)}>
-                  {tab.label}
-                </button>
-              )
-            })}
-          </nav>
-        </div>
+    <div className={classnames(styles.tabs,
+          type === "simple" ? styles.simple : styles.notsimple
+        )}
+      >
+        <nav>
+
+
+          {tabs.map((tab) => {
+            return (
+              <button
+                key={tab.id}
+                 href="#"
+                className={`${activeTab == tab.id ?  styles[chooseType]  : ""}`}
+                onClick={(ev) => this.selectTab(ev, tab.id)}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </nav>
       </div>
-    )
+    );
   }
 }
 
