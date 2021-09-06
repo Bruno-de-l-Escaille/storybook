@@ -33,16 +33,16 @@ $tab-button-height: 54px;
     border-bottom: 3px solid  #18a0fb;
   }
   .secondary {
-    color:  #e7e7e7;
-    border-bottom: 3px solid  #e7e7e7;
+    color:   #B2BCC6;
+    border-bottom: 3px solid   #B2BCC6;
   }
   .success {
-    color: #4caf50;
-    border-bottom: 3px solid  #4caf50;
+    color: #06D9B1;
+    border-bottom: 3px solid  #06D9B1;
   }
   .danger {
-    color: #F7953E;
-    border-bottom: 3px solid  #f44336;
+    color: #FF5656;
+    border-bottom: 3px solid  #FF5656;
   }
   .warning {
     color: #F7953E;
@@ -88,17 +88,17 @@ $tab-button-height: 54px;
 
       }
       .secondary {
-        background: #e7e7e7;
+        background:  #B2BCC6;
         color: #fff;
         border: 1px solid #EEF6FF;
       }
       .success {
         color: #fff;
         border: 1px solid #EEF6FF;
-        background: #4caf50;
+        background: #06D9B1;
       }
       .danger {
-        background: #f44336;
+        background: #FF5656;
         color: #fff;
         border: 1px solid #EEF6FF;
       }
@@ -109,7 +109,7 @@ $tab-button-height: 54px;
       }
 
       .themedanger{
-          color: #F7953E;
+          color: #FF5656;
         }
       .themeprimary{
         color: #18a0fb;
@@ -118,10 +118,10 @@ $tab-button-height: 54px;
         color: #F7953E;
       }
       .themesuccess{
-        color: #4caf50;
+        color: #06D9B1;
       }
       .themesecondary {
-        color:  #e7e7e7;
+        color:  #B2BCC6;
       }
     }
 
