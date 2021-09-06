@@ -1,0 +1,120 @@
+$tab-button-height: 54px;
+.tabs {
+  nav {
+    text-align: center;
+  }
+  button {
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+}
+.simple {
+  border-bottom: 1px solid #F1F2F4;
+  button {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 0.04em;
+    color: #6D7F92;
+    padding: 15px 25px 10px;
+  }
+  button.active {
+    color: #18A0FB;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+  }
+  .primary {
+    color: #18a0fb;
+    border-bottom: 3px solid  #18a0fb;
+  }
+  .secondary {
+    color:   #B2BCC6;
+    border-bottom: 3px solid   #B2BCC6;
+  }
+  .success {
+    color: #06D9B1;
+    border-bottom: 3px solid  #06D9B1;
+  }
+  .danger {
+    color: #FF5656;
+    border-bottom: 3px solid  #FF5656;
+  }
+  .warning {
+    color: #F7953E;
+    border-bottom: 3px solid  #F7953E;
+  }
+}
+.notsimple {
+    position: relative;
+    nav {
+      position: absolute;
+      top: -$tab-button-height/2;
+      left: 0;
+      right: 0;
+      font-size: 15px;
+      button {
+        background: #FFFFFF;
+        box-shadow: 0px 4px 20px rgba(41, 57, 77, 0.1);
+        border-radius: 5px;
+        margin: 0 10px;
+        display: inline-block;
+        position: relative;
+        width: 206px;
+        height: $tab-button-height;
+        font-style: normal;
+        font-size: 16px;
+        text-align: center;
+        letter-spacing: 0.02em;
+        color: #18A0FB;
+        outline: none;
+        transition: box-shadow .2s, transform .2s;
+        &:hover {
+          box-shadow: 2px 2px 11px rgba(41, 57, 77, 0.05);
+          transform: scale(0.99);
+        }
+      }
+      .primary {
+        background: #18a0fb;
+        color: #fff;
+        border: 1px solid #EEF6FF;
+      }
+      .secondary {
+        background:  #B2BCC6;
+        color: #fff;
+        border: 1px solid #EEF6FF;
+      }
+      .success {
+        color: #fff;
+        border: 1px solid #EEF6FF;
+        background: #06D9B1;
+      }
+      .danger {
+        background: #FF5656;
+        color: #fff;
+        border: 1px solid #EEF6FF;
+      }
+      .warning {
+        background: #F7953E;
+        color: #fff;
+        border: 1px solid #EEF6FF;
+      }
+
+      .themedanger{
+          color: #FF5656;
+        }
+      .themeprimary{
+        color: #18a0fb;
+      }
+      .themewarning{
+        color: #F7953E;
+      }
+      .themesuccess{
+        color: #06D9B1;
+      }
+      .themesecondary {
+        color:  #B2BCC6;
+      }
+    }
+}
