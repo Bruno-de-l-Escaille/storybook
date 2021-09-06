@@ -1,13 +1,4 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-.idea/
-.idea/vcs.xml
-.idea/storybook.iml
-.idea/modules.xml
-.idea/misc.xml
-.idea/inspectionProfiles/Project_Default.xml
-.idea/codeStyles/codeStyleConfig.xml
-.idea/codeStyles/Project.xml
-.idea/.gitignore
 # dependencies
 /node_modules
 /.pnp
