@@ -29,18 +29,23 @@ $tab-button-height: 54px;
     line-height: 19px;
   }
   .primary {
+    color: #18a0fb;
     border-bottom: 3px solid  #18a0fb;
   }
   .secondary {
+    color:  #e7e7e7;
     border-bottom: 3px solid  #e7e7e7;
   }
   .success {
+    color: #4caf50;
     border-bottom: 3px solid  #4caf50;
   }
   .danger {
+    color: #F7953E;
     border-bottom: 3px solid  #f44336;
   }
-  .primary-steps {
+  .warning {
+    color: #F7953E;
     border-bottom: 3px solid  #F7953E;
   }
 }
@@ -80,6 +85,7 @@ $tab-button-height: 54px;
         background: #18a0fb;
         color: #fff;
         border: 1px solid #EEF6FF;
+
       }
       .secondary {
         background: #e7e7e7;
@@ -96,13 +102,27 @@ $tab-button-height: 54px;
         color: #fff;
         border: 1px solid #EEF6FF;
       }
-      .primary-steps {
+      .warning {
         background: #F7953E;
         color: #fff;
         border: 1px solid #EEF6FF;
       }
 
-
+      .themedanger{
+          color: #F7953E;
+        }
+      .themeprimary{
+        color: #18a0fb;
+      }
+      .themewarning{
+        color: #F7953E;
+      }
+      .themesuccess{
+        color: #4caf50;
+      }
+      .themesecondary {
+        color:  #e7e7e7;
+      }
     }
 
 }

@@ -23,7 +23,7 @@ const TABS = [
     label: 'Tab 2',
   }
 ]
-const ButtonType = ["primary","primary-steps","success","danger","secondary"]
+const ButtonType = ["primary", "warning", "success", "danger", "secondary"];
 
 export const Primary = () =>  {
   const [currentTab, setCurrentTab] = useState();
@@ -31,8 +31,7 @@ export const Primary = () =>  {
   return <Tabs
     tabs={TABS}
     activeTab={currentTab}
-    chooseType={select("select a type", ButtonType,"primary")}
-    onChange={(status)=>console.log(status)}
+    ButtonType={select("select a type", ButtonType,"primary")}
     selectTab={(tab) => setCurrentTab(tab)} />
 };
 export const SimpleType = () =>  {
@@ -41,8 +40,7 @@ export const SimpleType = () =>  {
   return <Tabs
     tabs={TABS}
     type={"simple"}
-    chooseType={select("select a type", ButtonType,"primary")}
+    ButtonType={select("select a type", ButtonType,"primary")}
     activeTab={currentTab}
-    onChange={(status)=>console.log(status)}
     selectTab={(tab) => setCurrentTab(tab)} />
 }

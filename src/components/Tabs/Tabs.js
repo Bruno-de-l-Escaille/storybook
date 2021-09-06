@@ -7,12 +7,12 @@ class Tabs extends Component {
   selectTab = (ev, tabId) => {
     ev.preventDefault();
     this.props.selectTab(tabId);
-    this.props.onChange(tabId);
+     console.log(tabId);
   }
 
   render() {
-    let { tabs, activeTab = tabs[0]["id"], type, chooseType="primary" } = this.props;
-
+    let { tabs, activeTab = tabs[0]["id"], type, ButtonType="primary" } = this.props;
+    let theme ="theme";
     return (
     <div className={classnames(styles.tabs,
           type === "simple" ? styles.simple : styles.notsimple
@@ -26,7 +26,7 @@ class Tabs extends Component {
               <button
                 key={tab.id}
                  href="#"
-                className={`${activeTab == tab.id ?  styles[chooseType]  : ""}`}
+                className={`${activeTab == tab.id ? styles[ButtonType] : styles[theme + ButtonType]}`}
                 onClick={(ev) => this.selectTab(ev, tab.id)}
               >
                 {tab.label}
