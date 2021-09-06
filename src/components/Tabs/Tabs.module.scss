@@ -6,12 +6,10 @@ $tab-button-height: 54px;
   button {
     cursor: pointer;
     text-transform: uppercase;
-
   }
 }
 .simple {
   border-bottom: 1px solid #F1F2F4;
-
   button {
     font-weight: normal;
     font-size: 14px;
@@ -21,7 +19,6 @@ $tab-button-height: 54px;
     color: #6D7F92;
     padding: 15px 25px 10px;
   }
-
   button.active {
     color: #18A0FB;
     font-weight: 500;
@@ -57,7 +54,6 @@ $tab-button-height: 54px;
       left: 0;
       right: 0;
       font-size: 15px;
-
       button {
         background: #FFFFFF;
         box-shadow: 0px 4px 20px rgba(41, 57, 77, 0.1);
@@ -74,18 +70,15 @@ $tab-button-height: 54px;
         color: #18A0FB;
         outline: none;
         transition: box-shadow .2s, transform .2s;
-
         &:hover {
           box-shadow: 2px 2px 11px rgba(41, 57, 77, 0.05);
           transform: scale(0.99);
         }
       }
-
       .primary {
         background: #18a0fb;
         color: #fff;
         border: 1px solid #EEF6FF;
-
       }
       .secondary {
         background:  #B2BCC6;
@@ -124,5 +117,4 @@ $tab-button-height: 54px;
         color:  #B2BCC6;
       }
     }
-
 }

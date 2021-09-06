@@ -12,35 +12,37 @@ export default {
     withKnobs,
   ],
 };
-
 const TABS = [
   {
-    id: 'tab1',
-    label: 'Tab 1',
+    id: "tab1",
+    label: "Tab 1",
   },
   {
-    id: 'tab2',
-    label: 'Tab 2',
-  }
-]
+    id: "tab2",
+    label: "Tab 2",
+  },
+];
 const ButtonType = ["primary", "warning", "success", "danger", "secondary"];
-
-export const Primary = () =>  {
+export const Primary = () => {
   const [currentTab, setCurrentTab] = useState();
-
-  return <Tabs
-    tabs={TABS}
-    activeTab={currentTab}
-    ButtonType={select("select a type", ButtonType,"primary")}
-    selectTab={(tab) => setCurrentTab(tab)} />
+  return (
+    <Tabs
+      tabs={TABS}
+      activeTab={currentTab}
+      ButtonType={select("select a type", ButtonType, "primary")}
+      selectTab={(tab) => setCurrentTab(tab)}
+    />
+  );
 };
-export const SimpleType = () =>  {
+export const SimpleType = () => {
   const [currentTab, setCurrentTab] = useState();
-
-  return <Tabs
-    tabs={TABS}
-    type={"simple"}
-    ButtonType={select("select a type", ButtonType,"primary")}
-    activeTab={currentTab}
-    selectTab={(tab) => setCurrentTab(tab)} />
-}
+  return (
+    <Tabs
+      tabs={TABS}
+      type={"simple"}
+      ButtonType={select("select a type", ButtonType, "primary")}
+      activeTab={currentTab}
+      selectTab={(tab) => setCurrentTab(tab)}
+    />
+  );
+};
