@@ -1,0 +1,93 @@
+@import "../../styles/variables";
+.bubblediv {
+  &:hover {
+    svg {
+      fill: #FFFFFF;
+    }
+  }
+  span {
+    padding-left: 1rem;
+    color: #FFFFFF;
+  }
+}
+.campaignbubbles {
+  position: fixed;
+  top: 16rem;
+  right: -134px;
+  color: #fff;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  z-index: 2;
+  transition: 0.6s all ease-in-out;
+
+  & > div {
+    background: #F8F9FA;
+    box-shadow: 0px 4px 5px rgba(60, 78, 100, 0.2);
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    transition: nth($transitions, 5);
+    cursor: pointer;
+    position: relative;
+    color: $pickled-bluewood;
+    width: 205px;
+    height: 62px;
+    border-radius: 31px 0px 0px 31px;
+    padding: 0 1rem;
+    transform: translate(0);
+
+    span, div {
+      text-transform: uppercase;
+      text-align: center;
+      opacity: 0;
+    }
+
+    svg {
+      fill: $pickled-bluewood;
+      width: 26px;
+      height: 24px;
+    }
+
+    &.send {
+      svg {
+        fill: #FFFFFF;
+      }
+    }
+
+    &:hover, &.active{
+      transform: translate(-110px);
+      background: #18a0fb;
+      box-shadow: 0px 4px 5px rgba(109, 127, 146, 0.2);
+      color: #fff;
+
+      span, div {
+        opacity: 1;
+      }
+
+      svg {
+        fill: #FFFFFF;
+      }
+      &.primary{
+        background:  #18a0fb;
+      }
+      &.danger{
+        background: #FF5656;
+      }
+      &.warning{
+          background: #F7953E;
+        }
+      &.success{
+        background: #06D9B1;
+      }
+      &.secondary{
+        background:  #B2BCC6;
+      }
+
+      .padding-left {
+        padding-left: 1rem;
+      }
+    }
+  }
+}
