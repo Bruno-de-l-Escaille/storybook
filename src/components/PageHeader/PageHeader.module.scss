@@ -1,0 +1,171 @@
+@import "../../styles/variables";
+
+.page-header {
+  position: relative;
+  height: 96px;
+  text-transform: uppercase;
+  background: #F3FAFF;
+  border-radius: 0px 0px 10px 10px;
+  margin: 0 20px;
+  display: flex;
+  margin-bottom: 1rem;
+  z-index: 0;
+
+  &__icon {
+    display: flex;
+    width: 9%;
+    justify-content: flex-end;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 60px;
+      width: 1px;
+      background-color: #FFFFFF;
+      box-shadow: -4px 0px 10px rgba(41, 57, 77, 0.1);
+    }
+    img {
+      width: 46px;
+      padding-right: 12px;
+      margin: 18px 0;
+    }
+  }
+
+  &__info {
+    width: 51%;
+    display: flex;
+    align-items: center;
+    padding-left: 34px;
+
+    * {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;
+      margin: 0;
+    }
+
+    h3 {
+      font-size: 24px;
+      line-height: 28px;
+      color: $pickled-bluewood;
+    }
+
+    p {
+      font-size: 12px;
+      line-height: 14px;
+      color: $fiord;
+    }
+  }
+
+  &__children {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 5%;
+    text-transform: initial;
+  }
+}
+
+.btn {
+  min-width: 180px;
+  padding: 0 1rem;
+  height: 44px;
+  border: 1px solid rgba(199, 232, 254, 0.5);
+  box-sizing: border-box;
+  border-radius: 30px;
+  font-family: Roboto;
+  font-weight: 500;
+  text-align: center;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  margin-left: 22px;
+  cursor: pointer;
+  text-transform: uppercase;
+
+  &:hover {
+    box-shadow: 0px 0px 10px rgba(41, 57, 77, 0.1);
+  }
+
+  img {
+    margin-right: 12px;
+  }
+
+  &.secondary {
+    background: #FFFFFF;
+    letter-spacing: 0.06em;
+    color: $curious-blue;
+  }
+
+  &.secondary-steps {
+    background: #FFFFFF;
+    letter-spacing: 0.06em;
+    color: $sea-buckthorn;
+  }
+  &.small {
+    font-size: 12px;
+    min-width: unset;
+    padding: 0 17px;
+    height: 26px;
+    border: 1px solid $dodger-blue;
+  }
+
+  &.primary {
+    background: $caribbean-green;
+    letter-spacing: 0.04em;
+    color: #FFFFFF;
+    .btn-badge {
+      background: #fff;
+      color: $caribbean-green;
+    }
+    &:hover {
+      background: $persian-green;
+    };
+  }
+
+  &.success {
+    background: $dodger-blue;
+    letter-spacing: 0.04em;
+    color: white;
+    .btn-badge {
+      background: #fff;
+      color: $dodger-blue;
+    }
+    &:hover {
+      background: $curious-blue;
+    };
+  }
+
+  &.primary-steps {
+    background: $sea-buckthorn;
+    letter-spacing: 0.04em;
+    color: white;
+    &:hover {
+      background: $tango;
+    };
+  }
+
+  &.disabled {
+    background: #F8F9FA;
+    letter-spacing: 0.04em;
+    color: $slate-gray;
+    &:hover {
+      cursor: not-allowed;
+    };
+  }
+
+  &-badge {
+    padding: .3rem .4rem;
+    border-radius: 4px;
+    margin-left: .5rem;
+    font-weight: 600;
+  }
+}
