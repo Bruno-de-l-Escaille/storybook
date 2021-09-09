@@ -1,6 +1,6 @@
 @import "../../styles/variables";
 
-.page-header {
+.pageHeader {
   position: relative;
   height: 96px;
   text-transform: uppercase;
@@ -29,10 +29,11 @@
       background-color: #FFFFFF;
       box-shadow: -4px 0px 10px rgba(41, 57, 77, 0.1);
     }
-    img {
+    .Icon {
       width: 46px;
       padding-right: 12px;
-      margin: 18px 0;
+      margin: 26px 0;
+      stroke: $pickled-bluewood;
     }
   }
 
@@ -53,6 +54,9 @@
       font-size: 24px;
       line-height: 28px;
       color: $pickled-bluewood;
+      margin-left: -34px;
+      text-transform: uppercase;
+      margin-bottom: -1px;
     }
 
     p {
@@ -72,6 +76,7 @@
   }
 }
 
+
 .btn {
   min-width: 180px;
   padding: 0 1rem;
@@ -90,26 +95,34 @@
   margin-left: 22px;
   cursor: pointer;
   text-transform: uppercase;
+  --textcolor : white;
+
+  color : var(--textcolor);
+  svg path{
+    stroke: var(--textcolor);
+  }
 
   &:hover {
     box-shadow: 0px 0px 10px rgba(41, 57, 77, 0.1);
   }
 
-  img {
+  .Icon {
     margin-right: 12px;
   }
 
   &.secondary {
     background: #FFFFFF;
     letter-spacing: 0.06em;
-    color: $curious-blue;
+    --textcolor: #{$curious-blue};
   }
 
   &.secondary-steps {
     background: #FFFFFF;
     letter-spacing: 0.06em;
-    color: $sea-buckthorn;
+    --textcolor: #{$sea-buckthorn};
+
   }
+
   &.small {
     font-size: 12px;
     min-width: unset;
@@ -121,7 +134,7 @@
   &.primary {
     background: $caribbean-green;
     letter-spacing: 0.04em;
-    color: #FFFFFF;
+    --textcolor: #{#FFFFFF};
     .btn-badge {
       background: #fff;
       color: $caribbean-green;
@@ -134,7 +147,7 @@
   &.success {
     background: $dodger-blue;
     letter-spacing: 0.04em;
-    color: white;
+    --textcolor: #{white};
     .btn-badge {
       background: #fff;
       color: $dodger-blue;
@@ -147,7 +160,7 @@
   &.primary-steps {
     background: $sea-buckthorn;
     letter-spacing: 0.04em;
-    color: white;
+    --textcolor: #{white};
     &:hover {
       background: $tango;
     };
@@ -156,7 +169,7 @@
   &.disabled {
     background: #F8F9FA;
     letter-spacing: 0.04em;
-    color: $slate-gray;
+    --textcolor: #{$slate-gray};
     &:hover {
       cursor: not-allowed;
     };

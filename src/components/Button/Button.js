@@ -4,18 +4,23 @@ import classnames from "classnames";
 import IconLoader from "../Icons/IconLoader";
 
 class Button extends Component {
-render(){
-  const {inProcess ,variant="primary",children,...args} = this.props;
-
-  
-      return (
-           <button className={classnames(styles.button, styles[variant])}>
-            { inProcess ? 
-            ( <IconLoader/>) : children }
-            </button>
-        );
+  render() {
+    const {
+      inProcess,
+      variant = "primary",
+      children,
+      Icon,
+      classes,
+      ...args
+    } = this.props;
+    console.log("gghhbhjjnnjkjklklkllk", Icon)
+    return (
+      <button className={classnames(styles.button, styles[variant], classes)} onClick={args.click}>
+        { Icon && <Icon />}
+        {inProcess ? <IconLoader /> : children}
+      </button>
+    );
   }
-    
-  };
+}
 
 export default Button;

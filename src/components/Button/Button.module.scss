@@ -10,6 +10,9 @@
   cursor: pointer;
   min-width: 230px;
   height: 40px;
+  svg {
+    margin-right: 12px;
+  }
 }
 
 .primary {
@@ -17,10 +20,19 @@
 }
 .secondary {
   background: #e7e7e7;
+  svg *{
+    stroke: #e7e7e7;
+  }
 }
 .success {
   background: #4caf50;
+  svg *{
+    stroke: #4caf50;
+  }
 }
 .danger {
   background: #f44336;
+  svg *{
+    stroke: #f44336;
+  }
 }

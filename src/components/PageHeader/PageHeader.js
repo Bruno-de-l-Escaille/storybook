@@ -1,29 +1,29 @@
 import React, { Component } from "react";
 import styles from "./PageHeader.module.scss";
+import Button from "../Button/Button";
+import classnames from "classnames";
 
 class PageHeader extends Component {
   render() {
-    const { header, subHeader, icon, buttons = [] } = this.props;
-
+    const { header, subHeader, Icon, buttons = [] } = this.props;
+    console.log("dddddddd", styles.Icon);
     return (
-      <div className={`page-header`}>
-        <div className="page-header__icon">{icon}</div>
-        <div className="page-header__info">
+      <div className={styles.pageHeader}>
+        <div className={styles.pageHeader__icon}>
+          <Icon className={styles.Icon} width="45" height="45" />
+        </div>
+        <div className={styles.pageHeader__info}>
           <div>
             <h3>{header}</h3>
             <p>{subHeader}</p>
           </div>
         </div>
-        <div className="page-header__children">
+        <div className={styles.pageHeader__children}>
           {buttons.map((button) => {
             return (
-              <button
-                className={`btn ${
-                  styles[button.style]
-                }`}
-              >
+              <Button classes={classnames(styles.btn, styles[button.style])} Icon={button.Icon} click={button.onClick}>
                 {button.label}
-              </button>
+              </Button>
             );
           })}
         </div>
