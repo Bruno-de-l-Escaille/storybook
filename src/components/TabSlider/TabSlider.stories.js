@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TabSlider from "./TabSlider";
 import { withKnobs, text, boolean, select } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
+import { Settings, Profile, Ebox, Apps } from "../Icons";
 
 export default {
   title: "TabSlider",
@@ -15,15 +16,19 @@ export default {
 const TABSLIDER = [
   {
     label: "tab1",
-    icon: "",
+    icon: <Settings />,
   },
   {
     label: "tab2",
-    icon: "",
+    icon: <Profile />,
   },
   {
     label: "tab3",
-    icon: "",
+    icon: <Ebox />,
+  },
+  {
+    label: "tab4",
+    icon: <Apps />,
   },
 ];
 export const Primary = () => {

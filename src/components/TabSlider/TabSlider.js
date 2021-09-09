@@ -22,7 +22,7 @@ class TabSlider extends Component {
                 onClick={(ev) => this.selectTab(ev, tab.label)}
               >
                 {tab.icon}
-                {tab.label}
+                <span> {tab.label} </span>
               </div>
             );
           })}

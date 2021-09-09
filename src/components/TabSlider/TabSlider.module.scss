@@ -5,7 +5,6 @@
   border-radius: 16px;
   height: 32px;
   .item {
-    padding: 9px;
     font-weight: 500;
     font-size: 12px;
     line-height: 14px;
@@ -18,7 +17,11 @@
     padding-left: 25px;
     padding-right: 25px;
     cursor: pointer;
+    span{
+      margin: auto;
+    }
     svg {
+      margin: auto;
       margin-right: 10px;
       path {
         fill: #3C4E64;
