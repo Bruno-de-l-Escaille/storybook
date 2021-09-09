@@ -13,10 +13,12 @@ class Button extends Component {
       classes,
       ...args
     } = this.props;
-    console.log("gghhbhjjnnjkjklklkllk", Icon)
     return (
-      <button className={classnames(styles.button, styles[variant], classes)} onClick={args.click}>
-        { Icon && <Icon />}
+      <button
+        className={classnames(styles.button, styles[variant], classes)}
+        onClick={args.click}
+      >
+        {Icon && <Icon />}
         {inProcess ? <IconLoader /> : children}
       </button>
     );

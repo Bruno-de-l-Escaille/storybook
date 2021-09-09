@@ -6,7 +6,7 @@ import classnames from "classnames";
 class PageHeader extends Component {
   render() {
     const { header, subHeader, Icon, buttons = [] } = this.props;
-    console.log("dddddddd", styles.Icon);
+
     return (
       <div className={styles.pageHeader}>
         <div className={styles.pageHeader__icon}>
@@ -21,7 +21,11 @@ class PageHeader extends Component {
         <div className={styles.pageHeader__children}>
           {buttons.map((button) => {
             return (
-              <Button classes={classnames(styles.btn, styles[button.style])} Icon={button.Icon} click={button.onClick}>
+              <Button
+                classes={classnames(styles.btn, styles[button.style])}
+                Icon={button.Icon}
+                click={button.onClick}
+              >
                 {button.label}
               </Button>
             );

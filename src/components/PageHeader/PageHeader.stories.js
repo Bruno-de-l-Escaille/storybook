@@ -3,8 +3,8 @@ import PageHeader from "./PageHeader";
 import { withKnobs } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 import { ReactComponent as HomeSVG } from "../Icons/home.svg";
-import { ReactComponent as PlusIcon } from "../Icons/home.svg";
-import { ReactComponent as PencilIcon } from "../Icons/home.svg";
+import { ReactComponent as PlusIcon } from "../Icons/plus.svg";
+import { ReactComponent as PencilIcon } from "../Icons/pencil.svg";
 
 export default {
   title: "PageHeader",
