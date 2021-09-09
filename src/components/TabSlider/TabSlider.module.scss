@@ -1,0 +1,43 @@
+.tabslider {
+  display: flex;
+  align-items: center;
+  background: #F1F2F4;
+  border-radius: 16px;
+  height: 32px;
+  .item {
+    padding: 9px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    text-transform: capitalize;
+    color: #3C4E64;
+    border-radius: 16px;
+    display: flex;
+    width: 120px;
+    align-self: normal;
+    padding-left: 25px;
+    padding-right: 25px;
+    cursor: pointer;
+    svg {
+      margin-right: 10px;
+      path {
+        fill: #3C4E64;
+      }
+    }
+  }
+  .active {
+    position: relative;
+    background: #3C4E64;
+    color: #FFFFFF;
+    transition: all .5s ease-in;
+    svg {
+      path {
+        fill: #fff;
+      }
+    }
+  }
+}
+.container{
+  display:flex ;
+  flex-wrap: wrap;
+}
