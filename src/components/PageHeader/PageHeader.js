@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import styles from "./PageHeader.module.scss";
-import Button from "../Button/Button";
 import classnames from "classnames";
 
 class PageHeader extends Component {
   render() {
     const { header, subHeader, Icon, buttons = [] } = this.props;
-
+console.log("hhhhhhhh",styles);
     return (
       <div className={styles.pageHeader}>
         <div className={styles.pageHeader__icon}>
@@ -21,13 +20,13 @@ class PageHeader extends Component {
         <div className={styles.pageHeader__children}>
           {buttons.map((button) => {
             return (
-              <Button
-                classes={classnames(styles.btn, styles[button.style])}
-                Icon={button.Icon}
-                click={button.onClick}
+              <button
+                className={classnames(styles.btn, styles[button.style])}
+                onClick={button.onClick}
               >
+                {button.Icon && <button.Icon />}
                 {button.label}
-              </Button>
+              </button>
             );
           })}
         </div>

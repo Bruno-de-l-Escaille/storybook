@@ -2,9 +2,7 @@ import React from "react";
 import PageHeader from "./PageHeader";
 import { withKnobs } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
-import { ReactComponent as HomeSVG } from "../Icons/home.svg";
-import { ReactComponent as PlusIcon } from "../Icons/plus.svg";
-import { ReactComponent as PencilIcon } from "../Icons/pencil.svg";
+import { Search, Check, Portal } from "../Icons";
 
 export default {
   title: "PageHeader",
@@ -14,15 +12,15 @@ export default {
 
 const Buttons = [
   {
-    label: "Add",
-    Icon: PlusIcon,
+    label: "Check",
+    Icon: Check,
     style: "secondary",
     onClick: () => alert("Button Add"),
   },
   {
-    label: "Modify",
-    Icon: PencilIcon,
-    style: "secondary-steps",
+    label: "Search",
+    Icon: Search,
+    style: "warning",
     onClick: () => console.log(),
   },
   {
@@ -36,7 +34,7 @@ export const PageHeaderWithoutButton = () => (
   <PageHeader
     header="Dashboard"
     subHeader="view your campaigns stats"
-    Icon={HomeSVG}
+    Icon={Portal}
   />
 );
 
@@ -45,7 +43,7 @@ export const PageHeaderWithButtons = () => {
     <PageHeader
       header="Dashboard"
       subHeader="view your campaigns stats"
-      Icon={HomeSVG}
+      Icon={Portal}
       buttons={Buttons}
     />
   );

@@ -5,20 +5,10 @@ import IconLoader from "../Icons/IconLoader";
 
 class Button extends Component {
   render() {
-    const {
-      inProcess,
-      variant = "primary",
-      children,
-      Icon,
-      classes,
-      ...args
-    } = this.props;
+    const { inProcess, variant = "primary", children, ...args } = this.props;
+
     return (
-      <button
-        className={classnames(styles.button, styles[variant], classes)}
-        onClick={args.click}
-      >
-        {Icon && <Icon />}
+      <button className={classnames(styles.button, styles[variant])}>
         {inProcess ? <IconLoader /> : children}
       </button>
     );
