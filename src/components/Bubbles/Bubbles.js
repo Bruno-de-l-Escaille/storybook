@@ -8,21 +8,21 @@ class Bubbles extends Component {
     this.props.selectTab(tabId);
   };
   render() {
-    let { tabs, onBubbleClick, ButtonType = "primary", activeTab } = this.props;
+    let { tabs, ButtonType = "primary", activeTab } = this.props;
     return (
-      <div className={styles.campaignbubbles}>
+      <div className={styles.bubbles}>
         {tabs.map((tab) => {
           return (
             <div
               key={tab.id}
               className={classnames(
-                styles.bubblediv,
+                styles.item,
                 activeTab === tab.id ? styles.active : "",
                 styles[ButtonType]
               )}
               onClick={(ev) => this.selectTab(ev, tab.id)}
-              >
-              {tab.svg ? tab.svg : ""}
+            >
+              {tab.icon ? tab.icon : ""}
               <span className={styles.paddingleft}>{tab.label}</span>
             </div>
           );

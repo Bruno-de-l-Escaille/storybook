@@ -1,5 +1,5 @@
 @import "../../styles/variables";
-.bubblediv {
+.item {
   &:hover {
     svg {
       fill: #FFFFFF;
@@ -10,7 +10,7 @@
     color: #FFFFFF;
   }
 }
-.campaignbubbles {
+.bubbles {
   position: fixed;
   top: 16rem;
   right: -134px;
@@ -84,7 +84,6 @@
       &.secondary{
         background:  #B2BCC6;
       }
-
       .padding-left {
         padding-left: 1rem;
       }

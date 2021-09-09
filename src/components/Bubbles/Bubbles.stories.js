@@ -1,15 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Bubbles from "./Bubbles";
 import { withKnobs, select } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
-import {
-  SVG_EBOX_GALLERY_ICON,
-  SVG_ENVELOPE_ICON,
-  SVG_SEND_ICON,
-  SVG_SETTINGS_ICON,
-  SVG_USER_ICON,
-} from "./SvgIcon/icon";
-
+import { Check, Help, IconFacebook, IconLinkedin, IconTwitter } from "../Icons";
 export default {
   title: "Bubbles",
   component: Bubbles,
@@ -22,29 +15,28 @@ export default {
 const BUBBLES = [
   {
     id: "1",
-    label: "send",
-    svg: SVG_SEND_ICON,
+    label: "help",
+    icon: <Help />,
   },
   {
     id: "2",
-    label: "Gallery",
-    svg: SVG_EBOX_GALLERY_ICON,
+    label: "Check",
+    icon: <Check />,
   },
   {
     id: "3",
-    label: "Preferences",
-
-    svg: SVG_SETTINGS_ICON,
+    label: "Facebook",
+    icon: <IconFacebook />,
   },
   {
     id: "4",
-    label: "recipients",
-    svg: SVG_USER_ICON,
+    label: "Linkedin",
+    icon: <IconLinkedin />,
   },
   {
     id: "5",
-    label: "test",
-    svg: SVG_ENVELOPE_ICON,
+    label: "Twitter",
+    icon: <IconTwitter />,
   },
 ];
 const ButtonType = ["primary", "warning", "success", "danger", "secondary"];
