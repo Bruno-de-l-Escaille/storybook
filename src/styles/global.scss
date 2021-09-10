@@ -9,6 +9,10 @@ html {
   box-sizing: border-box;
 }
 
+.hide {
+  display: none;
+}
+
 *,
 *:before,
 *:after {
@@ -26,7 +30,6 @@ body {
   backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  // background-color: #fff;
 }
 
 h1,
