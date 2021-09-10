@@ -1,5 +1,4 @@
 @import "../../styles/variables";
-@import "~foundation-sites/scss/foundation";
 
 .modalOverlay {
   position: fixed;
@@ -132,6 +131,7 @@
   align-items: center;
   justify-content: center;
   height: 44px;
+  border: 0;
   border-radius: 5px;
   // font-family: $body-font-family;
   font-weight: 500;
@@ -211,7 +211,7 @@
   }
 }
 
-@include breakpoint(small only) {
+@media screen and (max-width: 39.9375em) {
   .body,
   .footer {
     padding-left: 1rem;

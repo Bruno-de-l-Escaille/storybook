@@ -1,5 +1,4 @@
 @import "../../styles/variables";
-@import "~foundation-sites/scss/foundation";
 
 .header {
   box-sizing: border-box;
@@ -1069,7 +1068,7 @@ nav {
   }
 }
 
-@include breakpoint(medium down) {
+@media screen and (max-width: 63.9375em) {
   .header {
     padding: 0;
     height: 100%;
@@ -1125,7 +1124,7 @@ nav {
   }
 }
 
-@include breakpoint(small only) {
+@media screen and (max-width: 39.9375em) {
   // .menu__community {
   //   overflow: scroll;
   // }

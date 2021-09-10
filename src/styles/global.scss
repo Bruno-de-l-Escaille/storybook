@@ -1,15 +1,7 @@
 @import "./variables";
 
-// base
-@import "base/foundation-settings.scss";
-
-// foundation
-@import "~foundation-sites/scss/foundation";
-@include foundation-everything(true);
-
-// Slick slider
-@import "base/slick.scss";
-@import "base/slick-theme.scss";
+// foundation grid class only
+@import "base/foundation.scss";
 
 @import "base/icons.scss";
 
@@ -29,13 +21,12 @@ body {
   font-family: $main-body-font;
   font-weight: normal;
   color: $main-color;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 22px;
   backface-visibility: hidden;
-  background-color: #fefefe !important;
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  // background-color: #fff;
 }
 
 h1,

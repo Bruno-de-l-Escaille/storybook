@@ -1,5 +1,3 @@
-@import "~foundation-sites/scss/foundation";
-
 .articleList1 {
   margin-bottom: 1.625rem;
   .articleTpl1 {
@@ -17,7 +15,7 @@
   justify-content: space-between;
 }
 
-@include breakpoint(small only) {
+@media screen and (max-width: 39.9375em) {
   .articleList1 {
     margin-bottom: 0;
     .articleTpl1 {

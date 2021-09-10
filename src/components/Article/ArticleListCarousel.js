@@ -3,6 +3,7 @@ import Slider from "react-slick";
 
 import { CAROUSEL_DISPOSITIONS } from "../../config";
 import { ArticleList } from "../Article/ArticleList";
+import "./ArticleListCarousel.scss";
 
 export class ArticleListCarousel extends Component {
   render() {

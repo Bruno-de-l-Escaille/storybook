@@ -16,7 +16,14 @@ const I18N = {
 
 export default class Communities extends Component {
   renderCommunities() {
-    const { communities, app, lng, Link, onSelectAllCommunities } = this.props;
+    const {
+      communities,
+      app,
+      lng,
+      Link,
+      allCommunitiesUrl,
+      onSelectAllCommunities,
+    } = this.props;
     const { appUrl } = app;
 
     if (!communities || communities.length === 0) {
@@ -80,7 +87,7 @@ export default class Communities extends Component {
         );
       }
     }
-    if (clientsBlock.length > 1 && onSelectAllCommunities) {
+    if (clientsBlock.length > 1 && allCommunitiesUrl) {
       if (Link) {
         clientsBlock.push(
           <li
@@ -88,7 +95,7 @@ export default class Communities extends Component {
             key={`c-all`}
             onClick={handleViewAll}
           >
-            <Link href={`/${lng}/communities`}>
+            <Link href={allCommunitiesUrl}>
               <a>{I18N[lng]["viewAll"]}</a>
             </Link>
           </li>
@@ -100,7 +107,7 @@ export default class Communities extends Component {
             key={`c-all`}
             onClick={handleViewAll}
           >
-            <a href={`${appUrl}/communities`}>{I18N[lng]["viewAll"]}</a>
+            <a href={allCommunitiesUrl}>{I18N[lng]["viewAll"]}</a>
           </li>
         );
       }

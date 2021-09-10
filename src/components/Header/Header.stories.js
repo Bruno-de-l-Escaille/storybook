@@ -392,7 +392,7 @@ export default {
 export const HeaderLoggedIn = () => (
   <Header
     app={object("app", App)}
-    // auth={object("auth", authLogin)}
+    auth={object("auth", authLogin)}
     auth={authLogin}
     env={text("env", "local")}
     settings={object("settings", settings)}
@@ -403,6 +403,7 @@ export const HeaderLoggedIn = () => (
     onLogoutClick={(e) => console.log("Logout", e)}
     onSearchClick={() => alert("searching")}
     notifications={object("notifications", notifications)}
+    allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
     onSelectAllCommunities={() => console.log("Communities select all")}
   />
 );

@@ -186,6 +186,7 @@ export class Header extends Component {
       lng,
       auth,
       Link,
+      allCommunitiesUrl,
       onSelectAllCommunities,
     } = this.props;
     const { appName, appLogoUrl, appUrl, isPrivateBlog } = app;
@@ -200,7 +201,6 @@ export class Header extends Component {
             {auth.navCommunity && auth.user && settings.length > 0 && (
               <div>
                 <span
-                  ref={this.settingsRef}
                   className={`icon-sb-more-vertical ${styles.settingsIcon}`}
                   style={settings.length === 0 ? { visibility: "hidden" } : {}}
                   onClick={this.handleShowSettings.bind(this)}
@@ -251,6 +251,7 @@ export class Header extends Component {
               lng={lng}
               app={app}
               Link={Link}
+              allCommunitiesUrl={allCommunitiesUrl}
               onSelectAllCommunities={onSelectAllCommunities}
             />
           )}
