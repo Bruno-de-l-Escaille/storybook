@@ -5,11 +5,10 @@ import classnames from "classnames";
 class PageHeader extends Component {
   render() {
     const { header, subHeader, Icon, buttons = [] } = this.props;
-console.log("hhhhhhhh",styles);
     return (
       <div className={styles.pageHeader}>
         <div className={styles.pageHeader__icon}>
-          <Icon className={styles.Icon} width="45" height="45" />
+          <Icon width="45" height="45" />
         </div>
         <div className={styles.pageHeader__info}>
           <div>
