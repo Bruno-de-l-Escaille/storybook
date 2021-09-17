@@ -2,7 +2,7 @@
   "files": {
     "0.21595556.iframe.bundle.js": "./0.21595556.iframe.bundle.js",
     "main.css": "./static/css/main.27d91bce.chunk.css",
-    "main.js": "./main.5c944e00.iframe.bundle.js",
+    "main.js": "./main.965944c1.iframe.bundle.js",
     "main.css.map": "./static/css/main.27d91bce.chunk.css.map",
     "runtime~main.js": "./runtime~main.54074348.iframe.bundle.js",
     "vendors~main.css": "./static/css/vendors~main.61061fbe.chunk.css",
@@ -18,7 +18,7 @@
     "4.679d082a.iframe.bundle.js.LICENSE.txt": "./4.679d082a.iframe.bundle.js.LICENSE.txt",
     "6.c4887bf8.iframe.bundle.js.LICENSE.txt": "./6.c4887bf8.iframe.bundle.js.LICENSE.txt",
     "iframe.html": "./iframe.html",
-    "precache-manifest.93144c829d2f89bfc2400fac18f1f5b5.js": "./precache-manifest.93144c829d2f89bfc2400fac18f1f5b5.js",
+    "precache-manifest.15f306207932924c7dee99ec13d31bb5.js": "./precache-manifest.15f306207932924c7dee99ec13d31bb5.js",
     "service-worker.js": "./service-worker.js",
     "static/media/global.scss": "./static/media/tamtam-sb.fc377c7a.woff",
     "vendors~main.db5ef39f.iframe.bundle.js.LICENSE.txt": "./vendors~main.db5ef39f.iframe.bundle.js.LICENSE.txt"
@@ -28,6 +28,6 @@
     "static/css/vendors~main.61061fbe.chunk.css",
     "vendors~main.db5ef39f.iframe.bundle.js",
     "static/css/main.27d91bce.chunk.css",
-    "main.5c944e00.iframe.bundle.js"
+    "main.965944c1.iframe.bundle.js"
   ]
 }

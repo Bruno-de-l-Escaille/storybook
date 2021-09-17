@@ -124,7 +124,7 @@ export default class Communities extends Component {
     const { currentCommunity, lng, communities } = this.props;
 
     if (!communities || communities.length === 0) {
-      return;
+      return null;
     }
 
     let navText = "Communities";
