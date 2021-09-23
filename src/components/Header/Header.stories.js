@@ -261,6 +261,7 @@ const notifications = [
     titleEn: "Emailing Release Note 1.4",
     titleFr: "Notes de publication de la nouvelle version d’Emailing 1.4",
     titleNl: "Emailing Release Note 1.4",
+    contentType: "TEXT",
     contentEn: "",
     contentFr:
       "Contenu <b>Notes de publication</b> de la nouvelle version d’Emailing",
@@ -288,12 +289,13 @@ const notifications = [
       "Nouvelle fonctionnalité : L’organisation des approbateurs a changé, maintenant vous pouvez définir plusieurs groupes d’approbation pour mieux gérer la validation de vos campagnes.",
     titleNl:
       "Nieuwe functionaliteit : de organisatie van de goedkeurders is gewijzigd, nu kunt u meerdere goedkeuringsgroepen instellen om uw campagnevalidatie beter te beheren.",
+    contentType: "LINK",
     isPersonal: 0,
     isAuto: 0,
     targetsCounts: 0,
     targetsListCreated: false,
     contentEn: null,
-    contentFr: null,
+    contentFr: "https://blog.tamtam.pro/fr",
     contentNl: null,
     type: null,
     createdAt: "2021-04-26 08:54:36",
@@ -314,6 +316,7 @@ const notifications = [
       "Découvrez e-Box la nouvelle fonctionnalité vous permettant d’accéder à votre boîte de réception et revoir tous les messages reçus de la part de vos communautés.",
     titleNl:
       "Ontdek e-Box de nieuwe functionaliteit waarmee je je inbox kunt openen en alle berichten kunt bekijken die je van je community's hebt ontvangen.",
+    contentType: "TEXT",
     isPersonal: 0,
     isAuto: 0,
     targetsCounts: 0,
@@ -396,9 +399,8 @@ export const HeaderLoggedIn = () => (
     auth={authLogin}
     env={text("env", "local")}
     settings={object("settings", settings)}
-    menu={object("menu", menu)}
     lng={select("language", ["fr", "nl", "en"], "fr")}
-    rightIcons={rightIcons}
+    rightIcons={object("rightIcons", rightIcons)}
     onLanguageChange={(langue) => alert(langue)}
     onLogoutClick={(e) => console.log("Logout", e)}
     onSearchClick={() => alert("searching")}
@@ -413,7 +415,6 @@ export const HeaderPrivateBlogLoggedIn = () => (
     auth={object("auth", authLogin)}
     env={text("env", "local")}
     settings={object("settings", settings)}
-    menu={object("menu", menu)}
     lng={select("language", ["fr", "nl", "en"], "fr")}
     rightIcons={object("rightIcons", rightIcons)}
     onLanguageChange={(langue) => alert(langue)}

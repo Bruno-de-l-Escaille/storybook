@@ -107,9 +107,7 @@ class MenuProfile extends Component {
                   <li
                     id={language}
                     key={language}
-                    className={
-                      lng === language ? styles.headerLanguageSelected : ""
-                    }
+                    className={lng === language ? styles.selected : ""}
                     onClick={() => this.props.onLanguageChange(language)}
                   >
                     {language.toUpperCase()}

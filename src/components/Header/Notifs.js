@@ -50,8 +50,11 @@ export default function Notifs({ notifications, lng, auth, appName }) {
           className={notification.isRead ? styles.read : styles.notRead}
         >
           <a
-            href={notification.url || null}
+            href={
+              notification.contentType === "LINK" ? notification[content] : null
+            }
             onClick={() => handleOnClick(notification)}
+            target={notification.contentType === "LINK" ? "_blank" : "_self"}
           >
             <div>{notification[title]}</div>
             {notification[introduction] && (
@@ -73,8 +76,11 @@ export default function Notifs({ notifications, lng, auth, appName }) {
   };
 
   const handleOnClick = (notification) => {
-    setCurrentNotif(notification);
-    setIsOpen(true);
+    if (notification?.contentType === "TEXT") {
+      setCurrentNotif(notification);
+      setIsOpen(true);
+    }
+
     if (!notification.isRead) {
       if (window.handleViewNotification) {
         window.handleViewNotification(notification);
@@ -127,26 +133,35 @@ export default function Notifs({ notifications, lng, auth, appName }) {
           afterOpen: styles.modalContentAfterOpen,
           beforeClose: styles.modalContentBeforeClose,
         }}
-        overlayClassName={styles.modalOverlay}
-        closeTimeoutMS={200}
+        overlayClassName={{
+          base: styles.modalOverlay,
+          afterOpen: styles.modalOverlayAfterOpen,
+          beforeClose: styles.modalOverlayBeforeClose,
+        }}
+        closeTimeoutMS={300}
         ariaHideApp={false}
       >
         <div className={`${styles.modal}`}>
-          <div className={styles.modalHeader}>{currentNotif?.[title]}</div>
-          <div
-            className={styles.modalClose}
-            onClick={() => {
-              setIsOpen(false);
-            }}
-          >
-            <IconClose width={14} />
+          <div className={styles.modal_body}>
+            <div className={styles.modal_header}>
+              <h3>{currentNotif?.[title]}</h3>
+              <div
+                className={styles.modal_close}
+                onClick={() => {
+                  setIsOpen(false);
+                }}
+              >
+                <IconClose width={14} />
+              </div>
+            </div>
+
+            <div
+              className={styles.modal_content}
+              dangerouslySetInnerHTML={{
+                __html: currentNotif?.[content],
+              }}
+            ></div>
           </div>
-          <div
-            className={styles.modalBody}
-            dangerouslySetInnerHTML={{
-              __html: currentNotif?.[content],
-            }}
-          ></div>
         </div>
       </Modal>
     </MenuItem>

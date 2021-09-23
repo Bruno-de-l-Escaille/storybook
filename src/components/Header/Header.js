@@ -78,7 +78,7 @@ export class Header extends Component {
     return (
       <>
         {loadNotifWidget && (
-          <AppendHead onLoad={this.handleShowFaqWidget.bind(this)} debug>
+          <AppendHead onLoad={this.handleShowFaqWidget.bind(this)}>
             <link
               name="faq-widget"
               rel="stylesheet"

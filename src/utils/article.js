@@ -249,7 +249,7 @@ export const prepareArticle = (article, env = "", host) => {
         ? organization.name
         : organization.name.substr(0, 30) + "..."),
     category: {
-      name: getCategoryName(category, "fr"),
+      name: getCategoryName(category, language),
       colorCode: category && category.colorCode ? category.colorCode : "",
     },
     url: getArticleFullUrl(article, env, host),
@@ -257,7 +257,7 @@ export const prepareArticle = (article, env = "", host) => {
     hasRelativePath: hasRelativePath(article, host),
     mainMedia: getMainMedia(article),
     album: getAlbum(article),
-    authors: getAuthors(article, "fr"),
+    authors: getAuthors(article, language),
     isPrivate,
     isExternal,
     externalUrl,
