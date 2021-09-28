@@ -57,7 +57,7 @@ export default function Notifs({ notifications, lng, auth, appName }) {
             target={notification.contentType === "LINK" ? "_blank" : "_self"}
           >
             <div>{notification[title]}</div>
-            {notification[introduction] && (
+            {notification.contentType === "TEXT" && notification[introduction] && (
               <div
                 className={styles.notifContent}
                 dangerouslySetInnerHTML={{

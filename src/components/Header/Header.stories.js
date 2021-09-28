@@ -283,12 +283,11 @@ const notifications = [
   {
     id: 4,
     appName: "SMS",
-    titleEn:
-      "The approver organization has changed, now you can define multiple approval groups to better manage the validation of your campaigns.",
+    titleEn: "The approver organization has changed.",
     titleFr:
-      "Nouvelle fonctionnalité : L’organisation des approbateurs a changé, maintenant vous pouvez définir plusieurs groupes d’approbation pour mieux gérer la validation de vos campagnes.",
+      "Nouvelle fonctionnalité : L’organisation des approbateurs a changé.",
     titleNl:
-      "Nieuwe functionaliteit : de organisatie van de goedkeurders is gewijzigd, nu kunt u meerdere goedkeuringsgroepen instellen om uw campagnevalidatie beter te beheren.",
+      "Nieuwe functionaliteit : de organisatie van de goedkeurders is gewijzigd.",
     contentType: "LINK",
     isPersonal: 0,
     isAuto: 0,
@@ -303,8 +302,7 @@ const notifications = [
     updatedAt: "12/05/2021",
     isRead: false,
     introEn: "",
-    introFr:
-      "Contenu Notes de publication de la nouvelle version d’Emailing...",
+    introFr: "https://blog.tamtam.pro/fr",
     introNl: "",
   },
   {
