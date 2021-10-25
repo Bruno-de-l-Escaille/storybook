@@ -1,10 +1,10 @@
 @font-face {
   font-family: "tamtam-sb";
-  src: url("../fonts/tamtam-sb.eot?v2r4nk");
-  src: url("../fonts/tamtam-sb.eot?v2r4nk#iefix") format("embedded-opentype"),
-    url("../fonts/tamtam-sb.ttf?v2r4nk") format("truetype"),
-    url("../fonts/tamtam-sb.woff?v2r4nk") format("woff"),
-    url("../fonts/tamtam-sb.svg?v2r4nk#tamtam-sb") format("svg");
+  src: url("../fonts/tamtam-sb.eot?5ha11c");
+  src: url("../fonts/tamtam-sb.eot?5ha11c#iefix") format("embedded-opentype"),
+    url("../fonts/tamtam-sb.ttf?5ha11c") format("truetype"),
+    url("../fonts/tamtam-sb.woff?5ha11c") format("woff"),
+    url("../fonts/tamtam-sb.svg?5ha11c#tamtam-sb") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -26,6 +26,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-sb-premium:before {
+  content: "\e92a";
+}
 .icon-sb-arrow-down:before {
   content: "\e927";
 }

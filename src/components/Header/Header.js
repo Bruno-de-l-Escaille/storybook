@@ -9,6 +9,7 @@ import MenuProfile from "./MenuProfile";
 import Communities from "./Communities";
 import Notifs from "./Notifs";
 import TTPFaqWidget from "../TTPFaqWidget";
+import * as icons from "../Icons";
 
 const I18N = {
   en: {
@@ -68,12 +69,22 @@ export class Header extends Component {
   };
 
   renderLoggedIn() {
-    const { rightIcons, auth, lng, env, notifications, app } = this.props;
+    const {
+      rightIcons,
+      auth,
+      lng,
+      env,
+      notifications,
+      app,
+      switchSpace,
+    } = this.props;
     const { navCommunity, user } = auth;
     const { isFaqWidgetLoaded } = this.state;
 
     const loadNotifWidget =
       rightIcons.notifs?.activated || rightIcons.faq?.activated;
+
+    const Icon = icons["Portal"];
 
     return (
       <>
@@ -91,6 +102,29 @@ export class Header extends Component {
           </AppendHead>
         )}
         <div className={styles.headerRight}>
+          {switchSpace && (
+            <div className={styles.switchSpace}>
+              <span
+                className={`${styles.switchSpace_left} ${
+                  switchSpace.current === switchSpace.items[0].key &&
+                  styles.switchSpace_active
+                }`}
+                onClick={() => switchSpace.onChange(switchSpace.items[0].key)}
+              >
+                {switchSpace.items[0].label}
+              </span>
+              <Icon />
+              <span
+                className={`${styles.switchSpace_right} ${
+                  switchSpace.current === switchSpace.items[1].key &&
+                  styles.switchSpace_active
+                }`}
+                onClick={() => switchSpace.onChange(switchSpace.items[1].key)}
+              >
+                {switchSpace.items[1].label}
+              </span>
+            </div>
+          )}
           <ul className={`${styles.menu} ${styles.buttons}`}>
             {rightIcons.backoffice?.activated && (
               <MenuLink icon="Settings" href={`${rightIcons.backoffice.url}`}>
@@ -188,6 +222,7 @@ export class Header extends Component {
       Link,
       allCommunitiesUrl,
       onSelectAllCommunities,
+      onSelectCommunity,
     } = this.props;
     const { appName, appLogoUrl, appUrl, isPrivateBlog } = app;
     return (
@@ -253,6 +288,7 @@ export class Header extends Component {
               Link={Link}
               allCommunitiesUrl={allCommunitiesUrl}
               onSelectAllCommunities={onSelectAllCommunities}
+              onSelectCommunity={onSelectCommunity}
             />
           )}
         </div>

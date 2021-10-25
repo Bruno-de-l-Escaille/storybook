@@ -58,6 +58,38 @@ const rightIcons = {
   },
 };
 
+const portalRightIcons = {
+  home: {
+    activated: false,
+    url: "https://blog.tamtam.pro/fr",
+  },
+  profile: {
+    activated: true,
+    url: "https://blog.tamtam.pro/fr",
+  },
+  ebox: {
+    activated: true,
+    url: "https://blog.tamtam.pro/fr",
+  },
+  search: {
+    activated: true,
+  },
+  notifs: {
+    activated: true,
+  },
+  apps: {
+    activated: true,
+  },
+  faq: {
+    activated: true,
+  },
+  backoffice: {
+    activated: false,
+    label: "Back office",
+    url: "https://blog.tamtam.pro/fr",
+  },
+};
+
 const settings = [
   {
     label: "utilisateur",
@@ -405,6 +437,7 @@ export const HeaderLoggedIn = () => (
     notifications={object("notifications", notifications)}
     allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
     onSelectAllCommunities={() => console.log("Communities select all")}
+    onSelectCommunity={() => console.log("community click")}
   />
 );
 export const HeaderPrivateBlogLoggedIn = () => (
@@ -420,6 +453,35 @@ export const HeaderPrivateBlogLoggedIn = () => (
     onSearchClick={() => alert("searching")}
     notifications={notifications}
     onSelectAllCommunities={() => console.log("Communities select all")}
+  />
+);
+
+const switchSpace = {
+  items: [
+    { key: "COMMUNITY", label: "Community" },
+    { key: "WORK", label: "Work place" },
+  ],
+  current: "WORK",
+  onChange: (e) => {
+    console.log("change space", e);
+  },
+};
+export const HeaderSpaceLoggedIn = () => (
+  <Header
+    app={object("app", App)}
+    auth={object("auth", authLogin)}
+    auth={authLogin}
+    env={text("env", "local")}
+    settings={object("settings", settings)}
+    lng={select("language", ["fr", "nl", "en"], "fr")}
+    rightIcons={object("rightIcons", portalRightIcons)}
+    onLanguageChange={(langue) => alert(langue)}
+    onLogoutClick={(e) => console.log("Logout", e)}
+    onSearchClick={() => alert("searching")}
+    notifications={object("notifications", notifications)}
+    allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
+    onSelectAllCommunities={() => console.log("Communities select all")}
+    switchSpace={object("switchSpace", switchSpace)}
   />
 );
 export const HeaderLoggedOut = () => (

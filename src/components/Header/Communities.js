@@ -23,6 +23,7 @@ export default class Communities extends Component {
       Link,
       allCommunitiesUrl,
       onSelectAllCommunities,
+      onSelectCommunity,
     } = this.props;
     const { appUrl } = app;
 
@@ -55,36 +56,51 @@ export default class Communities extends Component {
         clientName = clientName.substr(0, 30) + "...";
       }
 
-      if (Link) {
+      if (onSelectCommunity) {
         clientsBlock.push(
           <li
             className={styles.menu__subChild}
             key={`client-${communities[i].id}`}
+            onClick={onSelectCommunity}
           >
-            <Link
-              href={`/${lng}/community/${communities[i].url}/${communities[i].id}`}
-            >
-              <a>
-                {logoBlock}
-                {clientName}
-              </a>
-            </Link>
-          </li>
-        );
-      } else {
-        clientsBlock.push(
-          <li
-            className={styles.menu__subChild}
-            key={`client-${communities[i].id}`}
-          >
-            <a
-              href={`${appUrl}/community/${communities[i].url}/${communities[i].id}`}
-            >
+            <a href="javascript:void(0);">
               {logoBlock}
               {clientName}
             </a>
           </li>
         );
+      } else {
+        if (Link) {
+          clientsBlock.push(
+            <li
+              className={styles.menu__subChild}
+              key={`client-${communities[i].id}`}
+            >
+              <Link
+                href={`/${lng}/community/${communities[i].url}/${communities[i].id}`}
+              >
+                <a>
+                  {logoBlock}
+                  {clientName}
+                </a>
+              </Link>
+            </li>
+          );
+        } else {
+          clientsBlock.push(
+            <li
+              className={styles.menu__subChild}
+              key={`client-${communities[i].id}`}
+            >
+              <a
+                href={`${appUrl}/community/${communities[i].url}/${communities[i].id}`}
+              >
+                {logoBlock}
+                {clientName}
+              </a>
+            </li>
+          );
+        }
       }
     }
     if (clientsBlock.length > 1 && allCommunitiesUrl) {

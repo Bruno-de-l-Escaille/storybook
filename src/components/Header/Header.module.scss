@@ -1134,9 +1134,6 @@ nav {
 }
 
 @media screen and (max-width: 39.9375em) {
-  // .menu__community {
-  //   overflow: scroll;
-  // }
   .menuLogo {
     width: 50%;
   }
@@ -1189,6 +1186,10 @@ nav {
     li {
       position: relative;
     }
+  }
+
+  .switchSpace {
+    display: none !important;
   }
 }
 
@@ -1294,5 +1295,45 @@ nav {
 @media screen and (min-width: 992px) {
   .modal_body {
     width: 50%;
+  }
+}
+
+.switchSpace {
+  display: flex;
+  align-items: center;
+  position: relative;
+  left: 1.25rem;
+
+  span {
+    font-size: 12px;
+    line-height: 14px;
+    border-radius: 2rem;
+    text-transform: initial;
+    position: relative;
+    cursor: pointer;
+    transition: color 0.2s ease-in;
+    background: #f1f2f4;
+  }
+  &_left {
+    left: 2.5rem;
+    padding: 0.6rem 4rem 0.6rem 1.5rem;
+  }
+  &_right {
+    right: 2.5rem;
+    padding: 0.6rem 1.5em 0.6rem 4rem;
+  }
+
+  &_active {
+    color: #fff;
+    background: #29394d !important;
+    z-index: 1;
+    font-weight: 500;
+  }
+  svg {
+    position: relative;
+    z-index: 2;
+    path {
+      fill: #fff;
+    }
   }
 }

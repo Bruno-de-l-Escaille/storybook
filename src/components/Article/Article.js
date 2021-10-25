@@ -49,6 +49,7 @@ export const Article = ({
     mainMedia,
     status,
     medias,
+    isPrivate,
     isExternal,
     publishedAt,
     countLikes,
@@ -102,22 +103,30 @@ export const Article = ({
       return hasRelativePath ? (
         <Link href={url}>
           <a className={styles.title}>
-            <h3>{title}</h3>
+            <h3>
+              {title} {isPrivate && <i className="icon-sb-premium"></i>}
+            </h3>
           </a>
         </Link>
       ) : (
         <a href={url} taget="_blank" className={styles.title}>
-          <h3>{title}</h3>
+          <h3>
+            {title} {isPrivate && <i className="icon-sb-premium"></i>}
+          </h3>
         </a>
       );
     else
       return hasRelativePath ? (
         <a href={url} className={styles.title}>
-          <h3>{title}</h3>
+          <h3>
+            {title} {isPrivate && <i className="icon-sb-premium"></i>}
+          </h3>
         </a>
       ) : (
         <a href={url} taget="_blank" className={styles.title}>
-          <h3>{title}</h3>
+          <h3>
+            {title} {isPrivate && <i className="icon-sb-premium"></i>}
+          </h3>
         </a>
       );
   };
