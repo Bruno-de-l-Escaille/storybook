@@ -61,7 +61,7 @@ export default class Communities extends Component {
           <li
             className={styles.menu__subChild}
             key={`client-${communities[i].id}`}
-            onClick={onSelectCommunity}
+            onClick={() => onSelectCommunity(communities[i])}
           >
             <a href="javascript:void(0);">
               {logoBlock}

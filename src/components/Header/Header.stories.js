@@ -437,7 +437,7 @@ export const HeaderLoggedIn = () => (
     notifications={object("notifications", notifications)}
     allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
     onSelectAllCommunities={() => console.log("Communities select all")}
-    onSelectCommunity={() => console.log("community click")}
+    onSelectCommunity={(community) => console.log("community click", community)}
   />
 );
 export const HeaderPrivateBlogLoggedIn = () => (
