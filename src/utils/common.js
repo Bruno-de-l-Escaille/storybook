@@ -80,3 +80,19 @@ export const truncateWithHTML = (string, length, max = 10) => {
 
   return `<span title="${noHTML}">${truncated.join("")}…</span>`;
 };
+
+export const getApiUrl = (env) => {
+  let apiUrl = "";
+  switch (env) {
+    case "local":
+      apiUrl = "http://local.api.tamtam.pro";
+      break;
+    case "rc2":
+      apiUrl = "https://api.rc2.tamtam.pro";
+      break;
+    default:
+      apiUrl = "https://api.tamtam.pro";
+      break;
+  }
+  return apiUrl;
+};

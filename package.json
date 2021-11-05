@@ -162,6 +162,7 @@
     ]
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "classnames": "^2.2.6",
     "foundation-sites": "^6.6.3",
     "moment": "^2.29.1",

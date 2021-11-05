@@ -144,7 +144,9 @@ export class Header extends Component {
               <Notifs
                 notifications={notifications}
                 lng={lng}
+                env={env}
                 auth={auth}
+                navCommunity={navCommunity}
                 appName={app.appName}
               />
             )}

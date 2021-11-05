@@ -102,7 +102,7 @@ const settings = [
 ];
 
 const authLogin = {
-  token: "e987dcc6bc3f059d1ae69e80c85b90242a59e498",
+  token: "00882984434b82623e1831486530a29d44efffd9",
   navCommunity: {
     id: 9,
     name: "Forum For The Future",
@@ -214,6 +214,7 @@ const authLogin = {
   },
   user: {
     type: "ADMIN",
+    id: 8650,
     firstName: "Emmanuel",
     lastName: "Degrève",
     mainEmail: "emmanuel.degreve@degandpartners.com",
@@ -286,86 +287,6 @@ const authLogout = {
   token: null,
 };
 
-const notifications = [
-  {
-    id: 5,
-    appName: "SMS",
-    titleEn: "Emailing Release Note 1.4",
-    titleFr: "Notes de publication de la nouvelle version d’Emailing 1.4",
-    titleNl: "Emailing Release Note 1.4",
-    contentType: "TEXT",
-    contentEn: "",
-    contentFr:
-      "Contenu <b>Notes de publication</b> de la nouvelle version d’Emailing",
-    contentNl: "",
-    type: "RELEASE",
-    isPersonal: 0,
-    isAuto: 0,
-    targetsCounts: 0,
-    targetsListCreated: false,
-    createdAt: "2021-05-18 17:31:48",
-    expiredAt: null,
-    updatedAt: "18/05/2021",
-    isRead: false,
-    introEn: "",
-    introFr:
-      "Contenu Notes de publication de la nouvelle version d’Emailing...",
-    introNl: "",
-  },
-  {
-    id: 4,
-    appName: "SMS",
-    titleEn: "The approver organization has changed.",
-    titleFr:
-      "Nouvelle fonctionnalité : L’organisation des approbateurs a changé.",
-    titleNl:
-      "Nieuwe functionaliteit : de organisatie van de goedkeurders is gewijzigd.",
-    contentType: "LINK",
-    isPersonal: 0,
-    isAuto: 0,
-    targetsCounts: 0,
-    targetsListCreated: false,
-    contentEn: null,
-    contentFr: "https://blog.tamtam.pro/fr",
-    contentNl: null,
-    type: null,
-    createdAt: "2021-04-26 08:54:36",
-    expiredAt: null,
-    updatedAt: "12/05/2021",
-    isRead: false,
-    introEn: "",
-    introFr: "https://blog.tamtam.pro/fr",
-    introNl: "",
-  },
-  {
-    id: 2,
-    appName: "SMS",
-    titleEn:
-      "Here is our new service e-Box, it will help you to find all the email you have received from your communities.",
-    titleFr:
-      "Découvrez e-Box la nouvelle fonctionnalité vous permettant d’accéder à votre boîte de réception et revoir tous les messages reçus de la part de vos communautés.",
-    titleNl:
-      "Ontdek e-Box de nieuwe functionaliteit waarmee je je inbox kunt openen en alle berichten kunt bekijken die je van je community's hebt ontvangen.",
-    contentType: "TEXT",
-    isPersonal: 0,
-    isAuto: 0,
-    targetsCounts: 0,
-    targetsListCreated: false,
-    contentEn: null,
-    contentFr: null,
-    contentNl: null,
-    type: null,
-    createdAt: "2021-01-24 14:58:41",
-    expiredAt: null,
-    updatedAt: "14/05/2021",
-    isRead: true,
-    introEn: "",
-    introFr:
-      "Contenu Notes de publication de la nouvelle version d’Emailing...",
-    introNl: "",
-  },
-];
-
 const menu = [
   {
     title: "Acceuil",
@@ -434,7 +355,6 @@ export const HeaderLoggedIn = () => (
     onLanguageChange={(langue) => alert(langue)}
     onLogoutClick={(e) => console.log("Logout", e)}
     onSearchClick={() => alert("searching")}
-    notifications={object("notifications", notifications)}
     allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
     onSelectAllCommunities={() => console.log("Communities select all")}
     onSelectCommunity={(community) => console.log("community click", community)}
@@ -451,7 +371,6 @@ export const HeaderPrivateBlogLoggedIn = () => (
     onLanguageChange={(langue) => alert(langue)}
     onLogoutClick={(e) => console.log("Logout", e)}
     onSearchClick={() => alert("searching")}
-    notifications={notifications}
     onSelectAllCommunities={() => console.log("Communities select all")}
   />
 );
@@ -478,7 +397,6 @@ export const HeaderSpaceLoggedIn = () => (
     onLanguageChange={(langue) => alert(langue)}
     onLogoutClick={(e) => console.log("Logout", e)}
     onSearchClick={() => alert("searching")}
-    notifications={object("notifications", notifications)}
     allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
     onSelectAllCommunities={() => console.log("Communities select all")}
     switchSpace={object("switchSpace", switchSpace)}

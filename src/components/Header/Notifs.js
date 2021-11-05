@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import moment from "moment";
 import "moment/locale/fr";
 import "moment/locale/nl";
 
+import { getNotifications } from "../../api";
+import { getApiUrl } from "../../utils";
 import MenuItem from "./MenuItem";
 import IconClose from "../Icons/IconClose";
 import styles from "./Header.module.scss";
@@ -23,16 +25,43 @@ const I18N = {
   },
 };
 
-export default function Notifs({ notifications, lng, auth, appName }) {
+export default function Notifs({ lng, auth, env, appName, navCommunity }) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentNotif, setCurrentNotif] = useState(null);
   const isAdmin = auth && auth.user?.type === "ADMIN" ? true : false;
   const title = `title${lng.charAt(0).toUpperCase() + lng.slice(1)}`;
   const introduction = `intro${lng.charAt(0).toUpperCase() + lng.slice(1)}`;
   const content = `content${lng.charAt(0).toUpperCase() + lng.slice(1)}`;
+  const [isFetching, setIsFetching] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+
+  const apiUrl = getApiUrl(env);
+
+  useEffect(() => {
+    if (!isFetching) {
+      console.log("================", appName.toUpperCase());
+      setIsFetching(true);
+      getNotifications({
+        apiUrl,
+        token: auth.token,
+        userId: auth.user.id,
+        navCommunity,
+        appName: appName.toUpperCase(),
+        options: {
+          limit: 6,
+        },
+      })
+        .then((resp) => {
+          setNotifications(resp.data.data);
+        })
+        .catch((e) => {
+          // setIsFetching(false);
+        });
+    }
+  });
 
   const renderNotifications = () => {
-    if (!notifications || notifications?.length === 0) {
+    if (notifications.length === 0) {
       return <li className="p-b-m">{I18N[lng]["nothingToShow"]}</li>;
     }
 
