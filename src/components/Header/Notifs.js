@@ -39,7 +39,6 @@ export default function Notifs({ lng, auth, env, appName, navCommunity }) {
 
   useEffect(() => {
     if (!isFetching) {
-      console.log("================", appName.toUpperCase());
       setIsFetching(true);
       getNotifications({
         apiUrl,
@@ -132,7 +131,9 @@ export default function Notifs({ lng, auth, env, appName, navCommunity }) {
   return (
     <MenuItem
       icon="Notifs"
-      className={styles.notif}
+      className={`${styles.notif} ${
+        unreadNotifs.length > 0 ? styles.notifDot : ""
+      }`}
       count={unreadNotifs.length}
     >
       <div className={styles.socialLinksWrapper}>
