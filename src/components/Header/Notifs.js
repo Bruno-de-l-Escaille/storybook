@@ -37,26 +37,34 @@ export default function Notifs({ lng, auth, env, appName, navCommunity }) {
 
   const apiUrl = getApiUrl(env);
 
+  const fetchNotifications = () => {
+    setIsFetching(true);
+    getNotifications({
+      apiUrl,
+      token: auth.token,
+      userId: auth.user.id,
+      navCommunity,
+      appName: appName.toUpperCase(),
+      options: {
+        limit: 6,
+      },
+    })
+      .then((resp) => {
+        setNotifications(resp.data.data);
+      })
+      .catch((e) => {
+        // setIsFetching(false);
+      });
+  };
+
   useEffect(() => {
     if (!isFetching) {
-      setIsFetching(true);
-      getNotifications({
-        apiUrl,
-        token: auth.token,
-        userId: auth.user.id,
-        navCommunity,
-        appName: appName.toUpperCase(),
-        options: {
-          limit: 6,
-        },
-      })
-        .then((resp) => {
-          setNotifications(resp.data.data);
-        })
-        .catch((e) => {
-          // setIsFetching(false);
-        });
+      fetchNotifications();
     }
+
+    window.refreshNotifications = function () {
+      fetchNotifications();
+    };
   });
 
   const renderNotifications = () => {

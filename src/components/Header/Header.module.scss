@@ -448,13 +448,14 @@ nav {
     &.notifDot:before {
       content: "";
       display: block;
-      width: 10px;
-      height: 10px;
+      width: 14px;
+      height: 14px;
       background-color: #2495e1;
+      border: 2px solid #fff;
       border-radius: 50%;
       position: absolute;
-      right: 10px;
-      bottom: 9px;
+      right: 8px;
+      top: 9px;
     }
   }
 

@@ -64,7 +64,7 @@ export class Header extends Component {
   handleFaqClick = () => {
     const { app } = this.props;
     if (window.showFAQ) {
-      window.showFAQ(app.appName);
+      window.showFAQ(app.appName.toUpperCase());
     }
   };
 

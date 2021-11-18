@@ -1,10 +1,14 @@
 @font-face {
   font-family: "tamtam-sb";
-  src: url("../fonts/tamtam-sb.eot?5ha11c");
-  src: url("../fonts/tamtam-sb.eot?5ha11c#iefix") format("embedded-opentype"),
-    url("../fonts/tamtam-sb.ttf?5ha11c") format("truetype"),
-    url("../fonts/tamtam-sb.woff?5ha11c") format("woff"),
-    url("../fonts/tamtam-sb.svg?5ha11c#tamtam-sb") format("svg");
+  src: url("https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/storybook/static/fonts/tamtam-sb.eot?5ha11c");
+  src: url("https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/storybook/static/fonts/tamtam-sb.eot?5ha11c#iefix")
+      format("embedded-opentype"),
+    url("https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/storybook/static/fonts/tamtam-sb.ttf?5ha11c")
+      format("truetype"),
+    url("https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/storybook/static/fonts/tamtam-sb.woff?5ha11c")
+      format("woff"),
+    url("https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/storybook/static/fonts/tamtam-sb.svg?5ha11c#tamtam-sb")
+      format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;

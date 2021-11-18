@@ -28,40 +28,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "7.61e63351.iframe.bundle.js"
   },
   {
-    "revision": "612181e58d3804f4706135b4820e6441",
+    "revision": "6a89bd56814f069aa99dbb394a7dd8ba",
     "url": "iframe.html"
   },
   {
-    "revision": "88b1a1a1bae96c08cc1a",
-    "url": "main.cc06c8a9.iframe.bundle.js"
+    "revision": "c69e7cdb1ca528fdeb10",
+    "url": "main.0420361b.iframe.bundle.js"
   },
   {
     "revision": "f43ada044b4bd953fa66",
     "url": "runtime~main.38a011d9.iframe.bundle.js"
   },
   {
-    "revision": "88b1a1a1bae96c08cc1a",
-    "url": "static/css/main.e90c56d5.chunk.css"
+    "revision": "c69e7cdb1ca528fdeb10",
+    "url": "static/css/main.617f6829.chunk.css"
   },
   {
     "revision": "e378f5333902e811aa49",
     "url": "static/css/vendors~main.61061fbe.chunk.css"
-  },
-  {
-    "revision": "3c66a7fe28149c4e4965f8afc2438da1",
-    "url": "static/media/tamtam-sb.3c66a7fe.woff"
-  },
-  {
-    "revision": "6ad40c8f463a55f11ec0dc70197fc5f1",
-    "url": "static/media/tamtam-sb.6ad40c8f.ttf"
-  },
-  {
-    "revision": "97d2ff2f3d72d299bd57411020cce72e",
-    "url": "static/media/tamtam-sb.97d2ff2f.eot"
-  },
-  {
-    "revision": "be2c0017bb6e5a3043b2b372fd711658",
-    "url": "static/media/tamtam-sb.be2c0017.svg"
   },
   {
     "revision": "e378f5333902e811aa49",

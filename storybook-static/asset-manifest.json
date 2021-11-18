@@ -1,9 +1,9 @@
 {
   "files": {
     "0.79dc708d.iframe.bundle.js": "./0.79dc708d.iframe.bundle.js",
-    "main.css": "./static/css/main.e90c56d5.chunk.css",
-    "main.js": "./main.cc06c8a9.iframe.bundle.js",
-    "main.css.map": "./static/css/main.e90c56d5.chunk.css.map",
+    "main.css": "./static/css/main.617f6829.chunk.css",
+    "main.js": "./main.0420361b.iframe.bundle.js",
+    "main.css.map": "./static/css/main.617f6829.chunk.css.map",
     "runtime~main.js": "./runtime~main.38a011d9.iframe.bundle.js",
     "vendors~main.css": "./static/css/vendors~main.61061fbe.chunk.css",
     "vendors~main.js": "./vendors~main.d07784ba.iframe.bundle.js",
@@ -18,16 +18,15 @@
     "4.72a76bfe.iframe.bundle.js.LICENSE.txt": "./4.72a76bfe.iframe.bundle.js.LICENSE.txt",
     "6.977470a8.iframe.bundle.js.LICENSE.txt": "./6.977470a8.iframe.bundle.js.LICENSE.txt",
     "iframe.html": "./iframe.html",
-    "precache-manifest.178307cb355046f6ff455ddbf6444668.js": "./precache-manifest.178307cb355046f6ff455ddbf6444668.js",
+    "precache-manifest.363e186642a5572b4d0f67f03a9db968.js": "./precache-manifest.363e186642a5572b4d0f67f03a9db968.js",
     "service-worker.js": "./service-worker.js",
-    "static/media/global.scss": "./static/media/tamtam-sb.be2c0017.svg",
     "vendors~main.d07784ba.iframe.bundle.js.LICENSE.txt": "./vendors~main.d07784ba.iframe.bundle.js.LICENSE.txt"
   },
   "entrypoints": [
     "runtime~main.38a011d9.iframe.bundle.js",
     "static/css/vendors~main.61061fbe.chunk.css",
     "vendors~main.d07784ba.iframe.bundle.js",
-    "static/css/main.e90c56d5.chunk.css",
-    "main.cc06c8a9.iframe.bundle.js"
+    "static/css/main.617f6829.chunk.css",
+    "main.0420361b.iframe.bundle.js"
   ]
 }
