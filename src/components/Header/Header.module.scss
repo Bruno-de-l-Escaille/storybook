@@ -568,6 +568,8 @@ nav {
       & > ul {
         margin: 0 $spacing-xxs $spacing-xxs;
         border-top: 2px solid #fff;
+        max-height: 36rem;
+        overflow-y: auto;
       }
     }
 
@@ -689,6 +691,7 @@ nav {
   font-size: 12px;
   line-height: 14px;
   color: #6d7f92;
+  word-break: break-word;
 }
 .notReadPoint {
   position: absolute;

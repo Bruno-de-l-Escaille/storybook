@@ -185,3 +185,7 @@ ul {
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
 }
+
+.sun-editor .se-tooltip .se-tooltip-inner {
+  z-index: 9999 !important;
+}
