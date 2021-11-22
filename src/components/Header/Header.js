@@ -58,7 +58,8 @@ export class Header extends Component {
   };
 
   handleShowFaqWidget = () => {
-    setTimeout(() => this.setState({ isFaqWidgetLoaded: true }), 400);
+    // setTimeout(() => this.setState({ isFaqWidgetLoaded: true }), 400);
+    this.setState({ isFaqWidgetLoaded: true });
   };
 
   handleFaqClick = () => {
