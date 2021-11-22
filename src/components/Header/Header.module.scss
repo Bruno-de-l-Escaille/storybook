@@ -944,6 +944,7 @@ nav {
       color: #95959f;
       font-size: 0.7rem;
       cursor: pointer;
+
       &:hover {
         color: #2c2b3f;
       }
@@ -1045,6 +1046,11 @@ nav {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: rgba(44, 43, 63, 0.1);
+    color: #95959f;
+    cursor: pointer;
+    font-size: 0.7rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.06rem;
 
     a {
       color: #95959f;

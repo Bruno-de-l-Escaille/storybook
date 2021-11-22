@@ -11,6 +11,10 @@
   background-size: cover;
   background-repeat: no-repeat;
   margin-right: 6px;
+
+  &_nomargin {
+    margin-right: 0;
+  }
 }
 
 .avatarSvg {

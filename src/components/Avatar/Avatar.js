@@ -12,6 +12,7 @@ export class Avatar extends Component {
       firstName,
       lastName,
       avatarSignature,
+      noMargin,
     } = this.props;
 
     let avatarName = "";
@@ -25,11 +26,17 @@ export class Avatar extends Component {
       <div className={styles.avatarContainer}>
         {avatarUrl ? (
           <div
-            className={styles.avatar}
+            className={`${styles.avatar} ${
+              noMargin ? styles.avatar_nomargin : ""
+            }`}
             style={{ backgroundImage: `url(${avatarUrl})` }}
           ></div>
         ) : (
-          <div className={`${styles.avatar} ${styles.emptyAvatar}`}>
+          <div
+            className={`${styles.avatar} ${styles.emptyAvatar} ${
+              noMargin ? styles.avatar_nomargin : ""
+            }`}
+          >
             {getUserNameForAvatar(firstName, lastName)}
           </div>
         )}

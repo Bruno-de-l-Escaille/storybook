@@ -356,7 +356,7 @@ export const HeaderLoggedIn = () => (
     onLogoutClick={(e) => console.log("Logout", e)}
     onSearchClick={() => alert("searching")}
     allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
-    onSelectAllCommunities={() => console.log("Communities select all")}
+    // onSelectAllCommunities={() => console.log("Communities select all")}
     onSelectCommunity={(community) => console.log("community click", community)}
   />
 );
@@ -398,7 +398,7 @@ export const HeaderSpaceLoggedIn = () => (
     onLogoutClick={(e) => console.log("Logout", e)}
     onSearchClick={() => alert("searching")}
     allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
-    onSelectAllCommunities={() => console.log("Communities select all")}
+    // onSelectAllCommunities={() => console.log("Communities select all")}
     switchSpace={object("switchSpace", switchSpace)}
   />
 );

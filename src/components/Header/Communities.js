@@ -103,29 +103,36 @@ export default class Communities extends Component {
         }
       }
     }
-    if (clientsBlock.length > 1 && allCommunitiesUrl) {
-      if (Link) {
+    if (
+      clientsBlock.length > 1 &&
+      (onSelectAllCommunities || allCommunitiesUrl)
+    ) {
+      if (onSelectAllCommunities) {
         clientsBlock.push(
           <li
             className={styles.menu__seeAll}
             key={`c-all`}
-            onClick={handleViewAll}
+            onClick={onSelectAllCommunities}
           >
-            <Link href={allCommunitiesUrl}>
-              <a>{I18N[lng]["viewAll"]}</a>
-            </Link>
+            {I18N[lng]["viewAll"]}
           </li>
         );
-      } else {
-        clientsBlock.push(
-          <li
-            className={styles.menu__seeAll}
-            key={`c-all`}
-            onClick={handleViewAll}
-          >
-            <a href={allCommunitiesUrl}>{I18N[lng]["viewAll"]}</a>
-          </li>
-        );
+      } else if (allCommunitiesUrl) {
+        if (Link) {
+          clientsBlock.push(
+            <li className={styles.menu__seeAll} key={`c-all`}>
+              <Link href={allCommunitiesUrl}>
+                <a>{I18N[lng]["viewAll"]}</a>
+              </Link>
+            </li>
+          );
+        } else {
+          clientsBlock.push(
+            <li className={styles.menu__seeAll} key={`c-all`}>
+              <a href={allCommunitiesUrl}>{I18N[lng]["viewAll"]}</a>
+            </li>
+          );
+        }
       }
     }
 

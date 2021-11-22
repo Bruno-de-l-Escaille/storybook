@@ -74,6 +74,7 @@ class MenuProfile extends Component {
         firstName={firstName}
         lastName={lastName}
         showInfo={false}
+        noMargin={true}
       />
     ) : (
       <Avatar firstName={firstName} lastName={lastName} showInfo={false} />
