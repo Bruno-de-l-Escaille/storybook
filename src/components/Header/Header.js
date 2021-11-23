@@ -64,6 +64,7 @@ export class Header extends Component {
   handleFaqClick = () => {
     const { app } = this.props;
     if (window.showFAQ) {
+      console.log("====", app.currentEvent ? true : false);
       app.currentEvent
         ? window.showFAQ(app.appName.toUpperCase(), app.currentEvent)
         : window.showFAQ(app.appName.toUpperCase());

@@ -41,7 +41,7 @@ const rightIcons = {
     url: "https://blog.tamtam.pro/fr",
   },
   search: {
-    activated: true,
+    activated: false,
   },
   notifs: {
     activated: true,

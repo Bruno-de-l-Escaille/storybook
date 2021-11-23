@@ -1,6 +1,6 @@
 # TamTam Storybook
 
-Current version: 0.1.12
+Current version: 0.1.13
 
 ## Setup
 

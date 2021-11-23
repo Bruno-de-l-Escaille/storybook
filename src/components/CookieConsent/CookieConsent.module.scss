@@ -1,0 +1,36 @@
+.container {
+  position: fixed;
+  z-index: 9999;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #29394d;
+  padding: 1rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  transition: all 1s;
+  font-family: Roboto;
+
+  .text {
+    margin-right: 1rem;
+    font-size: 16px;
+  }
+
+  .button {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 500;
+    font-family: Roboto;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #18a0fb;
+  }
+}
