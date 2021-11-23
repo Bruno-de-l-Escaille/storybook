@@ -11,15 +11,16 @@ import {
 import StoryRouter from "storybook-react-router";
 
 const App = {
-  appName: "Blog",
+  appName: "BLOG",
   appLogoUrl: "https://s3.tamtam.pro/v2/apps/blog.png",
   appUrl: "https://blog.tamtam.pro/fr",
   homeUrl: "https://one.tamtam.pro",
   isPrivateBlog: false,
+  currentEvent: null,
 };
 
 const AppPrivate = {
-  appName: "Blog",
+  appName: "BLOG",
   appLogoUrl: "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/logo/deg.png",
   appUrl: "https://blog.tamtam.pro/fr",
   homeUrl: "https://one.tamtam.pro",

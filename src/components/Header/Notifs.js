@@ -33,6 +33,7 @@ export default function Notifs({ lng, auth, env, appName, navCommunity }) {
   const introduction = `intro${lng.charAt(0).toUpperCase() + lng.slice(1)}`;
   const content = `content${lng.charAt(0).toUpperCase() + lng.slice(1)}`;
   const [isFetching, setIsFetching] = useState(false);
+  const [isFetched, setIsFetched] = useState(false);
   const [notifications, setNotifications] = useState([]);
 
   const apiUrl = getApiUrl(env);
@@ -50,10 +51,11 @@ export default function Notifs({ lng, auth, env, appName, navCommunity }) {
       },
     })
       .then((resp) => {
+        setIsFetched(true);
         setNotifications(resp.data.data);
       })
       .catch((e) => {
-        // setIsFetching(false);
+        setIsFetched(true);
       });
   };
 
@@ -66,6 +68,12 @@ export default function Notifs({ lng, auth, env, appName, navCommunity }) {
       fetchNotifications();
     };
   });
+
+  useEffect(() => {
+    if (isFetched) {
+      fetchNotifications();
+    }
+  }, [navCommunity]);
 
   const renderNotifications = () => {
     if (notifications.length === 0) {

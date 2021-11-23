@@ -58,13 +58,15 @@ export class Header extends Component {
   };
 
   handleShowFaqWidget = () => {
-    setTimeout(() => this.setState({ isFaqWidgetLoaded: true }), 900);
+    setTimeout(() => this.setState({ isFaqWidgetLoaded: true }), 1200);
   };
 
   handleFaqClick = () => {
     const { app } = this.props;
     if (window.showFAQ) {
-      window.showFAQ(app.appName.toUpperCase());
+      app.currentEvent
+        ? window.showFAQ(app.appName.toUpperCase(), app.currentEvent)
+        : window.showFAQ(app.appName.toUpperCase());
     }
   };
 
