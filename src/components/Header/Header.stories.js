@@ -285,7 +285,7 @@ const authLogin = {
 const authLogout = {
   navCommunity: null,
   user: null,
-  token: null,
+  token: null, // null or public token
 };
 
 const menu = [
@@ -406,7 +406,8 @@ export const HeaderSpaceLoggedIn = () => (
 export const HeaderLoggedOut = () => (
   <Header
     app={object("app", App)}
-    auth={text("auth", JSON.stringify(authLogout))}
+    auth={object("auth", authLogout)}
+    env={text("env", "local")}
     lng={select("language", ["fr", "nl", "en"], "fr")}
     onLanguageChange={(langue) => alert(langue)}
   />

@@ -82,107 +82,83 @@ export class Header extends Component {
       switchSpace,
     } = this.props;
     const { navCommunity, user } = auth;
-    const { isFaqWidgetLoaded } = this.state;
-
-    const loadNotifWidget =
-      rightIcons.notifs?.activated || rightIcons.faq?.activated;
 
     const Icon = icons["Portal"];
 
     return (
-      <>
-        {loadNotifWidget && (
-          <AppendHead onLoad={this.handleShowFaqWidget.bind(this)}>
-            <link
-              name="faq-widget"
-              rel="stylesheet"
-              href={`https://tamtam.s3-eu-west-1.amazonaws.com/cdn/faq/${env}/static/css/widget.css`}
-            ></link>
-            <script
-              name="faq-widget-script"
-              src={`https://tamtam.s3-eu-west-1.amazonaws.com/cdn/faq/${env}/static/js/widget.js`}
-            />
-          </AppendHead>
+      <div className={styles.headerRight}>
+        {switchSpace && (
+          <div className={styles.switchSpace}>
+            <span
+              className={`${styles.switchSpace_left} ${
+                switchSpace.current === switchSpace.items[0].key &&
+                styles.switchSpace_active
+              }`}
+              onClick={() => switchSpace.onChange(switchSpace.items[0].key)}
+            >
+              {switchSpace.items[0].label}
+            </span>
+            <Icon />
+            <span
+              className={`${styles.switchSpace_right} ${
+                switchSpace.current === switchSpace.items[1].key &&
+                styles.switchSpace_active
+              }`}
+              onClick={() => switchSpace.onChange(switchSpace.items[1].key)}
+            >
+              {switchSpace.items[1].label}
+            </span>
+          </div>
         )}
-        <div className={styles.headerRight}>
-          {switchSpace && (
-            <div className={styles.switchSpace}>
-              <span
-                className={`${styles.switchSpace_left} ${
-                  switchSpace.current === switchSpace.items[0].key &&
-                  styles.switchSpace_active
-                }`}
-                onClick={() => switchSpace.onChange(switchSpace.items[0].key)}
-              >
-                {switchSpace.items[0].label}
-              </span>
-              <Icon />
-              <span
-                className={`${styles.switchSpace_right} ${
-                  switchSpace.current === switchSpace.items[1].key &&
-                  styles.switchSpace_active
-                }`}
-                onClick={() => switchSpace.onChange(switchSpace.items[1].key)}
-              >
-                {switchSpace.items[1].label}
-              </span>
+        <ul className={`${styles.menu} ${styles.buttons}`}>
+          {rightIcons.backoffice?.activated && (
+            <MenuLink icon="Settings" href={`${rightIcons.backoffice.url}`}>
+              {rightIcons.backoffice.label}
+            </MenuLink>
+          )}
+          {rightIcons.home.activated && (
+            <MenuItem icon="Portal" href={`${rightIcons.home.url}`} />
+          )}
+          {rightIcons.profile.activated && (
+            <MenuItem icon="Profile" href={`${rightIcons.profile.url}`} />
+          )}
+          {rightIcons.ebox.activated && (
+            <MenuItem icon="Ebox" href={`${rightIcons.ebox.url}`} />
+          )}
+          {rightIcons.notifs.activated && (
+            <Notifs
+              notifications={notifications}
+              lng={lng}
+              env={env}
+              auth={auth}
+              navCommunity={navCommunity}
+              appName={app.appName}
+            />
+          )}
+          {rightIcons.faq?.activated && (
+            <div onClick={this.handleFaqClick.bind(this)}>
+              <MenuItem icon="Help" />
             </div>
           )}
-          <ul className={`${styles.menu} ${styles.buttons}`}>
-            {rightIcons.backoffice?.activated && (
-              <MenuLink icon="Settings" href={`${rightIcons.backoffice.url}`}>
-                {rightIcons.backoffice.label}
-              </MenuLink>
-            )}
-            {rightIcons.home.activated && (
-              <MenuItem icon="Portal" href={`${rightIcons.home.url}`} />
-            )}
-            {rightIcons.profile.activated && (
-              <MenuItem icon="Profile" href={`${rightIcons.profile.url}`} />
-            )}
-            {rightIcons.ebox.activated && (
-              <MenuItem icon="Ebox" href={`${rightIcons.ebox.url}`} />
-            )}
-            {rightIcons.notifs.activated && (
-              <Notifs
-                notifications={notifications}
-                lng={lng}
-                env={env}
-                auth={auth}
-                navCommunity={navCommunity}
-                appName={app.appName}
-              />
-            )}
-            {rightIcons.faq?.activated && (
-              <div onClick={this.handleFaqClick.bind(this)}>
-                <MenuItem icon="Help" />
-              </div>
-            )}
-            {rightIcons.apps?.activated && navCommunity && (
-              <Apps apps={navCommunity.appsState} />
-            )}
+          {rightIcons.apps?.activated && navCommunity && (
+            <Apps apps={navCommunity.appsState} />
+          )}
 
-            {rightIcons.search.activated && (
-              <div onClick={this._Search.bind(this)}>
-                <MenuItem icon="Search" />
-              </div>
-            )}
-          </ul>
+          {rightIcons.search.activated && (
+            <div onClick={this._Search.bind(this)}>
+              <MenuItem icon="Search" />
+            </div>
+          )}
+        </ul>
 
-          <MenuProfile
-            user={user}
-            lng={lng}
-            rightIcons={rightIcons}
-            onLogoutClick={(e) => this.props.onLogoutClick(e)}
-            onLanguageChange={(language) =>
-              this.props.onLanguageChange(language)
-            }
-          />
-        </div>
-        {loadNotifWidget && isFaqWidgetLoaded && (
-          <TTPFaqWidget language={lng} auth={auth} faq />
-        )}
-      </>
+        <MenuProfile
+          user={user}
+          lng={lng}
+          rightIcons={rightIcons}
+          onLogoutClick={(e) => this.props.onLogoutClick(e)}
+          onLanguageChange={(language) => this.props.onLanguageChange(language)}
+        />
+      </div>
     );
   }
 
@@ -302,13 +278,36 @@ export class Header extends Component {
   }
 
   render() {
-    const { auth } = this.props;
+    const { auth, app, env, lng, rightIcons } = this.props;
+    const { isFaqWidgetLoaded } = this.state;
+
+    const loadNotifWidget =
+      app.appName.toUpperCase() === "EVENT" ||
+      (rightIcons &&
+        (rightIcons.notifs?.activated || rightIcons.faq?.activated));
+
     return (
       <>
+        {loadNotifWidget && (
+          <AppendHead onLoad={this.handleShowFaqWidget.bind(this)}>
+            <link
+              name="faq-widget"
+              rel="stylesheet"
+              href={`https://tamtam.s3-eu-west-1.amazonaws.com/cdn/faq/${env}/static/css/widget.css`}
+            ></link>
+            <script
+              name="faq-widget-script"
+              src={`https://tamtam.s3-eu-west-1.amazonaws.com/cdn/faq/${env}/static/js/widget.js`}
+            />
+          </AppendHead>
+        )}
         <header className={styles.header}>
           {this.renderLeftSide()}
           {!auth.user ? this.renderLoggedOut() : this.renderLoggedIn()}
         </header>
+        {loadNotifWidget && isFaqWidgetLoaded && (
+          <TTPFaqWidget language={lng} auth={auth} faq />
+        )}
       </>
     );
   }

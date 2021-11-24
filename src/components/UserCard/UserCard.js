@@ -71,7 +71,7 @@ export class UserCard extends Component {
           {this.renderUserExtraButton()}
           {showAvatarEdit && (
             <a className={styles.updateButton} onClick={this.handleAvatarClick}>
-              <i className={` ${styles.icon} icon-note`}></i>
+              <i className={` ${styles.icon} icon-sb-edit`}></i>
             </a>
           )}
         </div>
@@ -91,7 +91,7 @@ export class UserCard extends Component {
         {this.renderUserExtraButton()}
         {showAvatarEdit && (
           <a className={styles.updateButton} onClick={this.handleAvatarClick}>
-            <i className={` ${styles.icon} icon-note`}></i>
+            <i className={` ${styles.icon} icon-sb-edit`}></i>
           </a>
         )}
       </div>
