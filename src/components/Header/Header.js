@@ -61,10 +61,15 @@ export class Header extends Component {
     setTimeout(() => this.setState({ isFaqWidgetLoaded: true }), 1200);
   };
 
+  handleOnLoadFAQ = () => {
+    if (this.props.onFAQLoad) {
+      this.props.onFAQLoad();
+    }
+  };
+
   handleFaqClick = () => {
     const { app } = this.props;
     if (window.showFAQ) {
-      console.log("====", app.currentEvent ? true : false);
       app.currentEvent
         ? window.showFAQ(app.appName.toUpperCase(), app.currentEvent)
         : window.showFAQ(app.appName.toUpperCase());
@@ -306,7 +311,12 @@ export class Header extends Component {
           {!auth.user ? this.renderLoggedOut() : this.renderLoggedIn()}
         </header>
         {loadNotifWidget && isFaqWidgetLoaded && (
-          <TTPFaqWidget language={lng} auth={auth} faq />
+          <TTPFaqWidget
+            language={lng}
+            auth={auth}
+            faq
+            onLoadFAQ={this.handleOnLoadFAQ.bind(this)}
+          />
         )}
       </>
     );

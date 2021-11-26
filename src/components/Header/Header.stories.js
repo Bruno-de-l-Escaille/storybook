@@ -11,7 +11,7 @@ import {
 import StoryRouter from "storybook-react-router";
 
 const App = {
-  appName: "BLOG",
+  appName: "Blog",
   appLogoUrl: "https://s3.tamtam.pro/v2/apps/blog.png",
   appUrl: "https://blog.tamtam.pro/fr",
   homeUrl: "https://one.tamtam.pro",
@@ -20,7 +20,7 @@ const App = {
 };
 
 const AppPrivate = {
-  appName: "BLOG",
+  appName: "Blog",
   appLogoUrl: "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/logo/deg.png",
   appUrl: "https://blog.tamtam.pro/fr",
   homeUrl: "https://one.tamtam.pro",
@@ -359,6 +359,7 @@ export const HeaderLoggedIn = () => (
     allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
     // onSelectAllCommunities={() => console.log("Communities select all")}
     onSelectCommunity={(community) => console.log("community click", community)}
+    onFAQLoad={() => console.log("onFAQLoad", window.showFAQ)}
   />
 );
 export const HeaderPrivateBlogLoggedIn = () => (
