@@ -55,3 +55,15 @@
 // @include foundation-flex-classes;
 // @include foundation-visibility-classes;
 // @include foundation-prototype-classes;
+
+@media screen and (max-width: 39.9375em) {
+  .hide-for-small-only {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 0em), screen and (min-width: 40em) {
+  .show-for-small-only {
+    display: none !important;
+  }
+}

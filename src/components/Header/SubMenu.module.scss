@@ -23,6 +23,7 @@
     }
     .item a {
       visibility: hidden;
+      white-space: nowrap;
     }
     &:hover {
       width: 20rem;
@@ -153,7 +154,7 @@
 .item {
   display: flex;
   align-items: center;
-  padding: 15px 20px;
+  padding: 0 20px;
   background: #29394d;
   color: #c7e8fe;
   &:hover {
@@ -172,8 +173,9 @@
     text-transform: uppercase;
     font-size: 14px;
     line-height: 14px;
-    padding-left: 0.1rem;
+    // padding-left: 0.1rem;
     color: #c7e8fe;
+    padding: 18px 0;
   }
 }
 

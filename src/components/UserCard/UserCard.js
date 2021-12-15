@@ -26,13 +26,22 @@ export class UserCard extends Component {
     e.stopPropagation();
     this.props.onAvatarClick(this.props.user);
   };
-  getHeadlineValue(headlines) {
-    if (headlines.fr) {
-      return headlines.fr;
-    } else if (headlines.en) {
-      return headlines.en;
-    } else if (headlines.nl) {
-      return headlines.nl;
+  getHeadlineValue(blogRoleInOrganization) {
+    if (
+      blogRoleInOrganization.headlineFr &&
+      blogRoleInOrganization.headlineFr.title
+    ) {
+      return blogRoleInOrganization.headlineFr;
+    } else if (
+      blogRoleInOrganization.headlineEn &&
+      blogRoleInOrganization.headlineEn.title
+    ) {
+      return blogRoleInOrganization.headlineEn;
+    } else if (
+      blogRoleInOrganization.headlineNl &&
+      blogRoleInOrganization.headlineNl.title
+    ) {
+      return blogRoleInOrganization.headlineNl;
     }
 
     return null;
@@ -108,25 +117,39 @@ export class UserCard extends Component {
       id,
     } = this.props.user;
 
+    const headlineLng = `headline${
+      language.charAt(0).toUpperCase() + language.slice(1)
+    }`;
+
     let headlines =
       !blogRoleInOrganization ||
       blogRoleInOrganization.length === 0 ||
-      !blogRoleInOrganization[0].meta ||
-      !blogRoleInOrganization[0].meta.headlines
+      !blogRoleInOrganization[0][headlineLng]
         ? {}
-        : blogRoleInOrganization[0].meta.headlines;
+        : blogRoleInOrganization[0][headlineLng];
     let defaultSignatureDiv = [];
     defaultSignatureDiv.push(
       <h3 key={`h3-${id}`}>{firstName + " " + lastName}</h3>
     );
 
-    if (headlines && headlines[language]) {
-      defaultSignatureDiv.push(<h4 key={`h4-${id}`}>{headlines[language]}</h4>);
-    } else if (headlines) {
-      defaultSignatureDiv.push(
-        <h4 key={`h4-${id}`}>{this.getHeadlineValue(headlines)}</h4>
-      );
+    let signatureAdded = false;
+    if (headlines) {
+      if (headlines.title) {
+        defaultSignatureDiv.push(<h4 key={`h4-${id}`}>{headlines.title}</h4>);
+        signatureAdded = true;
+      }
     }
+    if (
+      !signatureAdded &&
+      blogRoleInOrganization &&
+      blogRoleInOrganization.length > 0
+    ) {
+      let signature = this.getHeadlineValue(blogRoleInOrganization[0]);
+      if (signature && signature.title) {
+        defaultSignatureDiv.push(<h4 key={`h4-${id}`}>{signature.title}</h4>);
+      }
+    }
+
     if (blogRoleInOrganization && blogRoleInOrganization.length > 0) {
       const role = blogRoleInOrganization[0].role;
       defaultSignatureDiv.push(

@@ -6,8 +6,8 @@ import StoryRouter from "storybook-react-router";
 
 import { UserCard } from "./UserCard";
 
-import jsonData from "./data2.json";
-import user from "./user.json";
+import jsonData from "./data.json";
+// import user from "./user.json";
 
 const users = jsonData.data;
 
@@ -27,7 +27,7 @@ export const Light = () => (
       <div className="cell small-12 medium-4 large-3">
         <UserCard
           theme="light"
-          user={users[Math.floor(Math.random() * 66)]}
+          user={users[Math.floor(Math.random() * 10)]}
           isFetching={boolean("isFetching", false)}
         />
       </div>
@@ -43,7 +43,7 @@ export const LightEdit = () => (
           theme="light"
           showAvatarEdit={true}
           onAvatarClick={action("onAvatarClick")}
-          user={users[Math.floor(Math.random() * 66)]}
+          user={users[Math.floor(Math.random() * 10)]}
           isFetching={boolean("isFetching", false)}
         />
       </div>
@@ -58,7 +58,7 @@ export const Dark = () => (
         <div className="cell small-12 medium-4 large-3">
           <UserCard
             theme="dark"
-            user={users[Math.floor(Math.random() * 66)]}
+            user={users[Math.floor(Math.random() * 10)]}
             isFetching={boolean("isFetching", false)}
           />
         </div>
@@ -76,7 +76,7 @@ export const DarkEdit = () => (
             theme="dark"
             showAvatarEdit={true}
             onAvatarClick={action("onAvatarClick")}
-            user={users[Math.floor(Math.random() * 66)]}
+            user={users[Math.floor(Math.random() * 10)]}
             isFetching={boolean("isFetching", false)}
           />
         </div>
