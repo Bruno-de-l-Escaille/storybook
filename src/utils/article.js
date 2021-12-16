@@ -162,7 +162,7 @@ export const getAuthors = ({ author, avatars }, lng = "fr") => {
       .map((a) => {
         return {
           id: a.id,
-          name: a.signature.title,
+          name: a.firstName + " " + a.lastName, //a.signature.title
           headline: a.signature.head,
           avatar: a.avatar,
           avatarUrl: a.avatarUrl,
