@@ -4,19 +4,46 @@ import styles from "./CookieConsent.module.scss";
 
 const I18N = {
   en: {
-    cookie_consent:
+    title: "Cookies management",
+    consent_text:
       "This site uses cookies to provide necessary website functionality, improve your experience and analyze our traffic. By using our website, you agree to our Privacy Policy and our cookies usage.",
     cookie_accept: "Accept",
+    more_infos: "Find out more",
+    back: "Back",
+    details: "Details",
+    amazon_text: "This cookie is managed by AWS for server load balancing",
+    analytics_text:
+      "Audience measurement and traffic analysis tool on our site",
+    tamtam_text:
+      "Used to save your language and personalization preferences to enhance your experience",
   },
   fr: {
-    cookie_consent:
+    title: "Gestion des Cookies",
+    consent_text:
       "Ce site utilise des cookies pour fournir les fonctionnalités nécessaires du site Web, améliorer votre expérience et analyser notre trafic. En utilisant notre site Web, vous acceptez notre politique de confidentialité et notre utilisation des cookies.",
     cookie_accept: "J'accepte",
+    more_infos: "En savoir plus",
+    back: "Retour",
+    details: "Détails",
+    amazon_text:
+      "Ce cookie est géré par AWS pour l'équilibrage de charge serveur",
+    analytics_text:
+      "Outil de mesure d’audience et d'analyse du traffic sur notre site",
+    tamtam_text:
+      "Utilisé pour mémoriser vos préférences linguistiques et de personnalisation afin d'améliorer votre expérience",
   },
   nl: {
-    cookie_consent:
+    title: "Beheer van cookies",
+    consent_text:
       "Deze site maakt gebruik van cookies om de noodzakelijke websitefunctionaliteit te bieden, uw ervaring te verbeteren en ons verkeer te analyseren. Door onze website te gebruiken, gaat u akkoord met ons privacybeleid en ons gebruik van cookies.",
     cookie_accept: "Aanvaarden",
+    more_infos: "Meer informaties",
+    back: "Opbrengst",
+    details: "Details",
+    amazon_text: "Deze cookie wordt beheerd door AWS voor servertaakverdeling",
+    analytics_text: "Doelgroepmeting en verkeersanalysetool op onze site",
+    tamtam_text:
+      "Wordt gebruikt om uw taal- en personalisatievoorkeuren te onthouden om uw ervaring te verbeteren",
   },
 };
 
@@ -66,12 +93,12 @@ export class CookieConsent extends PureComponent {
 
     return !visible ? null : (
       <div className={styles.container}>
-        <div className={styles.title}>Gestion des Cookies</div>
-        <div className={styles.text}>{I18N[lng]["cookie_consent"]}</div>
+        <div className={styles.title}>{I18N[lng]["title"]}</div>
+        <div className={styles.text}>{I18N[lng]["consent_text"]}</div>
         <div
           className={`${styles.info} ${showInfo ? styles.info_active : ""} `}
         >
-          <div>Details</div>
+          <div>{I18N[lng]["details"]}</div>
           <ul className={styles.detail_box}>
             <li>
               <span className={styles.detail_title}>
@@ -81,9 +108,7 @@ export class CookieConsent extends PureComponent {
                 />
                 Amazon Web Services
               </span>
-              <p className={styles.detail_text}>
-                Ce cookie est géré par AWS pour l'équilibrage de charge serveur
-              </p>
+              <p className={styles.detail_text}>{I18N[lng]["amazon_text"]}</p>
             </li>
             <li>
               <span className={styles.detail_title}>
@@ -94,8 +119,7 @@ export class CookieConsent extends PureComponent {
                 Google Analytics
               </span>
               <p className={styles.detail_text}>
-                Outil de mesure d’audience et d'analyse du traffic sur notre
-                site
+                {I18N[lng]["analytics_text"]}
               </p>
             </li>
             <li>
@@ -103,16 +127,13 @@ export class CookieConsent extends PureComponent {
                 <img height="25" src="https://portal.tamtam.pro/img/logo.png" />
                 Tamtam pro
               </span>
-              <p className={styles.detail_text}>
-                Utilisé pour mémoriser vos préférences linguistiques et de
-                personnalisation afin d'améliorer votre expérience
-              </p>
+              <p className={styles.detail_text}>{I18N[lng]["tamtam_text"]}</p>
             </li>
           </ul>
         </div>
 
         <button className={styles.buttonInfo} onClick={this.onShowInfo}>
-          {showInfo ? "Retour" : "En savoir plus"}
+          {showInfo ? I18N[lng]["back"] : I18N[lng]["more_infos"]}
         </button>
         <button className={styles.button} onClick={this.onAccept}>
           {I18N[lng]["cookie_accept"]}
