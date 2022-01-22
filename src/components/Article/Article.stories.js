@@ -31,6 +31,7 @@ export const DefaultSmall = () => (
           isFetching={boolean("isFetching", false)}
           navCommunityId=""
           env="v2"
+          onEdit={() => console.log("edit")}
         />
       </div>
     </div>
@@ -46,6 +47,9 @@ export const DefaultLarge = () => (
           size="large"
           showSummary={true}
           isFetching={boolean("isFetching", false)}
+          onEdit={() => console.log("edit")}
+          onLike={() => console.log("like")}
+          user={{ id: 12 }}
         />
       </div>
     </div>
@@ -61,6 +65,9 @@ export const Type2 = () => (
           showSummary={true}
           type="type2"
           isFetching={boolean("isFetching", false)}
+          onEdit={() => console.log("edit")}
+          onLike={() => console.log("like")}
+          user={{ id: 12 }}
         />
       </div>
     </div>
@@ -96,6 +103,9 @@ export const Type4 = () => (
           showSummary={true}
           type="type4"
           isFetching={boolean("isFetching", false)}
+          onEdit={() => console.log("edit")}
+          onLike={() => console.log("like")}
+          user={{ id: 12 }}
         />
       </div>
     </div>

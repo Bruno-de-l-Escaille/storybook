@@ -171,6 +171,8 @@
   transform: translate(-50%, -50%);
   width: 104px;
   text-align: center;
+  z-index: 10;
+
   button {
     outline: none;
     cursor: pointer;
@@ -554,6 +556,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    position: relative;
   }
 }
 

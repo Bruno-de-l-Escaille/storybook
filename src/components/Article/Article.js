@@ -256,7 +256,9 @@ export const Article = ({
     return (
       <div className={`${styles.articleTemplate2} ${styles[size]}`}>
         {renderAvatar()}
-        <div className={styles.content}>
+        <div
+          className={`${styles.content} ${hasActions ? styles.hasActions : ""}`}
+        >
           {publishedAt && (
             <div className={styles.publishedAt}>
               {moment(publishedAt, API_DATE_FORMAT).format(
@@ -280,6 +282,16 @@ export const Article = ({
           {renderTitle()}
           <div className={styles.summary}>{introduction}</div>
           {renderSocialStats()}
+
+          {hasActions && onEdit && (
+            <div className={styles.buttons}>
+              {onEdit && (
+                <button>
+                  <i className="icon-sb-edit" onClick={() => onEdit()}></i>
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     );
@@ -410,11 +422,23 @@ export const Article = ({
             </div>
           ) : (
             <div
-              className={styles.contentImg}
+              className={`${styles.contentImg} ${
+                hasActions ? styles.hasActions : ""
+              }`}
               style={{
                 backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
               }}
-            ></div>
+            >
+              {hasActions && onEdit && (
+                <div className={styles.buttons}>
+                  {onEdit && (
+                    <button>
+                      <i className="icon-sb-edit" onClick={() => onEdit()}></i>
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
           )}
           <div className={styles.content}>
             <div
@@ -450,7 +474,7 @@ export const Article = ({
       >
         {renderAvatar()}
         <div
-          className={styles.content}
+          className={`${styles.content} ${hasActions ? styles.hasActions : ""}`}
           style={
             size && size === "large"
               ? { backgroundImage: `url(${addLandaSize(mediaUrl, 1700)})` }
@@ -484,6 +508,16 @@ export const Article = ({
           )}
 
           {renderSocialStats()}
+
+          {hasActions && onEdit && (
+            <div className={styles.buttons}>
+              {onEdit && (
+                <button>
+                  <i className="icon-sb-edit" onClick={() => onEdit()}></i>
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     );
