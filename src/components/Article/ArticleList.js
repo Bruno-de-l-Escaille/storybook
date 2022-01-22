@@ -48,6 +48,7 @@ export const ArticleList = ({
             saveFavorite={() => saveFavorite(articles[0].id)}
             onLike={() => onLike(articles[0].id, 1)}
             onDislike={() => onLike(articles[0].id, 0)}
+            onEdit={() => onEdit(articles[0].id)}
             openModal={() => openModal(articles[0])}
             isSavingFavorite={isSavingFavorite}
             isSavingLike={isSavingLike}
