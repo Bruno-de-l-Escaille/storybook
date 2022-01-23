@@ -67,7 +67,6 @@ export const Type2 = () => (
           isFetching={boolean("isFetching", false)}
           onEdit={() => console.log("edit")}
           onLike={() => console.log("like")}
-          user={{ id: 12 }}
         />
       </div>
     </div>

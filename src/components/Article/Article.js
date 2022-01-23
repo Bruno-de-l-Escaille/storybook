@@ -6,7 +6,7 @@ import "moment/locale/fr";
 import styles from "./Article.module.scss";
 import { AuthorAvatar } from "../Avatar/AuthorAvatar";
 import { Fetching } from "./Fetching";
-import { prepareArticle, addLandaSize } from "../../utils";
+import { prepareArticle, isUserHasRights, addLandaSize } from "../../utils";
 import classnames from "classnames";
 
 const API_DATE_FORMAT = "YYYY-MM-DD HH:mm:ss";
@@ -60,7 +60,9 @@ export const Article = ({
     hasRelativePath,
     language,
   } = data;
-  const hasActions = onDelete || onEdit || onPublish ? true : false;
+  const hasRights = isUserHasRights(user, article);
+  const hasActions =
+    hasRights && (onDelete || onEdit || onPublish) ? true : false;
   const mediaUrl = medias && medias.length > 0 ? medias[0].path : mainMedia;
 
   let atText = "";

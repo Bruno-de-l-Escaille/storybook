@@ -269,3 +269,53 @@ export const prepareArticle = (article, env = "", host) => {
     language,
   };
 };
+
+export const isUserHasRights = (user, article) => {
+  if (!user) {
+    return false;
+  }
+
+  let author = null;
+  if (article.author) {
+    let authors = article.author.filter((a) => a.id === user.id);
+    if (authors.length > 0) {
+      author = authors[0];
+    }
+  }
+
+  let userArticleCommunity = null;
+  if (article.organization && user.communities) {
+    let communities = user.communities.filter(
+      (c) => c.id == article.organization.id
+    );
+    if (communities.length > 0) {
+      userArticleCommunity = communities[0];
+    }
+  }
+
+  let UserBlogRoleInArticleCommunity =
+    userArticleCommunity &&
+    userArticleCommunity.blogs &&
+    userArticleCommunity.blogs[0]
+      ? userArticleCommunity.blogs[0]
+      : null;
+
+  let isUserArticle = author !== null;
+  let isArticlePublished = article.status === "PUBLISHED";
+
+  let isUserCheifEditorInArticleCommunity =
+    UserBlogRoleInArticleCommunity !== null &&
+    UserBlogRoleInArticleCommunity.role === "CHIEF_EDITOR";
+  let isUserMandatedInArticleCommunity =
+    UserBlogRoleInArticleCommunity &&
+    (UserBlogRoleInArticleCommunity.role === "REDACTOR" ||
+      UserBlogRoleInArticleCommunity.role === "AUTHOR") &&
+    UserBlogRoleInArticleCommunity.role.mandated == 1;
+
+  let isCurrentUserHasRights =
+    isUserArticle ||
+    isUserCheifEditorInArticleCommunity ||
+    (isArticlePublished && isUserMandatedInArticleCommunity);
+
+  return isCurrentUserHasRights;
+};
