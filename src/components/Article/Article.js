@@ -278,7 +278,11 @@ export const Article = ({
             {category.name}
           </div>
           <div className={styles.meta}>
-            <span>{articleType.name}</span>
+            {articleType ? (
+              <span style={{ backgroundColor: articleType.colorCode }}>
+                {articleType.name}
+              </span>
+            ) : null}
             <div
               className={styles.community}
               style={{ borderLeftColor: category.colorCode }}
@@ -366,7 +370,11 @@ export const Article = ({
                 {category.name}
               </div>
               <div className={styles.meta}>
-                <span>{articleType.name}</span>
+                {articleType ? (
+                  <span style={{ backgroundColor: articleType.colorCode }}>
+                    {articleType.name}
+                  </span>
+                ) : null}
                 <div
                   className={styles.community}
                   style={{ borderLeftColor: category.colorCode }}
@@ -459,7 +467,11 @@ export const Article = ({
               {category.name}
             </div>
             <div className={styles.meta}>
-              <span>{articleType.name}</span>
+              {articleType ? (
+                <span style={{ backgroundColor: articleType.colorCode }}>
+                  {articleType.name}
+                </span>
+              ) : null}
               <div
                 className={styles.community}
                 style={{ borderLeftColor: category.colorCode }}
@@ -510,7 +522,11 @@ export const Article = ({
             {category.name}
           </div>
           <div className={styles.meta}>
-            <span>{articleType.name}</span>
+            {articleType ? (
+              <span style={{ backgroundColor: articleType.colorCode }}>
+                {articleType.name}
+              </span>
+            ) : null}
             <div
               className={styles.community}
               style={{ borderLeftColor: category.colorCode }}
