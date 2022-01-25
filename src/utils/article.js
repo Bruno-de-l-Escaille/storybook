@@ -217,6 +217,7 @@ export const prepareArticle = (article, env = "", host) => {
     introduction,
     organization,
     category,
+    type,
     isPrivate,
     isExternal,
     externalUrl,
@@ -251,6 +252,10 @@ export const prepareArticle = (article, env = "", host) => {
     category: {
       name: getCategoryName(category, language),
       colorCode: category && category.colorCode ? category.colorCode : "",
+    },
+    articleType: {
+      name: getCategoryName(type, language),
+      colorCode: type && type.colorCode ? type.colorCode : "",
     },
     url: getArticleFullUrl(article, env, host),
     shareUrl: getArticleUrl(article, env, host),

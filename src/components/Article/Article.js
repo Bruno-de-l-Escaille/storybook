@@ -38,6 +38,8 @@ export const Article = ({
 
   if (isFetching) return <Fetching type={type} size={size} />;
   const data = prepareArticle(article, env, host);
+  console.log(data);
+
   const {
     id,
     title,
@@ -46,6 +48,7 @@ export const Article = ({
     introduction,
     communityName,
     category,
+    articleType,
     mainMedia,
     status,
     medias,
@@ -274,11 +277,14 @@ export const Article = ({
           >
             {category.name}
           </div>
-          <div
-            className={styles.community}
-            style={{ borderLeftColor: category.colorCode }}
-          >
-            {communityName}
+          <div className={styles.meta}>
+            <span>{articleType.name}</span>
+            <div
+              className={styles.community}
+              style={{ borderLeftColor: category.colorCode }}
+            >
+              {communityName}
+            </div>
           </div>
 
           {renderTitle()}
@@ -359,11 +365,14 @@ export const Article = ({
               >
                 {category.name}
               </div>
-              <div
-                className={styles.community}
-                style={{ borderLeftColor: category.colorCode }}
-              >
-                {communityName}
+              <div className={styles.meta}>
+                <span>{articleType.name}</span>
+                <div
+                  className={styles.community}
+                  style={{ borderLeftColor: category.colorCode }}
+                >
+                  {communityName}
+                </div>
               </div>
               {renderTitle()}
               <div className={styles.summary}>{introduction}</div>
@@ -449,11 +458,14 @@ export const Article = ({
             >
               {category.name}
             </div>
-            <div
-              className={styles.community}
-              style={{ borderLeftColor: category.colorCode }}
-            >
-              {communityName}
+            <div className={styles.meta}>
+              <span>{articleType.name}</span>
+              <div
+                className={styles.community}
+                style={{ borderLeftColor: category.colorCode }}
+              >
+                {communityName}
+              </div>
             </div>
 
             {renderTitle()}
@@ -497,11 +509,14 @@ export const Article = ({
           >
             {category.name}
           </div>
-          <div
-            className={styles.community}
-            style={{ borderLeftColor: category.colorCode }}
-          >
-            {communityName}
+          <div className={styles.meta}>
+            <span>{articleType.name}</span>
+            <div
+              className={styles.community}
+              style={{ borderLeftColor: category.colorCode }}
+            >
+              {communityName}
+            </div>
           </div>
 
           {renderTitle()}
