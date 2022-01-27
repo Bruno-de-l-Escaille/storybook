@@ -38,7 +38,6 @@ export const Article = ({
 
   if (isFetching) return <Fetching type={type} size={size} />;
   const data = prepareArticle(article, env, host);
-  console.log(data);
 
   const {
     id,
@@ -278,7 +277,7 @@ export const Article = ({
             {category.name}
           </div>
           <div className={styles.meta}>
-            {articleType ? (
+            {articleType && articleType.name ? (
               <span style={{ backgroundColor: articleType.colorCode }}>
                 {articleType.name}
               </span>
@@ -370,7 +369,7 @@ export const Article = ({
                 {category.name}
               </div>
               <div className={styles.meta}>
-                {articleType ? (
+                {articleType && articleType.name ? (
                   <span style={{ backgroundColor: articleType.colorCode }}>
                     {articleType.name}
                   </span>
@@ -467,7 +466,7 @@ export const Article = ({
               {category.name}
             </div>
             <div className={styles.meta}>
-              {articleType ? (
+              {articleType && articleType.name ? (
                 <span style={{ backgroundColor: articleType.colorCode }}>
                   {articleType.name}
                 </span>
@@ -522,7 +521,7 @@ export const Article = ({
             {category.name}
           </div>
           <div className={styles.meta}>
-            {articleType ? (
+            {articleType && articleType.name ? (
               <span style={{ backgroundColor: articleType.colorCode }}>
                 {articleType.name}
               </span>
