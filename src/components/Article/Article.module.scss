@@ -418,6 +418,19 @@
 }
 
 // Template 2
+.articleTemplate2 {
+  .hasActions {
+    &:hover {
+      &::before {
+        top: 35%;
+        left: 0;
+        width: 100%;
+        height: 65%;
+        background: rgba(41, 57, 77, 0.05);
+      }
+    }
+  }
+}
 .articleTemplate2,
 .articleTemplate4 {
   .content {
