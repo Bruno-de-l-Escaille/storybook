@@ -1,3 +1,66 @@
+@-webkit-keyframes react-loading-skeleton {
+    100% {
+        -webkit-transform: translateX(100%);
+                transform: translateX(100%);
+    }
+}
+
+@keyframes react-loading-skeleton {
+    100% {
+        -webkit-transform: translateX(100%);
+                transform: translateX(100%);
+    }
+}
+
+.react-loading-skeleton {
+    --base-color: #ebebeb;
+    --highlight-color: #f5f5f5;
+    --animation-duration: 1.5s;
+    --animation-direction: normal;
+    --pseudo-element-display: block; /* Enable animation */
+
+    background-color: var(--base-color);
+
+    width: 100%;
+    border-radius: 0.25rem;
+    display: inline-flex;
+    line-height: 1;
+
+    position: relative;
+    overflow: hidden;
+    z-index: 1; /* Necessary for overflow: hidden to work correctly in Safari */
+}
+
+.react-loading-skeleton::after {
+    content: ' ';
+    display: var(--pseudo-element-display);
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(
+        90deg,
+        var(--base-color),
+        var(--highlight-color),
+        var(--base-color)
+    );
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+
+    -webkit-animation-name: react-loading-skeleton;
+
+            animation-name: react-loading-skeleton;
+    -webkit-animation-direction: var(--animation-direction);
+            animation-direction: var(--animation-direction);
+    -webkit-animation-duration: var(--animation-duration);
+            animation-duration: var(--animation-duration);
+    -webkit-animation-timing-function: ease-in-out;
+            animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+}
+
 .Toastify__toast-container {
   z-index: 9999;
   -webkit-transform: translate3d(0, 0, 9999px);
@@ -935,4 +998,4 @@
 
 /*# sourceMappingURL=ReactToastify.css.map */
 
-/*# sourceMappingURL=vendors~main.61061fbe.chunk.css.map*/
+/*# sourceMappingURL=vendors~main.bb24a25d.chunk.css.map*/
