@@ -9,7 +9,7 @@ import { addLandaSize, getUserNameForAvatar } from "../../utils";
 import { Fetching } from "./Fetching";
 import { I18N } from "../../i18n";
 
-export class AvatarCard extends Component {
+export class ChainCard extends Component {
   constructor() {
     super();
 
@@ -28,8 +28,8 @@ export class AvatarCard extends Component {
   };
 
   renderAvatar() {
-    const { isSelected, showAvatarEdit, user } = this.props;
-    const { avatar, avatarUrl, firstName, lastName, company } = user;
+    const { isSelected, showAvatarEdit, user, lng } = this.props;
+    const { avatar, avatarUrl, company } = user;
 
     const checkClasses = classnames(styles.check, isSelected && styles.active);
     const IconCheck = icons["Check"];
@@ -73,10 +73,11 @@ export class AvatarCard extends Component {
       isSelected && styles.selected,
       showAvatarEdit && styles.editAvatar
     );
-    const avatarUserName =
-      firstName || lastName
-        ? getUserNameForAvatar(firstName, lastName)
-        : getUserNameForAvatar(company, "");
+
+    const nameAttr = `name${lng.charAt(0).toUpperCase() + lng.slice(1)}`;
+    const avatarUserName = user[nameAttr]
+      ? getUserNameForAvatar("", user[nameAttr])
+      : getUserNameForAvatar(company, "");
     return (
       <div className={classes} onClick={this.selectUser}>
         <span>{avatarUserName}</span>
@@ -100,15 +101,14 @@ export class AvatarCard extends Component {
   }
 
   render() {
-    const { theme, isFetching } = this.props;
+    const { theme, isFetching, lng, user } = this.props;
 
     if (isFetching) {
       return <Fetching theme={theme} />;
     }
 
-    const { firstName, lastName, company } = this.props.user;
-    const avatarInfo =
-      firstName || lastName ? firstName + " " + lastName : company;
+    const nameAttr = `name${lng.charAt(0).toUpperCase() + lng.slice(1)}`;
+    const avatarInfo = user[nameAttr] ? user[nameAttr] : user.company;
 
     return (
       <div className={`${styles.userCard} ${styles[theme]}`}>

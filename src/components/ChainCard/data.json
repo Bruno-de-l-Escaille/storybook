@@ -1,0 +1,17 @@
+[
+    {
+    "id": 127,
+    "nameFr": "SPF Finances",
+    "nameEn": "SPF Finances",
+    "nameNl": "FOD Financiën",
+    "headline": "",
+    "company": "SPF",
+    "preferences": {
+    "isEmailVisible": "0"
+    },
+    "createdAt": "2021-01-22 10:15:54",
+    "updatedAt": "2021-01-28 15:29:28",
+    "avatar": "storage/uploads/blog/media-avatar/79b8c2190b015d78f77cb2bc9940fb74255af72c.png",
+    "avatarUrl": "https://s3.tamtam.pro/prod/storage/media/IMAGE/15363/48db46dacaffa6835edc225fe55b5dc0981d6f1a.png"
+    }
+]

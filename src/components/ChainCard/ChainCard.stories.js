@@ -4,12 +4,12 @@ import { action } from "@storybook/addon-actions";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 
-import { AvatarCard } from "./AvatarCard";
+import { ChainCard } from "./ChainCard";
 import avatars from "./data.json";
 
 export default {
-  title: "AvatarCard",
-  component: AvatarCard,
+  title: "ChainCard",
+  component: ChainCard,
   decorators: [
     StoryRouter(),
     (story) => <div style={{ padding: "3rem" }}>{story()}</div>,
@@ -21,11 +21,11 @@ export const Light = () => (
   <div className="grid-container">
     <div className="grid-x">
       <div className="cell small-12 medium-4 large-3">
-        <AvatarCard
+        <ChainCard
           theme="light"
-          lng="en"
+          lng="fr"
           isSelected={false}
-          user={avatars[Math.floor(Math.random() * 4)]}
+          user={avatars[0]}
           isFetching={boolean("isFetching", false)}
         />
       </div>
@@ -37,11 +37,12 @@ export const LightEdit = () => (
   <div className="grid-container">
     <div className="grid-x">
       <div className="cell small-12 medium-4 large-3">
-        <AvatarCard
+        <ChainCard
           theme="light"
+          lng="fr"
           showAvatarEdit={true}
           onAvatarClick={action("onAvatarClick")}
-          user={avatars[Math.floor(Math.random() * 4)]}
+          user={avatars[0]}
           isFetching={boolean("isFetching", false)}
         />
       </div>
@@ -54,9 +55,10 @@ export const Dark = () => (
     <div className="grid-container">
       <div className="grid-x">
         <div className="cell small-12 medium-4 large-3">
-          <AvatarCard
+          <ChainCard
+            lng="fr"
             theme="dark"
-            user={avatars[Math.floor(Math.random() * 4)]}
+            user={avatars[0]}
             isFetching={boolean("isFetching", false)}
           />
         </div>
@@ -70,11 +72,12 @@ export const DarkEdit = () => (
     <div className="grid-container">
       <div className="grid-x">
         <div className="cell small-12 medium-4 large-3">
-          <AvatarCard
+          <ChainCard
             theme="dark"
+            lng="fr"
             showAvatarEdit={true}
             onAvatarClick={action("onAvatarClick")}
-            user={avatars[Math.floor(Math.random() * 4)]}
+            user={avatars[0]}
             isFetching={boolean("isFetching", false)}
           />
         </div>
