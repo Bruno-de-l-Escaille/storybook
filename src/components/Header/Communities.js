@@ -31,12 +31,6 @@ export default class Communities extends Component {
       return null;
     }
 
-    const handleViewAll = () => {
-      if (onSelectAllCommunities) {
-        onSelectAllCommunities();
-      }
-    };
-
     let clientsBlock = [];
 
     for (let i = 0; i < communities.length; i++) {
@@ -103,10 +97,7 @@ export default class Communities extends Component {
         }
       }
     }
-    if (
-      clientsBlock.length > 1 &&
-      (onSelectAllCommunities || allCommunitiesUrl)
-    ) {
+    if (onSelectAllCommunities || allCommunitiesUrl) {
       if (onSelectAllCommunities) {
         clientsBlock.push(
           <li
