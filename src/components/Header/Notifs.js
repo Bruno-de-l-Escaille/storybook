@@ -29,6 +29,8 @@ export default function Notifs({ lng, auth, env, appName, navCommunity }) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentNotif, setCurrentNotif] = useState(null);
   const isAdmin = auth && auth.user?.type === "ADMIN" ? true : false;
+  const loggedAsAdmin =
+    auth && auth.loggedAs && auth.loggedAs === "ADMIN" ? true : false;
   const title = `title${lng.charAt(0).toUpperCase() + lng.slice(1)}`;
   const introduction = `intro${lng.charAt(0).toUpperCase() + lng.slice(1)}`;
   const content = `content${lng.charAt(0).toUpperCase() + lng.slice(1)}`;
@@ -49,6 +51,7 @@ export default function Notifs({ lng, auth, env, appName, navCommunity }) {
       options: {
         limit: 6,
       },
+      loggedAsAdmin,
     })
       .then((resp) => {
         setIsFetched(true);

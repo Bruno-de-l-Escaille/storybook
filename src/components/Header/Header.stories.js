@@ -104,6 +104,7 @@ const settings = [
 
 const authLogin = {
   token: "00882984434b82623e1831486530a29d44efffd9",
+  loggedAs: "ADMIN",
   navCommunity: {
     id: 9,
     name: "Forum For The Future",

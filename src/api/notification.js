@@ -6,6 +6,7 @@ export const getNotifications = ({
   userId,
   navCommunity,
   appName,
+  loggedAsAdmin,
   options,
 }) => {
   let filter = [
@@ -51,6 +52,9 @@ export const getNotifications = ({
     sort: JSON.stringify(sort),
     limit: options && options.limit ? options.limit : 10,
   };
+  if (loggedAsAdmin) {
+    params.is_admin = 1;
+  }
 
   return axios.get(requestUrl, {
     params,
