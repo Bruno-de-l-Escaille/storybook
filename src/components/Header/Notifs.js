@@ -25,7 +25,14 @@ const I18N = {
   },
 };
 
-export default function Notifs({ lng, auth, env, appName, navCommunity }) {
+export default function Notifs({
+  lng,
+  auth,
+  env,
+  appName,
+  navCommunity,
+  isFaqWidgetLoaded,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentNotif, setCurrentNotif] = useState(null);
   const isAdmin = auth && auth.user?.type === "ADMIN" ? true : false;
@@ -164,7 +171,9 @@ export default function Notifs({ lng, auth, env, appName, navCommunity }) {
           {I18N[lng]["notificationsOfUpdates"]}
           {isAdmin && (
             <span
-              className={styles.socialLinksHeader_edit}
+              className={`${styles.socialLinksHeader_edit} ${
+                !isFaqWidgetLoaded && styles.linkLoading
+              }`}
               onClick={() => handleEditClick()}
             >
               <i className="icon-sb-settings"></i>

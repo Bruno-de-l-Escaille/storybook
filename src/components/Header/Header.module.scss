@@ -1359,3 +1359,19 @@ nav {
     }
   }
 }
+
+.iconLoading {
+  a {
+    cursor: initial;
+  }
+  svg {
+    path {
+      fill: #e8eaed;
+    }
+  }
+}
+
+.linkLoading {
+  color: #ccc;
+  cursor: initial !important;
+}

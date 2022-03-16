@@ -58,7 +58,7 @@ export class Header extends Component {
   };
 
   handleShowFaqWidget = () => {
-    setTimeout(() => this.setState({ isFaqWidgetLoaded: true }), 1200);
+    setTimeout(() => this.setState({ isFaqWidgetLoaded: true }), 4000);
   };
 
   handleOnLoadFAQ = () => {
@@ -86,6 +86,7 @@ export class Header extends Component {
       app,
       switchSpace,
     } = this.props;
+    const { isFaqWidgetLoaded } = this.state;
     const { navCommunity, user } = auth;
 
     const Icon = icons["Portal"];
@@ -138,10 +139,14 @@ export class Header extends Component {
               auth={auth}
               navCommunity={navCommunity}
               appName={app.appName}
+              isFaqWidgetLoaded={isFaqWidgetLoaded}
             />
           )}
           {rightIcons.faq?.activated && (
-            <div onClick={this.handleFaqClick.bind(this)}>
+            <div
+              onClick={this.handleFaqClick.bind(this)}
+              className={!isFaqWidgetLoaded && styles.iconLoading}
+            >
               <MenuItem icon="Help" />
             </div>
           )}
