@@ -732,6 +732,7 @@ nav {
     background: $athens-gray !important;
     top: calc(100% + 0.6rem);
     right: -5px;
+    cursor: initial;
 
     & > li {
       margin: 1.1rem $spacing-xxs;
@@ -818,6 +819,7 @@ nav {
       padding: $spacing-xxs;
       text-align: center;
       color: $dodger-blue;
+      cursor: pointer;
 
       &:hover {
         color: $curious-blue;
@@ -867,15 +869,23 @@ nav {
 }
 .menuProfile {
   margin: 0;
-  padding: $spacing-m $spacing-s;
   background: #fff;
   font-family: $main-body-font;
 
   a {
     color: #29394d;
     white-space: normal;
-    padding: 0;
+    padding: 1.5rem 1rem;
     font-family: $main-body-font;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+
+    &:hover {
+      background: $athens-gray-lighter;
+      color: $tag-color;
+    }
   }
 
   &:before {
@@ -902,7 +912,7 @@ nav {
       align-items: center;
       width: 40px;
       height: 40px;
-      cursor: pointer;
+      // cursor: pointer;
       transition: 0.2s font-size ease-in-out;
       padding: 1.7rem 9.7rem;
       &:hover {

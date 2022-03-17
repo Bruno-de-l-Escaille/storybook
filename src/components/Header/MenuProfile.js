@@ -96,11 +96,7 @@ class MenuProfile extends Component {
               />
             </li>
             <li className={`${styles.menuProfile}`}>
-              <ul>
-                <li>
-                  <a href={rightIcons.profile.url}>{I18N[lng]["profile"]}</a>
-                </li>
-              </ul>
+              <a href={rightIcons.profile.url}>{I18N[lng]["profile"]}</a>
             </li>
             <li className={styles.menuLanguage}>
               <ul>
