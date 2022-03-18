@@ -61,6 +61,7 @@ export const Article = ({
     socialData,
     hasRelativePath,
     language,
+    readTime,
   } = data;
   const hasRights = isUserHasRights(user, article);
   const hasActions =
@@ -80,7 +81,7 @@ export const Article = ({
       break;
   }
 
-  const renderAvatar = () => {
+  const renderAvatar = (white) => {
     if (isExternal) {
       return (
         <div className={styles.isExternal}>
@@ -93,7 +94,7 @@ export const Article = ({
           <ul>
             {authors.map((author) => (
               <li key={`author-${id}-${author.id}`}>
-                <AuthorAvatar author={author} />
+                <AuthorAvatar author={author} white={white} />
               </li>
             ))}
           </ul>
@@ -256,6 +257,101 @@ export const Article = ({
       </div>
     );
   };
+
+  const renderPublishedAtRenderTime = () => {
+    if (!publishedAt) return null;
+    return (
+      <div className={styles.publishedAtReadTime}>
+        Publié le
+        {moment(publishedAt, API_DATE_FORMAT).format(
+          "DD MMM YYYY " + atText + " hh:mm"
+        )}
+        {readTime && (
+          <div className={styles.readTime}>
+            <div className={styles.dot}></div>
+            <span>Lecture de {readTime}min</span>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderUserSocialActions = () => {
+    if (!user) return null;
+    return (
+      <div className={styles.userActions}>
+        <hr />
+        <div className={styles.actions}>
+          <div className={styles.likes} onClick={() => onLike()}>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M17 4.5C14.9 4.5 13.05 5.55 12 7.2C10.95 5.55 9.1 4.5 7 4.5C3.7 4.5 1 7.2 1 10.5C1 16.45 12 22.5 12 22.5C12 22.5 23 16.5 23 10.5C23 7.2 20.3 4.5 17 4.5Z"
+                fill="#D8DDE2"
+              />
+            </svg>
+            {countLikes}
+          </div>
+          <div className={styles.comments} onClick={() => openModal()}>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 2C5.92422 2 1 6.00039 1 10.9375C1 13.0688 1.91953 15.0195 3.44922 16.5535C2.91211 18.7191 1.11602 20.6484 1.09453 20.6699C1 20.7687 0.974219 20.9148 1.03008 21.0438C1.08594 21.1727 1.20625 21.25 1.34375 21.25C4.19258 21.25 6.32813 19.8836 7.38516 19.0414C8.79023 19.5699 10.35 19.875 12 19.875C18.0758 19.875 23 15.8746 23 10.9375C23 6.00039 18.0758 2 12 2Z"
+                fill="#D8DDE2"
+              />
+            </svg>
+            {countComments}
+          </div>
+          <div className={styles.share}>
+            <span onClick={() => setIsOpen(!isOpen)}>Partager</span>
+            <div
+              className={classnames(
+                styles.sharePopup,
+                isOpen ? "show" : "hide"
+              )}
+            >
+              <a
+                className={styles.action}
+                href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i className="icon-sb-facebook" />
+              </a>
+              <a
+                className={styles.action}
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i className="icon-sb-linkedin" />
+              </a>
+
+              <a
+                className={styles.action}
+                href={`https://twitter.com/intent/tweet?url=${shareUrl}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i className="icon-sb-twitter" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const renderType2 = () => {
     return (
       <div className={`${styles.articleTemplate2} ${styles[size]}`}>
@@ -555,6 +651,202 @@ export const Article = ({
     );
   };
 
+  const renderType5 = () => {
+    // const settings = {
+    //   dots: true,
+    //   dotsClass: "slick-dots ",
+    //   infinite: true,
+    //   arrows: false,
+    //   speed: 500,
+    //   height: "100%",
+    //   autoplay: false,
+    // };
+
+    return (
+      <div className={`${styles.articleTemplate5} ${styles[size]}`}>
+        <div className={styles.articleContainer}>
+          <div
+            className={`${styles.contentImg}`}
+            style={{
+              backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
+            }}
+          >
+            <div className={styles.categoryChannel}>
+              <div
+                className={styles.category}
+                style={{ background: `${category.colorCode}` }}
+              >
+                {category.name}
+              </div>
+              <div
+                className={styles.channel}
+                style={{
+                  backgroundImage: `url(https://s3-alpha-sig.figma.com/img/8f25/74e9/d677d673a62bc9ebe0943b09e58fb049?Expires=1648425600&Signature=eGezxpIBPiF1fitjLhbAB1GH~t07KjIiPxfOP8aepM48nzzjf5JjXsKnJoYe-xW9lAzq4MF2R3g6HwA3NgiDcKfktAkNChT~0PO8i~KOySCLynYw6SlrF~vCvLTHow4QFA3rXntwjKM9RqVlN6be6uk6UJMYlh0bbxvyoqtwR1bJo3eJWnDaj~n-7O07cl~elTuDW6UTlGJ8u1nVxtUEjwRNPKrlk98PfqERkT~oSt83FReo-DMH8yHI5lU~alOIcVf8ogQHsyp~F13dwEWgaRcLRddASzEA82mzl3JeOrDEsrVarIAThnv0~q5z007YDoAMFJzhquN0eWID1xB8iQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA)`,
+                }}
+              ></div>
+            </div>
+          </div>
+
+          <div className={styles.content}>
+            <div className={styles.meta}>
+              {articleType && articleType.name ? (
+                <span>{articleType.name}</span>
+              ) : null}
+              <div
+                className={styles.community}
+                style={{ borderLeftColor: category.colorCode }}
+              >
+                {communityName}
+              </div>
+            </div>
+            {renderTitle()}
+            {renderAvatar()}
+            {renderPublishedAtRenderTime()}
+            {renderUserSocialActions()}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderType6 = () => {
+    return (
+      <div className={`${styles.articleTemplate6} ${styles[size]}`}>
+        <div className={styles.articleContainer}>
+          <div className={styles.content}>
+            <div className={styles.categoryChannel}>
+              <div
+                className={styles.category}
+                style={{ background: `${category.colorCode}` }}
+              >
+                {category.name}
+              </div>
+              <div
+                className={styles.channel}
+                style={{
+                  backgroundImage: `url(https://s3-alpha-sig.figma.com/img/8f25/74e9/d677d673a62bc9ebe0943b09e58fb049?Expires=1648425600&Signature=eGezxpIBPiF1fitjLhbAB1GH~t07KjIiPxfOP8aepM48nzzjf5JjXsKnJoYe-xW9lAzq4MF2R3g6HwA3NgiDcKfktAkNChT~0PO8i~KOySCLynYw6SlrF~vCvLTHow4QFA3rXntwjKM9RqVlN6be6uk6UJMYlh0bbxvyoqtwR1bJo3eJWnDaj~n-7O07cl~elTuDW6UTlGJ8u1nVxtUEjwRNPKrlk98PfqERkT~oSt83FReo-DMH8yHI5lU~alOIcVf8ogQHsyp~F13dwEWgaRcLRddASzEA82mzl3JeOrDEsrVarIAThnv0~q5z007YDoAMFJzhquN0eWID1xB8iQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA)`,
+                }}
+              ></div>
+            </div>
+            <div className={styles.meta}>
+              {articleType && articleType.name ? (
+                <span>{articleType.name}</span>
+              ) : null}
+              <div
+                className={styles.community}
+                style={{ borderLeftColor: category.colorCode }}
+              >
+                {communityName}
+              </div>
+            </div>
+            {renderTitle()}
+            <div className={styles.summary}>{introduction}</div>
+            {renderAvatar()}
+            {renderPublishedAtRenderTime()}
+            {renderUserSocialActions()}
+          </div>
+          <div
+            className={`${styles.contentImg}`}
+            style={{
+              backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
+            }}
+          ></div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderType7 = () => {
+    return (
+      <div className={`${styles.articleTemplate7} ${styles[size]}`}>
+        <div className={styles.articleContainer}>
+          <div
+            className={`${styles.contentImg}`}
+            style={{
+              backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
+            }}
+          >
+            <div className={styles.categoryChannel}>
+              <div
+                className={styles.category}
+                style={{ background: `${category.colorCode}` }}
+              >
+                {category.name}
+              </div>
+              <div
+                className={styles.channel}
+                style={{
+                  backgroundImage: `url(https://s3-alpha-sig.figma.com/img/8f25/74e9/d677d673a62bc9ebe0943b09e58fb049?Expires=1648425600&Signature=eGezxpIBPiF1fitjLhbAB1GH~t07KjIiPxfOP8aepM48nzzjf5JjXsKnJoYe-xW9lAzq4MF2R3g6HwA3NgiDcKfktAkNChT~0PO8i~KOySCLynYw6SlrF~vCvLTHow4QFA3rXntwjKM9RqVlN6be6uk6UJMYlh0bbxvyoqtwR1bJo3eJWnDaj~n-7O07cl~elTuDW6UTlGJ8u1nVxtUEjwRNPKrlk98PfqERkT~oSt83FReo-DMH8yHI5lU~alOIcVf8ogQHsyp~F13dwEWgaRcLRddASzEA82mzl3JeOrDEsrVarIAThnv0~q5z007YDoAMFJzhquN0eWID1xB8iQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA)`,
+                }}
+              ></div>
+            </div>
+            <div className={styles.meta}>
+              {articleType && articleType.name ? (
+                <span>{articleType.name}</span>
+              ) : null}
+              <div
+                className={styles.community}
+                style={{ borderLeftColor: category.colorCode }}
+              >
+                {communityName}
+              </div>
+            </div>
+            {renderTitle()}
+            {renderAvatar(true)}
+            {renderPublishedAtRenderTime()}
+            {renderUserSocialActions()}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderType8 = () => {
+    return (
+      <div className={`${styles.articleTemplate8} ${styles[size]}`}>
+        <div className={styles.articleContainer}>
+          <div
+            className={`${styles.contentImg}`}
+            style={{
+              backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
+            }}
+          ></div>{" "}
+          <div className={styles.content}>
+            <div className={styles.categoryChannel}>
+              <div
+                className={styles.category}
+                style={{ background: `${category.colorCode}` }}
+              >
+                {category.name}
+              </div>
+              <div
+                className={styles.channel}
+                style={{
+                  backgroundImage: `url(https://s3-alpha-sig.figma.com/img/8f25/74e9/d677d673a62bc9ebe0943b09e58fb049?Expires=1648425600&Signature=eGezxpIBPiF1fitjLhbAB1GH~t07KjIiPxfOP8aepM48nzzjf5JjXsKnJoYe-xW9lAzq4MF2R3g6HwA3NgiDcKfktAkNChT~0PO8i~KOySCLynYw6SlrF~vCvLTHow4QFA3rXntwjKM9RqVlN6be6uk6UJMYlh0bbxvyoqtwR1bJo3eJWnDaj~n-7O07cl~elTuDW6UTlGJ8u1nVxtUEjwRNPKrlk98PfqERkT~oSt83FReo-DMH8yHI5lU~alOIcVf8ogQHsyp~F13dwEWgaRcLRddASzEA82mzl3JeOrDEsrVarIAThnv0~q5z007YDoAMFJzhquN0eWID1xB8iQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA)`,
+                }}
+              ></div>
+            </div>
+            <div className={styles.meta}>
+              {articleType && articleType.name ? (
+                <span>{articleType.name}</span>
+              ) : null}
+              <div
+                className={styles.community}
+                style={{ borderLeftColor: category.colorCode }}
+              >
+                {communityName}
+              </div>
+            </div>
+            {renderTitle()}
+            {renderAvatar()}
+            {renderPublishedAtRenderTime()}
+            {renderUserSocialActions()}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   switch (type) {
     case "type2":
       return renderType2();
@@ -564,6 +856,18 @@ export const Article = ({
       break;
     case "type4":
       return renderType4();
+      break;
+    case "type5":
+      return renderType5();
+      break;
+    case "type6":
+      return renderType6();
+      break;
+    case "type7":
+      return renderType7();
+      break;
+    case "type8":
+      return renderType8();
       break;
     default:
       return renderDefault();

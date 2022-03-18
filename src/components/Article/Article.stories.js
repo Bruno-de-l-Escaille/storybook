@@ -26,7 +26,7 @@ export const DefaultSmall = () => (
     <div className="grid-x">
       <div className="cell small-12 medium-4">
         <Article
-          article={articles[Math.floor(Math.random() * 21)]}
+          article={articles[Math.floor(Math.random() * 20)]}
           size="small"
           isFetching={boolean("isFetching", false)}
           navCommunityId=""
@@ -43,7 +43,7 @@ export const DefaultLarge = () => (
     <div className="grid-x">
       <div className="cell small-12 medium-8">
         <Article
-          article={articles[Math.floor(Math.random() * 21)]}
+          article={articles[Math.floor(Math.random() * 20)]}
           size="large"
           showSummary={true}
           isFetching={boolean("isFetching", false)}
@@ -61,7 +61,7 @@ export const Type2 = () => (
     <div className="grid-x">
       <div className="cell small-12 medium-4">
         <Article
-          article={articles[Math.floor(Math.random() * 21)]}
+          article={articles[Math.floor(Math.random() * 20)]}
           showSummary={true}
           type="type2"
           isFetching={boolean("isFetching", false)}
@@ -78,7 +78,7 @@ export const Type3 = () => (
     <div className="grid-x">
       <div className="cell small-12 medium-6">
         <Article
-          article={articles[Math.floor(Math.random() * 21)]}
+          article={articles[Math.floor(Math.random() * 20)]}
           showSummary={true}
           type="type3"
           showStatus={boolean("showStatus", false)}
@@ -98,9 +98,81 @@ export const Type4 = () => (
     <div className="grid-x">
       <div className="cell small-12 medium-4">
         <Article
-          article={articles[Math.floor(Math.random() * 21)]}
+          article={articles[Math.floor(Math.random() * 20)]}
           showSummary={true}
           type="type4"
+          isFetching={boolean("isFetching", false)}
+          onEdit={() => console.log("edit")}
+          onLike={() => console.log("like")}
+          user={{ id: 12 }}
+        />
+      </div>
+    </div>
+  </div>
+);
+
+export const Type5 = () => (
+  <div className="grid-container">
+    <div className="grid-x">
+      <div className="cell small-12 medium-4">
+        <Article
+          article={articles[Math.floor(Math.random() * 20)]}
+          showSummary={true}
+          type="type5"
+          isFetching={boolean("isFetching", false)}
+          onEdit={() => console.log("edit")}
+          onLike={() => console.log("like")}
+          user={{ id: 12 }}
+        />
+      </div>
+    </div>
+  </div>
+);
+
+export const Type6 = () => (
+  <div className="grid-container">
+    <div className="grid-x">
+      <div className="cell small-12 medium-7">
+        <Article
+          article={articles[Math.floor(Math.random() * 20)]}
+          showSummary={true}
+          type="type6"
+          isFetching={boolean("isFetching", false)}
+          onEdit={() => console.log("edit")}
+          onLike={() => console.log("like")}
+          user={{ id: 12 }}
+        />
+      </div>
+    </div>
+  </div>
+);
+
+export const Type7 = () => (
+  <div className="grid-container">
+    <div className="grid-x">
+      <div className="cell small-12 medium-4">
+        <Article
+          article={articles[Math.floor(Math.random() * 20)]}
+          showSummary={true}
+          type="type7"
+          isFetching={boolean("isFetching", false)}
+          onEdit={() => console.log("edit")}
+          onLike={() => console.log("like")}
+          user={{ id: 12 }}
+        />
+      </div>
+    </div>
+  </div>
+);
+
+export const Type8 = () => (
+  <div className="grid-container">
+    <div className="grid-x">
+      <div className="cell small-12 medium-8">
+        <Article
+          article={articles[Math.floor(Math.random() * 20)]}
+          showSummary={true}
+          type="type8"
           isFetching={boolean("isFetching", false)}
           onEdit={() => console.log("edit")}
           onLike={() => console.log("like")}
