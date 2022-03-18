@@ -132,7 +132,7 @@ export const Type5 = () => (
 export const Type6 = () => (
   <div className="grid-container">
     <div className="grid-x">
-      <div className="cell small-12 medium-4">
+      <div className="cell small-12 medium-7">
         <Article
           article={articles[Math.floor(Math.random() * 20)]}
           showSummary={true}
@@ -168,7 +168,7 @@ export const Type7 = () => (
 export const Type8 = () => (
   <div className="grid-container">
     <div className="grid-x">
-      <div className="cell small-12 medium-4">
+      <div className="cell small-12 medium-8">
         <Article
           article={articles[Math.floor(Math.random() * 20)]}
           showSummary={true}

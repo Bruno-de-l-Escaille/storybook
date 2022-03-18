@@ -35,7 +35,7 @@ export const Article = ({
   host,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(isOpen);
+
   if (isFetching) return <Fetching type={type} size={size} />;
   const data = prepareArticle(article, env, host);
 

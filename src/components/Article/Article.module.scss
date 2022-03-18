@@ -602,9 +602,9 @@
 
 .articleTemplate5 {
   .articleContainer {
-    width: 305px;
     height: fit-content;
     background-color: #fff;
+    border-radius: 5px;
     .contentImg {
       height: 266px;
       width: 100%;
@@ -614,6 +614,8 @@
       background-repeat: no-repeat;
       position: relative;
       padding: 5% 4%;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
     }
     .content {
       padding: 5%;
@@ -763,20 +765,22 @@
 // Template 6
 .articleTemplate6 {
   .articleContainer {
-    width: 629px;
     height: 528px;
     background-color: #fff;
     display: flex;
+    border-radius: 5px;
     .contentImg {
       height: 100%;
-      width: 305px;
+      width: 46%;
       background-color: #eee;
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
+      border-bottom-right-radius: 5px;
+      border-top-right-radius: 5px;
     }
     .content {
-      width: calc(100% - 305px);
+      width: 54%;
       padding: 4%;
       display: flex;
       flex-direction: column;
@@ -823,7 +827,6 @@
 // Template 7
 .articleTemplate7 {
   .articleContainer {
-    width: 305px;
     height: 528px;
     background-color: #fff;
     display: flex;
@@ -917,20 +920,22 @@
 // Template 8
 .articleTemplate8 {
   .articleContainer {
-    width: 630px;
     height: 296px;
     background-color: #fff;
     display: flex;
+    border-radius: 5px;
     .contentImg {
       height: 100%;
-      width: 170px;
+      width: 25%;
       background-color: #eee;
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
     }
     .content {
-      width: calc(100% - 170px);
+      width: 75%;
       padding: 3% 4%;
       padding-bottom: 2%;
       display: flex;
