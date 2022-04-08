@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link as RouterLink } from "react-router-dom";
 import style from "./SubMenu.module.scss";
 
 export class SubMenu extends Component {
@@ -15,7 +14,7 @@ export class SubMenu extends Component {
   };
 
   renderItemMenu = (item) => {
-    const { Link } = this.props;
+    const { Link, RouterLink } = this.props;
     return (
       <li
         key={`smenu-${Math.random()}`}
@@ -34,7 +33,7 @@ export class SubMenu extends Component {
   };
 
   renderItemMenuWithSubmenu = (item) => {
-    const { Link } = this.props;
+    const { Link, RouterLink } = this.props;
 
     return (
       <li className={style.dropdown} key={`smenu-${Math.random()}`}>
@@ -61,7 +60,7 @@ export class SubMenu extends Component {
   };
 
   renderSubmenu = (data) => {
-    const { Link } = this.props;
+    const { Link, RouterLink } = this.props;
     return data.map((item) => (
       <li key={`smenu-${Math.random()}`}>
         <div
