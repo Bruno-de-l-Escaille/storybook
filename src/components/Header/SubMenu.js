@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import style from "./SubMenu.module.scss";
 
 export class SubMenu extends Component {
@@ -26,7 +27,7 @@ export class SubMenu extends Component {
             <a>{item.title}</a>
           </Link>
         ) : (
-          <a href={item.url}>{item.title} </a>
+          <RouterLink to={item.url}>{item.title} </RouterLink>
         )}
       </li>
     );
@@ -37,11 +38,11 @@ export class SubMenu extends Component {
 
     return (
       <li className={style.dropdown} key={`smenu-${Math.random()}`}>
-        <a href={item.url} className={style.item}>
+        <RouterLink to={item.url} className={style.item}>
           <img src={item.iconUrl} />
           <a className={style.title}>{item.title}</a>
           <i className="icon-sb-arrow-down"></i>
-        </a>
+        </RouterLink>
         <div>
           <ul>{this.renderSubmenu(item.submenu)}</ul>
           {item.more &&
@@ -50,9 +51,9 @@ export class SubMenu extends Component {
                 <a className={style.more}>{item.more.title}</a>
               </Link>
             ) : (
-              <a href={item.more.url} className={style.more}>
+              <RouterLink to={item.more.url} className={style.more}>
                 {item.more.title}
-              </a>
+              </RouterLink>
             ))}
         </div>
       </li>
@@ -78,7 +79,7 @@ export class SubMenu extends Component {
               <a>{item.title}</a>
             </Link>
           ) : (
-            <a href={item.url}>{item.title} </a>
+            <RouterLink to={item.url}>{item.title} </RouterLink>
           )}
         </div>
       </li>
