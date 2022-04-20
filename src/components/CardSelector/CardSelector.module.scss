@@ -1,0 +1,113 @@
+.ttpSelectorsTab {
+
+  display: flex;
+  justify-content: center;
+  .ttpSelector {
+    width: 290px;
+    height: 260px;
+    background: #ffffff;
+    box-shadow: 0px 0px 10px rgba(41, 57, 77, 0.1);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    margin: 20px 6px 0 6px;
+    cursor: pointer;
+    transition: transform 0.3s;
+
+    .icon {
+      z-index: 1;
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 28px;
+      background-color: #f8f9fa;
+      border: 3px solid #ffffff;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+      svg {
+        width: 42px;
+        height: 42px;
+      }
+    }
+
+    .labels {
+      z-index: 1;
+      position: absolute;
+      width: 231px;
+      height: 91px;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 35px;
+
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+      text-align: center;
+
+      color: #6d7f92;
+      * {
+        font-weight: 500;
+        margin: 0;
+        font-family: Roboto;
+      }
+      h5 {
+        font-size: 14px;
+        text-transform: uppercase;
+        color: #6d7f92;
+      }
+      h3 {
+        font-size: 18px;
+        text-transform: uppercase;
+        margin-top: 6px;
+        color: #29394d;
+      }
+      p {
+        font-weight: 300;
+        font-size: 12px;
+        margin-top: 12px;
+        color: #6d7f92;
+      }
+    }
+
+    .ellipse {
+      position: absolute;
+      width: 404px;
+      height: 404px;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 74px;
+      background: linear-gradient(
+        180deg,
+        #f3faff 0%,
+        rgba(243, 250, 255, 0) 100%
+      );
+      border-radius: 50%;
+      z-index: 0;
+      transition: top 0.3s;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      .ellipse {
+        top: -30%;
+      }
+      .icon {
+        background-color: #fefefe;
+      }
+
+      .labels {
+        h3 {
+          color: #18a0fb;
+        }
+      }
+    }
+  }
+}
