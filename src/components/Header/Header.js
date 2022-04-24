@@ -93,7 +93,7 @@ export class Header extends Component {
     const Icon = icons["Portal"];
 
     let portalSwitchCurrent = null;
-    if (portalSwitch.items) {
+    if (portalSwitch && portalSwitch.items) {
       portalSwitchCurrent = portalSwitch.items.filter(
         (item) => item.key === portalSwitch.current
       )[0];
@@ -221,7 +221,7 @@ export class Header extends Component {
     const Icon = icons["Portal"];
 
     let portalSwitchCurrent = null;
-    if (portalSwitch.items) {
+    if (portalSwitch && portalSwitch.items) {
       portalSwitchCurrent = portalSwitch.items.filter(
         (item) => item.key === portalSwitch.current
       )[0];
