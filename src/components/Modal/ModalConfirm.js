@@ -6,6 +6,8 @@ import IconSend from "../Icons/IconSend";
 import IconClose from "../Icons/IconClose";
 import IconLoader from "../Icons/IconLoader";
 import IconMegaphone from "../Icons/IconMegaphone";
+import IconDuplicate from "../Icons/IconDuplicate";
+import IconCircleClose from "../Icons/IconCircleClose";
 
 import styles from "./ModalConfirm.module.scss";
 
@@ -32,6 +34,10 @@ export const ModalConfirm = (props) => {
         return <IconSend />;
       case "delete":
         return <IconTrash />;
+      case "duplicate":
+        return <IconDuplicate />;
+      case "return":
+        return <IconCircleClose />;
       default:
         return null;
     }

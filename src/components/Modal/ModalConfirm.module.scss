@@ -187,7 +187,6 @@
     background-color: #2495e1;
   }
 }
-
 .send {
   .header {
     color: #02af8e;
@@ -203,7 +202,36 @@
     background-color: #06d9b1;
   }
 }
-
+.duplicate {
+  .header {
+    color: #2495e1;
+    background: #f3faff;
+    border-bottom: 1px solid #c7e8fe;
+    .icon {
+      background: #f3faff;
+      border: 1px solid #c7e8fe;
+    }
+  }
+  .yes,
+  .deleting {
+    background-color: #2495e1;
+  }
+}
+.return {
+  .header {
+    color: #f4515d;
+    background: #fff5f6;
+    border-bottom: 1px solid #ffdbdd;
+    .icon {
+      background: #fff5f6;
+      border: 1px solid #ffdbdd;
+    }
+  }
+  .yes,
+  .deleting {
+    background-color: #ff636e;
+  }
+}
 .deleting {
   cursor: not-allowed;
   &:hover {

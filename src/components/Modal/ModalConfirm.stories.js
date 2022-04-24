@@ -18,7 +18,11 @@ export default {
 
 export const Delete = () => (
   <ModalConfirm
-    type={select("type", ["delete", "publish", "send"], "delete")}
+    type={select(
+      "type",
+      ["delete", "publish", "send", "duplicate", "return"],
+      "delete"
+    )}
     isOpen={boolean("isOpen", true)}
     onCancel={() => console.log("cancel")}
     onConfirm={() => console.log("handleDeleteTree")}
@@ -60,6 +64,38 @@ export const Send = () => (
     text="Voulez-vous vraiment envoyer cet article ?"
     labelNo="No"
     labelYes="Yes"
+    labelError="Error"
+  />
+);
+
+export const Duplicate = () => (
+  <ModalConfirm
+    type="duplicate"
+    isOpen={true}
+    onCancel={() => console.log("cancel")}
+    onConfirm={() => console.log("handleOnConfirm")}
+    inProcess={false}
+    actionFailed={false}
+    title="Confirmation de duplication"
+    text="Voulez-vous vraiment dupliqué ce slide ? "
+    labelNo="Non"
+    labelYes="Oui, Dupliqué"
+    labelError="Error"
+  />
+);
+
+export const Return = () => (
+  <ModalConfirm
+    type="return"
+    isOpen={true}
+    onCancel={() => console.log("cancel")}
+    onConfirm={() => console.log("handleOnConfirm")}
+    inProcess={false}
+    actionFailed={false}
+    title="Voulez-vous quitter?"
+    text="Toute modification sera annulée. "
+    labelNo="Annuler"
+    labelYes="Quitter"
     labelError="Error"
   />
 );
