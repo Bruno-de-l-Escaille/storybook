@@ -85,11 +85,19 @@ export class Header extends Component {
       notifications,
       app,
       switchSpace,
+      portalSwitch,
     } = this.props;
     const { isFaqWidgetLoaded } = this.state;
     const { navCommunity, user } = auth;
 
     const Icon = icons["Portal"];
+
+    let portalSwitchCurrent = null;
+    if (portalSwitch.items) {
+      portalSwitchCurrent = portalSwitch.items.filter(
+        (item) => item.key === portalSwitch.current
+      )[0];
+    }
 
     return (
       <div className={styles.headerRight}>
@@ -114,6 +122,39 @@ export class Header extends Component {
             >
               {switchSpace.items[1].label}
             </span>
+          </div>
+        )}
+        {portalSwitchCurrent && (
+          <div className={styles.portalSwitch}>
+            <div>
+              <span className={styles.portalSwitch_iconPortal}>
+                <Icon />
+              </span>
+              <span>{portalSwitchCurrent.label}</span>
+              <span className={styles.portalSwitch_iconArrow}>
+                <i className="icon-sb-arrow-down"></i>
+              </span>
+            </div>
+            {portalSwitch.items.length > 1 && (
+              <div className={styles.portalSwitch_dropdown}>
+                <ul>
+                  {portalSwitch.items.map((item, index) => {
+                    if (item.key === portalSwitch.current) {
+                      return null;
+                    }
+                    return (
+                      <li
+                        key={index}
+                        className={`${styles.portalSwitch_item} `}
+                        onClick={() => portalSwitch.onChange(item)}
+                      >
+                        {item.label}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
           </div>
         )}
         <ul className={`${styles.menu} ${styles.buttons}`}>
@@ -173,9 +214,18 @@ export class Header extends Component {
   }
 
   renderLoggedOut() {
-    const { lng, app } = this.props;
+    const { lng, app, portalSwitch } = this.props;
     const { appUrl, homeUrl, isPrivateBlog } = app;
     const languages = ["fr", "nl", "en"];
+
+    const Icon = icons["Portal"];
+
+    let portalSwitchCurrent = null;
+    if (portalSwitch.items) {
+      portalSwitchCurrent = portalSwitch.items.filter(
+        (item) => item.key === portalSwitch.current
+      )[0];
+    }
 
     return (
       <div className={styles.headerRight}>
@@ -190,6 +240,37 @@ export class Header extends Component {
             </li>
           ))}
         </ul>
+        {portalSwitchCurrent && (
+          <div className={styles.portalSwitch}>
+            <div>
+              <span className={styles.portalSwitch_iconPortal}>
+                <Icon />
+              </span>
+              <span>{portalSwitchCurrent.label}</span>
+              <span className={styles.portalSwitch_iconArrow}>
+                <i className="icon-sb-arrow-down"></i>
+              </span>
+            </div>
+            <div className={styles.portalSwitch_dropdown}>
+              <ul>
+                {portalSwitch.items.map((item, index) => {
+                  if (item.key === portalSwitch.current) {
+                    return null;
+                  }
+                  return (
+                    <li
+                      key={index}
+                      className={`${styles.portalSwitch_item} `}
+                      onClick={() => portalSwitch.onChange(item)}
+                    >
+                      {item.label}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+        )}
         <a
           className={styles.signIn}
           href={
