@@ -29,6 +29,7 @@ export class Header extends Component {
     this.state = {
       showSettings: false,
       isFaqWidgetLoaded: false,
+      portalSwitchCurrent: null,
     };
   }
 
@@ -38,12 +39,27 @@ export class Header extends Component {
       this.setState({ isFaqWidgetLoaded: true });
     }
     // }
+    if (this.props.portalSwitch && this.props.portalSwitch.current) {
+      this.setState({
+        portalSwitchCurrent: this.props.portalSwitch.items.filter(
+          (item) => item.key === this.props.portalSwitch.current
+        )[0],
+      });
+    }
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
       if (window.TTPFAQWidget !== undefined) {
         this.setState({ isFaqWidgetLoaded: true });
+      }
+
+      if (this.props.portalSwitch && this.props.portalSwitch.current) {
+        this.setState({
+          portalSwitchCurrent: this.props.portalSwitch.items.filter(
+            (item) => item.key === this.props.portalSwitch.current
+          )[0],
+        });
       }
     }
   }
@@ -87,17 +103,11 @@ export class Header extends Component {
       switchSpace,
       portalSwitch,
     } = this.props;
-    const { isFaqWidgetLoaded } = this.state;
+    const { isFaqWidgetLoaded, portalSwitchCurrent } = this.state;
     const { navCommunity, user } = auth;
 
     const Icon = icons["Portal"];
-
-    let portalSwitchCurrent = null;
-    if (portalSwitch && portalSwitch.items) {
-      portalSwitchCurrent = portalSwitch.items.filter(
-        (item) => item.key === portalSwitch.current
-      )[0];
-    }
+    const IconSetting = icons["Settings"];
 
     return (
       <div className={styles.headerRight}>
@@ -125,15 +135,24 @@ export class Header extends Component {
           </div>
         )}
         {portalSwitchCurrent && (
-          <div className={styles.portalSwitch}>
+          <div
+            className={styles.portalSwitch}
+            onClick={() => portalSwitch.onChange(portalSwitchCurrent)}
+          >
             <div>
               <span className={styles.portalSwitch_iconPortal}>
-                <Icon />
+                {portalSwitchCurrent.key === "SETTINGS" ? (
+                  <IconSetting />
+                ) : (
+                  <Icon />
+                )}
               </span>
               <span>{portalSwitchCurrent.label}</span>
-              <span className={styles.portalSwitch_iconArrow}>
-                <i className="icon-sb-arrow-down"></i>
-              </span>
+              {portalSwitch.items.length > 1 && (
+                <span className={styles.portalSwitch_iconArrow}>
+                  <i className="icon-sb-arrow-down"></i>
+                </span>
+              )}
             </div>
             {portalSwitch.items.length > 1 && (
               <div className={styles.portalSwitch_dropdown}>
@@ -214,18 +233,9 @@ export class Header extends Component {
   }
 
   renderLoggedOut() {
-    const { lng, app, portalSwitch } = this.props;
+    const { lng, app } = this.props;
     const { appUrl, homeUrl, isPrivateBlog } = app;
     const languages = ["fr", "nl", "en"];
-
-    const Icon = icons["Portal"];
-
-    let portalSwitchCurrent = null;
-    if (portalSwitch && portalSwitch.items) {
-      portalSwitchCurrent = portalSwitch.items.filter(
-        (item) => item.key === portalSwitch.current
-      )[0];
-    }
 
     return (
       <div className={styles.headerRight}>
@@ -240,37 +250,6 @@ export class Header extends Component {
             </li>
           ))}
         </ul>
-        {portalSwitchCurrent && (
-          <div className={styles.portalSwitch}>
-            <div>
-              <span className={styles.portalSwitch_iconPortal}>
-                <Icon />
-              </span>
-              <span>{portalSwitchCurrent.label}</span>
-              <span className={styles.portalSwitch_iconArrow}>
-                <i className="icon-sb-arrow-down"></i>
-              </span>
-            </div>
-            <div className={styles.portalSwitch_dropdown}>
-              <ul>
-                {portalSwitch.items.map((item, index) => {
-                  if (item.key === portalSwitch.current) {
-                    return null;
-                  }
-                  return (
-                    <li
-                      key={index}
-                      className={`${styles.portalSwitch_item} `}
-                      onClick={() => portalSwitch.onChange(item)}
-                    >
-                      {item.label}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
-        )}
         <a
           className={styles.signIn}
           href={
