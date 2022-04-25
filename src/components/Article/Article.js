@@ -38,7 +38,7 @@ export const Article = ({
 
   if (isFetching) return <Fetching type={type} size={size} />;
   const data = prepareArticle(article, env, host);
-  console.log(data);
+
   const {
     id,
     title,
