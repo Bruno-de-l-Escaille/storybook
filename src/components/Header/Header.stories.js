@@ -413,7 +413,6 @@ const portalSwitch = {
     { key: "CLIENT", label: "Portail client", url: "/" },
     { key: "PUBLIC", label: "Portail publique", url: "/" },
   ],
-  current: "SETTINGS",
   onChange: (e) => {
     console.log("change space", e);
   },
@@ -431,6 +430,7 @@ export const HeaderPortalSwitch = () => (
     onSearchClick={() => alert("searching")}
     allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
     portalSwitch={object("portalSwitch", portalSwitch)}
+    currentPortal={text("currentPortal", "SETTINGS")}
   />
 );
 export const HeaderLoggedOut = () => (

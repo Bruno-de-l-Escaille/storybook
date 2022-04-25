@@ -39,10 +39,10 @@ export class Header extends Component {
       this.setState({ isFaqWidgetLoaded: true });
     }
     // }
-    if (this.props.portalSwitch && this.props.portalSwitch.current) {
+    if (this.props.portalSwitch && this.props.currentPortal) {
       this.setState({
         portalSwitchCurrent: this.props.portalSwitch.items.filter(
-          (item) => item.key === this.props.portalSwitch.current
+          (item) => item.key === this.props.currentPortal
         )[0],
       });
     }
@@ -54,10 +54,10 @@ export class Header extends Component {
         this.setState({ isFaqWidgetLoaded: true });
       }
 
-      if (this.props.portalSwitch && this.props.portalSwitch.current) {
+      if (this.props.portalSwitch && this.props.currentPortal) {
         this.setState({
           portalSwitchCurrent: this.props.portalSwitch.items.filter(
-            (item) => item.key === this.props.portalSwitch.current
+            (item) => item.key === this.props.currentPortal
           )[0],
         });
       }
@@ -102,6 +102,7 @@ export class Header extends Component {
       app,
       switchSpace,
       portalSwitch,
+      currentPortal,
     } = this.props;
     const { isFaqWidgetLoaded, portalSwitchCurrent } = this.state;
     const { navCommunity, user } = auth;
@@ -158,14 +159,17 @@ export class Header extends Component {
               <div className={styles.portalSwitch_dropdown}>
                 <ul>
                   {portalSwitch.items.map((item, index) => {
-                    if (item.key === portalSwitch.current) {
+                    if (item.key === currentPortal) {
                       return null;
                     }
                     return (
                       <li
                         key={index}
                         className={`${styles.portalSwitch_item} `}
-                        onClick={() => portalSwitch.onChange(item)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          portalSwitch.onChange(item);
+                        }}
                       >
                         {item.label}
                       </li>
