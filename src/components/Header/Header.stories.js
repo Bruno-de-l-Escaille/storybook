@@ -405,6 +405,34 @@ export const HeaderSpaceLoggedIn = () => (
     switchSpace={object("switchSpace", switchSpace)}
   />
 );
+
+const portalSwitch = {
+  items: [
+    { key: "SETTINGS", label: "Configuration", url: "/" },
+    { key: "COLLABORATOR", label: "Portail collaborateur", url: "/" },
+    { key: "CLIENT", label: "Portail client", url: "/" },
+    { key: "PUBLIC", label: "Portail publique", url: "/" },
+  ],
+  onChange: (e) => {
+    console.log("change space", e);
+  },
+};
+export const HeaderPortalSwitch = () => (
+  <Header
+    app={object("app", App)}
+    auth={authLogin}
+    env={text("env", "local")}
+    settings={object("settings", settings)}
+    lng={select("language", ["fr", "nl", "en"], "fr")}
+    rightIcons={object("rightIcons", portalRightIcons)}
+    onLanguageChange={(langue) => alert(langue)}
+    onLogoutClick={(e) => console.log("Logout", e)}
+    onSearchClick={() => alert("searching")}
+    allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
+    portalSwitch={object("portalSwitch", portalSwitch)}
+    currentPortal={text("currentPortal", "SETTINGS")}
+  />
+);
 export const HeaderLoggedOut = () => (
   <Header
     app={object("app", App)}
