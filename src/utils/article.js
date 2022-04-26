@@ -53,15 +53,15 @@ const getArticleFullUrl = (article, env = "", host) => {
     return fullUrl;
   }
 
-  // if (organization && [8, 9, 4].includes(organization.id)) {
-  //   if (organization.id === 9) {
-  //     return `${fffBlog}${fullUrl}`;
-  //   } else if (organization.id === 8) {
-  //     return `${baBlog}${fullUrl}`;
-  //   } else if (organization.id === 4) {
-  //     return `${dapBlog}${fullUrl}`;
-  //   }
-  // }
+  if (organization && [8, 9, 4].includes(organization.id)) {
+    if (organization.id === 9) {
+      return `${fffBlog}${fullUrl}`;
+    } else if (organization.id === 8) {
+      return `${baBlog}${fullUrl}`;
+    } else if (organization.id === 4) {
+      return `${dapBlog}${fullUrl}`;
+    }
+  }
 
   return `${blog}${fullUrl}`;
 };
