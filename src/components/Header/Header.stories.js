@@ -444,6 +444,7 @@ export const HeaderUA = () => (
     onLanguageChange={(langue) => alert(langue)}
     onLogoutClick={(e) => console.log("Logout", e)}
     onSearchClick={() => alert("searching")}
+    isUA={true}
     uaFolder={object("uaFolder", {
       avatarUrl:
         "https://s3.tamtam.pro/prod/storage/media/IMAGE/34/AVATAR_00e0170bb5fc8a8cae3fd79abdc36c943669673b.png",

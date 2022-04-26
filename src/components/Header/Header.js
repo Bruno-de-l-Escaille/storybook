@@ -279,6 +279,7 @@ export class Header extends Component {
       onSelectAllCommunities,
       onSelectCommunity,
       uaFolder,
+      isUA,
     } = this.props;
     const { appName, appLogoUrl, appUrl, isPrivateBlog } = app;
 
@@ -345,21 +346,18 @@ export class Header extends Component {
             )}
           </div>
 
-          {auth.user &&
-            auth.user.communities &&
-            !isPrivateBlog &&
-            !uaFolder && (
-              <Communities
-                communities={auth.user.communities}
-                currentCommunity={auth.navCommunity}
-                lng={lng}
-                app={app}
-                Link={Link}
-                allCommunitiesUrl={allCommunitiesUrl}
-                onSelectAllCommunities={onSelectAllCommunities}
-                onSelectCommunity={onSelectCommunity}
-              />
-            )}
+          {auth.user && auth.user.communities && !isPrivateBlog && !isUA && (
+            <Communities
+              communities={auth.user.communities}
+              currentCommunity={auth.navCommunity}
+              lng={lng}
+              app={app}
+              Link={Link}
+              allCommunitiesUrl={allCommunitiesUrl}
+              onSelectAllCommunities={onSelectAllCommunities}
+              onSelectCommunity={onSelectCommunity}
+            />
+          )}
 
           {uaFolder && (
             <div className={styles.menu__ua_folder}>
