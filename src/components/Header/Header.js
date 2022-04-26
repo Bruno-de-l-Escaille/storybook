@@ -278,8 +278,20 @@ export class Header extends Component {
       allCommunitiesUrl,
       onSelectAllCommunities,
       onSelectCommunity,
+      uaFolder,
+      isUA,
     } = this.props;
     const { appName, appLogoUrl, appUrl, isPrivateBlog } = app;
+
+    let uaFolderName = "";
+    if (uaFolder) {
+      uaFolderName = uaFolder.name;
+      if (uaFolder.abbreviation) {
+        uaFolderName = uaFolder.abbreviation;
+      } else if (uaFolderName.length > 30) {
+        uaFolderName = uaFolderName.substr(0, 30) + "...";
+      }
+    }
     return (
       <>
         <div className={styles.headerLeft}>
@@ -334,7 +346,7 @@ export class Header extends Component {
             )}
           </div>
 
-          {auth.user && auth.user.communities && !isPrivateBlog && (
+          {auth.user && auth.user.communities && !isPrivateBlog && !isUA && (
             <Communities
               communities={auth.user.communities}
               currentCommunity={auth.navCommunity}
@@ -345,6 +357,16 @@ export class Header extends Component {
               onSelectAllCommunities={onSelectAllCommunities}
               onSelectCommunity={onSelectCommunity}
             />
+          )}
+
+          {uaFolder && (
+            <div className={styles.menu__ua_folder}>
+              {uaFolder.avatarUrl ? (
+                <img src={uaFolder.avatarUrl} alt={uaFolderName} />
+              ) : (
+                <span>{uaFolderName}</span>
+              )}
+            </div>
           )}
         </div>
       </>
