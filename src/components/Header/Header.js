@@ -361,16 +361,11 @@ export class Header extends Component {
 
           {uaFolder && (
             <div className={styles.menu__ua_folder}>
-              <div
-                className={`${styles.menu__link}`}
-                style={{ cursor: "pointer" }}
-              >
-                {uaFolder.avatarUrl ? (
-                  <img src={uaFolder.avatarUrl} alt={uaFolderName} />
-                ) : (
-                  <span>{uaFolderName}</span>
-                )}
-              </div>
+              {uaFolder.avatarUrl ? (
+                <img src={uaFolder.avatarUrl} alt={uaFolderName} />
+              ) : (
+                <span>{uaFolderName}</span>
+              )}
             </div>
           )}
         </div>
