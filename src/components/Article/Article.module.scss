@@ -78,6 +78,7 @@
     text-shadow: 0px 4px 4px rgba(41, 57, 77, 0.1);
     margin-bottom: 20px;
     font-family: Roboto;
+    width: 100%;
 
     max-height: 2 * 18px * 1.266;
     overflow: hidden;
@@ -649,6 +650,12 @@
         font-size: 20px;
         line-height: 23px;
         color: #29394d;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* number of lines to show */
+                line-clamp: 3; 
+        -webkit-box-orient: vertical;
       }
       .authorsContainer {
         margin-top: auto;
