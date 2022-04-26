@@ -433,6 +433,24 @@ export const HeaderPortalSwitch = () => (
     currentPortal={text("currentPortal", "SETTINGS")}
   />
 );
+export const HeaderUA = () => (
+  <Header
+    app={object("app", App)}
+    auth={authLogin}
+    env={text("env", "local")}
+    settings={object("settings", settings)}
+    lng={select("language", ["fr", "nl", "en"], "fr")}
+    rightIcons={object("rightIcons", portalRightIcons)}
+    onLanguageChange={(langue) => alert(langue)}
+    onLogoutClick={(e) => console.log("Logout", e)}
+    onSearchClick={() => alert("searching")}
+    uaFolder={object("uaFolder", {
+      avatarUrl:
+        "https://s3.tamtam.pro/prod/storage/media/IMAGE/34/AVATAR_00e0170bb5fc8a8cae3fd79abdc36c943669673b.png",
+      name: "Deg & Partners",
+    })}
+  />
+);
 export const HeaderLoggedOut = () => (
   <Header
     app={object("app", App)}

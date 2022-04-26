@@ -1463,3 +1463,16 @@ nav {
     }
   }
 }
+
+.menu__ua_folder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F8F9FA;
+  width: 188px;
+
+  img {
+    height: 38px;
+    cursor: auto;
+  }
+}

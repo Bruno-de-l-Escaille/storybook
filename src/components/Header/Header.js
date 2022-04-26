@@ -278,8 +278,19 @@ export class Header extends Component {
       allCommunitiesUrl,
       onSelectAllCommunities,
       onSelectCommunity,
+      uaFolder,
     } = this.props;
     const { appName, appLogoUrl, appUrl, isPrivateBlog } = app;
+
+    let uaFolderName = "";
+    if (uaFolder) {
+      uaFolderName = uaFolder.name;
+      if (uaFolder.abbreviation) {
+        uaFolderName = uaFolder.abbreviation;
+      } else if (uaFolderName.length > 30) {
+        uaFolderName = uaFolderName.substr(0, 30) + "...";
+      }
+    }
     return (
       <>
         <div className={styles.headerLeft}>
@@ -334,17 +345,35 @@ export class Header extends Component {
             )}
           </div>
 
-          {auth.user && auth.user.communities && !isPrivateBlog && (
-            <Communities
-              communities={auth.user.communities}
-              currentCommunity={auth.navCommunity}
-              lng={lng}
-              app={app}
-              Link={Link}
-              allCommunitiesUrl={allCommunitiesUrl}
-              onSelectAllCommunities={onSelectAllCommunities}
-              onSelectCommunity={onSelectCommunity}
-            />
+          {auth.user &&
+            auth.user.communities &&
+            !isPrivateBlog &&
+            !uaFolder && (
+              <Communities
+                communities={auth.user.communities}
+                currentCommunity={auth.navCommunity}
+                lng={lng}
+                app={app}
+                Link={Link}
+                allCommunitiesUrl={allCommunitiesUrl}
+                onSelectAllCommunities={onSelectAllCommunities}
+                onSelectCommunity={onSelectCommunity}
+              />
+            )}
+
+          {uaFolder && (
+            <div className={styles.menu__ua_folder}>
+              <div
+                className={`${styles.menu__link}`}
+                style={{ cursor: "pointer" }}
+              >
+                {uaFolder.avatarUrl ? (
+                  <img src={uaFolder.avatarUrl} alt={uaFolderName} />
+                ) : (
+                  <span>{uaFolderName}</span>
+                )}
+              </div>
+            </div>
           )}
         </div>
       </>
