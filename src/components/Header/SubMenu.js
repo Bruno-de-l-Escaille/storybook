@@ -25,8 +25,10 @@ export class SubMenu extends Component {
           <Link href={item.url}>
             <a>{item.title}</a>
           </Link>
-        ) : (
+        ) : RouterLink ? (
           <RouterLink to={item.url}>{item.title} </RouterLink>
+        ) : (
+          <a href={item.url}>{item.title} </a>
         )}
       </li>
     );
@@ -37,11 +39,19 @@ export class SubMenu extends Component {
 
     return (
       <li className={style.dropdown} key={`smenu-${Math.random()}`}>
-        <RouterLink to={item.url} className={style.item}>
-          <img src={item.iconUrl} />
-          <a className={style.title}>{item.title}</a>
-          <i className="icon-sb-arrow-down"></i>
-        </RouterLink>
+        {RouterLink ? (
+          <RouterLink to={item.url} className={style.item}>
+            <img src={item.iconUrl} />
+            <a className={style.title}>{item.title}</a>
+            <i className="icon-sb-arrow-down"></i>
+          </RouterLink>
+        ) : (
+          <a href={item.url} className={style.item}>
+            <img src={item.iconUrl} />
+            <a className={style.title}>{item.title}</a>
+            <i className="icon-sb-arrow-down"></i>
+          </a>
+        )}
         <div>
           <ul>{this.renderSubmenu(item.submenu)}</ul>
           {item.more &&
@@ -49,10 +59,14 @@ export class SubMenu extends Component {
               <Link href={item.more.url}>
                 <a className={style.more}>{item.more.title}</a>
               </Link>
-            ) : (
+            ) : RouterLink ? (
               <RouterLink to={item.more.url} className={style.more}>
                 {item.more.title}
               </RouterLink>
+            ) : (
+              <a href={item.more.url} className={style.more}>
+                {item.more.title}
+              </a>
             ))}
         </div>
       </li>
@@ -77,8 +91,10 @@ export class SubMenu extends Component {
             <Link href={item.url}>
               <a>{item.title}</a>
             </Link>
+          ) : RouterLink ? (
+            <RouterLink to={item.url}>{item.title}</RouterLink>
           ) : (
-            <RouterLink to={item.url}>{item.title} </RouterLink>
+            <a href={item.url}>{item.title} </a>
           )}
         </div>
       </li>
