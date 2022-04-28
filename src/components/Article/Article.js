@@ -295,7 +295,6 @@ export const Article = ({
                 fill={socialData.isFavorite === 1 ? "#C70039" : "#D8DDE2"}
               />
             </svg>
-            {countLikes}
           </div>
           <div className={styles.comments} onClick={() => openModal()}>
             <svg
