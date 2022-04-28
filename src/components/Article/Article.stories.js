@@ -116,7 +116,7 @@ export const Type5 = () => (
     <div className="grid-x">
       <div className="cell small-12 medium-3">
         <Article
-          article={articles[Math.floor(Math.random() * 20)]}
+          article={articles[0]}
           showSummary={true}
           type="type5"
           isFetching={boolean("isFetching", false)}

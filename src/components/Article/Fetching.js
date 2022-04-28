@@ -170,7 +170,7 @@ export const Fetching = (props) => {
 
             {renderAvatar()}
 
-            <div className={styles.userActions} style={{ marginTop: "15px" }}>
+            <div className={styles.userActions}>
               <hr />
               <div className={styles.actions}>
                 <Skeleton width={30} height={24} />

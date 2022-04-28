@@ -571,7 +571,7 @@
       },
       "social": {
         "isLiked": -1,
-        "isFavorite": 0
+        "isFavorite": 1
       },
       "type": {
         "id": 3,
