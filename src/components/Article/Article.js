@@ -694,7 +694,7 @@ export const Article = ({
                     <span className={styles.vIterm}>
                       <a
                         target="_blank"
-                        href={`/${related[0]}/${related[1].url}/${related[1].id}`}
+                        href={`/${related[0]}/article/${related[1].url}/${related[1].id}`}
                       >
                         <img
                           src={`/img/flags/${related[0]}.png`}
@@ -759,7 +759,7 @@ export const Article = ({
                     <span className={styles.vIterm}>
                       <a
                         target="_blank"
-                        href={`/${related[0]}/${related[1].url}/${related[1].id}`}
+                        href={`/${related[0]}/article/${related[1].url}/${related[1].id}`}
                       >
                         <img
                           src={`/img/flags/${related[0]}.png`}
@@ -833,7 +833,7 @@ export const Article = ({
                     <span className={styles.vIterm}>
                       <a
                         target="_blank"
-                        href={`/${related[0]}/${related[1].url}/${related[1].id}`}
+                        href={`/${related[0]}/article/${related[1].url}/${related[1].id}`}
                       >
                         <img
                           src={`/img/flags/${related[0]}.png`}
@@ -901,7 +901,7 @@ export const Article = ({
                     <span className={styles.vIterm}>
                       <a
                         target="_blank"
-                        href={`/${related[0]}/${related[1].url}/${related[1].id}`}
+                        href={`/${related[0]}/article/${related[1].url}/${related[1].id}`}
                       >
                         <img
                           src={`/img/flags/${related[0]}.png`}
