@@ -644,7 +644,6 @@
         }
       }
       .title h3 {
-        margin: 4% 0%;
         text-align: left;
         font-weight: 600;
         font-size: 20px;
@@ -698,7 +697,7 @@
 .publishedAtReadTime {
   width: 100%;
   position: relative;
-  margin: 5% 0%;
+  margin: 10px 0;
   font-weight: 300;
   font-size: 10px;
   line-height: 12px;
@@ -736,13 +735,16 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 15%;
-      margin-right: 5%;
+     
+      margin-right: 10px;
       font-weight: 700;
       font-size: 12px;
       line-height: 14px;
       color: #6d7f92;
       cursor: pointer;
+    }
+    svg {
+      margin-right: 4px;
     }
     .share {
       position: relative;
