@@ -282,7 +282,7 @@ export const Article = ({
       <div className={styles.userActions}>
         <hr />
         <div className={styles.actions}>
-          <div className={styles.likes} onClick={() => saveFavorite()}>
+          <div className={styles.likes} onClick={() => onLike()}>
             <svg
               width="24"
               height="24"
