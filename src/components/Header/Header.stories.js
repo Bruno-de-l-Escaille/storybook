@@ -468,6 +468,7 @@ export const SubMenuHeader = () => (
       lng={select("language", ["fr", "nl", "en"], "fr")}
       menu={object("menu", menu)}
       currentCommunity={object("currentCommunity", authLogin.navCommunity)}
+      hideVertical={boolean("hideVertical", false)}
     >
       <div style={{ padding: "3rem" }}>Content</div>
     </SubMenu>
