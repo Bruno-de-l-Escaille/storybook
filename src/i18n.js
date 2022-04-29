@@ -20,6 +20,7 @@ export const I18N = {
 
     Mandated: "Mandated",
     Not_Mandated: "Not Mandated",
+    see_version: "See version",
   },
   fr: {
     ARTCILES: "Articles",
@@ -41,6 +42,7 @@ export const I18N = {
     EXTERNAL: "EXTERNE",
     Mandated: "Mandaté",
     Not_Mandated: "Non Mandaté",
+    see_version: "Voir version",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -63,5 +65,6 @@ export const I18N = {
 
     Mandated: "gemandateerde",
     Not_Mandated: "niet Gemandateerde",
+    see_version: "Zie versie",
   },
 };

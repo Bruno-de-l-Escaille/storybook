@@ -1,5 +1,21 @@
 @import "../../styles/variables";
 
+.version {
+  display: flex;
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #2495e1;
+  background-color: #f3faff;
+  border-color: #c7e8fe;
+  border-radius: 5px;
+  z-index: 1;
+  width: fit-content;
+  span {
+    margin: 0 4px;
+    height: 24px;
+  }
+}
+
 .article {
   font-family: Roboto;
   // width: 309px;
@@ -602,6 +618,13 @@
 // Template 5
 
 .articleTemplate5 {
+  .version {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translateY(50%);
+    border-radius: 5px 0 0 5px;
+  }
   .articleContainer {
     height: 528px;
     background-color: #fff;
@@ -943,6 +966,11 @@
 
 // Template 8
 .articleTemplate8 {
+  .version {
+    position: absolute;
+    top: 4px;
+    right: 10px;
+  }
   .articleContainer {
     height: 296px;
     background-color: #fff;

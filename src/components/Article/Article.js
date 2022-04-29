@@ -8,6 +8,7 @@ import { AuthorAvatar } from "../Avatar/AuthorAvatar";
 import { Fetching } from "./Fetching";
 import { prepareArticle, isUserHasRights, addLandaSize } from "../../utils";
 import classnames from "classnames";
+import { I18N } from "../../i18n";
 
 const API_DATE_FORMAT = "YYYY-MM-DD HH:mm:ss";
 
@@ -685,6 +686,28 @@ export const Article = ({
                 }}
               ></div>
             </div>
+            {article.relatedArticles && (
+              <div className={styles.version}>
+                <span>{I18N[language]["see_version"]}:</span>
+                {Object.entries(article.relatedArticles).map((related) => {
+                  return (
+                    <span className={styles.vIterm}>
+                      <a
+                        target="_blank"
+                        href={`/${related[0]}/${related[1].url}/${related[1].id}`}
+                      >
+                        <img
+                          src={`/img/flags/${related[0]}.png`}
+                          width="24"
+                          height="24"
+                          alt=""
+                        />
+                      </a>
+                    </span>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           <div className={styles.content}>
@@ -728,6 +751,28 @@ export const Article = ({
                 }}
               ></div>
             </div>
+            {article.relatedArticles && (
+              <div className={styles.version}>
+                <span>{I18N[language]["see_version"]}:</span>
+                {Object.entries(article.relatedArticles).map((related) => {
+                  return (
+                    <span className={styles.vIterm}>
+                      <a
+                        target="_blank"
+                        href={`/${related[0]}/${related[1].url}/${related[1].id}`}
+                      >
+                        <img
+                          src={`/img/flags/${related[0]}.png`}
+                          width="24"
+                          height="24"
+                          alt=""
+                        />
+                      </a>
+                    </span>
+                  );
+                })}
+              </div>
+            )}
             <div className={styles.meta}>
               {articleType && articleType.name ? (
                 <span>{articleType.name}</span>
@@ -780,6 +825,28 @@ export const Article = ({
                 }}
               ></div>
             </div>
+            {article.relatedArticles && (
+              <div className={styles.version}>
+                <span>{I18N[language]["see_version"]}:</span>
+                {Object.entries(article.relatedArticles).map((related) => {
+                  return (
+                    <span className={styles.vIterm}>
+                      <a
+                        target="_blank"
+                        href={`/${related[0]}/${related[1].url}/${related[1].id}`}
+                      >
+                        <img
+                          src={`/img/flags/${related[0]}.png`}
+                          width="24"
+                          height="24"
+                          alt=""
+                        />
+                      </a>
+                    </span>
+                  );
+                })}
+              </div>
+            )}
             <div className={styles.meta}>
               {articleType && articleType.name ? (
                 <span>{articleType.name}</span>
@@ -826,6 +893,28 @@ export const Article = ({
                 }}
               ></div>
             </div>
+            {article.relatedArticles && (
+              <div className={styles.version}>
+                <span>{I18N[language]["see_version"]}:</span>
+                {Object.entries(article.relatedArticles).map((related) => {
+                  return (
+                    <span className={styles.vIterm}>
+                      <a
+                        target="_blank"
+                        href={`/${related[0]}/${related[1].url}/${related[1].id}`}
+                      >
+                        <img
+                          src={`/img/flags/${related[0]}.png`}
+                          width="24"
+                          height="24"
+                          alt=""
+                        />
+                      </a>
+                    </span>
+                  );
+                })}
+              </div>
+            )}
             <div className={styles.meta}>
               {articleType && articleType.name ? (
                 <span>{articleType.name}</span>
