@@ -20,6 +20,14 @@ export const I18N = {
 
     Mandated: "Mandated",
     Not_Mandated: "Not Mandated",
+    Details: "Details",
+    Replay: "Replay",
+    Purchase: "Purchase",
+    "Possible to review the training for max 15 days after the date of the live":
+      "Possible to review the training for max 15 days after the date of the live",
+    Webinar: "Webinar",
+    "In progress": "In progress",
+    "Certificate included approved by": "Certificate included approved by",
   },
   fr: {
     ARTCILES: "Articles",
@@ -41,6 +49,14 @@ export const I18N = {
     EXTERNAL: "EXTERNE",
     Mandated: "Mandaté",
     Not_Mandated: "Non Mandaté",
+    Details: "Détails",
+    Replay: "Rejouer",
+    Purchase: "Acheter",
+    "Possible to review the training for max 15 days after the date of the live":
+      "Possible de revoir la formation pendant max 15 jours après la date du live",
+    Webinar: "Webinar",
+    "In progress": "En cours",
+    "Certificate included approved by": "Attestation incluse agréé par",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -63,5 +79,14 @@ export const I18N = {
 
     Mandated: "gemandateerde",
     Not_Mandated: "niet Gemandateerde",
+    Details: "Details",
+    Replay: "Herhaling",
+    Purchase: "Aankoop",
+    "Possible to review the training for max 15 days after the date of the live":
+      "Mogelijkheid om de training te bekijken tot 15 dagen vanaf de datum van de live",
+    Webinar: "Webinar",
+    "In progress": "Bezig",
+    "Certificate included approved by":
+      "Certificaat meegeleverd goedgekeurd door",
   },
 };
