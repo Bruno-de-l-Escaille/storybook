@@ -218,7 +218,7 @@ export class EventCard extends PureComponent {
               <li>
                 <i className="icon icon-calendar" />
                 <span>
-                  <strong>En Live</strong> : {helpDate}
+                  <strong>{I18N[language]["En Live"]}</strong> : {helpDate}
                 </span>
               </li>
             )}

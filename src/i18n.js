@@ -28,6 +28,7 @@ export const I18N = {
     Webinar: "Webinar",
     "In progress": "In progress",
     "Certificate included approved by": "Certificate included approved by",
+    "En Live": "Live",
   },
   fr: {
     ARTCILES: "Articles",
@@ -57,6 +58,7 @@ export const I18N = {
     Webinar: "Webinar",
     "In progress": "En cours",
     "Certificate included approved by": "Attestation incluse agréé par",
+    "En Live": "En Live",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -88,5 +90,6 @@ export const I18N = {
     "In progress": "Bezig",
     "Certificate included approved by":
       "Certificaat meegeleverd goedgekeurd door",
+    "En Live": "Live",
   },
 };
