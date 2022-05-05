@@ -158,7 +158,7 @@ export const getAlbum = ({ albums }) => {
   return medias;
 };
 
-export const getAuthors = ({ author, avatars }, lng = "fr") => {
+export const getAuthors = ({ author, chains }, lng = "fr") => {
   let authors = [];
   let others = [];
   if (author && author.length > 0) {
@@ -175,14 +175,24 @@ export const getAuthors = ({ author, avatars }, lng = "fr") => {
         };
       });
   }
-  if (avatars && avatars.length > 0) {
-    others = avatars.map((a) => {
+  if (chains && chains.length > 0) {
+    const nameAttr = `name${lng.charAt(0).toUpperCase() + lng.slice(1)}`;
+    others = chains.map((chain) => {
+      let mediaChain = null;
+      if (chain.mediaChain && chain.mediaChain.length > 0) {
+        chain.mediaChain.forEach((media) => {
+          if (media.language === lng) {
+            mediaChain = media;
+          }
+        });
+      }
+
       return {
-        id: a.id,
-        name: a.company,
-        headline: a.headline,
-        avatar: a.avatar,
-        avatarUrl: a.avatarUrl,
+        id: chain.id,
+        name: chain[nameAttr],
+        headline: chain.headline,
+        avatar: mediaChain ? mediaChain.avatar : "",
+        avatarUrl: mediaChain ? mediaChain.avatarUrl : "",
       };
     });
   }
