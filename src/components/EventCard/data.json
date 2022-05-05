@@ -1,0 +1,2165 @@
+[
+  {
+    "id": 311,
+    "nameFr": "Congrès FFF 2021",
+    "nameEn": "Congres FFF 2021",
+    "nameNl": "Congres FFF 2021",
+    "status": 1,
+    "type": 5,
+    "languages": "{\"Fr\":\"1\",\"Nl\":\"1\"}",
+    "urlBannerFr": "/eventsFolder/client9/event311/_model/html/img/bannerFr_2021_11_26_10_28_25-original.jpg",
+    "urlBannerEn": "",
+    "urlBannerNl": "/eventsFolder/client9/event311/_model/html/img/bannerNl_2021_11_26_10_28_26-original.jpg",
+    "descriptionFr": "Congrès FFF 2021 : les professions économiques au cœur de la relance\r\n\r\nLa 13ème édition du Congrès FFF se déploie désormais sur **4 jours virtuels et 2 jours présentiels** :\r\n\r\n-\t4 jours virtuels du 30/11/2021 au 03/12/2021 sur notre plateforme \r\n-\t2 jours présentiels, les 14 et 15 mars 2022, Palais 10 et Auditorium 2000\r\n\r\n\r\nPlus que jamais unique par **la qualité et la variété des contenus.**\r\nPartenaires, exposants, orateurs sont au rendez-vous pour 6 journées de rencontres, de découvertes et d’échanges.",
+    "descriptionEn": "",
+    "descriptionNl": "Congres FFF 2021 : de economische beroepen in het hart van het herstel.\r\n\r\nDe 13de editie van het FFF Congres over **4 digitale dagen en 2 fysieke dagen :**\r\n\r\n-\t4 digitale dagen van 30/11/21 tot 03/12/21 op onze platform\r\n-\t2 fysieke dagen op 14 & 15 maart 2022, paleis 10 & auditorium 2000\r\nMeer dan ooit uniek in de kwaliteit en de verscheidenheid van de inhoud.\r\nPartners, exposanten en sprekers zullen aanwezig zijn voor 6 dagen van ontmoetingen, ontdekkingen en uitwisselingen.",
+    "placeFr": "Brussels Expo - Auditorium 2000 et Palais 10\r\nPlace de Belgique 1\r\n1020 Bruxelles \r\n\r\ncontact : info@forumforthefuture.be",
+    "placeEn": "",
+    "placeNl": "Brussels Expo - Auditorium 2000 en paleis 10\r\nBelgiëplein 1\r\n1020 Brussel\r\n\r\ncontact : info@forumforthefuture.be",
+    "memberPrice": 0,
+    "nonMemberPrice": 0,
+    "isReplayable": 1,
+    "labelFr": "",
+    "labelNl": "",
+    "labelEn": "",
+    "replayStatus": 1,
+    "updatedAt": "2022-01-27 10:16:06",
+    "createdAt": "2021-09-23 07:36:14",
+    "startDateTime": "2022-05-09 08:00:00",
+    "endDateTime": "2022-05-10 12:30:00",
+    "eventDate": "2022-05-10",
+    "client": 9,
+    "eventCycles": [],
+    "user-registered": true,
+    "dateEndOfReplay": "2022-01-31 00:00:00",
+    "speakers-abstract": {
+      "count": 235,
+      "speakers": [
+        {
+          "id": "2633",
+          "firstName": "Jonathan",
+          "lastName": "Picavet",
+          "email": "j.picavet@defenso.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/11/Jonathan_Picavet_2020_11_19_15_01_19-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2634",
+          "firstName": "Sébastien",
+          "lastName": "Thiry",
+          "email": "sthiry@dekeyser-associes.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/03/Sebastien_Thiry_2021_03_30_19_43_07-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2635",
+          "firstName": "Charles",
+          "lastName": "Markowicz",
+          "email": "chm@costmasters.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/06/Charles_Markowicz_2021_06_09_10_46_58-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2637",
+          "firstName": "Grégory",
+          "lastName": "Homans",
+          "email": "ghomans@dekeyser-associes.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/03/Gregory_Homans_2021_03_23_21_09_01-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2638",
+          "firstName": "Christian",
+          "lastName": "Amand",
+          "email": "ca@xirius.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2015/11/Christian_Amand_2015_11_17_12_45_12-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2639",
+          "firstName": "Roland",
+          "lastName": "Forestini",
+          "email": "rf@forestini.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2015/10/Roland_Forestini_2015_10_08_14_18_25-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2640",
+          "firstName": "Baudouin",
+          "lastName": "Paquot",
+          "email": "BP@tetralaw.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2017/10/Baudouin__Paquot__2017_10_13_11_00_04-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2643",
+          "firstName": "Renaud",
+          "lastName": "Thonet",
+          "email": "RT@tetralaw.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2019/08/Renaud_Thonet_2019_08_06_09_23_01-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2645",
+          "firstName": "Philippe",
+          "lastName": "Dedobbeleer",
+          "email": "pdedobbeleer@deloitte.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2018/07/Philippe_Dedobbeleer_2018_07_23_10_36_40-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2646",
+          "firstName": "Marc",
+          "lastName": "Gielis",
+          "email": "Marc.Gielis@DENP.BE",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/10/Marc_Gielis_2020_10_30_07_11_18-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2647",
+          "firstName": "Alain",
+          "lastName": "Lacourt",
+          "email": "contact@alain-lacourt.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/04/Alain_Lacourt_2021_04_07_23_45_44-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2648",
+          "firstName": "Maxim",
+          "lastName": "Daniel",
+          "email": "Maxim.Daniel@tuerlinckx.eu",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/06/Maxim_Daniel_2021_06_16_09_04_45-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2650",
+          "firstName": "Filip",
+          "lastName": "Duwaerts",
+          "email": "f.duwaerts@ardent.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/10/Filip__Duwaerts_2020_10_26_14_09_58-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2651",
+          "firstName": "Dany",
+          "lastName": "De Decker",
+          "email": "d.dedecker@bakertillybelgium.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/08/Dany_De_Decker_2021_08_09_10_33_00-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2654",
+          "firstName": "Rosanne",
+          "lastName": "Van Gael",
+          "email": "rosanne.vangael@cazimir.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/10/Rosanne_Van_Gael_2020_10_20_10_30_09-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2655",
+          "firstName": "Olivier",
+          "lastName": "De Keukelaere",
+          "email": "olivier.dekeukelaere@cazimir.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/08/Olivier_De_Keukelaere_2021_08_05_12_49_29-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2657",
+          "firstName": "van der Haert",
+          "lastName": "Francis",
+          "email": "francis.vanderhaert@cazimir.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/08/van_der_Haert_Francis_2021_08_05_11_25_16-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2658",
+          "firstName": "Pieter-Jan",
+          "lastName": "Wouters",
+          "email": "pieter-jan.wouters@be.ey.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/08/Pieter-Jan_Wouters_2021_08_05_12_09_46-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2659",
+          "firstName": "Baptistin",
+          "lastName": "Alaime",
+          "email": "baptistin@tuerlinckx.eu",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/10/Baptistin_Alaime_2020_10_29_11_12_32-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2660",
+          "firstName": "Olivier",
+          "lastName": "D'août",
+          "email": "o.daout@defenso.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2017/10/Olivier__D_AOUT_2017_10_23_10_04_18-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2661",
+          "firstName": "Mikael",
+          "lastName": "Gossiaux",
+          "email": "m.gossiaux@hvlaw.eu",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2018/07/Mikael_Gossiaux_2018_07_23_10_52_57-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2662",
+          "firstName": "Sabrina",
+          "lastName": "Scarna",
+          "email": "SS@tetralaw.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2014/10/Sabrina_Scarna_2014_10_02_13_01_23-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2663",
+          "firstName": "Laurent",
+          "lastName": "Tainmont",
+          "email": "lta@lawtax.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/04/Laurent_Tainmont_2021_04_08_00_34_05-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2665",
+          "firstName": "Gerd",
+          "lastName": "Goyvaerts",
+          "email": "GerdD.Goyvaerts@tiberghien.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Gerd_Goyvaerts_2021_11_09_13_46_45-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2667",
+          "firstName": "Tim",
+          "lastName": "Melis",
+          "email": "tim.melis@cazimir.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Tim_Melis_2021_10_20_10_15_33-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2668",
+          "firstName": "Jan",
+          "lastName": "Tuerlinckx",
+          "email": "jan@tuerlinckx.eu",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2016/08/Jan__Tuerlinckx_2016_08_22_11_53_09-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2669",
+          "firstName": "Bart",
+          "lastName": "Van Besien",
+          "email": "bart@finnian.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Bart_Van_Besien_2021_11_09_14_10_22-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2670",
+          "firstName": "François",
+          "lastName": "Collon",
+          "email": "f.collon@hvlaw.eu",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2015/09/Francois_Collon_2015_09_01_17_32_54-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2671",
+          "firstName": "Vincent",
+          "lastName": "Deckers",
+          "email": "vd@avocatdeckers.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2018/09/Vincent_Deckers_2018_09_28_11_21_37-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2673",
+          "firstName": "Céline",
+          "lastName": "Joly",
+          "email": "cjo@lawtax.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Celine_Joly_2021_11_09_14_01_52-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2674",
+          "firstName": "Ludovic",
+          "lastName": "Ioos",
+          "email": "ludovic.ioos@insurprotect.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/05/Ludovic_Ioos_2021_05_29_18_02_20-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2675",
+          "firstName": "Matthieu",
+          "lastName": "Possoz",
+          "email": "mathpossoz@hotmail.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2018/09/Matthieu_Possoz_2018_09_28_11_14_59-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2678",
+          "firstName": "Christophe",
+          "lastName": "Remon",
+          "email": "christophe.remon@remon.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Christophe_Remon_2021_11_09_13_53_00-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2680",
+          "firstName": "David",
+          "lastName": "de backer",
+          "email": "david@ddbcf.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/David_de_backer_2021_10_18_19_51_45-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2695",
+          "firstName": "Badr",
+          "lastName": "Al Hammoumi",
+          "email": "badr.alhammoumi@liberform.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Badr_Al_Hammoumi_2021_11_16_11_07_22-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2697",
+          "firstName": "Tom",
+          "lastName": "Vanautryve",
+          "email": "tom.vanautryve@fednot.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Tom_Vanautryve_2021_10_15_14_13_05-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2699",
+          "firstName": "Nele",
+          "lastName": "Muys",
+          "email": "nele.muys@liberform.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Nele_Muys_2021_11_16_11_06_39-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2701",
+          "firstName": "Marc",
+          "lastName": "Van Thournout",
+          "email": "mvt@logistica.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Marc_Van_Thournout_2021_10_16_08_18_01-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2702",
+          "firstName": "Nathalie",
+          "lastName": "Procureur",
+          "email": "nathalie.procureur@delvauxassocies.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/11/Nathalie_Procureur_2020_11_13_11_20_27-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2703",
+          "firstName": "Johan",
+          "lastName": "De Coster",
+          "email": "Johan.DeCoster@vhg.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2018/09/Johan_De_Coster_2018_09_19_14_26_59-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2705",
+          "firstName": "Diederik",
+          "lastName": "Bruloot",
+          "email": "Diederik.Bruloot@UGent.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Diederik_Bruloot_2021_10_15_10_38_58-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2713",
+          "firstName": "Karen",
+          "lastName": "van der Loo",
+          "email": "karen.vanderloo@itaa.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Karen__van_der_Loo_2021_10_15_13_52_15-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2716",
+          "firstName": "Géraldine",
+          "lastName": "Horgnies",
+          "email": "geraldine.horgnies@itaa.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Geraldine_Horgnies_2021_10_15_13_58_09-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2718",
+          "firstName": "Eric",
+          "lastName": "Van Den Broele",
+          "email": "eric.vandenbroele@graydon.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Eric_Van_Den_Broele_2021_10_15_14_02_45-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2720",
+          "firstName": "Ilse",
+          "lastName": "Getteman",
+          "email": "ilse.getteman@companyweb.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2724",
+          "firstName": "Koen",
+          "lastName": "Michielsen",
+          "email": "Koen.Michielsen@graydon.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Koen_Michielsen_2021_10_15_14_09_15-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2727",
+          "firstName": "Frédéric",
+          "lastName": "Delrue",
+          "email": "frederic.delrue@itaa.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/10/Frederic__Delrue_2020_10_23_11_49_15-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2728",
+          "firstName": "Bart",
+          "lastName": "Van Coile",
+          "email": "b.vancoile@itaa.be",
+          "priority": "30",
+          "pictureUrl": "/uploads/orateurs/2020/10/Bart_Van_Coile_2020_10_23_12_06_54-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2730",
+          "firstName": "Angelo",
+          "lastName": "Terranova",
+          "email": "angelo@gestionova.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Angelo_Terranova_2021_10_05_20_28_31-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2731",
+          "firstName": "Hein",
+          "lastName": "Vandelanotte",
+          "email": "Hein.Vandelanotte@vdl.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2018/10/Hein_Vandelanotte_2018_10_11_11_06_56-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2733",
+          "firstName": "Tulay",
+          "lastName": "Kasap",
+          "email": "tulay.kasap@sdworx.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Tulay_Kasap_2021_10_15_15_14_19-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2735",
+          "firstName": "Jordane",
+          "lastName": "Houdart",
+          "email": "jordane.houdart@sdworx.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Jordane_Houdart_2021_10_15_15_19_20-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2737",
+          "firstName": "Vincent",
+          "lastName": "Emel",
+          "email": "vincent.emel@getyooz.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Vincent_Emel_2021_10_15_15_28_37-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2739",
+          "firstName": "Julie",
+          "lastName": "Breton",
+          "email": "julie.breton@getyooz.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Julie__Breton_2021_10_15_15_29_30-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2741",
+          "firstName": "Paul",
+          "lastName": "Dhaeyer",
+          "email": "Paul.dhaeyer@fakemail.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Paul_Dhaeyer_2021_10_16_08_13_37-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2742",
+          "firstName": "Sébastien",
+          "lastName": "Watelet",
+          "email": "sw@litannie.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/10/Sebastien_Watelet_2020_10_20_09_55_46-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2744",
+          "firstName": "Emmanuel",
+          "lastName": "Degrève",
+          "email": "emmanuel.degreve@degandpartners.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Emmanuel_Degreve_2021_10_18_22_36_35-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2746",
+          "firstName": "Julien",
+          "lastName": "Buy",
+          "email": "j.buy@avocat.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Julien_Buy_2021_10_18_22_46_03-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2748",
+          "firstName": "Olivier",
+          "lastName": "Wéry",
+          "email": "wery@arthemis.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Olivier_Wery_2021_11_09_14_06_11-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2750",
+          "firstName": "Jérôme",
+          "lastName": "Terfve",
+          "email": "jt@tetralaw.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Jerome_Terfve_2021_11_01_09_05_44-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2751",
+          "firstName": "Alexandre",
+          "lastName": "Missal",
+          "email": "alexandre.missal@cazimir.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/08/Alexandre_Missal_2021_08_05_12_01_56-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2752",
+          "firstName": "Tomas",
+          "lastName": "Martens",
+          "email": "tomas.martens@cazimir.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/08/Tomas_Martens_2021_08_05_12_00_19-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2753",
+          "firstName": "Eline",
+          "lastName": "Alders",
+          "email": "Eline.Alders@monardlaw.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/09/Eline__Alders_2021_09_10_12_12_59-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2754",
+          "firstName": "Robin",
+          "lastName": "Messiaen",
+          "email": "robin.messiaen@spartax.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2015/09/Robin_Messiaen_2015_09_29_15_23_54-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2756",
+          "firstName": "Wouter",
+          "lastName": "Strypsteen",
+          "email": "wouter.strypsteen@cazimir.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Wouter_Strypsteen_2021_10_19_12_07_20-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2757",
+          "firstName": "Stefan",
+          "lastName": "Jacobs",
+          "email": "Stefan.jacobs@monardlaw.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/09/Stefan_Jacobs_2021_09_10_12_16_26-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2758",
+          "firstName": "Serge",
+          "lastName": "Pattyn",
+          "email": "serge.pattyn@skynet.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/08/Serge_Pattyn_2021_08_06_12_18_51-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2759",
+          "firstName": "Aurélie",
+          "lastName": "De Meester",
+          "email": "aurelie.de_meester@linklaters.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/04/Aurelie_De_Meester__2021_04_13_15_30_58-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2760",
+          "firstName": "Evelyne",
+          "lastName": "Van der Elst",
+          "email": "evelyne.vanderelst@cazimir.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/08/Evelyne_Van_der_Elst_2021_08_05_13_01_56-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2761",
+          "firstName": "Dave",
+          "lastName": "van Moppes",
+          "email": "dave@tuerlinckx.eu",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2018/10/Dave_van_Moppes_2018_10_01_11_01_57-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2762",
+          "firstName": "Kristof",
+          "lastName": "Zadora",
+          "email": "kristof.zadora@monardlaw.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/09/Kristof_Zadora_2021_09_13_09_33_07-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2763",
+          "firstName": "Marnix",
+          "lastName": "Cornette",
+          "email": "marnix.cornette@rfn.fr",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/04/Marnix_Cornette_2021_04_15_09_31_09-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2764",
+          "firstName": "Aleksandr",
+          "lastName": "Natanelov",
+          "email": "Aleksandr.Natanelov@bofidi.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/10/Aleksandr_Natanelov_Aleksandr_Natanelov_2020_10_30_06_54_35-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2765",
+          "firstName": "Tom",
+          "lastName": "Vanhoorne",
+          "email": "tom.vanhoorne@clearfacts.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2017/09/Tom_Vanhoorne_2017_09_22_11_00_55-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2768",
+          "firstName": "Jan",
+          "lastName": "Hermans",
+          "email": "jan.hermans@intellifin.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Jan_Hermans_2021_10_18_10_02_02-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2770",
+          "firstName": "Pieter",
+          "lastName": "Vandewiele",
+          "email": "pieter.vandewiele@fakemail.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2772",
+          "firstName": "Olivier",
+          "lastName": "Willocx",
+          "email": "ow@beci.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Olivier_Willocx__2021_10_18_13_51_55-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2774",
+          "firstName": "Mark",
+          "lastName": "Andries",
+          "email": "mark.andries@vlaio.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Mark_Andries__2021_10_18_13_53_55-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2776",
+          "firstName": "Filip",
+          "lastName": "Geusens",
+          "email": "Filip.geusens@bnpparibasfortisfactor.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Filip_Geusens_2021_10_21_11_07_33-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2777",
+          "firstName": "Philippe",
+          "lastName": "Dedobbeleer",
+          "email": "pdedobbeleer@deloitte.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2014/10/Philippe_De_Dobbeleer_2014_10_30_12_56_01-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2779",
+          "firstName": "Julien",
+          "lastName": "Colson",
+          "email": "jucolson@deloitte.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Julien_Colson_2021_10_18_18_54_05-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2780",
+          "firstName": "Luc",
+          "lastName": "Herve",
+          "email": "l.herve@herve-law.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2015/11/Luc_Herve_2015_11_16_18_48_35-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2782",
+          "firstName": "Michel",
+          "lastName": "De Wolf",
+          "email": "michel.dewolf@dgst.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Michel_De_Wolf_2021_10_18_22_31_38-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2783",
+          "firstName": "Thierry",
+          "lastName": "Litannie",
+          "email": "tli@lawtax.be",
+          "priority": "16",
+          "pictureUrl": "/uploads/orateurs/2019/08/Thierry_Litannie_2019_08_05_10_33_44-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2785",
+          "firstName": "Aurélie",
+          "lastName": "Soldai",
+          "email": "a.soldai@avocat.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Aurelie_Soldai_2021_11_09_13_57_22-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2789",
+          "firstName": "Joëlle",
+          "lastName": "Goormans",
+          "email": "joelle.goormans@liantis.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Joelle_Goormans__2021_10_19_09_49_03-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2790",
+          "firstName": "Katrien",
+          "lastName": "Billen",
+          "email": "katrien.billen@liantis.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Katrien_Billen_2021_10_19_09_52_03-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2791",
+          "firstName": "Luc",
+          "lastName": "Joosten",
+          "email": "luc.joosten@minfin.fed.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Luc_JOOSTEN_2021_10_19_10_18_04-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2792",
+          "firstName": "Louise",
+          "lastName": "Olivier",
+          "email": "Louise.olivier@minfin.fed.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Louise_Olivier_2021_10_19_10_29_37-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2793",
+          "firstName": "Inge",
+          "lastName": "Mattens",
+          "email": "inge.mattens@minfin.fed.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/10/Inge_Mattens_2020_10_26_14_45_26-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2794",
+          "firstName": "Jennifer",
+          "lastName": "Granado",
+          "email": "jennifer.granado_aranzana@linklaters.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/04/Jennifer_Granado_2021_04_13_15_32_57-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2795",
+          "firstName": "Charlotte",
+          "lastName": "Lardenoit",
+          "email": "charlotte@sanseninternational.tax",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Charlotte_Lardenoit_2021_10_19_13_48_37-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2796",
+          "firstName": "Patrick",
+          "lastName": "Huybrechts",
+          "email": "Guy@parmrev.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Patrick_Huybrechts_2021_10_07_10_02_03-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2797",
+          "firstName": "Gonda",
+          "lastName": "Schelfhaut",
+          "email": "gonda.schefhaut@itaa.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/10/Gonda__Schelfhaut_2020_10_23_12_24_41-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2800",
+          "firstName": "Tim",
+          "lastName": "Inslegers",
+          "email": "tim@inslegers.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Tim_Inslegers_2021_10_20_10_14_15-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2801",
+          "firstName": "Alexis",
+          "lastName": "de Biolley",
+          "email": "alexis.debiolley@itaa.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Alexis_de_Biolley_2021_10_20_10_36_47-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2803",
+          "firstName": "Patrice",
+          "lastName": "Richier",
+          "email": "patrice.richier@itaa.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2805",
+          "firstName": "Jean-Pierre",
+          "lastName": "Di Bartolomeo",
+          "email": "JeanPierre.DiBartolomeo@fakemail.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Jean-Pierre_Di_Bartolomeo_2021_10_20_10_44_23-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2812",
+          "firstName": "Danny",
+          "lastName": "Van Assche",
+          "email": "Danny.vanassche@fakemail.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Danny_Van_Assche_2021_10_20_10_56_32-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2814",
+          "firstName": "Pierre-Frédéric",
+          "lastName": "Nyst",
+          "email": "PierreFrederic.Nyst@fakemail.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2818",
+          "firstName": "Eric",
+          "lastName": "Standaert",
+          "email": "eric.standaert@unifiedpost.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Eric_Standaert_2021_10_21_10_39_09-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2820",
+          "firstName": "Stéphanie",
+          "lastName": "Liesens",
+          "email": "Stephanie.Liesens@bnpparibasfortisfactor.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Stephanie_Liesens_2021_10_21_11_09_55-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2824",
+          "firstName": "Benoit",
+          "lastName": "VAN VYVE",
+          "email": "benoit.vanvyve@minfin.fed.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Benoit_VAN_VYVE_2021_11_09_14_04_22-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2826",
+          "firstName": "Vincent",
+          "lastName": "Weverberg",
+          "email": "vincent.weverberg@minfin.fed.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Vincent_Weverberg_2021_11_16_11_59_14-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2828",
+          "firstName": "Ariane",
+          "lastName": "Van den Bogaert",
+          "email": "ariane@yuki.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Ariane_Van_den_Bogaert_2021_10_23_07_13_23-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2830",
+          "firstName": "Bart",
+          "lastName": "Schockaert",
+          "email": "bart@yuki.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Bart__Schockaert_2021_10_23_07_14_35-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2834",
+          "firstName": "Frank",
+          "lastName": "Haemers",
+          "email": "frank.haemers@bibf.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2836",
+          "firstName": "Philippe",
+          "lastName": "Mulliez",
+          "email": "philippe.mulliez@eubelius.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Philippe__Mulliez_2021_10_27_06_57_19-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2837",
+          "firstName": "Denis-Emmanuel",
+          "lastName": "Philippe",
+          "email": "denis-emmanuel.philippe@bloom-law.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2016/07/Denis-Emmanuel_Philippe_2016_07_26_09_59_16-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2838",
+          "firstName": "Fabrice",
+          "lastName": "Grognard",
+          "email": "fabrice.grognard@bdo.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2017/10/Fabrice_Grognard_2017_10_13_11_03_27-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2839",
+          "firstName": "Jan",
+          "lastName": "Druppel",
+          "email": "jan.druppel@unifiedpost.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/11/Jan_Druppel_2020_11_10_11_13_48-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2842",
+          "firstName": "Frederik",
+          "lastName": "Billiet",
+          "email": "Frederik.Billiet@unifiedpost.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Frederik_Billiet_2021_11_09_14_00_22-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2844",
+          "firstName": "Laura",
+          "lastName": "Dewez",
+          "email": "Laura.Dewez@bdo.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Laura_Dewez_2021_11_30_18_08_12-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2845",
+          "firstName": "Laurent",
+          "lastName": "Schuermans",
+          "email": "laurent.schuermans@fid-manager.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Laurent_Schuermans_2021_10_29_13_50_36-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2846",
+          "firstName": "Guillaume",
+          "lastName": "Thimus",
+          "email": "guillaume.thimus@fid-manager.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/10/Guillaume_Thimus_2021_10_29_13_49_31-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2848",
+          "firstName": "Andy",
+          "lastName": "Neuteleers",
+          "email": "Andy.Neuteleers@tiberghien.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Andy_Neuteleers_2021_11_02_09_11_42-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2852",
+          "firstName": "Rinse",
+          "lastName": "Elsermans",
+          "email": "rinse.elsermans@cazimir.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/06/Rinse_Elsermans_2021_06_07_16_32_44-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2854",
+          "firstName": "Caroline",
+          "lastName": "Rigaux",
+          "email": "Caroline.Rigaux@visma.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Caroline_Rigaux__2021_11_04_09_28_57-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2855",
+          "firstName": "Michael",
+          "lastName": "Thielens",
+          "email": "mthielens@kpmglaw.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/04/Michael_Thielens_2021_04_12_15_27_16-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2856",
+          "firstName": "Stefan",
+          "lastName": "Ruysschaert",
+          "email": "stefan.ruysschaert@minfin.fed.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Stefan_Ruysschaert_2021_11_04_11_58_53-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2858",
+          "firstName": "Joris",
+          "lastName": "Joppe",
+          "email": "joris.joppe@visma.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Joris_Joppe_2021_11_05_08_42_12-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2860",
+          "firstName": "",
+          "lastName": "",
+          "email": "jp@riquet.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2864",
+          "firstName": "Gilles",
+          "lastName": "Soaleh",
+          "email": "GSoaleh@isabelgroup.eu",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Gilles__Soaleh_2021_11_07_08_18_24-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2866",
+          "firstName": "Tom",
+          "lastName": "Vanhoorne",
+          "email": "tvhoorne@isabelgroup.eu",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Tom_Vanhoorne_2021_11_07_08_23_24-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2868",
+          "firstName": "Benoit",
+          "lastName": "Coenegrachts",
+          "email": "bcoenegrachts@isabelgroup.eu",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Benoit_Coenegrachts_2021_11_07_08_25_57-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2869",
+          "firstName": "Pieter",
+          "lastName": "Evenepoel",
+          "email": "pieter.evenepoel@clearfacts.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2014/10/Pieter_Evenepoel_2014_10_09_18_16_28-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2871",
+          "firstName": "Annelies",
+          "lastName": "Rottiers",
+          "email": "annelies.rottiers@sdworx.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Annelies_Rottiers_2021_11_08_12_04_40-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2874",
+          "firstName": "Elena",
+          "lastName": "Barbaduomo",
+          "email": "hello@anlisa.app",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Elena_Barbaduomo_2021_11_11_10_12_36-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2875",
+          "firstName": "Dries",
+          "lastName": "Wijnen",
+          "email": "dries@accounton.io",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/10/Dries_Wijnen_2020_10_27_09_28_42-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2878",
+          "firstName": "Marie",
+          "lastName": "Klejniak",
+          "email": "mk@winbooks.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Marie_Klejniak__2021_11_12_10_23_54-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2880",
+          "firstName": "Grégory",
+          "lastName": "Verhulst",
+          "email": "gv@winbooks.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Gregory_Verhulst_2021_11_12_10_27_16-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2885",
+          "firstName": "Filip",
+          "lastName": "Van Ermengem",
+          "email": "Fvanermengem@partena.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Filip_Van_Ermengem__2021_11_14_08_59_45-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2887",
+          "firstName": "Daniel",
+          "lastName": "Binamé",
+          "email": "daniel.biname@partena.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Daniel_Biname_2021_11_14_09_02_41-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2888",
+          "firstName": "Katrien",
+          "lastName": "Van Lierde",
+          "email": "katrien.vanlierde@minfin.fed.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Katrien_Van_Lierde_2021_11_16_11_39_07-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2890",
+          "firstName": "Erwin",
+          "lastName": "Bonduel",
+          "email": "Erwin.bonduel@minfin.fed.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Erwin_Bonduel_2021_11_17_07_29_22-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2891",
+          "firstName": "Antony",
+          "lastName": "Lamparelli",
+          "email": "antonio.lamparelli@minfin.fed.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Antony_Lamparelli_2021_11_16_11_44_02-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2893",
+          "firstName": "Eddy",
+          "lastName": "Struyven",
+          "email": "eddy.struyven@minfin.fed.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Eddy__Struyven_2021_11_16_11_47_16-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2895",
+          "firstName": "Luce",
+          "lastName": "Petit",
+          "email": "lp@lucepetit.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Luce__Petit_2021_11_17_09_09_17-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2898",
+          "firstName": "Alain",
+          "lastName": "Bervoets",
+          "email": "Alain.bervoets@fakemail.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/12/Alain_Bervoets_2021_12_01_09_11_28-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2900",
+          "firstName": "Frederic",
+          "lastName": "Crenerinne",
+          "email": "fcrenerinne@cegid.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2902",
+          "firstName": "Sabrina",
+          "lastName": "Dewever",
+          "email": "sdewever@cegid.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2904",
+          "firstName": "Marek",
+          "lastName": "Zanguropol",
+          "email": "mzanguropol@cegid.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2906",
+          "firstName": "Abdelhamid",
+          "lastName": "Sahili",
+          "email": "asahili@cegid.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2908",
+          "firstName": "Phillipe",
+          "lastName": "Wauthier",
+          "email": "philippe.wauthier@minfin.fed.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Phillipe__Wautier_2021_11_24_16_20_18-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2910",
+          "firstName": "Mario",
+          "lastName": "Ryckaert",
+          "email": "mario.ryckaert@minfin.fed.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Mario_Ryckaert_2021_11_24_16_21_44-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2911",
+          "firstName": "David",
+          "lastName": "Clarinval",
+          "email": "info@clarinval.belgium.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/11/David_Clarinval_2020_11_25_14_04_22-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2912",
+          "firstName": "Bruno",
+          "lastName": "de l'Escaille",
+          "email": "bruno.delescaille@degandpartners.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2913",
+          "firstName": "joris",
+          "lastName": "dresselaers",
+          "email": "joris.dresselaers@syneton.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/joris_dresselaers_2021_11_29_12_30_44-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2914",
+          "firstName": "Jean Pierre",
+          "lastName": "Riquet",
+          "email": "jpriquet@juristax.eu",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2016/06/Jean_Pierre_Riquet_2016_06_23_07_12_56-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2915",
+          "firstName": "Bruno",
+          "lastName": "Colmant",
+          "email": "b.colmant@degroofpetercam.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2014/10/Bruno_Colmant_2014_10_09_13_53_02-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2917",
+          "firstName": "Willy",
+          "lastName": "Borsus",
+          "email": "willy.borsus@gov.wallonie.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Willy_Borsu_2021_11_25_09_34_44-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2919",
+          "firstName": "Georges-Louis",
+          "lastName": "Bouchez",
+          "email": "georges-louis@glbouchez.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Georges-Louis_Bouchez_2021_11_25_09_53_20-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2923",
+          "firstName": "Pierre-Yves",
+          "lastName": "Dermagne",
+          "email": "pierre-yves.dermagne@dermagne.fed.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Pierre-Yves_Dermagne_2021_11_25_10_10_21-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2925",
+          "firstName": "Denis",
+          "lastName": "Ducarme",
+          "email": "denis.ducarme@ducarme.net",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Denis__Ducarme_2021_11_25_11_47_18-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2927",
+          "firstName": "Frederic",
+          "lastName": "Robert",
+          "email": "frederic.robert@clehm.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Frederic__Robert_2021_11_25_11_55_17-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2931",
+          "firstName": "Rudy",
+          "lastName": "Aernoudt",
+          "email": "raernoudt@gmail.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Rudy_Aernoudt_2021_11_27_19_52_12-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2933",
+          "firstName": "Rudi",
+          "lastName": "Cleymans",
+          "email": "rudi.cleymans@aaawesome.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Rudi_Cleymans_2021_11_25_15_43_27-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2934",
+          "firstName": "Egbert",
+          "lastName": "Lachaert",
+          "email": "Egbert.Lachaert@fakemail.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/11/Egbert__Lachaert_2020_11_16_11_54_10-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2935",
+          "firstName": "jill",
+          "lastName": "daelemans",
+          "email": "jill.daelemans@syneton.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2936",
+          "firstName": "carla",
+          "lastName": "janssen",
+          "email": "carla.janssen@syneton.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2938",
+          "firstName": "laura",
+          "lastName": "de pot",
+          "email": "laura.depot@federatievrijeberoepen.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2940",
+          "firstName": "stijn",
+          "lastName": "dejong",
+          "email": "Stijn.Dejong@partena.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2942",
+          "firstName": "Pierre",
+          "lastName": "Borremans",
+          "email": "pb@winbooks.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2944",
+          "firstName": "Sander",
+          "lastName": "Gansbeke",
+          "email": "sg@winbooks.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2945",
+          "firstName": "Anh Dai",
+          "lastName": "Lu",
+          "email": "anhdai.lu@unifiedpost.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/11/Anh_Dai_Lu_2020_11_23_13_54_37-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2946",
+          "firstName": "Jean-Luc",
+          "lastName": "Oosters",
+          "email": "jean-luc.oosters@fid-manager.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/11/Jean-Luc_Ooster_2020_11_23_09_06_43-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2948",
+          "firstName": "Ellen",
+          "lastName": "Lampo",
+          "email": "Ellen.Lampo@federatievrijeberoepen.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2952",
+          "firstName": "Pieter",
+          "lastName": "Willems",
+          "email": "Pieter.Willems@tuerlinckx.eu",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Pieter_Willems_2021_11_26_11_11_21-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2953",
+          "firstName": "Rudi",
+          "lastName": "Cleymans",
+          "email": "rudi.cleymans@syneton.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2015/10/Rudi_Cleymans_2015_10_20_18_38_04-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2955",
+          "firstName": "Jürgen",
+          "lastName": "Verhelst",
+          "email": "jurgen.verhelst@abcverhelst.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Jurgen_Verhelst_2021_11_26_11_56_39-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2957",
+          "firstName": "Vincent",
+          "lastName": "Van Himbergen",
+          "email": "vincent.vanhimbergen@noeth.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Vincent_Van_Himbergen__2021_11_26_11_59_23-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2958",
+          "firstName": "Catherine",
+          "lastName": "Debatty",
+          "email": "catherine.debatty@forumforthefuture.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2960",
+          "firstName": "",
+          "lastName": "",
+          "email": "bruno.delescaille@gmail.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2962",
+          "firstName": "maarten",
+          "lastName": "van miert",
+          "email": "Maarten.VanMiert@bnpparibasfortisfactor.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2964",
+          "firstName": "Ellen",
+          "lastName": "Lampo",
+          "email": "ellen.lampo@vdl.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2966",
+          "firstName": "Judith",
+          "lastName": "Vandenborne",
+          "email": "judith.vandenborne@visma.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2968",
+          "firstName": "filip",
+          "lastName": "jansen",
+          "email": "filip.jansen@visma.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/filip_jansen_2021_11_29_10_21_39-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2969",
+          "firstName": "Alexia",
+          "lastName": "Turlot",
+          "email": "at@winbooks.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2971",
+          "firstName": "",
+          "lastName": "",
+          "email": "gauthier.roussel@espace-innovation.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2972",
+          "firstName": "Gauthier",
+          "lastName": "Roussel",
+          "email": "gauthier.roussel@espace-innovation.fr",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2016/03/Gauthier_Roussel_2016_03_19_14_08_09-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2974",
+          "firstName": "Eva",
+          "lastName": "De Bleeker",
+          "email": "info@debleeker.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Eva_De_Bleeker_2021_11_26_19_08_59-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2975",
+          "firstName": "Laurent",
+          "lastName": "Oosters",
+          "email": "laurent@winauditor.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/11/Laurent_Oosters_2020_11_20_12_06_53-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2976",
+          "firstName": "Carla",
+          "lastName": "Van Corenland",
+          "email": "carla@fiscadvies.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Carla_Van_Corenland_2021_11_27_15_07_09-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2977",
+          "firstName": "maaike",
+          "lastName": "standaert",
+          "email": "maaike.standaert@unifiedpost.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2979",
+          "firstName": "els",
+          "lastName": "van bergeijk",
+          "email": "vanbergeijk@comandi.nl",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2981",
+          "firstName": "jessica",
+          "lastName": "jaumeau",
+          "email": "jjaumeau@cegid.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2983",
+          "firstName": "clémentine",
+          "lastName": "maisonnier",
+          "email": "cmaisonnier@cegid.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2985",
+          "firstName": "geoffrey",
+          "lastName": "letot",
+          "email": "geoffrey.letot@sdworx.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2987",
+          "firstName": "hughes",
+          "lastName": "thibaut",
+          "email": "hughes.thibaut@sdworx.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2989",
+          "firstName": "kristel",
+          "lastName": "hermans",
+          "email": "kristel.hermans@intellifin.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2991",
+          "firstName": "sabine",
+          "lastName": "longueville",
+          "email": "sabine.longueville@liantis.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2993",
+          "firstName": "florian",
+          "lastName": "robin",
+          "email": "Florian.Robin@yooz.fr",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "2994",
+          "firstName": "Hugues",
+          "lastName": "Thibaut",
+          "email": "Hugues.Thibaut@sdworx.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/06/Hugues_Thibaut_2021_06_15_01_43_18-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2995",
+          "firstName": "Maurizio",
+          "lastName": "d'Auria",
+          "email": "maurizio.dauria@degandpartners.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2018/09/Maurizio_d_Auria_2018_09_24_22_28_20-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2997",
+          "firstName": "Grégory",
+          "lastName": "Bruchansky",
+          "email": "gregory.bruchansky@equity.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Gregory_Bruchansky_2021_11_28_19_34_46-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "2999",
+          "firstName": "Denis",
+          "lastName": "Higny",
+          "email": "denis.higny@hdconsulting.eu",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3000",
+          "firstName": "paul",
+          "lastName": "ramakers",
+          "email": "paul.ramakers@octopus.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/paul_ramakers_2021_11_28_17_25_33-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "3002",
+          "firstName": "peggy",
+          "lastName": "D'Herde",
+          "email": "peggy.dherde@octopus.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/12/peggy_D_Herde_2021_12_01_10_15_21-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "3004",
+          "firstName": "Nika",
+          "lastName": "Kovacic",
+          "email": "nika.kovacic@octopus.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3006",
+          "firstName": "",
+          "lastName": "",
+          "email": "pra@octopus.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3007",
+          "firstName": "Peggy",
+          "lastName": "D'Herde",
+          "email": "pdh@octopus.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/12/Peggy_D_Herde_2021_12_01_10_15_57-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "3008",
+          "firstName": "paul",
+          "lastName": "bossu",
+          "email": "paul.bossu@minfin.fed.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3009",
+          "firstName": "muriel",
+          "lastName": "maurice",
+          "email": "muriel.maurice@minfin.fed.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3011",
+          "firstName": "",
+          "lastName": "",
+          "email": "alain.segers@syneton.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3012",
+          "firstName": "Véronique",
+          "lastName": "Nuyens",
+          "email": "veronique.nuyens@syneton.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2020/10/Veronique_Nuyens_2020_10_30_14_49_02-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "3013",
+          "firstName": "yassine",
+          "lastName": "el bekkali",
+          "email": "yassine.el.bekkali21@gmail.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3015",
+          "firstName": "andy",
+          "lastName": "hens",
+          "email": "andy.hens@liantis.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3017",
+          "firstName": "willem",
+          "lastName": "tack",
+          "email": "willem.tack@liantis.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3018",
+          "firstName": "maximilien",
+          "lastName": "lefebvre",
+          "email": "mle@winbooks.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3020",
+          "firstName": "claude",
+          "lastName": "steenmans",
+          "email": "claude.steenmans@minfin.fed.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3022",
+          "firstName": "isabelle",
+          "lastName": "de marto",
+          "email": "isabelle.demarto@unifiedpost.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3024",
+          "firstName": "eglantine",
+          "lastName": "landrain",
+          "email": "eglantine.landrain@bnpparibasfortisfactor.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3026",
+          "firstName": "charles",
+          "lastName": "deboo",
+          "email": "charles.deboo@octopus.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3028",
+          "firstName": "",
+          "lastName": "",
+          "email": "erwin.sauwen@unifiedpost.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3030",
+          "firstName": "",
+          "lastName": "",
+          "email": "ikram.yakoubi@unifiedpost.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3032",
+          "firstName": "",
+          "lastName": "",
+          "email": "Gillian.vermeersch@unifiedpost.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3033",
+          "firstName": "",
+          "lastName": "",
+          "email": "fadoua.chaieb@unifiedpost.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3034",
+          "firstName": "Debby",
+          "lastName": "Heijlesonne",
+          "email": "debby.heijlesonne@unifiedpost.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3036",
+          "firstName": "",
+          "lastName": "",
+          "email": "robbie.demeyer@unifiedpost.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3038",
+          "firstName": "Klaas",
+          "lastName": "Francken",
+          "email": "klaas.francken@tuerlinckx.eu",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Klaas__Francken_2021_11_29_18_32_33-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "3040",
+          "firstName": "Bas",
+          "lastName": "Minten",
+          "email": "bas.minten@tuerlinckx.eu",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Bas__Minten_2021_11_29_18_35_19-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "3042",
+          "firstName": "",
+          "lastName": "",
+          "email": "antoine.kinart@visma.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3044",
+          "firstName": "",
+          "lastName": "",
+          "email": "mattia.defeyter@syneton.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3046",
+          "firstName": "",
+          "lastName": "",
+          "email": "gdesmot@cegid.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3048",
+          "firstName": "",
+          "lastName": "",
+          "email": "hdarnet@cegid.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3050",
+          "firstName": "joost",
+          "lastName": "van genechten",
+          "email": "j.vangenechten@ardent.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3052",
+          "firstName": "bart",
+          "lastName": "govaerts",
+          "email": "bart.govaerts@visma.com",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3054",
+          "firstName": "Chris",
+          "lastName": "Van Wesemael.",
+          "email": "chris@retailemotion.be",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/11/Chris_Van_Wesemael._2021_11_30_20_53_31-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "3056",
+          "firstName": "Nicolas",
+          "lastName": "Widar",
+          "email": "dw@ifid.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3058",
+          "firstName": "Camille",
+          "lastName": "Van Houtte",
+          "email": "camille@accounton.io",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3060",
+          "firstName": "cedric",
+          "lastName": "neukermans",
+          "email": "cedric@accounton.io",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3062",
+          "firstName": "Nadine",
+          "lastName": "Ringoot",
+          "email": "xx@hotmail.com",
+          "priority": "0",
+          "pictureUrl": "/uploads/orateurs/2021/12/Nadine_Ringoot_2021_12_01_15_06_02-original.jpg",
+          "eventId": "311"
+        },
+        {
+          "id": "3064",
+          "firstName": "Kayo",
+          "lastName": "Quintens",
+          "email": "Kayo.Quintens@octopus.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3065",
+          "firstName": "Marc",
+          "lastName": "Gielis",
+          "email": "marc.gielis@bankvanbreda.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        },
+        {
+          "id": "3066",
+          "firstName": "",
+          "lastName": "",
+          "email": "swa@lawtax.be",
+          "priority": "0",
+          "pictureUrl": "",
+          "eventId": "311"
+        }
+      ]
+    },
+    "accreditationHours": 11,
+    "clientData": {
+      "id": "9",
+      "name": "Forum for the future",
+      "abbreviation": "F.F.F.",
+      "mediaId": "2174",
+      "avatarUrl": "https://s3.tamtam.pro/local/storage/media/IMAGE/2174/AVATAR_998833879d2ecbb79d89cec53059dcd59e72d9f2.png"
+    },
+    "slotsCount": 440
+  }
+]
