@@ -114,7 +114,7 @@ export const Type4 = () => (
 export const Type5 = () => (
   <div className="grid-container">
     <div className="grid-x">
-      <div className="cell small-12 medium-3">
+      <div className="cell small-12 medium-6">
         <Article
           article={articles[0]}
           showSummary={true}
@@ -134,7 +134,7 @@ export const Type6 = () => (
     <div className="grid-x">
       <div className="cell small-12 medium-6">
         <Article
-          article={articles[Math.floor(Math.random() * 20)]}
+          article={articles[0]}
           showSummary={true}
           type="type6"
           isFetching={boolean("isFetching", false)}
@@ -152,7 +152,7 @@ export const Type7 = () => (
     <div className="grid-x">
       <div className="cell small-12 medium-3">
         <Article
-          article={articles[Math.floor(Math.random() * 20)]}
+          article={articles[0]}
           showSummary={true}
           type="type7"
           isFetching={boolean("isFetching", false)}
@@ -170,7 +170,7 @@ export const Type8 = () => (
     <div className="grid-x">
       <div className="cell small-12 medium-6">
         <Article
-          article={articles[Math.floor(Math.random() * 20)]}
+          article={articles[0]}
           showSummary={true}
           type="type8"
           isFetching={boolean("isFetching", false)}

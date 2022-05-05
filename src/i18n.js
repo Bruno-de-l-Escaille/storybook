@@ -29,6 +29,7 @@ export const I18N = {
     "In progress": "In progress",
     "Certificate included approved by": "Certificate included approved by",
     "En Live": "Live",
+    see_version: "See version",
   },
   fr: {
     ARTCILES: "Articles",
@@ -59,6 +60,7 @@ export const I18N = {
     "In progress": "En cours",
     "Certificate included approved by": "Attestation incluse agréé par",
     "En Live": "En Live",
+    see_version: "Voir version",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -91,5 +93,6 @@ export const I18N = {
     "Certificate included approved by":
       "Certificaat meegeleverd goedgekeurd door",
     "En Live": "Live",
+    see_version: "Zie versie",
   },
 };

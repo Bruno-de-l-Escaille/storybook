@@ -102,22 +102,27 @@ export class SubMenu extends Component {
   };
 
   render() {
-    const { menu, currentCommunity } = this.props;
+    const { menu, currentCommunity, hideVertical } = this.props;
     return menu.length === 0 ? (
       this.props.children
     ) : (
       <div className={this.state.isVertical ? style.vertical : ""}>
         <nav className={style.container}>
-          <span className={style.control} onClick={() => this.handleOnClick()}>
-            {this.state.isVertical ? (
-              <>
-                <i className="icon-sb-menu hide-for-small-only"></i>
-                <i className="icon-sb-close show-for-small-only"></i>
-              </>
-            ) : (
-              <i className="icon-sb-menu"></i>
-            )}
-          </span>
+          {!hideVertical && (
+            <span
+              className={style.control}
+              onClick={() => this.handleOnClick()}
+            >
+              {this.state.isVertical ? (
+                <>
+                  <i className="icon-sb-menu hide-for-small-only"></i>
+                  <i className="icon-sb-close show-for-small-only"></i>
+                </>
+              ) : (
+                <i className="icon-sb-menu"></i>
+              )}
+            </span>
+          )}
 
           <ul className={style.menu}>
             {menu.map((item) => {
