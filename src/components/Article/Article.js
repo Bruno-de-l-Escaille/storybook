@@ -353,6 +353,48 @@ export const Article = ({
     );
   };
 
+  const renderRelatedArticles = (relatedArticles) => {
+    return (
+      <div className={styles.version}>
+        <span>{I18N[language]["see_version"]}:</span>
+        {Object.entries(relatedArticles).map((related) => {
+          if (Link)
+            return (
+              <span className={styles.vIterm}>
+                <Link
+                  href={`/${related[0]}/article/${related[1].url}/${related[1].id}`}
+                >
+                  <a>
+                    <img
+                      src={`/img/flags/${related[0]}.png`}
+                      width="24"
+                      height="24"
+                      alt=""
+                    />
+                  </a>
+                </Link>
+              </span>
+            );
+          else
+            return (
+              <span className={styles.vIterm}>
+                <a
+                  href={`/${related[0]}/article/${related[1].url}/${related[1].id}`}
+                >
+                  <img
+                    src={`/img/flags/${related[0]}.png`}
+                    width="24"
+                    height="24"
+                    alt=""
+                  />
+                </a>
+              </span>
+            );
+        })}
+      </div>
+    );
+  };
+
   const renderType2 = () => {
     return (
       <div className={`${styles.articleTemplate2} ${styles[size]}`}>
@@ -686,28 +728,8 @@ export const Article = ({
                 }}
               ></div>
             </div>
-            {article.relatedArticles && (
-              <div className={styles.version}>
-                <span>{I18N[language]["see_version"]}:</span>
-                {Object.entries(article.relatedArticles).map((related) => {
-                  return (
-                    <span className={styles.vIterm}>
-                      <a
-                        target="_blank"
-                        href={`/${related[0]}/article/${related[1].url}/${related[1].id}`}
-                      >
-                        <img
-                          src={`/img/flags/${related[0]}.png`}
-                          width="24"
-                          height="24"
-                          alt=""
-                        />
-                      </a>
-                    </span>
-                  );
-                })}
-              </div>
-            )}
+            {article.relatedArticles &&
+              renderRelatedArticles(article.relatedArticles)}
           </div>
 
           <div className={styles.content}>
@@ -751,28 +773,8 @@ export const Article = ({
                 }}
               ></div>
             </div>
-            {article.relatedArticles && (
-              <div className={styles.version}>
-                <span>{I18N[language]["see_version"]}:</span>
-                {Object.entries(article.relatedArticles).map((related) => {
-                  return (
-                    <span className={styles.vIterm}>
-                      <a
-                        target="_blank"
-                        href={`/${related[0]}/article/${related[1].url}/${related[1].id}`}
-                      >
-                        <img
-                          src={`/img/flags/${related[0]}.png`}
-                          width="24"
-                          height="24"
-                          alt=""
-                        />
-                      </a>
-                    </span>
-                  );
-                })}
-              </div>
-            )}
+            {article.relatedArticles &&
+              renderRelatedArticles(article.relatedArticles)}
             <div className={styles.meta}>
               {articleType && articleType.name ? (
                 <span>{articleType.name}</span>
@@ -825,28 +827,8 @@ export const Article = ({
                 }}
               ></div>
             </div>
-            {article.relatedArticles && (
-              <div className={styles.version}>
-                <span>{I18N[language]["see_version"]}:</span>
-                {Object.entries(article.relatedArticles).map((related) => {
-                  return (
-                    <span className={styles.vIterm}>
-                      <a
-                        target="_blank"
-                        href={`/${related[0]}/article/${related[1].url}/${related[1].id}`}
-                      >
-                        <img
-                          src={`/img/flags/${related[0]}.png`}
-                          width="24"
-                          height="24"
-                          alt=""
-                        />
-                      </a>
-                    </span>
-                  );
-                })}
-              </div>
-            )}
+            {article.relatedArticles &&
+              renderRelatedArticles(article.relatedArticles)}
             <div className={styles.meta}>
               {articleType && articleType.name ? (
                 <span>{articleType.name}</span>
@@ -893,28 +875,8 @@ export const Article = ({
                 }}
               ></div>
             </div>
-            {article.relatedArticles && (
-              <div className={styles.version}>
-                <span>{I18N[language]["see_version"]}:</span>
-                {Object.entries(article.relatedArticles).map((related) => {
-                  return (
-                    <span className={styles.vIterm}>
-                      <a
-                        target="_blank"
-                        href={`/${related[0]}/article/${related[1].url}/${related[1].id}`}
-                      >
-                        <img
-                          src={`/img/flags/${related[0]}.png`}
-                          width="24"
-                          height="24"
-                          alt=""
-                        />
-                      </a>
-                    </span>
-                  );
-                })}
-              </div>
-            )}
+            {article.relatedArticles &&
+              renderRelatedArticles(article.relatedArticles)}
             <div className={styles.meta}>
               {articleType && articleType.name ? (
                 <span>{articleType.name}</span>
