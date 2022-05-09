@@ -25,7 +25,7 @@ export class AuthorAvatar extends Component {
               className={styles.avatarName}
               style={{ color: this.props.white ? "#fff" : "#3c4e64" }}
             >
-              {name} test1
+              {name}
             </div>
             {headline && (
               <div
