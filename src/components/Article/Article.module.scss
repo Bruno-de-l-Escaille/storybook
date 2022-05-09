@@ -712,9 +712,10 @@
     width: 58px;
     height: 34px;
     background-position: center;
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     border-radius: 5px;
+    background-color: #faf9fa;
   }
 }
 .publishedAtReadTime {
@@ -968,11 +969,6 @@
 
 // Template 8
 .articleTemplate8 {
-  .version {
-    position: absolute;
-    top: 4px;
-    right: 10px;
-  }
   .articleContainer {
     height: 296px;
     background-color: #fff;
@@ -1015,12 +1011,17 @@
         }
       }
       .title h3 {
-        margin: 1% 0%;
+        margin: 5px 0;
         text-align: left;
         font-weight: 600;
         font-size: 20px;
         line-height: 23px;
         color: #29394d;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .authorsContainer {
         margin-top: auto;

@@ -993,8 +993,6 @@ export const Article = ({
                 ></div>
               )}
             </div>
-            {article.relatedArticles &&
-              renderRelatedArticles(article.relatedArticles)}
             <div className={styles.meta}>
               {articleType && articleType.name ? (
                 <span>{articleType.name}</span>
@@ -1007,6 +1005,8 @@ export const Article = ({
               </div>
             </div>
             {renderTitle()}
+            {article.relatedArticles &&
+              renderRelatedArticles(article.relatedArticles)}
             {renderAvatar()}
             {renderPublishedAtRenderTime()}
             {renderUserSocialActions()}

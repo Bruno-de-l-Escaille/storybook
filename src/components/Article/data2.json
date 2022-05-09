@@ -715,7 +715,31 @@
           "createdAt": "2020-05-05 06:57:17",
           "updatedAt": "2020-09-22 08:49:45",
           "avatar": "storage/uploads/blog/media-avatar/10fd92809227fd7b4ccfa1187bf6601f46f385bc.png",
-          "avatarUrl": "https://s3.tamtam.pro/prod/storage/media/IMAGE/15741/10fd92809227fd7b4ccfa1187bf6601f46f385bc.png"
+          "avatarUrl": "https://s3.tamtam.pro/rc/storage/media/IMAGE/24107/7213ad07892aa97e3bfaa12258229e2714721768.png"
+        }
+      ],
+      "chains": [
+        {
+          "id": 184,
+          "nameFr": "StatBel",
+          "nameEn": "StatBel",
+          "nameNl": "StatBel",
+          "descriptionFr": "undefined",
+          "descriptionEn": "undefined",
+          "descriptionNl": "undefined",
+          "headline": "",
+          "company": "Office belge des statistiques - het Belgische statistiekbureau",
+          "preferences": { "isEmailVisible": "0" },
+          "site": "https://statbel.fgov.be/",
+          "createdAt": "2021-11-18 13:28:27",
+          "updatedAt": "2022-05-05 07:40:11",
+          "mediaChain": [
+            {
+              "language": "fr",
+              "avatar": "storage/uploads/blog/media-avatar/8e0ef594412b5018f06909809bd1c31186fc6f54.png",
+              "avatarUrl": "https://s3.tamtam.pro/prod/storage/media/IMAGE/23139/8e0ef594412b5018f06909809bd1c31186fc6f54.png"
+            }
+          ]
         }
       ]
     },
