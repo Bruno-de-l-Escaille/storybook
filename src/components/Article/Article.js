@@ -709,11 +709,38 @@ export const Article = ({
       <div className={`${styles.articleTemplate5} ${styles[size]}`}>
         <div className={styles.articleContainer}>
           <div
-            className={`${styles.contentImg}`}
+            className={classnames(
+              styles.contentImg,
+              hasActions ? styles.hasActions : ""
+            )}
             style={{
               backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
             }}
           >
+            {hasActions && (
+              <div className={styles.buttons}>
+                {status !== "PUBLISHED" && onPublish && (
+                  <div>
+                    <button onClick={() => onPublish()}>
+                      <i className="icon-sb-paper-airplane"></i>
+                    </button>
+                  </div>
+                )}
+                {onEdit && (
+                  <button>
+                    <i className="icon-sb-edit" onClick={() => onEdit()}></i>
+                  </button>
+                )}
+                {onDelete && (
+                  <button
+                    className={styles["btn-delete"]}
+                    onClick={() => onDelete()}
+                  >
+                    <i className="icon-sb-trash"></i>
+                  </button>
+                )}
+              </div>
+            )}
             <div className={styles.categoryChannel}>
               <div
                 className={styles.category}
@@ -721,12 +748,14 @@ export const Article = ({
               >
                 {category.name}
               </div>
-              <div
-                className={styles.channel}
-                style={{
-                  backgroundImage: `url(https://s3-alpha-sig.figma.com/img/8f25/74e9/d677d673a62bc9ebe0943b09e58fb049?Expires=1648425600&Signature=eGezxpIBPiF1fitjLhbAB1GH~t07KjIiPxfOP8aepM48nzzjf5JjXsKnJoYe-xW9lAzq4MF2R3g6HwA3NgiDcKfktAkNChT~0PO8i~KOySCLynYw6SlrF~vCvLTHow4QFA3rXntwjKM9RqVlN6be6uk6UJMYlh0bbxvyoqtwR1bJo3eJWnDaj~n-7O07cl~elTuDW6UTlGJ8u1nVxtUEjwRNPKrlk98PfqERkT~oSt83FReo-DMH8yHI5lU~alOIcVf8ogQHsyp~F13dwEWgaRcLRddASzEA82mzl3JeOrDEsrVarIAThnv0~q5z007YDoAMFJzhquN0eWID1xB8iQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA)`,
-                }}
-              ></div>
+              {article.avatars && article.avatars.length > 0 && (
+                <div
+                  className={styles.channel}
+                  style={{
+                    backgroundImage: `url(${article.avatars[0].avatarUrl})`,
+                  }}
+                ></div>
+              )}
             </div>
             {article.relatedArticles &&
               renderRelatedArticles(article.relatedArticles)}
@@ -766,12 +795,14 @@ export const Article = ({
               >
                 {category.name}
               </div>
-              <div
-                className={styles.channel}
-                style={{
-                  backgroundImage: `url(https://s3-alpha-sig.figma.com/img/8f25/74e9/d677d673a62bc9ebe0943b09e58fb049?Expires=1648425600&Signature=eGezxpIBPiF1fitjLhbAB1GH~t07KjIiPxfOP8aepM48nzzjf5JjXsKnJoYe-xW9lAzq4MF2R3g6HwA3NgiDcKfktAkNChT~0PO8i~KOySCLynYw6SlrF~vCvLTHow4QFA3rXntwjKM9RqVlN6be6uk6UJMYlh0bbxvyoqtwR1bJo3eJWnDaj~n-7O07cl~elTuDW6UTlGJ8u1nVxtUEjwRNPKrlk98PfqERkT~oSt83FReo-DMH8yHI5lU~alOIcVf8ogQHsyp~F13dwEWgaRcLRddASzEA82mzl3JeOrDEsrVarIAThnv0~q5z007YDoAMFJzhquN0eWID1xB8iQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA)`,
-                }}
-              ></div>
+              {article.avatars && article.avatars.length > 0 && (
+                <div
+                  className={styles.channel}
+                  style={{
+                    backgroundImage: `url(${article.avatars[0].avatarUrl})`,
+                  }}
+                ></div>
+              )}
             </div>
             {article.relatedArticles &&
               renderRelatedArticles(article.relatedArticles)}
@@ -793,11 +824,39 @@ export const Article = ({
             {renderUserSocialActions()}
           </div>
           <div
-            className={`${styles.contentImg}`}
+            className={classnames(
+              styles.contentImg,
+              hasActions ? styles.hasActions : ""
+            )}
             style={{
               backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
             }}
-          ></div>
+          >
+            {hasActions && (
+              <div className={styles.buttons}>
+                {status !== "PUBLISHED" && onPublish && (
+                  <div>
+                    <button onClick={() => onPublish()}>
+                      <i className="icon-sb-paper-airplane"></i>
+                    </button>
+                  </div>
+                )}
+                {onEdit && (
+                  <button>
+                    <i className="icon-sb-edit" onClick={() => onEdit()}></i>
+                  </button>
+                )}
+                {onDelete && (
+                  <button
+                    className={styles["btn-delete"]}
+                    onClick={() => onDelete()}
+                  >
+                    <i className="icon-sb-trash"></i>
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -808,11 +867,38 @@ export const Article = ({
       <div className={`${styles.articleTemplate7} ${styles[size]}`}>
         <div className={styles.articleContainer}>
           <div
-            className={`${styles.contentImg}`}
+            className={classnames(
+              styles.contentImg,
+              hasActions ? styles.hasActions : ""
+            )}
             style={{
               backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
             }}
           >
+            {hasActions && (
+              <div className={styles.buttons}>
+                {status !== "PUBLISHED" && onPublish && (
+                  <div>
+                    <button onClick={() => onPublish()}>
+                      <i className="icon-sb-paper-airplane"></i>
+                    </button>
+                  </div>
+                )}
+                {onEdit && (
+                  <button>
+                    <i className="icon-sb-edit" onClick={() => onEdit()}></i>
+                  </button>
+                )}
+                {onDelete && (
+                  <button
+                    className={styles["btn-delete"]}
+                    onClick={() => onDelete()}
+                  >
+                    <i className="icon-sb-trash"></i>
+                  </button>
+                )}
+              </div>
+            )}
             <div className={styles.categoryChannel}>
               <div
                 className={styles.category}
@@ -820,12 +906,14 @@ export const Article = ({
               >
                 {category.name}
               </div>
-              <div
-                className={styles.channel}
-                style={{
-                  backgroundImage: `url(https://s3-alpha-sig.figma.com/img/8f25/74e9/d677d673a62bc9ebe0943b09e58fb049?Expires=1648425600&Signature=eGezxpIBPiF1fitjLhbAB1GH~t07KjIiPxfOP8aepM48nzzjf5JjXsKnJoYe-xW9lAzq4MF2R3g6HwA3NgiDcKfktAkNChT~0PO8i~KOySCLynYw6SlrF~vCvLTHow4QFA3rXntwjKM9RqVlN6be6uk6UJMYlh0bbxvyoqtwR1bJo3eJWnDaj~n-7O07cl~elTuDW6UTlGJ8u1nVxtUEjwRNPKrlk98PfqERkT~oSt83FReo-DMH8yHI5lU~alOIcVf8ogQHsyp~F13dwEWgaRcLRddASzEA82mzl3JeOrDEsrVarIAThnv0~q5z007YDoAMFJzhquN0eWID1xB8iQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA)`,
-                }}
-              ></div>
+              {article.avatars && article.avatars.length > 0 && (
+                <div
+                  className={styles.channel}
+                  style={{
+                    backgroundImage: `url(${article.avatars[0].avatarUrl})`,
+                  }}
+                ></div>
+              )}
             </div>
             {article.relatedArticles &&
               renderRelatedArticles(article.relatedArticles)}
@@ -855,11 +943,39 @@ export const Article = ({
       <div className={`${styles.articleTemplate8} ${styles[size]}`}>
         <div className={styles.articleContainer}>
           <div
-            className={`${styles.contentImg}`}
+            className={classnames(
+              styles.contentImg,
+              hasActions ? styles.hasActions : ""
+            )}
             style={{
               backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
             }}
-          ></div>{" "}
+          >
+            {hasActions && (
+              <div className={styles.buttons}>
+                {status !== "PUBLISHED" && onPublish && (
+                  <div>
+                    <button onClick={() => onPublish()}>
+                      <i className="icon-sb-paper-airplane"></i>
+                    </button>
+                  </div>
+                )}
+                {onEdit && (
+                  <button>
+                    <i className="icon-sb-edit" onClick={() => onEdit()}></i>
+                  </button>
+                )}
+                {onDelete && (
+                  <button
+                    className={styles["btn-delete"]}
+                    onClick={() => onDelete()}
+                  >
+                    <i className="icon-sb-trash"></i>
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
           <div className={styles.content}>
             <div className={styles.categoryChannel}>
               <div
@@ -868,12 +984,14 @@ export const Article = ({
               >
                 {category.name}
               </div>
-              <div
-                className={styles.channel}
-                style={{
-                  backgroundImage: `url(https://s3-alpha-sig.figma.com/img/8f25/74e9/d677d673a62bc9ebe0943b09e58fb049?Expires=1648425600&Signature=eGezxpIBPiF1fitjLhbAB1GH~t07KjIiPxfOP8aepM48nzzjf5JjXsKnJoYe-xW9lAzq4MF2R3g6HwA3NgiDcKfktAkNChT~0PO8i~KOySCLynYw6SlrF~vCvLTHow4QFA3rXntwjKM9RqVlN6be6uk6UJMYlh0bbxvyoqtwR1bJo3eJWnDaj~n-7O07cl~elTuDW6UTlGJ8u1nVxtUEjwRNPKrlk98PfqERkT~oSt83FReo-DMH8yHI5lU~alOIcVf8ogQHsyp~F13dwEWgaRcLRddASzEA82mzl3JeOrDEsrVarIAThnv0~q5z007YDoAMFJzhquN0eWID1xB8iQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA)`,
-                }}
-              ></div>
+              {article.avatars && article.avatars.length > 0 && (
+                <div
+                  className={styles.channel}
+                  style={{
+                    backgroundImage: `url(${article.avatars[0].avatarUrl})`,
+                  }}
+                ></div>
+              )}
             </div>
             {article.relatedArticles &&
               renderRelatedArticles(article.relatedArticles)}
