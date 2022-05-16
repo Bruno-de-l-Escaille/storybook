@@ -4,6 +4,7 @@ import AppendHead from "react-append-head";
 import styles from "./Header.module.scss";
 import MenuItem from "./MenuItem";
 import MenuLink from "./MenuLink";
+import MenuLinkIcon from "./MenuLinkIcon";
 import Apps from "./Apps";
 import MenuProfile from "./MenuProfile";
 import Communities from "./Communities";
@@ -181,6 +182,14 @@ export class Header extends Component {
           </div>
         )}
         <ul className={`${styles.menu} ${styles.buttons}`}>
+          {rightIcons.buttonLink?.activated && (
+            <MenuLinkIcon
+              iconUrl={`${rightIcons.buttonLink.icon}`}
+              href={`${rightIcons.buttonLink.url}`}
+            >
+              {rightIcons.buttonLink.label}
+            </MenuLinkIcon>
+          )}
           {rightIcons.backoffice?.activated && (
             <MenuLink icon="Settings" href={`${rightIcons.backoffice.url}`}>
               {rightIcons.backoffice.label}

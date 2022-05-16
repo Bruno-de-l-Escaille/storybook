@@ -452,6 +452,34 @@ export const HeaderUA = () => (
     })}
   />
 );
+
+const heabderButtonRightIcons = {
+  ...rightIcons,
+  backoffice: {
+    activated: false,
+  },
+  buttonLink: {
+    activated: true,
+    label: "Event",
+    url: "https://blog.tamtam.pro/fr",
+    icon: "https://event-pro.tamtam.pro/img/logo-event.png",
+  },
+};
+export const HeaderButton = () => (
+  <Header
+    app={object("app", App)}
+    auth={authLogin}
+    env={text("env", "local")}
+    settings={object("settings", settings)}
+    lng={select("language", ["fr", "nl", "en"], "fr")}
+    rightIcons={object("rightIcons", heabderButtonRightIcons)}
+    onLanguageChange={(langue) => alert(langue)}
+    onLogoutClick={(e) => console.log("Logout", e)}
+    onSearchClick={() => alert("searching")}
+    allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
+  />
+);
+
 export const HeaderLoggedOut = () => (
   <Header
     app={object("app", App)}

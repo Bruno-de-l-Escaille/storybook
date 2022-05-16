@@ -1475,3 +1475,25 @@ nav {
     height: 62px;
   }
 }
+
+.buttonLinkImg {
+  border: 1px solid #b2bcc6;
+  border-radius: 50px !important;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: capitalize;
+  height: 36px !important;
+  width: auto !important;
+  margin-right: 0.6rem;
+  padding: 0 1rem !important;
+
+  a {
+    align-items: center;
+  }
+
+  img {
+    width: 22px;
+    height: 22px;
+    margin-right: 8px !important;
+  }
+}
