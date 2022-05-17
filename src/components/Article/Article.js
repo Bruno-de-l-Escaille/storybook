@@ -261,7 +261,7 @@ export const Article = ({
         {I18N[language].publishedOn}
         {moment(clonePublishedAt, API_DATE_FORMAT)
           .locale(language)
-          .format("DD MMM YYYY " + I18N[language].atText + " hh:mm")}
+          .format("DD MMM YYYY " + I18N[language].atText + " HH:mm")}
         {readTime && (
           <div className={styles.readTime}>
             <div className={styles.dot}></div>
@@ -403,7 +403,7 @@ export const Article = ({
             <div className={styles.publishedAt}>
               {moment(clonePublishedAt, API_DATE_FORMAT)
                 .locale(language)
-                .format("DD MMM YYYY " + I18N[language].atText + " hh:mm")}
+                .format("DD MMM YYYY " + I18N[language].atText + " HH:mm")}
             </div>
           )}
           <div
@@ -495,7 +495,7 @@ export const Article = ({
                 <div className={styles.publishedAt}>
                   {moment(clonePublishedAt, API_DATE_FORMAT)
                     .locale(language)
-                    .format("DD MMM YYYY " + I18N[language].atText + " hh:mm")}
+                    .format("DD MMM YYYY " + I18N[language].atText + " HH:mm")}
                 </div>
               )}
               <div
@@ -546,7 +546,7 @@ export const Article = ({
             <div className={styles.publishedAt}>
               {moment(clonePublishedAt, API_DATE_FORMAT)
                 .locale(language)
-                .format("DD MMM YYYY " + I18N[language].atText + " hh:mm")}
+                .format("DD MMM YYYY " + I18N[language].atText + " HH:mm")}
             </div>
           )}
 
@@ -646,7 +646,7 @@ export const Article = ({
             <div className={styles.publishedAt}>
               {moment(clonePublishedAt, API_DATE_FORMAT)
                 .locale(language)
-                .format("DD MMM YYYY " + I18N[language].atText + " hh:mm")}
+                .format("DD MMM YYYY " + I18N[language].atText + " HH:mm")}
             </div>
           )}
 
