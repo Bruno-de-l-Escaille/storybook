@@ -676,7 +676,7 @@
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: 3; /* number of lines to show */
-                line-clamp: 3; 
+        line-clamp: 3;
         -webkit-box-orient: vertical;
       }
       .authorsContainer {
@@ -725,9 +725,9 @@
   font-weight: 300;
   font-size: 10px;
   line-height: 12px;
-  text-align: right;
   color: #6d7f92;
   display: flex;
+
   .readTime {
     display: flex;
     align-items: center;
@@ -737,7 +737,7 @@
       height: 5px;
       border-radius: 50%;
       background-color: #6d7f92;
-      margin: 0% 2%;
+      margin: 0% 5% 0 2%;
     }
     span {
       width: 80px;
@@ -759,7 +759,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-     
+
       margin-right: 10px;
       font-weight: 700;
       font-size: 12px;

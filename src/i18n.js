@@ -30,6 +30,9 @@ export const I18N = {
     "Certificate included approved by": "Certificate included approved by",
     "En Live": "Live",
     see_version: "See version",
+    atText: "at",
+    publishedOn: "Published on",
+    reading: "Reading",
   },
   fr: {
     ARTCILES: "Articles",
@@ -61,6 +64,9 @@ export const I18N = {
     "Certificate included approved by": "Attestation incluse agréé par",
     "En Live": "En Live",
     see_version: "Voir version",
+    atText: "à",
+    publishedOn: "Publié le",
+    reading: "Lecture de",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -94,5 +100,8 @@ export const I18N = {
       "Certificaat meegeleverd goedgekeurd door",
     "En Live": "Live",
     see_version: "Zie versie",
+    atText: "bij",
+    publishedOn: "Gepubliceerd op",
+    reading: "Lezen",
   },
 };

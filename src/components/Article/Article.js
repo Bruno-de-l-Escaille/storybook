@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
-import moment from "moment";
+import classnames from "classnames";
+import moment from "moment-timezone";
 import "moment/locale/fr";
 import "moment/locale/nl";
 
 import styles from "./Article.module.scss";
-import { AuthorAvatar } from "../Avatar/AuthorAvatar";
 import { Fetching } from "./Fetching";
+import { AuthorAvatar } from "../Avatar/AuthorAvatar";
 import { prepareArticle, isUserHasRights, addLandaSize } from "../../utils";
-import classnames from "classnames";
 import { I18N } from "../../i18n";
 
 const API_DATE_FORMAT = "YYYY-MM-DD HH:mm:ss";
@@ -65,23 +65,16 @@ export const Article = ({
     language,
     readTime,
   } = data;
+
   const hasRights = isUserHasRights(user, article);
   const hasActions =
     hasRights && (onDelete || onEdit || onPublish) ? true : false;
   const mediaUrl = medias && medias.length > 0 ? medias[0].path : mainMedia;
 
-  let atText = "";
-  switch (language) {
-    case "fr":
-      atText = "à";
-      break;
-    case "nl":
-      atText = "bij";
-      break;
-    default:
-      atText = "at";
-      break;
-  }
+  var momentPublishedAt = publishedAt ? moment.tz(publishedAt, "UTC") : "";
+  var clonePublishedAt = publishedAt
+    ? momentPublishedAt.clone().tz(moment.tz.guess())
+    : "";
 
   const renderAvatar = (white) => {
     if (isExternal) {
@@ -262,16 +255,19 @@ export const Article = ({
 
   const renderPublishedAtRenderTime = () => {
     if (!publishedAt) return null;
+
     return (
       <div className={styles.publishedAtReadTime}>
-        Publié le
-        {moment(publishedAt, API_DATE_FORMAT)
+        {I18N[language].publishedOn}
+        {moment(clonePublishedAt, API_DATE_FORMAT)
           .locale(language)
-          .format("DD MMM YYYY " + atText + " hh:mm")}
+          .format("DD MMM YYYY " + I18N[language].atText + " hh:mm")}
         {readTime && (
           <div className={styles.readTime}>
             <div className={styles.dot}></div>
-            <span>Lecture de {readTime}min</span>
+            <span>
+              {I18N[language].reading} {readTime}min
+            </span>
           </div>
         )}
       </div>
@@ -358,10 +354,10 @@ export const Article = ({
     return (
       <div className={styles.version}>
         <span>{I18N[language]["see_version"]}:</span>
-        {Object.entries(relatedArticles).map((related) => {
+        {Object.entries(relatedArticles).map((related, idx) => {
           if (Link)
             return (
-              <span className={styles.vIterm}>
+              <span className={styles.vIterm} key={`related-${idx}`}>
                 <Link
                   href={`/${related[0]}/article/${related[1].url}/${related[1].id}`}
                 >
@@ -378,7 +374,7 @@ export const Article = ({
             );
           else
             return (
-              <span className={styles.vIterm}>
+              <span className={styles.vIterm} key={`related-${idx}`}>
                 <a
                   href={`/${related[0]}/article/${related[1].url}/${related[1].id}`}
                 >
@@ -405,9 +401,9 @@ export const Article = ({
         >
           {publishedAt && (
             <div className={styles.publishedAt}>
-              {moment(publishedAt, API_DATE_FORMAT)
+              {moment(clonePublishedAt, API_DATE_FORMAT)
                 .locale(language)
-                .format("DD MMM YYYY " + atText + " hh:mm")}
+                .format("DD MMM YYYY " + I18N[language].atText + " hh:mm")}
             </div>
           )}
           <div
@@ -497,9 +493,9 @@ export const Article = ({
             <div className={styles.content}>
               {publishedAt && (
                 <div className={styles.publishedAt}>
-                  {moment(publishedAt, API_DATE_FORMAT)
+                  {moment(clonePublishedAt, API_DATE_FORMAT)
                     .locale(language)
-                    .format("DD MMM YYYY " + atText + " hh:mm")}
+                    .format("DD MMM YYYY " + I18N[language].atText + " hh:mm")}
                 </div>
               )}
               <div
@@ -548,9 +544,9 @@ export const Article = ({
         <div className={styles.articleContainer}>
           {publishedAt && (
             <div className={styles.publishedAt}>
-              {moment(publishedAt, API_DATE_FORMAT)
+              {moment(clonePublishedAt, API_DATE_FORMAT)
                 .locale(language)
-                .format("DD MMM YYYY " + atText + " hh:mm")}
+                .format("DD MMM YYYY " + I18N[language].atText + " hh:mm")}
             </div>
           )}
 
@@ -648,9 +644,9 @@ export const Article = ({
         >
           {publishedAt && (
             <div className={styles.publishedAt}>
-              {moment(publishedAt, API_DATE_FORMAT)
+              {moment(clonePublishedAt, API_DATE_FORMAT)
                 .locale(language)
-                .format("DD MMM YYYY " + atText + " hh:mm")}
+                .format("DD MMM YYYY " + I18N[language].atText + " hh:mm")}
             </div>
           )}
 
