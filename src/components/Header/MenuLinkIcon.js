@@ -8,7 +8,7 @@ class MenuLinkIcon extends Component {
 
     return (
       <li className={`${styles.buttonLinkImg}`}>
-        <a href={href && href}>
+        <a target="_blank" href={href && href}>
           <img src={iconUrl} /> {children}
         </a>
       </li>
