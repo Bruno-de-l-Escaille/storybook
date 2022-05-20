@@ -488,11 +488,7 @@ export const Article = ({
                 <div className={styles.publishedAt}>
                   {moment(publishedAt, API_DATE_FORMAT)
                     .locale(language)
-                    .format(
-                      "DD MMM YYYY " +
-                        I18N[language].I18N[language].atText +
-                        " HH:mm"
-                    )}
+                    .format("DD MMM YYYY " + I18N[language].atText + " HH:mm")}
                 </div>
               )}
               <div
@@ -543,11 +539,7 @@ export const Article = ({
             <div className={styles.publishedAt}>
               {moment(publishedAt, API_DATE_FORMAT)
                 .locale(language)
-                .format(
-                  "DD MMM YYYY " +
-                    I18N[language].I18N[language].atText +
-                    " HH:mm"
-                )}
+                .format("DD MMM YYYY " + I18N[language].atText + " HH:mm")}
             </div>
           )}
 
