@@ -1,92 +1,25 @@
 import React from "react";
-import { Header } from "./Header";
-import { SubMenu } from "./SubMenu";
+import { HeaderUA } from "./HeaderUA";
 import {
   withKnobs,
   text,
   object,
   boolean,
   select,
+  array,
 } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 
 const App = {
-  appName: "Blog",
-  appLogoUrl: "https://s3.tamtam.pro/v2/apps/blog.png",
-  appUrl: "https://blog.tamtam.pro/fr",
+  appName: "United Associates",
+  appLogoUrl: "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/logo/ua.png",
+  appUrl: "https://unitedassociates.be",
   homeUrl: "https://one.tamtam.pro",
-  isPrivateBlog: false,
-  currentEvent: null,
-};
-
-const AppPrivate = {
-  appName: "Blog",
-  appLogoUrl: "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/logo/deg.png",
-  appUrl: "https://blog.tamtam.pro/fr",
-  homeUrl: "https://one.tamtam.pro",
-  isPrivateBlog: true,
 };
 
 const rightIcons = {
-  home: {
-    activated: true,
-    url: "https://blog.tamtam.pro/fr",
-  },
   profile: {
-    activated: true,
-    url: "https://blog.tamtam.pro/fr",
-  },
-  ebox: {
-    activated: true,
-    url: "https://blog.tamtam.pro/fr",
-  },
-  search: {
     activated: false,
-  },
-  notifs: {
-    activated: true,
-  },
-  apps: {
-    activated: true,
-  },
-  faq: {
-    activated: true,
-  },
-  backoffice: {
-    activated: true,
-    label: "Back office",
-    url: "https://blog.tamtam.pro/fr",
-  },
-};
-
-const portalRightIcons = {
-  home: {
-    activated: false,
-    url: "https://blog.tamtam.pro/fr",
-  },
-  profile: {
-    activated: true,
-    url: "https://blog.tamtam.pro/fr",
-  },
-  ebox: {
-    activated: true,
-    url: "https://blog.tamtam.pro/fr",
-  },
-  search: {
-    activated: true,
-  },
-  notifs: {
-    activated: true,
-  },
-  apps: {
-    activated: true,
-  },
-  faq: {
-    activated: true,
-  },
-  backoffice: {
-    activated: false,
-    label: "Back office",
     url: "https://blog.tamtam.pro/fr",
   },
 };
@@ -289,67 +222,16 @@ const authLogout = {
   token: null, // null or public token
 };
 
-const menu = [
-  {
-    title: "Acceuil",
-    url: `/fr`,
-    iconUrl:
-      "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/icon/header/home.svg",
-    community: false,
-  },
-  {
-    title: "mes articles",
-    url: `/articles/my_articles`,
-    iconUrl:
-      "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/icon/header/articles.svg",
-    community: false,
-  },
-  {
-    title: "auteurs",
-    iconUrl:
-      "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/icon/header/authors.svg",
-    submenu: "AUTEURS",
-    community: false,
-    submenu: [
-      {
-        title: "Emmanuel DEGREVE",
-        avatarUrl:
-          "https://s3.tamtam.pro/v2/storage/media/IMAGE/31/AVATAR_70d83b21836dec24e6ec10e5d38a0ac3d96cbed2.png",
-        url: `/authors`,
-      },
-      {
-        title: "Stéphane De Bremaeker",
-        avatarUrl:
-          "https://s3.tamtam.pro/prod/storage/media/IMAGE/1975/AVATAR_89452b9bf04fee0471086bb171ea8357a42eec9a.png",
-        url: `/authors`,
-      },
-    ],
-    more: {
-      title: "follow_others",
-      url: `/authors`,
-    },
-  },
-  {
-    title: "library",
-    url: `/library`,
-    iconUrl:
-      "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/icon/header/categories.svg",
-    community: true,
-    className: "hide-for-small-only",
-  },
-];
-
 export default {
-  title: "Header",
-  component: Header,
+  title: "HeaderUA",
+  component: HeaderUA,
   decorators: [StoryRouter(), (story) => <div>{story()}</div>, withKnobs],
 };
 
 export const HeaderLoggedIn = () => (
-  <Header
+  <HeaderUA
     app={object("app", App)}
     auth={object("auth", authLogin)}
-    auth={authLogin}
     env={text("env", "local")}
     settings={object("settings", settings)}
     lng={select("language", ["fr", "nl", "en"], "fr")}
@@ -361,48 +243,6 @@ export const HeaderLoggedIn = () => (
     // onSelectAllCommunities={() => console.log("Communities select all")}
     onSelectCommunity={(community) => console.log("community click", community)}
     onFAQLoad={() => console.log("onFAQLoad", window.showFAQ)}
-  />
-);
-export const HeaderPrivateBlogLoggedIn = () => (
-  <Header
-    app={object("app", AppPrivate)}
-    auth={object("auth", authLogin)}
-    env={text("env", "local")}
-    settings={object("settings", settings)}
-    lng={select("language", ["fr", "nl", "en"], "fr")}
-    rightIcons={object("rightIcons", rightIcons)}
-    onLanguageChange={(langue) => alert(langue)}
-    onLogoutClick={(e) => console.log("Logout", e)}
-    onSearchClick={() => alert("searching")}
-    onSelectAllCommunities={() => console.log("Communities select all")}
-  />
-);
-
-const switchSpace = {
-  items: [
-    { key: "COMMUNITY", label: "Community" },
-    { key: "WORK", label: "Work place" },
-  ],
-  current: "WORK",
-  onChange: (e) => {
-    console.log("change space", e);
-  },
-};
-export const HeaderSpaceLoggedIn = () => (
-  <Header
-    app={object("app", App)}
-    auth={object("auth", authLogin)}
-    auth={authLogin}
-    env={text("env", "local")}
-    settings={object("settings", settings)}
-    lng={select("language", ["fr", "nl", "en"], "fr")}
-    rightIcons={object("rightIcons", portalRightIcons)}
-    onLanguageChange={(langue) => alert(langue)}
-    onLogoutClick={(e) => console.log("Logout", e)}
-    onSearchClick={() => alert("searching")}
-    allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
-    // onSelectAllCommunities={() => console.log("Communities select all")}
-    switchSpace={object("switchSpace", switchSpace)}
   />
 );
 
@@ -418,13 +258,13 @@ const portalSwitch = {
   },
 };
 export const HeaderPortalSwitch = () => (
-  <Header
+  <HeaderUA
     app={object("app", App)}
     auth={authLogin}
     env={text("env", "local")}
     settings={object("settings", settings)}
     lng={select("language", ["fr", "nl", "en"], "fr")}
-    rightIcons={object("rightIcons", portalRightIcons)}
+    rightIcons={object("rightIcons", rightIcons)}
     onLanguageChange={(langue) => alert(langue)}
     onLogoutClick={(e) => console.log("Logout", e)}
     onSearchClick={() => alert("searching")}
@@ -434,52 +274,17 @@ export const HeaderPortalSwitch = () => (
   />
 );
 
-const heabderButtonRightIcons = {
-  ...rightIcons,
-  backoffice: {
-    activated: false,
-  },
-  buttonLink: {
-    activated: true,
-    label: "Event",
-    url: "https://blog.tamtam.pro/fr",
-    icon: "https://event-pro.tamtam.pro/img/logo-event.png",
-  },
-};
-export const HeaderButton = () => (
-  <Header
-    app={object("app", App)}
-    auth={authLogin}
-    env={text("env", "local")}
-    settings={object("settings", settings)}
-    lng={select("language", ["fr", "nl", "en"], "fr")}
-    rightIcons={object("rightIcons", heabderButtonRightIcons)}
-    onLanguageChange={(langue) => alert(langue)}
-    onLogoutClick={(e) => console.log("Logout", e)}
-    onSearchClick={() => alert("searching")}
-    allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
-  />
-);
-
+const languages = ["fr", "nl", "en"];
+const noLanguages = [];
 export const HeaderLoggedOut = () => (
-  <Header
+  <HeaderUA
     app={object("app", App)}
     auth={object("auth", authLogout)}
     env={text("env", "local")}
     lng={select("language", ["fr", "nl", "en"], "fr")}
+    languages={array("languages", languages)}
     onLanguageChange={(langue) => alert(langue)}
+    signInUrl={text("signinUrl", "/login")}
+    signUpUrl={text("signupUrl", "/register")}
   />
-);
-
-export const SubMenuHeader = () => (
-  <div style={{ padding: "3rem" }}>
-    <SubMenu
-      lng={select("language", ["fr", "nl", "en"], "fr")}
-      menu={object("menu", menu)}
-      currentCommunity={object("currentCommunity", authLogin.navCommunity)}
-      hideVertical={boolean("hideVertical", false)}
-    >
-      <div style={{ padding: "3rem" }}>Content</div>
-    </SubMenu>
-  </div>
 );

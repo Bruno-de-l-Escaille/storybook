@@ -3,32 +3,29 @@ import AppendHead from "react-append-head";
 
 import styles from "./Header.module.scss";
 import MenuItem from "./MenuItem";
-import MenuLink from "./MenuLink";
-import MenuLinkIcon from "./MenuLinkIcon";
-import Apps from "./Apps";
 import MenuProfile from "./MenuProfile";
-import Communities from "./Communities";
-import Notifs from "./Notifs";
 import TTPFaqWidget from "../TTPFaqWidget";
 import * as icons from "../Icons";
 
 const I18N = {
   en: {
-    signIn: "Login / Sign up",
+    signIn: "Login",
+    signUp: "Register",
   },
   fr: {
-    signIn: "Connexion / Inscription",
+    signIn: "S'identifier",
+    signUp: "S'inscrire",
   },
   nl: {
-    signIn: "Aanmelden / Inschrijven",
+    signIn: "Herkennen",
+    signUp: "Register",
   },
 };
 
-export class Header extends Component {
+export class HeaderUA extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showSettings: false,
       isFaqWidgetLoaded: false,
       portalSwitchCurrent: null,
     };
@@ -69,11 +66,6 @@ export class Header extends Component {
     this.props.onSearchClick();
   }
 
-  handleShowSettings = () => {
-    const { showSettings } = this.state;
-    this.setState({ showSettings: !showSettings });
-  };
-
   handleShowFaqWidget = () => {
     setTimeout(() => this.setState({ isFaqWidgetLoaded: true }), 4000);
   };
@@ -87,9 +79,7 @@ export class Header extends Component {
   handleFaqClick = () => {
     const { app } = this.props;
     if (window.showFAQ) {
-      app.currentEvent
-        ? window.showFAQ(app.appName.toUpperCase(), app.currentEvent)
-        : window.showFAQ(app.appName.toUpperCase());
+      window.showFAQ(app.appName.toUpperCase());
     }
   };
 
@@ -98,15 +88,12 @@ export class Header extends Component {
       rightIcons,
       auth,
       lng,
-      env,
-      notifications,
-      app,
       switchSpace,
       portalSwitch,
       currentPortal,
     } = this.props;
-    const { isFaqWidgetLoaded, portalSwitchCurrent } = this.state;
-    const { navCommunity, user } = auth;
+    const { portalSwitchCurrent } = this.state;
+    const { user } = auth;
 
     const Icon = icons["Portal"];
     const IconSetting = icons["Settings"];
@@ -182,55 +169,8 @@ export class Header extends Component {
           </div>
         )}
         <ul className={`${styles.menu} ${styles.buttons}`}>
-          {rightIcons.buttonLink?.activated && (
-            <MenuLinkIcon
-              iconUrl={`${rightIcons.buttonLink.icon}`}
-              href={`${rightIcons.buttonLink.url}`}
-            >
-              {rightIcons.buttonLink.label}
-            </MenuLinkIcon>
-          )}
-          {rightIcons.backoffice?.activated && (
-            <MenuLink icon="Settings" href={`${rightIcons.backoffice.url}`}>
-              {rightIcons.backoffice.label}
-            </MenuLink>
-          )}
-          {rightIcons.home.activated && (
-            <MenuItem icon="Portal" href={`${rightIcons.home.url}`} />
-          )}
           {rightIcons.profile.activated && (
             <MenuItem icon="Profile" href={`${rightIcons.profile.url}`} />
-          )}
-          {rightIcons.ebox.activated && (
-            <MenuItem icon="Ebox" href={`${rightIcons.ebox.url}`} />
-          )}
-          {rightIcons.notifs.activated && (
-            <Notifs
-              notifications={notifications}
-              lng={lng}
-              env={env}
-              auth={auth}
-              navCommunity={navCommunity}
-              appName={app.appName}
-              isFaqWidgetLoaded={isFaqWidgetLoaded}
-            />
-          )}
-          {rightIcons.faq?.activated && (
-            <div
-              onClick={this.handleFaqClick.bind(this)}
-              className={!isFaqWidgetLoaded && styles.iconLoading}
-            >
-              <MenuItem icon="Help" />
-            </div>
-          )}
-          {rightIcons.apps?.activated && navCommunity && (
-            <Apps apps={navCommunity.appsState} />
-          )}
-
-          {rightIcons.search.activated && (
-            <div onClick={this._Search.bind(this)}>
-              <MenuItem icon="Search" />
-            </div>
           )}
         </ul>
 
@@ -246,9 +186,7 @@ export class Header extends Component {
   }
 
   renderLoggedOut() {
-    const { lng, app } = this.props;
-    const { appUrl, homeUrl, isPrivateBlog } = app;
-    const languages = ["fr", "nl", "en"];
+    const { lng, signInUrl, signUpUrl, RouterLink, languages } = this.props;
 
     return (
       <div className={styles.headerRight}>
@@ -263,98 +201,72 @@ export class Header extends Component {
             </li>
           ))}
         </ul>
-        <a
-          className={styles.signIn}
-          href={
-            isPrivateBlog
-              ? `${homeUrl}/?gotoWithAuth=${appUrl}`
-              : `${homeUrl}/?goto=${appUrl}`
-          }
-        >
-          {I18N[lng]["signIn"]}
-        </a>
+        {RouterLink ? (
+          <ul className={styles.headerLinks}>
+            <li>
+              <RouterLink to={signInUrl}>{I18N[lng]["signIn"]}</RouterLink>
+            </li>
+            <li>
+              <RouterLink to={signUpUrl}>{I18N[lng]["signUp"]}</RouterLink>
+            </li>
+          </ul>
+        ) : (
+          <ul className={styles.headerLinks}>
+            <li>
+              <a href={signInUrl}>{I18N[lng]["signIn"]}</a>
+            </li>
+            <li className={styles.register}>
+              <a href={signUpUrl}>{I18N[lng]["signUp"]}</a>
+            </li>
+          </ul>
+        )}
       </div>
     );
   }
 
   renderLeftSide() {
-    const {
-      app,
-      settings,
-      lng,
-      auth,
-      Link,
-      allCommunitiesUrl,
-      onSelectAllCommunities,
-      onSelectCommunity,
-    } = this.props;
-    const { appName, appLogoUrl, appUrl, isPrivateBlog } = app;
+    const { app, auth, RouterLink } = this.props;
+    const { appLogoUrl, appUrl } = app;
 
+    let uaFolderName = "";
+    if (
+      auth.user &&
+      auth.user.communities &&
+      auth.user.communities.length > 0
+    ) {
+      uaFolderName = auth.user.communities[0].name;
+      if (auth.user.communities[0].abbreviation) {
+        uaFolderName = auth.user.communities[0].abbreviation;
+      } else if (uaFolderName.length > 30) {
+        uaFolderName = uaFolderName.substr(0, 30) + "...";
+      }
+    }
     return (
       <>
         <div className={styles.headerLeft}>
-          <div
-            className={`${styles.menuLogo} ${
-              this.state.showSettings ? styles.shadow : ""
-            }`}
-          >
-            {auth.navCommunity && auth.user && settings.length > 0 && (
-              <div>
-                <span
-                  className={`icon-sb-more-vertical ${styles.settingsIcon}`}
-                  style={settings.length === 0 ? { visibility: "hidden" } : {}}
-                  onClick={this.handleShowSettings.bind(this)}
-                />
-                <ul
-                  className={`${styles.menuDropdown} ${
-                    this.state.showSettings ? styles.show : ""
-                  }`}
-                >
-                  {settings.map(({ label, url }) => (
-                    <li key={url}>
-                      {Link ? (
-                        <Link href={url}>
-                          <a>{label}</a>
-                        </Link>
-                      ) : (
-                        <a href={url}>{label}</a>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {Link ? (
-              <Link href={appUrl}>
-                <a className={styles.appInfo}>
-                  <img className={styles.appLogo} src={appLogoUrl} alt="logo" />
-                  {!isPrivateBlog && (
-                    <span className={styles.appName}>{appName}</span>
-                  )}
-                </a>
-              </Link>
+          <div className={`${styles.menuLogo}`}>
+            {RouterLink ? (
+              <RouterLink to={appUrl} className={styles.appInfo}>
+                <img className={styles.appLogo} src={appLogoUrl} alt="logo" />
+              </RouterLink>
             ) : (
               <a href={appUrl} className={styles.appInfo}>
                 <img className={styles.appLogo} src={appLogoUrl} alt="logo" />
-                {!isPrivateBlog && (
-                  <span className={styles.appName}>{appName}</span>
-                )}
               </a>
             )}
           </div>
 
-          {auth.user && auth.user.communities && !isPrivateBlog && (
-            <Communities
-              communities={auth.user.communities}
-              currentCommunity={auth.navCommunity}
-              lng={lng}
-              app={app}
-              Link={Link}
-              allCommunitiesUrl={allCommunitiesUrl}
-              onSelectAllCommunities={onSelectAllCommunities}
-              onSelectCommunity={onSelectCommunity}
-            />
+          {uaFolderName && (
+            <div className={styles.menu__ua_folder}>
+              {auth.user.communities[0].avatarUrl ? (
+                <img
+                  src={auth.user.communities[0].avatarUrl}
+                  alt={uaFolderName}
+                />
+              ) : (
+                <span>{uaFolderName}</span>
+              )}
+            </div>
           )}
         </div>
       </>
