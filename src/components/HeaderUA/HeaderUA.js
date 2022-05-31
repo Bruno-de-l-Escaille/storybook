@@ -26,6 +26,7 @@ export class HeaderUA extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showSettings: false,
       isFaqWidgetLoaded: false,
       portalSwitchCurrent: null,
     };
@@ -65,6 +66,11 @@ export class HeaderUA extends Component {
   _Search() {
     this.props.onSearchClick();
   }
+
+  handleShowSettings = () => {
+    const { showSettings } = this.state;
+    this.setState({ showSettings: !showSettings });
+  };
 
   handleShowFaqWidget = () => {
     setTimeout(() => this.setState({ isFaqWidgetLoaded: true }), 4000);
@@ -225,7 +231,7 @@ export class HeaderUA extends Component {
   }
 
   renderLeftSide() {
-    const { app, auth, RouterLink } = this.props;
+    const { app, auth, settings, RouterLink } = this.props;
     const { appLogoUrl, appUrl } = app;
 
     let uaFolderName = "";
@@ -244,7 +250,36 @@ export class HeaderUA extends Component {
     return (
       <>
         <div className={styles.headerLeft}>
-          <div className={`${styles.menuLogo}`}>
+          <div
+            className={`${styles.menuLogo} ${
+              this.state.showSettings ? styles.shadow : ""
+            }`}
+          >
+            {auth.user && settings.length > 0 && (
+              <div>
+                <span
+                  className={`icon-sb-more-vertical ${styles.settingsIcon}`}
+                  style={settings.length === 0 ? { visibility: "hidden" } : {}}
+                  onClick={this.handleShowSettings.bind(this)}
+                />
+                <ul
+                  className={`${styles.menuDropdown} ${
+                    this.state.showSettings ? styles.show : ""
+                  }`}
+                >
+                  {settings.map(({ label, url }) => (
+                    <li key={url}>
+                      {RouterLink ? (
+                        <RouterLink to={url}>{label}</RouterLink>
+                      ) : (
+                        <a href={url}>{label}</a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {RouterLink ? (
               <RouterLink to={appUrl} className={styles.appInfo}>
                 <img className={styles.appLogo} src={appLogoUrl} alt="logo" />

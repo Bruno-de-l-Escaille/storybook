@@ -26,12 +26,8 @@ const rightIcons = {
 
 const settings = [
   {
-    label: "utilisateur",
-    url: "https://blog.rc2.tamtam.pro/",
-  },
-  {
-    label: "data",
-    url: "https://accounting.rc2.tamtam.pro/",
+    label: "Gérer les fiduciaires",
+    url: "/manage-fiduciary",
   },
 ];
 
