@@ -94,9 +94,11 @@ export class HeaderUA extends Component {
       rightIcons,
       auth,
       lng,
+      languages,
       switchSpace,
       portalSwitch,
       currentPortal,
+      RouterLink,
     } = this.props;
     const { portalSwitchCurrent } = this.state;
     const { user } = auth;
@@ -183,7 +185,9 @@ export class HeaderUA extends Component {
         <MenuProfile
           user={user}
           lng={lng}
+          languages={languages}
           rightIcons={rightIcons}
+          RouterLink={RouterLink}
           onLogoutClick={(e) => this.props.onLogoutClick(e)}
           onLanguageChange={(language) => this.props.onLanguageChange(language)}
         />
@@ -235,14 +239,10 @@ export class HeaderUA extends Component {
     const { appLogoUrl, appUrl } = app;
 
     let uaFolderName = "";
-    if (
-      auth.user &&
-      auth.user.communities &&
-      auth.user.communities.length > 0
-    ) {
-      uaFolderName = auth.user.communities[0].name;
-      if (auth.user.communities[0].abbreviation) {
-        uaFolderName = auth.user.communities[0].abbreviation;
+    if (auth.navCommunity) {
+      uaFolderName = auth.navCommunity.name;
+      if (auth.navCommunity.abbreviation) {
+        uaFolderName = auth.navCommunity.abbreviation;
       } else if (uaFolderName.length > 30) {
         uaFolderName = uaFolderName.substr(0, 30) + "...";
       }
@@ -293,11 +293,8 @@ export class HeaderUA extends Component {
 
           {uaFolderName && (
             <div className={styles.menu__ua_folder}>
-              {auth.user.communities[0].avatarUrl ? (
-                <img
-                  src={auth.user.communities[0].avatarUrl}
-                  alt={uaFolderName}
-                />
+              {auth.navCommunity.avatarUrl ? (
+                <img src={auth.navCommunity.avatarUrl} alt={uaFolderName} />
               ) : (
                 <span>{uaFolderName}</span>
               )}

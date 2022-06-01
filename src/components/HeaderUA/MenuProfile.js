@@ -58,7 +58,7 @@ class MenuProfile extends Component {
   }
 
   render() {
-    const { user, lng, rightIcons } = this.props;
+    const { user, lng, rightIcons, languages, RouterLink } = this.props;
     const {
       avatarUrl,
       firstName,
@@ -66,7 +66,7 @@ class MenuProfile extends Component {
       mainEmail,
       contactSocialNetworks,
     } = user;
-    const languages = ["fr", "nl", "en"];
+    // const languages = ["fr", "nl", "en"];
 
     const avatarDiv = avatarUrl ? (
       <Avatar
@@ -96,7 +96,13 @@ class MenuProfile extends Component {
               />
             </li>
             <li className={`${styles.menuProfile}`}>
-              <a href={rightIcons.profile.url}>{I18N[lng]["profile"]}</a>
+              {RouterLink ? (
+                <RouterLink to={rightIcons.profile.url}>
+                  {I18N[lng]["signIn"]}
+                </RouterLink>
+              ) : (
+                <a href={rightIcons.profile.url}>{I18N[lng]["profile"]}</a>
+              )}
             </li>
             <li className={styles.menuLanguage}>
               <ul>

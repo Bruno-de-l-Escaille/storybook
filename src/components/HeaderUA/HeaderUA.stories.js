@@ -14,7 +14,6 @@ const App = {
   appName: "United Associates",
   appLogoUrl: "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/logo/ua.png",
   appUrl: "https://unitedassociates.be",
-  homeUrl: "https://one.tamtam.pro",
 };
 
 const rightIcons = {
@@ -224,6 +223,8 @@ export default {
   decorators: [StoryRouter(), (story) => <div>{story()}</div>, withKnobs],
 };
 
+const languages = ["fr", "nl", "en"];
+const noLanguages = [];
 export const HeaderLoggedIn = () => (
   <HeaderUA
     app={object("app", App)}
@@ -231,6 +232,7 @@ export const HeaderLoggedIn = () => (
     env={text("env", "local")}
     settings={object("settings", settings)}
     lng={select("language", ["fr", "nl", "en"], "fr")}
+    languages={array("languages", languages)}
     rightIcons={object("rightIcons", rightIcons)}
     onLanguageChange={(langue) => alert(langue)}
     onLogoutClick={(e) => console.log("Logout", e)}
@@ -260,6 +262,7 @@ export const HeaderPortalSwitch = () => (
     env={text("env", "local")}
     settings={object("settings", settings)}
     lng={select("language", ["fr", "nl", "en"], "fr")}
+    languages={array("languages", languages)}
     rightIcons={object("rightIcons", rightIcons)}
     onLanguageChange={(langue) => alert(langue)}
     onLogoutClick={(e) => console.log("Logout", e)}
@@ -270,8 +273,6 @@ export const HeaderPortalSwitch = () => (
   />
 );
 
-const languages = ["fr", "nl", "en"];
-const noLanguages = [];
 export const HeaderLoggedOut = () => (
   <HeaderUA
     app={object("app", App)}
