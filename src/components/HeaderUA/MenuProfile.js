@@ -98,26 +98,28 @@ class MenuProfile extends Component {
             <li className={`${styles.menuProfile}`}>
               {RouterLink ? (
                 <RouterLink to={rightIcons.profile.url}>
-                  {I18N[lng]["signIn"]}
+                  {I18N[lng]["profile"]}
                 </RouterLink>
               ) : (
                 <a href={rightIcons.profile.url}>{I18N[lng]["profile"]}</a>
               )}
             </li>
-            <li className={styles.menuLanguage}>
-              <ul>
-                {languages.map((language) => (
-                  <li
-                    id={language}
-                    key={language}
-                    className={lng === language ? styles.selected : ""}
-                    onClick={() => this.props.onLanguageChange(language)}
-                  >
-                    {language.toUpperCase()}
-                  </li>
-                ))}
-              </ul>
-            </li>
+            {languages.length > 0 && (
+              <li className={styles.menuLanguage}>
+                <ul>
+                  {languages.map((language) => (
+                    <li
+                      id={language}
+                      key={language}
+                      className={lng === language ? styles.selected : ""}
+                      onClick={() => this.props.onLanguageChange(language)}
+                    >
+                      {language.toUpperCase()}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            )}
             <li className={styles.social}>
               <ul>
                 {this.renderContactSocialNetworkBlock(
