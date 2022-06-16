@@ -14,7 +14,16 @@ export class SubMenu extends Component {
   };
 
   renderItemMenu = (item) => {
-    const { Link, RouterLink } = this.props;
+    const { Link, RouterLink, queryParams } = this.props;
+
+    const href = {
+      pathname: item.url,
+    };
+    if (queryParams) {
+      href.query = {
+        params: queryParams,
+      };
+    }
     return (
       <li
         key={`smenu-${Math.random()}`}
@@ -22,7 +31,7 @@ export class SubMenu extends Component {
       >
         <img src={item.iconUrl} />
         {Link ? (
-          <Link href={item.url}>
+          <Link href={href}>
             <a>{item.title}</a>
           </Link>
         ) : RouterLink ? (
