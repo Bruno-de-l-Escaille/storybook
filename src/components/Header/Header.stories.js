@@ -471,6 +471,17 @@ export const HeaderLoggedOut = () => (
   />
 );
 
+export const HeaderLoggedOutIntendedApp = () => (
+  <Header
+    app={object("app", App)}
+    auth={object("auth", authLogout)}
+    env={text("env", "local")}
+    lng={select("language", ["fr", "nl", "en"], "fr")}
+    onLanguageChange={(langue) => alert(langue)}
+    intendedApp={text("intendedApp", "offfcourse*")}
+  />
+);
+
 export const SubMenuHeader = () => (
   <div style={{ padding: "3rem" }}>
     <SubMenu

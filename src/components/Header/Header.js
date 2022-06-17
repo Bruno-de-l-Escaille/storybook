@@ -246,7 +246,7 @@ export class Header extends Component {
   }
 
   renderLoggedOut() {
-    const { lng, app } = this.props;
+    const { lng, app, intendedApp } = this.props;
     const { appUrl, homeUrl, isPrivateBlog } = app;
     const languages = ["fr", "nl", "en"];
 
@@ -266,7 +266,9 @@ export class Header extends Component {
         <a
           className={styles.signIn}
           href={
-            isPrivateBlog
+            intendedApp
+              ? `${homeUrl}/?intendedApp=${intendedApp}`
+              : isPrivateBlog
               ? `${homeUrl}/?gotoWithAuth=${appUrl}`
               : `${homeUrl}/?goto=${appUrl}`
           }
