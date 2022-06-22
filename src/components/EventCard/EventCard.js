@@ -138,7 +138,11 @@ export class EventCard extends PureComponent {
     const appEnv = APP_ENV === "rc2" ? "rc" : APP_ENV;
 
     let speaker = null;
-    if (event["speakers-abstract"] && event["speakers-abstract"].speakers) {
+    if (
+      event["speakers-abstract"] &&
+      event["speakers-abstract"].speakers &&
+      event["speakers-abstract"].speakers.length > 0
+    ) {
       const { firstName, lastName } = event["speakers-abstract"].speakers[0];
       speaker = `${firstName} ${lastName}`;
     }
