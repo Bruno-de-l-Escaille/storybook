@@ -287,7 +287,7 @@ nav {
   margin: 0;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.2s ease-in-out;
+  // transition: all 0.2s ease-in-out;
   padding: 0 2rem 1rem;
   background: #fff;
   z-index: 1005;
@@ -574,7 +574,7 @@ nav {
     }
 
     &Wrapper {
-      top: calc(100% + 0.6rem);
+      top: 45px;
       padding: 0;
       width: 20rem;
       background: $athens-gray;
@@ -584,7 +584,7 @@ nav {
       margin: 0;
       opacity: 0;
       visibility: hidden;
-      transition: 0.2s all ease-in-out;
+      // transition: 0.2s all ease-in-out;
       z-index: 1005;
       cursor: default;
     }
@@ -676,7 +676,7 @@ nav {
 
   li {
     padding: 0 0.6rem;
-    transition: nth($transitions, 3);
+    // transition: nth($transitions, 3);
     &:hover::after {
       background-color: inherit;
     }
@@ -730,7 +730,7 @@ nav {
     width: 20rem;
     padding: 0;
     background: $athens-gray !important;
-    top: calc(100% + 0.6rem);
+    top: 45px;
     right: -5px;
     cursor: initial;
 
@@ -938,11 +938,12 @@ nav {
   border-top-right-radius: 0;
   opacity: 0;
   visibility: hidden;
-  transition: nth($transitions, 2);
+  // transition: nth($transitions, 2);
   //padding: 0 2rem 1rem;
   background: #fff;
   z-index: 1005;
   width: 24rem;
+
   .menu__dropdown-top {
     padding: 1rem 0;
     border-bottom: 1px solid rgba(44, 43, 63, 0.1);
@@ -977,10 +978,9 @@ nav {
     padding: 0 1rem 0 1rem;
   }
   .menu__dropdown {
-    // padding-top: 1rem;
     width: 15rem;
+
     li {
-      transition: nth($transitions, 2);
       &:hover > a {
         color: #2c2b3f;
       }
