@@ -35,6 +35,7 @@ export const Article = ({
   user,
   Link,
   host,
+  targetBlank,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -103,7 +104,7 @@ export const Article = ({
           </a>
         </Link>
       ) : (
-        <a href={url} taget="_blank" className={styles.title}>
+        <a href={url} target="_blank" rel="noreferrer" className={styles.title}>
           <h3>
             {title} {isPrivate && <i className="icon-sb-premium"></i>}
           </h3>
@@ -111,13 +112,26 @@ export const Article = ({
       );
     else
       return hasRelativePath ? (
-        <a href={url} className={styles.title}>
-          <h3>
-            {title} {isPrivate && <i className="icon-sb-premium"></i>}
-          </h3>
-        </a>
+        targetBlank ? (
+          <a
+            href={url}
+            target="_blank"
+            rel="noreferrer"
+            className={styles.title}
+          >
+            <h3>
+              {title} {isPrivate && <i className="icon-sb-premium"></i>}
+            </h3>
+          </a>
+        ) : (
+          <a href={url} className={styles.title}>
+            <h3>
+              {title} {isPrivate && <i className="icon-sb-premium"></i>}
+            </h3>
+          </a>
+        )
       ) : (
-        <a href={url} taget="_blank" className={styles.title}>
+        <a href={url} target="_blank" rel="noreferrer" className={styles.title}>
           <h3>
             {title} {isPrivate && <i className="icon-sb-premium"></i>}
           </h3>
