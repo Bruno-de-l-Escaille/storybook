@@ -79,8 +79,13 @@ export const Article = ({
         </div>
       );
     } else {
+      const newTypes = ["type5", "type6", "type7", "type8"];
       return (
-        <div className={styles.authorsContainer}>
+        <div
+          className={`${styles.authorsContainer} ${
+            newTypes.includes(type) && styles.authorsContainer_width
+          }`}
+        >
           <ul>
             {authors.map((author) => (
               <li key={`author-${id}-${author.id}`}>
@@ -265,10 +270,10 @@ export const Article = ({
     if (!publishedAt) return null;
     return (
       <div className={styles.publishedAtReadTime}>
-        Publié le
+        {I18N[language].publishedOn}
         {moment(publishedAt, API_DATE_FORMAT)
           .locale(language)
-          .format("DD MMM YYYY " + I18N[language].atText + " HH:mm")}
+          .format(" DD MMM YYYY " + I18N[language].atText + " HH:mm")}
         {readTime && (
           <div className={styles.readTime}>
             <div className={styles.dot}></div>

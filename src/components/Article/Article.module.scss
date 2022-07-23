@@ -364,6 +364,10 @@
     display: none;
   }
 
+  &_width {
+    width: 100%;
+  }
+
   ul {
     display: flex;
     width: max-content;
