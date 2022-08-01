@@ -11,7 +11,6 @@ import Communities from "./Communities";
 import Notifs from "./Notifs";
 import TTPFaqWidget from "../TTPFaqWidget";
 import * as icons from "../Icons";
-import classnames from "classnames";
 
 const I18N = {
   en: {
@@ -45,7 +44,7 @@ export class Header extends Component {
     if (this.props.portalSwitch && this.props.currentPortal) {
       this.setState({
         portalSwitchCurrent: this.props.portalSwitch.items.filter(
-          item => item.key === this.props.currentPortal
+          (item) => item.key === this.props.currentPortal
         )[0],
       });
     }
@@ -60,7 +59,7 @@ export class Header extends Component {
       if (this.props.portalSwitch && this.props.currentPortal) {
         this.setState({
           portalSwitchCurrent: this.props.portalSwitch.items.filter(
-            item => item.key === this.props.currentPortal
+            (item) => item.key === this.props.currentPortal
           )[0],
         });
       }
@@ -129,16 +128,20 @@ export class Header extends Component {
         {switchSpace && (
           <div className={styles.switchSpace}>
             <span
-              className={`${styles.switchSpace_left} ${switchSpace.current ===
-                switchSpace.items[0].key && styles.switchSpace_active}`}
+              className={`${styles.switchSpace_left} ${
+                switchSpace.current === switchSpace.items[0].key &&
+                styles.switchSpace_active
+              }`}
               onClick={() => switchSpace.onChange(switchSpace.items[0].key)}
             >
               {switchSpace.items[0].label}
             </span>
             <Icon />
             <span
-              className={`${styles.switchSpace_right} ${switchSpace.current ===
-                switchSpace.items[1].key && styles.switchSpace_active}`}
+              className={`${styles.switchSpace_right} ${
+                switchSpace.current === switchSpace.items[1].key &&
+                styles.switchSpace_active
+              }`}
               onClick={() => switchSpace.onChange(switchSpace.items[1].key)}
             >
               {switchSpace.items[1].label}
@@ -176,7 +179,7 @@ export class Header extends Component {
                       <li
                         key={index}
                         className={`${styles.portalSwitch_item} `}
-                        onClick={e => {
+                        onClick={(e) => {
                           e.stopPropagation();
                           portalSwitch.onChange(item);
                         }}
@@ -199,30 +202,28 @@ export class Header extends Component {
               {rightIcons.buttonLink.label}
             </MenuLinkIcon>
           )}
-          {rightIcons.backoffice?.activated &&
-            !onBackOfficeClick && (
-              <MenuLink icon="Settings" href={`${rightIcons.backoffice.url}`}>
-                {rightIcons.backoffice.label}
-              </MenuLink>
-            )}
-          {rightIcons.backoffice?.activated &&
-            onBackOfficeClick && (
-              <div
-                /* className={classnames(
+          {rightIcons.backoffice?.activated && !onBackOfficeClick && (
+            <MenuLink icon="Settings" href={`${rightIcons.backoffice.url}`}>
+              {rightIcons.backoffice.label}
+            </MenuLink>
+          )}
+          {rightIcons.backoffice?.activated && onBackOfficeClick && (
+            <div
+              /* className={classnames(
                 styles.back_office,
                 isBackOffice ? styles.clicked : ""
               )}*/
-                onClick={this.handleBackOffice.bind(this)}
-                className={styles.back_office_button}
+              onClick={this.handleBackOffice.bind(this)}
+              className={styles.back_office_button}
+            >
+              <MenuLink
+                icon="Settings"
+                className={isBackOffice ? styles.back_office_clicked : ""}
               >
-                <MenuLink
-                  icon="Settings"
-                  className={isBackOffice ? styles.back_office_clicked : ""}
-                >
-                  {rightIcons.backoffice.label}
-                </MenuLink>
-              </div>
-            )}
+                {rightIcons.backoffice.label}
+              </MenuLink>
+            </div>
+          )}
           {rightIcons.home.activated && (
             <MenuItem icon="Portal" href={`${rightIcons.home.url}`} />
           )}
@@ -251,8 +252,9 @@ export class Header extends Component {
               <MenuItem icon="Help" />
             </div>
           )}
-          {rightIcons.apps?.activated &&
-            navCommunity && <Apps apps={navCommunity.appsState} />}
+          {rightIcons.apps?.activated && navCommunity && (
+            <Apps apps={navCommunity.appsState} />
+          )}
 
           {rightIcons.search.activated && (
             <div onClick={this._Search.bind(this)}>
@@ -265,8 +267,8 @@ export class Header extends Component {
           user={user}
           lng={lng}
           rightIcons={rightIcons}
-          onLogoutClick={e => this.props.onLogoutClick(e)}
-          onLanguageChange={language => this.props.onLanguageChange(language)}
+          onLogoutClick={(e) => this.props.onLogoutClick(e)}
+          onLanguageChange={(language) => this.props.onLanguageChange(language)}
         />
       </div>
     );
@@ -280,7 +282,7 @@ export class Header extends Component {
     return (
       <div className={styles.headerRight}>
         <ul className={styles.headerLanguages}>
-          {languages.map(language => (
+          {languages.map((language) => (
             <li
               key={language}
               className={lng === language ? styles.headerLanguageSelected : ""}
@@ -296,8 +298,8 @@ export class Header extends Component {
             intendedApp
               ? `${homeUrl}/?intendedApp=${intendedApp}`
               : isPrivateBlog
-                ? `${homeUrl}/?gotoWithAuth=${appUrl}`
-                : `${homeUrl}/?goto=${appUrl}`
+              ? `${homeUrl}/?gotoWithAuth=${appUrl}`
+              : `${homeUrl}/?goto=${appUrl}`
           }
         >
           {I18N[lng]["signIn"]}
@@ -327,36 +329,32 @@ export class Header extends Component {
               this.state.showSettings ? styles.shadow : ""
             }`}
           >
-            {auth.navCommunity &&
-              auth.user &&
-              settings.length > 0 && (
-                <div>
-                  <span
-                    className={`icon-sb-more-vertical ${styles.settingsIcon}`}
-                    style={
-                      settings.length === 0 ? { visibility: "hidden" } : {}
-                    }
-                    onClick={this.handleShowSettings.bind(this)}
-                  />
-                  <ul
-                    className={`${styles.menuDropdown} ${
-                      this.state.showSettings ? styles.show : ""
-                    }`}
-                  >
-                    {settings.map(({ label, url }) => (
-                      <li key={url}>
-                        {Link ? (
-                          <Link href={url}>
-                            <a>{label}</a>
-                          </Link>
-                        ) : (
-                          <a href={url}>{label}</a>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+            {auth.navCommunity && auth.user && settings.length > 0 && (
+              <div>
+                <span
+                  className={`icon-sb-more-vertical ${styles.settingsIcon}`}
+                  style={settings.length === 0 ? { visibility: "hidden" } : {}}
+                  onClick={this.handleShowSettings.bind(this)}
+                />
+                <ul
+                  className={`${styles.menuDropdown} ${
+                    this.state.showSettings ? styles.show : ""
+                  }`}
+                >
+                  {settings.map(({ label, url }) => (
+                    <li key={url}>
+                      {Link ? (
+                        <Link href={url}>
+                          <a>{label}</a>
+                        </Link>
+                      ) : (
+                        <a href={url}>{label}</a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {Link ? (
               <Link href={appUrl}>
@@ -377,20 +375,18 @@ export class Header extends Component {
             )}
           </div>
 
-          {auth.user &&
-            auth.user.communities &&
-            !isPrivateBlog && (
-              <Communities
-                communities={auth.user.communities}
-                currentCommunity={auth.navCommunity}
-                lng={lng}
-                app={app}
-                Link={Link}
-                allCommunitiesUrl={allCommunitiesUrl}
-                onSelectAllCommunities={onSelectAllCommunities}
-                onSelectCommunity={onSelectCommunity}
-              />
-            )}
+          {auth.user && auth.user.communities && !isPrivateBlog && (
+            <Communities
+              communities={auth.user.communities}
+              currentCommunity={auth.navCommunity}
+              lng={lng}
+              app={app}
+              Link={Link}
+              allCommunitiesUrl={allCommunitiesUrl}
+              onSelectAllCommunities={onSelectAllCommunities}
+              onSelectCommunity={onSelectCommunity}
+            />
+          )}
         </div>
       </>
     );
@@ -424,15 +420,14 @@ export class Header extends Component {
           {this.renderLeftSide()}
           {!auth.user ? this.renderLoggedOut() : this.renderLoggedIn()}
         </header>
-        {loadNotifWidget &&
-          isFaqWidgetLoaded && (
-            <TTPFaqWidget
-              language={lng}
-              auth={auth}
-              faq
-              onLoadFAQ={this.handleOnLoadFAQ.bind(this)}
-            />
-          )}
+        {loadNotifWidget && isFaqWidgetLoaded && (
+          <TTPFaqWidget
+            language={lng}
+            auth={auth}
+            faq
+            onLoadFAQ={this.handleOnLoadFAQ.bind(this)}
+          />
+        )}
       </>
     );
   }

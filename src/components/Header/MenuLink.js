@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import classnames from "classnames";
+
 import * as icons from "../Icons";
 import styles from "./Header.module.scss";
-import classnames from "classnames";
 
 class MenuLink extends Component {
   render() {
