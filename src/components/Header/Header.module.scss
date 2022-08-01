@@ -428,7 +428,18 @@ nav {
     height: 36px;
     width: auto;
     margin-right: 0.6rem;
-
+    background-color: #ffffff;
+    &.back_office_clicked {
+      background-color: #29394d;
+      a {
+        color: white;
+        svg {
+          path {
+            fill: #fff;
+          }
+        }
+      }
+    }
     svg {
       width: 14px;
       height: 14px;
@@ -683,6 +694,17 @@ nav {
     &:hover a {
       color: $fiord;
       border: 0;
+    }
+  }
+
+  .back_office_button {
+    &:hover {
+      cursor: pointer;
+    }
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

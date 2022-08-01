@@ -56,6 +56,7 @@ const rightIcons = {
     activated: true,
     label: "Back office",
     url: "https://blog.tamtam.pro/fr",
+    clicked: false,
   },
 };
 
@@ -360,6 +361,7 @@ export const HeaderLoggedIn = () => (
     allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
     // onSelectAllCommunities={() => console.log("Communities select all")}
     onSelectCommunity={(community) => console.log("community click", community)}
+    onBackOfficeClick={(activate) => console.log("backOffice click : " + activate)}
     onFAQLoad={() => console.log("onFAQLoad", window.showFAQ)}
   />
 );

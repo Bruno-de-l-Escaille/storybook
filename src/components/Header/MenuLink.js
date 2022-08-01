@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as icons from "../Icons";
 import styles from "./Header.module.scss";
+import classnames from "classnames";
 
 class MenuLink extends Component {
   render() {
@@ -8,7 +9,7 @@ class MenuLink extends Component {
     const Icon = icons[icon];
 
     return (
-      <li className={`${styles.buttonLink}`}>
+      <li className={classnames(`${styles.buttonLink}`, className)}>
         <a href={href && href}>
           <Icon /> {children}
         </a>
