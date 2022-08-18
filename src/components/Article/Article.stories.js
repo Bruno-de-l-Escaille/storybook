@@ -114,9 +114,9 @@ export const Type4 = () => (
 export const Type5 = () => (
   <div className="grid-container">
     <div className="grid-x">
-      <div className="cell small-12 medium-6">
+      <div className="cell small-12 medium-4">
         <Article
-          article={articles[0]}
+          article={articles[4]}
           showSummary={true}
           type="type5"
           isFetching={boolean("isFetching", false)}
@@ -155,6 +155,25 @@ export const Type7 = () => (
           article={articles[0]}
           showSummary={true}
           type="type7"
+          isFetching={boolean("isFetching", false)}
+          onEdit={() => console.log("edit")}
+          onLike={() => console.log("like")}
+          user={{ id: 12 }}
+        />
+      </div>
+    </div>
+  </div>
+);
+
+export const Type7Large = () => (
+  <div className="grid-container">
+    <div className="grid-x">
+      <div className="cell small-12 medium-6">
+        <Article
+          article={articles[0]}
+          showSummary={true}
+          type="type7"
+          size="large"
           isFetching={boolean("isFetching", false)}
           onEdit={() => console.log("edit")}
           onLike={() => console.log("like")}

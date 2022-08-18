@@ -715,7 +715,11 @@ export const Article = ({
     // };
 
     return (
-      <div className={`${styles.articleTemplate5} ${styles[size]}`}>
+      <div
+        className={`${styles.articleTemplate5} ${
+          title.length > 120 && styles.smallImg
+        }`}
+      >
         <div className={styles.articleContainer}>
           <div
             className={classnames(
@@ -938,6 +942,9 @@ export const Article = ({
               </div>
             </div>
             {renderTitle()}
+            {size === "large" && (
+              <div className={styles.summary}>{introduction}</div>
+            )}
             {renderAvatar(true)}
             {renderPublishedAtRenderTime()}
             {renderUserSocialActions()}

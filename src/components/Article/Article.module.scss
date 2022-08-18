@@ -161,6 +161,17 @@
   .content {
     min-height: 216px;
   }
+
+  &.large {
+    .title {
+      max-height: 2 * 22px * 1.266;
+      margin-bottom: 14px;
+
+      h3 {
+        font-size: 20px;
+      }
+    }
+  }
 }
 .status {
   width: 100px;
@@ -412,12 +423,6 @@
     font-size: 16px;
   }
 
-  .title {
-    font-size: 22px;
-    max-height: 2 * 22px * 1.266;
-    margin-bottom: 14px;
-  }
-
   .summary {
     position: relative;
     font-weight: 300;
@@ -622,6 +627,13 @@
 // Template 5
 
 .articleTemplate5 {
+  &.smallImg {
+    .articleContainer {
+      .contentImg {
+        height: 210px;
+      }
+    }
+  }
   .version {
     position: absolute;
     bottom: 0;
@@ -676,12 +688,12 @@
         font-size: 20px;
         line-height: 23px;
         color: #29394d;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 3; /* number of lines to show */
-        line-clamp: 3;
-        -webkit-box-orient: vertical;
+        // overflow: hidden;
+        // text-overflow: ellipsis;
+        // display: -webkit-box;
+        // -webkit-line-clamp: 3; /* number of lines to show */
+        // line-clamp: 3;
+        // -webkit-box-orient: vertical;
       }
       .authorsContainer {
         margin-top: auto;
