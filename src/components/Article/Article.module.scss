@@ -630,7 +630,12 @@
   &.smallImg {
     .articleContainer {
       .contentImg {
-        height: 210px;
+        height: 190px;
+      }
+      .content {
+        .title h3 {
+          font-size: 19px;
+        }
       }
     }
   }
