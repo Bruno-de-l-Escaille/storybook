@@ -788,8 +788,10 @@ export const Article = ({
             </div>
             {renderTitle()}
             {renderAvatar()}
-            {renderPublishedAtRenderTime()}
-            {renderUserSocialActions()}
+            <div className={styles.bottomAction}>
+              {renderPublishedAtRenderTime()}
+              {renderUserSocialActions()}
+            </div>
           </div>
         </div>
       </div>
