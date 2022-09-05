@@ -8,6 +8,8 @@ import IconLoader from "../Icons/IconLoader";
 import IconMegaphone from "../Icons/IconMegaphone";
 import IconDuplicate from "../Icons/IconDuplicate";
 import IconCircleClose from "../Icons/IconCircleClose";
+import IconShare from "../Icons/IconShare";
+import IconAdd from "../Icons/IconAdd";
 
 import styles from "./ModalConfirm.module.scss";
 
@@ -38,6 +40,10 @@ export const ModalConfirm = (props) => {
         return <IconDuplicate />;
       case "return":
         return <IconCircleClose />;
+      case "share":
+        return <IconShare />;
+      case "add":
+        return <IconAdd />;
       default:
         return null;
     }

@@ -20,7 +20,7 @@ export const Delete = () => (
   <ModalConfirm
     type={select(
       "type",
-      ["delete", "publish", "send", "duplicate", "return"],
+      ["delete", "publish", "send", "duplicate", "return", "share", "add"],
       "delete"
     )}
     isOpen={boolean("isOpen", true)}
@@ -96,6 +96,38 @@ export const Return = () => (
     text="Toute modification sera annulée. "
     labelNo="Annuler"
     labelYes="Quitter"
+    labelError="Error"
+  />
+);
+
+export const Share = () => (
+  <ModalConfirm
+    type="share"
+    isOpen={true}
+    onCancel={() => console.log("cancel")}
+    onConfirm={() => console.log("handleOnConfirm")}
+    inProcess={false}
+    actionFailed={false}
+    title="Confirmation de partage"
+    text="Voulez-vous vraiment partager ce slide ?"
+    labelNo="No"
+    labelYes="Yes"
+    labelError="Error"
+  />
+);
+
+export const Add = () => (
+  <ModalConfirm
+    type="add"
+    isOpen={true}
+    onCancel={() => console.log("cancel")}
+    onConfirm={() => console.log("handleOnConfirm")}
+    inProcess={false}
+    actionFailed={false}
+    title="Confirmation d'ajout"
+    text="Voulez-vous vraiment ajouter ce slide ? "
+    labelNo="No"
+    labelYes="Yes"
     labelError="Error"
   />
 );

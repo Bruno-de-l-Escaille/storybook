@@ -229,6 +229,36 @@
     background-color: #ff636e;
   }
 }
+.share {
+  .header {
+    color: #02af8e;
+    background: #f1fbf9;
+    border-bottom: 1px solid #c7e8fe;
+    .icon {
+      background: #f1fbf9;
+      border: 1px solid rgba(98, 222, 176, 0.3);
+    }
+  }
+  .yes,
+  .deleting {
+    background-color: #06d9b1;
+  }
+}
+.add {
+  .header {
+    color: #2495e1;
+    background: #f3faff;
+    border-bottom: 1px solid #c7e8fe;
+    .icon {
+      background: #f3faff;
+      border: 1px solid #c7e8fe;
+    }
+  }
+  .yes,
+  .deleting {
+    background-color: #2495e1;
+  }
+}
 .deleting {
   cursor: not-allowed;
   &:hover {
