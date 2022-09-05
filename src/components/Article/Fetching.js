@@ -76,7 +76,7 @@ export const Fetching = (props) => {
               flexDirection: "column",
             }}
           >
-            <div style={{ flex: "1", width: "100%" }}>
+            <div style={{ marginBottom: "2rem" }}>
               <Skeleton width={100} height={25} />
             </div>
             <div className={styles.userActions}>
@@ -91,14 +91,16 @@ export const Fetching = (props) => {
                 <Skeleton width="100%" height={20} />
               </div>
 
-              {renderAvatar()}
-              <hr />
-              <div className={styles.actions}>
-                <Skeleton width={30} height={24} />
-                &nbsp;
-                <Skeleton width={30} height={24} />
-                <div style={{ marginLeft: "auto" }}>
-                  <Skeleton width={80} height={24} />
+              <div className={styles.bottomAction}>
+                {renderAvatar()}
+                <hr />
+                <div className={styles.actions}>
+                  <Skeleton width={30} height={24} />
+                  &nbsp;
+                  <Skeleton width={30} height={24} />
+                  <div style={{ marginLeft: "auto" }}>
+                    <Skeleton width={80} height={24} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -168,16 +170,17 @@ export const Fetching = (props) => {
               <Skeleton width="100%" height={20} />
             </div>
 
-            {renderAvatar()}
-
-            <div className={styles.userActions}>
-              <hr />
-              <div className={styles.actions}>
-                <Skeleton width={30} height={24} />
-                &nbsp;
-                <Skeleton width={30} height={24} />
-                <div style={{ marginLeft: "auto" }}>
-                  <Skeleton width={80} height={24} />
+            <div className={styles.bottomAction}>
+              {renderAvatar()}
+              <div className={styles.userActions}>
+                <hr />
+                <div className={styles.actions}>
+                  <Skeleton width={30} height={24} />
+                  &nbsp;
+                  <Skeleton width={30} height={24} />
+                  <div style={{ marginLeft: "auto" }}>
+                    <Skeleton width={80} height={24} />
+                  </div>
                 </div>
               </div>
             </div>
