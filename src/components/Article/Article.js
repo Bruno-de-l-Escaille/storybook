@@ -787,8 +787,8 @@ export const Article = ({
               </div>
             </div>
             {renderTitle()}
-            {renderAvatar()}
             <div className={styles.bottomAction}>
+              {renderAvatar()}
               {renderPublishedAtRenderTime()}
               {renderUserSocialActions()}
             </div>
