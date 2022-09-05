@@ -947,9 +947,12 @@ export const Article = ({
             {size === "large" && (
               <div className={styles.summary}>{introduction}</div>
             )}
-            {renderAvatar(true)}
-            {renderPublishedAtRenderTime()}
-            {renderUserSocialActions()}
+
+            <div className={styles.bottomAction}>
+              {renderAvatar(true)}
+              {renderPublishedAtRenderTime()}
+              {renderUserSocialActions()}
+            </div>
           </div>
         </div>
       </div>

@@ -930,7 +930,7 @@
         position: relative;
       }
       .meta {
-        margin-top: auto;
+        margin-top: 2rem;
         span {
           background-color: transparent;
           font-weight: 700;
@@ -995,6 +995,13 @@
       );
       border-radius: 5px;
     }
+  }
+  .bottomAction {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5%;
   }
 }
 // End Template 7
