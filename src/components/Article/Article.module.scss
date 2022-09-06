@@ -627,7 +627,31 @@
 // Template 5
 
 .articleTemplate5 {
-  &.smallImg {
+  &.smallImg1 {
+    .articleContainer {
+      .contentImg {
+        height: 230px;
+      }
+      .content {
+        .title h3 {
+          font-size: 19px;
+        }
+      }
+    }
+  }
+  &.smallImg2 {
+    .articleContainer {
+      .contentImg {
+        height: 210px;
+      }
+      .content {
+        .title h3 {
+          font-size: 19px;
+        }
+      }
+    }
+  }
+  &.smallImg3 {
     .articleContainer {
       .contentImg {
         height: 190px;
