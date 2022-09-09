@@ -16,10 +16,42 @@ const App = {
   appUrl: "https://unitedassociates.be",
 };
 
+// const rightIcons = {
+//   profile: {
+//     activated: false,
+//     url: "https://blog.tamtam.pro/fr",
+//   },
+// };
 const rightIcons = {
-  profile: {
-    activated: false,
+  home: {
+    activated: true,
     url: "https://blog.tamtam.pro/fr",
+  },
+  profile: {
+    activated: true,
+    url: "https://blog.tamtam.pro/fr",
+  },
+  ebox: {
+    activated: true,
+    url: "https://blog.tamtam.pro/fr",
+  },
+  search: {
+    activated: false,
+  },
+  notifs: {
+    activated: true,
+  },
+  apps: {
+    activated: true,
+  },
+  faq: {
+    activated: true,
+  },
+  backoffice: {
+    activated: true,
+    label: "Back office",
+    url: "https://blog.tamtam.pro/fr",
+    clicked: false,
   },
 };
 

@@ -4,6 +4,8 @@ import AppendHead from "react-append-head";
 import styles from "./Header.module.scss";
 import MenuItem from "./MenuItem";
 import MenuProfile from "./MenuProfile";
+import Notifs from "./Notifs";
+
 import TTPFaqWidget from "../TTPFaqWidget";
 import * as icons from "../Icons";
 
@@ -95,13 +97,16 @@ export class HeaderUA extends Component {
       auth,
       lng,
       languages,
+      env,
+      notifications,
+      app,
       switchSpace,
       portalSwitch,
       currentPortal,
       RouterLink,
     } = this.props;
-    const { portalSwitchCurrent } = this.state;
-    const { user } = auth;
+    const { portalSwitchCurrent, isFaqWidgetLoaded } = this.state;
+    const { user, navCommunity } = auth;
 
     const Icon = icons["Portal"];
     const IconSetting = icons["Settings"];
@@ -179,6 +184,25 @@ export class HeaderUA extends Component {
         <ul className={`${styles.menu} ${styles.buttons}`}>
           {rightIcons.profile.activated && (
             <MenuItem icon="Profile" href={`${rightIcons.profile.url}`} />
+          )}
+          {rightIcons.notifs.activated && (
+            <Notifs
+              notifications={notifications}
+              lng={lng}
+              env={env}
+              auth={auth}
+              navCommunity={navCommunity}
+              appName={app.appName}
+              isFaqWidgetLoaded={isFaqWidgetLoaded}
+            />
+          )}
+          {rightIcons.faq?.activated && (
+            <div
+              onClick={this.handleFaqClick.bind(this)}
+              className={!isFaqWidgetLoaded && styles.iconLoading}
+            >
+              <MenuItem icon="Help" />
+            </div>
           )}
         </ul>
 
