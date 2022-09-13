@@ -1,35 +1,50 @@
+import classNames from "classnames";
 import React from "react";
 
 import styles from "./FooterUA.module.scss";
 
-const footerUA = ({ auth, data, lng, portalSwitch, navigateTo }) => {
-  const titleAttr = `title${lng.charAt(0).toUpperCase() + lng.slice(1)}`;
+const footerUA = ({
+  navigateTo,
+  primaryLogo,
+  secondaryLogo,
+  firstList,
+  secondList,
+  thirdList,
+}) => {
   return (
     <div className={styles.footer}>
-      <div className={styles.content}>
-        <div className={styles.logos}>
-          <div
-            className={styles.uaLogo}
-            style={{
-              backgroundImage:
-                'url("https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/logo/ua.png")',
-            }}
-          ></div>
+      <div className={classNames(styles.content, "grid-x")}>
+        <div
+          className={classNames(styles.logos, "cell small-12 medium-6 large-3")}
+        >
+          {primaryLogo && (
+            <div
+              className={styles.uaLogo}
+              style={{
+                backgroundImage: `url(${primaryLogo})`,
+              }}
+            ></div>
+          )}
 
-          {auth.navCommunity && (
+          {secondaryLogo && (
             <div
               className={styles.communityLogo}
               style={{
-                backgroundImage: `url(${auth.navCommunity.avatarUrl})`,
+                backgroundImage: `url(${secondaryLogo})`,
               }}
             ></div>
           )}
         </div>
-        {auth.user.isUaAdmin && (
-          <div className={styles.section}>
+        {firstList && (
+          <div
+            className={classNames(
+              styles.section,
+              "cell small-12 medium-6 large-3"
+            )}
+          >
             <ul>
-              {portalSwitch.map((el) => (
-                <li onClick={() => navigateTo(el.url, "ua")}>
+              {firstList.map((el) => (
+                <li onClick={() => navigateTo(el.url)}>
                   <div className={styles.block}></div>
                   {el.label}
                 </li>
@@ -37,25 +52,35 @@ const footerUA = ({ auth, data, lng, portalSwitch, navigateTo }) => {
             </ul>
           </div>
         )}
-        <div className={styles.section}>
-          <ul>
-            <li>
-              <div className={styles.block}></div>
-              {"terms_of_use"}
-            </li>
-            <li>
-              <div className={styles.block}></div>
-              {"privacy_policy"}
-            </li>
-          </ul>
-        </div>
-        {data && (
-          <div className={styles.section}>
+        {secondList && (
+          <div
+            className={classNames(
+              styles.section,
+              "cell small-12 medium-6 large-3"
+            )}
+          >
             <ul>
-              {data.map((rubric) => (
-                <li onClick={() => navigateTo(rubric.id, "faq")}>
+              {secondList.map((el) => (
+                <li onClick={() => navigateTo(el.url)}>
                   <div className={styles.block}></div>
-                  {rubric.versions[0][titleAttr]}
+                  {el.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {thirdList && (
+          <div
+            className={classNames(
+              styles.section,
+              "cell small-12 medium-6 large-3"
+            )}
+          >
+            <ul>
+              {thirdList.map((el) => (
+                <li onClick={() => navigateTo(el.url)}>
+                  <div className={styles.block}></div>
+                  {el.label}
                 </li>
               ))}
             </ul>
