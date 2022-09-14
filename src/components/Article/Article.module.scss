@@ -954,7 +954,8 @@
         position: relative;
       }
       .meta {
-        margin-top: 8rem;
+        margin-top: 10rem;
+        // margin-bottom: 0;
         span {
           background-color: transparent;
           font-weight: 700;
@@ -975,7 +976,7 @@
       }
       .title h3 {
         color: #fff;
-        margin: 4% 0%;
+        // margin: 4% 0%;
         text-align: left;
         font-weight: 600;
         font-size: 20px;

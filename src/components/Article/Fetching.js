@@ -76,7 +76,7 @@ export const Fetching = (props) => {
               flexDirection: "column",
             }}
           >
-            <div style={{ marginBottom: "2rem" }}>
+            <div style={{ marginBottom: "10rem" }}>
               <Skeleton width={100} height={25} />
             </div>
             <div className={styles.userActions}>
