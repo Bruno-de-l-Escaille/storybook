@@ -948,9 +948,6 @@ export const Article = ({
               </div>
             </div>
             {renderTitle()}
-            {size === "large" && (
-              <div className={styles.summary}>{introduction}</div>
-            )}
 
             <div className={styles.bottomAction}>
               {renderAvatar(true)}

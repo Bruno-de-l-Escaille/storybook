@@ -44,7 +44,16 @@ export class SubMenu extends Component {
   };
 
   renderItemMenuWithSubmenu = (item) => {
-    const { Link, RouterLink } = this.props;
+    const { Link, RouterLink, queryParams } = this.props;
+
+    const moreHref = {
+      pathname: item.more ? item.more.url : "",
+    };
+    if (queryParams) {
+      moreHref.query = {
+        params: queryParams,
+      };
+    }
 
     return (
       <li className={style.dropdown} key={`smenu-${Math.random()}`}>
@@ -65,7 +74,7 @@ export class SubMenu extends Component {
           <ul>{this.renderSubmenu(item.submenu)}</ul>
           {item.more &&
             (Link ? (
-              <Link href={item.more.url}>
+              <Link href={moreHref}>
                 <a className={style.more}>{item.more.title}</a>
               </Link>
             ) : RouterLink ? (
@@ -83,31 +92,42 @@ export class SubMenu extends Component {
   };
 
   renderSubmenu = (data) => {
-    const { Link, RouterLink } = this.props;
-    return data.map((item) => (
-      <li key={`smenu-${Math.random()}`}>
-        <div
-          className={
-            this.state.isVertical ? style.subitemvertical : style.subitem
-          }
-        >
-          {item.avatarUrl && (
-            <img className={style.avatar} src={item.avatarUrl} />
-          )}
-          {item.iconUrl && <img src={item.iconUrl} />}
+    const { Link, RouterLink, queryParams } = this.props;
 
-          {Link ? (
-            <Link href={item.url}>
-              <a>{item.title}</a>
-            </Link>
-          ) : RouterLink ? (
-            <RouterLink to={item.url}>{item.title}</RouterLink>
-          ) : (
-            <a href={item.url}>{item.title} </a>
-          )}
-        </div>
-      </li>
-    ));
+    return data.map((item) => {
+      const href = {
+        pathname: item.url,
+      };
+      if (queryParams) {
+        href.query = {
+          params: queryParams,
+        };
+      }
+      return (
+        <li key={`smenu-${Math.random()}`}>
+          <div
+            className={
+              this.state.isVertical ? style.subitemvertical : style.subitem
+            }
+          >
+            {item.avatarUrl && (
+              <img className={style.avatar} src={item.avatarUrl} />
+            )}
+            {item.iconUrl && <img src={item.iconUrl} />}
+
+            {Link ? (
+              <Link href={href}>
+                <a>{item.title}</a>
+              </Link>
+            ) : RouterLink ? (
+              <RouterLink to={item.url}>{item.title}</RouterLink>
+            ) : (
+              <a href={item.url}>{item.title} </a>
+            )}
+          </div>
+        </li>
+      );
+    });
   };
 
   render() {

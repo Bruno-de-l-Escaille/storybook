@@ -954,7 +954,7 @@
         position: relative;
       }
       .meta {
-        margin-top: 2rem;
+        margin-top: 8rem;
         span {
           background-color: transparent;
           font-weight: 700;
@@ -980,6 +980,11 @@
         font-weight: 600;
         font-size: 20px;
         line-height: 23px;
+
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
       }
       .authorsContainer ul li .avatarContainer .avatarInfo .avatarName {
         display: none;
@@ -1026,6 +1031,24 @@
     left: 0;
     width: 100%;
     padding: 1rem;
+  }
+
+  .version {
+    position: absolute;
+    top: 50px;
+    display: none;
+  }
+
+  &.large {
+    .articleContainer {
+      .contentImg {
+        .title h3 {
+          font-size: 28px;
+          line-height: 33px;
+          -webkit-line-clamp: 5;
+        }
+      }
+    }
   }
 }
 // End Template 7
