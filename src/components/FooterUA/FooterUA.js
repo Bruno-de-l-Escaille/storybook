@@ -3,7 +3,7 @@ import React from "react";
 
 import styles from "./FooterUA.module.scss";
 
-const footerUA = ({
+const FooterUA = ({
   navigateTo,
   primaryLogo,
   secondaryLogo,
@@ -94,4 +94,4 @@ const footerUA = ({
   );
 };
 
-export default footerUA;
+export default FooterUA;
