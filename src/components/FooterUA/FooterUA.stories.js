@@ -34,114 +34,35 @@ const auth = {
   },
 };
 
+const policy = [
+  { label: "terms_of_use", url: "/" },
+  { label: "privacy_policy", url: "/" },
+];
+
 const data = [
-  {
-    id: 5,
-    order: 1,
-    showInFooter: true,
-    versions: [
-      {
-        id: 12,
-        name: "1.3",
-        titleFr: "v 1.3 fr",
-        titleEn: "v 1.3 en",
-        titleNl: "v 1.3 nl",
-        status: "PUBLISHED",
-        introductionFr: "v 1.3 fr",
-        introductionEn: "<p>v 1.3 en<br></p>",
-        introductionNl: "<p>v 1.3 nl<br></p>",
-        publishedAt: "2022-09-09 16:55:38",
-      },
-      {
-        id: 11,
-        name: "1.2",
-        titleFr: "azazd",
-        titleEn: "",
-        titleNl: "",
-        status: "DRAFT",
-        introductionFr: "dada",
-        introductionEn: "",
-        introductionNl: "",
-      },
-      {
-        id: 7,
-        name: "1.1",
-        titleFr: "test",
-        titleEn: "test",
-        titleNl: "test",
-        status: "PUBLISHED",
-        introductionFr: "test",
-        introductionEn: "test",
-        introductionNl: "test",
-        publishedAt: "2022-09-09 11:25:26",
-      },
-      {
-        id: 6,
-        name: "1.0",
-        titleFr: "test",
-        titleEn: "test",
-        titleNl: "test",
-        status: "DRAFT",
-        introductionFr: "test",
-        introductionEn: "test",
-        introductionNl: "test",
-      },
-    ],
-  },
-  {
-    id: 7,
-    order: 2,
-    showInFooter: false,
-    versions: [
-      {
-        id: 14,
-        name: "1.0",
-        titleFr: "another one",
-        titleEn: "",
-        titleNl: "",
-        status: "DRAFT",
-        introductionFr: "another one",
-        introductionEn: "",
-        introductionNl: "",
-      },
-    ],
-  },
-  {
-    id: 6,
-    order: 3,
-    showInFooter: false,
-    versions: [
-      {
-        id: 13,
-        name: "1.0",
-        titleFr: "new rub test",
-        titleEn: "",
-        titleNl: "",
-        status: "PUBLISHED",
-        introductionFr: "new rub test",
-        introductionEn: "",
-        introductionNl: "",
-        publishedAt: "2022-09-11 11:56:08",
-      },
-    ],
-  },
+  { label: "v 1.3 fr", url: "/privacy?rub=5" },
+  { label: "another one", url: "/privacy?rub=7" },
+  { label: "new rub test", url: "/privacy?rub=6" },
 ];
 
 const portalSwitch = [
-  { key: "COLLABORATOR", label: "Portail collaborateur", url: "/collaborator" },
-  { key: "CLIENT", label: "Portail client", url: "/client" },
-  { key: "PUBLIC", label: "Portail publique", url: "/public" },
-  { key: "SETTINGS", label: "Configuration", url: "/settings" },
+  { label: "Portail collaborateur", url: "/collaborator" },
+  { label: "Portail client", url: "/client" },
+  { label: "Portail publique", url: "/public" },
+  { label: "Configuration", url: "/settings" },
 ];
 
 export const Basic = () => (
   <FooterUA
-    auth={auth}
-    lng={select("language", ["fr", "nl", "en"], "fr")}
-    data={data}
-    portalSwitch={portalSwitch}
-    navigateTo={(value, type) => {
-      console.log(value, type);
+    primaryLogo={
+      "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/logo/ua.png"
+    }
+    secondaryLogo={auth.navCommunity.avatarUrl}
+    firstList={portalSwitch}
+    secondList={policy}
+    thirdList={data}
+    navigateTo={(url) => {
+      console.log(url);
     }}
   />
 );
