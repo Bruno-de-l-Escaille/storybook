@@ -1,37 +1,14 @@
 import React from "react";
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { withKnobs, select } from "@storybook/addon-knobs";
+
+import { withKnobs } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 
-import FooterUA from "./FooterUA";
+import { FooterUA } from "./FooterUA";
 
 export default {
   title: "FooterUA",
   component: FooterUA,
   decorators: [StoryRouter(), (story) => <div>{story()}</div>, withKnobs],
-};
-
-const auth = {
-  token: "00882984434b82623e1831486530a29d44efffd9",
-  loggedAs: "ADMIN",
-  navCommunity: {
-    id: 9,
-    name: "Forum For The Future",
-    abbreviation: "F.F.F.",
-    avatarUrl:
-      "https://s3.tamtam.pro/v2/storage/media/IMAGE/2174/AVATAR_a55cc7155830b08e45678b3bc4ed02f3e190fc96.png",
-  },
-  user: {
-    type: "ADMIN",
-    id: 8650,
-    firstName: "Emmanuel",
-    lastName: "Degrève",
-    mainEmail: "emmanuel.degreve@degandpartners.com",
-    isUaAdmin: true,
-    avatarUrl:
-      "https://s3.tamtam.pro/v2/storage/media/IMAGE/31/AVATAR_70d83b21836dec24e6ec10e5d38a0ac3d96cbed2.png",
-  },
 };
 
 const policy = [
@@ -57,7 +34,9 @@ export const Basic = () => (
     primaryLogo={
       "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/logo/ua.png"
     }
-    secondaryLogo={auth.navCommunity.avatarUrl}
+    secondaryLogo={
+      "https://s3.tamtam.pro/v2/storage/media/IMAGE/2174/AVATAR_a55cc7155830b08e45678b3bc4ed02f3e190fc96.png"
+    }
     firstList={portalSwitch}
     secondList={policy}
     thirdList={data}
