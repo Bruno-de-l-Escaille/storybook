@@ -10,3 +10,4 @@ export * from "./Settings";
 export * from "./IconFacebook";
 export * from "./IconLinkedin";
 export * from "./IconTwitter";
+export * from "./IconSetting";

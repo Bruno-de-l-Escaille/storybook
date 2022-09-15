@@ -109,7 +109,7 @@ export class HeaderUA extends Component {
     const { user, navCommunity } = auth;
 
     const Icon = icons["Portal"];
-    const IconSetting = icons["Settings"];
+    const IconSetting = icons["IconSetting"];
 
     return (
       <div className={styles.headerRight}>

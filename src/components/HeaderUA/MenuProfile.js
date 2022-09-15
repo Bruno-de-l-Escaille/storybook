@@ -75,9 +75,15 @@ class MenuProfile extends Component {
         lastName={lastName}
         showInfo={false}
         noMargin={true}
+        isLarge={true}
       />
     ) : (
-      <Avatar firstName={firstName} lastName={lastName} showInfo={false} />
+      <Avatar
+        firstName={firstName}
+        lastName={lastName}
+        showInfo={false}
+        isLarge={true}
+      />
     );
 
     return (
