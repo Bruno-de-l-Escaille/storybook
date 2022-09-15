@@ -1,0 +1,75 @@
+.footer {
+  margin-top: 2rem;
+}
+
+.copyright {
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: #6d7f92;
+}
+
+.content {
+  background-color: #fff;
+  min-height: 12.5rem;
+  padding: 2.5rem 5rem;
+  display: flex;
+}
+
+.logos {
+  height: 100%;
+  padding-top: 0.563rem;
+  width: 19.063rem;
+}
+
+.uaLogo {
+  height: 2.375rem;
+  width: 8.813rem;
+  margin-bottom: 1.75rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.communityLogo {
+  height: 2.375rem;
+  width: 6.25rem;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.section {
+  min-height: 7.5rem;
+  border-left: 1px solid #f1f2f4;
+  width: 20.25rem;
+  padding-top: 0.688rem;
+  ul li {
+    width: fit-content;
+    cursor: pointer;
+    height: 1rem;
+    margin-bottom: 0.625rem;
+    font-size: 0.875rem;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    &:last-child {
+      margin-bottom: 0rem;
+    }
+    &:hover {
+      color: #18a0fb;
+      .block {
+        background-color: #18a0fb;
+      }
+    }
+  }
+}
+.block {
+  width: 10px;
+  height: 6px;
+  background: #d8dde2;
+  border-radius: 0px 3px 3px 0px;
+  margin-right: 1.25rem;
+}
