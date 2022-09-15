@@ -3,6 +3,7 @@ import "./styles/global.scss";
 export * from "./components/Header/Header";
 export * from "./components/Header/SubMenu";
 export * from "./components/HeaderUA/HeaderUA";
+export * from "./components/FooterUA/FooterUA";
 export * from "./components/Article/Article";
 export * from "./components/Article/ArticleList";
 export * from "./components/Article/ArticleListCarousel";
