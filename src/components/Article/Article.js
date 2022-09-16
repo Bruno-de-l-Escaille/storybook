@@ -70,8 +70,7 @@ export const Article = ({
     language,
     readTime,
   } = data;
-  // const hasRights = isUserHasRights(user, article);
-  const hasRights = true;
+  const hasRights = isUserHasRights(user, article);
   const hasActions =
     hasRights && (onDelete || onEdit || onPublish) ? true : false;
   const mediaUrl = medias && medias.length > 0 ? medias[0].path : mainMedia;
