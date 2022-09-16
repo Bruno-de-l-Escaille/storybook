@@ -10,6 +10,7 @@ import { Fetching } from "./Fetching";
 import { prepareArticle, isUserHasRights, addLandaSize } from "../../utils";
 import classnames from "classnames";
 import { I18N } from "../../i18n";
+import { IconTranslate, IconStar, IconSlider } from "../Icons";
 
 const API_DATE_FORMAT = "YYYY-MM-DD HH:mm:ss";
 
@@ -24,6 +25,9 @@ export const Article = ({
   onPublish,
   onEdit,
   onDelete,
+  onTranslate,
+  onRelevance,
+  onPosition,
   onLike,
   onDislike,
   saveFavorite,
@@ -66,7 +70,8 @@ export const Article = ({
     language,
     readTime,
   } = data;
-  const hasRights = isUserHasRights(user, article);
+  // const hasRights = isUserHasRights(user, article);
+  const hasRights = true;
   const hasActions =
     hasRights && (onDelete || onEdit || onPublish) ? true : false;
   const mediaUrl = medias && medias.length > 0 ? medias[0].path : mainMedia;
@@ -908,6 +913,21 @@ export const Article = ({
                     <i className="icon-sb-edit" onClick={() => onEdit()}></i>
                   </button>
                 )}
+                {onTranslate && (
+                  <button onClick={() => onTranslate()}>
+                    <IconTranslate />
+                  </button>
+                )}
+                {onRelevance && (
+                  <button onClick={() => onRelevance()}>
+                    <IconStar />
+                  </button>
+                )}
+                {onPosition && (
+                  <button onClick={() => onPosition()}>
+                    <IconSlider />
+                  </button>
+                )}
                 {onDelete && (
                   <button
                     className={styles["btn-delete"]}
@@ -1038,6 +1058,102 @@ export const Article = ({
     );
   };
 
+  const renderFeatured = () => {
+    return (
+      <div className={`${styles.articleFeatured}`}>
+        <div className={styles.articleContainer}>
+          <div
+            className={classnames(
+              styles.contentImg,
+              hasActions ? styles.hasActions : ""
+            )}
+            style={{
+              backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
+            }}
+          >
+            {hasActions && (
+              <div className={styles.buttons}>
+                {status !== "PUBLISHED" && onPublish && (
+                  <div>
+                    <button onClick={() => onPublish()}>
+                      <i className="icon-sb-paper-airplane"></i>
+                    </button>
+                  </div>
+                )}
+                {onEdit && (
+                  <button>
+                    <i className="icon-sb-edit" onClick={() => onEdit()}></i>
+                  </button>
+                )}
+                {onTranslate && (
+                  <button onClick={() => onTranslate()}>
+                    <IconTranslate />
+                  </button>
+                )}
+                {onRelevance && (
+                  <button onClick={() => onRelevance()}>
+                    <IconStar />
+                  </button>
+                )}
+                {onPosition && (
+                  <button onClick={() => onPosition()}>
+                    <IconSlider />
+                  </button>
+                )}
+                {onDelete && (
+                  <button
+                    className={styles["btn-delete"]}
+                    onClick={() => onDelete()}
+                  >
+                    <i className="icon-sb-trash"></i>
+                  </button>
+                )}
+              </div>
+            )}
+            <div className={styles.categoryChannel}>
+              <div
+                className={styles.category}
+                style={{ background: `${category.colorCode}` }}
+              >
+                {category.name}
+              </div>
+              {article.avatars && article.avatars.length > 0 && (
+                <div
+                  className={styles.channel}
+                  style={{
+                    backgroundImage: `url(${article.avatars[0].avatarUrl})`,
+                  }}
+                ></div>
+              )}
+            </div>
+            {article.relatedArticles &&
+              renderRelatedArticles(article.relatedArticles)}
+            <div className={styles.metaBox}>
+              <div className={styles.meta}>
+                {articleType && articleType.name ? (
+                  <span>{articleType.name}</span>
+                ) : null}
+                <div
+                  className={styles.community}
+                  style={{ borderLeftColor: category.colorCode }}
+                >
+                  {communityName}
+                </div>
+              </div>
+              {renderTitle()}
+            </div>
+
+            <div className={styles.bottomAction}>
+              {renderAvatar(true)}
+              {renderPublishedAtRenderTime()}
+              {renderUserSocialActions()}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   switch (type) {
     case "type2":
       return renderType2();
@@ -1059,6 +1175,9 @@ export const Article = ({
       break;
     case "type8":
       return renderType8();
+      break;
+    case "featured":
+      return renderFeatured();
       break;
     default:
       return renderDefault();

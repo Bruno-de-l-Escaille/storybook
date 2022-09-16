@@ -157,6 +157,9 @@ export const Type7 = () => (
           type="type7"
           isFetching={boolean("isFetching", false)}
           onEdit={() => console.log("edit")}
+          onTranslate={() => console.log("translate")}
+          onRelevance={() => console.log("relevance")}
+          onPosition={() => console.log("position")}
           onLike={() => console.log("like")}
           user={{ id: 12 }}
         />
@@ -176,6 +179,9 @@ export const Type7Large = () => (
           size="large"
           isFetching={boolean("isFetching", false)}
           onEdit={() => console.log("edit")}
+          onTranslate={() => console.log("translate")}
+          onRelevance={() => console.log("relevance")}
+          onPosition={() => console.log("position")}
           onLike={() => console.log("like")}
           user={{ id: 12 }}
         />
@@ -194,6 +200,28 @@ export const Type8 = () => (
           type="type8"
           isFetching={boolean("isFetching", false)}
           onEdit={() => console.log("edit")}
+          onLike={() => console.log("like")}
+          user={{ id: 12 }}
+        />
+      </div>
+    </div>
+  </div>
+);
+
+export const Featured = () => (
+  <div className="grid-container">
+    <div className="grid-x">
+      <div className="cell small-12 medium-12">
+        <Article
+          article={articles[0]}
+          showSummary={true}
+          type="featured"
+          size="large"
+          isFetching={boolean("isFetching", false)}
+          onEdit={() => console.log("edit")}
+          onTranslate={() => console.log("translate")}
+          onRelevance={() => console.log("relevance")}
+          onPosition={() => console.log("position")}
           onLike={() => console.log("like")}
           user={{ id: 12 }}
         />

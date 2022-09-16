@@ -11,3 +11,6 @@ export * from "./IconFacebook";
 export * from "./IconLinkedin";
 export * from "./IconTwitter";
 export * from "./IconSetting";
+export * from "./IconTranslate";
+export * from "./IconStar";
+export * from "./IconSlider";
