@@ -10,7 +10,6 @@ import IconDuplicate from "../Icons/IconDuplicate";
 import IconCircleClose from "../Icons/IconCircleClose";
 import IconShare from "../Icons/IconShare";
 import IconAdd from "../Icons/IconAdd";
-import IconPadlock from "../Icons/IconPadlock";
 
 import styles from "./ModalConfirm.module.scss";
 
@@ -45,8 +44,6 @@ export const ModalConfirm = (props) => {
         return <IconShare />;
       case "add":
         return <IconAdd />;
-      case "privatize":
-        return <IconPadlock />;
       default:
         return null;
     }
