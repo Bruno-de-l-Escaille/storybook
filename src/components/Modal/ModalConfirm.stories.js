@@ -20,7 +20,16 @@ export const Delete = () => (
   <ModalConfirm
     type={select(
       "type",
-      ["delete", "publish", "send", "duplicate", "return", "share", "add"],
+      [
+        "delete",
+        "publish",
+        "send",
+        "duplicate",
+        "return",
+        "share",
+        "add",
+        "privatize",
+      ],
       "delete"
     )}
     isOpen={boolean("isOpen", true)}
@@ -126,6 +135,22 @@ export const Add = () => (
     actionFailed={false}
     title="Confirmation d'ajout"
     text="Voulez-vous vraiment ajouter ce slide ? "
+    labelNo="No"
+    labelYes="Yes"
+    labelError="Error"
+  />
+);
+
+export const Privatize = () => (
+  <ModalConfirm
+    type="privatize"
+    isOpen={true}
+    onCancel={() => console.log("cancel")}
+    onConfirm={() => console.log("handleOnConfirm")}
+    inProcess={false}
+    actionFailed={false}
+    title="Visibilité Slide"
+    text="Voulez-vous vraiment rendre ce slide privé ? "
     labelNo="No"
     labelYes="Yes"
     labelError="Error"
