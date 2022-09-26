@@ -7,7 +7,12 @@ import "moment/locale/nl";
 import styles from "./Article.module.scss";
 import { AuthorAvatar } from "../Avatar/AuthorAvatar";
 import { Fetching } from "./Fetching";
-import { prepareArticle, isUserHasRights, addLandaSize } from "../../utils";
+import {
+  prepareArticle,
+  isUserHasRights,
+  addLandaSize,
+  convertDateFromUTC,
+} from "../../utils";
 import classnames from "classnames";
 import { I18N } from "../../i18n";
 import { IconTranslate, IconStar, IconSlider } from "../Icons";
@@ -275,9 +280,12 @@ export const Article = ({
     return (
       <div className={styles.publishedAtReadTime}>
         {I18N[language].publishedOn}
-        {moment(publishedAt, API_DATE_FORMAT)
-          .locale(language)
-          .format(" DD MMM YYYY " + I18N[language].atText + " HH:mm")}
+        {convertDateFromUTC(
+          publishedAt,
+          language,
+          API_DATE_FORMAT,
+          " DD MMM YYYY " + I18N[language].atText + " HH:mm"
+        )}
         {readTime && (
           <div className={styles.readTime}>
             <div className={styles.dot}></div>

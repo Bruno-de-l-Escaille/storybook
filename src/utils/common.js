@@ -1,3 +1,9 @@
+import moment from "moment-timezone";
+import "moment/locale/fr";
+import "moment/locale/nl";
+
+const API_DATE_FORMAT = "YYYY-MM-DD HH:mm:ss";
+
 export function addLandaSize(img, width = 0, height = 0) {
   let result = img;
   let found = false;
@@ -119,3 +125,29 @@ export const getDateLabel = (date) => {
     minutes
   );
 };
+
+/**
+ * Convert a date from UTC to client Timezone
+ *
+ * @param date string
+ * @param srcFormat string
+ * @param destFormat string
+ *
+ * @return string formatted local date (in destFormat format)
+ */
+export function convertDateFromUTC(
+  date,
+  language,
+  srcFormat = API_DATE_FORMAT,
+  destFormat = API_DATE_FORMAT
+) {
+  if (!date) {
+    return "";
+  }
+
+  var offsetMinutes = new Date().getTimezoneOffset();
+  return moment(date, [srcFormat])
+    .locale(language)
+    .subtract(offsetMinutes, "minutes")
+    .format(destFormat);
+}
