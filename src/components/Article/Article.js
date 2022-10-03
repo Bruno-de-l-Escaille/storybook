@@ -425,9 +425,12 @@ export const Article = ({
         >
           {publishedAt && (
             <div className={styles.publishedAt}>
-              {moment(publishedAt, API_DATE_FORMAT)
-                .locale(language)
-                .format("DD MMM YYYY " + I18N[language].atText + " HH:mm")}
+              {convertDateFromUTC(
+                publishedAt,
+                language,
+                API_DATE_FORMAT,
+                " DD MMM YYYY " + I18N[language].atText + " HH:mm"
+              )}
             </div>
           )}
           <div
@@ -517,9 +520,12 @@ export const Article = ({
             <div className={styles.content}>
               {publishedAt && (
                 <div className={styles.publishedAt}>
-                  {moment(publishedAt, API_DATE_FORMAT)
-                    .locale(language)
-                    .format("DD MMM YYYY " + I18N[language].atText + " HH:mm")}
+                  {convertDateFromUTC(
+                    publishedAt,
+                    language,
+                    API_DATE_FORMAT,
+                    " DD MMM YYYY " + I18N[language].atText + " HH:mm"
+                  )}
                 </div>
               )}
               <div
@@ -568,9 +574,12 @@ export const Article = ({
         <div className={styles.articleContainer}>
           {publishedAt && (
             <div className={styles.publishedAt}>
-              {moment(publishedAt, API_DATE_FORMAT)
-                .locale(language)
-                .format("DD MMM YYYY " + I18N[language].atText + " HH:mm")}
+              {convertDateFromUTC(
+                publishedAt,
+                language,
+                API_DATE_FORMAT,
+                " DD MMM YYYY " + I18N[language].atText + " HH:mm"
+              )}
             </div>
           )}
 
@@ -668,9 +677,12 @@ export const Article = ({
         >
           {publishedAt && (
             <div className={styles.publishedAt}>
-              {moment(publishedAt, API_DATE_FORMAT)
-                .locale(language)
-                .format("DD MMM YYYY " + I18N[language].atText + " HH:mm")}
+              {convertDateFromUTC(
+                publishedAt,
+                language,
+                API_DATE_FORMAT,
+                " DD MMM YYYY " + I18N[language].atText + " HH:mm"
+              )}
             </div>
           )}
 
