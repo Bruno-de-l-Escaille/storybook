@@ -257,6 +257,19 @@ export default {
 
 const languages = ["fr", "nl", "en"];
 const noLanguages = [];
+const policy = [{ label: "terms_of_use", url: "/" }];
+
+const privacy = [
+  { label: "v 1.3 fr", url: "/" },
+  { label: "another one", url: "/" },
+  { label: "new rub test", url: "/" },
+];
+
+const cookies = [
+  { label: "manage_cookies", url: "/" },
+  { label: "cookie one", url: "/" },
+  { label: "cookie two", url: "/" },
+];
 export const HeaderLoggedIn = () => (
   <HeaderUA
     app={object("app", App)}
@@ -273,6 +286,12 @@ export const HeaderLoggedIn = () => (
     // onSelectAllCommunities={() => console.log("Communities select all")}
     onSelectCommunity={(community) => console.log("community click", community)}
     onFAQLoad={() => console.log("onFAQLoad", window.showFAQ)}
+    firstList={privacy}
+    secondList={cookies}
+    thirdList={policy}
+    navigateTo={(url) => {
+      console.log(url);
+    }}
   />
 );
 
@@ -302,6 +321,12 @@ export const HeaderPortalSwitch = () => (
     allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
     portalSwitch={object("portalSwitch", portalSwitch)}
     currentPortal={text("currentPortal", "SETTINGS")}
+    firstList={privacy}
+    secondList={cookies}
+    thirdList={policy}
+    navigateTo={(url) => {
+      console.log(url);
+    }}
   />
 );
 

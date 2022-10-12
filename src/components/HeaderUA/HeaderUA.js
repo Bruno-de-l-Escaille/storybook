@@ -104,6 +104,10 @@ export class HeaderUA extends Component {
       portalSwitch,
       currentPortal,
       RouterLink,
+      firstList,
+      secondList,
+      thirdList,
+      navigateTo,
     } = this.props;
     const { portalSwitchCurrent, isFaqWidgetLoaded } = this.state;
     const { user, navCommunity } = auth;
@@ -214,6 +218,10 @@ export class HeaderUA extends Component {
           RouterLink={RouterLink}
           onLogoutClick={(e) => this.props.onLogoutClick(e)}
           onLanguageChange={(language) => this.props.onLanguageChange(language)}
+          firstList={firstList}
+          secondList={secondList}
+          thirdList={thirdList}
+          navigateTo={navigateTo}
         />
       </div>
     );

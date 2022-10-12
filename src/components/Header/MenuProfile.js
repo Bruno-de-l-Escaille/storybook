@@ -58,7 +58,15 @@ class MenuProfile extends Component {
   }
 
   render() {
-    const { user, lng, rightIcons } = this.props;
+    const {
+      user,
+      lng,
+      rightIcons,
+      firstList,
+      secondList,
+      thirdList,
+      navigateTo,
+    } = this.props;
     const {
       avatarUrl,
       firstName,
@@ -128,6 +136,48 @@ class MenuProfile extends Component {
                 )}
               </ul>
             </li>
+            {(firstList || secondList || thirdList) && (
+              <li className={styles.footerItems}>
+                <ul>
+                  {firstList && (
+                    <li className={styles.section}>
+                      <ul>
+                        {firstList.map((el) => (
+                          <li onClick={() => navigateTo(el.url)}>
+                            <div className={styles.block}></div>
+                            {el.label}
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  )}
+                  {secondList && (
+                    <li className={styles.section}>
+                      <ul>
+                        {secondList.map((el) => (
+                          <li onClick={() => navigateTo(el.url)}>
+                            <div className={styles.block}></div>
+                            {el.label}
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  )}
+                  {thirdList && (
+                    <li className={styles.section}>
+                      <ul>
+                        {thirdList.map((el) => (
+                          <li onClick={() => navigateTo(el.url)}>
+                            <div className={styles.block}></div>
+                            {el.label}
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  )}
+                </ul>
+              </li>
+            )}
             <li
               className={styles.logout}
               onClick={(e) => this.props.onLogoutClick(e)}

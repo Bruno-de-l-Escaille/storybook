@@ -21,6 +21,7 @@ export class FooterUA extends Component {
       firstList,
       secondList,
       thirdList,
+      fourthList,
     } = this.props;
 
     return (
@@ -50,57 +51,84 @@ export class FooterUA extends Component {
               ></div>
             )}
           </div>
-          {firstList && (
-            <div
-              className={classNames(
-                styles.section,
-                "cell small-12 medium-6 large-3"
-              )}
-            >
-              <ul>
-                {firstList.map((el) => (
-                  <li onClick={() => navigateTo(el.url)}>
-                    <div className={styles.block}></div>
-                    {el.label}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {secondList && (
-            <div
-              className={classNames(
-                styles.section,
-                "cell small-12 medium-6 large-3"
-              )}
-            >
-              <ul>
-                {secondList.map((el) => (
-                  <li onClick={() => navigateTo(el.url)}>
-                    <div className={styles.block}></div>
-                    {el.label}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {thirdList && (
-            <div
-              className={classNames(
-                styles.section,
-                "cell small-12 medium-6 large-3"
-              )}
-            >
-              <ul>
-                {thirdList.map((el) => (
-                  <li onClick={() => navigateTo(el.url)}>
-                    <div className={styles.block}></div>
-                    {el.label}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          <div className="grid-x cell small-12 medium-6 large-9">
+            {firstList && (
+              <div
+                className={classNames(
+                  styles.section,
+                  fourthList
+                    ? "cell small-12 medium-6 large-3"
+                    : "cell small-12 medium-6 large-4"
+                )}
+              >
+                <ul>
+                  {firstList.map((el) => (
+                    <li onClick={() => navigateTo(el.url)}>
+                      <div className={styles.block}></div>
+                      {el.label}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {secondList && (
+              <div
+                className={classNames(
+                  styles.section,
+                  fourthList
+                    ? "cell small-12 medium-6 large-3"
+                    : "cell small-12 medium-6 large-4"
+                )}
+              >
+                <ul>
+                  {secondList.map((el) => (
+                    <li onClick={() => navigateTo(el.url)}>
+                      <div className={styles.block}></div>
+                      {el.label}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {thirdList && (
+              <div
+                className={classNames(
+                  styles.section,
+                  fourthList
+                    ? "cell small-12 medium-6 large-3"
+                    : "cell small-12 medium-6 large-4"
+                )}
+              >
+                <ul>
+                  {thirdList.map((el) => (
+                    <li onClick={() => navigateTo(el.url)}>
+                      <div className={styles.block}></div>
+                      {el.label}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {fourthList && (
+              <div
+                className={classNames(
+                  styles.section,
+                  fourthList
+                    ? "cell small-12 medium-6 large-3"
+                    : "cell small-12 medium-6 large-4"
+                )}
+              >
+                <ul>
+                  {fourthList.map((el) => (
+                    <li onClick={() => navigateTo(el.url)}>
+                      <div className={styles.block}></div>
+                      {el.label}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
         <div className={styles.copyright}>
           © Copyright -{new Date().getFullYear()} Tamtam International

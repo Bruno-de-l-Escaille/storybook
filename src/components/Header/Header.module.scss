@@ -950,6 +950,49 @@ nav {
   }
 }
 
+.footerItems {
+  margin: 0;
+  background: #fff;
+  padding: 1rem;
+
+  .section {
+    // min-height: 7.5rem;
+    border-bottom: 1px solid #f1f2f4;
+    padding-top: 0.688rem;
+    padding-bottom: 0.5rem;
+    ul li {
+      width: fit-content;
+      cursor: pointer;
+      height: 1rem;
+      margin-bottom: 0.625rem;
+      font-size: 0.875rem;
+      font-weight: 400;
+      text-transform: capitalize;
+      display: flex;
+      align-items: center;
+      &:last-child {
+        margin-bottom: 0rem;
+      }
+      &:hover {
+        color: #18a0fb;
+        .block {
+          background-color: #18a0fb;
+        }
+      }
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  .block {
+    width: 10px;
+    height: 6px;
+    background: #d8dde2;
+    border-radius: 0px 3px 3px 0px;
+    margin-right: 1.25rem;
+  }
+}
+
 .menu__dropdown {
   position: absolute;
   right: 0;

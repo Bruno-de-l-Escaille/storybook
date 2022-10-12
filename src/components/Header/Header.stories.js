@@ -340,6 +340,20 @@ const menu = [
   },
 ];
 
+const policy = [{ label: "terms_of_use", url: "/" }];
+
+const privacy = [
+  { label: "v 1.3 fr", url: "/" },
+  { label: "another one", url: "/" },
+  { label: "new rub test", url: "/" },
+];
+
+const cookies = [
+  { label: "manage_cookies", url: "/" },
+  { label: "cookie one", url: "/" },
+  { label: "cookie two", url: "/" },
+];
+
 export default {
   title: "Header",
   component: Header,
@@ -365,6 +379,12 @@ export const HeaderLoggedIn = () => (
       console.log("backOffice click : " + activate)
     }
     onFAQLoad={() => console.log("onFAQLoad", window.showFAQ)}
+    firstList={privacy}
+    secondList={cookies}
+    thirdList={policy}
+    navigateTo={(url) => {
+      console.log(url);
+    }}
   />
 );
 export const HeaderPrivateBlogLoggedIn = () => (
@@ -379,6 +399,12 @@ export const HeaderPrivateBlogLoggedIn = () => (
     onLogoutClick={(e) => console.log("Logout", e)}
     onSearchClick={() => alert("searching")}
     onSelectAllCommunities={() => console.log("Communities select all")}
+    firstList={privacy}
+    secondList={cookies}
+    thirdList={policy}
+    navigateTo={(url) => {
+      console.log(url);
+    }}
   />
 );
 
@@ -407,6 +433,12 @@ export const HeaderSpaceLoggedIn = () => (
     allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
     // onSelectAllCommunities={() => console.log("Communities select all")}
     switchSpace={object("switchSpace", switchSpace)}
+    firstList={privacy}
+    secondList={cookies}
+    thirdList={policy}
+    navigateTo={(url) => {
+      console.log(url);
+    }}
   />
 );
 
@@ -435,6 +467,12 @@ export const HeaderPortalSwitch = () => (
     allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
     portalSwitch={object("portalSwitch", portalSwitch)}
     currentPortal={text("currentPortal", "SETTINGS")}
+    firstList={privacy}
+    secondList={cookies}
+    thirdList={policy}
+    navigateTo={(url) => {
+      console.log(url);
+    }}
   />
 );
 
@@ -462,6 +500,12 @@ export const HeaderButton = () => (
     onLogoutClick={(e) => console.log("Logout", e)}
     onSearchClick={() => alert("searching")}
     allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
+    firstList={privacy}
+    secondList={cookies}
+    thirdList={policy}
+    navigateTo={(url) => {
+      console.log(url);
+    }}
   />
 );
 

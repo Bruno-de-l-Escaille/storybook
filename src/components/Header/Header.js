@@ -116,6 +116,10 @@ export class Header extends Component {
       portalSwitch,
       currentPortal,
       onBackOfficeClick,
+      firstList,
+      secondList,
+      thirdList,
+      navigateTo,
     } = this.props;
     const { isFaqWidgetLoaded, portalSwitchCurrent, isBackOffice } = this.state;
     const { navCommunity, user } = auth;
@@ -269,6 +273,10 @@ export class Header extends Component {
           rightIcons={rightIcons}
           onLogoutClick={(e) => this.props.onLogoutClick(e)}
           onLanguageChange={(language) => this.props.onLanguageChange(language)}
+          firstList={firstList}
+          secondList={secondList}
+          thirdList={thirdList}
+          navigateTo={navigateTo}
         />
       </div>
     );
