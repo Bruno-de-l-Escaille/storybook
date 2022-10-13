@@ -98,7 +98,7 @@ export const Article = ({
           <ul>
             {authors.map((author) => (
               <li key={`author-${id}-${author.id}`}>
-                <AuthorAvatar author={author} white={white} />
+                <AuthorAvatar author={author} white={white} Link={Link} />
               </li>
             ))}
           </ul>
