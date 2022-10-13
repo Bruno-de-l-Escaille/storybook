@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import styles from "./Avatar.module.scss";
 
-export const AuthorAvatar = ({ author, white, Link }) => {
+export const AuthorAvatar = ({ author, white, Link, queryParams }) => {
   const { name, headline, avatarUrl, url } = author;
 
   const renderContent = () => {
@@ -41,8 +41,16 @@ export const AuthorAvatar = ({ author, white, Link }) => {
 
   if (url) {
     if (Link) {
+      const href = {
+        pathname: url,
+      };
+      if (queryParams) {
+        href.query = {
+          params: queryParams,
+        };
+      }
       return (
-        <Link href={url}>
+        <Link href={href}>
           <a className={styles.avatarContainer}>{renderContent()}</a>
         </Link>
       );

@@ -45,6 +45,7 @@ export const Article = ({
   Link,
   host,
   targetBlank,
+  queryParams,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -98,7 +99,12 @@ export const Article = ({
           <ul>
             {authors.map((author) => (
               <li key={`author-${id}-${author.id}`}>
-                <AuthorAvatar author={author} white={white} Link={Link} />
+                <AuthorAvatar
+                  author={author}
+                  white={white}
+                  Link={Link}
+                  queryParams={queryParams}
+                />
               </li>
             ))}
           </ul>
