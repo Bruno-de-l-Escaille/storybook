@@ -8,9 +8,13 @@
   border-radius: 9px;
   background: #fff;
   box-shadow: 0px 4px 10px rgba(41, 57, 77, 0.1);
-  transition: all 1s;
+
+  // transition: all 1s;
   font-family: Roboto;
 
+  &_active {
+    max-width: 800px;
+  }
   .title {
     font-weight: 500;
     color: #29394d;
@@ -26,9 +30,44 @@
   .info {
     display: none;
     transition: all 1s;
-
+    margin-bottom: 1rem;
     &_active {
       display: block;
+    }
+    .cookiesDetails {
+      overflow: scroll;
+      max-height: 400px;
+      .section {
+        p {
+          text-align: left;
+          margin: 0;
+        }
+        &_header {
+          position: relative;
+          padding: 1rem 1.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          h2 {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: #29394d;
+          }
+          .disable {
+            position: absolute;
+            height: 100%;
+            width: 100px;
+            top: 0;
+            right: 0;
+            background-color: #ffffff8d;
+          }
+        }
+        .description {
+          font-size: 0.875rem;
+          line-height: 1.25rem;
+          padding: 0rem 1.5rem;
+        }
+      }
     }
   }
 

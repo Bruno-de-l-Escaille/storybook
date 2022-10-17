@@ -189,3 +189,58 @@ ul {
 .sun-editor .se-tooltip .se-tooltip-inner {
   z-index: 9999 !important;
 }
+
+.sun-editor-editable {
+  padding: 16px 10px !important;
+}
+.sun-editor-editable,
+.editorBox {
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji" !important ;
+  color: #29394d !important;
+  font-size: 16px !important;
+  line-height: 22px !important;
+  background-color: transparent !important;
+
+  p {
+    margin-bottom: 16px !important;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 500;
+    margin: 1rem 0 !important;
+  }
+  h2 {
+    font-size: 22px;
+    line-height: 28px;
+  }
+  h3 {
+    font-size: 20px;
+    line-height: 26px;
+  }
+  h4 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  h5 {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  h6 {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  table {
+    width: 100% !important;
+  }
+  blockquote {
+    color: #8a8a8a !important;
+    border-width: 0 0 0 1px;
+    border-color: #cacaca;
+  }
+}
