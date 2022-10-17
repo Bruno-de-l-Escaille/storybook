@@ -113,12 +113,15 @@ export const Share = () => (
   <ModalConfirm
     type="share"
     isOpen={true}
+    isChecked={true}
     onCancel={() => console.log("cancel")}
     onConfirm={() => console.log("handleOnConfirm")}
+    onSwitch={() => console.log("handleOnSwitch")}
     inProcess={false}
     actionFailed={false}
     title="Confirmation de partage"
     text="Voulez-vous vraiment partager ce slide ?"
+    secondText="Modèle modifiable"
     labelNo="No"
     labelYes="Yes"
     labelError="Error"

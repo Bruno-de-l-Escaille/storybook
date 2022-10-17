@@ -13,6 +13,7 @@ import IconAdd from "../Icons/IconAdd";
 import IconPadlock from "../Icons/IconPadlock";
 
 import styles from "./ModalConfirm.module.scss";
+import classnames from "classnames";
 
 export const ModalConfirm = (props) => {
   const {
@@ -20,13 +21,16 @@ export const ModalConfirm = (props) => {
     isOpen,
     onCancel,
     onConfirm,
+    onSwitch,
     inProcess,
     actionFailed,
     labelError = "Error",
     labelNo = "No",
     labelYes = "Yes",
     text = "",
+    secondText = "",
     title,
+    isChecked,
   } = props;
 
   const renderMainIcon = () => {
@@ -72,7 +76,31 @@ export const ModalConfirm = (props) => {
         <div className={styles.close} onClick={onCancel}>
           <IconClose width={14} />
         </div>
-        <div className={styles.body}>{text}</div>
+        <div
+          className={classnames(
+            styles.body,
+            isChecked != null ? styles.with_switch : ""
+          )}
+        >
+          {text}
+          {isChecked != null && (
+            <div className={styles.item}>
+              <span className={styles.itemLabel}>{secondText}</span>
+              <label>
+                <input
+                  name="switch"
+                  checked={isChecked}
+                  onChange={onSwitch}
+                  className={styles.switch}
+                  type="checkbox"
+                />
+                <div className={styles.switch_frame}>
+                  <div className={styles.switch_handle} />
+                </div>
+              </label>
+            </div>
+          )}
+        </div>
         <div className={styles.footer}>
           <button className={styles.no} onClick={onCancel}>
             {labelNo}
