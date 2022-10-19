@@ -10,7 +10,7 @@ import IconDuplicate from "../Icons/IconDuplicate";
 import IconCircleClose from "../Icons/IconCircleClose";
 import IconShare from "../Icons/IconShare";
 import IconAdd from "../Icons/IconAdd";
-import IconPadlock from "../Icons/IconPadlock";
+import IconUnshare from "../Icons/IconUnshare";
 
 import styles from "./ModalConfirm.module.scss";
 import classnames from "classnames";
@@ -50,7 +50,7 @@ export const ModalConfirm = (props) => {
       case "add":
         return <IconAdd />;
       case "privatize":
-        return <IconPadlock />;
+        return <IconUnshare />;
       default:
         return null;
     }
