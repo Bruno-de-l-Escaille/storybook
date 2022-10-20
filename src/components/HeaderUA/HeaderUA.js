@@ -371,6 +371,7 @@ export class HeaderUA extends Component {
             auth={auth}
             faq
             onLoadFAQ={this.handleOnLoadFAQ.bind(this)}
+            isUA={true}
           />
         )}
       </>
