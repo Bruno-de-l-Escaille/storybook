@@ -9,7 +9,7 @@ const I18N = {
     optional_cookies: "Optional Cookies",
     title: "Cookies management",
     consent_text:
-      "This site uses cookies to provide necessary website functionality, improve your experience and analyze our traffic. By using our website, you agree to our Privacy Policy and our cookies usage.",
+      "<p>Your privacy is our priority</p><br><p>This website uses cookies. Some cookies are strictly necessary for the proper functioning of the site: you cannot refuse them. In order to optimize your experience, optional cookies are also used, for which your prior consent is required for their placement! In particular, they make it possible to analyze traffic and offer you possibilities related to social networks.</p><br><p>You can change your preferences at any time via your browser settings or by using our privacy center, which can be activated via the “Manage my cookies” tab (make the link).To find out more about cookies, the data we use and the processing we carry out, you can consult our “cookie policy” and our privacy statement.</p>",
     cookie_accept: "Accept and close",
     more_infos: "Manage my cookies",
     back: "Back",
