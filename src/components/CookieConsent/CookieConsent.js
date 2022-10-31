@@ -10,8 +10,8 @@ const I18N = {
     title: "Cookies management",
     consent_text:
       "This site uses cookies to provide necessary website functionality, improve your experience and analyze our traffic. By using our website, you agree to our Privacy Policy and our cookies usage.",
-    cookie_accept: "Accept",
-    more_infos: "Find out more",
+    cookie_accept: "Accept and close",
+    more_infos: "Manage my cookies",
     back: "Back",
     details: "Details",
     amazon_text: "This cookie is managed by AWS for server load balancing",
@@ -25,9 +25,9 @@ const I18N = {
     optional_cookies: "Cookies optionnel",
     title: "Gestion des Cookies",
     consent_text:
-      "Ce site utilise des cookies pour fournir les fonctionnalités nécessaires du site Web, améliorer votre expérience et analyser notre trafic. En utilisant notre site Web, vous acceptez notre politique de confidentialité et notre utilisation des cookies.",
-    cookie_accept: "J'accepte",
-    more_infos: "En savoir plus",
+      "<p>Le respect de votre vie privée est notre priorité</p><br><p>Ce site web utilise  des cookies. Certains cookies sont strictement nécessaires au bon fonctionnement du site : vous ne pouvez pas les refuser. Afin d’optimiser votre expérience, des cookies optionnels sont également utilisés, pour lesquels votre consentement préalable est requis à leur placement ! Ils permettent notamment d’analyser le trafic et vous offrir des possibilités liées  aux réseaux sociaux.</p><br><p>Vous pouvez modifier vos préférences à tout moment via les paramètres de votre navigateur ou en utilisant notre centre de confidentialité, activable via l’onglet « Gérer mes cookies » (faire le link).Pour en savoir plus sur les cookies, les données que nous utilisons et les traitements que nous réalisons, vous pouvez consulter notre « cookie policy »  et notre déclaration de confidentialité.</p>",
+    cookie_accept: "Accepter et fermer",
+    more_infos: "Gérer mes cookies",
     back: "Retour",
     details: "Détails",
     amazon_text:
@@ -42,9 +42,9 @@ const I18N = {
     optionele_cookies: "Optionele cookies",
     title: "Beheer van cookies",
     consent_text:
-      "Deze site maakt gebruik van cookies om de noodzakelijke websitefunctionaliteit te bieden, uw ervaring te verbeteren en ons verkeer te analyseren. Door onze website te gebruiken, gaat u akkoord met ons privacybeleid en ons gebruik van cookies.",
-    cookie_accept: "Aanvaarden",
-    more_infos: "Meer informaties",
+      "<p>Uw privacy is ons beleid</p><br><p>Deze website maakte gebruik van cookies. Sommige cookies zijn strikt noodzakelijk voor een goede werking van de website: u kan deze niet weigeren. Om uw gebruikservaring te verbeteren, worden ook optionele cookies gebruikt. Hiervoor vragen wij voorafgaand uw toestemming. Dankzij deze cookies kunnen wij het website-bezoek analyseren en mogelijkheden aanbieden via sociale media.</p><br><p>U kan uw voorkeuren wijzigen wanneer u dat wenst, via de instellingen van uw browser, of door uw instellingen op onze website te beheren. Dit kan door te klikken op het tabblad ‘Mijn cookies beheren’.</p><br><p>Wil u meer weten over cookies, de gegevens waar wij gebruik van maken en de verwerking ervan?</p><br><p>Lees dan zeker onze cookies policy en onze privacyverklaring.</p>",
+    cookie_accept: "Aanvaarden en sluiten",
+    more_infos: "My cookies beheerden",
     back: "Opbrengst",
     details: "Details",
     amazon_text: "Deze cookie wordt beheerd door AWS voor servertaakverdeling",
@@ -118,11 +118,17 @@ export class CookieConsent extends PureComponent {
         }`}
       >
         <div className={styles.title}>{I18N[lng]["title"]}</div>
-        <div className={styles.text}>{I18N[lng]["consent_text"]}</div>
+        {!showInfo && (
+          <div
+            className={styles.text}
+            dangerouslySetInnerHTML={{
+              __html: I18N[lng]["consent_text"],
+            }}
+          ></div>
+        )}
         <div
           className={`${styles.info} ${showInfo ? styles.info_active : ""} `}
         >
-          <div>{I18N[lng]["details"]}</div>
           <div className={styles.cookiesDetails}>
             <div className={styles.section}>
               <div className={styles.section_header}>

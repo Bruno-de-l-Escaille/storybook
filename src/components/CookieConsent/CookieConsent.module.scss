@@ -3,11 +3,11 @@
   z-index: 9999;
   bottom: 24px;
   left: 24px;
-  max-width: 400px;
+  max-width: 500px;
   padding: 18px;
   border-radius: 9px;
   background: #fff;
-  box-shadow: 0px 4px 10px rgba(41, 57, 77, 0.1);
+  box-shadow: 0px 0px 10px 5px rgba(41, 57, 77, 0.1);
 
   // transition: all 1s;
   font-family: Roboto;
@@ -25,18 +25,21 @@
     font-size: 14px;
     margin: 1rem 0;
     color: #8d8d8d;
+    p {
+      text-align: left;
+    }
   }
 
   .info {
     display: none;
     transition: all 1s;
-    margin-bottom: 1rem;
+    margin: 1.5rem 0 1rem;
     &_active {
       display: block;
     }
     .cookiesDetails {
       overflow: scroll;
-      max-height: 400px;
+      max-height: 500px;
       .section {
         p {
           text-align: left;
