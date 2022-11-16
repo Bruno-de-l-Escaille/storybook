@@ -778,7 +778,6 @@
   width: 100%;
   position: relative;
   margin: 10px 0;
-  font-weight: 300;
   font-size: 10px;
   line-height: 12px;
   color: #6d7f92;
@@ -796,32 +795,46 @@
       margin: 0% 5% 0 2%;
     }
     span {
-      width: 80px;
+      width: 90px;
     }
   }
 }
 .userActions {
   width: 100%;
   hr {
-    border: 1px solid rgba(216, 221, 226, 0.51);
+    background-color: rgba(216, 221, 226, 0.51);
+    border: 0;
+    height: 1px;
     margin: 0;
   }
   .actions {
     display: flex;
     align-items: center;
     border: none;
+
+    .likesActive {
+      svg {
+        color: #c70039;
+      }
+    }
     .likes,
     .comments {
       display: flex;
       align-items: center;
       justify-content: space-between;
-
-      margin-right: 10px;
+      margin-right: 20px;
       font-weight: 700;
       font-size: 12px;
       line-height: 14px;
-      color: #6d7f92;
       cursor: pointer;
+
+      svg {
+        color: #d8dde2;
+      }
+
+      &:hover svg {
+        color: #6d7f92;
+      }
     }
     svg {
       margin-right: 4px;

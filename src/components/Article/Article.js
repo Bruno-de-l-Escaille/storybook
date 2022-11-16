@@ -310,7 +310,13 @@ export const Article = ({
       <div className={styles.userActions}>
         <hr />
         <div className={styles.actions}>
-          <div className={styles.likes} onClick={() => onLike()}>
+          <div
+            className={classnames(
+              styles.likes,
+              socialData.isLiked === 1 && styles.likesActive
+            )}
+            onClick={() => onLike()}
+          >
             <svg
               width="24"
               height="24"
@@ -320,7 +326,7 @@ export const Article = ({
             >
               <path
                 d="M17 4.5C14.9 4.5 13.05 5.55 12 7.2C10.95 5.55 9.1 4.5 7 4.5C3.7 4.5 1 7.2 1 10.5C1 16.45 12 22.5 12 22.5C12 22.5 23 16.5 23 10.5C23 7.2 20.3 4.5 17 4.5Z"
-                fill={socialData.isLiked === 1 ? "#C70039" : "#D8DDE2"}
+                fill="currentColor"
               />
             </svg>
             {countLikes}
@@ -335,7 +341,7 @@ export const Article = ({
             >
               <path
                 d="M12 2C5.92422 2 1 6.00039 1 10.9375C1 13.0688 1.91953 15.0195 3.44922 16.5535C2.91211 18.7191 1.11602 20.6484 1.09453 20.6699C1 20.7687 0.974219 20.9148 1.03008 21.0438C1.08594 21.1727 1.20625 21.25 1.34375 21.25C4.19258 21.25 6.32813 19.8836 7.38516 19.0414C8.79023 19.5699 10.35 19.875 12 19.875C18.0758 19.875 23 15.8746 23 10.9375C23 6.00039 18.0758 2 12 2Z"
-                fill="#D8DDE2"
+                fill="currentColor"
               />
             </svg>
             {countComments}
