@@ -17,6 +17,7 @@ const App = {
   homeUrl: "https://one.tamtam.pro",
   isPrivateBlog: false,
   currentEvent: null,
+  withAuthLogin: false,
 };
 
 const AppPrivate = {

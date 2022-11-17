@@ -152,6 +152,9 @@
   }
 }
 .default {
+  .authorsContainer {
+    margin-bottom: 4px;
+  }
   .actionsContainer {
     color: #fff;
   }
@@ -369,8 +372,9 @@
   overflow-y: hidden;
   position: relative;
   width: calc(100% - 100px);
-  height: 34px;
-  margin-bottom: 4px;
+  // height: 34px;
+  margin-bottom: 15px;
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -568,6 +572,10 @@
     background: #f3faff;
     border: 0.5px solid rgba(199, 232, 254, 0.5);
     color: #18a0fb;
+  }
+
+  .authorsContainer {
+    margin-bottom: 4px;
   }
 }
 // End Template 2
@@ -814,7 +822,7 @@
 
     .likesActive {
       svg {
-        color: #c70039;
+        color: #c70039 !important;
       }
     }
     .likes,

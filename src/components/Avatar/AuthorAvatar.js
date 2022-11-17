@@ -9,16 +9,18 @@ export const AuthorAvatar = ({ author, white, Link, queryParams }) => {
   const renderContent = () => {
     return (
       <>
-        {avatarUrl ? (
-          <div
-            className={styles.avatar}
-            style={{ backgroundImage: `url(${avatarUrl})` }}
-          ></div>
-        ) : (
-          <div className={`${styles.avatar} ${styles.emptyAvatar}`}>
-            {name.charAt(0).toUpperCase()}
-          </div>
-        )}
+        <div className={styles.avatar_bg}>
+          {avatarUrl ? (
+            <div
+              className={styles.avatar}
+              style={{ backgroundImage: `url(${avatarUrl})` }}
+            ></div>
+          ) : (
+            <div className={`${styles.avatar} ${styles.emptyAvatar}`}>
+              {name.charAt(0).toUpperCase()}
+            </div>
+          )}
+        </div>
         <div className={styles.avatarInfo}>
           <div
             className={styles.avatarName}
