@@ -446,7 +446,11 @@ export const Article = ({
       <div className={`${styles.articleTemplate2} ${styles[size]}`}>
         {renderAvatar()}
         <div
-          className={`${styles.content} ${hasActions ? styles.hasActions : ""}`}
+          className={`${styles.content} ${
+            hasActions || (!hasRights && status === "PROGRAMMED")
+              ? styles.hasActions
+              : ""
+          }`}
         >
           {publishedAt && (
             <div className={styles.publishedAt}>
@@ -644,7 +648,9 @@ export const Article = ({
           ) : (
             <div
               className={`${styles.contentImg} ${
-                hasActions ? styles.hasActions : ""
+                hasActions || (!hasRights && status === "PROGRAMMED")
+                  ? styles.hasActions
+                  : ""
               }`}
               style={{
                 backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
@@ -711,7 +717,11 @@ export const Article = ({
       >
         {renderAvatar()}
         <div
-          className={`${styles.content} ${hasActions ? styles.hasActions : ""}`}
+          className={`${styles.content} ${
+            hasActions || (!hasRights && status === "PROGRAMMED")
+              ? styles.hasActions
+              : ""
+          }`}
           style={
             size && size === "large"
               ? { backgroundImage: `url(${addLandaSize(mediaUrl, 1700)})` }
@@ -804,7 +814,9 @@ export const Article = ({
           <div
             className={classnames(
               styles.contentImg,
-              hasActions ? styles.hasActions : ""
+              hasActions || (!hasRights && status === "PROGRAMMED")
+                ? styles.hasActions
+                : ""
             )}
             style={{
               backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
@@ -930,7 +942,9 @@ export const Article = ({
           <div
             className={classnames(
               styles.contentImg,
-              hasActions ? styles.hasActions : ""
+              hasActions || (!hasRights && status === "PROGRAMMED")
+                ? styles.hasActions
+                : ""
             )}
             style={{
               backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
@@ -982,7 +996,9 @@ export const Article = ({
           <div
             className={classnames(
               styles.contentImg,
-              hasActions ? styles.hasActions : ""
+              hasActions || (!hasRights && status === "PROGRAMMED")
+                ? styles.hasActions
+                : ""
             )}
             style={{
               backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
@@ -1085,7 +1101,9 @@ export const Article = ({
           <div
             className={classnames(
               styles.contentImg,
-              hasActions ? styles.hasActions : ""
+              hasActions || (!hasRights && status === "PROGRAMMED")
+                ? styles.hasActions
+                : ""
             )}
             style={{
               backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
@@ -1172,7 +1190,9 @@ export const Article = ({
           <div
             className={classnames(
               styles.contentImg,
-              hasActions ? styles.hasActions : ""
+              hasActions || (!hasRights && status === "PROGRAMMED")
+                ? styles.hasActions
+                : ""
             )}
             style={{
               backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
