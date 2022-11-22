@@ -541,13 +541,13 @@ export const Article = ({
               </div>
             )}
             {!hasRights && status === "PROGRAMMED" && (
-              <>
+              <div className={styles.buttons}>
                 {onEdit && (
                   <button>
                     <i className="icon-sb-edit" onClick={() => onEdit()}></i>
                   </button>
                 )}
-              </>
+              </div>
             )}
           </div>
           <div className={`${styles.col6} ${styles.articleTemplate2}`}>
@@ -835,13 +835,13 @@ export const Article = ({
               </div>
             )}
             {!hasRights && status === "PROGRAMMED" && (
-              <>
+              <div className={styles.buttons}>
                 {onEdit && (
                   <button>
                     <i className="icon-sb-edit" onClick={() => onEdit()}></i>
                   </button>
                 )}
-              </>
+              </div>
             )}
             <div className={styles.categoryChannel}>
               <div
@@ -961,13 +961,13 @@ export const Article = ({
               </div>
             )}
             {!hasRights && status === "PROGRAMMED" && (
-              <>
+              <div className={styles.buttons}>
                 {onEdit && (
                   <button>
                     <i className="icon-sb-edit" onClick={() => onEdit()}></i>
                   </button>
                 )}
-              </>
+              </div>
             )}
           </div>
         </div>
@@ -1028,13 +1028,13 @@ export const Article = ({
               </div>
             )}
             {!hasRights && status === "PROGRAMMED" && (
-              <>
+              <div className={styles.buttons}>
                 {onEdit && (
                   <button>
                     <i className="icon-sb-edit" onClick={() => onEdit()}></i>
                   </button>
                 )}
-              </>
+              </div>
             )}
             <div className={styles.categoryChannel}>
               <div
@@ -1116,13 +1116,13 @@ export const Article = ({
               </div>
             )}
             {!hasRights && status === "PROGRAMMED" && (
-              <>
+              <div className={styles.buttons}>
                 {onEdit && (
                   <button>
                     <i className="icon-sb-edit" onClick={() => onEdit()}></i>
                   </button>
                 )}
-              </>
+              </div>
             )}
           </div>
           <div className={styles.content}>
@@ -1218,13 +1218,13 @@ export const Article = ({
               </div>
             )}
             {!hasRights && status === "PROGRAMMED" && (
-              <>
+              <div className={styles.buttons}>
                 {onEdit && (
                   <button>
                     <i className="icon-sb-edit" onClick={() => onEdit()}></i>
                   </button>
                 )}
-              </>
+              </div>
             )}
             <div className={styles.categoryChannel}>
               <div
