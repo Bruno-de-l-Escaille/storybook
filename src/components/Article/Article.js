@@ -160,13 +160,26 @@ export const Article = ({
   };
 
   const renderTitle = () => {
-    if (isExternal)
+    if (status === "PROGRAMMED") {
       return (
-        <a href={url} target="_blank" rel="noreferrer" className={styles.title}>
+        <span href={url} className={styles.title}>
           <h3>{title}</h3>
-        </a>
+        </span>
       );
-    else return articleLink();
+    } else {
+      if (isExternal)
+        return (
+          <a
+            href={url}
+            target="_blank"
+            rel="noreferrer"
+            className={styles.title}
+          >
+            <h3>{title}</h3>
+          </a>
+        );
+      else return articleLink();
+    }
   };
 
   const renderSocialStats = () => {
