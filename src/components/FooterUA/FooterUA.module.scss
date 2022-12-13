@@ -31,12 +31,16 @@
   background-repeat: no-repeat;
 }
 
-.communityLogo {
+.communityLogo,
+.communityLogoLarge {
   height: 2.375rem;
   width: 6.25rem;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+}
+.communityLogoLarge {
+  height: 6.375rem;
 }
 
 .section {

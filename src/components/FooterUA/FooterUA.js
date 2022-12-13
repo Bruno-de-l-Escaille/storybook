@@ -44,7 +44,9 @@ export class FooterUA extends Component {
 
             {secondaryLogo && (
               <div
-                className={styles.communityLogo}
+                className={
+                  primaryLogo ? styles.communityLogo : styles.communityLogoLarge
+                }
                 style={{
                   backgroundImage: `url(${secondaryLogo})`,
                 }}
