@@ -67,7 +67,7 @@ export class FooterUA extends Component {
                   {firstList.map((el) => (
                     <li onClick={() => navigateTo(el.url)}>
                       <div className={styles.block}></div>
-                      {el.label}
+                      <span>{el.label}</span>
                     </li>
                   ))}
                 </ul>
@@ -86,7 +86,7 @@ export class FooterUA extends Component {
                   {secondList.map((el) => (
                     <li onClick={() => navigateTo(el.url)}>
                       <div className={styles.block}></div>
-                      {el.label}
+                      <span>{el.label}</span>
                     </li>
                   ))}
                 </ul>
@@ -105,7 +105,7 @@ export class FooterUA extends Component {
                   {thirdList.map((el) => (
                     <li onClick={() => navigateTo(el.url)}>
                       <div className={styles.block}></div>
-                      {el.label}
+                      <span>{el.label}</span>
                     </li>
                   ))}
                 </ul>
@@ -124,7 +124,7 @@ export class FooterUA extends Component {
                   {fourthList.map((el) => (
                     <li onClick={() => navigateTo(el.url)}>
                       <div className={styles.block}></div>
-                      {el.label}
+                      <span>{el.label}</span>
                     </li>
                   ))}
                 </ul>

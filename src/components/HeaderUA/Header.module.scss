@@ -963,9 +963,12 @@ nav {
       margin-bottom: 0.625rem;
       font-size: 0.875rem;
       font-weight: 400;
-      text-transform: capitalize;
+      text-transform: lowercase;
       display: flex;
       align-items: center;
+      span::first-letter {
+        text-transform: uppercase;
+      }
       &:last-child {
         margin-bottom: 0rem;
       }
