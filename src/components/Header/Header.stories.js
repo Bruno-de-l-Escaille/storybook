@@ -341,7 +341,7 @@ const menu = [
   },
 ];
 
-const policy = [{ label: "terms_of_use", url: "/" }];
+const policy = [{ label: "TERMS OF USE", url: "/" }];
 
 const privacy = [
   { label: "v 1.3 fr", url: "/" },

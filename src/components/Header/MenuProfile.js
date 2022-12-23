@@ -145,7 +145,7 @@ class MenuProfile extends Component {
                         {firstList.map((el) => (
                           <li onClick={() => navigateTo(el.url)}>
                             <div className={styles.block}></div>
-                            {el.label}
+                            <span>{el.label}</span>
                           </li>
                         ))}
                       </ul>
@@ -157,7 +157,7 @@ class MenuProfile extends Component {
                         {secondList.map((el) => (
                           <li onClick={() => navigateTo(el.url)}>
                             <div className={styles.block}></div>
-                            {el.label}
+                            <span>{el.label}</span>
                           </li>
                         ))}
                       </ul>
@@ -169,7 +169,7 @@ class MenuProfile extends Component {
                         {thirdList.map((el) => (
                           <li onClick={() => navigateTo(el.url)}>
                             <div className={styles.block}></div>
-                            {el.label}
+                            <span>{el.label}</span>
                           </li>
                         ))}
                       </ul>
