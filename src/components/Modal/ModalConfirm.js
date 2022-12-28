@@ -48,7 +48,7 @@ export const ModalConfirm = (props) => {
       case "share":
         return <IconShare />;
       case "add":
-        return <IconAdd />;
+        return <IconAdd width={22} height={22}/>;
       case "privatize":
         return <IconUnshare />;
       default:
