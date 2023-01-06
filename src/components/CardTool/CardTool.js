@@ -30,6 +30,7 @@ export class CardTool extends PureComponent {
       onDelete,
       onUpdate,
       onShare,
+      onReach,
       data,
     } = this.props;
     let { moreActions } = this.state;
@@ -38,7 +39,7 @@ export class CardTool extends PureComponent {
       <div className={styles.card_frame}>
         <div className={styles.card_content}>
           <div className={styles.card_header}>
-            <IconInsurance />
+            <i className={`icon ${data.icon}`} />
             <div className={styles.card_info}>
               <div className={styles.card_info_title}>{data.title}</div>
               <div className={styles.card_info_link} style={{ color: color }}>
@@ -65,8 +66,8 @@ export class CardTool extends PureComponent {
           </div>
         </div>
         <div className={styles.card_actions}>
-          <div className={styles.card_action} onClick={() => onShare()}>
-            <IconExternalLink />
+          <div className={styles.card_action} onClick={() => onReach()}>
+            {<IconExternalLink />}
           </div>
           <div
             className={classnames(
@@ -77,7 +78,7 @@ export class CardTool extends PureComponent {
           >
             {isFavorite ? <IconStarFull /> : <IconStarEmpty />}
           </div>
-          <div className={styles.card_action} onClick={() => onUpdate()}>
+          <div className={styles.card_action} onClick={() => onShare()}>
             <IconShare fill="#18A0FB" />
           </div>
           {moreActions ? (

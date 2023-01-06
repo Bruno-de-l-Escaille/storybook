@@ -3,6 +3,7 @@ import { withKnobs, boolean } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 
 import { CardTool } from "./CardTool";
+import IconInsurance from "../Icons/IconInsurance";
 
 export default {
   title: "CardTool",
@@ -15,6 +16,7 @@ export default {
 };
 
 const data = {
+  icon: "webtool-calculator",
   scoop: "public",
   created: "Créé le 02 août 2022, 10:55",
   title: "Inter haec Orfitus",
@@ -25,6 +27,7 @@ const data = {
   organization: "Par Deg & Partners Consulting Company",
 };
 const dataFavorite = {
+  icon: "webtool-user",
   scoop: "public",
   created: "Créé le 02 août 2022, 10:55",
   title: "Inter haec Orfitus Inter haec hae Orfitus Inter haec Orfitus",
@@ -43,6 +46,7 @@ export const CardToolDefault = () => (
           data={data}
           color={"#FFB340"}
           isFavorite={boolean("isFavorite", false)}
+          onReach={() => console.log("handleReachCard")}
           onShare={() => console.log("handleShareCard")}
           onDelete={() => console.log("handleDeleteCard")}
           onUpdate={() => console.log("handleUpdateCard")}
@@ -61,6 +65,7 @@ export const CardToolFavorite = () => (
           data={dataFavorite}
           color={"#4695DB"}
           isFavorite={boolean("isFavorite", true)}
+          onReach={() => console.log("handleReachCard")}
           onShare={() => console.log("handleShareCard")}
           onDelete={() => console.log("handleDeleteCard")}
           onUpdate={() => console.log("handleUpdateCard")}
