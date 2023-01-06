@@ -1,32 +1,33 @@
 @import "../../styles/variables";
 
 .card_frame {
-  width: 100%;
+  width: 305px;
   display: flex;
   background: #FFFFFF;
   border: 1px solid #F1F2F4;
   border-radius: 5px 3px 5px 5px;
-  height: 170px;
+  height: 192px;
 
   &:hover {
+    background: #F3FAFF;
+    border: 1px solid #C7E8FE;
+    box-shadow: 0px 4px 10px rgba(41, 57, 77, 0.1);
     .card_actions {
       opacity: 1;
     }
   }
 }
-.card_favorite {
-  background: #F3FAFF;
-  border: 1px solid #C7E8FE;
-  box-shadow: 0px 4px 10px rgba(41, 57, 77, 0.1);
-}
 
 .card_content {
-  width: 83%;
+  width: 84%;
 }
 
 .card_header {
   display: flex;
-  margin: 25px 0px 0px 16px;
+  margin: 15px 0px 0px 16px;
+  > svg {
+    min-width: 32px!important;
+  }
 }
 .card_info{
   margin-left: 5px;
@@ -36,8 +37,9 @@
   &_title {
     font-weight: 500;
     font-size: 16px;
-    line-height: 19px;
+    line-height: 13px;
     color: #29394D;
+    margin-bottom: 5px;
   }
   &_link {
     display: flex;
@@ -45,8 +47,15 @@
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
-    svg {
+    > svg {
+      min-width: 12px!important;
       margin-right: 5px;
+    }
+    span {
+      width: 190px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 }
@@ -65,40 +74,49 @@
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  margin: 10px 0px 20px 12px;
+  margin: 9px 0px 20px 12px;
+  position: absolute;
+  width: 255px;
+  bottom: 252px;
 }
 
 .card_footer {
+  bottom: 205px;
+  width: 285px;
   display: flex;
-  align-items: center;
-  margin: 10px 0px 10px 12px;
-  &_tag {
-    padding: 2px 5px;
-    height: 20px;
-    border-radius: 5px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
-    text-align: center;
-    letter-spacing: 0.02em;
-    color: #FFFFFF;
-    margin-right: 5px;
-  }
-  span {
-    width: 3px;
-    height: 20px;
-    border-radius: 4px;
-  }
-  &_group {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 15px;
-    color: #6D7F92;
-    margin-left: 5px;
+  margin: 0px 10px;
+  flex-direction: column;
+  position: absolute;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.02em;
+  color: #6D7F92;
+
+  &_tags {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    &_scoop {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      height: 22px;
+      width: 71px;
+      border: 1px solid #F1F2F4;
+      border-radius: 5px 3px 5px 5px;
+      padding: 2px 5px;
+    }
+    &_tag {
+      padding: 2px 5px;
+      height: 20px;
+      border-radius: 5px;
+      color: #FFFFFF;
+      margin-right: 5px;
+    }
   }
 }
 
@@ -118,6 +136,7 @@
     border: 0.5px solid #C7E8FE;
     box-shadow: 0px 4px 10px rgba(41, 57, 77, 0.1);
 
+    &_activated {background: #18A0FB;}
     &_danger {
       border: 0.5px solid #FEB5BB;
       svg {
@@ -126,7 +145,6 @@
         }
       }
     }
-
   }
   & > :first-child {
     z-index: 6;
@@ -149,10 +167,18 @@
     }
   }
   & > :nth-child(4) {
-    top: -20px;
+    top: -25px;
     z-index: 3;
     svg {
       z-index: 4;
+    }
+  }
+  & > :nth-child(5) {
+    top: -35px;
+    z-index: 2;
+    // right: 30px;
+    svg {
+      z-index: 3;
     }
   }
 }

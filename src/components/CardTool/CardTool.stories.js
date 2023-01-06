@@ -15,11 +15,24 @@ export default {
 };
 
 const data = {
+  scoop: "public",
+  created: "Créé le 02 août 2022, 10:55",
   title: "Inter haec Orfitus",
-  link: "www.reportpaiementsonss.be",
-  description: "Exsistit autem hoc loco quaedam quaestio subdifficilis, numt antep uaestio subdi quando amici subdi qua autem hoc loco quaedam quaestio subdifficilis, numt antep uaestio subdi q",
+  link: "www.reportpaiementsonss.be/",
+  description:
+    "Exsistit autem hoc loco quaedam quaestio subdifficilis, numt antep uaestio subdi quando amici subdi qua autem hoc loco quaedam quaestio subdifficilis, numt antep uaestio subdi q",
   tag: "Juridique",
-  organization: "DEG&PARTNERS"
+  organization: "Par Deg & Partners Consulting Company",
+};
+const dataFavorite = {
+  scoop: "public",
+  created: "Créé le 02 août 2022, 10:55",
+  title: "Inter haec Orfitus Inter haec hae Orfitus Inter haec Orfitus",
+  link: "www.reportpaiementsonss.be/fr/Orfitus-Inter-haec-Orfitus",
+  description:
+    "Exsistit autem hoc loco quaedam quaestio subdifficilis, numt antep uaestio subdi quando amici subdi qua autem hoc loco quaedam quaestio subdifficilis, numt antep uaestio subdi q",
+  tag: "Juridique",
+  organization: "Par Deg & Partners Consulting Company",
 };
 
 export const CardToolDefault = () => (
@@ -40,13 +53,12 @@ export const CardToolDefault = () => (
   </div>
 );
 
-
 export const CardToolFavorite = () => (
   <div className="grid-container">
     <div className="grid-x">
       <div className="cell small-12 medium-5 large-3">
         <CardTool
-          data={data}
+          data={dataFavorite}
           color={"#4695DB"}
           isFavorite={boolean("isFavorite", true)}
           onShare={() => console.log("handleShareCard")}
