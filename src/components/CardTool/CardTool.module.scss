@@ -7,6 +7,7 @@
   border: 1px solid #F1F2F4;
   border-radius: 5px 3px 5px 5px;
   height: 192px;
+  position: relative;
 
   &:hover {
     background: #F3FAFF;
@@ -37,7 +38,7 @@
   &_title {
     font-weight: 500;
     font-size: 16px;
-    line-height: 13px;
+    line-height: 15px;
     color: #29394D;
     margin-bottom: 5px;
   }
@@ -77,11 +78,11 @@
   margin: 9px 0px 20px 12px;
   position: absolute;
   width: 255px;
-  bottom: 252px;
+  bottom: 55px;
 }
 
 .card_footer {
-  bottom: 205px;
+  bottom: 8px;
   width: 285px;
   display: flex;
   margin: 0px 10px;
