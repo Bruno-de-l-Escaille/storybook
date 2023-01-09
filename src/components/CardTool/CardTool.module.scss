@@ -9,6 +9,19 @@
   height: 192px;
   position: relative;
 
+  &_transparent {
+    background: transparent!important;
+    border: none!important;
+    &:hover {
+      background: transparent!important;
+      border: none!important;
+      box-shadow: none!important;
+      .card_actions {
+        opacity: 0!important;
+      }
+    }
+  }
+
   &:hover {
     background: #F3FAFF;
     border: 1px solid #C7E8FE;

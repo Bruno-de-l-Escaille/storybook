@@ -57,11 +57,32 @@ export const CardToolDefault = () => (
   </div>
 );
 
+export const CardToolTransparent = () => (
+  <div className="grid-container">
+    <div className="grid-x">
+      <div className="cell small-12 medium-5 large-3">
+        <CardTool
+          data={data}
+          color={"#FFB340"}
+          transparent
+          isFavorite={boolean("isFavorite", false)}
+          onReach={() => console.log("handleReachCard")}
+          onShare={() => console.log("handleShareCard")}
+          onDelete={() => console.log("handleDeleteCard")}
+          onUpdate={() => console.log("handleUpdateCard")}
+          onAddFavorite={() => console.log("handleAddFavoritCard")}
+        />
+      </div>
+    </div>
+  </div>
+);
+
 export const CardToolFavorite = () => (
   <div className="grid-container">
     <div className="grid-x">
       <div className="cell small-12 medium-5 large-3">
         <CardTool
+          allowed
           data={dataFavorite}
           color={"#4695DB"}
           isFavorite={boolean("isFavorite", true)}

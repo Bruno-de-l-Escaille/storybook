@@ -1,7 +1,6 @@
 import React, { Fragment, PureComponent } from "react";
 
 import IconExternalLink from "../Icons/IconExternalLink";
-import IconInsurance from "../Icons/IconInsurance";
 import IconTrash from "../Icons/IconTrash";
 import IconGlobe from "../Icons/IconGlobe";
 import IconUnlock from "../Icons/IconUnlock";
@@ -24,22 +23,29 @@ export class CardTool extends PureComponent {
   }
   render() {
     const {
+      data,
       color,
+      allowed,
       isFavorite,
+      transparent,
       onAddFavorite,
       onDelete,
       onUpdate,
       onShare,
       onReach,
-      data,
     } = this.props;
     let { moreActions } = this.state;
 
     return (
-      <div className={styles.card_frame}>
+      <div
+        className={classnames(
+          styles.card_frame,
+          transparent && styles.card_frame_transparent
+        )}
+      >
         <div className={styles.card_content}>
           <div className={styles.card_header}>
-            <i className={`icon icon-${data.icon}`} />
+            <i className={`icon webtool-${data.icon}`} />
             <div className={styles.card_info}>
               <div className={styles.card_info_title}>{data.title}</div>
               <div className={styles.card_info_link} style={{ color: color }}>
@@ -81,28 +87,32 @@ export class CardTool extends PureComponent {
           <div className={styles.card_action} onClick={() => onShare()}>
             <IconShare fill="#18A0FB" />
           </div>
-          {moreActions ? (
-            <Fragment>
-              <div className={styles.card_action} onClick={() => onUpdate()}>
-                <IconPen />
-              </div>
+          {allowed ? (
+            moreActions ? (
+              <Fragment>
+                <div className={styles.card_action} onClick={() => onUpdate()}>
+                  <IconPen />
+                </div>
+                <div
+                  className={classnames(
+                    styles.card_action,
+                    styles.card_action_danger
+                  )}
+                  onClick={() => onDelete()}
+                >
+                  <IconTrash height={16} width={14.23} />
+                </div>
+              </Fragment>
+            ) : (
               <div
-                className={classnames(
-                  styles.card_action,
-                  styles.card_action_danger
-                )}
-                onClick={() => onDelete()}
+                className={styles.card_action}
+                onClick={() => this.setState({ moreActions: true })}
               >
-                <IconTrash height={16} width={14.23} />
+                <IconMore />
               </div>
-            </Fragment>
+            )
           ) : (
-            <div
-              className={styles.card_action}
-              onClick={() => this.setState({ moreActions: true })}
-            >
-              <IconMore />
-            </div>
+            ""
           )}
         </div>
       </div>
