@@ -25,8 +25,10 @@
 
 .card_header {
   display: flex;
+  align-items: center;
   margin: 15px 0px 0px 16px;
   > i {
+    font-size: 1.7rem;
     min-width: 32px!important;
   }
 }

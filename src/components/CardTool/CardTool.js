@@ -39,7 +39,7 @@ export class CardTool extends PureComponent {
       <div className={styles.card_frame}>
         <div className={styles.card_content}>
           <div className={styles.card_header}>
-            <i className={`icon ${data.icon}`} />
+            <i className={`icon icon-${data.icon}`} />
             <div className={styles.card_info}>
               <div className={styles.card_info_title}>{data.title}</div>
               <div className={styles.card_info_link} style={{ color: color }}>
