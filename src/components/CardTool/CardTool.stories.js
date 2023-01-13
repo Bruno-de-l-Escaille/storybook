@@ -28,7 +28,7 @@ const data = {
 };
 const dataFavorite = {
   icon: "webtool-user",
-  scoop: "public",
+  scoop: "private",
   created: "Créé le 02 août 2022, 10:55",
   title: "Inter haec Orfitus Inter haec hae Orfitus Inter haec Orfitus",
   link: "www.reportpaiementsonss.be/fr/Orfitus-Inter-haec-Orfitus",
@@ -43,8 +43,15 @@ export const CardToolDefault = () => (
     <div className="grid-x">
       <div className="cell small-12 medium-5 large-3">
         <CardTool
+          lng="fr"
           data={data}
           color={"#FFB340"}
+          toolOptions={[
+            { value: "public", label: "public" },
+            { value: "collaborator", label: "collaborateur" },
+            { value: "client", label: "client" },
+            { value: "private", label: "privé" },
+          ]}
           isFavorite={boolean("isFavorite", false)}
           onReach={() => console.log("handleReachCard")}
           onShare={() => console.log("handleShareCard")}
@@ -62,7 +69,7 @@ export const CardToolTransparent = () => (
     <div className="grid-x">
       <div className="cell small-12 medium-5 large-3">
         <CardTool
-          data={data}
+          data={{ ...data, scoop: "shared" }}
           color={"#FFB340"}
           transparent
           isFavorite={boolean("isFavorite", false)}

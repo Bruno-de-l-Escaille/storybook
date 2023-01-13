@@ -33,6 +33,9 @@ export const I18N = {
     atText: "at",
     publishedOn: "Published on",
     reading: "Reading",
+    noOptions: "no options",
+    sharedWith: "share with",
+    share: "share",
   },
   fr: {
     ARTCILES: "Articles",
@@ -67,6 +70,9 @@ export const I18N = {
     atText: "à",
     publishedOn: "Publié le",
     reading: "Lecture de",
+    noOptions: "aucune options",
+    sharedWith: "partager avec",
+    share: "partager",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -103,5 +109,8 @@ export const I18N = {
     atText: "bij",
     publishedOn: "Gepubliceerd op",
     reading: "Lezen",
+    noOptions: "[no options]",
+    sharedWith: "[share with]",
+    share: "[share]",
   },
 };

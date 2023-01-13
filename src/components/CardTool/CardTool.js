@@ -1,9 +1,12 @@
 import React, { Fragment, PureComponent } from "react";
+import classnames from "classnames";
+import { I18N } from "../../i18n";
 
 import IconExternalLink from "../Icons/IconExternalLink";
 import IconTrash from "../Icons/IconTrash";
 import IconGlobe from "../Icons/IconGlobe";
 import IconUnlock from "../Icons/IconUnlock";
+import IconLock from "../Icons/IconLock";
 import IconPen from "../Icons/IconPen";
 import IconMore from "../Icons/IconMore";
 import IconShare from "../Icons/IconShare";
@@ -11,7 +14,6 @@ import IconStarEmpty from "../Icons/IconStarEmpty";
 import IconStarFull from "../Icons/IconStarFull";
 
 import styles from "./CardTool.module.scss";
-import classnames from "classnames";
 
 export class CardTool extends PureComponent {
   constructor(props) {
@@ -19,28 +21,71 @@ export class CardTool extends PureComponent {
 
     this.state = {
       moreActions: false,
+      displayTooltip: false,
+      selectedValue: null,
     };
   }
+  componentDidMount() {
+    document.addEventListener(
+      "mousedown",
+      this.handleClickOutsideTooltip.bind(this)
+    );
+  }
+
+  handleClickOutsideTooltip(event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      this.setState({ displayTooltip: false });
+    }
+  }
+
+  setWrapperRef(node) {
+    this.wrapperRef = node;
+  }
+
+  handleShareCardtool = () => {
+    let { selectedValue } = this.state;
+    this.props.onShare(selectedValue);
+    this.setState({ displayTooltip: false, selectedValue: null });
+  };
+
+  renderScoopIcon = (type) => {
+    switch (type) {
+      case "public":
+        return <IconUnlock />;
+      case "private":
+        return <IconLock />;
+      case "shared":
+        return <IconShare width={12} height={12} fill="#6D7F92" />;
+      default:
+        return null;
+    }
+  };
+
   render() {
     const {
+      lng,
       data,
       color,
       allowed,
       isFavorite,
       transparent,
+      toolOptions,
       onAddFavorite,
       onDelete,
       onUpdate,
-      onShare,
       onReach,
     } = this.props;
-    let { moreActions } = this.state;
-
+    let { moreActions, displayTooltip, selectedValue } = this.state;
+    let language = lng ? lng : "fr";
     return (
       <div
         className={classnames(
           styles.card_frame,
-          transparent && styles.card_frame_transparent
+          transparent
+            ? styles.card_frame_transparent
+            : displayTooltip
+            ? styles.card_frame_show_actions
+            : ""
         )}
       >
         <div className={styles.card_content}>
@@ -59,7 +104,7 @@ export class CardTool extends PureComponent {
             <span>{data.organization}</span>
             <div className={styles.card_footer_tags}>
               <div className={styles.card_footer_tags_scoop}>
-                <IconUnlock />
+                {this.renderScoopIcon(data.scoop)}
                 {data.scoop}
               </div>
               <div
@@ -78,14 +123,20 @@ export class CardTool extends PureComponent {
           <div
             className={classnames(
               styles.card_action,
-              isFavorite && styles.card_action_activated
+              isFavorite ? styles.card_action_activated : ""
             )}
             onClick={() => onAddFavorite()}
           >
             {isFavorite ? <IconStarFull /> : <IconStarEmpty />}
           </div>
-          <div className={styles.card_action} onClick={() => onShare()}>
-            <IconShare fill="#18A0FB" />
+          <div
+            className={classnames(
+              styles.card_action,
+              displayTooltip ? styles.card_action_activated : ""
+            )}
+            onClick={() => this.setState({ displayTooltip: true })}
+          >
+            <IconShare fill={displayTooltip ? "#FFFFFF" : "#18A0FB"} />
           </div>
           {allowed ? (
             moreActions ? (
@@ -115,6 +166,45 @@ export class CardTool extends PureComponent {
             ""
           )}
         </div>
+        {displayTooltip && (
+          <div
+            className={styles.card_tooltip}
+            ref={this.setWrapperRef.bind(this)}
+          >
+            <span>{I18N[language].sharedWith} :</span>
+            <div className={styles.card_tooltip_options}>
+              {toolOptions && toolOptions.length ? (
+                toolOptions.map((item, i) => {
+                  return (
+                    <div>
+                      <input
+                        type="radio"
+                        id={item.value}
+                        name="scoop"
+                        value={item.value}
+                        onClick={() =>
+                          this.setState({ selectedValue: item.value })
+                        }
+                      />
+                      <label for={item.id}>{item.label}</label>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className={styles.no_options}>
+                  {I18N[language].noOptions}
+                </div>
+              )}
+            </div>
+            <button
+              disabled={!selectedValue}
+              onClick={this.handleShareCardtool}
+              style={{ opacity: selectedValue ? 1 : 0.5 }}
+            >
+              {I18N[language].share}
+            </button>
+          </div>
+        )}
       </div>
     );
   }
