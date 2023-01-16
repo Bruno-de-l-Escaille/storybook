@@ -52,6 +52,8 @@ export const CardToolDefault = () => (
             { value: "client", label: "client" },
             { value: "private", label: "privé" },
           ]}
+          isLoadingShare
+          isLoadingFavorite
           isFavorite={boolean("isFavorite", false)}
           onReach={() => console.log("handleReachCard")}
           onShare={() => console.log("handleShareCard")}

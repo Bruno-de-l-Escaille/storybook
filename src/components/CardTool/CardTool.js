@@ -12,6 +12,7 @@ import IconMore from "../Icons/IconMore";
 import IconShare from "../Icons/IconShare";
 import IconStarEmpty from "../Icons/IconStarEmpty";
 import IconStarFull from "../Icons/IconStarFull";
+import IconCircleLoader from "../Icons/IconCircleLoader";
 
 import styles from "./CardTool.module.scss";
 
@@ -34,7 +35,7 @@ export class CardTool extends PureComponent {
 
   handleClickOutsideTooltip(event) {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      this.setState({ displayTooltip: false });
+      this.setState({ displayTooltip: false, selectedValue: null });
     }
   }
 
@@ -74,6 +75,8 @@ export class CardTool extends PureComponent {
       onDelete,
       onUpdate,
       onReach,
+      isLoadingFavorite,
+      isLoadingShare,
     } = this.props;
     let { moreActions, displayTooltip, selectedValue } = this.state;
     let language = lng ? lng : "fr";
@@ -127,7 +130,13 @@ export class CardTool extends PureComponent {
             )}
             onClick={() => onAddFavorite()}
           >
-            {isFavorite ? <IconStarFull /> : <IconStarEmpty />}
+            {isLoadingFavorite ? (
+              <IconCircleLoader />
+            ) : isFavorite ? (
+              <IconStarFull />
+            ) : (
+              <IconStarEmpty />
+            )}
           </div>
           <div
             className={classnames(
@@ -136,7 +145,11 @@ export class CardTool extends PureComponent {
             )}
             onClick={() => this.setState({ displayTooltip: true })}
           >
-            <IconShare fill={displayTooltip ? "#FFFFFF" : "#18A0FB"} />
+            {isLoadingShare ? (
+              <IconCircleLoader />
+            ) : (
+              <IconShare fill={displayTooltip ? "#FFFFFF" : "#18A0FB"} />
+            )}
           </div>
           {allowed ? (
             moreActions ? (
