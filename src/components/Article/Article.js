@@ -342,7 +342,7 @@ export const Article = ({
                 fill="currentColor"
               />
             </svg>
-            {countLikes}
+            {countLikes > 0 && countLikes}
           </div>
           <div className={styles.comments} onClick={() => openModal()}>
             <svg
@@ -357,7 +357,7 @@ export const Article = ({
                 fill="currentColor"
               />
             </svg>
-            {countComments}
+            {countComments > 0 && countComments}
           </div>
           <div className={styles.share}>
             <span onClick={() => setIsOpen(!isOpen)}>Partager</span>
