@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
-import Switch from "../Switch/Switch/index";
 
+import { getCookie, setCookie } from "../../utils";
+
+import Switch from "../Switch/Switch/index";
 import styles from "./CookieConsent.module.scss";
 
 const I18N = {
@@ -74,14 +76,21 @@ export class CookieConsent extends PureComponent {
 
   getCookieValue() {
     const { cookieName } = this.props;
-    var cookieValue = localStorage.getItem(cookieName);
-    return cookieValue;
+    // var cookieValue = localStorage.getItem(cookieName);
+    var cookieValue = getCookie(cookieName);
+    return cookieValue ? cookieValue : null;
   }
 
   onAccept() {
-    const { cookieName, onAcceptCookies } = this.props;
-    if (onAcceptCookies) onAcceptCookies();
-    localStorage.setItem(cookieName, true);
+    const { cookieName, cookieDomain, onAcceptCookies } = this.props;
+    if (onAcceptCookies) {
+      onAcceptCookies();
+    }
+    let dtExpire = new Date();
+    dtExpire.setTime(dtExpire.getTime() + 9900000 * 1000);
+    setCookie(cookieName, true, dtExpire, "/", cookieDomain);
+
+    // localStorage.setItem(cookieName, true);
     this.setState({ visible: false });
   }
 

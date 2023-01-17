@@ -44,5 +44,6 @@ export const Default = () => (
     cookiesData={cookiesData}
     lng="fr"
     cookieName={`ttp_consent_${APP_ENV}_${random}`}
+    cookieDomain="tamtam.pro"
   />
 );

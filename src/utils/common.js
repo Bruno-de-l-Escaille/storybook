@@ -151,3 +151,31 @@ export function convertDateFromUTC(
     .subtract(offsetMinutes, "minutes")
     .format(destFormat);
 }
+
+export function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+export function setCookie(name, value, expires, path, domain, secure) {
+  document.cookie =
+    name +
+    " = " +
+    escape(value) +
+    "  " +
+    (expires == undefined ? "" : "; expires = " + expires.toUTCString()) +
+    (path == undefined ? "" : "; path = " + path) +
+    (domain == undefined ? "" : "; domain = " + domain) +
+    (secure == true ? "; secure" : "");
+}
