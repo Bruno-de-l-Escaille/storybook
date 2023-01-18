@@ -75,7 +75,7 @@ export class CookieConsent extends PureComponent {
   getCookieValue() {
     const { cookieName } = this.props;
     var cookieValue = null;
-    if (localStorage !== "undefined") {
+    if (typeof window !== "undefined") {
       try {
         cookieValue = localStorage.getItem(cookieName);
       } catch (e) {}
@@ -89,7 +89,7 @@ export class CookieConsent extends PureComponent {
       onAcceptCookies();
     }
 
-    if (localStorage !== "undefined") {
+    if (typeof window !== "undefined") {
       try {
         localStorage.setItem(cookieName, true);
       } catch (e) {}
