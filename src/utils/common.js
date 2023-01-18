@@ -168,7 +168,15 @@ export function getCookie(cname) {
   return "";
 }
 
-export function setCookie(name, value, expires, path, domain, secure) {
+export function setCookie(
+  name,
+  value,
+  expires,
+  path,
+  domain,
+  sameSite,
+  secure
+) {
   document.cookie =
     name +
     " = " +
@@ -177,5 +185,6 @@ export function setCookie(name, value, expires, path, domain, secure) {
     (expires == undefined ? "" : "; expires = " + expires.toUTCString()) +
     (path == undefined ? "" : "; path = " + path) +
     (domain == undefined ? "" : "; domain = " + domain) +
+    (sameSite == undefined ? "" : "; sameSite = " + sameSite) +
     (secure == true ? "; secure" : "");
 }

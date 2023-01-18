@@ -88,7 +88,7 @@ export class CookieConsent extends PureComponent {
     }
     let dtExpire = new Date();
     dtExpire.setTime(dtExpire.getTime() + 9900000 * 1000);
-    setCookie(cookieName, true, dtExpire, "/", cookieDomain);
+    setCookie(cookieName, true, dtExpire, "/", cookieDomain, "None", true);
 
     // localStorage.setItem(cookieName, true);
     this.setState({ visible: false });
