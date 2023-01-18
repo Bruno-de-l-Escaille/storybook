@@ -67,7 +67,7 @@ export class CookieConsent extends PureComponent {
   }
 
   componentDidMount() {
-    if (this.getCookieValue() === null) {
+    if (this.getCookieValue() === null && typeof window !== "undefined") {
       this.setState({ visible: true });
     }
   }
