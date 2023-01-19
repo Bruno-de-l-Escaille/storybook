@@ -52,8 +52,8 @@ export const CardToolDefault = () => (
             { value: "client", label: "client" },
             { value: "private", label: "privé" },
           ]}
-          isLoadingShare
-          isLoadingFavorite
+          loadingActions={{ favorite: true, share: true }}
+          allowedActions={{ favorite: true }}
           isFavorite={boolean("isFavorite", false)}
           onReach={() => console.log("handleReachCard")}
           onShare={() => console.log("handleShareCard")}
@@ -75,6 +75,8 @@ export const CardToolTransparent = () => (
           color={"#FFB340"}
           transparent
           isFavorite={boolean("isFavorite", false)}
+          allowedActions={{ favorite: true }}
+          loadingActions={{ favorite: false, share: false }}
           onReach={() => console.log("handleReachCard")}
           onShare={() => console.log("handleShareCard")}
           onDelete={() => console.log("handleDeleteCard")}
@@ -86,12 +88,13 @@ export const CardToolTransparent = () => (
   </div>
 );
 
-export const CardToolFavorite = () => (
+export const CardToolShared = () => (
   <div className="grid-container">
     <div className="grid-x">
       <div className="cell small-12 medium-5 large-3">
         <CardTool
-          allowed
+          allowedActions={{ favorite: false, more: true, unshare: true }}
+          loadingActions={{ favorite: false, share: false }}
           data={dataFavorite}
           color={"#4695DB"}
           isFavorite={boolean("isFavorite", true)}

@@ -10,6 +10,7 @@ import IconLock from "../Icons/IconLock";
 import IconPen from "../Icons/IconPen";
 import IconMore from "../Icons/IconMore";
 import IconShare from "../Icons/IconShare";
+import IconUnShare from "../Icons/IconUnshare";
 import IconStarEmpty from "../Icons/IconStarEmpty";
 import IconStarFull from "../Icons/IconStarFull";
 import IconCircleLoader from "../Icons/IconCircleLoader";
@@ -67,16 +68,16 @@ export class CardTool extends PureComponent {
       lng,
       data,
       color,
-      allowed,
+      loadingActions,
+      allowedActions,
       isFavorite,
       transparent,
       toolOptions,
       onAddFavorite,
+      onUnshare,
       onDelete,
       onUpdate,
       onReach,
-      isLoadingFavorite,
-      isLoadingShare,
     } = this.props;
     let { moreActions, displayTooltip, selectedValue } = this.state;
     let language = lng ? lng : "fr";
@@ -123,35 +124,60 @@ export class CardTool extends PureComponent {
           <div className={styles.card_action} onClick={() => onReach()}>
             {<IconExternalLink />}
           </div>
-          <div
-            className={classnames(
-              styles.card_action,
-              isFavorite ? styles.card_action_activated : ""
-            )}
-            onClick={() => onAddFavorite()}
-          >
-            {isLoadingFavorite ? (
-              <IconCircleLoader />
-            ) : isFavorite ? (
-              <IconStarFull />
-            ) : (
-              <IconStarEmpty />
-            )}
-          </div>
-          <div
-            className={classnames(
-              styles.card_action,
-              displayTooltip ? styles.card_action_activated : ""
-            )}
-            onClick={() => this.setState({ displayTooltip: true })}
-          >
-            {isLoadingShare ? (
-              <IconCircleLoader />
-            ) : (
-              <IconShare fill={displayTooltip ? "#FFFFFF" : "#18A0FB"} />
-            )}
-          </div>
-          {allowed ? (
+          {allowedActions.favorite ? (
+            <div
+              className={classnames(
+                styles.card_action,
+                isFavorite ? styles.card_action_activated : ""
+              )}
+              onClick={() => onAddFavorite()}
+            >
+              {loadingActions.favorite ? (
+                <IconCircleLoader />
+              ) : isFavorite ? (
+                <IconStarFull />
+              ) : (
+                <IconStarEmpty />
+              )}
+            </div>
+          ) : (
+            ""
+          )}
+          {allowedActions.unshare ? (
+            <div
+              className={classnames(
+                styles.card_action,
+                displayTooltip ? styles.card_action_activated : ""
+              )}
+              onClick={() => onUnshare()}
+            >
+              {loadingActions.unShare ? (
+                <IconCircleLoader />
+              ) : (
+                <IconUnShare
+                  fill="#18A0FB"
+                  width={16}
+                  height={16}
+                  viewBox="0 0 16 16"
+                />
+              )}
+            </div>
+          ) : (
+            <div
+              className={classnames(
+                styles.card_action,
+                displayTooltip ? styles.card_action_activated : ""
+              )}
+              onClick={() => this.setState({ displayTooltip: true })}
+            >
+              {loadingActions.share ? (
+                <IconCircleLoader />
+              ) : (
+                <IconShare fill={displayTooltip ? "#FFFFFF" : "#18A0FB"} />
+              )}
+            </div>
+          )}
+          {allowedActions.more ? (
             moreActions ? (
               <Fragment>
                 <div className={styles.card_action} onClick={() => onUpdate()}>
