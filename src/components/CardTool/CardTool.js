@@ -124,7 +124,7 @@ export class CardTool extends PureComponent {
           <div className={styles.card_action} onClick={() => onReach()}>
             {<IconExternalLink />}
           </div>
-          {allowedActions.favorite ? (
+          {allowedActions && allowedActions.favorite ? (
             <div
               className={classnames(
                 styles.card_action,
@@ -132,7 +132,7 @@ export class CardTool extends PureComponent {
               )}
               onClick={() => onAddFavorite()}
             >
-              {loadingActions.favorite ? (
+              {loadingActions && loadingActions.favorite ? (
                 <IconCircleLoader />
               ) : isFavorite ? (
                 <IconStarFull />
@@ -143,7 +143,7 @@ export class CardTool extends PureComponent {
           ) : (
             ""
           )}
-          {allowedActions.unshare ? (
+          {allowedActions && allowedActions.unshare ? (
             <div
               className={classnames(
                 styles.card_action,
@@ -151,7 +151,7 @@ export class CardTool extends PureComponent {
               )}
               onClick={() => onUnshare()}
             >
-              {loadingActions.unShare ? (
+              {loadingActions && loadingActions.unShare ? (
                 <IconCircleLoader />
               ) : (
                 <IconUnShare
@@ -170,14 +170,14 @@ export class CardTool extends PureComponent {
               )}
               onClick={() => this.setState({ displayTooltip: true })}
             >
-              {loadingActions.share ? (
+              {loadingActions && loadingActions.share ? (
                 <IconCircleLoader />
               ) : (
                 <IconShare fill={displayTooltip ? "#FFFFFF" : "#18A0FB"} />
               )}
             </div>
           )}
-          {allowedActions.more ? (
+          {allowedActions && allowedActions.more ? (
             moreActions ? (
               <Fragment>
                 <div className={styles.card_action} onClick={() => onUpdate()}>
