@@ -45,6 +45,7 @@ export const CardToolDefault = () => (
         <CardTool
           lng="fr"
           data={data}
+          scope="collaborator"
           color={"#FFB340"}
           toolOptions={[
             { value: "public", label: "public" },
@@ -52,7 +53,7 @@ export const CardToolDefault = () => (
             { value: "client", label: "client" },
             { value: "private", label: "privé" },
           ]}
-          loadingActions={{ favorite: true, share: true }}
+          loadingActions={{ favorite: true }}
           allowedActions={{ favorite: true }}
           isFavorite={boolean("isFavorite", false)}
           onReach={() => console.log("handleReachCard")}

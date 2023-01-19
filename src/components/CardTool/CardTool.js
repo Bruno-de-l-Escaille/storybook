@@ -24,7 +24,7 @@ export class CardTool extends PureComponent {
     this.state = {
       moreActions: false,
       displayTooltip: false,
-      selectedValue: null,
+      selectedValue: props.scope,
     };
   }
   componentDidMount() {
@@ -221,6 +221,7 @@ export class CardTool extends PureComponent {
                         id={item.value}
                         name="scoop"
                         value={item.value}
+                        checked={item.value === selectedValue}
                         onClick={() =>
                           this.setState({ selectedValue: item.value })
                         }
