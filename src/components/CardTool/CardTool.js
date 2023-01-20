@@ -36,7 +36,7 @@ export class CardTool extends PureComponent {
 
   handleClickOutsideTooltip(event) {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      this.setState({ displayTooltip: false, selectedValue: null });
+      this.setState({ displayTooltip: false, selectedValue: this.props.scope });
     }
   }
 
@@ -47,7 +47,9 @@ export class CardTool extends PureComponent {
   handleShareCardtool = () => {
     let { selectedValue } = this.state;
     this.props.onShare(selectedValue);
-    this.setState({ displayTooltip: false, selectedValue: this.props.scope });
+    this.setState({
+      displayTooltip: false,
+    });
   };
 
   renderScopeIcon = (type) => {
@@ -147,19 +149,14 @@ export class CardTool extends PureComponent {
             <div
               className={classnames(
                 styles.card_action,
-                displayTooltip ? styles.card_action_activated : ""
+                styles.card_action_danger
               )}
               onClick={() => onUnshare()}
             >
               {loadingActions && loadingActions.unShare ? (
                 <IconCircleLoader />
               ) : (
-                <IconUnShare
-                  fill="#18A0FB"
-                  width={16}
-                  height={16}
-                  viewBox="0 0 16 16"
-                />
+                <IconUnShare width={16} height={16} viewBox="0 0 16 16" />
               )}
             </div>
           ) : (
