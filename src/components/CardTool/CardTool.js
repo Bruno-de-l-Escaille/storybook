@@ -47,10 +47,10 @@ export class CardTool extends PureComponent {
   handleShareCardtool = () => {
     let { selectedValue } = this.state;
     this.props.onShare(selectedValue);
-    this.setState({ displayTooltip: false, selectedValue: null });
+    this.setState({ displayTooltip: false, selectedValue: this.props.scope });
   };
 
-  renderScoopIcon = (type) => {
+  renderScopeIcon = (type) => {
     switch (type) {
       case "public":
         return <IconUnlock />;
@@ -108,8 +108,8 @@ export class CardTool extends PureComponent {
             <span>{data.organization}</span>
             <div className={styles.card_footer_tags}>
               <div className={styles.card_footer_tags_scoop}>
-                {this.renderScoopIcon(data.scoop)}
-                {data.scoop}
+                {this.renderScopeIcon(data.scope)}
+                {data.scope}
               </div>
               <div
                 className={styles.card_footer_tags_tag}
@@ -163,6 +163,9 @@ export class CardTool extends PureComponent {
               )}
             </div>
           ) : (
+            ""
+          )}
+          {allowedActions && allowedActions.share ? (
             <div
               className={classnames(
                 styles.card_action,
@@ -176,6 +179,8 @@ export class CardTool extends PureComponent {
                 <IconShare fill={displayTooltip ? "#FFFFFF" : "#18A0FB"} />
               )}
             </div>
+          ) : (
+            ""
           )}
           {allowedActions && allowedActions.more ? (
             moreActions ? (
@@ -219,7 +224,7 @@ export class CardTool extends PureComponent {
                       <input
                         type="radio"
                         id={item.value}
-                        name="scoop"
+                        name="scope"
                         value={item.value}
                         checked={item.value === selectedValue}
                         onClick={() =>
