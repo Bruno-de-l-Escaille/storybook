@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import style from "./SubMenu.module.scss";
+import classNames from "classnames";
 
 export class SubMenu extends Component {
   constructor(props) {
@@ -58,7 +59,7 @@ export class SubMenu extends Component {
     return (
       <li
         key={`smenu-${Math.random()}`}
-        className={`${style.dropdown} ${item.simple ? style.simple : ""} `}
+        className={classNames(style.dropdown, item.simple ? style.simple : "")}
       >
         {RouterLink ? (
           <RouterLink to={item.url} className={style.item}>
