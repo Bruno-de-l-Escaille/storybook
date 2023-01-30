@@ -56,7 +56,10 @@ export class SubMenu extends Component {
     }
 
     return (
-      <li className={style.dropdown} key={`smenu-${Math.random()}`}>
+      <li
+        key={`smenu-${Math.random()}`}
+        className={`${style.dropdown} ${item.simple ? style.simple : ""} `}
+      >
         {RouterLink ? (
           <RouterLink to={item.url} className={style.item}>
             <img src={item.iconUrl} />

@@ -208,6 +208,9 @@
   ul {
     margin: 0;
   }
+  &.simple{
+    width: auto;
+  }
 }
 .dropdown:hover {
   position: relative;
