@@ -1,6 +1,19 @@
 import React, { Component } from "react";
+import { IconWhiteCheck } from "../Icons";
 import style from "./SubMenu.module.scss";
 import classNames from "classnames";
+
+const I18N = {
+  en: {
+    shared_premium: "shared premium",
+  },
+  fr: {
+    shared_premium: "premium partagé",
+  },
+  nl: {
+    shared_premium: "gedeelde premie",
+  },
+};
 
 export class SubMenu extends Component {
   constructor(props) {
@@ -135,7 +148,13 @@ export class SubMenu extends Component {
   };
 
   render() {
-    const { menu, currentCommunity, hideVertical } = this.props;
+    const {
+      menu,
+      currentCommunity,
+      hideVertical,
+      sharedPremium = false,
+      lng,
+    } = this.props;
     return menu.length === 0 ? (
       this.props.children
     ) : (
@@ -166,6 +185,12 @@ export class SubMenu extends Component {
               else return null;
             })}
           </ul>
+          {sharedPremium && (
+            <span className={style.sharePremium}>
+              <IconWhiteCheck />
+              {I18N[lng]["shared_premium"]}
+            </span>
+          )}
         </nav>
         <div className={style.content}>{this.props.children}</div>
       </div>

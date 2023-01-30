@@ -14,3 +14,4 @@ export * from "./IconSetting";
 export * from "./IconTranslate";
 export * from "./IconStar";
 export * from "./IconSlider";
+export * from "./IconWhiteCheck";

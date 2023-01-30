@@ -9,6 +9,9 @@
   background: #29394d;
   padding-left: 60px;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .vertical {
   display: flex;
@@ -208,7 +211,7 @@
   ul {
     margin: 0;
   }
-  &.simple{
+  &.simple {
     width: auto;
   }
 }
@@ -233,6 +236,25 @@
 }
 .vertical > div {
   flex: 1;
+}
+
+.sharePremium {
+  display: block;
+  margin-right: 5rem;
+  height: 2.25rem;
+  padding: 0 1rem;
+  border-radius: 5px;
+  background-color: #fb1e5b;
+  color: #ffffff;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 0.875rem;
+  svg {
+    margin-right: 0.75rem;
+  }
 }
 
 @media screen and (max-width: 39.9375em) {

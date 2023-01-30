@@ -538,6 +538,7 @@ export const SubMenuHeader = () => (
       menu={object("menu", menu)}
       currentCommunity={object("currentCommunity", authLogin.navCommunity)}
       hideVertical={boolean("hideVertical", false)}
+      sharedPremium={boolean("sharedPremium", true)}
     >
       <div style={{ padding: "3rem" }}>Content</div>
     </SubMenu>
