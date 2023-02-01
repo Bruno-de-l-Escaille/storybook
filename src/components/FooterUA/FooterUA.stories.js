@@ -38,7 +38,7 @@ export const Basic = () => (
       "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/logo/ua.png"
     }
     secondaryLogo={
-      "https://s3.tamtam.pro/v2/storage/media/IMAGE/2174/AVATAR_a55cc7155830b08e45678b3bc4ed02f3e190fc96.png"
+      "https://s3.tamtam.pro/local/storage/media/IMAGE/2174/AVATAR_998833879d2ecbb79d89cec53059dcd59e72d9f2.png"
     }
     firstList={portalSwitch}
     secondList={privacy}
