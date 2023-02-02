@@ -114,9 +114,17 @@ export const Article = ({
   };
 
   const articleLink = () => {
-    if (Link)
+    if (Link) {
+      const href = {
+        pathname: url,
+      };
+      if (queryParams) {
+        href.query = {
+          params: queryParams,
+        };
+      }
       return hasRelativePath ? (
-        <Link href={url}>
+        <Link href={href}>
           <a className={styles.title}>
             <h3>
               {title} {isPrivate && <i className="icon-sb-premium"></i>}
@@ -130,7 +138,7 @@ export const Article = ({
           </h3>
         </a>
       );
-    else
+    } else
       return hasRelativePath ? (
         targetBlank ? (
           <a
