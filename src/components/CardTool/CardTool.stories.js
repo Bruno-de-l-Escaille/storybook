@@ -3,7 +3,6 @@ import { withKnobs, boolean } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 
 import { CardTool } from "./CardTool";
-import IconInsurance from "../Icons/IconInsurance";
 
 export default {
   title: "CardTool",
@@ -17,7 +16,7 @@ export default {
 
 const data = {
   icon: "webtool-calculator",
-  scoop: "public",
+  scope: "public",
   created: "Créé le 02 août 2022, 10:55",
   title: "Inter haec Orfitus",
   link: "www.reportpaiementsonss.be/",
@@ -28,7 +27,7 @@ const data = {
 };
 const dataFavorite = {
   icon: "webtool-user",
-  scoop: "private",
+  scope: "private",
   created: "Créé le 02 août 2022, 10:55",
   title: "Inter haec Orfitus Inter haec hae Orfitus Inter haec Orfitus",
   link: "www.reportpaiementsonss.be/fr/Orfitus-Inter-haec-Orfitus",
@@ -47,15 +46,9 @@ export const CardToolDefault = () => (
           data={data}
           scope="collaborator"
           color={"#FFB340"}
-          toolOptions={[
-            { value: "public", label: "public" },
-            { value: "collaborator", label: "collaborateur" },
-            { value: "client", label: "client" },
-            { value: "private", label: "privé" },
-          ]}
-          loadingActions={{ favorite: true }}
-          allowedActions={{ favorite: true }}
-          isFavorite={boolean("isFavorite", false)}
+          loadingActions={{ share: true }}
+          allowedActions={{ favorite: true, share: true }}
+          isFavorite={true}
           onReach={() => console.log("handleReachCard")}
           onShare={() => console.log("handleShareCard")}
           onDelete={() => console.log("handleDeleteCard")}
@@ -72,12 +65,10 @@ export const CardToolTransparent = () => (
     <div className="grid-x">
       <div className="cell small-12 medium-5 large-3">
         <CardTool
-          data={{ ...data, scoop: "shared" }}
+          data={{ ...data, scope: "shared" }}
           color={"#FFB340"}
           transparent
           isFavorite={boolean("isFavorite", false)}
-          allowedActions={{ favorite: true }}
-          loadingActions={{ favorite: false, share: false }}
           onReach={() => console.log("handleReachCard")}
           onShare={() => console.log("handleShareCard")}
           onDelete={() => console.log("handleDeleteCard")}
@@ -94,10 +85,10 @@ export const CardToolShared = () => (
     <div className="grid-x">
       <div className="cell small-12 medium-5 large-3">
         <CardTool
-          allowedActions={{ favorite: false, more: true, unshare: true }}
-          loadingActions={{ favorite: false, share: false }}
+          allowedActions={{ share: true, more: true, unshare: true }}
           data={dataFavorite}
           color={"#4695DB"}
+          toolContent={<span>Tooltip content</span>}
           isFavorite={boolean("isFavorite", true)}
           onReach={() => console.log("handleReachCard")}
           onShare={() => console.log("handleShareCard")}
