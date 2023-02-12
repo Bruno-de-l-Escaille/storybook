@@ -22,7 +22,6 @@ export class CardTool extends PureComponent {
 
     this.state = {
       moreActions: false,
-      displayTooltip: false,
     };
   }
   componentDidMount() {
@@ -34,21 +33,13 @@ export class CardTool extends PureComponent {
 
   handleClickOutsideTooltip(event) {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      this.setState({ displayTooltip: false });
+      this.props.setTooltipVisibility(false);
     }
   }
 
   setWrapperRef(node) {
     this.wrapperRef = node;
   }
-
-  handleShareCardtool = () => {
-    let { selectedValue } = this.state;
-    this.props.onShare(selectedValue);
-    this.setState({
-      displayTooltip: false,
-    });
-  };
 
   renderScopeIcon = (type) => {
     switch (type) {
@@ -67,6 +58,7 @@ export class CardTool extends PureComponent {
     const {
       data,
       color,
+      displayTooltip,
       loadingActions,
       allowedActions,
       isFavorite,
@@ -78,7 +70,7 @@ export class CardTool extends PureComponent {
       onUpdate,
       onReach,
     } = this.props;
-    let { moreActions, displayTooltip } = this.state;
+    let { moreActions } = this.state;
     return (
       <div
         className={classnames(
@@ -122,20 +114,22 @@ export class CardTool extends PureComponent {
           <div className={styles.card_action} onClick={() => onReach()}>
             {<IconExternalLink />}
           </div>
-          {allowedActions && allowedActions.favorite ? (
+          {allowedActions && allowedActions.share ? (
             <div
               className={classnames(
                 styles.card_action,
-                isFavorite ? styles.card_action_activated : ""
+                displayTooltip ? styles.card_action_activated : ""
               )}
-              onClick={() => onAddFavorite()}
+              onClick={() => {
+                if (!loadingActions || !loadingActions.share) {
+                  this.props.setTooltipVisibility(true);
+                } else return;
+              }}
             >
-              {loadingActions && loadingActions.favorite ? (
+              {loadingActions && loadingActions.share ? (
                 <IconCircleLoader />
-              ) : isFavorite ? (
-                <IconStarFull />
               ) : (
-                <IconStarEmpty />
+                <IconShare fill={displayTooltip ? "#FFFFFF" : "#18A0FB"} />
               )}
             </div>
           ) : (
@@ -158,22 +152,20 @@ export class CardTool extends PureComponent {
           ) : (
             ""
           )}
-          {allowedActions && allowedActions.share ? (
+          {allowedActions && allowedActions.favorite ? (
             <div
               className={classnames(
                 styles.card_action,
-                displayTooltip ? styles.card_action_activated : ""
+                isFavorite ? styles.card_action_activated : ""
               )}
-              onClick={() => {
-                if (!loadingActions || !loadingActions.share) {
-                  this.setState({ displayTooltip: true });
-                } else return;
-              }}
+              onClick={() => onAddFavorite()}
             >
-              {loadingActions && loadingActions.share ? (
+              {loadingActions && loadingActions.favorite ? (
                 <IconCircleLoader />
+              ) : isFavorite ? (
+                <IconStarFull />
               ) : (
-                <IconShare fill={displayTooltip ? "#FFFFFF" : "#18A0FB"} />
+                <IconStarEmpty />
               )}
             </div>
           ) : (

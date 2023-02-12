@@ -54,6 +54,7 @@ export const CardToolDefault = () => (
           onDelete={() => console.log("handleDeleteCard")}
           onUpdate={() => console.log("handleUpdateCard")}
           onAddFavorite={() => console.log("handleAddFavoritCard")}
+          setTooltipVisibility={() => console.log("setTooltipVisibility1")}
         />
       </div>
     </div>
@@ -74,6 +75,7 @@ export const CardToolTransparent = () => (
           onDelete={() => console.log("handleDeleteCard")}
           onUpdate={() => console.log("handleUpdateCard")}
           onAddFavorite={() => console.log("handleAddFavoritCard")}
+          setTooltipVisibility={() => console.log("setTooltipVisibility2")}
         />
       </div>
     </div>
@@ -85,16 +87,20 @@ export const CardToolShared = () => (
     <div className="grid-x">
       <div className="cell small-12 medium-5 large-3">
         <CardTool
-          allowedActions={{ share: true, more: true, unshare: true }}
           data={dataFavorite}
           color={"#4695DB"}
+          displayTooltip
           toolContent={<span>Tooltip content</span>}
           isFavorite={boolean("isFavorite", true)}
+          allowedActions={{ share: true, more: true, unshare: true }}
           onReach={() => console.log("handleReachCard")}
           onShare={() => console.log("handleShareCard")}
           onDelete={() => console.log("handleDeleteCard")}
           onUpdate={() => console.log("handleUpdateCard")}
           onAddFavorite={() => console.log("handleAddFavoritCard")}
+          setTooltipVisibility={(val) =>
+            console.log("setTooltipVisibility3", val)
+          }
         />
       </div>
     </div>
