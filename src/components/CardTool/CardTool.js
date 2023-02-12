@@ -33,7 +33,7 @@ export class CardTool extends PureComponent {
 
   handleClickOutsideTooltip(event) {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      this.props.setTooltipVisibility(false);
+      this.props.setTooltipVisibility(null);
     }
   }
 
@@ -122,7 +122,7 @@ export class CardTool extends PureComponent {
               )}
               onClick={() => {
                 if (!loadingActions || !loadingActions.share) {
-                  this.props.setTooltipVisibility(true);
+                  this.props.setTooltipVisibility(data.id);
                 } else return;
               }}
             >
