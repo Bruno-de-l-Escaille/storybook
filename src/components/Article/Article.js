@@ -46,10 +46,11 @@ export const Article = ({
   host,
   targetBlank,
   queryParams,
+  expert = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  if (isFetching) return <Fetching type={type} size={size} />;
+  if (isFetching) return <Fetching type={type} size={size} expert={expert} />;
   const data = prepareArticle(article, env, host);
 
   const {
@@ -999,12 +1000,16 @@ export const Article = ({
 
   const renderType7 = () => {
     return (
-      <div className={`${styles.articleTemplate7} ${styles[size]}`}>
+      <div
+        className={`${styles.articleTemplate7} ${expert ? styles.expert : ""} ${
+          styles[size]
+        }`}
+      >
         <div className={styles.articleContainer}>
           <div
             className={classnames(
               styles.contentImg,
-              hasActions || (!hasRights && status === "PROGRAMMED")
+              !expert && (hasActions || (!hasRights && status === "PROGRAMMED"))
                 ? styles.hasActions
                 : ""
             )}
@@ -1012,7 +1017,7 @@ export const Article = ({
               backgroundImage: `url(${addLandaSize(mediaUrl, null, 432)})`,
             }}
           >
-            {hasActions && (
+            {!expert && hasActions && (
               <div className={styles.buttons}>
                 {status !== "PUBLISHED" && onPublish && (
                   <div>
@@ -1051,7 +1056,7 @@ export const Article = ({
                 )}
               </div>
             )}
-            {!hasRights && status === "PROGRAMMED" && (
+            {!expert && !hasRights && status === "PROGRAMMED" && (
               <div className={styles.buttons}>
                 {onEdit && (
                   <button>
@@ -1076,7 +1081,8 @@ export const Article = ({
                 ></div>
               )}
             </div>
-            {article.relatedArticles &&
+            {!expert &&
+              article.relatedArticles &&
               renderRelatedArticles(article.relatedArticles)}
             <div className={styles.meta}>
               {articleType && articleType.name ? (
@@ -1094,7 +1100,7 @@ export const Article = ({
             <div className={styles.bottomAction}>
               {renderAvatar(true)}
               {renderPublishedAtRenderTime()}
-              {renderUserSocialActions()}
+              {!expert && renderUserSocialActions()}
             </div>
           </div>
         </div>

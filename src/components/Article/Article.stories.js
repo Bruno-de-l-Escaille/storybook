@@ -189,6 +189,20 @@ export const Type7Large = () => (
     </div>
   </div>
 );
+export const Type7Expert = () => (
+  <div className="grid-container">
+    <div className="grid-x">
+      <div className="cell small-12 medium-4">
+        <Article
+          article={articles[0]}
+          type="type7"
+          isFetching={boolean("isFetching", false)}
+          expert={true}
+        />
+      </div>
+    </div>
+  </div>
+);
 
 export const Type8 = () => (
   <div className="grid-container">
