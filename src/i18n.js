@@ -36,6 +36,7 @@ export const I18N = {
     noOptions: "no options",
     sharedWith: "share with",
     share: "share",
+    "En Replay": "En Replay",
   },
   fr: {
     ARTCILES: "Articles",
@@ -73,6 +74,7 @@ export const I18N = {
     noOptions: "aucune options",
     sharedWith: "partager avec",
     share: "partager",
+    "En Replay": "En Replay",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -112,5 +114,6 @@ export const I18N = {
     noOptions: "[no options]",
     sharedWith: "[share with]",
     share: "[share]",
+    "En Replay": "En Replay",
   },
 };

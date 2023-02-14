@@ -33,3 +33,20 @@ export const Default = () => (
     </div>
   </div>
 );
+
+export const Expert = () => (
+  <div className="grid-container">
+    <div className="grid-x">
+      <div className="cell small-12 medium-4 large-3">
+        <EventCard
+          language="fr"
+          event={events[0]}
+          index={1}
+          eventUrl={"https://event-pro.rc2.tamtam.pro/"}
+          isFetching={boolean("isFetching", false)}
+          expert={true}
+        />
+      </div>
+    </div>
+  </div>
+);

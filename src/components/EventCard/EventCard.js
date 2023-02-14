@@ -7,6 +7,7 @@ import { APP_ENV } from "../../config";
 import { getDateLabel } from "../../utils";
 import { Fetching } from "./Fetching";
 import { I18N } from "../../i18n";
+import { AuthorAvatar } from "../Avatar/AuthorAvatar";
 
 export class EventCard extends PureComponent {
   render() {
@@ -19,6 +20,7 @@ export class EventCard extends PureComponent {
       myEventsType,
       isFetching,
       eventUrl,
+      expert = false,
     } = this.props;
 
     const {
@@ -124,7 +126,7 @@ export class EventCard extends PureComponent {
 
     let desc = "";
     let dotes = "";
-    const maxWords = 8;
+    const maxWords = expert ? 10 : 8;
     if (event[nameAttr]) {
       const splt = event[nameAttr].split(" ");
       const lgt = splt.length;
@@ -138,6 +140,7 @@ export class EventCard extends PureComponent {
     const appEnv = APP_ENV === "rc2" ? "rc" : APP_ENV;
 
     let speaker = null;
+    let expertSpeaker = null;
     if (
       event["speakers-abstract"] &&
       event["speakers-abstract"].speakers &&
@@ -145,6 +148,7 @@ export class EventCard extends PureComponent {
     ) {
       const { firstName, lastName } = event["speakers-abstract"].speakers[0];
       speaker = `${firstName} ${lastName}`;
+      expertSpeaker = event["speakers-abstract"].speakers[0];
     }
 
     let clientLogo = "";
@@ -159,6 +163,7 @@ export class EventCard extends PureComponent {
       <div
         className={classnames(
           styles.event,
+          expert ? styles.expert : "",
           index === 0 ? styles.noMargin : "",
           fromCycle ? styles.fromCycle : "",
           myEventsType ? styles.mine : ""
@@ -197,7 +202,6 @@ export class EventCard extends PureComponent {
               </div>
             )}
           </div>
-
           <div className={styles.actions}>
             <span className={styles.eventType}>
               {newPrice ? <span>{newPrice} €</span> : null}
@@ -211,41 +215,63 @@ export class EventCard extends PureComponent {
             >{`${hours}h ${minutes}min`}</span>
           </div>
           <h3>{desc}</h3>
-          {speaker ? <h4>{speaker}</h4> : null}
+          {speaker && !expert ? <h4>{speaker}</h4> : null}
+          {expertSpeaker && expert ? (
+            <div className={styles.speaker}>
+              <AuthorAvatar
+                author={{
+                  name: `${expertSpeaker.firstName} ${expertSpeaker.lastName}`,
+                  headline: "",
+                  avatarUrl: `https://s3.tamtam.pro/${appEnv}/events-folder${expertSpeaker.pictureUrl}`,
+                }}
+              />
+            </div>
+          ) : null}
+
           <ul className={styles.infos}>
-            {processing ? (
-              <li>
-                <i className={styles.pending} />
-                <span>{I18N[language]["In progress"]}</span>
-              </li>
-            ) : (
-              <li>
-                <i className="icon icon-calendar" />
-                <span>
-                  <strong>{I18N[language]["En Live"]}</strong> : {helpDate}
-                </span>
-              </li>
+            {!expert && (
+              <>
+                {processing ? (
+                  <li>
+                    <i className={styles.pending} />
+                    <span>{I18N[language]["In progress"]}</span>
+                  </li>
+                ) : (
+                  <li>
+                    <i className="icon icon-calendar" />
+                    <span>
+                      <strong>{I18N[language]["En Live"]}</strong> : {helpDate}
+                    </span>
+                  </li>
+                )}
+              </>
             )}
+
             {/* {isReplayable && isReplayable === 1 ? (
               <li>
                 <i className="icon icon-globe" />
                 <span>{I18N[language]["Webinar"]}</span>
               </li>
             ) : null} */}
-            {!myEventsType && isReplayable && isReplayable === 1 ? (
+            {(!myEventsType && isReplayable && isReplayable === 1) || expert ? (
               <li>
                 <i className="icon icon-control-play" />
-
-                <span>
-                  {
-                    I18N[language][
-                      "Possible to review the training for max 15 days after the date of the live"
-                    ]
-                  }
-                </span>
+                {expert ? (
+                  <span>
+                    <strong>{I18N[language]["En Replay"]}</strong> : {helpDate}
+                  </span>
+                ) : (
+                  <span>
+                    {
+                      I18N[language][
+                        "Possible to review the training for max 15 days after the date of the live"
+                      ]
+                    }
+                  </span>
+                )}
               </li>
             ) : null}
-            {!myEventsType && (
+            {!myEventsType && !expert && (
               <li>
                 <i className="icon icon-badge" />
 
@@ -262,41 +288,44 @@ export class EventCard extends PureComponent {
               </li>
             ) : null} */}
           </ul>
-          <div className={styles.controls}>
-            {passed || fromCycle || myEventsType ? null : (
-              <a
-                className={classnames(styles.btn, styles.btnPrimary)}
-                href={`${eventUrl}/plan-selector?eventId=${event.id}`}
-                target="_blank"
-              >
-                {I18N[language]["Purchase"]}
-              </a>
-            )}
-            {webinarUrl && myEventsType && myEventsType === "REPLAY" ? (
-              <a
-                className={classnames(styles.btn, styles.btnBlue)}
-                href={webinarUrl}
-                target="_blank"
-              >
-                <i className="icon icon-control-play" />
-                {I18N[language]["Replay"]}
-              </a>
-            ) : null}
-            <a
-              className={classnames(
-                styles.btn,
-                styles.btnSecondary,
-                (!myEventsType || myEventsType === "SPACE") &&
-                  (passed || fromCycle)
-                  ? styles.btn100
-                  : ""
+
+          {!expert && (
+            <div className={styles.controls}>
+              {passed || fromCycle || myEventsType ? null : (
+                <a
+                  className={classnames(styles.btn, styles.btnPrimary)}
+                  href={`${eventUrl}/plan-selector?eventId=${event.id}`}
+                  target="_blank"
+                >
+                  {I18N[language]["Purchase"]}
+                </a>
               )}
-              href={`${eventUrl}/event/${event.id}/reception?tool=register`}
-              target="_blank"
-            >
-              {I18N[language]["Details"]}
-            </a>
-          </div>
+              {webinarUrl && myEventsType && myEventsType === "REPLAY" ? (
+                <a
+                  className={classnames(styles.btn, styles.btnBlue)}
+                  href={webinarUrl}
+                  target="_blank"
+                >
+                  <i className="icon icon-control-play" />
+                  {I18N[language]["Replay"]}
+                </a>
+              ) : null}
+              <a
+                className={classnames(
+                  styles.btn,
+                  styles.btnSecondary,
+                  (!myEventsType || myEventsType === "SPACE") &&
+                    (passed || fromCycle)
+                    ? styles.btn100
+                    : ""
+                )}
+                href={`${eventUrl}/event/${event.id}/reception?tool=register`}
+                target="_blank"
+              >
+                {I18N[language]["Details"]}
+              </a>
+            </div>
+          )}
         </div>
       </div>
     );
