@@ -52,7 +52,7 @@ export const AuthorAvatar = ({ author, white, Link, queryParams }) => {
         };
       }
       return (
-        <Link href={href}>
+        <Link href={href} prefetch={false}>
           <a className={styles.avatarContainer}>{renderContent()}</a>
         </Link>
       );

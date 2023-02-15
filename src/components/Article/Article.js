@@ -125,7 +125,7 @@ export const Article = ({
         };
       }
       return hasRelativePath ? (
-        <Link href={href}>
+        <Link href={href} prefetch={false}>
           <a className={styles.title}>
             <h3>
               {title} {isPrivate && <i className="icon-sb-premium"></i>}
@@ -418,6 +418,7 @@ export const Article = ({
               <span className={styles.vIterm}>
                 <Link
                   href={`/${related[0]}/article/${related[1].url}/${related[1].id}`}
+                  prefetch={false}
                 >
                   <a>
                     <img

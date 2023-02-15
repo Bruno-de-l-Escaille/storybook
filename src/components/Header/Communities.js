@@ -72,6 +72,7 @@ export default class Communities extends Component {
             >
               <Link
                 href={`/${lng}/community/${communities[i].url}/${communities[i].id}`}
+                prefetch={false}
               >
                 <a>
                   {logoBlock}
