@@ -117,6 +117,11 @@
   letter-spacing: 0.02em;
   color: #6D7F92;
 
+  &_tags_scopes{
+    display: flex;
+    max-width: 200px;
+    overflow: scroll;
+  }
   &_tags {
     display: flex;
     align-items: center;
@@ -127,10 +132,14 @@
       align-items: center;
       justify-content: space-around;
       height: 22px;
-      width: 71px;
       border: 1px solid #D8DDE2;
       border-radius: 5px 3px 5px 5px;
       padding: 2px 5px;
+      margin: 0px 2px;
+
+      > svg {
+        margin-right: 3px;
+      }
     }
     &_tag {
       padding: 2px 5px;

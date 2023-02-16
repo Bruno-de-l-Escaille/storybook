@@ -43,14 +43,12 @@ export class CardTool extends PureComponent {
 
   renderScopeIcon = (type) => {
     switch (type) {
-      case "public":
+      case "PUBLIC":
         return <IconUnlock />;
-      case "private":
+      case "PRIVATE":
         return <IconLock />;
-      case "shared":
-        return <IconShare width={12} height={12} fill="#6D7F92" />;
       default:
-        return null;
+        return <IconShare width={12} height={12} fill="#6D7F92" />;
     }
   };
 
@@ -97,9 +95,15 @@ export class CardTool extends PureComponent {
             <span>{data.created}</span>
             <span>{data.organization}</span>
             <div className={styles.card_footer_tags}>
-              <div className={styles.card_footer_tags_scoop}>
-                {this.renderScopeIcon(data.scope)}
-                {data.scope}
+              <div className={styles.card_footer_tags_scopes}>
+                {data.scopes.map((scope) => {
+                  return (
+                    <div className={styles.card_footer_tags_scoop}>
+                      {this.renderScopeIcon(scope)}
+                      {scope.toLowerCase()}
+                    </div>
+                  );
+                })}
               </div>
               <div
                 className={styles.card_footer_tags_tag}
