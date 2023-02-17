@@ -16,7 +16,7 @@ export default {
 
 const data = {
   icon: "webtool-calculator",
-  scopes: ["PUBLIC", "allCollaborators", "allClient"],
+  scope: "public",
   created: "Créé le 02 août 2022, 10:55",
   title: "Inter haec Orfitus",
   link: "www.reportpaiementsonss.be/",
@@ -27,7 +27,7 @@ const data = {
 };
 const dataFavorite = {
   icon: "webtool-user",
-  scopes: ["PRIVATE"],
+  scope: "partagé",
   created: "Créé le 02 août 2022, 10:55",
   title: "Inter haec Orfitus Inter haec hae Orfitus Inter haec Orfitus",
   link: "www.reportpaiementsonss.be/fr/Orfitus-Inter-haec-Orfitus",
@@ -66,7 +66,7 @@ export const CardToolTransparent = () => (
     <div className="grid-x">
       <div className="cell small-12 medium-5 large-3">
         <CardTool
-          data={{ ...data, scopes: ["shared"] }}
+          data={data}
           color={"#FFB340"}
           transparent
           isFavorite={boolean("isFavorite", false)}
