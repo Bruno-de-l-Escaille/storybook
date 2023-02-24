@@ -157,7 +157,7 @@ export class EventCard extends PureComponent {
       clientLogo = clientData.avatarUrl;
     }
     if (isFetching) {
-      return <Fetching />;
+      return <Fetching expert={expert} />;
     }
     return (
       <div

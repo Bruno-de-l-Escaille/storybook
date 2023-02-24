@@ -1,13 +1,14 @@
+import classNames from "classnames";
 import React from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 import styles from "./EventCard.module.scss";
 
-export const Fetching = () => {
+export const Fetching = ({ expert }) => {
   const renderCard = () => {
     return (
-      <div className={styles.event}>
+      <div className={classNames(styles.event, expert ? styles.expert : "")}>
         <div className={styles.eventContent}>
           <div>
             <Skeleton height={130} />
@@ -34,14 +35,18 @@ export const Fetching = () => {
           <div style={{ marginTop: "5px" }}>
             <Skeleton height={28} width="100%" />
           </div>
-          <div style={{ marginTop: "5px" }}>
-            <Skeleton height={14} width={182} />
-          </div>
+          {!expert && (
+            <div style={{ marginTop: "5px" }}>
+              <Skeleton height={14} width={182} />
+            </div>
+          )}
 
-          <div className={styles.controls} style={{ width: "100%" }}>
-            <Skeleton height={30} width={115} />
-            <Skeleton height={30} width={115} />
-          </div>
+          {!expert && (
+            <div className={styles.controls} style={{ width: "100%" }}>
+              <Skeleton height={30} width={115} />
+              <Skeleton height={30} width={115} />
+            </div>
+          )}
         </div>
       </div>
     );
