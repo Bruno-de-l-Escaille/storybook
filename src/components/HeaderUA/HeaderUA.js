@@ -13,14 +13,17 @@ const I18N = {
   en: {
     signIn: "Login",
     signUp: "Register",
+    complete_account: "Complete your UA account",
   },
   fr: {
     signIn: "S'identifier",
     signUp: "S'inscrire",
+    complete_account: "Completez votre compte UA",
   },
   nl: {
     signIn: "Herkennen",
     signUp: "Register",
+    complete_account: "Voltooi uw UA -account",
   },
 };
 
@@ -108,6 +111,8 @@ export class HeaderUA extends Component {
       secondList,
       thirdList,
       navigateTo,
+      showOnBoardProgress,
+      onBoardProgress,
     } = this.props;
     const { portalSwitchCurrent, isFaqWidgetLoaded } = this.state;
     const { user, navCommunity } = auth;
@@ -183,6 +188,27 @@ export class HeaderUA extends Component {
                 </ul>
               </div>
             )}
+          </div>
+        )}
+        {showOnBoardProgress && (
+          <div className={styles.progress}>
+            <div>
+              <div className={styles.progress_top}>
+                <span>{I18N[lng]["complete_account"]}</span>
+                <span className={styles.progress_top_value}>
+                  {" "}
+                  {onBoardProgress}%
+                </span>
+              </div>
+              <div className={styles.progress_bar}>
+                {onBoardProgress > 0 && (
+                  <span
+                    className={styles.progress_value}
+                    style={{ width: onBoardProgress + "%" }}
+                  ></span>
+                )}
+              </div>
+            </div>
           </div>
         )}
         <ul className={`${styles.menu} ${styles.buttons}`}>

@@ -1561,3 +1561,36 @@ nav {
     margin-right: 8px !important;
   }
 }
+
+.progress {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #6d7f92;
+  text-transform: initial;
+  min-width: 50px;
+  display: flex;
+  align-items: center;
+
+  &_top_value {
+    margin-left: 10px;
+  }
+
+  &_bar {
+    margin-top: 5px;
+    height: 4px;
+    width: 100%;
+    background: #c4c4c4;
+    border-radius: 20px;
+    position: relative;
+  }
+
+  &_value {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 4px;
+    background: #18a0fb;
+    border-radius: 20px;
+  }
+}

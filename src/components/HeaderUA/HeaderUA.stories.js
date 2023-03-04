@@ -55,6 +55,39 @@ const rightIcons = {
   },
 };
 
+const disabledRightIcons = {
+  home: {
+    activated: false,
+    url: "https://blog.tamtam.pro/fr",
+  },
+  profile: {
+    activated: false,
+    url: "https://blog.tamtam.pro/fr",
+  },
+  ebox: {
+    activated: false,
+    url: "https://blog.tamtam.pro/fr",
+  },
+  search: {
+    activated: false,
+  },
+  notifs: {
+    activated: false,
+  },
+  apps: {
+    activated: false,
+  },
+  faq: {
+    activated: false,
+  },
+  backoffice: {
+    activated: false,
+    label: "Back office",
+    url: "https://blog.tamtam.pro/fr",
+    clicked: false,
+  },
+};
+
 const settings = [
   {
     label: "Gérer les fiduciaires",
@@ -292,6 +325,33 @@ export const HeaderLoggedIn = () => (
     navigateTo={(url) => {
       console.log(url);
     }}
+  />
+);
+
+export const HeaderOnBoarding = () => (
+  <HeaderUA
+    app={object("app", App)}
+    auth={object("auth", authLogin)}
+    env={text("env", "local")}
+    settings={object("settings", settings)}
+    lng={select("language", ["fr", "nl", "en"], "fr")}
+    languages={array("languages", languages)}
+    rightIcons={object("rightIcons", disabledRightIcons)}
+    onLanguageChange={(langue) => alert(langue)}
+    onLogoutClick={(e) => console.log("Logout", e)}
+    onSearchClick={() => alert("searching")}
+    allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
+    // onSelectAllCommunities={() => console.log("Communities select all")}
+    onSelectCommunity={(community) => console.log("community click", community)}
+    onFAQLoad={() => console.log("onFAQLoad", window.showFAQ)}
+    firstList={privacy}
+    secondList={cookies}
+    thirdList={policy}
+    navigateTo={(url) => {
+      console.log(url);
+    }}
+    showOnBoardProgress={true}
+    onBoardProgress={25}
   />
 );
 
