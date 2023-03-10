@@ -17,7 +17,7 @@ export const AuthorAvatar = ({ author, white, Link, queryParams }) => {
             ></div>
           ) : (
             <div className={`${styles.avatar} ${styles.emptyAvatar}`}>
-              {name.charAt(0).toUpperCase()}
+              {name?.charAt(0).toUpperCase()}
             </div>
           )}
         </div>

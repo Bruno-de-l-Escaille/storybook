@@ -159,6 +159,9 @@ export const getAlbum = ({ albums }) => {
 };
 
 export const sanitize = (str) => {
+  if (!str) {
+    return "";
+  }
   str = str.replace(/^\s+|\s+$/g, ""); // trim
   str = str.toLowerCase();
 
@@ -207,7 +210,9 @@ export const getAuthors = ({ author, chains }, lng = "fr") => {
       }
       const chainName =
         chain[`name${lng.charAt(0).toUpperCase()}${lng.slice(1)}`];
-      let chainUrl = `/${lng}/chain/${sanitize(chainName)}/${chain.id}`;
+      let chainUrl = `/${lng}/chain/${chainName ? sanitize(chainName) : "-"}/${
+        chain.id
+      }`;
       return {
         id: chain.id,
         name: chain[nameAttr],
