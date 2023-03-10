@@ -223,6 +223,9 @@ export const getAuthors = ({ author, chains }, lng = "fr") => {
 };
 
 export const addLandaSize = (img, width = 0, height = 0) => {
+  if (!img) {
+    return "";
+  }
   let result = img;
   let found = false;
 

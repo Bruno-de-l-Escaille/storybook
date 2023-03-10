@@ -5,6 +5,9 @@ import "moment/locale/nl";
 const API_DATE_FORMAT = "YYYY-MM-DD HH:mm:ss";
 
 export function addLandaSize(img, width = 0, height = 0) {
+  if (!img) {
+    return "";
+  }
   let result = img;
   let found = false;
 
