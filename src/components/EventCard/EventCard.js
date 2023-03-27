@@ -222,7 +222,7 @@ export class EventCard extends PureComponent {
                 author={{
                   name: `${expertSpeaker.firstName} ${expertSpeaker.lastName}`,
                   headline: "",
-                  avatarUrl: `https://s3.tamtam.pro/${appEnv}/events-folder${expertSpeaker.pictureUrl}`,
+                  avatarUrl: expertSpeaker.pictureUrl,
                 }}
               />
             </div>
