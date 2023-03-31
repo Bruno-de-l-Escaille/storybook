@@ -9,7 +9,7 @@ const I18N = {
     optional_cookies: "Optional Cookies",
     title: "Cookies management",
     consent_text:
-      "<p>Your privacy is our priority</p><br><p>This website uses cookies. Some cookies are strictly necessary for the proper functioning of the site: you cannot refuse them. In order to optimize your experience, optional cookies are also used, for which your prior consent is required for their placement! In particular, they make it possible to analyze traffic and offer you possibilities related to social networks.</p><br><p>You can change your preferences at any time via your browser settings or by using our privacy center, which can be activated via the “Manage my cookies” tab (make the link).To find out more about cookies, the data we use and the processing we carry out, you can consult our “cookie policy” and our privacy statement.</p>",
+      "<p>Your privacy is our priority</p><br><p>This website uses cookies. Some cookies are strictly necessary for the proper functioning of the site: you cannot refuse them. In order to optimize your experience, optional cookies are also used, for which your prior consent is required for their placement! In particular, they make it possible to analyze traffic and offer you possibilities related to social networks.</p><br><p>You can change your preferences at any time via your browser settings or by using our privacy center, which can be activated via the “manage_cookies_url” tab.To find out more about cookies, the data we use and the processing we carry out, you can consult our “cookie policy” and our privacy statement.</p>",
     cookie_accept: "Accept and close",
     more_infos: "Manage my cookies",
     back: "Back",
@@ -19,13 +19,14 @@ const I18N = {
       "Audience measurement and traffic analysis tool on our site",
     tamtam_text:
       "Used to save your language and personalization preferences to enhance your experience",
+    manage_cookies_url: "Manage my cookies",
   },
   fr: {
     functional_cookies: "Cookies fonctionnel",
     optional_cookies: "Cookies optionnel",
     title: "Gestion des Cookies",
     consent_text:
-      "<p>Le respect de votre vie privée est notre priorité</p><br><p>Ce site web utilise  des cookies. Certains cookies sont strictement nécessaires au bon fonctionnement du site : vous ne pouvez pas les refuser. Afin d’optimiser votre expérience, des cookies optionnels sont également utilisés, pour lesquels votre consentement préalable est requis à leur placement ! Ils permettent notamment d’analyser le trafic et vous offrir des possibilités liées  aux réseaux sociaux.</p><br><p>Vous pouvez modifier vos préférences à tout moment via les paramètres de votre navigateur ou en utilisant notre centre de confidentialité, activable via l’onglet « Gérer mes cookies » (faire le link).Pour en savoir plus sur les cookies, les données que nous utilisons et les traitements que nous réalisons, vous pouvez consulter notre « cookie policy »  et notre déclaration de confidentialité.</p>",
+      "<p>Le respect de votre vie privée est notre priorité</p><br><p>Ce site web utilise  des cookies. Certains cookies sont strictement nécessaires au bon fonctionnement du site : vous ne pouvez pas les refuser. Afin d’optimiser votre expérience, des cookies optionnels sont également utilisés, pour lesquels votre consentement préalable est requis à leur placement ! Ils permettent notamment d’analyser le trafic et vous offrir des possibilités liées  aux réseaux sociaux.</p><br><p>Vous pouvez modifier vos préférences à tout moment via les paramètres de votre navigateur ou en utilisant notre centre de confidentialité, activable via l’onglet « manage_cookies_url » .Pour en savoir plus sur les cookies, les données que nous utilisons et les traitements que nous réalisons, vous pouvez consulter notre « cookie policy »  et notre déclaration de confidentialité.</p>",
     cookie_accept: "Accepter et fermer",
     more_infos: "Gérer mes cookies",
     back: "Retour",
@@ -36,13 +37,14 @@ const I18N = {
       "Outil de mesure d’audience et d'analyse du traffic sur notre site",
     tamtam_text:
       "Utilisé pour mémoriser vos préférences linguistiques et de personnalisation afin d'améliorer votre expérience",
+    manage_cookies_url: "Gérer mes cookies",
   },
   nl: {
     functional_cookies: "Functionele Cookies",
     optionele_cookies: "Optionele cookies",
     title: "Beheer van cookies",
     consent_text:
-      "<p>Uw privacy is ons beleid</p><br><p>Deze website maakte gebruik van cookies. Sommige cookies zijn strikt noodzakelijk voor een goede werking van de website: u kan deze niet weigeren. Om uw gebruikservaring te verbeteren, worden ook optionele cookies gebruikt. Hiervoor vragen wij voorafgaand uw toestemming. Dankzij deze cookies kunnen wij het website-bezoek analyseren en mogelijkheden aanbieden via sociale media.</p><br><p>U kan uw voorkeuren wijzigen wanneer u dat wenst, via de instellingen van uw browser, of door uw instellingen op onze website te beheren. Dit kan door te klikken op het tabblad ‘Mijn cookies beheren’.</p><br><p>Wil u meer weten over cookies, de gegevens waar wij gebruik van maken en de verwerking ervan?</p><br><p>Lees dan zeker onze cookies policy en onze privacyverklaring.</p>",
+      "<p>Uw privacy is ons beleid</p><br><p>Deze website maakte gebruik van cookies. Sommige cookies zijn strikt noodzakelijk voor een goede werking van de website: u kan deze niet weigeren. Om uw gebruikservaring te verbeteren, worden ook optionele cookies gebruikt. Hiervoor vragen wij voorafgaand uw toestemming. Dankzij deze cookies kunnen wij het website-bezoek analyseren en mogelijkheden aanbieden via sociale media.</p><br><p>U kan uw voorkeuren wijzigen wanneer u dat wenst, via de instellingen van uw browser, of door uw instellingen op onze website te beheren. Dit kan door te klikken op het tabblad ‘manage_cookies_url’.</p><br><p>Wil u meer weten over cookies, de gegevens waar wij gebruik van maken en de verwerking ervan?</p><br><p>Lees dan zeker onze cookies policy en onze privacyverklaring.</p>",
     cookie_accept: "Aanvaarden en sluiten",
     more_infos: "My cookies beheerden",
     back: "Opbrengst",
@@ -51,6 +53,7 @@ const I18N = {
     analytics_text: "Doelgroepmeting en verkeersanalysetool op onze site",
     tamtam_text:
       "Wordt gebruikt om uw taal- en personalisatievoorkeuren te onthouden om uw ervaring te verbeteren",
+    manage_cookies_url: "Mijn cookies beheren",
   },
 };
 
@@ -140,7 +143,10 @@ export class CookieConsent extends PureComponent {
           <div
             className={styles.text}
             dangerouslySetInnerHTML={{
-              __html: I18N[lng]["consent_text"],
+              __html: I18N[lng]["consent_text"].replace(
+                "manage_cookies_url",
+                `<a target="_blank" href="${this.props.manageCookiesUrl}" alt="manage_cookies" class="on">${I18N[lng]["manage_cookies_url"]}</a>`
+              ),
             }}
           ></div>
         )}
@@ -191,3 +197,7 @@ export class CookieConsent extends PureComponent {
     );
   }
 }
+// Mijn cookies beheren
+// Gérer mes cookies
+// Manage my cookies
+// <a target="_blank" href="https://google.com" alt="test" class="on">test</a>
