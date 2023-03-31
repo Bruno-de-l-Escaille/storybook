@@ -39,7 +39,7 @@
     }
     .cookiesDetails {
       overflow: scroll;
-      max-height: 500px;
+      max-height: 400px;
       .section {
         p {
           text-align: left;
@@ -72,6 +72,10 @@
         }
       }
     }
+  }
+  .actions {
+    display: flex;
+    align-items: center;
   }
 
   .button {
@@ -141,4 +145,48 @@
   font-size: 14px;
   text-align: left;
   color: #8d8d8d;
+}
+
+@media screen and (max-width: 393px) {
+  .container {
+    left: 0;
+    bottom: 10vh;
+    .text {
+      height: 100px;
+      overflow: scroll;
+    }
+
+    .info {
+      .cookiesDetails {
+        max-height: 200px;
+      }
+    }
+
+    .button,
+    .buttonInfo {
+      padding: 0.5rem;
+    }
+  }
+}
+@media screen and (max-height: 393px) {
+  .container {
+    max-width: 750px;
+    left: 0;
+    bottom: 20vh;
+    .text {
+      height: 100px;
+      overflow: scroll;
+    }
+
+    .info {
+      .cookiesDetails {
+        max-height: 98px;
+      }
+    }
+
+    .button,
+    .buttonInfo {
+      padding: 0.5rem;
+    }
+  }
 }

@@ -179,13 +179,14 @@ export class CookieConsent extends PureComponent {
             </div>
           </div>
         </div>
-
-        <button className={styles.buttonInfo} onClick={this.onShowInfo}>
-          {showInfo ? I18N[lng]["back"] : I18N[lng]["more_infos"]}
-        </button>
-        <button className={styles.button} onClick={this.onAccept}>
-          {I18N[lng]["cookie_accept"]}
-        </button>
+        <div className={styles.actions}>
+          <button className={styles.buttonInfo} onClick={this.onShowInfo}>
+            {showInfo ? I18N[lng]["back"] : I18N[lng]["more_infos"]}
+          </button>
+          <button className={styles.button} onClick={this.onAccept}>
+            {I18N[lng]["cookie_accept"]}
+          </button>
+        </div>
       </div>
     );
   }
