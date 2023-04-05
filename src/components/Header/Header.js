@@ -354,9 +354,7 @@ export class Header extends Component {
                   {settings.map(({ label, url }) => (
                     <li key={url}>
                       {Link ? (
-                        <Link href={url}>
-                          <a>{label}</a>
-                        </Link>
+                        <Link href={url}>{label}</Link>
                       ) : (
                         <a href={url}>{label}</a>
                       )}
@@ -367,13 +365,11 @@ export class Header extends Component {
             )}
 
             {Link ? (
-              <Link href={appUrl}>
-                <a className={styles.appInfo}>
-                  <img className={styles.appLogo} src={appLogoUrl} alt="logo" />
-                  {!isPrivateBlog && (
-                    <span className={styles.appName}>{appName}</span>
-                  )}
-                </a>
+              <Link href={appUrl} className={styles.appInfo}>
+                <img className={styles.appLogo} src={appLogoUrl} alt="logo" />
+                {!isPrivateBlog && (
+                  <span className={styles.appName}>{appName}</span>
+                )}
               </Link>
             ) : (
               <a href={appUrl} className={styles.appInfo}>

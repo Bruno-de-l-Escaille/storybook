@@ -74,10 +74,8 @@ export default class Communities extends Component {
                 href={`/${lng}/community/${communities[i].url}/${communities[i].id}`}
                 prefetch={false}
               >
-                <a>
-                  {logoBlock}
-                  {clientName}
-                </a>
+                {logoBlock}
+                {clientName}
               </Link>
             </li>
           );
@@ -113,9 +111,7 @@ export default class Communities extends Component {
         if (Link) {
           clientsBlock.push(
             <li className={styles.menu__seeAll} key={`c-all`}>
-              <Link href={allCommunitiesUrl}>
-                <a>{I18N[lng]["viewAll"]}</a>
-              </Link>
+              <Link href={allCommunitiesUrl}>{I18N[lng]["viewAll"]}</Link>
             </li>
           );
         } else {

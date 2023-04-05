@@ -52,8 +52,8 @@ export const AuthorAvatar = ({ author, white, Link, queryParams }) => {
         };
       }
       return (
-        <Link href={href} prefetch={false}>
-          <a className={styles.avatarContainer}>{renderContent()}</a>
+        <Link href={href} prefetch={false} className={styles.avatarContainer}>
+          {renderContent()}
         </Link>
       );
     } else {

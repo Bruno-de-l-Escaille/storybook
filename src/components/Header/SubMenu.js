@@ -45,9 +45,7 @@ export class SubMenu extends Component {
       >
         <img src={item.iconUrl} />
         {Link ? (
-          <Link href={href}>
-            <a>{item.title}</a>
-          </Link>
+          <Link href={href}>{item.title}</Link>
         ) : RouterLink ? (
           <RouterLink to={item.url}>{item.title} </RouterLink>
         ) : (
@@ -88,8 +86,8 @@ export class SubMenu extends Component {
           <ul>{this.renderSubmenu(item.submenu)}</ul>
           {item.more &&
             (Link ? (
-              <Link href={moreHref}>
-                <a className={style.more}>{item.more.title}</a>
+              <Link href={moreHref} className={style.more}>
+                {item.more.title}
               </Link>
             ) : RouterLink ? (
               <RouterLink to={item.more.url} className={style.more}>
@@ -130,9 +128,7 @@ export class SubMenu extends Component {
             {item.iconUrl && <img src={item.iconUrl} />}
 
             {Link ? (
-              <Link href={href}>
-                <a>{item.title}</a>
-              </Link>
+              <Link href={href}>{item.title}</Link>
             ) : RouterLink ? (
               <RouterLink to={item.url}>{item.title}</RouterLink>
             ) : (

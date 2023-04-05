@@ -125,12 +125,10 @@ export const Article = ({
         };
       }
       return hasRelativePath ? (
-        <Link href={href} prefetch={false}>
-          <a className={styles.title}>
-            <h3>
-              {title} {isPrivate && <i className="icon-sb-premium"></i>}
-            </h3>
-          </a>
+        <Link href={href} prefetch={false} className={styles.title}>
+          <h3>
+            {title} {isPrivate && <i className="icon-sb-premium"></i>}
+          </h3>
         </Link>
       ) : (
         <a href={url} target="_blank" rel="noreferrer" className={styles.title}>
@@ -420,14 +418,12 @@ export const Article = ({
                   href={`/${related[0]}/article/${related[1].url}/${related[1].id}`}
                   prefetch={false}
                 >
-                  <a>
-                    <img
-                      src={`/img/flags/${related[0]}.png`}
-                      width="24"
-                      height="24"
-                      alt=""
-                    />
-                  </a>
+                  <img
+                    src={`/img/flags/${related[0]}.png`}
+                    width="24"
+                    height="24"
+                    alt=""
+                  />
                 </Link>
               </span>
             );
