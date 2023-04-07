@@ -200,9 +200,11 @@ export default function Notifs({
         ariaHideApp={false}
       >
         <div className={`${styles.modal}`}>
-          <div className={styles.modal_body}>
+          <div id="ttp-adeditor" className={styles.modal_body}>
             <div className={styles.modal_header}>
-              <h3>{currentNotif?.[title]}</h3>
+              <h2 className={styles.modal_header_title}>
+                {currentNotif?.[title]}
+              </h2>
               <div
                 className={styles.modal_close}
                 onClick={() => {
@@ -214,7 +216,7 @@ export default function Notifs({
             </div>
 
             <div
-              className={styles.modal_content}
+              className={`sun-editor-editable ${styles.modal_content}`}
               dangerouslySetInnerHTML={{
                 __html: currentNotif?.[content],
               }}
