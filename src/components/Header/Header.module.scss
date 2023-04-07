@@ -1358,6 +1358,7 @@ nav {
     font-weight: normal;
     font-size: 14px;
     line-height: 20px;
+    overflow: scroll;
   }
 
   &_header {
@@ -1373,6 +1374,8 @@ nav {
       font-weight: 500;
       text-transform: uppercase;
       margin: 0 0 0.5rem;
+      font-style: normal;
+      color: #29394d;
     }
     p {
       color: #6d7f92;
