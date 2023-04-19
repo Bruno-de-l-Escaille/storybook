@@ -113,6 +113,8 @@ export class HeaderUA extends Component {
       navigateTo,
       showOnBoardProgress,
       onBoardProgress,
+      showPersonalData,
+      personalData,
     } = this.props;
     const { portalSwitchCurrent, isFaqWidgetLoaded } = this.state;
     const { user, navCommunity } = auth;
@@ -237,7 +239,9 @@ export class HeaderUA extends Component {
         </ul>
 
         <MenuProfile
+          env={env}
           user={user}
+          auth={auth}
           lng={lng}
           languages={languages}
           rightIcons={rightIcons}
@@ -248,6 +252,8 @@ export class HeaderUA extends Component {
           secondList={secondList}
           thirdList={thirdList}
           navigateTo={navigateTo}
+          showPersonalData={showPersonalData}
+          personalData={personalData}
         />
       </div>
     );

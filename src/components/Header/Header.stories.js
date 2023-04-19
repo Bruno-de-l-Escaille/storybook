@@ -386,6 +386,14 @@ export const HeaderLoggedIn = () => (
     navigateTo={(url) => {
       console.log(url);
     }}
+    showPersonalData={true}
+    personalData={{
+      numeroAgreation: "11111112",
+      agreationType: "mItaa",
+      agreationTitle: "Conseil",
+      agreationParam: "externe",
+    }}
+    // personalData={{}}
   />
 );
 export const HeaderPrivateBlogLoggedIn = () => (

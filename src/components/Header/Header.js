@@ -120,6 +120,8 @@ export class Header extends Component {
       secondList,
       thirdList,
       navigateTo,
+      showPersonalData,
+      personalData,
     } = this.props;
     const { isFaqWidgetLoaded, portalSwitchCurrent, isBackOffice } = this.state;
     const { navCommunity, user } = auth;
@@ -268,7 +270,9 @@ export class Header extends Component {
         </ul>
 
         <MenuProfile
+          env={env}
           user={user}
+          auth={auth}
           lng={lng}
           rightIcons={rightIcons}
           onLogoutClick={(e) => this.props.onLogoutClick(e)}
@@ -277,6 +281,8 @@ export class Header extends Component {
           secondList={secondList}
           thirdList={thirdList}
           navigateTo={navigateTo}
+          showPersonalData={showPersonalData}
+          personalData={personalData}
         />
       </div>
     );

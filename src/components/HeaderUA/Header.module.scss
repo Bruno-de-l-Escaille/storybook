@@ -946,6 +946,89 @@ nav {
   }
 }
 
+.personalData {
+  margin: 0;
+  background: #fff;
+  padding: 1rem;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  text-align: center;
+  text-transform: none;
+  color: #6d7f92;
+
+  &_title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  span {
+    display: block;
+  }
+
+  &_edit {
+    margin-top: 5px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  &_actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+
+  &_cancel {
+    padding: 10px;
+    cursor: pointer;
+    // height: 40px;
+    width: 40%;
+    border: 1px solid #b2bcc6;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0);
+    color: #6d7f92;
+
+    &:hover {
+      background-color: #d8dde2;
+    }
+  }
+
+  &_save {
+    padding: 10px;
+    cursor: pointer;
+    width: 40%;
+    border-radius: 5px;
+    background: #06d9b1;
+    color: #fff;
+
+    &:hover {
+      background-color: #02af8e;
+    }
+  }
+}
+
+.input {
+  background: #f8f9fa;
+  border: 1px solid #b2bcc6;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 9px 15px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  width: 100%;
+
+  &:focus {
+    border-color: #18a0fb;
+  }
+
+  &.error {
+    border-color: #d50000;
+  }
+}
+
 .footerItems {
   margin: 0;
   background: #fff;
@@ -1596,4 +1679,13 @@ nav {
     background: #18a0fb;
     border-radius: 20px;
   }
+}
+
+.error {
+  color: #d50000 !important;
+  font-size: 12px;
+  display: block;
+  line-height: 16px;
+  margin-top: 4px;
+  text-align: left;
 }
