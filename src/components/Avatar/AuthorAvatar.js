@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React from "react";
+import { addLandaSize } from "../../utils";
 
 import styles from "./Avatar.module.scss";
 
@@ -13,7 +13,7 @@ export const AuthorAvatar = ({ author, white, Link, queryParams }) => {
           {avatarUrl ? (
             <div
               className={styles.avatar}
-              style={{ backgroundImage: `url(${avatarUrl})` }}
+              style={{ backgroundImage: `url(${addLandaSize(avatarUrl, 68)})` }}
             ></div>
           ) : (
             <div className={`${styles.avatar} ${styles.emptyAvatar}`}>

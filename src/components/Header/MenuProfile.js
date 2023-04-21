@@ -165,6 +165,7 @@ export default function MenuProfile(props) {
     navigateTo,
     showPersonalData,
     personalData,
+    onAfterSavePersonal,
   } = props;
 
   const AGREATION_TYPE_OPTIONS = [
@@ -295,6 +296,9 @@ export default function MenuProfile(props) {
       data: JSON.stringify(data),
     })
       .then((resp) => {
+        if (onAfterSavePersonal) {
+          onAfterSavePersonal(data);
+        }
         setUserData(data);
         setIsSaving(false);
         setShowForm(false);

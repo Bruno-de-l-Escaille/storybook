@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import React, { Component } from "react";
 
+import { addLandaSize } from "../../utils";
+
 import styles from "./FooterUA.module.scss";
 
 export class FooterUA extends Component {
@@ -48,7 +50,7 @@ export class FooterUA extends Component {
                   primaryLogo ? styles.communityLogo : styles.communityLogoLarge
                 }
                 style={{
-                  backgroundImage: `url(${secondaryLogo})`,
+                  backgroundImage: `url(${addLandaSize(secondaryLogo, 500)})`,
                 }}
               ></div>
             )}

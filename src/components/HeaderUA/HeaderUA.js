@@ -115,6 +115,7 @@ export class HeaderUA extends Component {
       onBoardProgress,
       showPersonalData,
       personalData,
+      onAfterSavePersonal,
     } = this.props;
     const { portalSwitchCurrent, isFaqWidgetLoaded } = this.state;
     const { user, navCommunity } = auth;
@@ -254,6 +255,7 @@ export class HeaderUA extends Component {
           navigateTo={navigateTo}
           showPersonalData={showPersonalData}
           personalData={personalData}
+          onAfterSavePersonal={onAfterSavePersonal}
         />
       </div>
     );

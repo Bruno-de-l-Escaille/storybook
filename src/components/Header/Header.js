@@ -122,6 +122,7 @@ export class Header extends Component {
       navigateTo,
       showPersonalData,
       personalData,
+      onAfterSavePersonal,
     } = this.props;
     const { isFaqWidgetLoaded, portalSwitchCurrent, isBackOffice } = this.state;
     const { navCommunity, user } = auth;
@@ -283,6 +284,7 @@ export class Header extends Component {
           navigateTo={navigateTo}
           showPersonalData={showPersonalData}
           personalData={personalData}
+          onAfterSavePersonal={onAfterSavePersonal}
         />
       </div>
     );

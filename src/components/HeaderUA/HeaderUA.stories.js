@@ -332,6 +332,7 @@ export const HeaderLoggedIn = () => (
       agreationTitle: "Conseil",
       agreationParam: "externe",
     }}
+    onAfterSavePersonal={(data) => console.log("save ", data)}
   />
 );
 
