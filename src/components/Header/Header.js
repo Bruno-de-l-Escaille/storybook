@@ -374,14 +374,24 @@ export class Header extends Component {
 
             {Link ? (
               <Link href={appUrl} className={styles.appInfo}>
-                <img className={styles.appLogo} src={appLogoUrl} alt="logo" />
+                <img
+                  className={styles.appLogo}
+                  src={appLogoUrl}
+                  alt="logo"
+                  height="45"
+                />
                 {!isPrivateBlog && (
                   <span className={styles.appName}>{appName}</span>
                 )}
               </Link>
             ) : (
               <a href={appUrl} className={styles.appInfo}>
-                <img className={styles.appLogo} src={appLogoUrl} alt="logo" />
+                <img
+                  className={styles.appLogo}
+                  src={appLogoUrl}
+                  alt="logo"
+                  height="45"
+                />
                 {!isPrivateBlog && (
                   <span className={styles.appName}>{appName}</span>
                 )}
