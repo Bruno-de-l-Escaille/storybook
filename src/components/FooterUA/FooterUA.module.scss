@@ -57,6 +57,7 @@
     text-transform: lowercase;
     display: flex;
     align-items: center;
+    line-height: 100%;
     span::first-letter {
       text-transform: uppercase;
     }

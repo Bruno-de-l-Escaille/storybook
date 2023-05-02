@@ -32,7 +32,7 @@ export class FooterUA extends Component {
           <div
             className={classNames(
               styles.logos,
-              "cell small-12 medium-6 large-3"
+              "cell small-12 medium-4 large-3"
             )}
           >
             {primaryLogo && (
@@ -55,7 +55,7 @@ export class FooterUA extends Component {
               ></div>
             )}
           </div>
-          <div className="grid-x cell small-12 medium-6 large-9">
+          <div className="grid-x cell small-12 medium-8 large-9">
             {firstList && (
               <div
                 className={classNames(
