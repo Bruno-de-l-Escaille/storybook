@@ -21,6 +21,7 @@ export class EventCard extends PureComponent {
       isFetching,
       eventUrl,
       expert = false,
+      isUaWatch = false,
     } = this.props;
 
     const {
@@ -297,7 +298,9 @@ export class EventCard extends PureComponent {
                   href={`${eventUrl}/plan-selector?eventId=${event.id}`}
                   target="_blank"
                 >
-                  {I18N[language]["Purchase"]}
+                  {isUaWatch
+                    ? I18N[language]["Join"]
+                    : I18N[language]["Purchase"]}
                 </a>
               )}
               {webinarUrl && myEventsType && myEventsType === "REPLAY" ? (

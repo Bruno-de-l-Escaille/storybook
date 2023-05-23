@@ -21,6 +21,7 @@ export const I18N = {
     Mandated: "Mandated",
     Not_Mandated: "Not Mandated",
     Details: "Details",
+    Join: "Join",
     Replay: "Replay",
     Purchase: "Purchase",
     "Possible to review the training for max 15 days after the date of the live":
@@ -59,6 +60,7 @@ export const I18N = {
     Mandated: "Mandaté",
     Not_Mandated: "Non Mandaté",
     Details: "Détails",
+    Join: "Rejoindre",
     Replay: "Rejouer",
     Purchase: "Acheter",
     "Possible to review the training for max 15 days after the date of the live":
@@ -98,6 +100,7 @@ export const I18N = {
     Mandated: "gemandateerde",
     Not_Mandated: "niet Gemandateerde",
     Details: "Details",
+    Join: "Meedoen",
     Replay: "Herhaling",
     Purchase: "Aankoop",
     "Possible to review the training for max 15 days after the date of the live":
