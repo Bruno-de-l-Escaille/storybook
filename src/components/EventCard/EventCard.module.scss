@@ -260,3 +260,14 @@
   align-items: center;
   justify-content: center;
 }
+
+.dark_mode {
+  background-color: #3c4e64;
+  color: #fff;
+  .eventType {
+    background-color: #3c4e64;
+  }
+  h3 {
+    color: #fff;
+  }
+}

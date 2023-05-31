@@ -22,6 +22,7 @@ export class EventCard extends PureComponent {
       eventUrl,
       expert = false,
       isUaWatch = false,
+      darkMode = false,
     } = this.props;
 
     const {
@@ -167,7 +168,8 @@ export class EventCard extends PureComponent {
           expert ? styles.expert : "",
           index === 0 ? styles.noMargin : "",
           fromCycle ? styles.fromCycle : "",
-          myEventsType ? styles.mine : ""
+          myEventsType ? styles.mine : "",
+          darkMode ? styles.dark_mode : ""
         )}
       >
         <div className={styles.eventContent}>
@@ -225,6 +227,7 @@ export class EventCard extends PureComponent {
                   headline: "",
                   avatarUrl: expertSpeaker.pictureUrl,
                 }}
+                white={darkMode}
               />
             </div>
           ) : null}
