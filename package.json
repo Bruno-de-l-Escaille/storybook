@@ -174,6 +174,8 @@
     "react-select": "^5.7.2",
     "react-slick": "^0.27.13",
     "react-toastify": "^7.0.4",
-    "storybook-react-router": "^1.0.8"
+    "storybook-react-router": "^1.0.8",
+    "suneditor": "^2.45.1",
+    "suneditor-react": "^3.5.0"
   }
 }
