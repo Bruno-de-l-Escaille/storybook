@@ -16,3 +16,4 @@ export * from "./components/UserCard/UserCard";
 export * from "./components/CookieConsent/CookieConsent";
 export * from "./components/CardTool/CardTool";
 export * from "./components/TableBorderedColumns/TableBorderedColumns";
+export * from "./components/TTPEditor/TTPEditor";
