@@ -1,12 +1,25 @@
-import { getNotifications } from "../../../api";
+import { getArticle } from "../../../api";
 import { getApiUrl, getArticleFullUrl } from "../../../utils";
 
-const addArticle = async (articleId, token) => {
-  if (!articleId) return;
+const I18N = {
+  en: {
+    quote_add: "Add",
+  },
+  fr: {
+    quote_add: "Ajouter",
+  },
+  nl: {
+    quote_add: "Toevoegen",
+  },
+};
 
-  if (!token) return;
+const addArticle = async (env, articleId, token) => {
+  if (!articleId || !token) return;
 
-  return api.getArticle({
+  const apiUrl = getApiUrl(env);
+
+  return getArticle({
+    apiUrl,
     token,
     articleId,
   });
@@ -133,9 +146,9 @@ const ArticleEmbed = {
       <ul class="se-list-basic" style="width: 230px;">
       <li>
       <div class="se-form-group"><input class="se-input-form" type="text" placeholder="Article URL" style="border: 1px solid #CCC;" /></div>
-      <div class="se-form-group"><button type="button" class="se-plugin-btn se-tooltip">${_(
-        "article.quote_add"
-      )}</button></div>
+      <div class="se-form-group"><button type="button" class="se-plugin-btn se-tooltip">${
+        I18N[core.lang.code]["quote_add"]
+      }</button></div>
       </li>
       </ul>
       </div>`;
@@ -157,16 +170,16 @@ const ArticleEmbed = {
     const articleId = url[0].split("/").pop();
     if (!articleId) return;
 
-    const state = store.getState();
-    const token = state.auth?.token;
-    const language = state.params?.language;
+    const token = "b03f904a45843d832720e1ead56705c45ac9463a";
+    const language = "fr";
+    const env = "local";
 
     if (!token) return;
 
     this.functions.core.showLoading();
 
     try {
-      const response = await addArticle(articleId, token);
+      const response = await addArticle(env, articleId, token);
       this.functions.core.closeLoading();
       const article = response.data.data[0];
       const articleTmpl = renderArticle(article, language);

@@ -19,7 +19,7 @@ const hasRelativePath = (organizationId, host) => {
 
   return false;
 };
-const getArticleFullUrl = (article, env = "", host) => {
+export const getArticleFullUrl = (article, env = "", host) => {
   let baBlog = "https://blog.be.accountants";
   let fffBlog = "https://blog.forumforthefuture.be";
   let dapBlog = "https://blog.degandpartners.com";

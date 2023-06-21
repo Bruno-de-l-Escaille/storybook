@@ -5,6 +5,7 @@ import "suneditor/dist/css/suneditor.min.css";
 
 import TweetEmbed from "./plugins/TweetEmbed";
 import QuoteEmbed from "./plugins/QuoteEmbed";
+import ArticleEmbed from "./plugins/ArticleEmbed";
 import "./editor.scss";
 
 const I18N = {
@@ -19,7 +20,7 @@ const I18N = {
   },
 };
 
-export const TTPEditor = ({ lng, initialContent, setContent }) => {
+export const TTPEditor = ({ auth, env, lng, initialContent, setContent }) => {
   const editorRef = useRef();
 
   const initEditor = () => {
@@ -66,6 +67,7 @@ export const TTPEditor = ({ lng, initialContent, setContent }) => {
         getSunEditorInstance={getSunEditorInstance}
         placeholder={I18N[lng]["write_here"]}
         lang={lng}
+        token={auth.token}
         setOptions={{
           attributesWhitelist: {
             // all: "style",
@@ -97,12 +99,12 @@ export const TTPEditor = ({ lng, initialContent, setContent }) => {
               "video",
               "tweet_embed",
               "quote_embed",
-              // "article_embed",
+              "article_embed",
               "showBlocks",
               "fullScreen",
             ],
           ],
-          plugins: { ...plugins, TweetEmbed, QuoteEmbed },
+          plugins: { ...plugins, TweetEmbed, QuoteEmbed, ArticleEmbed },
         }}
         setContents={initialContent}
         onChange={(c) => handleChange(c)}
