@@ -51,7 +51,7 @@ export const TTPEditor = ({ auth, env, lng, initialContent, setContent }) => {
     return content.replace(/(<\/?h)([0-1])/gi, "$12");
   };
 
-  const handleImageUploadBefore = (files, info, uploadHandler) => {
+  const handleImageUploadBefore = (files, info, e, uploadHandler) => {
     const apiUrl = getApiUrl(env);
 
     uploadMedia({ apiUrl, token: auth.token, data: files[0] })
