@@ -3,6 +3,9 @@ import SunEditor from "suneditor-react";
 import plugins from "suneditor/src/plugins";
 import "suneditor/dist/css/suneditor.min.css";
 
+import { uploadMedia } from "../../api";
+import { getApiUrl } from "../../utils";
+
 import TweetEmbed from "./plugins/TweetEmbed";
 import QuoteEmbed from "./plugins/QuoteEmbed";
 import ArticleEmbed from "./plugins/ArticleEmbed";
@@ -25,6 +28,14 @@ export const TTPEditor = ({ auth, env, lng, initialContent, setContent }) => {
 
   const initEditor = () => {
     editorRef.current.util.createTagsWhitelist("div");
+
+    editorRef.current.core.plugins.article_embed.initParams.call(
+      editorRef.current,
+      editorRef.current.core.context,
+      auth,
+      env,
+      lng
+    );
   };
 
   const getSunEditorInstance = (sunEditor) => {
@@ -41,24 +52,24 @@ export const TTPEditor = ({ auth, env, lng, initialContent, setContent }) => {
   };
 
   const handleImageUploadBefore = (files, info, uploadHandler) => {
-    // dispatch(uploadTmpMedia({ token: auth.token, data: files[0] })).then(
-    //   (resp) => {
-    //     const url = resp.payload.data.data.url;
-    //     const startsWithHttp = url.lastIndexOf("http://", 0) === 0;
-    //     const startsWithHttps = url.lastIndexOf("https://", 0) === 0;
-    //     const isAbsolute = startsWithHttp || startsWithHttps;
-    //     const imgUrl = isAbsolute ? url : `${TTP_API_URL}/${url}`;
-    //     uploadHandler({
-    //       result: [
-    //         {
-    //           url: imgUrl,
-    //           name: files[0].name,
-    //           size: files[0].size,
-    //         },
-    //       ],
-    //     });
-    //   }
-    // );
+    const apiUrl = getApiUrl(env);
+
+    uploadMedia({ apiUrl, token: auth.token, data: files[0] })
+      .then((resp) => {
+        const imgUrl = resp.data.data.image_url;
+        uploadHandler({
+          result: [
+            {
+              url: imgUrl,
+              name: files[0].name,
+              size: files[0].size,
+            },
+          ],
+        });
+      })
+      .catch((e) => {
+        uploadHandler({ result: [] });
+      });
   };
 
   return (

@@ -45,3 +45,15 @@ export const getArticle = ({ apiUrl, token, articleId }) => {
     },
   });
 };
+
+export const uploadMedia = ({ apiUrl, token, data }) => {
+  const requestUrl = `${apiUrl}/media/media/upload-media`;
+
+  var formData = new FormData();
+  formData.append("access_token", token);
+  formData.append("file", data);
+
+  return axios.post(requestUrl, formData, {
+    Warning: "413",
+  });
+};
