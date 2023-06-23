@@ -10,6 +10,7 @@ export * from "./components/Article/ArticleListCarousel";
 export * from "./components/Avatar/Avatar";
 export * from "./components/Avatar/AuthorAvatar";
 export * from "./components/ChainCard/ChainCard";
+export * from "./components/CustumedMatrix/CustumedMatrix";
 export * from "./components/EventCard/EventCard";
 export * from "./components/Modal/ModalConfirm";
 export * from "./components/UserCard/UserCard";
