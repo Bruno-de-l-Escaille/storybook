@@ -129,6 +129,7 @@ export const Basic = () => (
       items={tableItems}
       handleTitle={renderTitleLine}
       handleCellule={handleColumns}
+      headerTagBG={"#FFFFFF"}
     />
   </div>
 );

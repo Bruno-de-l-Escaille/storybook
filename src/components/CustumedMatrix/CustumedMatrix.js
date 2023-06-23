@@ -4,7 +4,7 @@ import styles from "./CustumedMatrix.module.scss";
 import classnames from "classnames";
 
 export const CustumedMatrix = (props) => {
-  const { columns, items, handleCellule, handleTitle } = props;
+  const { columns, items, handleCellule, handleTitle, headerTagBG } = props;
 
   let titleWidth = 0;
   return (
@@ -20,7 +20,11 @@ export const CustumedMatrix = (props) => {
               )}
               style={{ width: `${item.widthPercentage}%` }}
             >
-              <div>{item.label}</div>
+              <div
+                style={{ background: headerTagBG ? headerTagBG : "#F4F7F9" }}
+              >
+                {item.label}
+              </div>
             </div>
           );
         })}
