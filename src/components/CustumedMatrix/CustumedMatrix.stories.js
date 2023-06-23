@@ -1,9 +1,7 @@
 import React from "react";
 import { withKnobs } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
-import classnames from "classnames";
 import { CustumedMatrix } from "./CustumedMatrix";
-import styles from "./CustumedMatrix.module.scss";
 
 export default {
   title: "CustumedMatrix",
