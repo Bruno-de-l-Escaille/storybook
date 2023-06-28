@@ -1,14 +1,4 @@
-const I18N = {
-  en: {
-    quote_add: "Add",
-  },
-  fr: {
-    quote_add: "Ajouter",
-  },
-  nl: {
-    quote_add: "Toevoegen",
-  },
-};
+import { I18N } from "../../../i18n";
 
 const TweetEmbed = {
   // @Required
@@ -68,7 +58,7 @@ const TweetEmbed = {
       <div class="se-form-group"><input class="se-input-form" type="text" placeholder="Insert tweet embed text" style="border: 1px solid #CCC;" /></div>
       <div class="se-form-group">
         <button type="button" class="se-plugin-btn se-tooltip">${
-          I18N[core.lang.code]["quote_add"]
+          I18N[core.lang.code]["add"]
         }</button>
       </div>
       </div>`;

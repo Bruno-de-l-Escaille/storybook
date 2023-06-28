@@ -106,6 +106,22 @@ export const getApiUrl = (env) => {
   return apiUrl;
 };
 
+export const getEventUrl = (env) => {
+  let eventUrl = "";
+  switch (env) {
+    case "local":
+      eventUrl = "http://local.portal.event.tamtam.pro:3005";
+      break;
+    case "rc2":
+      eventUrl = "https://rc2.offfcourse.be";
+      break;
+    default:
+      eventUrl = "https://offfcourse.be";
+      break;
+  }
+  return eventUrl;
+};
+
 export const getDateLabel = (date) => {
   const d = new Date(date);
 

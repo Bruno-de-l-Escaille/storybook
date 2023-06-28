@@ -1,20 +1,4 @@
-const I18N = {
-  en: {
-    quote_add: "Add",
-    quote_text: '"Insert quote text"',
-    quote_author: '"Insert quote author"',
-  },
-  fr: {
-    quote_add: "Ajouter",
-    quote_text: "Insérer le texte de la citation",
-    quote_author: "Insérer l'auteur de la citation",
-  },
-  nl: {
-    quote_add: "Toevoegen",
-    quote_text: '"Citaattekst invoegen"',
-    quote_author: '"Voeg de auteur van de bronvermelding in"',
-  },
-};
+import { I18N } from "../../../i18n";
 
 const QuoteEmbed = {
   // @Required
@@ -87,7 +71,7 @@ const QuoteEmbed = {
       </div>
       <div class="se-form-group">
         <button type="button" class="se-plugin-btn se-tooltip">${
-          I18N[core.lang.code]["quote_add"]
+          I18N[core.lang.code]["add"]
         }</button>
       </div>
       </div>`;
@@ -106,9 +90,9 @@ const QuoteEmbed = {
     const authorValue = this.context.quoteSubmenu.authorTextElement.value.trim();
     if (!value) return;
 
-    let html = `<blockquote class="ttp-quote"><p>${value}</p>`;
+    let html = `<style>.ttp-quote:before{content: "";background-image: url("data:image/svg+xml,%3Csvg width='54' height='38' viewBox='0 0 54 38' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18.4463 19.375C20.5289 21.4778 21.5702 24.0311 21.5702 27.0351C21.5702 30.039 20.5289 32.6425 18.4463 34.8454C16.3636 36.9481 13.8347 37.9995 10.8595 37.9995C7.8843 37.9995 5.30579 36.9481 3.12397 34.8454C1.04132 32.6425 0 30.039 0 27.0351C0 22.1286 2.13223 16.9718 6.3967 11.5647C10.4855 6.49816 16.1417 2.7943 23.3651 0.453128C24.2041 0.181218 25.1024 0.610679 25.447 1.42249C25.8434 2.35632 25.3594 3.42728 24.4097 3.78384C20.6999 5.1766 17.4724 6.86904 14.7273 8.86117C11.6529 11.0641 9.66942 12.9165 8.77686 14.4185C8.34935 15.1858 9.2348 16.2919 10.1118 16.2416C10.3525 16.2278 10.6017 16.2209 10.8595 16.2209C13.8347 16.2209 16.3636 17.2722 18.4463 19.375ZM46.2645 19.375C48.3471 21.4778 49.3884 24.0311 49.3884 27.0351C49.3884 30.039 48.3471 32.6425 46.2645 34.8454C44.1818 36.9481 41.6529 37.9995 38.6777 37.9995C35.7025 37.9995 33.124 36.9481 30.9421 34.8454C28.8595 32.6425 27.8182 30.039 27.8182 27.0351C27.8182 22.1286 29.9504 16.9718 34.2149 11.5647C38.3037 6.49816 43.9598 2.7943 51.1833 0.453128C52.0223 0.181218 52.9206 0.610679 53.2652 1.42249C53.6616 2.35632 53.1776 3.42728 52.2278 3.78385C48.5181 5.1766 45.2906 6.86904 42.5455 8.86117C39.4711 11.0641 37.4876 12.9165 36.595 14.4185C36.1675 15.1858 37.053 16.2919 37.93 16.2416C38.1706 16.2278 38.4199 16.2209 38.6777 16.2209C41.6529 16.2209 44.1818 17.2722 46.2645 19.375Z' fill='%236D7F92' fill-opacity='0.2'/%3E%3C/svg%3E%0A");width: 54px;height: 38px;position: absolute;left: 20px;top: 20%;}</style><blockquote class="ttp-quote" style="position: relative;font-style: italic;font-weight: 300;font-size: 18px;line-height: 25px;color: #6d7f92;border: none !important;padding-left: 100px !important;"><p>${value}</p>`;
     if (authorValue) {
-      html += `<span class="author">--${authorValue}</span>`;
+      html += `<span style="display: block;font-style: normal;font-size: 12px;text-transform: uppercase;">--${authorValue}</span>`;
     }
     html += "</blockquote><p><br /></p>";
     this.functions.insertHTML(html, true);

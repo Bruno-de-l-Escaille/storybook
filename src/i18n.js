@@ -7,7 +7,6 @@ export const I18N = {
     "Organization roles": "Organization roles",
     "Blog roles": "Blog roles",
     "Editor-in-chief": "Editor-in-chief",
-
     CHIEF_EDITOR: "CHIEF EDITOR",
     AUTHOR: "AUTHOR",
     REDACTOR: "REDACTOR",
@@ -17,7 +16,6 @@ export const I18N = {
     SHAREHOLDER: "SHAREHOLDER",
     QUALITY_MANAGER: "QUALITY MANAGER",
     EXTERNAL: "EXTERNAL",
-
     Mandated: "Mandated",
     Not_Mandated: "Not Mandated",
     Details: "Details",
@@ -38,6 +36,9 @@ export const I18N = {
     sharedWith: "share with",
     share: "share",
     "En Replay": "En Replay",
+    add: "Add",
+    quote_text: "Insert quote text",
+    quote_author: "Insert quote author",
   },
   fr: {
     ARTCILES: "Articles",
@@ -47,7 +48,6 @@ export const I18N = {
     "Organization roles": "Rôles de l'organisation",
     "Blog roles": "Rôles du blog",
     "Editor-in-chief": "Éditeur en chef",
-
     CHIEF_EDITOR: "Rédacteur en chef",
     AUTHOR: "Auteur",
     REDACTOR: "Rédacteur",
@@ -77,6 +77,9 @@ export const I18N = {
     sharedWith: "partager avec",
     share: "partager",
     "En Replay": "En Replay",
+    add: "Ajouter",
+    quote_text: "Insérer le texte de la citation",
+    quote_author: "Insérer l'auteur de la citation",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -86,7 +89,6 @@ export const I18N = {
     "Organization roles": "organisatie rollen",
     "Blog roles": "blog rollen",
     "Editor-in-chief": "Hoofdredacteur",
-
     CHIEF_EDITOR: "Hoofdredacteur",
     AUTHOR: "Auteur",
     REDACTOR: "Redacteur",
@@ -96,7 +98,6 @@ export const I18N = {
     SHAREHOLDER: "AANDEELHOUDER",
     QUALITY_MANAGER: "KWALITEITSMANAGER",
     EXTERNAL: "EXTERNE",
-
     Mandated: "gemandateerde",
     Not_Mandated: "niet Gemandateerde",
     Details: "Details",
@@ -118,5 +119,8 @@ export const I18N = {
     sharedWith: "[share with]",
     share: "[share]",
     "En Replay": "En Replay",
+    add: "Toevoegen",
+    quote_text: "Citaattekst invoegen",
+    quote_author: "Voeg de auteur van de bronvermelding in",
   },
 };

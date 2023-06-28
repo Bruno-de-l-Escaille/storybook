@@ -9,6 +9,7 @@ import { getApiUrl } from "../../utils";
 import TweetEmbed from "./plugins/TweetEmbed";
 import QuoteEmbed from "./plugins/QuoteEmbed";
 import ArticleEmbed from "./plugins/ArticleEmbed";
+import EventEmbed from "./plugins/EventEmbed";
 import "./editor.scss";
 
 const I18N = {
@@ -112,11 +113,18 @@ export const TTPEditor = ({ auth, env, lng, initialContent, setContent }) => {
               "tweet_embed",
               "quote_embed",
               "article_embed",
+              "event_embed",
               "showBlocks",
               "fullScreen",
             ],
           ],
-          plugins: { ...plugins, TweetEmbed, QuoteEmbed, ArticleEmbed },
+          plugins: {
+            ...plugins,
+            TweetEmbed,
+            QuoteEmbed,
+            ArticleEmbed,
+            EventEmbed,
+          },
         }}
         setContents={initialContent}
         onChange={(c) => handleChange(c)}

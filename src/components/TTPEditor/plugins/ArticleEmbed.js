@@ -1,17 +1,6 @@
 import { getArticle } from "../../../api";
 import { getApiUrl, getArticleFullUrl } from "../../../utils";
-
-const I18N = {
-  en: {
-    quote_add: "Add",
-  },
-  fr: {
-    quote_add: "Ajouter",
-  },
-  nl: {
-    quote_add: "Toevoegen",
-  },
-};
+import { I18N } from "../../../i18n";
 
 const addArticle = async (env, articleId, token) => {
   if (!articleId || !token) return;
@@ -66,10 +55,10 @@ const renderArticle = (article, lng) => {
   }
 
   // prettier-ignore
-  let str = `<div class="article-embed-img __se__tag" style="background-image: url('${imageSrc}')"></div><div class="article-embed-tmpl"><span class="article-embed-cat" style="background: ${category.colorCode}">${category[categoryName]}</span><span class="article-embed-com" style="border-left-color: ${category.colorCode}">${organization.abbreviation}</span>${isExternal ? `<a href="${currentArticleUrl}" target="_blank" rel="noreferrer" class="title">${title}</a>`: `<a href="${currentArticleUrl}" target="_blank" class="title">${title}</a>`}</div>`;
+  let str = `<div class="__se__tag" style="background-image: url('${imageSrc}');display: block;position: relative;color: transparent;background-color: #eee;background-position: center;background-size: cover;background-repeat: no-repeat;height: 220px;width: 40%;border-radius: 8px 0 0 8px;"></div><div style="position: relative;height: 220px;width: 60%;background-color: #ffffff;padding: 1rem !important;display: flex !important;flex-direction: column;justify-content: center;margin: 0 !important;"><span style="font-size: 12px;letter-spacing: 0.02em;position: absolute;top: 0;right: 0;z-index: 1;padding: 4px 14px;margin-bottom: auto;margin-left: auto;background: #eee;border-radius: 2px 8px 2px 2px;background: ${category.colorCode};white-space: nowrap;overflow: hidden;text-overflow: ellipsis;color: #ffffff;text-shadow: 0px 4px 4px rgba(41, 57, 77, 0.1);">${category[categoryName]}</span><span style="position: relative;z-index: 1;height: 20px;border-left: 3px solid #eee;border-left-color: ${category.colorCode};color: #3c4e64;padding-left: 6px;margin-top: 10px;margin-bottom: 20px;font-size: 14px;line-height: 20px;white-space: nowrap;max-width: 100%;overflow: hidden;text-overflow: ellipsis;">${organization.abbreviation}</span><a href="${currentArticleUrl}" target="_blank" ${isExternal ? 'rel="noreferrer"' : ""} style="margin-bottom: 20px;font-family: Roboto;max-height: 90px;overflow: hidden;text-overflow: ellipsis;display: block;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;text-align: left;color: #29394d;font-weight: 500;font-size: 18px;line-height: 1.266;text-decoration: none !important;">${title}</a></div>`;
 
   // prettier-ignore
-  return `<div class="se-component se-article-embed __se__uneditable" contenteditable="false" data-src=${encodeURIComponent(str)}>${str}</div>`;
+  return `<div class="se-component __se__uneditable" contenteditable="false" style="display: flex !important;width: 100%;box-shadow: 0px 4px 10px rgba(41, 57, 77, 0.1);margin-bottom: 10px !important;border-radius: 8px;border: none !important;outline: none !important;">${str}</div>`;
 };
 
 const ArticleEmbed = {
@@ -154,7 +143,7 @@ const ArticleEmbed = {
       <li>
       <div class="se-form-group"><input class="se-input-form" type="text" placeholder="Article URL" style="border: 1px solid #CCC;" /></div>
       <div class="se-form-group"><button type="button" class="se-plugin-btn se-tooltip">${
-        I18N[core.lang.code]["quote_add"]
+        I18N[core.lang.code]["add"]
       }</button></div>
       </li>
       </ul>
