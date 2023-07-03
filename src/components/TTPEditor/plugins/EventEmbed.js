@@ -1,11 +1,6 @@
-// import React from "react";
-// import ReactDOMServer from "react-dom/server";
-
 import { getEvent } from "../../../api";
 import { getApiUrl, getEventUrl, getDateLabel } from "../../../utils";
 import { I18N } from "../../../i18n";
-
-// import { EventCard } from "../../EventCard/EventCard";
 
 const addEvent = async (env, eventId, token) => {
   if (!eventId || !token) return;
@@ -20,16 +15,6 @@ const addEvent = async (env, eventId, token) => {
 };
 
 const renderEvent = (event, env, language) => {
-  // const eventTmpl = ReactDOMServer.renderToString(
-  //   <EventCard
-  //     language="fr"
-  //     isSelected={false}
-  //     event={event}
-  //     index={1}
-  //     eventUrl={"https://event-pro.rc2.tamtam.pro/"}
-  //   />
-  // );
-
   const {
     eventDate,
     clientData,
@@ -169,16 +154,12 @@ const renderEvent = (event, env, language) => {
     "events-folder"
   )}`;
 
-  let str = `<div class="se-component __se__uneditable" contenteditable="false" style="width:300px;height: 25.25rem;font-size: 0.75rem;border-radius: 5px;padding: 0.688rem;background: #fff;color: #29394d;border: 1px solid #f1f2f4;outline: none;">
-  <div style="height: 100%;width: 100%;display: flex;flex-direction: column;">
-    <div
-      style="width: 100%;height: 8.75rem;background-size: cover;background-repeat: no-repeat;border-radius: 5px;display: flex;position: relative;background-image: url('${imageSrc}');
-      "
-    >`;
+  let str = `<div class="se-component se-event-embed" contenteditable="false" style="width:300px;font-size: 0.75rem;border-radius: 5px;padding: 0.688rem;background: #fff;color: #29394d;border: 1px solid #f1f2f4;outline: none;display: flex;flex-direction: column;">
+    <div style="width: 100%;height: 8.75rem;background-size: cover;background-repeat: no-repeat;border-radius: 5px;display: flex;position: relative;background-image: url('${imageSrc}');">`;
   if (clientLogo) {
     str += `<div class="__se__tag" style="margin: 0.5rem;width: 3.5rem;height: 2.25rem;background-color: rgba(255, 255, 255, 0.85);border: 1px solid #f1f2f4;border-radius: 5px;padding: 0.2rem;"><span style="background-size: contain;background-repeat: no-repeat;background-position: center;width: 100%;height: 100%;display: flex;background-image: url('${clientLogo}');"></span></div>`;
   }
-  str += `</div><h3 style="font-size: 1rem;font-weight: 500;height: 2.75rem;line-height:21px;overflow: hidden;margin: 0 0 0.25rem !important;text-align: left;">${desc}</h3>`;
+  str += `</div><h3 style="font-size: 1rem;font-weight: 500;height: 2.75rem;line-height:21px;overflow: hidden;margin: 0.75rem 0 0.25rem !important;text-align: left;">${desc}</h3>`;
   if (speaker) {
     str += `<h4 style="font-size: 0.75rem;color: #6d7f92;margin: 0 0 0.829rem !important;font-weight: 400;">${speaker}</h4>`;
   }
@@ -193,17 +174,11 @@ const renderEvent = (event, env, language) => {
   }
   str += `<li>${I18N[language]["Certificate included approved by"]} <strong>${clientData.abbreviation}</strong></li>`;
   str += `</ul>`;
-  str += `<a style="height: 2rem;display: flex;align-items: center;justify-content: center;font-weight: 500;border-radius: 5px;color: #6d7f92 !important;background-color: #f1f2f4;text-decoration: none;" href="${getEventUrl(
-    env
-  )}/event/${event.id}" target="_blank">${I18N[language]["Details"]}</a>`;
+
+  // prettier-ignore
+  str += `<a style="height: 2rem;display: flex;align-items: center;justify-content: center;font-weight: 500;border-radius: 5px;color: #6d7f92 !important;background-color: #f1f2f4;text-decoration: none;margin: 20px 0;" href="${getEventUrl(env)}/event/${event.id}" target="_blank">${I18N[language]["Details"]}</a>`;
   str += `</div>`;
   return str;
-
-  // prettier-ignore
-  //let str1 = `<div class="article-embed-img __se__tag" style="background-image: url('${imageSrc}')"></div><div class="article-embed-tmpl"><span class="article-embed-cat" style="background: ${category.colorCode}">${category[categoryName]}</span><span class="article-embed-com" style="border-left-color: ${category.colorCode}">${organization.abbreviation}</span>${isExternal ? `<a href="${currentArticleUrl}" target="_blank" rel="noreferrer" class="title">${title}</a>`: `<a href="${currentArticleUrl}" target="_blank" class="title">${title}</a>`}</div>`;
-
-  // prettier-ignore
-  //return `<div class="se-component se-article-embed __se__uneditable" contenteditable="false" data-src=${encodeURIComponent(str)}>${str}</div>`;
 };
 
 const EventEmbed = {
@@ -265,13 +240,9 @@ const EventEmbed = {
    */
   managedTags: function () {
     return {
-      className: "se-article-embed",
+      className: "se-event-embed",
       method: function (element) {
-        if (!element.getAttribute("src")) return;
-        let dataSrc = element.getAttribute("src");
-        element.setAttribute("data-src", dataSrc);
-        element.removeAttribute("src");
-        element.innerHTML = decodeURIComponent(dataSrc);
+        element.setAttribute("contenteditable", false);
       },
     };
   },

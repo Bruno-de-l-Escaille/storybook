@@ -81,7 +81,6 @@ export const TTPEditor = ({ auth, env, lng, initialContent, setContent }) => {
         lang={lng}
         token={auth.token}
         setOptions={{
-          allowedClassNames: "^se-|__se__|katex|ttp-|author|article-embed",
           attributesWhitelist: {
             all: "*",
             input: "checked",
