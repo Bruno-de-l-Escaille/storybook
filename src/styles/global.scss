@@ -62,6 +62,7 @@ th,
 ul {
   margin: 0;
   padding: 0;
+  text-align: left !important;
 }
 
 a {
@@ -296,6 +297,197 @@ ul {
     }
     li {
       font-weight: normal;
+    }
+  }
+}
+
+/////////
+.styled-tabs {
+  position: relative;
+  margin-top: 1rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 13px;
+    cursor: pointer;
+    .control {
+      width: 36px;
+      height: 36px;
+      background: #ffffff;
+      border: 1px solid rgba(109, 127, 146, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      svg path {
+        fill: #29394d;
+      }
+      &.next {
+        transform: rotate(90deg);
+      }
+      &.previous {
+        transform: rotate(-90deg);
+      }
+    }
+    &-items {
+      display: flex;
+      overflow: hidden;
+      height: 36px;
+    }
+    .control-1 {
+      max-width: calc(100% - 36px - 10px);
+    }
+    .control-2 {
+      max-width: calc(100% - 2 * 36px - 10px);
+    }
+    .tab {
+      border: 1px solid rgba(109, 127, 146, 0.2);
+      box-sizing: border-box;
+      border-radius: 50px;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 14px;
+      text-transform: uppercase;
+      color: #6d7f92;
+      background: #ffffff;
+      padding: 10px 18px;
+      margin-right: 8px;
+      transition: all 0.3s ease-in;
+      display: flex;
+      justify-items: center;
+      align-items: center;
+      white-space: nowrap;
+      &:hover,
+      &.active {
+        background: #6d7f92;
+        box-sizing: border-box;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 14px;
+        text-transform: uppercase;
+        color: #ffffff;
+        text-shadow: 0px 4px 4px rgba(60, 78, 100, 0.3);
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    background: #ffffff;
+    border: 0.5px solid #f1f2f4;
+    box-sizing: border-box;
+    border-radius: 0px 4px 4px 4px;
+    padding: 25px;
+  }
+}
+.styled-tabs.light {
+  margin: 0;
+  .styled-tabs__header {
+    .tab {
+      background: #f1f2f4;
+      border-radius: 2px;
+      border: none;
+      color: #6d7f92;
+      padding: 6px 18px;
+      text-transform: capitalize;
+      &:hover,
+      &.active {
+        background: #6d7f92;
+        color: #ffffff;
+      }
+    }
+    .control-1 {
+      max-width: calc(100% - 26px - 10px);
+    }
+    .control-2 {
+      max-width: calc(100% - 2 * 26px - 10px);
+    }
+    .control {
+      width: 26px;
+      height: 26px;
+      background: #f1f2f4;
+      border-radius: 2px;
+      border: none;
+    }
+    &-items {
+      height: auto;
+    }
+  }
+}
+
+.tab-slider {
+  display: flex;
+  align-items: center;
+  background: #f1f2f4;
+  border-radius: 16px;
+  height: 32px;
+  position: relative;
+  max-width: 240px;
+  &__item {
+    padding: 9px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    text-transform: capitalize;
+    color: #3c4e64;
+    border-radius: 16px;
+    display: flex;
+    padding-left: 25px;
+    padding-right: 25px;
+    cursor: pointer;
+    width: 120px;
+    svg {
+      margin-right: 10px;
+      path {
+        fill: #3c4e64;
+      }
+    }
+  }
+  .active {
+    position: relative;
+    background: #3c4e64;
+    color: #ffffff;
+    transition: all 0.5s ease-in;
+    svg {
+      path {
+        fill: #fff;
+      }
+    }
+  }
+}
+
+.fields-selector {
+  // margin: 0 3rem 2rem;
+  background: #fafbfb;
+  height: 100%;
+
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    span {
+      margin: 0.4rem;
+      background: #f3faff;
+      border: 1px solid #c7e8fe;
+      padding: 10px 15px;
+      box-sizing: border-box;
+      box-shadow: 0px 4px 10px rgba(41, 57, 77, 0.1);
+      border-radius: 3px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+      text-transform: uppercase;
+      color: #29394d;
+      cursor: pointer;
+      &:hover {
+        box-shadow: none;
+        background: #2495e1;
+        color: #fff;
+      }
     }
   }
 }

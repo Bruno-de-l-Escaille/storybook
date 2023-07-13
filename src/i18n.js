@@ -80,6 +80,10 @@ export const I18N = {
     add: "Ajouter",
     quote_text: "Insérer le texte de la citation",
     quote_author: "Insérer l'auteur de la citation",
+    write_here: "Écrire ici ...",
+    customize: "Personnaliser",
+    customize_dynamic_fields: "Personnalisez avec des champs dynamiques",
+    quiz: "Questionnaire",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -122,5 +126,9 @@ export const I18N = {
     add: "Toevoegen",
     quote_text: "Citaattekst invoegen",
     quote_author: "Voeg de auteur van de bronvermelding in",
+    write_here: "Schrijf hier ...",
+    customize: "Aanpassen",
+    customize_dynamic_fields: "Aanpassen met dynamische velden",
+    quiz: "Quiz",
   },
 };
