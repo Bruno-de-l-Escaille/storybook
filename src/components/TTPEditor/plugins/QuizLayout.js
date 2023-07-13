@@ -24,7 +24,7 @@ const QuizLayout = ({
       tab.push({ ...question, answer: question.type === "TEXT" ? "" : [] });
     });
     setData(tab);
-  }, []);
+  }, [isOpen]);
 
   const handleChange = (questionKey, content) => {
     const tab = data.map((question) => {
@@ -163,8 +163,6 @@ const QuizLayout = ({
       }
       content = content.replace("{{" + question.key + "}}", answer);
     });
-    console.log("=======");
-    console.log(content);
     setContent(content);
     onCancel();
   };
@@ -195,7 +193,7 @@ const QuizLayout = ({
         </div>
         <div className={styles.footer}>
           <button className={styles.yes} onClick={handleSave}>
-            save
+            {I18N[lng].save}
           </button>
         </div>
       </div>

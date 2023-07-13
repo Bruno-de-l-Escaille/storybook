@@ -222,14 +222,15 @@ export const DynamicFields = () => (
 const quizQuestions = [
   {
     key: "question1",
-    title: "Question 1",
+    title: "Quel type de crédit à la consommation détenez-vous ?",
     type: "TEXT",
   },
   {
     key: "question2",
-    title: "Question 2",
+    title:
+      "Détenez tenez-vous actuellement, vous ou votre conjoint, un crédit à la consommation ?",
     type: "SELECT",
-    choices: ["Choix 1", "Choix 2", "Choix 3"],
+    choices: ["Oui", "Non"],
   },
   {
     key: "question3",
@@ -244,7 +245,7 @@ const quizQuestions = [
   },
 ];
 const quizBody =
-  "<h2>Titre</h2><p>ddkddjd</p><p>{{question1}}</p><p>{{question2}}</p> <p>{{question3}}</p><p>{{question4}}</p>";
+  "<h2>Titre</h2><p>Text début</p><p>{{question1}}</p><p>Votre choix</p><p>{{question2}}</p> <p>Test</p><p>{{question3}}</p><p>{{question4}}</p>";
 export const QuizLayout = () => (
   <TTPEditor
     auth={object("auth", authLogin)}

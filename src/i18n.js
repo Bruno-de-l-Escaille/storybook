@@ -84,6 +84,7 @@ export const I18N = {
     customize: "Personnaliser",
     customize_dynamic_fields: "Personnalisez avec des champs dynamiques",
     quiz: "Questionnaire",
+    save: "Enregistrer",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -130,5 +131,6 @@ export const I18N = {
     customize: "Aanpassen",
     customize_dynamic_fields: "Aanpassen met dynamische velden",
     quiz: "Quiz",
+    save: "Opslaan",
   },
 };
