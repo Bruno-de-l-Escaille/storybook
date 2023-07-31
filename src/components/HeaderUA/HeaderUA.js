@@ -116,6 +116,7 @@ export class HeaderUA extends Component {
       showPersonalData,
       personalData,
       onAfterSavePersonal,
+      showProfileLink,
     } = this.props;
     const { portalSwitchCurrent, isFaqWidgetLoaded } = this.state;
     const { user, navCommunity } = auth;
@@ -256,6 +257,7 @@ export class HeaderUA extends Component {
           showPersonalData={showPersonalData}
           personalData={personalData}
           onAfterSavePersonal={onAfterSavePersonal}
+          showProfileLink={showProfileLink}
         />
       </div>
     );

@@ -333,6 +333,7 @@ export const HeaderLoggedIn = () => (
       agreationParam: "externe",
     }}
     onAfterSavePersonal={(data) => console.log("save ", data)}
+    showProfileLink={true}
   />
 );
 

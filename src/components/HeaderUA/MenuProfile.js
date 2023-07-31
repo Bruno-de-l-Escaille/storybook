@@ -166,6 +166,7 @@ export default function MenuProfile(props) {
     showPersonalData,
     personalData,
     onAfterSavePersonal,
+    showProfileLink,
   } = props;
 
   const AGREATION_TYPE_OPTIONS = [
@@ -415,9 +416,11 @@ export default function MenuProfile(props) {
               avatarSignature={mainEmail}
             />
           </li>
-          <li className={`${styles.menuProfile}`}>
-            <a href={rightIcons.profile.url}>{I18N[lng]["profile"]}</a>
-          </li>
+          {showProfileLink && (
+            <li className={`${styles.menuProfile}`}>
+              <a href={rightIcons.profile.url}>{I18N[lng]["profile"]}</a>
+            </li>
+          )}
 
           {showPersonalData && (
             <li className={styles.personalData}>
