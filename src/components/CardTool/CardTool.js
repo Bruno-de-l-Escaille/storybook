@@ -101,7 +101,7 @@ export class CardTool extends PureComponent {
               </div>
               <div
                 className={styles.card_footer_tags_tag}
-                style={{ background: `${color}20`, color }}
+                style={{ background: `${color}30`, color }}
               >
                 {data.tag}
               </div>
