@@ -46,17 +46,20 @@
 }
 
 .card_header {
-  display: flex;
-  align-items: center;
+  position: relative;
   > i {
     font-size: 1.7rem;
     min-width: 32px!important;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 .card_info{
-  margin-left: 16px;
   font-family: Roboto;
   font-style: normal;
+  margin-left: 48px;  
 
   &_title {
     font-weight: 500;
