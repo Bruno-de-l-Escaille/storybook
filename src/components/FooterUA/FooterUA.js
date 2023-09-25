@@ -50,7 +50,7 @@ export class FooterUA extends Component {
                   primaryLogo ? styles.communityLogo : styles.communityLogoLarge
                 }
                 style={{
-                  backgroundImage: `url(${addLandaSize(secondaryLogo, 500)})`,
+                  backgroundImage: `url(${secondaryLogo})`,
                 }}
               ></div>
             )}
