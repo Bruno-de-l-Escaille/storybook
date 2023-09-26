@@ -3,7 +3,8 @@
   z-index: 9999;
   bottom: 24px;
   left: 24px;
-  max-width: 500px;
+  width: 500px;
+  max-width: 90%;
   padding: 18px;
   border-radius: 9px;
   background: #fff;
@@ -13,7 +14,7 @@
   font-family: Roboto;
 
   &_active {
-    max-width: 800px;
+    width: 800px;
   }
   .title {
     font-weight: 500;
@@ -25,6 +26,9 @@
     font-size: 14px;
     margin: 1rem 0;
     color: #8d8d8d;
+    max-height: 300px;
+    overflow: scroll;
+
     p {
       text-align: left;
     }
@@ -147,10 +151,11 @@
   color: #8d8d8d;
 }
 
-@media screen and (max-width: 393px) {
+@media screen and (max-width: 600px) {
   .container {
-    left: 0;
-    bottom: 10vh;
+    left: 2%;
+    max-width: 96%;
+
     .text {
       height: 100px;
       overflow: scroll;
@@ -168,13 +173,10 @@
     }
   }
 }
-@media screen and (max-height: 393px) {
+@media screen and (max-height: 600px) {
   .container {
-    max-width: 750px;
-    left: 0;
-    bottom: 20vh;
     .text {
-      height: 100px;
+      max-height: 120px;
       overflow: scroll;
     }
 
