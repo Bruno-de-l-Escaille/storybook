@@ -8,6 +8,10 @@ import { getDateLabel } from "../../utils";
 import { Fetching } from "./Fetching";
 import { I18N } from "../../i18n";
 import { AuthorAvatar } from "../Avatar/AuthorAvatar";
+import IconCalendar from "../Icons/IconCalendar";
+import IconPlay from "../Icons/IconPlay";
+import IconAward from "../Icons/IconAward";
+import IconInfo from "../Icons/IconInfo";
 
 export class EventCard extends PureComponent {
   render() {
@@ -200,7 +204,7 @@ export class EventCard extends PureComponent {
             )}
             {!event[labelAttr] ? null : (
               <div className={styles.lable}>
-                <i className="icon icon-info" />
+                <IconInfo />
                 {event[labelAttr]}
               </div>
             )}
@@ -218,8 +222,8 @@ export class EventCard extends PureComponent {
             >{`${hours}h ${minutes}min`}</span>
           </div>
           <h3>{desc}</h3>
-          {speaker && !expert ? <h4>{speaker}</h4> : null}
-          {expertSpeaker && expert ? (
+          {/*speaker && !expert ? <h4>{speaker}</h4> : null*/}
+          {expertSpeaker ? (
             <div className={styles.speaker}>
               <AuthorAvatar
                 author={{
@@ -242,7 +246,7 @@ export class EventCard extends PureComponent {
                   </li>
                 ) : (
                   <li>
-                    <i className="icon icon-calendar" />
+                    <IconCalendar />
                     <span>
                       <strong>{I18N[language]["En Live"]}</strong> : {helpDate}
                     </span>
@@ -253,13 +257,13 @@ export class EventCard extends PureComponent {
 
             {/* {isReplayable && isReplayable === 1 ? (
               <li>
-                <i className="icon icon-globe" />
+                <i className="icon-sb-globe" />
                 <span>{I18N[language]["Webinar"]}</span>
               </li>
             ) : null} */}
             {(!myEventsType && isReplayable && isReplayable === 1) || expert ? (
               <li>
-                <i className="icon icon-control-play" />
+                <IconPlay />
                 {expert ? (
                   <span>
                     <strong>{I18N[language]["En Replay"]}</strong> : {helpDate}
@@ -277,7 +281,7 @@ export class EventCard extends PureComponent {
             ) : null}
             {!myEventsType && !expert && (
               <li>
-                <i className="icon icon-badge" />
+                <IconAward />
 
                 <span>
                   {I18N[language]["Certificate included approved by"]}{" "}
@@ -287,7 +291,7 @@ export class EventCard extends PureComponent {
             )}
             {/* {event[placeAttr] ? (
               <li>
-                <i className="icon icon-location-pin" />
+                <i className="icon-sb-location-pin" />
                 <span>{event[placeAttr].split("contact")[0]}</span>
               </li>
             ) : null} */}
@@ -312,7 +316,7 @@ export class EventCard extends PureComponent {
                   href={webinarUrl}
                   target="_blank"
                 >
-                  <i className="icon icon-control-play" />
+                  <IconPlay />
                   {I18N[language]["Replay"]}
                 </a>
               ) : null}

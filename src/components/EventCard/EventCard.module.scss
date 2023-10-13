@@ -69,6 +69,16 @@
   }
 }
 
+.speaker {
+  margin-top: auto;
+  display: flex;
+  overflow: scroll;
+
+  > div {
+    margin-right: 10px;
+  }
+}
+
 .noMargin {
   margin-left: 0;
 }
@@ -142,6 +152,7 @@
 .infos {
   // height: 4.25rem;
   margin-bottom: 1.25rem;
+  margin-top: 0.25rem;
   font-size: 0.75rem;
   li {
     display: flex;
@@ -153,11 +164,12 @@
       line-height: 1.25;
     }
   }
-  i {
+  svg {
     margin-right: 0.5rem;
-    font-size: 0.875rem;
-    display: flex;
+    // font-size: 0.875rem;
     margin-top: 0.125rem;
+    flex-shrink: 0;
+    width: 14px;
   }
   .pending {
     width: 10px;
