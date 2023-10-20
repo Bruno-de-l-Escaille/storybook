@@ -167,6 +167,7 @@ export default function MenuProfile(props) {
     personalData,
     onAfterSavePersonal,
     showProfileLink,
+    disableLanguageChange = false,
   } = props;
 
   const AGREATION_TYPE_OPTIONS = [
@@ -497,20 +498,22 @@ export default function MenuProfile(props) {
               )}
             </li>
           )}
-          <li className={styles.menuLanguage}>
-            <ul>
-              {languages.map((language) => (
-                <li
-                  id={language}
-                  key={language}
-                  className={lng === language ? styles.selected : ""}
-                  onClick={() => props.onLanguageChange(language)}
-                >
-                  {language.toUpperCase()}
-                </li>
-              ))}
-            </ul>
-          </li>
+          {!disableLanguageChange && (
+            <li className={styles.menuLanguage}>
+              <ul>
+                {languages.map((language) => (
+                  <li
+                    id={language}
+                    key={language}
+                    className={lng === language ? styles.selected : ""}
+                    onClick={() => props.onLanguageChange(language)}
+                  >
+                    {language.toUpperCase()}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          )}
           <li className={styles.social}>
             <ul>
               {renderContactSocialNetworkBlock(

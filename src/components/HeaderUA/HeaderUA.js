@@ -117,6 +117,7 @@ export class HeaderUA extends Component {
       personalData,
       onAfterSavePersonal,
       showProfileLink,
+      disableLanguageChange = false,
     } = this.props;
     const { portalSwitchCurrent, isFaqWidgetLoaded } = this.state;
     const { user, navCommunity } = auth;
@@ -258,27 +259,39 @@ export class HeaderUA extends Component {
           personalData={personalData}
           onAfterSavePersonal={onAfterSavePersonal}
           showProfileLink={showProfileLink}
+          disableLanguageChange={disableLanguageChange}
         />
       </div>
     );
   }
 
   renderLoggedOut() {
-    const { lng, signInUrl, signUpUrl, RouterLink, languages } = this.props;
+    const {
+      lng,
+      signInUrl,
+      signUpUrl,
+      RouterLink,
+      languages,
+      disableLanguageChange,
+    } = this.props;
 
     return (
       <div className={styles.headerRight}>
-        <ul className={styles.headerLanguages}>
-          {languages.map((language) => (
-            <li
-              key={language}
-              className={lng === language ? styles.headerLanguageSelected : ""}
-              onClick={() => this.props.onLanguageChange(language)}
-            >
-              {language.toUpperCase()}
-            </li>
-          ))}
-        </ul>
+        {!disableLanguageChange && (
+          <ul className={styles.headerLanguages}>
+            {languages.map((language) => (
+              <li
+                key={language}
+                className={
+                  lng === language ? styles.headerLanguageSelected : ""
+                }
+                onClick={() => this.props.onLanguageChange(language)}
+              >
+                {language.toUpperCase()}
+              </li>
+            ))}
+          </ul>
+        )}
         {RouterLink ? (
           <ul className={styles.headerLinks}>
             <li>
