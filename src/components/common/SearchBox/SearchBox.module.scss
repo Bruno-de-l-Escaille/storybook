@@ -1,0 +1,29 @@
+.searchBox {
+  display: flex;
+  background: #3c4e64;
+  border: 1px solid #e8eaed;
+  box-sizing: border-box;
+  border-radius: 30px;
+  height: 32px;
+  max-width: 357px;
+  padding-right: 4px;
+  align-items: center;
+
+  &__icon {
+    color: #b7bdc3;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: inherit;
+    margin: auto 1rem;
+  }
+
+  input {
+    max-width: 300px;
+    background-color: #3c4e64;
+    border: none;
+    outline: none;
+    margin: 0;
+    width: 100%;
+    color: #fff;
+  }
+}

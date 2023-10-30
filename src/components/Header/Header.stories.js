@@ -312,6 +312,10 @@ const menu = [
       "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/icon/header/authors.svg",
     submenu: "AUTEURS",
     community: false,
+    hasSearch: true,
+    onSearch: (word) => {
+      console.log(word);
+    },
     submenu: [
       {
         title: "Emmanuel DEGREVE",
@@ -544,6 +548,8 @@ export const SubMenuHeader = () => (
     <SubMenu
       lng={select("language", ["fr", "nl", "en"], "fr")}
       menu={object("menu", menu)}
+      auth={authLogin}
+      env={text("env", "local")}
       currentCommunity={object("currentCommunity", authLogin.navCommunity)}
       hideVertical={boolean("hideVertical", false)}
       sharedPremium={boolean("sharedPremium", true)}

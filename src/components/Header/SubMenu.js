@@ -1,17 +1,21 @@
 import React, { Component } from "react";
+
+import SearchBox from "../common/SearchBox";
 import { IconWhiteCheck } from "../Icons";
 import style from "./SubMenu.module.scss";
-import classNames from "classnames";
 
 const I18N = {
   en: {
     shared_premium: "shared premium",
+    search: "Search ...",
   },
   fr: {
     shared_premium: "premium partagé",
+    search: "Recherche ...",
   },
   nl: {
     shared_premium: "gedeelde premie",
+    search: "Zoekopdracht ...",
   },
 };
 
@@ -83,6 +87,14 @@ export class SubMenu extends Component {
           </a>
         )}
         <div style={{ width: item.simple ? "auto" : "24rem" }}>
+          {item.hasSearch && item.onSearch && (
+            <div className={style.search}>
+              <SearchBox
+                placeholder={I18N.search}
+                onChange={(word) => item.onSearch(word)}
+              />
+            </div>
+          )}
           <ul>{this.renderSubmenu(item.submenu)}</ul>
           {item.more &&
             (Link ? (
