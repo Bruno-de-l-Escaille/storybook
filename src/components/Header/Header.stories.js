@@ -313,9 +313,7 @@ const menu = [
     submenu: "AUTEURS",
     community: false,
     hasSearch: true,
-    onSearch: (word) => {
-      console.log(word);
-    },
+    searchUrl: "http://local.api.tamtam.prp/endpoint",
     submenu: [
       {
         title: "Emmanuel DEGREVE",
@@ -548,8 +546,6 @@ export const SubMenuHeader = () => (
     <SubMenu
       lng={select("language", ["fr", "nl", "en"], "fr")}
       menu={object("menu", menu)}
-      auth={authLogin}
-      env={text("env", "local")}
       currentCommunity={object("currentCommunity", authLogin.navCommunity)}
       hideVertical={boolean("hideVertical", false)}
       sharedPremium={boolean("sharedPremium", true)}
