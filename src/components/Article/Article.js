@@ -367,7 +367,9 @@ export const Article = ({
             {countComments > 0 && countComments}
           </div>
           <div className={styles.share}>
-            <span onClick={() => setIsOpen(!isOpen)}>Partager</span>
+            <span onClick={() => setIsOpen(!isOpen)}>
+              {I18N[language].share}
+            </span>
             <div
               className={classnames(
                 styles.sharePopup,
