@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { withKnobs } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
@@ -11,32 +11,18 @@ export default {
 };
 
 export const Basic = () => {
+  const [tags, setTags] = useState([]);
   return (
     <Tag
       lng={"fr"}
-      token={"0d742d308b297fbe1f356debd76b2bb815c14c92"}
-      tags={[
-        {
-          label: "Attestation d'informations",
-          name: "Attestation d'informations",
-          value: 1463,
-          tag: {
-            id: 1463,
-            nameEn: "Information certificate",
-            nameFr: "Attestation d'informations",
-            nameNl: "Informatie attestering",
-            isSuperTag: false,
-            superTag: null,
-          },
-          color: "#fed493",
-        },
-      ]}
+      token={"fc11dbe508b7af7f082b86c4f1bab9cd868e34bf"}
+      tags={tags}
       allowCreateTags={true}
       loadingTags={false}
       limitSuperTag={1}
-      appEnv={"local"}
-      onChange={(val) => console.log(val)}
-      apiUrl={"http://local.api.tamtam.pro"}
+      appEnv={"staging"}
+      onChange={(val) => setTags(val)}
+      apiUrl={"https://api.staging.tamtam.pro"}
     />
   );
 };
