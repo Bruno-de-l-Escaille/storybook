@@ -170,3 +170,18 @@ export function convertDateFromUTC(
     .subtract(offsetMinutes, "minutes")
     .format(destFormat);
 }
+
+export function getTagName(tag, currentLanguage) {
+  let languages = ["nameFr", "nameNl", "nameEn"].filter(
+    (e) => e !== currentLanguage
+  );
+
+  for (let i = 0; i < languages.length; i++) {
+    let lng = languages[i];
+
+    if (tag[lng] != null && tag[lng].trim() !== "") {
+      return tag[lng];
+    }
+  }
+  return "";
+}
