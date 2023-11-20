@@ -99,6 +99,9 @@ export const getApiUrl = (env) => {
     case "rc2":
       apiUrl = "https://api.rc2.tamtam.pro";
       break;
+    case "staging":
+      apiUrl = "https://api.staging.tamtam.pro";
+      break;
     default:
       apiUrl = "https://api.tamtam.pro";
       break;
@@ -114,6 +117,9 @@ export const getEventUrl = (env) => {
       break;
     case "rc2":
       eventUrl = "https://rc2.offfcourse.be";
+      break;
+    case "staging":
+      eventUrl = "https://staging.offfcourse.be";
       break;
     default:
       eventUrl = "https://offfcourse.be";
