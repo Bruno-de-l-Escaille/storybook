@@ -373,7 +373,11 @@ export const Tag = (props) => {
           tag.parent !== undefined &&
           !parentTags.includes(tag.parent.id)
         ) {
-          tmp.parent = { label: tag.parent[nameAttr], value: tag.parent.id };
+          tmp.parent = {
+            label: tag.parent[nameAttr],
+            value: tag.parent.id,
+            tag: tag.parent,
+          };
         }
 
         if (!tag.isSynonym || (tag.isSynonym && tmp.parent)) {
@@ -484,7 +488,11 @@ export const Tag = (props) => {
 
       e.forEach((tag) => {
         if (tag.parent !== undefined) {
-          tmp.push({ label: tag.parent.label, value: tag.parent.value });
+          tmp.push({
+            label: tag.parent.label,
+            value: tag.parent.value,
+            tag: tag.parent.tag,
+          });
         } else {
           tmp.push(tag);
         }
