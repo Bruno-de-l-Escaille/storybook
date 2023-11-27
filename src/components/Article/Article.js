@@ -809,7 +809,7 @@ export const Article = ({
     // };
     let className = "";
     if (title.length > 180) {
-      className = styles.smallImg3;
+      // className = styles.smallImg3;
     } else if (title.length > 150) {
       className = styles.smallImg2;
     } else if (title.length > 120) {

@@ -141,3 +141,54 @@
   border: 1px solid #f1f2f4;
   border-radius: 50%;
 }
+
+.bar {
+  display: flex;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 60px;
+  border-bottom: 1px solid rgba(109, 127, 146, 0.1);
+  border-radius: 2px;
+  background-color: #ffffff;
+  padding: 10px;
+}
+.tags_table {
+  width: 100%;
+  margin-top: 20px;
+
+  thead {
+    background-color: #f6f9fc;
+    th {
+      padding: 1rem 0rem;
+      text-align: center !important;
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+  }
+  tbody tr:hover {
+    background-color: rgba(80, 129, 190, 0.1);
+  }
+  .cell {
+    padding: 0.75rem 0.5rem;
+    text-align: center !important;
+    font-weight: 500;
+    .namesList li {
+      &:nth-child(1) {
+        color: #3a87ad;
+      }
+      &:nth-child(2) {
+        color: #acc460;
+      }
+      &:nth-child(3) {
+        color: #ff9900;
+      }
+    }
+    svg {
+      height: 1rem;
+      color: rgb(80, 129, 190);
+      margin: 0 0.5rem;
+    }
+  }
+}

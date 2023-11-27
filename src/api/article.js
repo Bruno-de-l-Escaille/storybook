@@ -7,6 +7,7 @@ import {
 } from "../utils";
 
 let getTagsCTS;
+let getThemesCTS;
 
 export const getArticle = ({ apiUrl, token, articleId }) => {
   const filter = [
@@ -95,8 +96,55 @@ export const getTags = ({
     access_token: token,
     nolimit: 1,
     fields:
-      "id, nameFr, nameEn, nameNl, parent, isSynonym, isSuperTag, superTag",
+      "id, nameFr, nameEn, nameNl, counter, parent, isSynonym, isSuperTag, superTag",
     filter: JSON.stringify(filter),
+  };
+
+  let requestConfig = getRequestConfig(params, requestCancellationToken);
+  return axios.get(requestUrl, requestConfig).catch(function (thrown) {
+    throwCatchedError(thrown);
+  });
+};
+
+export const getThemes = ({
+  token,
+  communityId = null,
+  customFilter = null,
+  apiUrl,
+}) => {
+  let cancellationTokenSource = generateCancellationTokenSource();
+
+  let requestCancellationToken = getRequestCancellationToken(
+    getThemesCTS,
+    cancellationTokenSource
+  );
+  getThemesCTS = cancellationTokenSource;
+
+  const requestUrl = `${apiUrl}/blog/theme`;
+
+  let filters = [];
+
+  if (customFilter !== null) {
+    if (Array.isArray(customFilter)) {
+      filters.push(...customFilter);
+    } else {
+      filters.push(customFilter);
+    }
+  }
+
+  if (communityId) {
+    filters.push({
+      property: "organization",
+      value: communityId,
+      operator: "eq",
+    });
+  }
+
+  let params = {
+    access_token: token,
+    filter: JSON.stringify(filters),
+    fields: "*,mediaThemes,pages",
+    limit: 20,
   };
 
   let requestConfig = getRequestConfig(params, requestCancellationToken);
@@ -127,7 +175,49 @@ export const saveSuperTag = (token, data, apiUrl) => {
   var formData = new FormData();
   formData.append("access_token", token);
   formData.append("id", data.id);
-  formData.append("superTag", data.superTag);
+  if (data.superTag) {
+    formData.append("superTag", data.superTag);
+  }
+  if (data.theme) {
+    formData.append("theme", data.theme);
+  }
+  if (data.pages && data.pages.length > 0) {
+    for (let i = 0; i < data.pages.length; i++) {
+      formData.append(`pages[${i}]`, data.pages[i].id);
+    }
+  }
+
+  return axios.post(requestUrl, formData);
+};
+
+export const getTag = ({ token, id, apiUrl }) => {
+  const requestUrl = `${apiUrl}/blog/tag`;
+  let filter = [
+    {
+      property: "id",
+      value: id,
+      operator: "eq",
+    },
+  ];
+
+  return axios.get(requestUrl, {
+    params: {
+      access_token: token,
+      fields:
+        "id, nameFr, nameEn, nameNl, isSynonym, isSuperTag, themeAndPages",
+      filter: JSON.stringify(filter),
+    },
+  });
+};
+
+export const mergeTags = ({ token, apiUrl, data }) => {
+  const requestUrl = `${apiUrl}/blog/tag/merge`;
+
+  var formData = new FormData();
+  formData.append("access_token", token);
+  formData.append("source", data.source);
+  formData.append("destination", data.destination);
+  formData.append("full_merge", data.fullMerge);
 
   return axios.post(requestUrl, formData);
 };
