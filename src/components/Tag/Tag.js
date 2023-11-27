@@ -212,6 +212,8 @@ export const Tag = (props) => {
   const nameAttr = `name${lng.charAt(0).toUpperCase() + lng.slice(1)}`;
   const titleAttr = `title${lng.charAt(0).toUpperCase() + lng.slice(1)}`;
 
+  const SELECT_STYLES = props.styles ? props.styles : selectStyles;
+
   useEffect(() => {
     if (openTagModal && editTag) {
       if (editTag.superTag) {
@@ -673,7 +675,7 @@ export const Tag = (props) => {
         cacheOptions
         isClearable
         value={tags}
-        styles={selectStyles}
+        styles={SELECT_STYLES}
         onChange={(e) => handleChange(e)}
         loadOptions={fetchTTags}
         components={{ MultiValueLabel }}
@@ -805,7 +807,7 @@ export const Tag = (props) => {
                         cacheOptions
                         isClearable
                         value={superTag}
-                        styles={props.selectStyles}
+                        styles={SELECT_STYLES}
                         onChange={(e) => setSuperTag(e)}
                         loadOptions={fetchSuperTags}
                         classNamePrefix="custom-select"
@@ -842,7 +844,7 @@ export const Tag = (props) => {
                   </label>
                   <AsyncSelect
                     cacheOptions
-                    styles={props.selectStyles}
+                    styles={SELECT_STYLES}
                     value={theme}
                     onChange={handleChangeTheme}
                     isLoading={loadingThemes}
@@ -860,7 +862,7 @@ export const Tag = (props) => {
                     {I18N[lng]["page"]}
                   </label>
                   <Select
-                    styles={props.selectStyles}
+                    styles={SELECT_STYLES}
                     isLoading={loadingThemes}
                     options={pageOptions}
                     className={styles.input}
