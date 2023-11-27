@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { withKnobs } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
-import Tag from "./Tag";
+import { Tag } from "./Tag";
 
 export default {
   title: "Tag",

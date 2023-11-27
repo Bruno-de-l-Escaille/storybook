@@ -182,7 +182,7 @@ const modalStyles = {
   },
 };
 
-const Tag = (props) => {
+export const Tag = (props) => {
   const {
     lng,
     token,
@@ -922,5 +922,3 @@ const Tag = (props) => {
     </>
   );
 };
-
-export default Tag;
