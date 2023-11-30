@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { components } from "react-select";
-// import AsyncCreatableSelect from "react-select/async-creatable";
+import AsyncCreatableSelect from "react-select/async-creatable";
 import Select from "react-select";
 import AsyncSelect from "react-select/async";
 import { Modal as AntModal } from "antd";
@@ -232,7 +232,7 @@ export const Tag = (props) => {
 
         setSuperTag(tmp);
       } else if (tags?.length > 0) {
-        const superT = tags.filter((tag) => tag.tag.isSuperTag);
+        const superT = tags.filter((tag) => tag?.tag?.isSuperTag);
         if (superT?.length > 0) {
           setSuperTag(superT[0]);
         }
@@ -331,7 +331,7 @@ export const Tag = (props) => {
       }
     }
     setInputSearch(inputValue);
-    const superT = tags?.filter((t) => t.tag.isSuperTag);
+    const superT = tags?.filter((t) => t?.tag?.isSuperTag);
 
     return getTags({
       token,
@@ -469,7 +469,7 @@ export const Tag = (props) => {
       }
       let newSuperT = [];
       e.forEach((t) => {
-        if (t.tag.isSuperTag) {
+        if (t?.tag?.isSuperTag) {
           newSuperT.push(t.tag.id);
         }
       });
@@ -481,40 +481,44 @@ export const Tag = (props) => {
 
       let superT = [];
       tags.forEach((t) => {
-        if (t.tag.isSuperTag) {
+        if (t?.tag?.isSuperTag) {
           superT.push(t.tag.id);
         }
       });
 
       e.forEach((tag) => {
-        if (tag.parent !== undefined) {
-          tmp.push({
-            label: tag.parent.label,
-            value: tag.parent.value,
-            tag: tag.parent.tag,
-          });
-        } else {
+        if (tag["__isNew__"]) {
           tmp.push(tag);
-        }
-        if (tag?.tag.superTag) {
-          if (
-            superT.length < limitSuperTag &&
-            !newSuperT.includes(tag.tag.superTag.id) &&
-            !superT.includes(tag.tag.superTag.id) &&
-            tmp.filter((t) => t.tag.id === tag.tag.superTag.id).length === 0
-          ) {
-            let label = getTagName(tag.tag.superTag, lng);
-            let tmpTag = {
-              label: "⚡︎ " + label,
-              name: tag[nameAttr],
-              value: tag.tag.superTag.id,
-              tag: { ...tag.tag.superTag, isSuperTag: true },
-            };
-            if (!tag.tag.superTag[nameAttr]) {
-              tmpTag.color = "#fed493";
-            }
+        } else {
+          if (tag.parent !== undefined) {
+            tmp.push({
+              label: tag.parent.label,
+              value: tag.parent.value,
+              tag: tag.parent.tag,
+            });
+          } else {
+            tmp.push(tag);
+          }
+          if (tag?.tag.superTag) {
+            if (
+              superT.length < limitSuperTag &&
+              !newSuperT.includes(tag.tag.superTag.id) &&
+              !superT.includes(tag.tag.superTag.id) &&
+              tmp.filter((t) => t?.tag?.id === tag.tag.superTag.id).length === 0
+            ) {
+              let label = getTagName(tag.tag.superTag, lng);
+              let tmpTag = {
+                label: "⚡︎ " + label,
+                name: tag[nameAttr],
+                value: tag.tag.superTag.id,
+                tag: { ...tag.tag.superTag, isSuperTag: true },
+              };
+              if (!tag.tag.superTag[nameAttr]) {
+                tmpTag.color = "#fed493";
+              }
 
-            tmp.push(tmpTag);
+              tmp.push(tmpTag);
+            }
           }
         }
       });
@@ -526,7 +530,7 @@ export const Tag = (props) => {
     e.stopPropagation();
     e.preventDefault();
 
-    if (allowCreateTags) {
+    if (allowCreateTags && !data["__isNew__"]) {
       setEditTag(data.tag);
       setOpenTagModal(true);
     }
@@ -556,7 +560,7 @@ export const Tag = (props) => {
     const tagIds = [];
     if (applyAllSelection && tags) {
       tags.forEach((tag) => {
-        if (!tag.tag.isSuperTag && !tag.tag.superTag) {
+        if (!tag["__isNew__"] && !tag.tag.isSuperTag && !tag.tag.superTag) {
           tagIds.push(tag.tag.id);
         }
       });
@@ -663,7 +667,7 @@ export const Tag = (props) => {
 
   return (
     <>
-      {/* {allowCreateTags ? (
+      {allowCreateTags ? (
         <AsyncCreatableSelect
           isLoading={loadingTags}
           isMulti
@@ -672,24 +676,24 @@ export const Tag = (props) => {
           onChange={(e) => handleChange(e)}
           loadOptions={fetchTTags}
           createOptionPosition="first"
-          styles={selectStyles}
+          styles={SELECT_STYLES}
           components={{ MultiValueLabel }}
           formatGroupLabel={formatGroupLabel}
         />
-      ) : ( */}
-      <AsyncSelect
-        isLoading={loadingTags}
-        isMulti
-        cacheOptions
-        isClearable
-        value={tags}
-        styles={SELECT_STYLES}
-        onChange={(e) => handleChange(e)}
-        loadOptions={fetchTTags}
-        components={{ MultiValueLabel }}
-        classNamePrefix="custom-select"
-      />
-      {/* )}  */}
+      ) : (
+        <AsyncSelect
+          isLoading={loadingTags}
+          isMulti
+          cacheOptions
+          isClearable
+          value={tags}
+          styles={SELECT_STYLES}
+          onChange={(e) => handleChange(e)}
+          loadOptions={fetchTTags}
+          components={{ MultiValueLabel }}
+          classNamePrefix="custom-select"
+        />
+      )}
 
       <AntModal
         closable={false}
@@ -835,7 +839,9 @@ export const Tag = (props) => {
 
                           <p className={styles.tags_list}>
                             {tags?.map((tag) =>
-                              !tag.tag.isSuperTag && !tag.tag.superTag ? (
+                              !tag["__isNew__"] &&
+                              !tag.tag.isSuperTag &&
+                              !tag.tag.superTag ? (
                                 <span className={styles.tag}>{tag.label}</span>
                               ) : null
                             )}

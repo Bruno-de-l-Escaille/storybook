@@ -96,3 +96,20 @@ export const Custom = () => {
     />
   );
 };
+
+export const Creatable = () => {
+  const [tags, setTags] = useState([]);
+  return (
+    <Tag
+      lng={"fr"}
+      token={"00882984434b82623e1831486530a29d44efffd9"}
+      tags={tags}
+      allowCreateTags={true}
+      limitSuperTag={2}
+      appEnv={"local"}
+      onChange={(val) => setTags(val)}
+      apiUrl={"http://local.api.tamtam.pro"}
+      styles={SELECT_STYLES}
+    />
+  );
+};
