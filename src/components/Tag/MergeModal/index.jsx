@@ -34,6 +34,13 @@ export default function MergeModal({
   };
 
   const merge = async () => {
+    const tab = [];
+    tags.forEach((el) => {
+      if (el.tag.id !== destination) {
+        tab.push(el.tag.id);
+      }
+    });
+
     try {
       setMerging(true);
       await mergeTags({
@@ -42,7 +49,7 @@ export default function MergeModal({
         data: {
           destination,
           fullMerge,
-          source: tags.filter((el) => el.tag.id !== destination)[0].tag.id,
+          source: tab.join(),
         },
       });
       setMerging(false);
@@ -70,18 +77,21 @@ export default function MergeModal({
     >
       <p className={styles.question}>
         {I18N[lng].merge_question}{" "}
-        <strong>
-          <em>
-            {tags[0].tag[nameAttr]}(#{tags[0].tag.id})
-          </em>
-        </strong>{" "}
-        {I18N[lng].and}{" "}
-        <strong>
-          <em>
-            {tags[1].tag[nameAttr]}(#{tags[1].tag.id})
-          </em>
-        </strong>{" "}
-        ?
+        {tags.length === 2 && (
+          <>
+            <strong>
+              <em>
+                {tags[0].tag[nameAttr]}(#{tags[0].tag.id})
+              </em>
+            </strong>{" "}
+            {I18N[lng].and}{" "}
+            <strong>
+              <em>
+                {tags[1].tag[nameAttr]}(#{tags[1].tag.id})
+              </em>
+            </strong>
+          </>
+        )}
       </p>
 
       <select

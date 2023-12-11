@@ -74,9 +74,9 @@ export default function TagMergeModal({
         <div className={homeStyles.modal_body}>
           <div className={styles.bar}>
             <Button
-              disabled={selectedTags.length !== 2}
+              disabled={selectedTags.length < 2}
               className={`${styles.btn} ${
-                selectedTags.length !== 2 ? styles.disabled : ""
+                selectedTags.length < 2 ? styles.disabled : ""
               }`}
               onClick={() => setMergeModalOpen(true)}
             >
