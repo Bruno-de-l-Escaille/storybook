@@ -541,6 +541,13 @@
         "url": "forum-for-the-future",
         "hasFiduciariesAdmin": true
       },
+      "organizationSource": {
+        "id": 16669,
+        "uen": "0900000000",
+        "name": "asdd",
+        "abbreviation": "",
+        "officeType": "ITAA"
+      },
       "theme": {
         "id": 27,
         "titleFr": "Tendances sectorielles",

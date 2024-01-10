@@ -1472,3 +1472,22 @@
     padding: 2%;
   }
 }
+
+.fff_lib {
+  height: 20px;
+  width: fit-content;
+  position: relative;
+  z-index: 1;
+  padding: 0 14px;
+  border-radius: 2px;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  margin: 0 0 0 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #ffffff;
+  text-shadow: 0px 4px 4px rgba(41, 57, 77, 0.1);
+}

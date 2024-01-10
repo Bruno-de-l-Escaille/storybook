@@ -894,6 +894,14 @@ export const Article = ({
               >
                 {communityName}
               </div>
+              {article.organizationSource && (
+                <div
+                  className={styles.fff_lib}
+                  style={{ background: `${category.colorCode}` }}
+                >
+                  {I18N[language].fff_library}
+                </div>
+              )}
             </div>
             {renderTitle()}
             <div className={styles.bottomAction}>
@@ -940,6 +948,14 @@ export const Article = ({
               >
                 {communityName}
               </div>
+              {article.organizationSource && (
+                <div
+                  className={styles.fff_lib}
+                  style={{ background: `${category.colorCode}` }}
+                >
+                  {I18N[language].fff_library}
+                </div>
+              )}
             </div>
             {renderTitle()}
             <div className={styles.summary}>{introduction}</div>
@@ -1093,6 +1109,14 @@ export const Article = ({
               >
                 {communityName}
               </div>
+              {article.organizationSource && (
+                <div
+                  className={styles.fff_lib}
+                  style={{ background: `${category.colorCode}` }}
+                >
+                  {I18N[language].fff_library}
+                </div>
+              )}
             </div>
             {renderTitle()}
 
@@ -1183,6 +1207,14 @@ export const Article = ({
               >
                 {communityName}
               </div>
+              {article.organizationSource && (
+                <div
+                  className={styles.fff_lib}
+                  style={{ background: `${category.colorCode}` }}
+                >
+                  {I18N[language].fff_library}
+                </div>
+              )}
             </div>
             {renderTitle()}
             {article.relatedArticles &&

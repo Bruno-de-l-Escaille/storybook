@@ -285,16 +285,18 @@ export const prepareArticle = (article, env = "", host) => {
     };
   }
 
+  const org = article.organizationSource || organization;
+
+  let communityName =
+    org.abbreviation ||
+    (org.name.length <= 30 ? org.name : org.name.substr(0, 30) + "...");
+
   return {
     id,
     title,
     status,
     introduction,
-    communityName:
-      organization.abbreviation ||
-      (organization.name.length <= 30
-        ? organization.name
-        : organization.name.substr(0, 30) + "..."),
+    communityName,
     category: {
       name: getCategoryName(category, language),
       colorCode: category && category.colorCode ? category.colorCode : "",
