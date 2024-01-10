@@ -1320,6 +1320,14 @@ export const Article = ({
                 >
                   {communityName}
                 </div>
+                {article.organizationSource && (
+                  <div
+                    className={styles.fff_lib}
+                    style={{ background: `${category.colorCode}` }}
+                  >
+                    {I18N[language].fff_library}
+                  </div>
+                )}
               </div>
               {renderTitle()}
             </div>
