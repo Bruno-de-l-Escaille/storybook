@@ -365,7 +365,19 @@ export const Tag = (props) => {
             superTag: tag.superTag ?? null,
           },
         };
-        if (!tag[nameAttr] || (!tag.isSuperTag && !tag.superTag)) {
+        if (!tag.isSuperTag && !tag.superTag) {
+          tmp.color = "#acd4f9";
+        }
+        let emptyTagName = false;
+        if (
+          tag.nameFr?.length === 0 ||
+          tag.nameNl?.length === 0 ||
+          tag.nameEn?.length === 0
+        ) {
+          emptyTagName = true;
+        }
+
+        if (emptyTagName) {
           tmp.color = "#fed493";
         }
         if (
@@ -514,7 +526,7 @@ export const Tag = (props) => {
                 tag: { ...tag.tag.superTag, isSuperTag: true },
               };
               if (!tag.tag.superTag[nameAttr]) {
-                tmpTag.color = "#fed493";
+                tmpTag.color = "#acd4f9";
               }
 
               tmp.push(tmpTag);
