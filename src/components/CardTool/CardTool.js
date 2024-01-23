@@ -169,11 +169,14 @@ export class CardTool extends PureComponent {
           ) : (
             ""
           )}
-          {allowedActions?.more && (
-            <Fragment>
+
+          <Fragment>
+            {allowedActions?.update && (
               <div className={styles.card_action} onClick={() => onUpdate()}>
                 <IconPen />
               </div>
+            )}
+            {allowedActions?.delete && (
               <div
                 className={classnames(
                   styles.card_action,
@@ -183,8 +186,8 @@ export class CardTool extends PureComponent {
               >
                 <IconTrash height={16} width={14.23} />
               </div>
-            </Fragment>
-          )}
+            )}
+          </Fragment>
         </div>
         {displayTooltip && (
           <div
