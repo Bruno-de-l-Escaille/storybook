@@ -169,32 +169,21 @@ export class CardTool extends PureComponent {
           ) : (
             ""
           )}
-          {allowedActions && allowedActions.more ? (
-            moreActions ? (
-              <Fragment>
-                <div className={styles.card_action} onClick={() => onUpdate()}>
-                  <IconPen />
-                </div>
-                <div
-                  className={classnames(
-                    styles.card_action,
-                    styles.card_action_danger
-                  )}
-                  onClick={() => onDelete()}
-                >
-                  <IconTrash height={16} width={14.23} />
-                </div>
-              </Fragment>
-            ) : (
-              <div
-                className={styles.card_action}
-                onClick={() => this.setState({ moreActions: true })}
-              >
-                <IconMore />
+          {allowedActions?.more && (
+            <Fragment>
+              <div className={styles.card_action} onClick={() => onUpdate()}>
+                <IconPen />
               </div>
-            )
-          ) : (
-            ""
+              <div
+                className={classnames(
+                  styles.card_action,
+                  styles.card_action_danger
+                )}
+                onClick={() => onDelete()}
+              >
+                <IconTrash height={16} width={14.23} />
+              </div>
+            </Fragment>
           )}
         </div>
         {displayTooltip && (
