@@ -95,16 +95,20 @@ export class CardTool extends PureComponent {
             <span>{data.created}</span>
             <span>{data.organization}</span>
             <div className={styles.card_footer_tags}>
-              {/* <div className={styles.card_footer_tags_scoop}>
-                {this.renderScopeIcon(data.scope)}
-                {data.scope}
-              </div> */}
               <div
                 className={styles.card_footer_tags_tag}
                 style={{ background: `${color}30`, color }}
               >
                 {data.tag}
               </div>
+              {data.source && (
+                <div
+                  className={styles.card_footer_tags_tag}
+                  style={{ background: "#8FBC8B", color: "#fff" }}
+                >
+                  {data.source}
+                </div>
+              )}
             </div>
           </div>
         </div>

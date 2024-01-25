@@ -24,6 +24,7 @@ const data = {
     "Exsistit autem hoc loco quaedam quaestio subdifficilis, numt antep uaestio subdi quando amici subdi qua autem hoc loco quaedam quaestio subdifficilis, numt antep uaestio subdi q",
   tag: "Juridique",
   organization: "Par Deg & Partners Consulting Company",
+  source: "Bibliothèque FFF",
 };
 const dataFavorite = {
   icon: "webtool-user",
@@ -35,6 +36,7 @@ const dataFavorite = {
     "Exsistit autem hoc loco quaedam quaestio subdifficilis, numt antep uaestio subdi quando amici subdi qua autem hoc loco quaedam quaestio subdifficilis, numt antep uaestio subdi q",
   tag: "Juridique",
   organization: "Par Deg & Partners Consulting Company",
+  source: "Bibliothèque FFF",
 };
 
 export const CardToolDefault = () => (
