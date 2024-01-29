@@ -66,9 +66,7 @@ export class CardTool extends PureComponent {
       onUnshare,
       onDelete,
       onUpdate,
-      onReach,
     } = this.props;
-    let { moreActions } = this.state;
     return (
       <div
         className={classnames(
@@ -79,6 +77,7 @@ export class CardTool extends PureComponent {
             ? styles.card_frame_show_actions
             : ""
         )}
+        onClick={() => window.open(data.link, "_blank")}
       >
         <div className={styles.card_content}>
           <div className={styles.card_header}>
@@ -113,9 +112,6 @@ export class CardTool extends PureComponent {
           </div>
         </div>
         <div className={styles.card_actions}>
-          <div className={styles.card_action} onClick={() => onReach()}>
-            {<IconExternalLink />}
-          </div>
           {allowedActions && allowedActions.share ? (
             <div
               className={classnames(
@@ -143,7 +139,10 @@ export class CardTool extends PureComponent {
                 styles.card_action,
                 styles.card_action_danger
               )}
-              onClick={() => onUnshare()}
+              onClick={(e) => {
+                e.stopPropagation();
+                onUnshare();
+              }}
             >
               {loadingActions && loadingActions.unShare ? (
                 <IconCircleLoader />
@@ -160,7 +159,10 @@ export class CardTool extends PureComponent {
                 styles.card_action,
                 isFavorite ? styles.card_action_activated : ""
               )}
-              onClick={() => onAddFavorite()}
+              onClick={(e) => {
+                e.stopPropagation();
+                onAddFavorite();
+              }}
             >
               {loadingActions && loadingActions.favorite ? (
                 <IconCircleLoader />
@@ -176,7 +178,13 @@ export class CardTool extends PureComponent {
 
           <Fragment>
             {allowedActions?.update && (
-              <div className={styles.card_action} onClick={() => onUpdate()}>
+              <div
+                className={styles.card_action}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onUpdate();
+                }}
+              >
                 <IconPen />
               </div>
             )}
@@ -186,7 +194,10 @@ export class CardTool extends PureComponent {
                   styles.card_action,
                   styles.card_action_danger
                 )}
-                onClick={() => onDelete()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDelete();
+                }}
               >
                 <IconTrash height={16} width={14.23} />
               </div>
