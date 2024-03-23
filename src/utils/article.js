@@ -23,18 +23,18 @@ export const getArticleFullUrl = (article, env = "", host) => {
   let baBlog = "https://blog.be.accountants";
   let fffBlog = "https://blog.forumforthefuture.be";
   let dapBlog = "https://blog.degandpartners.com";
-  let blog = "https:blog.tamtam.pro";
+  let blog = "https://blog.tamtam.pro";
 
   if (env === "local") {
     baBlog = "http://local.blog.be.accountants:3000";
     fffBlog = "http://local.blog.forumforthefuture.be:3000";
     dapBlog = "http://local.blog.degandpartners.com:3000";
     blog = "http://local.blog.tamtam.pro:3000";
-  } else if (env === "v2") {
+  } else if (env === "v2" || env === "production") {
     baBlog = "https://blog.be.accountants";
     fffBlog = "https://blog.forumforthefuture.be";
     dapBlog = "https://blog.degandpartners.com";
-    blog = "https:blog.tamtam.pro";
+    blog = "https://blog.tamtam.pro";
   } else if (env) {
     baBlog = `https://blog.${env}.be.accountants`;
     fffBlog = `https://blog.${env}.forumforthefuture.be`;
