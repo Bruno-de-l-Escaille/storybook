@@ -81,7 +81,7 @@ const getArticleUrl = (article, env, host) => {
     baBlog = "http://local.blog.be.accountants:3000";
     fffBlog = "http://local.blog.forumforthefuture.be:3000";
     dapBlog = "http://local.blog.degandpartners.com:3000";
-  } else if (env === "v2") {
+  } else if (env === "v2" || env === "production") {
     baBlog = "https://blog.be.accountants";
     fffBlog = "https://blog.forumforthefuture.be";
     dapBlog = "https://blog.degandpartners.com";
