@@ -1,0 +1,141 @@
+@import "../../styles/variables";
+
+.popupContent {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    border: none;
+    background: transparent;
+    border-radius: 4px;
+    outline: none;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popupContentAfterOpen {
+    .confirm {
+      top: 0;
+      opacity: 1;
+    }
+}
+.popupContentBeforeClose {
+    .confirm {
+      top: 50%;
+      opacity: 0;
+    }
+}
+
+.confirm {
+    display: flex;
+    width: 600px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-end;
+    border-radius: 20px;
+    background: #FFF;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    .icon {
+        display: flex;
+        padding: 20px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 200px;
+        background:  #F1F2F4;
+    }
+}
+.body {
+    color: #29394D;
+    text-align: center;
+    /* H3 */
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+    margin-right: 70px;
+    margin-top: 10px;
+    text-transform: none;
+  }
+  
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+}
+.yes,
+.no{
+    display: flex;
+    padding: 10px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    border: 0.5px solid var(--dark-1, #29394D);
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    text-transform: none;
+    font-weight: 600;
+    line-height: 140%;
+    color: #29394D;
+    margin-top: 30px;
+
+  &:hover {
+   background-color: #F1F2F4;
+
+  }
+}
+
+.no {
+  background: white;
+}
+.yes{
+    border: 0.5px solid var(--dark-1, #FC5D2B);
+    color: white;
+}
+.deleting {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    border: 0;
+    border-radius: 5px;
+    // font-family: $body-font-family;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-transform: uppercase;
+    color: #ffffff;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+  
+    &:hover {
+      opacity: 0.8;
+    }
+}
+
+.lock {
+    .yes{
+        border-radius: 8px;
+        background: var(--rouge-alerte, #FC5D2B);
+    }
+}
+.unlock {
+    .yes{
+        border-radius: 8px;
+        background: var(--rouge-alerte, #FC5D2B);
+    }
+  }
+
