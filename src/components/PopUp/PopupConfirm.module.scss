@@ -75,14 +75,13 @@
     align-self: stretch;
 }
 .yes,
-.no{
+.no, .deleting{
     display: flex;
     padding: 10px 16px;
     justify-content: center;
     align-items: center;
     gap: 10px;
     border-radius: 8px;
-    border: 0.5px solid var(--dark-1, #29394D);
     font-family: Roboto;
     font-size: 18px;
     font-style: normal;
@@ -91,6 +90,7 @@
     line-height: 140%;
     color: #29394D;
     margin-top: 30px;
+    border-radius: 8px;
 
   &:hover {
    background-color: #F1F2F4;
@@ -100,42 +100,24 @@
 
 .no {
   background: white;
+  border: 0.5px solid #29394D;
 }
-.yes{
-    border: 0.5px solid var(--dark-1, #FC5D2B);
+
+.yes, .deleting{
     color: white;
-}
-.deleting {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 44px;
-    border: 0;
-    border-radius: 5px;
-    // font-family: $body-font-family;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    text-transform: uppercase;
-    color: #ffffff;
-    cursor: pointer;
-    transition: opacity 0.3s ease-in-out;
-  
-    &:hover {
-      opacity: 0.8;
-    }
 }
 
 .lock {
-    .yes{
-        border-radius: 8px;
-        background: var(--rouge-alerte, #FC5D2B);
+    .yes, .deleting {
+        border: 0.5px solid #18A0FB;
+        background: #18A0FB;
     }
+    
 }
 .unlock {
     .yes{
-        border-radius: 8px;
-        background: var(--rouge-alerte, #FC5D2B);
+        border: 0.5px solid #FC5D2B;
+        background: #FC5D2B;
     }
   }
 

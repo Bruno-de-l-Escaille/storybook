@@ -19,9 +19,8 @@ export const PopupConfirm = (props) => {
     labelNo = "No",
     labelYes = "Yes",
     text = "",
-    period,
+    period = "",
   } = props;
-  console.log('Period prop:', period);
   const renderMainIcon = () => {
     switch (type) {
       case "lock":
@@ -49,7 +48,7 @@ export const PopupConfirm = (props) => {
         <div className={styles.header}>
           <div className={styles.icon}>{renderMainIcon()}</div>
         </div>
-        <div className={styles.body}>{text} {period} {" ?"}</div>
+        <div className={styles.body}>{text} ({period}){" ?"}</div>
         <div className={styles.footer}>
           <button className={styles.no} onClick={onCancel}>
             {labelNo}

@@ -23,11 +23,11 @@ export const Lock = () => (
     onConfirm={() => console.log("handleLock")}
     inProcess={boolean("inProcess", false)}
     actionFailed={boolean("actionFailed", false)}
-    text="Êtes-vous sûr de vouloir verrouiller cette période "
+    text="Voulez-vous vraiment verrouiller cette période "
     labelNo="Non, annuler"
     labelYes="Oui, verrouiller"
     labelError="Error"
-    //period={period}
+    period={period}
   />
 );
 
@@ -43,6 +43,6 @@ export const Unlock = () => (
     labelNo="Non, annuler"
     labelYes="Oui, déverrouiller"
     labelError="Error"
-    //period={period}
+    period={period}
   />
 );
