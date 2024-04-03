@@ -27,7 +27,7 @@ export const Lock = () => (
     labelNo="Non, annuler"
     labelYes="Oui, verrouiller"
     labelError="Error"
-    period={period}
+    //period={period}
   />
 );
 
@@ -43,6 +43,6 @@ export const Unlock = () => (
     labelNo="Non, annuler"
     labelYes="Oui, déverrouiller"
     labelError="Error"
-    period={period}
+    //period={period}
   />
 );

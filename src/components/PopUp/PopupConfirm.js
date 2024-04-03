@@ -1,8 +1,8 @@
 import React from "react";
 import Modal from "react-modal";
 
-import IconLock from "../Icons/IconLock";
-import IconUnlock from "../Icons/IconUnlock";
+import IconLock from "../Icons/Lock";
+import IconUnlock from "../Icons/Unlock";
 import IconLoader from "../Icons/IconLoader";
 import styles from "./PopupConfirm.module.scss";
 
