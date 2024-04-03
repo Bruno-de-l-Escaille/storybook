@@ -13,6 +13,7 @@ export default {
     withKnobs,
   ],
 };
+const period = "";
 
 export const Lock = () => (
   <PopupConfirm
