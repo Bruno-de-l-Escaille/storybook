@@ -1,11 +1,9 @@
 import React from "react";
 import Modal from "react-modal";
-
 import IconLock from "../Icons/Lock";
 import IconUnlock from "../Icons/Unlock";
 import IconLoader from "../Icons/IconLoader";
 import styles from "./PopupConfirm.module.scss";
-
 
 export const PopupConfirm = (props) => {
   const {
@@ -48,7 +46,9 @@ export const PopupConfirm = (props) => {
         <div className={styles.header}>
           <div className={styles.icon}>{renderMainIcon()}</div>
         </div>
-        <div className={styles.body}>{text} ({period}){" ?"}</div>
+        <div className={styles.body}>
+          {text} ({period}){" ?"}
+        </div>
         <div className={styles.footer}>
           <button className={styles.no} onClick={onCancel}>
             {labelNo}

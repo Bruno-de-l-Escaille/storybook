@@ -1,6 +1,5 @@
 import React from "react";
-import { storiesOf } from "@storybook/react";
-import { withKnobs, text, boolean, select } from "@storybook/addon-knobs";
+import { withKnobs, boolean } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 
 import { PopupConfirm } from "./PopupConfirm";
@@ -27,7 +26,7 @@ export const Lock = () => (
     labelNo="Non, annuler"
     labelYes="Oui, verrouiller"
     labelError="Error"
-    //period={period}
+    period={period}
   />
 );
 
@@ -43,6 +42,6 @@ export const Unlock = () => (
     labelNo="Non, annuler"
     labelYes="Oui, déverrouiller"
     labelError="Error"
-    //period={period}
+    period={period}
   />
 );
