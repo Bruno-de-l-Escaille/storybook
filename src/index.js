@@ -19,4 +19,4 @@ export * from "./components/CardTool/CardTool";
 export * from "./components/TableBorderedColumns/TableBorderedColumns";
 export * from "./components/TTPEditor/TTPEditor";
 export * from "./components/Tag/Tag";
-export * from "./components/Popup/PopupConfirm";
+export * from "./components/PopUp/PopupConfirm";
