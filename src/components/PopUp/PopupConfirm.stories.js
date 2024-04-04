@@ -1,7 +1,6 @@
 import React from "react";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
-
 import { PopupConfirm } from "./PopupConfirm";
 
 export default {

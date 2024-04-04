@@ -47,15 +47,9 @@ export const PopupConfirm = (props) => {
           <div className={styles.icon}>{renderMainIcon()}</div>
         </div>
         <div className={styles.body}>
-          {period === "" ? (
-            <>
-              {text} {" ?"}
-            </>
-          ) : (
-            <>
-              {text} ({period}) {" ?"}
-            </>
-          )}
+          <>
+            {text} {period ? `(${period})` : ""} ?
+          </>
         </div>
         <div className={styles.footer}>
           <button className={styles.no} onClick={onCancel}>
