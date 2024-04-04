@@ -12,8 +12,6 @@ export default {
     withKnobs,
   ],
 };
-const period = "";
-
 export const Lock = () => (
   <PopupConfirm
     type="lock"
@@ -26,7 +24,7 @@ export const Lock = () => (
     labelNo="Non, annuler"
     labelYes="Oui, verrouiller"
     labelError="Error"
-    period={period}
+    period="Semaine 5"
   />
 );
 
@@ -42,6 +40,6 @@ export const Unlock = () => (
     labelNo="Non, annuler"
     labelYes="Oui, déverrouiller"
     labelError="Error"
-    period={period}
+    period="Semaine 7"
   />
 );
