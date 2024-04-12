@@ -373,7 +373,7 @@ export class HeaderUA extends Component {
             )}
           </div>
 
-          {auth.user && auth.user.uaRoles ? (
+          {auth.user && auth.user.uaRoles && auth.user.uaRoles.length > 1 ? (
             <Communities
               communities={auth.user.uaRoles}
               currentCommunity={auth.navCommunity}

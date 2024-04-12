@@ -26,8 +26,8 @@ export default class Communities extends Component {
     let clientsBlock = [];
 
     for (let i = 0; i < communities.length; i++) {
-      let logo = communities[i].avatarUrl
-        ? `${communities[i].avatarUrl}`
+      let logo = communities[i].organization.avatarUrl
+        ? `${communities[i].organization.avatarUrl}`
         : "img/default-logo.png";
       let logoBlock = (
         <span
@@ -35,9 +35,9 @@ export default class Communities extends Component {
           style={{ backgroundImage: `url(${logo})` }}
         ></span>
       );
-      let clientName = communities[i].name;
-      if (communities[i].abbreviation) {
-        clientName = communities[i].abbreviation;
+      let clientName = communities[i].organization.name;
+      if (communities[i].organization.abbreviation) {
+        clientName = communities[i].organization.abbreviation;
       } else if (clientName.length > 30) {
         clientName = clientName.substr(0, 30) + "...";
       }
@@ -46,7 +46,7 @@ export default class Communities extends Component {
         clientsBlock.push(
           <li
             className={styles.menu__subChild}
-            key={`client-${communities[i].id}`}
+            key={`client-${communities[i].organization.id}`}
             onClick={() => onSelectCommunity(communities[i])}
           >
             <a href="javascript:void(0);">

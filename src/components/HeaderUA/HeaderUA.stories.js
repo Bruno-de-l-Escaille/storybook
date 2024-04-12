@@ -399,13 +399,88 @@ export const HeaderPortalSwitch = () => (
   />
 );
 
+const autuMultiRole = {
+  ...authLogin,
+  user: {
+    ...authLogin.user,
+    uaRoles: [
+      {
+        id: 3181,
+        function: "",
+        type: "LEGAL_REPRESENTATIVE",
+        typeStatus: "MANAGER",
+        validated: false,
+        internal: false,
+        exist: false,
+        createdAt: {
+          date: "2017-07-24 11:14:12.000000",
+          timezone_type: 3,
+          timezone: "Africa/Casablanca",
+        },
+        updatedAt: {
+          date: "2021-10-12 10:29:06.000000",
+          timezone_type: 3,
+          timezone: "Africa/Casablanca",
+        },
+        organization: {
+          id: 4,
+          uen: "0446086370",
+          name: "DEG & PARTNERS CONSULTING COMPANY",
+          abbreviation: "Deg & Partners",
+          avatarWebPath:
+            "storage/media/IMAGE/34/AVATAR_7f435c11e8fbf8edeeba523506b0364ae8b5d668.png",
+          avatarUrl:
+            "https://s3.tamtam.pro/local/storage/media/IMAGE/34/AVATAR_7f435c11e8fbf8edeeba523506b0364ae8b5d668.png",
+          portalScope: "COLLABORATER",
+        },
+      },
+      {
+        id: 37,
+        function: "Partner",
+        type: "LEGAL_REPRESENTATIVE",
+        typeStatus: "MANAGER",
+        validated: false,
+        internal: false,
+        exist: false,
+        createdAt: {
+          date: "2017-09-11 20:22:13.000000",
+          timezone_type: 3,
+          timezone: "Africa/Casablanca",
+        },
+        updatedAt: {
+          date: "2019-10-19 16:00:24.000000",
+          timezone_type: 3,
+          timezone: "Africa/Casablanca",
+        },
+        organization: {
+          id: 9,
+          uen: "0899167234",
+          name: "Forum for the future",
+          address1: "Rue Waelhem, 68",
+          zipCode: "1030",
+          country: "BE",
+          tva: "VAT_SYSTEM_VAT",
+          legalForm: "FONDPRIV",
+          abbreviation: "F.F.F.",
+          billingAddress: "",
+          billingCity: "",
+          hasAgreedTerms: false,
+          sector: [],
+          avatarWebPath:
+            "storage/media/IMAGE/2174/AVATAR_998833879d2ecbb79d89cec53059dcd59e72d9f2.png",
+          avatarUrl:
+            "https://s3.tamtam.pro/local/storage/media/IMAGE/2174/AVATAR_998833879d2ecbb79d89cec53059dcd59e72d9f2.png",
+          hasFiduciariesAdmin: true,
+          portalScope: "COLLABORATER",
+        },
+      },
+    ],
+  },
+};
 export const HeaderMultiRole = () => (
   <HeaderUA
     app={object("app", App)}
-    auth={object("auth", {
-      ...authLogin,
-      user: { ...authLogin.user, uaRoles: authLogin.user.communities },
-    })}
+    auth={object("auth", autuMultiRole)}
     env={text("env", "local")}
     settings={object("settings", settings)}
     lng={select("language", ["fr", "nl", "en"], "fr")}
