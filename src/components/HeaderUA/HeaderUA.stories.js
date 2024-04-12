@@ -399,6 +399,43 @@ export const HeaderPortalSwitch = () => (
   />
 );
 
+export const HeaderMultiRole = () => (
+  <HeaderUA
+    app={object("app", App)}
+    auth={object("auth", {
+      ...authLogin,
+      user: { ...authLogin.user, uaRoles: authLogin.user.communities },
+    })}
+    env={text("env", "local")}
+    settings={object("settings", settings)}
+    lng={select("language", ["fr", "nl", "en"], "fr")}
+    languages={array("languages", languages)}
+    rightIcons={object("rightIcons", rightIcons)}
+    onLanguageChange={(langue) => alert(langue)}
+    onLogoutClick={(e) => console.log("Logout", e)}
+    onSearchClick={() => alert("searching")}
+    // allCommunitiesUrl={text("allCommunitiesUrl", "/fr/communities")}
+    // onSelectAllCommunities={() => console.log("Communities select all")}
+    onSelectCommunity={(community) => console.log("community click", community)}
+    onFAQLoad={() => console.log("onFAQLoad", window.showFAQ)}
+    firstList={privacy}
+    secondList={cookies}
+    thirdList={policy}
+    navigateTo={(url) => {
+      console.log(url);
+    }}
+    showPersonalData={true}
+    personalData={{
+      numeroAgreation: "11111112",
+      agreationType: "mItaa",
+      agreationTitle: "Conseil",
+      agreationParam: "externe",
+    }}
+    onAfterSavePersonal={(data) => console.log("save ", data)}
+    showProfileLink={true}
+  />
+);
+
 export const HeaderLoggedOut = () => (
   <HeaderUA
     app={object("app", App)}

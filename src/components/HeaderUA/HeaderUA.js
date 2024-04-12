@@ -5,6 +5,7 @@ import styles from "./Header.module.scss";
 import MenuItem from "./MenuItem";
 import MenuProfile from "./MenuProfile";
 import Notifs from "./Notifs";
+import Communities from "./Communities";
 
 import TTPFaqWidget from "../TTPFaqWidget";
 import * as icons from "../Icons";
@@ -316,7 +317,7 @@ export class HeaderUA extends Component {
   }
 
   renderLeftSide() {
-    const { app, auth, settings, RouterLink } = this.props;
+    const { app, auth, settings, RouterLink, onSelectCommunity } = this.props;
     const { appLogoUrl, appUrl } = app;
 
     let uaFolderName = "";
@@ -372,14 +373,23 @@ export class HeaderUA extends Component {
             )}
           </div>
 
-          {uaFolderName && (
-            <div className={styles.menu__ua_folder}>
-              {auth.navCommunity.avatarUrl ? (
-                <img src={auth.navCommunity.avatarUrl} alt={uaFolderName} />
-              ) : (
-                <span>{uaFolderName}</span>
-              )}
-            </div>
+          {auth.user && auth.user.uaRoles ? (
+            <Communities
+              communities={auth.user.uaRoles}
+              currentCommunity={auth.navCommunity}
+              app={app}
+              onSelectCommunity={onSelectCommunity}
+            />
+          ) : (
+            uaFolderName && (
+              <div className={styles.menu__ua_folder}>
+                {auth.navCommunity.avatarUrl ? (
+                  <img src={auth.navCommunity.avatarUrl} alt={uaFolderName} />
+                ) : (
+                  <span>{uaFolderName}</span>
+                )}
+              </div>
+            )
           )}
         </div>
       </>
