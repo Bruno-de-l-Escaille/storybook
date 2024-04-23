@@ -808,13 +808,13 @@ export const Article = ({
     //   autoplay: false,
     // };
     let className = "";
-    if (title.length > 180) {
-      // className = styles.smallImg3;
-    } else if (title.length > 150) {
-      className = styles.smallImg2;
-    } else if (title.length > 120) {
-      className = styles.smallImg1;
-    }
+    // if (title.length > 180) {
+    //   // className = styles.smallImg3;
+    // } else if (title.length > 150) {
+    //   className = styles.smallImg2;
+    // } else if (title.length > 120) {
+    //   className = styles.smallImg1;
+    // }
 
     return (
       <div className={`${styles.articleTemplate5} ${className}`}>
