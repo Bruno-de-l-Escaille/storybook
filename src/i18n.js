@@ -39,7 +39,7 @@ export const I18N = {
     add: "Add",
     quote_text: "Insert quote text",
     quote_author: "Insert quote author",
-    fff_library: "FFF library",
+    fff_library: "oFFFcourse lib",
   },
   fr: {
     ARTCILES: "Articles",
@@ -86,7 +86,7 @@ export const I18N = {
     customize_dynamic_fields: "Personnalisez avec des champs dynamiques",
     quiz: "Questionnaire",
     save: "Enregistrer",
-    fff_library: "Bibliothèque FFF",
+    fff_library: "oFFFcourse lib",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -134,6 +134,6 @@ export const I18N = {
     customize_dynamic_fields: "Aanpassen met dynamische velden",
     quiz: "Quiz",
     save: "Opslaan",
-    fff_library: "FFF-bibliotheek",
+    fff_library: "oFFFcourse lib",
   },
 };
