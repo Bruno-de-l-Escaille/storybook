@@ -894,12 +894,12 @@ export const Article = ({
               >
                 {communityName}
               </div>
-              {article.organizationSource && (
+              {article?.fffLibrary === "ACCEPTED" && (
                 <div
                   className={styles.fff_lib}
                   style={{ background: `${category.colorCode}` }}
                 >
-                  {I18N[language].fff_library}
+                  {I18N[language].offfcourse_library}
                 </div>
               )}
             </div>
@@ -948,12 +948,12 @@ export const Article = ({
               >
                 {communityName}
               </div>
-              {article.organizationSource && (
+              {article?.fffLibrary === "ACCEPTED" && (
                 <div
                   className={styles.fff_lib}
                   style={{ background: `${category.colorCode}` }}
                 >
-                  {I18N[language].fff_library}
+                  {I18N[language].offfcourse_library}
                 </div>
               )}
             </div>
@@ -1109,12 +1109,12 @@ export const Article = ({
               >
                 {communityName}
               </div>
-              {article.organizationSource && (
+              {article?.fffLibrary === "ACCEPTED" && (
                 <div
                   className={styles.fff_lib}
                   style={{ background: `${category.colorCode}` }}
                 >
-                  {I18N[language].fff_library}
+                  {I18N[language].offfcourse_library}
                 </div>
               )}
             </div>
@@ -1207,12 +1207,12 @@ export const Article = ({
               >
                 {communityName}
               </div>
-              {article.organizationSource && (
+              {article?.fffLibrary === "ACCEPTED" && (
                 <div
                   className={styles.fff_lib}
                   style={{ background: `${category.colorCode}` }}
                 >
-                  {I18N[language].fff_library}
+                  {I18N[language].offfcourse_library}
                 </div>
               )}
             </div>
@@ -1320,12 +1320,12 @@ export const Article = ({
                 >
                   {communityName}
                 </div>
-                {article.organizationSource && (
+                {article?.fffLibrary === "ACCEPTED" && (
                   <div
                     className={styles.fff_lib}
                     style={{ background: `${category.colorCode}` }}
                   >
-                    {I18N[language].fff_library}
+                    {I18N[language].offfcourse_library}
                   </div>
                 )}
               </div>
