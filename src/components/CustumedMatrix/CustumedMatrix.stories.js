@@ -109,6 +109,35 @@ const tableItems = [
     SE: { value_heure: "16 h", value_percentage: "40 %", checked: false },
     GE: { value_heure: "8 h", value_percentage: "20 %", checked: true },
     ScanOp: { value_heure: "40 h", value_percentage: "20 %", checked: true },
+    children: [
+      {
+        label: "Child 1",
+        Total: { value_heure: "50 h", value_percentage: "50 %", checked: true },
+        Superviseur: { value_heure: "24 h", value_percentage: "12 %", checked: false },
+        GD: { value_percentage: "12.5 %" },
+        SE: { value_heure: "31 h", value_percentage: "15.5 %", checked: false },
+        GE: { value_heure: "20 h", value_percentage: "10 %", checked: true },
+        ScanOp: { value_heure: "20 h", value_percentage: "10 %", checked: true },
+      },
+      {
+        label: "Child 2",
+        Total: { value_heure: "50 h", value_percentage: "50 %", checked: true },
+        Superviseur: { value_heure: "24 h", value_percentage: "12 %", checked: false },
+        GD: { value_percentage: "12.5 %" },
+        SE: { value_heure: "31 h", value_percentage: "15.5 %", checked: false },
+        GE: { value_heure: "20 h", value_percentage: "10 %", checked: true },
+        ScanOp: { value_heure: "20 h", value_percentage: "10 %", checked: true },
+      },
+      {
+        label: "Child 3",
+        Total: { value_heure: "50 h", value_percentage: "50 %", checked: true },
+        Superviseur: { value_heure: "24 h", value_percentage: "12 %", checked: false },
+        GD: { value_percentage: "12.5 %" },
+        SE: { value_heure: "31 h", value_percentage: "15.5 %", checked: false },
+        GE: { value_heure: "20 h", value_percentage: "10 %", checked: true },
+        ScanOp: { value_heure: "20 h", value_percentage: "10 %", checked: true },
+      },
+    ],
   },
 ];
 
@@ -120,6 +149,14 @@ const renderTitleLine = (line) => {
   return line.label;
 };
 
+const handleChildTitle = (child) => {
+  return <div>{child.label}</div>;
+};
+
+const handleChildCellule = (column, child) => {
+  return <span>{child[column.label]?.value_percentage || ""}</span>;
+};
+
 export const Basic = () => (
   <div>
     <CustumedMatrix
@@ -128,6 +165,8 @@ export const Basic = () => (
       handleTitle={renderTitleLine}
       handleCellule={handleColumns}
       headerTagBG={"#FFFFFF"}
+      handleChildCellule={handleChildCellule}
+      handleChildTitle={handleChildTitle}
     />
   </div>
 );
