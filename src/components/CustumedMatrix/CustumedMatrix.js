@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./CustumedMatrix.module.scss";
 
 import classnames from "classnames";
 
 export const CustumedMatrix = (props) => {
-  const { columns, items, handleCellule, handleTitle, headerTagBG } = props;
+  const {
+    columns,
+    items,
+    handleCellule,
+    handleTitle,
+    headerTagBG,
+    handleChildCellule,
+    handleChildTitle,
+  } = props;
 
+  const [selectedLineId, setSelectedLineId] = useState(null);
   let titleWidth = 0;
+
+  const handleLineClick = (lineId) => {
+    if (selectedLineId === lineId) {
+      setSelectedLineId(null);
+    } else {
+      setSelectedLineId(lineId);
+    }
+  };
   return (
     <div className={styles.matrix}>
       <div className={styles.matrix_header}>
@@ -14,6 +31,7 @@ export const CustumedMatrix = (props) => {
           titleWidth += item.widthPercentage;
           return (
             <div
+              key={item.label}
               className={classnames(
                 styles.matrix_header_column,
                 !item.isEditable && styles.disabled
@@ -31,20 +49,50 @@ export const CustumedMatrix = (props) => {
       </div>
       <div className={styles.matrix_body}>
         {items.map((line) => {
+          const hasChildren = line.details && line.details.length > 0;
+          const isSelected = selectedLineId === line.id;
           return (
-            <div className={styles.matrix_body_line}>
-              <div style={{ width: `${100 - titleWidth - 6}%` }}>
-                {handleTitle(line)}
-              </div>
-              {columns.map((column) => (
-                <div
-                  className={!column.isEditable && styles.disabled}
-                  style={{ width: `${column.widthPercentage}%` }}
-                >
-                  {handleCellule(column, line)}
+            <>
+              <div
+                className={styles.matrix_body_line}
+                onClick={() => handleLineClick(line.id)}
+              >
+                <div style={{ width: `${100 - titleWidth - 6}%` }}>
+                  {handleTitle(line)}
                 </div>
-              ))}
-            </div>
+                {columns.map((column) => (
+                  <div
+                    className={!column.isEditable && styles.disabled}
+                    style={{ width: `${column.widthPercentage}%` }}
+                  >
+                    {handleCellule(column, line)}
+                  </div>
+                ))}
+              </div>
+              {hasChildren &&
+                isSelected &&
+                line.details.map((child) => (
+                  <div key={child.id} className={styles.matrix_body_line}>
+                    <div
+                      style={{
+                        width: `${100 - titleWidth - 6}%`,
+                        paddingLeft: "20px",
+                      }}
+                    >
+                      {handleChildTitle(child)}
+                    </div>
+                    {columns.map((column) => (
+                      <div
+                        key={column.label}
+                        className={!column.isEditable && styles.disabled}
+                        style={{ width: `${column.widthPercentage}%` }}
+                      >
+                        {handleChildCellule(column, child)}
+                      </div>
+                    ))}
+                  </div>
+                ))}
+            </>
           );
         })}
       </div>
