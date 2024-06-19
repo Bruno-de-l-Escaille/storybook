@@ -1,12 +1,12 @@
 .matrix {
   font-family: "Roboto";
   font-style: normal;
-  padding: 20px ;
+  padding: 20px;
 
   &_header {
     display: flex;
     justify-content: end;
-    
+
     &_column {
       border: solid #29394d;
       border-radius: 5px 5px 0px 0px;
@@ -20,7 +20,7 @@
       & > div {
         margin-top: -19px;
         padding: 3px 4px;
-        color: #29394D;
+        color: #29394d;
         margin: -19px 5px 0px;
         text-align: center;
         font-weight: 600;
@@ -29,9 +29,9 @@
       }
     }
     .disabled {
-      border-color: #D8DDE2;
+      border-color: #d8dde2;
       & > div {
-        color: #6D7F92;
+        color: #6d7f92;
       }
     }
   }
@@ -39,9 +39,9 @@
     &_line {
       display: flex;
       justify-content: end;
-      border-bottom: 1px solid #D8DDE2;
+      border-bottom: 1px solid #d8dde2;
 
-      color: #29394D;
+      color: #29394d;
       font-size: 14px;
       line-height: 16px;
       > div {
@@ -56,18 +56,21 @@
         }
       }
       .disabled {
-        border-color: #D8DDE2;
+        border-color: #d8dde2;
       }
       &:first-child {
         border-bottom: 1px solid #29394d;
       }
+    }
+    &_child {
+      text-align: center;
     }
   }
 
   &_footer {
     display: flex;
     justify-content: end;
-    
+
     &_column {
       border: solid #29394d;
       border-radius: 0px 0px 5px 5px;
@@ -79,7 +82,10 @@
       margin: 0 0 0 8px;
     }
     .disabled {
-      border-color: #D8DDE2;
+      border-color: #d8dde2;
     }
   }
+}
+.pointer {
+  cursor: pointer;
 }
