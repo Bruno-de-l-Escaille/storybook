@@ -53,24 +53,26 @@ export const CustumedMatrix = (props) => {
           const isSelected = selectedLineId === line.id;
           return (
             <>
-            <div className={classnames(styles.matrix_body_line,{
-              [styles.pointer]: hasChildren
-            })}
-            onClick={() => handleLineClick(line.id)}
-            >
-              <div style={{ width: `${100 - titleWidth - 6}%` }}>
-                {handleTitle(line)}
+              <div
+                className={classnames(styles.matrix_body_line,{
+                  [styles.pointer]: hasChildren
+                })}
+                onClick={() => handleLineClick(line.id)}
+              >
+                <div style={{ width: `${100 - titleWidth - 6}%` }}>
+                  {handleTitle(line)}
+                </div>
+                {columns.map((column) => (
+                  <div
+                    className={!column.isEditable && styles.disabled}
+                    style={{ width: `${column.widthPercentage}%` }}
+                  >
+                    {handleCellule(column, line)}
+                  </div>
+                ))}
               </div>
-              {columns.map((column) => (
-                <div
-                  className={!column.isEditable && styles.disabled}
-                  style={{ width: `${column.widthPercentage}%` }}
-                >
-                  {handleCellule(column, line)}
-                </div> 
-              ))}
-            </div>
-            {hasChildren && isSelected &&
+              {hasChildren &&
+                isSelected &&
                 line.details.map((child) => (
                   <div key={child.id} className={classnames(styles.matrix_body_line, styles.matrix_body_child)}>
                     <div
