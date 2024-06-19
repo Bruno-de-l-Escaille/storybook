@@ -87,7 +87,7 @@ export const CustumedMatrix = (props) => {
                         className={!column.isEditable && styles.disabled}
                         style={{ width: `${column.widthPercentage}%` }}
                       >
-                        {handleChildCellule(column, child)}
+                        {handleChildCellule(column, line, child)}
                       </div>
                     ))}
                   </div>
