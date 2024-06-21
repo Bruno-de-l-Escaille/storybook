@@ -54,8 +54,8 @@ export const CustumedMatrix = (props) => {
           return (
             <>
               <div
-                className={classnames(styles.matrix_body_line,{
-                  [styles.pointer]: hasChildren
+                className={classnames(styles.matrix_body_line, {
+                  [styles.pointer]: hasChildren,
                 })}
                 onClick={() => handleLineClick(line.id)}
               >
@@ -74,7 +74,13 @@ export const CustumedMatrix = (props) => {
               {hasChildren &&
                 isSelected &&
                 line.details.map((child) => (
-                  <div key={child.id} className={classnames(styles.matrix_body_line, styles.matrix_body_child)}>
+                  <div
+                    key={child.id}
+                    className={classnames(
+                      styles.matrix_body_line,
+                      styles.matrix_body_child
+                    )}
+                  >
                     <div
                       style={{
                         width: `${100 - titleWidth - 6}%`,
