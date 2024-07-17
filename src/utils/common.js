@@ -343,7 +343,7 @@ export const appendParamsToLink = (link, params) => {
 
 export const onError = (language, resp, message, autoClose) => {
   if (!message) {
-    message = I18N[language]["Error occured"];
+    message = I18N[language]["errorOccurred"];
   }
 
   const errorMessage = message;

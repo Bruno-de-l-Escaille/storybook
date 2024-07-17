@@ -40,27 +40,15 @@ import { ClipLoader } from "react-spinners";
 import LiveTrainingIcon from "./assets/live-training.svg";
 import CheckMarkIcon from "./assets/checkmark.svg";
 import { ProgressBar } from "../../common/components/ProgressBar";
-import SeasonDescriptionIcon from "./assets/season-description.svg";
-import SeasonIcon from "./assets/season.svg";
-import CycleDescriptionIcon from "./assets/cycle-description.svg";
-import CycleIcon from "./assets/cycle-circle.svg";
-import PresentialDescriptionIcon from "./assets/presentialDescription.svg";
-import PresentialIcon from "./assets/presential.svg";
-import LiveDescriptionIcon from "./assets/liveDescription.svg";
-import LiveIcon from "./assets/live.svg";
-import HybridDescriptionIcon from "./assets/hybrideDescription.svg";
-import HybrideIcon from "./assets/hybride.svg";
-import ReplayDescriptionIcon from "./assets/replayDescription.svg";
-import ReplayIcon from "./assets/replay.svg";
-import HelpIcon from "./assets/alert-circle.svg";
 import styles from "./EventLayout.module.scss";
 import PlayIcon from "./assets/play.svg";
 import EarthIcon from "./assets/earth.svg";
 import CalendarIcon from "./assets/calendar.svg";
 import NewCalendarIcon from "./assets/newCalendar.svg";
-import EventLayoutHover from "./EventLayoutHover/EventLayoutHover";
 import { CardFlag } from "../CardFlag";
 import { registerPremiumToEvent } from "../../api/event";
+import { Shave } from "../../common/components/Shave";
+import { TimeCounter } from "../../common/components/TimeCounter";
 
 const S3_FOLDER_URL = "http://s3.tamtam.pro/production";
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =
@@ -96,16 +84,7 @@ export default function EventLayout({
   const bannerImgUrl = !isEmpty(banner)
     ? prepareS3ResourceUrl(S3_FOLDER_URL, banner)
     : `${S3_FOLDER_AWS_URL_WITHOUT_ENV}/image_2024_01_08T20_38_38_750Z.png`;
-  const label = getByLanguage(event, "label", language, true);
   const name = getByLanguage(event, "name", language) ?? "";
-  const eventCycles = Array.isArray(event?.eventCycles)
-    ? event.eventCycles.filter((eventCycle) => !eventCycle.isCyclePremium)
-    : [];
-  const [showIcons, setShowIcons] = useState(false);
-  const isEventInSeason = eventCycles?.some((cycle) => cycle.isCycleSeason);
-  const isEventInCycle = eventCycles?.some((cycle) => !cycle.isCycleSeason);
-  const [hovered, setHovered] = useState(false);
-  const [showAddTags, setShowAddTags] = useState(false);
   const { hours: eventHoursDiffWithNow } = calculateTimeDifference(
     event.startDateTime
   );
@@ -153,37 +132,10 @@ export default function EventLayout({
   const isRegistrationOpen = isFull
     ? isRegistrationActive(event, isAdmin)
     : isEventRegistrationOpen(event);
-  const mainRef = useRef(null);
   const [registeringPremium, setRegisteringPremium] = useState(false);
   const eventLink = isEventFull ? sessionPageLink : receptionPageLink;
 
-  const cycleIconStyle = {
-    top: "1px",
-    fontSize: "10.4px",
-    width: "max-content",
-    left: "1px",
-  };
-  const seasonIconStyle = {
-    ...cycleIconStyle,
-    left: "5px",
-  };
   const nbMinutes = getEventNbMinutes(event);
-
-  const handleClickOutside = (evt) => {
-    const target = evt.target;
-
-    if (mainRef.current && !mainRef.current.contains(target)) {
-      setHovered(true);
-      setShowAddTags(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      window.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   const handleRegisterPremium = useCallback(
     (e) => {
@@ -225,7 +177,7 @@ export default function EventLayout({
               className={classNames(styles.mainButton, styles.blue)}
             >
               <span style={{ fontSize: "13px", fontWeight: "500" }}>
-                {I18N[language]["Replay expired"]}
+                {I18N[language]["replayExpired"]}
               </span>
             </Button>
           );
@@ -274,10 +226,10 @@ export default function EventLayout({
             >
               <span style={{ fontSize: "14px" }}>
                 {isFullWatch
-                  ? I18N[language]["Review"]
+                  ? I18N[language]["review"]
                   : watchedTime > 0
-                  ? I18N[language]["Resume"]
-                  : I18N[language]["Play"]}
+                  ? I18N[language]["resume"]
+                  : I18N[language]["play"]}
               </span>
             </Button>
           );
@@ -299,7 +251,7 @@ export default function EventLayout({
             rel="noopener noreferrer"
             icon={<LiveTrainingIcon className="m-r-xxxs" />}
           >
-            <span style={{ fontSize: "14px" }}>{I18N[language]["Rejoin"]}</span>
+            <span style={{ fontSize: "14px" }}>{I18N[language]["rejoin"]}</span>
           </Button>
         );
       }
@@ -308,9 +260,9 @@ export default function EventLayout({
     const buttonText =
       isRegistrationOpen && !isSoldOut
         ? isUpcomming
-          ? I18N[language]["Participate"]
-          : I18N[language]["Buy"]
-        : I18N[language]["Details"];
+          ? I18N[language]["participate"]
+          : I18N[language]["buy"]
+        : I18N[language]["details"];
     const buttonClassName = classNames(
       styles.mainButton,
       isFull,
@@ -329,17 +281,6 @@ export default function EventLayout({
     );
   };
 
-  const handleOnMouseEnter = () => {
-    setShowIcons(true);
-    setHovered(true);
-  };
-  const handleOnMouseLeave = () => {
-    setShowIcons(false);
-    if (!showAddTags) {
-      setHovered(false);
-    }
-  };
-
   const renderEventPrice = () => {
     if (options && !options.showPrice) {
       return null;
@@ -351,7 +292,7 @@ export default function EventLayout({
           className={classNames(styles.badge, "m-t-xs")}
           style={{ color: "#29394D", fontWeight: "500" }}
         >
-          {I18N[language]["Free"]}{" "}
+          {I18N[language]["free"]}{" "}
         </div>
       );
     }
@@ -360,7 +301,7 @@ export default function EventLayout({
       return (
         <div className={classNames(styles.subscribed)}>
           <CheckMarkIcon className="m-r-s" />
-          <span>{I18N[language]["Subscribed"]}</span>
+          <span>{I18N[language]["subscribed"]}</span>
         </div>
       );
     }
@@ -395,7 +336,7 @@ export default function EventLayout({
           {!isMember && memberPrice !== nonMemberPrice && (
             <span className={classNames("m-r-s", styles.reductionOrg)}>
               <span style={{ fontSize: "16px" }}> {memberPrice} €</span>
-              <span> {I18N[language]["For the members"]} OECCBB.</span>
+              <span> {I18N[language]["forTheMembers"]} OECCBB.</span>
             </span>
           )}
           {isMember && memberPrice !== nonMemberPrice && (
@@ -437,139 +378,6 @@ export default function EventLayout({
     return null;
   };
 
-  const renderHoveringIcons = () => (
-    <>
-      <div
-        className={styles.cycleIcon}
-        style={!isEventInSeason ? { display: "none" } : {}}
-      >
-        {showIcons ? (
-          <>
-            <SeasonDescriptionIcon />
-            <span
-              className={styles.cycleDescription}
-              style={language === "nl" ? seasonIconStyle : {}}
-            >
-              {I18N[language]["Included in season"]}
-            </span>
-          </>
-        ) : (
-          <SeasonIcon />
-        )}
-      </div>
-      <div
-        className={styles.cycleIcon}
-        style={
-          isEventInCycle && !isEventInSeason
-            ? { bottom: "20px" }
-            : isEventInCycle && isEventInSeason
-            ? { bottom: "56px" }
-            : { display: "none" }
-        }
-      >
-        {showIcons ? (
-          <>
-            <CycleDescriptionIcon />
-            <span
-              className={styles.cycleDescription}
-              style={
-                language === "nl"
-                  ? { ...cycleIconStyle, color: "#5F5DE8" }
-                  : { color: "#5F5DE8" }
-              }
-            >
-              {I18N[language]["Included in cycle"]}
-            </span>
-          </>
-        ) : (
-          <CycleIcon />
-        )}
-      </div>
-      <div className={styles.eventStateIcon}>
-        {showIcons && place && !event.isVirtual && !isExpired ? (
-          <>
-            <PresentialDescriptionIcon />
-            <span className={styles.eventStateDescriptionIcon}>
-              {I18N[language]["In presential"].toUpperCase()}
-            </span>
-          </>
-        ) : place && !event.isVirtual && !isExpired ? (
-          <PresentialIcon />
-        ) : (
-          <></>
-        )}
-      </div>
-      <div
-        className={
-          place && !event.isVirtual
-            ? classNames(styles.eventStateIcon, styles.multipleIcons)
-            : styles.eventStateIcon
-        }
-      >
-        {!place && isUpcomming && !showTimeCounter && showIcons ? (
-          <Link href={eventLink}>
-            <div style={place ? { bottom: "40px" } : {}}>
-              <LiveDescriptionIcon />
-              <span className={styles.eventStateDescriptionIcon}>
-                {I18N[language]["Live"]}
-              </span>
-            </div>
-          </Link>
-        ) : !place && isUpcomming && !showTimeCounter ? (
-          <LiveIcon />
-        ) : place &&
-          isWebinar &&
-          isUpcomming &&
-          !showTimeCounter &&
-          showIcons ? (
-          <div>
-            <HybridDescriptionIcon />
-            <span className={styles.eventStateDescriptionIcon}>
-              {I18N[language]["Hybrid"]}
-            </span>
-          </div>
-        ) : place && isWebinar && isUpcomming && !showTimeCounter ? (
-          <HybrideIcon />
-        ) : (
-          <></>
-        )}
-      </div>
-      <div className={styles.eventStateIcon}>
-        {showIcons && isExpired ? (
-          <>
-            <Link href={eventLink}>
-              <ReplayDescriptionIcon />
-              <span className={styles.eventStateDescriptionIcon}>
-                {I18N[language]["Replay"]}
-              </span>
-            </Link>
-          </>
-        ) : isExpired ? (
-          <ReplayIcon />
-        ) : (
-          <></>
-        )}
-      </div>
-      {label && (
-        <div
-          className={styles.labels}
-          style={
-            isEventInCycle && isEventInSeason
-              ? { marginBottom: "100px" }
-              : isEventInCycle || isEventInSeason
-              ? { marginBottom: "70px" }
-              : {}
-          }
-        >
-          <div className={styles.label}>
-            <HelpIcon className="m-r-xs" />
-            <span>{label}</span>
-          </div>
-        </div>
-      )}
-    </>
-  );
-
   const renderInReplayTitleWithDesc = () => {
     if (!isReplayable || (options && !options.showReplayInfo)) {
       return null;
@@ -587,7 +395,7 @@ export default function EventLayout({
                 marginRight: "15px",
               }}
             >
-              {capFirstLetterInSentence(I18N[language]["In replay"])}
+              {capFirstLetterInSentence(I18N[language]["inReplay"])}
             </span>
             <span className={styles.replayDate}>
               {dateEndOfReplayYear || eventDateEndOfReplayYear}
@@ -603,8 +411,6 @@ export default function EventLayout({
   return (
     <div
       className={classNames(styles.event, isActive && styles.active)}
-      onMouseEnter={handleOnMouseEnter}
-      onMouseLeave={handleOnMouseLeave}
       style={{ height: "318px" }}
     >
       <div className="m-b-s">
@@ -631,20 +437,19 @@ export default function EventLayout({
                 : undefined
             }
           />
-          {/* {showTimeCounter && (
+          {showTimeCounter && (
             <div className={styles.timeCounter}>
               <TimeCounter
                 date={event.startDateTime}
-                dict={dict}
+                language={language}
                 showDays={false}
               />
             </div>
-          )} */}
-          {renderHoveringIcons()}
+          )}
           {isLive ? (
             <div className={styles.badges}>
               <div className={styles.badge} style={{ background: "#FE3745" }}>
-                {I18N[language]["Live now"].toUpperCase()}
+                {I18N[language]["liveNow"].toUpperCase()}
               </div>
               <div className={classNames(styles.badge)}>{nbMinutes} min</div>
             </div>
@@ -666,7 +471,7 @@ export default function EventLayout({
                     "linear-gradient(180deg, #18A0FB 0%, #06D9B1 100%)",
                 }}
               >
-                {I18N[language]["Seen"].toUpperCase()}
+                {I18N[language]["seen"].toUpperCase()}
               </div>
             </div>
           ) : (
@@ -682,11 +487,11 @@ export default function EventLayout({
         </div>
         <div className={styles.container}>
           <div>
-            {/* <Link href={receptionPage}>
+            <Link href={receptionPageLink}>
               <h3>
                 <Shave maxHeight={90}>{name} </Shave>
               </h3>
-            </Link> */}
+            </Link>
             <div
               className={classNames(
                 styles.infos,
@@ -703,12 +508,12 @@ export default function EventLayout({
                         <strong>
                           {place && !isWebinar
                             ? capFirstLetterInSentence(
-                                I18N[language]["Presential"]
+                                I18N[language]["presential"]
                               )
                             : place && isWebinar
-                            ? capFirstLetterInSentence(I18N[language]["Hybrid"])
+                            ? capFirstLetterInSentence(I18N[language]["hybrid"])
                             : capFirstLetterInSentence(
-                                I18N[language]["In live"]
+                                I18N[language]["inLive"]
                               )}{" "}
                           :
                         </strong>
@@ -728,15 +533,6 @@ export default function EventLayout({
           </div>
         </div>
       </div>
-      {isAdmin && hovered && (
-        <EventLayoutHover
-          setShowAddTags={setShowAddTags}
-          showAddTags={showAddTags}
-        />
-      )}
-      {/* {isAdmin && showAddTags && (
-        <TagsForm setShowAddTags={setShowAddTags} eventId={event.id} />
-      )} */}
     </div>
   );
 }

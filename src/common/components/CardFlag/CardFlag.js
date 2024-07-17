@@ -5,10 +5,10 @@ import styles from "./CardFlag.module.scss";
 
 const getFlagProps = (flag) => {
   if (flag === "premium") {
-    return { text: "Included premium" };
+    return { text: "includedPremium" };
   }
 
-  return { text: "Sold Out" };
+  return { text: "soldOut" };
 };
 
 function CardFlag({ className, language, flag }) {

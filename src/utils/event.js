@@ -148,26 +148,26 @@ export const formatDateFromTo = (
 
   if (isSameYear && isSameDay) {
     return `${startDate.format(dateFormat)} ${
-      I18N[language]["Date from"]
-    } ${startDate.format("HH:mm")} ${
-      I18N[language]["Time to"]
-    } ${endDate.format("HH:mm")}`;
+      I18N[language]["dateFrom"]
+    } ${startDate.format("HH:mm")} ${I18N[language]["timeTo"]} ${endDate.format(
+      "HH:mm"
+    )}`;
   }
 
   if (isSameYear && isSameMonth) {
-    return `${I18N[language]["Date from"]} ${startDate.format("DD")} ${
-      I18N[language]["Date to"]
+    return `${I18N[language]["dateFrom"]} ${startDate.format("DD")} ${
+      I18N[language]["dateTo"]
     } ${endDate.format(dateFormat)}`;
   }
 
   if (isSameYear) {
-    return `${I18N[language]["Date from"]} ${startDate.format("DD MMM")} ${
-      I18N[language]["Date to"]
+    return `${I18N[language]["dateFrom"]} ${startDate.format("DD MMM")} ${
+      I18N[language]["dateTo"]
     } ${endDate.format(dateFormat)}`;
   }
 
-  return `${I18N[language]["Date from"]} ${startDate.format(dateFormat)} ${
-    I18N[language]["Date to"]
+  return `${I18N[language]["dateFrom"]} ${startDate.format(dateFormat)} ${
+    I18N[language]["dateTo"]
   } ${endDate.format(dateFormat)}`;
 };
 
