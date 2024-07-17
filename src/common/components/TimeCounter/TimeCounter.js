@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import React from "react";
-import styles from "./time-counter.module.scss";
-import { useTimeCounter } from "@/common/hooks/use-time-counter";
+import styles from "./TimeCounter.module.scss";
 import { I18N } from "../../../i18n";
+import { useTimeCounter } from "../../hooks/useTimeCounter";
 
 export default function TimeCounter({
   date,

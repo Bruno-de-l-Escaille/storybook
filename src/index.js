@@ -20,3 +20,4 @@ export * from "./components/TableBorderedColumns/TableBorderedColumns";
 export * from "./components/TTPEditor/TTPEditor";
 export * from "./components/Tag/Tag";
 export * from "./components/PopUp/PopupConfirm";
+export * from "./components/EventLayout/EventLayout";

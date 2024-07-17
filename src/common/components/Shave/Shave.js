@@ -1,13 +1,7 @@
-"use client";
-
-import React, { ElementType, useLayoutEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import shave from "shave";
-import { useWindowSize } from "@/common/hooks/use-window";
+import { useWindowSize } from "../../hooks/useWindow";
 
-/**
- * This is wrapper component of the vanilla JavaScript library 'shave' to easily reuse it throughout
- * the app and stay in “React Mode”.
- */
 export default function Shave({
   children,
   maxHeight,
@@ -24,8 +18,9 @@ export default function Shave({
       shave(contentRef.current, maxHeight, {
         character: " ...",
       });
-      // Text is shaved off when its container has children, namely two spans (end character, remaining text) and a text node.
-      setHasMore?.(!!contentRef.current?.childElementCount);
+      if (setHasMore) {
+        setHasMore(!!contentRef.current?.childElementCount);
+      }
     }
   }, [maxHeight, isEnabled, windowSize, setHasMore]);
 

@@ -38,7 +38,7 @@
     cursor: pointer;
 
     &:hover {
-      filter: drop-shadow(0 4px 5px rgb(41 57 77 / 5%));
+      filter: drop-shadow(0 4px 5px #29394d0d);
     }
   }
 
@@ -47,6 +47,7 @@
     font-size: 16px;
     color: #29394d;
     height: 68px;
+    text-align: start;
   }
 
   .speakers {
@@ -167,7 +168,7 @@
       align-items: center;
       height: 22px;
       padding: 0 1rem;
-      background: rgb(41 57 77 / 70%);
+      background: #29394db3;
       border-radius: 5px;
       margin-right: 0.25rem;
       font-size: 12px;
@@ -214,7 +215,7 @@
       align-items: center;
       height: 26px;
       padding: 0 0.75rem;
-      background: rgb(24 160 251);
+      background: #18a0fb;
       border-radius: 50px;
 
       &:not(:last-child) {
@@ -322,7 +323,7 @@
 
   &::after {
     position: absolute;
-    content: '';
+    content: "";
     width: 110%;
     height: 2px;
     border-radius: 2px;
@@ -426,7 +427,7 @@
 
   h3:hover {
     color: #506a8a;
-    text-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+    text-shadow: 0 4px 4px #00000040;
   }
 }
 

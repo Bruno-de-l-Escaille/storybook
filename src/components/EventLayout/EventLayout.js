@@ -1,11 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React from "react";
 import {
   capFirstLetterInSentence,
-  getApiUrl,
   getByLanguage,
   getCroppedImageUrl,
   isEmpty,
-  onError,
   parseBoolean,
   prepareS3ResourceUrl,
   stopPropagation,
@@ -34,44 +32,35 @@ import moment from "moment";
 import { Button } from "../../common/components/OfffcourseButton";
 import classNames from "classnames";
 import { I18N } from "../../i18n";
-import FilledPlayIcon from "./assets/filled-play.svg";
-import FilledResumeIcon from "./assets/filled-resume.svg";
-import { ClipLoader } from "react-spinners";
-import LiveTrainingIcon from "./assets/live-training.svg";
-import CheckMarkIcon from "./assets/checkmark.svg";
+import FilledPlayIcon from "../Icons/FilledPlay";
+import FilledResumeIcon from "../Icons/FilledResume";
+import LiveTrainingIcon from "../Icons/LiveTraining";
+import CheckMarkIcon from "../Icons/CheckMark";
 import { ProgressBar } from "../../common/components/ProgressBar";
 import styles from "./EventLayout.module.scss";
-import PlayIcon from "./assets/play.svg";
-import EarthIcon from "./assets/earth.svg";
-import CalendarIcon from "./assets/calendar.svg";
-import NewCalendarIcon from "./assets/newCalendar.svg";
-import { CardFlag } from "../CardFlag";
-import { registerPremiumToEvent } from "../../api/event";
+import PlayIcon from "../Icons/Play";
+import NewCalendarIcon from "../Icons/NewCalendar";
 import { Shave } from "../../common/components/Shave";
 import { TimeCounter } from "../../common/components/TimeCounter";
+import { Fetching } from "./Fetching";
+import { Link } from "react-router-dom";
+import { CardFlag } from "../../common/components/CardFlag";
 
 const S3_FOLDER_URL = "http://s3.tamtam.pro/production";
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =
   "https://tamtam.s3.eu-west-1.amazonaws.com";
 
 export default function EventLayout({
-  env,
   language,
-  auth,
-  Link,
   event,
   price,
   options,
   dateEndOfReplay,
-  isActive,
-  isRegisteredToPremium,
-  isMember,
-  receptionPageLink,
-  sessionPageLink,
+  isUserMember,
+  isFetching,
 }) {
   const { startDateTime, endDateTime, memberPrice, nonMemberPrice } = event;
 
-  const apiUrl = getApiUrl(env);
   const isExpired = isEventPast(event);
   const isUpcomming = isEventUpcoming(event);
   const isReplayable = isEventReplayable(event);
@@ -127,47 +116,19 @@ export default function EventLayout({
     endDateTime ?? "",
     language
   );
-  const isAdmin = auth.loggedAs === "ADMIN";
+  const isUserEventRegistered = event && event["user-registered"];
   const isFree = isFreeEvent(event);
   const isRegistrationOpen = isFull
-    ? isRegistrationActive(event, isAdmin)
+    ? isRegistrationActive(event)
     : isEventRegistrationOpen(event);
-  const [registeringPremium, setRegisteringPremium] = useState(false);
-  const eventLink = isEventFull ? sessionPageLink : receptionPageLink;
+  const eventLink = isEventFull
+    ? `/event/${event.id}/session`
+    : `/event/${event.id}/reception`;
 
   const nbMinutes = getEventNbMinutes(event);
 
-  const handleRegisterPremium = useCallback(
-    (e) => {
-      e.preventDefault();
-      const eventId = event.id;
-
-      setRegisteringPremium(true);
-      registerPremiumToEvent({
-        apiUrl,
-        token: auth.token,
-        eventId,
-        userId: auth.id,
-      })
-        .finally(() => {
-          setRegisteringPremium(false);
-        })
-        .then(() => {
-          event["user-registered"] = true;
-          if (+event.slotsCount === 1 && event.slotReplayUrls) {
-            const replayLink = getSlotReplayUrl(event.slotReplayUrls, language);
-            if (replayLink) {
-              window.open(replayLink, "_blank", "noreferrer");
-            }
-          }
-        })
-        .catch((e) => onError(language));
-    },
-    [registeringPremium, auth.id, event, registerPremiumToEvent, onError]
-  );
-
   const renderMainAction = () => {
-    if (isActive) {
+    if (isUserEventRegistered) {
       if (isExpired) {
         if (+event.replayStatus !== 2 || isReplayExpiredForUser(event)) {
           return (
@@ -202,27 +163,17 @@ export default function EventLayout({
               target="_blank"
               rel="noopener noreferrer"
               icon={
-                !registeringPremium ? (
-                  <>
-                    {isFullWatch ? (
-                      <FilledPlayIcon className="m-r-xxs" />
-                    ) : watchedTime > 0 ? (
-                      <FilledResumeIcon className="m-r-xxs" />
-                    ) : (
-                      <FilledPlayIcon className="m-r-xxs" />
-                    )}
-                  </>
-                ) : (
-                  <div className="m-r-xxs">
-                    <ClipLoader size={12} color="#FFFFFF" />
-                  </div>
-                )
+                <>
+                  {isFullWatch ? (
+                    <FilledPlayIcon className="m-r-xxs" />
+                  ) : watchedTime > 0 ? (
+                    <FilledResumeIcon className="m-r-xxs" />
+                  ) : (
+                    <FilledPlayIcon className="m-r-xxs" />
+                  )}
+                </>
               }
-              onClick={
-                isRegisteredToPremium && !event["user-registered"]
-                  ? handleRegisterPremium
-                  : stopPropagation
-              }
+              onClick={stopPropagation}
             >
               <span style={{ fontSize: "14px" }}>
                 {isFullWatch
@@ -286,7 +237,7 @@ export default function EventLayout({
       return null;
     }
 
-    if (isFree && !isActive) {
+    if (isFree && !isUserEventRegistered) {
       return (
         <div
           className={classNames(styles.badge, "m-t-xs")}
@@ -297,7 +248,7 @@ export default function EventLayout({
       );
     }
 
-    if (isActive) {
+    if (isUserEventRegistered) {
       return (
         <div className={classNames(styles.subscribed)}>
           <CheckMarkIcon className="m-r-s" />
@@ -306,7 +257,7 @@ export default function EventLayout({
       );
     }
 
-    const eventPrice = isMember ? memberPrice : nonMemberPrice;
+    const eventPrice = isUserMember ? memberPrice : nonMemberPrice;
 
     if (price && +price < +eventPrice) {
       return (
@@ -333,17 +284,21 @@ export default function EventLayout({
           className={styles.badge}
           style={{ display: "flex", alignItems: "center", marginTop: "5px" }}
         >
-          {!isMember && memberPrice !== nonMemberPrice && (
-            <span className={classNames("m-r-s", styles.reductionOrg)}>
-              <span style={{ fontSize: "16px" }}> {memberPrice} €</span>
-              <span> {I18N[language]["forTheMembers"]} OECCBB.</span>
-            </span>
-          )}
-          {isMember && memberPrice !== nonMemberPrice && (
-            <span className={styles.strike} style={{ fontWeight: "500" }}>
-              {nonMemberPrice} €
-            </span>
-          )}
+          {!isUserMember &&
+            memberPrice !== nonMemberPrice &&
+            (event.client === 1256 || event.client === 9) && (
+              <span className={classNames("m-r-s", styles.reductionOrg)}>
+                <span style={{ fontSize: "16px" }}> {memberPrice} €</span>
+                <span> {I18N[language]["forTheMembers"]} OECCBB.</span>
+              </span>
+            )}
+          {isUserMember &&
+            memberPrice !== nonMemberPrice &&
+            (event.client === 1256 || event.client === 9) && (
+              <span className={styles.strike} style={{ fontWeight: "500" }}>
+                {nonMemberPrice} €
+              </span>
+            )}
           <span
             className="m-l-xs"
             style={{ color: "#29394D", fontWeight: "500", fontSize: "20px" }}
@@ -358,7 +313,10 @@ export default function EventLayout({
   };
 
   const renderPlayProgress = () => {
-    if (EventPlayProgress > 0 || (isActive && EventPlayProgress === 0)) {
+    if (
+      EventPlayProgress > 0 ||
+      (isUserEventRegistered && EventPlayProgress === 0)
+    ) {
       return (
         <div>
           <ProgressBar
@@ -408,10 +366,17 @@ export default function EventLayout({
     return null;
   };
 
+  if (isFetching) {
+    return <Fetching />;
+  }
+
   return (
     <div
-      className={classNames(styles.event, isActive && styles.active)}
-      style={{ height: "318px" }}
+      className={classNames(
+        styles.event,
+        isUserEventRegistered && styles.active
+      )}
+      style={{ width: "305px", height: "318px" }}
     >
       <div className="m-b-s">
         <div
@@ -427,16 +392,6 @@ export default function EventLayout({
               />
             </div>
           )}
-          <CardFlag
-            language={language}
-            flag={
-              isSoldOut && !isActive
-                ? "sold-out"
-                : parseBoolean(event.isIncludedPremium) && !isActive
-                ? "premium"
-                : undefined
-            }
-          />
           {showTimeCounter && (
             <div className={styles.timeCounter}>
               <TimeCounter
@@ -453,7 +408,7 @@ export default function EventLayout({
               </div>
               <div className={classNames(styles.badge)}>{nbMinutes} min</div>
             </div>
-          ) : isActive && EventPlayProgress === 0 ? (
+          ) : isUserEventRegistered && EventPlayProgress === 0 ? (
             <div className={styles.badges}>
               <div className={styles.badge}>{`${0} sur ${eventTime} min`}</div>
             </div>
@@ -487,7 +442,7 @@ export default function EventLayout({
         </div>
         <div className={styles.container}>
           <div>
-            <Link href={receptionPageLink}>
+            <Link href={eventLink}>
               <h3>
                 <Shave maxHeight={90}>{name} </Shave>
               </h3>
@@ -532,37 +487,6 @@ export default function EventLayout({
             {renderEventPrice()}
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
-
-export function EventLayoutFetching() {
-  return (
-    <div className={classNames(styles.event, styles.fetching)}>
-      <div className={classNames(styles.banner, "m-b-m")} />
-      <h3 className="m-l-xs m-b-xxs" />
-      <div className={classNames(styles.speakers, "greetings")}>
-        <h6 className="m-l-xs" />
-      </div>
-      <div className={styles.infos}>
-        <ul className="m-l-xs">
-          <li>
-            <CalendarIcon />,
-            <span>
-              <h3 />
-            </span>
-          </li>
-          <li>
-            <EarthIcon />,
-            <span>
-              <h3 />
-            </span>
-          </li>
-        </ul>
-      </div>
-      <div className="m-t-auto">
-        <div className={styles.mainActions} />
       </div>
     </div>
   );
