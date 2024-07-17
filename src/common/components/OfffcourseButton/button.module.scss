@@ -1,0 +1,330 @@
+@import 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap';
+
+$color-blue1: #18a0fb;
+$color-blue2: #2495e1;
+$color-blue3: #3b8ad5;
+$color-sky-blue1: #c7e8fe;
+$color-sky-blue2: #f3faff;
+$color-dark1: #29394d;
+$color-dark2: #3c4e64;
+$color-dark3: #6d7f92;
+$color-gray1: #b2bcc6;
+$color-gray2: #d8dde2;
+$color-gray3: #e1e4e8;
+$color-gray4: #f1f2f4;
+$color-gray5: #f8f9fa;
+$color-red1: #fe3745;
+$color-red2: #e4313e;
+$color-red3: #fec3c7;
+$color-warning: #ff6b00;
+$color-green1: #06d9b1;
+$color-green2: #02af8e;
+$color-green3: #edfaf5;
+$color-white: #fff;
+$color-bg-light: #f4f7f9;
+
+/* -------------------------------------
+  GLOBAL STYLES
+------------------------------------- */
+.btn {
+  border: none;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  font-family: Roboto, sans-serif;
+
+  &:disabled {
+    pointer-events: none;
+  }
+}
+
+.btnBlock {
+  width: 100%;
+}
+
+.btnLink {
+  width: 100%;
+}
+
+/* -------------------------------------
+  BUTTON VARIANTS
+------------------------------------- */
+.btnPrimary {
+  background-color: $color-blue1;
+  color: $color-white;
+
+  &:hover {
+    background-color: $color-blue2;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    box-shadow: none;
+  }
+
+  &Outlined {
+    background-color: $color-white;
+    color: $color-blue1;
+    border: 1px solid $color-sky-blue1;
+
+    &:hover {
+      background-color: $color-sky-blue1;
+      border: 1px solid transparent;
+      box-shadow: none;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      box-shadow: none;
+    }
+  }
+}
+
+.btnSecondary {
+  background-color: $color-white;
+  color: $color-dark1;
+  border: 1px solid $color-gray2;
+
+  &:disabled {
+    opacity: 0.5;
+    box-shadow: none;
+  }
+
+  &:hover {
+    background-color: $color-gray4;
+    border: 1px solid transparent;
+    box-shadow: none;
+  }
+}
+
+.btnTertiary {
+  background-color: $color-dark3;
+  color: $color-white;
+  border: none;
+
+  &:hover {
+    background-color: $color-dark2;
+    box-shadow: none;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    box-shadow: none;
+  }
+
+  &Outlined {
+    background-color: $color-white;
+    color: $color-dark3;
+    border: 1px solid $color-gray2;
+
+    &:hover {
+      background-color: $color-gray4;
+      box-shadow: none;
+      border: 1px solid transparent;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      box-shadow: none;
+    }
+  }
+}
+
+.btnSuccess {
+  background-color: $color-green1;
+  color: $color-white;
+
+  &:hover {
+    background-color: $color-green2;
+    box-shadow: none;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    box-shadow: none;
+  }
+
+  &Outlined {
+    background-color: $color-green3;
+    color: $color-green2;
+
+    &:hover {
+      box-shadow: none;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      box-shadow: none;
+    }
+  }
+}
+
+.btnDanger {
+  background-color: $color-red1;
+  color: $color-white;
+
+  &:hover {
+    background-color: $color-red2;
+    box-shadow: none;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    box-shadow: none;
+  }
+
+  &Outlined {
+    background-color: $color-white;
+    color: $color-red2;
+    border: 1px solid $color-red3;
+
+    &:hover {
+      background: $color-red3;
+      box-shadow: none;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      box-shadow: none;
+    }
+  }
+}
+
+/* -------------------------------------
+  BUTTON CORNERS RADIUS
+------------------------------------- */
+.btnNoRadius {
+  border-radius: 0;
+}
+
+.btnRadiusSm {
+  border-radius: 5px;
+}
+
+.btnRadiusMd {
+  border-radius: 30px;
+}
+
+.btnRadiusFull {
+  border-radius: 100%;
+}
+
+/* -------------------------------------
+  BUTTON SHADOWS
+------------------------------------- */
+.btnNoShadow {
+  box-shadow: none;
+}
+
+.btnShadowSm {
+  box-shadow: 0 4px 10px 0 rgb(41 57 77 / 10%);
+}
+
+.btnShadowMd {
+  box-shadow: 0 0 20px 0 rgb(41 57 77 / 10%);
+}
+
+/* -------------------------------------
+  BUTTON SIZES
+------------------------------------- */
+.btnSm {
+  height: 36px;
+  padding: 10px 20px;
+  gap: 5px;
+  flex-shrink: 0;
+
+  // default text styles for sm button
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  // default icon size for sm button
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.btnMd {
+  padding: 12px 24px;
+  gap: 5px;
+
+  // default text styles for md button
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  // default icon size for md button
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.btnIcon {
+  padding: 0;
+  margin: 0;
+  width: 36px;
+  height: 36px;
+
+  // default icon size for icon button
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* -------------------------------------
+  TEXT SIZES / APPEARANCE
+------------------------------------- */
+.textXs {
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.textSm {
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.textMd {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.textUppercase {
+  text-transform: uppercase;
+}
+
+/* -------------------------------------
+  BUTTON CONTENT ALIGNMENT
+------------------------------------- */
+.contentLeft {
+  justify-content: flex-start;
+}
+
+.contentRight {
+  justify-content: flex-end;
+}
+
+.contentCenter {
+  justify-content: center;
+}
+
+.contentBetween {
+  justify-content: space-between;
+}

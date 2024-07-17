@@ -1,0 +1,93 @@
+.progressWrapper {
+  background: #d8dde2;
+  border-radius: 5px;
+  position: relative;
+  display: inline-block;
+  height: 6px;
+  cursor: pointer;
+  align-self: center;
+
+  .watchProgressBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    background: #06d9b1;
+    color: #06d9b1;
+    border-radius: 5px;
+    height: 6px;
+    max-width: 100%;
+  }
+
+  .progressBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    background: #06d9b1;
+    color: #06d9b1;
+    border-radius: 5px;
+    height: 6px;
+    max-width: 100%;
+
+    &::after {
+      content: '';
+      display: none;
+      width: 16px;
+      height: 16px;
+      background: #f1f2f4;
+      border: 2px solid currentcolor;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transition: auto;
+      transform: translateX(50%) translateY(-50%);
+    }
+  }
+
+  .label {
+    position: absolute;
+    bottom: 100%;
+    margin-bottom: 0.2rem;
+
+    // transform: translateX(-50%);
+
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #06d9b1;
+  }
+
+  .infos {
+    background: #fff;
+    border: 1px solid #f1f2f4;
+    box-sizing: border-box;
+    box-shadow: 0 4px 10px rgb(41 57 77 / 10%);
+    border-radius: 10px;
+    display: none;
+    transition: all 0.5s ease;
+    position: absolute;
+    bottom: 100%;
+    margin-bottom: 0.5rem;
+    min-width: 238px;
+    padding: 0.7rem;
+    transform: translateX(-50%);
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #6d7f92;
+  }
+
+  &:hover {
+    .progressBar {
+      &::after {
+        display: inline-block;
+      }
+    }
+
+    .infos {
+      display: block;
+    }
+  }
+}

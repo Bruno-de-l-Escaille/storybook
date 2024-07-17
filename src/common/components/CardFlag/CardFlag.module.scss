@@ -1,0 +1,23 @@
+.flag {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 130px;
+  height: 22px;
+  transform: rotate(49deg);
+  color: #fff !important;
+  background: #fb1e5b;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 140%;
+  right: 0;
+  top: 0;
+  transform-origin: bottom right;
+  margin-top: 76.11px; // = width*sin(θ) - height = 130*sin(49°) - 22 !do not round the result just truncate it
+
+  &.sold-out {
+    background: #fc5d2b !important;
+    text-transform: uppercase;
+  }
+}
