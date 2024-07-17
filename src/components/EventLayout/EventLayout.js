@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   capFirstLetterInSentence,
   getByLanguage,
   getCroppedImageUrl,
   isEmpty,
-  parseBoolean,
   prepareS3ResourceUrl,
   stopPropagation,
 } from "../../utils/common";
@@ -44,7 +43,19 @@ import { Shave } from "../../common/components/Shave";
 import { TimeCounter } from "../../common/components/TimeCounter";
 import { Fetching } from "./Fetching";
 import { Link } from "react-router-dom";
-import { CardFlag } from "../../common/components/CardFlag";
+import SeasonDescriptionIcon from "../Icons/SeasonDescription";
+import SeasonIcon from "../Icons/Season";
+import CycleDescriptionIcon from "../Icons/CycleDescription";
+import PresentialDescriptionIcon from "../Icons/PresentialDescription";
+import CycleIcon from "../Icons/CycleCircle";
+import PresentialIcon from "../Icons/Presential";
+import LiveDescriptionIcon from "../Icons/LiveDescription";
+import LiveIcon from "../Icons/Live";
+import HybridDescriptionIcon from "../Icons/HybrideDescription";
+import HybrideIcon from "../Icons/Hybride";
+import ReplayDescriptionIcon from "../Icons/ReplayDescription";
+import ReplayIcon from "../Icons/Replay";
+import HelpIcon from "../Icons/Help";
 
 const S3_FOLDER_URL = "http://s3.tamtam.pro/production";
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =
@@ -61,6 +72,23 @@ export default function EventLayout({
 }) {
   const { startDateTime, endDateTime, memberPrice, nonMemberPrice } = event;
 
+  const [showIcons, setShowIcons] = useState(false);
+
+  const eventCycles = Array.isArray(event?.eventCycles)
+    ? event.eventCycles.filter((eventCycle) => !eventCycle.isCyclePremium)
+    : [];
+  const isEventInSeason = eventCycles?.some((cycle) => cycle.isCycleSeason);
+  const isEventInCycle = eventCycles?.some((cycle) => !cycle.isCycleSeason);
+  const cycleIconStyle = {
+    top: "1px",
+    fontSize: "10.4px",
+    width: "max-content",
+    left: "1px",
+  };
+  const seasonIconStyle = {
+    ...cycleIconStyle,
+    left: "5px",
+  };
   const isExpired = isEventPast(event);
   const isUpcomming = isEventUpcoming(event);
   const isReplayable = isEventReplayable(event);
@@ -68,6 +96,7 @@ export default function EventLayout({
   const isWebinar = isWebinarEvent(event);
   const isFull = isEventFull(event);
   const isSoldOut = isSoldOutEvent(event);
+  const label = getByLanguage(event, "label", language, true);
   const urlBanner = getByLanguage(event, "urlBanner", language) ?? "";
   const banner = getCroppedImageUrl(urlBanner, undefined, 280);
   const bannerImgUrl = !isEmpty(banner)
@@ -232,6 +261,13 @@ export default function EventLayout({
     );
   };
 
+  const handleOnMouseEnter = () => {
+    setShowIcons(true);
+  };
+  const handleOnMouseLeave = () => {
+    setShowIcons(false);
+  };
+
   const renderEventPrice = () => {
     if (options && !options.showPrice) {
       return null;
@@ -336,6 +372,139 @@ export default function EventLayout({
     return null;
   };
 
+  const renderHoveringIcons = () => (
+    <>
+      <div
+        className={styles.cycleIcon}
+        style={!isEventInSeason ? { display: "none" } : {}}
+      >
+        {showIcons ? (
+          <>
+            <SeasonDescriptionIcon />
+            <span
+              className={styles.cycleDescription}
+              style={language === "nl" ? seasonIconStyle : {}}
+            >
+              {I18N[language]["includedInSeason"]}
+            </span>
+          </>
+        ) : (
+          <SeasonIcon />
+        )}
+      </div>
+      <div
+        className={styles.cycleIcon}
+        style={
+          isEventInCycle && !isEventInSeason
+            ? { bottom: "20px" }
+            : isEventInCycle && isEventInSeason
+            ? { bottom: "56px" }
+            : { display: "none" }
+        }
+      >
+        {showIcons ? (
+          <>
+            <CycleDescriptionIcon />
+            <span
+              className={styles.cycleDescription}
+              style={
+                language === "nl"
+                  ? { ...cycleIconStyle, color: "#5F5DE8" }
+                  : { color: "#5F5DE8" }
+              }
+            >
+              {I18N[language]["includedInCycle"]}
+            </span>
+          </>
+        ) : (
+          <CycleIcon />
+        )}
+      </div>
+      <div className={styles.eventStateIcon}>
+        {showIcons && place && !event.isVirtual && !isExpired ? (
+          <>
+            <PresentialDescriptionIcon />
+            <span className={styles.eventStateDescriptionIcon}>
+              {I18N[language]["inPresential"].toUpperCase()}
+            </span>
+          </>
+        ) : place && !event.isVirtual && !isExpired ? (
+          <PresentialIcon />
+        ) : (
+          <></>
+        )}
+      </div>
+      <div
+        className={
+          place && !event.isVirtual
+            ? classNames(styles.eventStateIcon, styles.multipleIcons)
+            : styles.eventStateIcon
+        }
+      >
+        {!place && isUpcomming && !showTimeCounter && showIcons ? (
+          <a href={eventLink}>
+            <div style={place ? { bottom: "40px" } : {}}>
+              <LiveDescriptionIcon />
+              <span className={styles.eventStateDescriptionIcon}>
+                {I18N[language]["live"]}
+              </span>
+            </div>
+          </a>
+        ) : !place && isUpcomming && !showTimeCounter ? (
+          <LiveIcon />
+        ) : place &&
+          isWebinar &&
+          isUpcomming &&
+          !showTimeCounter &&
+          showIcons ? (
+          <div>
+            <HybridDescriptionIcon />
+            <span className={styles.eventStateDescriptionIcon}>
+              {I18N[language]["hybrid"]}
+            </span>
+          </div>
+        ) : place && isWebinar && isUpcomming && !showTimeCounter ? (
+          <HybrideIcon />
+        ) : (
+          <></>
+        )}
+      </div>
+      <div className={styles.eventStateIcon}>
+        {showIcons && isExpired ? (
+          <>
+            <a href={eventLink}>
+              <ReplayDescriptionIcon />
+              <span className={styles.eventStateDescriptionIcon}>
+                {I18N[language]["replay"]}
+              </span>
+            </a>
+          </>
+        ) : isExpired ? (
+          <ReplayIcon />
+        ) : (
+          <></>
+        )}
+      </div>
+      {label && (
+        <div
+          className={styles.labels}
+          style={
+            isEventInCycle && isEventInSeason
+              ? { marginBottom: "100px" }
+              : isEventInCycle || isEventInSeason
+              ? { marginBottom: "70px" }
+              : {}
+          }
+        >
+          <div className={styles.label}>
+            <HelpIcon className="m-r-xs" />
+            <span>{label}</span>
+          </div>
+        </div>
+      )}
+    </>
+  );
+
   const renderInReplayTitleWithDesc = () => {
     if (!isReplayable || (options && !options.showReplayInfo)) {
       return null;
@@ -377,6 +546,8 @@ export default function EventLayout({
         isUserEventRegistered && styles.active
       )}
       style={{ width: "305px", height: "318px" }}
+      onMouseEnter={handleOnMouseEnter}
+      onMouseLeave={handleOnMouseLeave}
     >
       <div className="m-b-s">
         <div
@@ -401,6 +572,7 @@ export default function EventLayout({
               />
             </div>
           )}
+          {renderHoveringIcons()}
           {isLive ? (
             <div className={styles.badges}>
               <div className={styles.badge} style={{ background: "#FE3745" }}>

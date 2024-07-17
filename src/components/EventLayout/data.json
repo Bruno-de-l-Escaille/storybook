@@ -36,17 +36,17 @@
     "callToActionNl": "",
     "updatedAt": "2024-05-02 12:02:10",
     "createdAt": "2024-01-18 06:06:35",
-    "startDateTime": "2024-06-12 12:15:00",
-    "endDateTime": "2024-06-12 13:15:00",
-    "eventDate": "2024-06-12",
+    "startDateTime": "2024-08-12 12:15:00",
+    "endDateTime": "2024-08-12 13:15:00",
+    "eventDate": "2024-08-12",
     "client": 9,
     "tag": [],
     "isIncludedPremium": 1,
     "eventDates": [
       {
         "id": "125",
-        "startDateTime": "2024-07-18 13:15:00",
-        "endDateTime": "2024-07-18 14:15:00"
+        "startDateTime": "2024-09-18 13:15:00",
+        "endDateTime": "2024-09-18 14:15:00"
       }
     ],
     "speakers-abstract": {
