@@ -19,6 +19,7 @@ export class SubMenu extends Component {
     super(props);
     this.state = {
       isVertical: false,
+      pathname: window.location.pathname,
     };
   }
 
@@ -28,6 +29,8 @@ export class SubMenu extends Component {
 
   renderItemMenu = (item) => {
     const { Link, RouterLink, queryParams } = this.props;
+    const { pathname } = this.state; // Use the pathname from the state
+    const isActive = pathname.includes(item.url); // Check if the current pathname includes the item url
 
     const href = {
       pathname: item.url,
@@ -40,7 +43,9 @@ export class SubMenu extends Component {
     return (
       <li
         key={`smenu-${Math.random()}`}
-        className={`${style.item} ${item.className ? item.className : ""} `}
+        className={`${style.item} ${isActive ? style.active : ""} ${
+          item.className ? item.className : ""
+        } `}
       >
         <img src={item.iconUrl} />
         {Link ? (
@@ -56,7 +61,8 @@ export class SubMenu extends Component {
 
   renderItemMenuWithSubmenu = (item) => {
     const { Link, RouterLink, queryParams } = this.props;
-
+    const { pathname } = this.state;
+    const isActive = pathname.includes(item.url);
     const moreHref = {
       pathname: item.more ? item.more.url : "",
     };
@@ -67,7 +73,10 @@ export class SubMenu extends Component {
     }
 
     return (
-      <li key={`smenu-${Math.random()}`} className={style.dropdown}>
+      <li
+        key={`smenu-${Math.random()}`}
+        className={`${style.dropdown} ${isActive ? style.active : ""}`}
+      >
         {RouterLink ? (
           <RouterLink to={item.url} className={style.item}>
             <img src={item.iconUrl} />
