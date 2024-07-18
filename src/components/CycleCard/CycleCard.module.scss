@@ -1,22 +1,11 @@
 @import "~foundation-sites/scss/util/util";
 
 .wrapper {
-  // border-radius: 5px;
-
-  // // padding: 10px 22px;
-  // width: 310px;
-  // height: max-content;
-  // background: #f4f2ff;
-  // overflow: hidden;
-  // position: relative;
-
   .type {
     font-weight: 700;
     font-size: 16px;
     line-height: normal;
     color: #5f5de8;
-
-    // margin: 0.7rem 0 0.1rem;
     text-transform: uppercase;
   }
 
@@ -46,7 +35,6 @@
     font-size: 16px;
     line-height: normal;
     color: #29394d;
-    margin-bottom: 1.3rem;
     text-overflow: ellipsis;
   }
 
@@ -75,13 +63,8 @@
     font-weight: 500;
     font-size: 12px;
     color: #29394d;
-    margin-bottom: 0.25rem;
-    line-height: 13px;
     display: flex;
-
-    &:not(:last-child) {
-      margin-bottom: 0.5rem;
-    }
+    align-items: center;
   }
 
   .action_price {
@@ -363,7 +346,7 @@
 
 .banner {
   position: relative;
-  height: 150px;
+  height: 151px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -571,8 +554,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 5px;
+  gap: 20px;
   height: 190px;
+
+  &_upper {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    height: 76px;
+  }
 
   h3:hover {
     color: #506a8a;
@@ -598,7 +588,6 @@
   align-items: center;
   justify-content: space-between;
   z-index: 1;
-  margin-top: 20px;
 }
 
 .mainButton {

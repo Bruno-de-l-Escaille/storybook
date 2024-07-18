@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./CycleCard.module.scss";
 import {
+  capFirstLetterInSentence,
   getByLanguage,
   getCroppedImageUrl,
   isEmpty,
@@ -20,7 +21,7 @@ import {
 import classNames from "classnames";
 import { I18N } from "../../i18n";
 import RegisteredBadge from "../../common/components/RegisteredBadge/RegisteredBadge";
-import CalendarIcon from "../Icons/Calendarv2";
+import NewCalendarIcon from "../Icons/NewCalendar";
 import PresentialDescriptionIcon from "../Icons/PresentialDescription";
 import PresentialIcon from "../Icons/Presential";
 import LiveDescriptionIcon from "../Icons/LiveDescription";
@@ -34,7 +35,7 @@ const S3_FOLDER_AWS_URL_WITHOUT_ENV =
 
 export const modeLabelMapper = {
   PRESENTIAL: "presential",
-  WEBINAR: "live",
+  WEBINAR: "inLive",
   HYBRID: "hybrid",
 };
 
@@ -139,10 +140,11 @@ function CycleCard({ cycle, language, isUserMember, isFetching }) {
   const renderDetails = () => (
     <ul>
       <li>
-        <CalendarIcon style={{ marginRight: "0.3rem" }} />
+        <NewCalendarIcon className="m-r-xs" />
         <span>
           <b className="tc">
-            {I18N[language][modeLabelMapper[type]]} {" : "}
+            {capFirstLetterInSentence(I18N[language][modeLabelMapper[type]])}{" "}
+            {" : "}
           </b>
           {dateHelper}
         </span>
@@ -249,19 +251,21 @@ function CycleCard({ cycle, language, isUserMember, isFetching }) {
           </div>
         </div>
         <div className={styles.container}>
-          <div className={styles.type}>
-            {isSeason
-              ? I18N[language]["season"]
-              : isEssential
-              ? I18N[language]["essential"]
-              : I18N[language]["cycle"]}
-          </div>
-          <div className={styles.title}>
-            <a href={`/cycle/${cycle.id}/reception`}>
-              <h3>
-                <Shave maxHeight={60}>{name}</Shave>
-              </h3>
-            </a>
+          <div className={styles.container_upper}>
+            <div className={styles.type}>
+              {isSeason
+                ? I18N[language]["season"]
+                : isEssential
+                ? I18N[language]["essential"]
+                : I18N[language]["cycle"]}
+            </div>
+            <div className={styles.title}>
+              <a href={`/cycle/${cycle.id}/reception`}>
+                <h3>
+                  <Shave maxHeight={76}>{name}</Shave>
+                </h3>
+              </a>
+            </div>
           </div>
           {renderDetails()}
           <div className={classNames(styles.mainActions)}>
