@@ -4,7 +4,7 @@ import styles from "./EventLayout.module.scss";
 import EarthIcon from "../Icons/Earth";
 import CalendarIcon from "../Icons/Calendar";
 
-export const Fetching = ({ expert }) => {
+export const Fetching = () => {
   const renderCard = () => {
     return (
       <div

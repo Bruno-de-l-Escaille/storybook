@@ -1,0 +1,32 @@
+.registred {
+  width: 42px;
+  height: 55px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: inline-block;
+  padding: 0.5rem 0.25rem;
+
+  & > * {
+    font-size: 9px;
+    word-break: break-all;
+    font-weight: 500;
+    margin: 11px;
+  }
+
+  &.green {
+    background-image: url('./assets/bg-bookmark-green-sm.png');
+
+    & > * {
+      color: #fff;
+    }
+  }
+
+  &.white {
+    background-image: url('./assets/bg-bookmark-white-sm.png');
+
+    & > * {
+      color: #02af8e;
+    }
+  }
+}

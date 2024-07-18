@@ -150,7 +150,7 @@ export default function EventLayout({
   const isRegistrationOpen = isFull
     ? isRegistrationActive(event)
     : isEventRegistrationOpen(event);
-  const eventLink = isEventFull
+  const eventLink = isFull
     ? `/event/${event.id}/session`
     : `/event/${event.id}/reception`;
 
@@ -374,52 +374,6 @@ export default function EventLayout({
 
   const renderHoveringIcons = () => (
     <>
-      <div
-        className={styles.cycleIcon}
-        style={!isEventInSeason ? { display: "none" } : {}}
-      >
-        {showIcons ? (
-          <>
-            <SeasonDescriptionIcon />
-            <span
-              className={styles.cycleDescription}
-              style={language === "nl" ? seasonIconStyle : {}}
-            >
-              {I18N[language]["includedInSeason"]}
-            </span>
-          </>
-        ) : (
-          <SeasonIcon />
-        )}
-      </div>
-      <div
-        className={styles.cycleIcon}
-        style={
-          isEventInCycle && !isEventInSeason
-            ? { bottom: "20px" }
-            : isEventInCycle && isEventInSeason
-            ? { bottom: "56px" }
-            : { display: "none" }
-        }
-      >
-        {showIcons ? (
-          <>
-            <CycleDescriptionIcon />
-            <span
-              className={styles.cycleDescription}
-              style={
-                language === "nl"
-                  ? { ...cycleIconStyle, color: "#5F5DE8" }
-                  : { color: "#5F5DE8" }
-              }
-            >
-              {I18N[language]["includedInCycle"]}
-            </span>
-          </>
-        ) : (
-          <CycleIcon />
-        )}
-      </div>
       <div className={styles.eventStateIcon}>
         {showIcons && place && !event.isVirtual && !isExpired ? (
           <>
@@ -545,7 +499,7 @@ export default function EventLayout({
         styles.event,
         isUserEventRegistered && styles.active
       )}
-      style={{ width: "305px", height: "318px" }}
+      style={{ width: "305px", height: "344px" }}
       onMouseEnter={handleOnMouseEnter}
       onMouseLeave={handleOnMouseLeave}
     >
@@ -616,14 +570,14 @@ export default function EventLayout({
           <div>
             <Link href={eventLink}>
               <h3>
-                <Shave maxHeight={90}>{name} </Shave>
+                <Shave maxHeight={76}>{name} </Shave>
               </h3>
             </Link>
             <div
               className={classNames(
                 styles.infos,
-                options && !options.showReplayInfo && "m-t-xs",
-                name.length > 93 && "m-t-m"
+                options && !options.showReplayInfo && "m-t-xs"
+                // name.length > 93 && "m-t-m"
               )}
             >
               <ul>

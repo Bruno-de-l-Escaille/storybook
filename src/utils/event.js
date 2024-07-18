@@ -5,6 +5,7 @@ import {
   getByLanguage,
   getNotNullLanguages,
   isEmpty,
+  parseBoolean,
   parseJson,
 } from "./common";
 import { I18N } from "../i18n";
@@ -193,8 +194,9 @@ export const isRegistrationActive = (event, isAdmin = false) => {
   }
 
   return (
-    stages?.inscription === "true" ||
-    (stages?.inscription === "admin" && isAdmin)
+    stages.inscription &&
+    (stages.inscription === "true" ||
+      (stages.inscription === "admin" && isAdmin))
   );
 };
 
@@ -229,3 +231,106 @@ export const isReplayExpiredForUser = (guest) => {
   const { dateEndOfReplay } = guest;
   return !dateEndOfReplay || moment().isAfter(moment(dateEndOfReplay));
 };
+
+export const getCyclePrice = (cycle) => {
+  const {
+    memberPrice: cycleMemberPrice,
+    nonMemberPrice: cycleNonMemberPrice,
+  } = cycle;
+
+  const member =
+    cycle && cycle.allEventsPrices ? cycle.allEventsPrices.member : undefined;
+  const nonMember =
+    cycle && cycle.allEventsPrices
+      ? cycle.allEventsPrices.nonMember
+      : undefined;
+
+  return {
+    memberPrice: {
+      price: cycleMemberPrice,
+      originalPrice: member && cycleMemberPrice < member ? member : null,
+    },
+    nonMemberPrice: {
+      price: cycleNonMemberPrice,
+      originalPrice:
+        nonMember && cycleNonMemberPrice < nonMember ? nonMember : null,
+    },
+  };
+};
+
+export const isCycleSeason = (cycle) => parseBoolean(cycle.type === 2);
+
+export const isCycleEssential = (cycle) => parseBoolean(cycle.type === 3);
+
+export const cycleType = (eventCycles) => {
+  // Check if eventCycles is empty
+  if (eventCycles.length === 0) {
+    return "WEBINAR";
+  }
+
+  const allVirtual = eventCycles.every(
+    (event) => event?.eventsAbstract.isVirtual == 1
+  );
+  const allPresential = eventCycles.every(
+    (event) => event?.eventsAbstract.isVirtual == 0
+  );
+
+  if (allVirtual) {
+    return "WEBINAR";
+  }
+  if (allPresential) {
+    return "PRESENTIAL";
+  }
+  return "HYBRID";
+};
+
+export const totalCycleTrainingHours = (cycle) => {
+  let cycleEventsNbMinutes = 0;
+
+  cycle.eventCycles &&
+    cycle.eventCycles.forEach(({ eventsAbstract }) => {
+      cycleEventsNbMinutes += getEventNbMinutes(eventsAbstract);
+    });
+
+  return cycleEventsNbMinutes / 60;
+};
+
+export const formatDecimalHours = (
+  decimalHours,
+  language = "fr",
+  withAbr = true
+) => {
+  const hoursLabel = withAbr
+    ? I18N[language]["hourAbr"]
+    : ` ${I18N[language]["hours"]}`;
+  const minutesLabel = withAbr ? "min" : ` ${I18N[language]["minutes"]}`;
+  const sep = withAbr ? " " : ` ${I18N[language]["and"]} `;
+
+  if (!decimalHours || Number.isNaN(+decimalHours)) {
+    return `0${hoursLabel}`;
+  }
+
+  let hours = +decimalHours;
+  let minutes = 0;
+
+  minutes = hours % 1;
+  hours = Math.floor(hours);
+  minutes = Math.round(minutes * 60);
+
+  if (minutes === 60) {
+    minutes = 0;
+    hours++;
+  }
+
+  if (minutes > 0 && hours > 0) {
+    return `${hours}${hoursLabel}${sep}${minutes}${minutesLabel}`;
+  }
+
+  if (minutes > 0) {
+    return `${minutes}${minutesLabel}`;
+  }
+
+  return `${hours}${hoursLabel}`;
+};
+
+export const isCycleRegistrationOpen = (cycle) => cycle.status === 1;
