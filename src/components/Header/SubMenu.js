@@ -23,6 +23,11 @@ export class SubMenu extends Component {
     };
   }
 
+  compopnenDidMount() {
+    alert(this.state.pathname);
+    console.log(this.state.pathname);
+  }
+
   handleOnClick = () => {
     this.setState({ isVertical: !this.state.isVertical });
   };
