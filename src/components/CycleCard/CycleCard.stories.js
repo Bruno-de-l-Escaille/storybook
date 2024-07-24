@@ -19,7 +19,7 @@ export default {
 export const Default = () => (
   <CycleCard
     language="fr"
-    cycle={cycles[2]}
+    cycle={cycles[0]}
     isUserMember={false}
     isFetching={boolean("isFetching", false)}
     env="v2"
