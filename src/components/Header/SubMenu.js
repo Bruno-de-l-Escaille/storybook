@@ -34,8 +34,8 @@ export class SubMenu extends Component {
 
   renderItemMenu = (item) => {
     const { Link, RouterLink, queryParams } = this.props;
-    const { pathname } = this.state; // Use the pathname from the state
-    const isActive = pathname.includes(item.url); // Check if the current pathname includes the item url
+    const { pathname } = this.state;
+    const isActive = pathname.includes(item.url);
 
     const href = {
       pathname: item.url,
