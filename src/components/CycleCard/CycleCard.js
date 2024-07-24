@@ -74,7 +74,7 @@ function CycleCard({ cycle, language, isUserMember, isFetching, env }) {
   const cycleTrainingHours = formatDecimalHours(
     cycleCertifiedTrainingHours,
     language,
-    false
+    true
   );
 
   const cyclePrice = isUserMember ? memberPrice : nonMemberPrice;

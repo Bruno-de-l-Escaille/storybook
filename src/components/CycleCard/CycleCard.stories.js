@@ -16,10 +16,30 @@ export default {
   ],
 };
 
-export const Default = () => (
+export const Cycle = () => (
   <CycleCard
     language="fr"
     cycle={cycles[0]}
+    isUserMember={false}
+    isFetching={boolean("isFetching", false)}
+    env="v2"
+  />
+);
+
+export const Season = () => (
+  <CycleCard
+    language="fr"
+    cycle={cycles[1]}
+    isUserMember={false}
+    isFetching={boolean("isFetching", false)}
+    env="v2"
+  />
+);
+
+export const Essential = () => (
+  <CycleCard
+    language="fr"
+    cycle={cycles[2]}
     isUserMember={false}
     isFetching={boolean("isFetching", false)}
     env="v2"
