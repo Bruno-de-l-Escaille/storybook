@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Help() {
+export default function Help() {
   return (
     <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
       <path
