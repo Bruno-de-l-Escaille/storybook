@@ -32,6 +32,7 @@ import { Fetching } from "./Fetching";
 const S3_FOLDER_URL = "http://s3.tamtam.pro/production";
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =
   "https://tamtam.s3.eu-west-1.amazonaws.com";
+const TTP_OFFFCOURSE_URL = "https://offfcourse.be";
 
 export const modeLabelMapper = {
   PRESENTIAL: "presential",
@@ -82,7 +83,7 @@ function CycleCard({ cycle, language, isUserMember, isFetching }) {
           {isCycleRegistrationOpen(cycle) && (
             <a
               className={classNames(styles.green, styles.mobileActions)}
-              href={`/cycle/${cycle.id}/reception`}
+              href={`${TTP_OFFFCOURSE_URL}/cycle/${cycle.id}/reception`}
             >
               {I18N[language]["buy"]}
             </a>
@@ -184,7 +185,7 @@ function CycleCard({ cycle, language, isUserMember, isFetching }) {
         }
       >
         {showIcons && type === "WEBINAR" ? (
-          <a href={`/cycle/${cycle.id}/reception`}>
+          <a href={`${TTP_OFFFCOURSE_URL}/cycle/${cycle.id}/reception`}>
             <div style={{ bottom: "40px" }}>
               <LiveDescriptionIcon />
               <span className={styles.cycleStateDescriptionIcon}>
@@ -260,7 +261,7 @@ function CycleCard({ cycle, language, isUserMember, isFetching }) {
                 : I18N[language]["cycle"]}
             </div>
             <div className={styles.title}>
-              <a href={`/cycle/${cycle.id}/reception`}>
+              <a href={`${TTP_OFFFCOURSE_URL}/cycle/${cycle.id}/reception`}>
                 <h3>
                   <Shave maxHeight={76}>{name}</Shave>
                 </h3>

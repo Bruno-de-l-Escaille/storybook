@@ -42,12 +42,7 @@ import NewCalendarIcon from "../Icons/NewCalendar";
 import { Shave } from "../../common/components/Shave";
 import { TimeCounter } from "../../common/components/TimeCounter";
 import { Fetching } from "./Fetching";
-import { Link } from "react-router-dom";
-import SeasonDescriptionIcon from "../Icons/SeasonDescription";
-import SeasonIcon from "../Icons/Season";
-import CycleDescriptionIcon from "../Icons/CycleDescription";
 import PresentialDescriptionIcon from "../Icons/PresentialDescription";
-import CycleIcon from "../Icons/CycleCircle";
 import PresentialIcon from "../Icons/Presential";
 import LiveDescriptionIcon from "../Icons/LiveDescription";
 import LiveIcon from "../Icons/Live";
@@ -60,6 +55,7 @@ import HelpIcon from "../Icons/Help";
 const S3_FOLDER_URL = "http://s3.tamtam.pro/production";
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =
   "https://tamtam.s3.eu-west-1.amazonaws.com";
+const TTP_OFFFCOURSE_URL = "https://offfcourse.be";
 
 export default function EventLayout({
   language,
@@ -151,8 +147,8 @@ export default function EventLayout({
     ? isRegistrationActive(event)
     : isEventRegistrationOpen(event);
   const eventLink = isFull
-    ? `/event/${event.id}/session`
-    : `/event/${event.id}/reception`;
+    ? `${TTP_OFFFCOURSE_URL}/event/${event.id}/session`
+    : `${TTP_OFFFCOURSE_URL}/event/${event.id}/reception`;
 
   const nbMinutes = getEventNbMinutes(event);
 
@@ -568,11 +564,11 @@ export default function EventLayout({
         </div>
         <div className={styles.container}>
           <div>
-            <Link href={eventLink}>
+            <a href={eventLink}>
               <h3>
                 <Shave maxHeight={76}>{name} </Shave>
               </h3>
-            </Link>
+            </a>
             <div
               className={classNames(
                 styles.infos,
