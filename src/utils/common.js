@@ -1,6 +1,8 @@
 import moment from "moment-timezone";
 import "moment/locale/fr";
 import "moment/locale/nl";
+import { I18N } from "../i18n";
+import { toast } from "react-toastify";
 
 const API_DATE_FORMAT = "YYYY-MM-DD HH:mm:ss";
 
@@ -191,3 +193,212 @@ export function getTagName(tag, currentLanguage) {
   }
   return "";
 }
+
+export const isEmpty = (value) => {
+  if (Array.isArray(value) || typeof value === "string") {
+    return value.length === 0;
+  }
+  if (typeof value === "object" && value !== null) {
+    return Object.keys(value).length === 0;
+  }
+  return !value;
+};
+
+export const getKeyByLanguage = (key, language) =>
+  `${key}${language?.charAt(0).toUpperCase()}${language
+    ?.slice(1)
+    .toLowerCase()}`;
+
+export const getByLanguage = (resource, property, language, strict = false) => {
+  if (!resource || typeof resource !== "object") {
+    return "";
+  }
+  const value = resource[getKeyByLanguage(property, language)];
+
+  if (!isEmpty(value)) {
+    return value;
+  }
+
+  if (strict) {
+    return undefined;
+  }
+
+  let result;
+  ["Fr", "Nl", "En"].forEach((lng) => {
+    const val = resource[`${property}${lng}`];
+    if (!isEmpty(val)) {
+      result = val;
+    }
+  });
+
+  return result === undefined ? undefined : result;
+};
+
+export const getCroppedImageUrl = (
+  imageUrl,
+  width = 0,
+  height = 0,
+  optimize = true
+) => {
+  if (isEmpty(imageUrl) || (!width && !height)) {
+    return "";
+  }
+
+  // Todo use webp when it supported by landa
+  const extension = optimize ? "jpg" : imageUrl.split(".").pop();
+  const options = [];
+
+  if (width) {
+    options.push(`w${width}`);
+  }
+
+  if (height) {
+    options.push(`h${height}`);
+  }
+
+  return `${imageUrl}/${options.join("-")}-noEnlarge.${extension}`;
+};
+
+export function isUrl(str) {
+  const regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+
+  return regexp.test(str);
+}
+
+export const trimUrlSlashes = (url) => url.replace(/^\/+|\/+$/g, "");
+
+export const prepareS3ResourceUrl = (
+  baseS3Url,
+  urlPath,
+  appendEventsFolder = true
+) => {
+  if (isUrl(urlPath ?? "")) return urlPath;
+  if (isEmpty(baseS3Url) || isEmpty(urlPath) || !baseS3Url || !urlPath)
+    return "";
+
+  const base = trimUrlSlashes(baseS3Url);
+  const path = trimUrlSlashes(urlPath).replace("eventsFolder", "events-folder");
+  const pathPrefix =
+    appendEventsFolder && path.split("/")[0] !== "events-folder"
+      ? "events-folder"
+      : "";
+
+  return `${base}${isEmpty(pathPrefix) ? "/" : `/${pathPrefix}/`}${path}`;
+};
+
+export const parseJson = (value) => {
+  if (!isEmpty(value) && value) {
+    try {
+      return JSON.parse(value);
+    } catch (e) {
+      return undefined;
+    }
+  }
+
+  return undefined;
+};
+
+export const getNotNullLanguages = (resource, property) => {
+  if (!resource || typeof resource !== "object") {
+    return [];
+  }
+  const values = [];
+
+  const valueFr = resource[`${property}Fr`];
+  const valueNl = resource[`${property}Nl`];
+  const valueEn = resource[`${property}En`];
+
+  if (!isEmpty(valueFr)) {
+    values.push("fr");
+  }
+
+  if (!isEmpty(valueNl)) {
+    values.push("nl");
+  }
+
+  if (!isEmpty(valueEn)) {
+    values.push("en");
+  }
+
+  return values;
+};
+
+export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+export const appendParamsToLink = (link, params) => {
+  if (!link || isEmpty(link)) {
+    return link;
+  }
+
+  try {
+    const url = new URL(link);
+    params.forEach((param) => {
+      url.searchParams.set(param[0], param[1]);
+    });
+    return url.toString();
+  } catch (err) {
+    return link;
+  }
+};
+
+export const onError = (language, resp, message, autoClose) => {
+  if (!message) {
+    message = I18N[language]["errorOccurred"];
+  }
+
+  const errorMessage = message;
+
+  if (typeof autoClose === "boolean") {
+    toast.error(errorMessage, {
+      autoClose: false,
+    });
+  } else {
+    toast.error(errorMessage);
+  }
+};
+
+export const stopPropagation = (e) => {
+  e.stopPropagation();
+};
+
+export const startCase = (str) => {
+  if (!str) return "";
+
+  const words = str.split(" ");
+  const capitalizedWords = words.map((word) => {
+    const firstLetter = word.charAt(0).toUpperCase();
+    const restOfWord = word.slice(1).toLowerCase();
+    return `${firstLetter}${restOfWord}`;
+  });
+
+  return capitalizedWords.join(" ");
+};
+
+// this function capitalize the first letter and after each space
+export const capFirstLetterInSentence = (sentence) => {
+  const sentenceToLowerCase = sentence?.toLowerCase() ?? "";
+  return startCase(sentenceToLowerCase);
+};
+
+export const parseBoolean = (value) => {
+  if (value === null || value === undefined) {
+    return false;
+  }
+
+  switch (value) {
+    case "false":
+      return false;
+    case "0":
+      return false;
+    case 0:
+      return false;
+    case "true":
+      return true;
+    case "1":
+      return true;
+    case 1:
+      return true;
+    default:
+      return value === true;
+  }
+};

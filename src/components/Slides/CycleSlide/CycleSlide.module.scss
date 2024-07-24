@@ -1,0 +1,43 @@
+@import "~foundation-sites/scss/util/util";
+
+.cycleSlide {
+  .info {
+    border-radius: 5px;
+    background: rgba(41, 57, 77, 0.7);
+    padding: 4px 10px;
+    color: #fff;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: lowercase;
+  }
+
+  ul li {
+    font-weight: normal;
+    font-size: 14px;
+    color: #fff;
+    line-height: normal;
+    display: flex;
+
+    strong {
+      font-weight: 500;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 6px;
+    }
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+@include breakpoint(medium down) {
+  ul li {
+    font-size: 0.75rem;
+  }
+}

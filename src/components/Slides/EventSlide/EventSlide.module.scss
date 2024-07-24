@@ -1,0 +1,43 @@
+.eventSlide {
+  .slideBody {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .speakers {
+      padding: 6px 10px;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+
+      li {
+        font-weight: normal;
+        font-size: 14px;
+        color: #fff;
+        line-height: normal;
+        display: flex;
+        flex-direction: row;
+
+        strong {
+          font-weight: 500;
+        }
+
+        &:not(:last-child) {
+          margin-bottom: 6px;
+        }
+      }
+    }
+  }
+
+  .slideFooter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+.fetching {
+  background-color: #fff !important;
+}

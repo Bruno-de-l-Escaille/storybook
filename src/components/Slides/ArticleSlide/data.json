@@ -1,0 +1,1875 @@
+{
+  "articles": [
+    {
+      "id": 22290,
+      "title": "L’importance de la déontologie professionnelle dans nos professions libérales",
+      "language": "fr",
+      "status": "PUBLISHED",
+      "isPrivate": false,
+      "authorsNames": "Gérard Delvaux OECCBB | Ordre des Experts-comptabes et Comptables Brevetés de Belgique ",
+      "authorsTypes": "",
+      "isExternal": false,
+      "externalUrl": "",
+      "shortUrl": "bit.ly/3VIs1Qk",
+      "fluxType": "FLUX",
+      "csScope": ["PUBLIC"],
+      "groups": [],
+      "privateGroups": ["899"],
+      "readTime": 7,
+      "publishOnTalk": false,
+      "relevance": 5,
+      "featured": 0,
+      "isUsedNl": 0,
+      "isProgrammedNl": 0,
+      "countLikes": 1,
+      "countDislikes": 0,
+      "countComments": 0,
+      "createdAt": "2024-03-22 14:56:20",
+      "publishedAt": "2024-02-29 06:14:00",
+      "updatedAt": "2024-04-01 14:35:56",
+      "introduction": "Il nous revient très régulièrement de la part de consœurs et confrères que les bonnes pratiques déontologiques sont peu ou même pas du tout respectées. Ainsi en est-il du :non-respect de l’obligation de prendre contact avec le confrère en cas de reprise de dossiers ;non-respect de l’obligation de prendre contact avec le confrère en cas d’acceptation d’une mission ponctuelle (quelle que soit la nature de...",
+      "url": "limportance-de-la-deontologie-professionnelle-dans-nos-professions-liberales",
+      "main_media": {
+        "id": 41182,
+        "type": "IMAGE",
+        "inHistory": false,
+        "isAttachment": false,
+        "embedUrl": "",
+        "isMain": true,
+        "name": "img3.jpeg",
+        "createdAt": "2024-03-22 14:56:20",
+        "updatedAt": "2024-04-01 14:35:57",
+        "yPos": 0,
+        "rgb": "#a3a3a3",
+        "yHeight": 75,
+        "mainFilename": "79490ba2ae17e3d662aea630fb047012c81a734c.jpeg",
+        "path": "79490ba2ae17e3d662aea630fb047012c81a734c.jpeg",
+        "titleEn": "",
+        "titleFr": "L’importance de la déontologie professionnelle dans nos professions libérales",
+        "titleNl": "",
+        "docType": "IMAGE",
+        "inTheNews": false,
+        "publishedAt": null,
+        "meta": [],
+        "webPath": "storage/uploads/medias/79490ba2ae17e3d662aea630fb047012c81a734c.jpeg",
+        "fullMediaUrl": "http://s3.tamtam.pro/local/storage/media/IMAGE/41182/79490ba2ae17e3d662aea630fb047012c81a734c.jpeg"
+      },
+      "category": {
+        "urlNameFr": "profession",
+        "urlNameEn": "profession",
+        "urlNameNl": "beroep",
+        "colorCode": "#684117",
+        "id": 2,
+        "nameFr": "Profession",
+        "nameEn": "Profession",
+        "nameNl": "Beroep",
+        "idInFlux": 43
+      },
+      "tags": [
+        {
+          "nameFr": "Cadre",
+          "nameEn": "Framework",
+          "nameNl": "Kader",
+          "sanitizedNameFr": "cadre",
+          "counter": 502,
+          "blogCounter": 502,
+          "eventCounter": 0,
+          "mediaCounter": 0,
+          "rubricCounter": 0,
+          "webtoolCounter": 0,
+          "isAbbreviation": false,
+          "isUniversal": false,
+          "isSuperTag": false,
+          "isSynonym": false,
+          "isHandled": true,
+          "status": "0",
+          "state": "UNTREATED",
+          "id": 1209,
+          "idInFlux": 2301,
+          "createdAt": "2015-05-05 00:00:00",
+          "synonymsCount": 0
+        },
+        {
+          "nameFr": "Informations",
+          "nameEn": "Informations",
+          "nameNl": "informatie",
+          "sanitizedNameFr": "informations",
+          "counter": 357,
+          "blogCounter": 356,
+          "eventCounter": 0,
+          "mediaCounter": 0,
+          "rubricCounter": 1,
+          "webtoolCounter": 0,
+          "isAbbreviation": false,
+          "isUniversal": false,
+          "isSuperTag": false,
+          "isSynonym": false,
+          "isHandled": false,
+          "status": "0",
+          "state": "TO_VALIDATE",
+          "similarsNl": "3574-9862-27562",
+          "id": 9862,
+          "createdAt": "2019-10-10 11:29:38",
+          "synonymsCount": 0
+        },
+        {
+          "nameFr": "ITAA",
+          "nameEn": "ITAA",
+          "nameNl": "ITAA",
+          "sanitizedNameFr": "itaa",
+          "counter": 289,
+          "blogCounter": 288,
+          "eventCounter": 1,
+          "mediaCounter": 0,
+          "rubricCounter": 0,
+          "webtoolCounter": 0,
+          "isAbbreviation": false,
+          "isUniversal": false,
+          "isSuperTag": false,
+          "isSynonym": false,
+          "isHandled": true,
+          "status": "1",
+          "state": "UNTREATED",
+          "id": 7956,
+          "createdAt": "2019-02-19 11:23:34",
+          "synonymsCount": 2
+        },
+        {
+          "nameFr": "Déontologie",
+          "nameEn": "Deontology",
+          "nameNl": "Deontologie",
+          "sanitizedNameFr": "deontologie",
+          "counter": 42,
+          "blogCounter": 40,
+          "eventCounter": 2,
+          "mediaCounter": 0,
+          "rubricCounter": 0,
+          "webtoolCounter": 0,
+          "isAbbreviation": false,
+          "isUniversal": false,
+          "isSuperTag": false,
+          "isSynonym": false,
+          "isHandled": false,
+          "status": "0",
+          "state": "UNTREATED",
+          "id": 772,
+          "idInFlux": 700,
+          "createdAt": "2015-05-05 00:00:00",
+          "synonymsCount": 0
+        }
+      ],
+      "pages": [
+        {
+          "id": 391,
+          "titleFr": "OECCBB page FR",
+          "titleEn": "OECCBB page FR",
+          "titleNl": "OECCBB page FR",
+          "sharedBy": {
+            "firstName": "Emmanuel",
+            "lastName": "Degrève",
+            "id": 8650,
+            "mainEmail": "emmanuel.degreve@degandpartners.com",
+            "mainPhone": "+3222473939",
+            "avatar": "storage/uploads/users/8650/AVATAR_a838aa75f6239ff4efb921e6dde7adbc3dd7d3d9.png"
+          },
+          "sharedAt": "2024-04-01 14:35:56"
+        }
+      ],
+      "author": [
+        {
+          "firstName": "Emmanuel",
+          "lastName": "Degrève",
+          "description": "",
+          "metas": {
+            "quote": {
+              "en": "",
+              "fr": "",
+              "nl": ""
+            },
+            "organizations": {
+              "4": {
+                "name": "Deg & Partners",
+                "url": "http://www.degandpartners.com",
+                "path": "https://s3.eu-west-1.amazonaws.com/tamtam/prod/organization/metas/2db7e3774c3b8a7b3e67268324c024fc587f505d-DEG-logo.png"
+              },
+              "4442": {
+                "name": "Deg & Partners",
+                "url": "http://www.degandpartners.com",
+                "path": "https://s3.tamtam.pro/prod/organization/metas/ef166943d8ea17e99a03164eb895c5b5c700fe6e-Deg&PartnersLogo.png"
+              }
+            }
+          },
+          "id": 8650,
+          "mainEmail": "emmanuel.degreve@degandpartners.com",
+          "mainPhone": "+3222473939",
+          "userMobilePhone": {
+            "intlFormat": "+32 486 21 02 11",
+            "countryCode": "be"
+          },
+          "hasPassword": true,
+          "avatar": "storage/media/IMAGE/31/AVATAR_a838aa75f6239ff4efb921e6dde7adbc3dd7d3d9.png",
+          "avatarUrl": "http://s3.tamtam.pro/local/storage/media/IMAGE/31/AVATAR_a838aa75f6239ff4efb921e6dde7adbc3dd7d3d9.png",
+          "url": "emmanuel-degreve",
+          "creator": {
+            "id": 71367,
+            "organizations": []
+          },
+          "signature": {
+            "title": "Emmanuel Degrève",
+            "head": "Conseil Fiscal, Founding Partner @ Deg & Partners"
+          },
+          "enableAvatar": false,
+          "priority": 0,
+          "authorDetails": {
+            "id": 25,
+            "cvFr": "<p><strong>Conseil Fiscal</strong>, Ingénieur commercial IAG UCL et titulaire d'un Master en Gestion fiscale de Solvay ULB.</p><p>Fondateur &amp; Partner du Cabinet <strong>Deg &amp; Partners</strong> (Bruxelles, Gembloux, Rochefort).</p><p><strong>Président</strong> de la Fondation <strong>Forum for the Future. Vice-président&nbsp;</strong>de l'<strong>Ordre des Experts-comptables</strong> (OECCBB).</p><p><strong>Fondateur </strong>de la plateforme<strong> oFFFcourse.be.</strong></p><p><strong>Professeur associé</strong> à <strong>l'EPHEC.&nbsp; Chargé de conférences&nbsp;</strong>à la <strong>Solvay Business School </strong>(Master en gestion fiscale).</p><p><strong>Président de jury</strong> à l'examen d'admission à l'<strong>ITAA</strong>.</p><p>Ancien administrateur et membre du comité exécutif de l'<strong>IEC</strong> (2007-2016)responsable de la communication au sein de l'Institut, membre des jurys d'examens d'aptitude.</p><p><strong>Auteur</strong> de plusieurs ouvrages et publications sur le <strong> passage en société</strong> et les mécanismes d'optimalisation.Auteur chaque année depuis 2011 du <strong>Manuel de l'impôt des personnes physiques</strong>. Fréquent <strong>conférencier</strong>.</p><p>Ancien <strong>directeur de la cellule stratégique</strong> du cabinet du <strong>''secrétaire d'Etat Bernard Clerfayt</strong>'' (2008 à 2011), à la modernisation du Service Public Fédéral Finances, à la fiscalité environnementale et à la lutte contre la fraude fiscale, adjoint au ministre des Finances.</p>",
+            "isSpeaker": false,
+            "isExpert": true,
+            "rubricCounter": -8,
+            "articleCounter": 2273,
+            "expertCvFr": {
+              "hiddenItems": ["AUTHOR_PHONE"],
+              "link": "www.degandpartners.com",
+              "video": "",
+              "description": "<p><strong><em>Ingénieur commercial</em></strong> de formation, j’ai rencontré divers challenges en tant qu’<strong><em>entrepreneur</em></strong> avant de développer mon propre bureau fiscal et comptable.&nbsp;<strong><em>Conseil fiscal</em></strong>, je consacre une grande énergie à cette matière vivante et publie régulièrement.&nbsp;<strong><em>Représentant de la profession,&nbsp;</em></strong> j’apporte mon expérience et mes compétences à son service et me bats chaque jour pour que nos professionnels évoluent dans le changement et s’organise pour <strong><em>conseiller avec talent et valeur nos clients</em></strong>.&nbsp;A la tête d’un <strong><em>groupe d’entreprises</em></strong>, et dans un esprit de «&nbsp;<strong><em>serial entrepreneur</em></strong>&nbsp;», j’anime dorénavant 90 personnes dans les secteurs économique et juridique avec un accent plus particulier sur le conseil, le digital, la formation et le développement informatique, en <em>Belgique</em> et au <em>Maroc</em>.</p><p>Marié, quatre enfants.&nbsp;Né à Mons le 29 juin 1967.</p>",
+              "titles": [
+                {
+                  "id": "1213cbfd-d52d-4b7d-ad84-e690042881eb",
+                  "date": "2004",
+                  "title": "Master en gestion fiscale",
+                  "university": "Solvay Business School - ULB Bruxelles",
+                  "description": "<p>Détenteur à cette occasion du prix Bartholomé récompensant le meilleur étudiant en impôt indirect.</p>"
+                },
+                {
+                  "id": "f6e2c800-9404-4f3c-9202-5cce6697fc47",
+                  "date": "1992",
+                  "title": "Ingénieur Commercial",
+                  "university": "UCL Louvain-La-Neuve (IAG)",
+                  "description": ""
+                }
+              ],
+              "experiences": [
+                {
+                  "id": "45f6c42a-8b01-40a2-b4f3-d0da3654a0db",
+                  "startDate": "2002",
+                  "endDate": null,
+                  "title": "Conseil Fiscal & Founding Partner",
+                  "location": "Deg & Partners, Bruxelles, Gembloux, Rochefort, Marrakech",
+                  "description": "<p>Direction de la fiduciaire Deg &amp; Partners depuis 2002, date à laquelle le bureau de conseil (plus généraliste) décide de se spécialiser sur les matières fiscales et les mécanismes d’optimalisation.&nbsp;Intègre le top 30 des fiduciaires francophones.&nbsp;Toujours actionnaire principal du cabinet.</p>",
+                  "currentJob": true
+                },
+                {
+                  "id": "fb22ef2d-fbb5-4a20-9976-bc2e1a3703e9",
+                  "startDate": 2014,
+                  "endDate": null,
+                  "title": "Founder & owner",
+                  "location": "Tamtam International | Bruxelles et Marrakech",
+                  "description": "<p>Créateur et concepteur de la startup de «&nbsp;Community management&nbsp;» tamtam.pro.&nbsp;Lancement de la plateforme de formation oFFFcourse.be et du réseau technologique UnitedAssociates.be. Création et lancement du studio d’enregistrement vidéo \"Studio Dope\".</p>",
+                  "currentJob": true
+                },
+                {
+                  "id": "0c116b52-da33-4473-92dc-cc5c524dbdae",
+                  "startDate": "2008",
+                  "endDate": "2007",
+                  "title": "Directeur de la cellule stratégique",
+                  "location": "Secrétariat d’Etat adjoint aux Finances, Bruxelles. ",
+                  "description": "<p>Chef de Cabinet de Bernard Clerfayt.&nbsp;Pilotage stratégique plus particulier des plans de lutte contre la fraude fiscale, de la politique fiscale environnementale à l’échelle fédérale&nbsp;et de la réorganisation du SPF Finances (28.000 employés).&nbsp;Membre du Comité de Direction du SPF Finances.</p>",
+                  "currentJob": false
+                },
+                {
+                  "id": "a38739a7-28ca-4efc-8838-63e0278b639e",
+                  "startDate": "1996",
+                  "endDate": "2002",
+                  "title": "Consultant et gérant",
+                  "location": "Deg Consulting",
+                  "description": "<p>Direction et gérance du bureau de conseil Deg Consulting.&nbsp;Nombreuses missions dans ce cadre, notamment dans le cadre des missions agrées par la Région Wallonne.&nbsp;Mission principale : restructuration en vue de sa vente d’un groupe industriel du secteur de la confection.&nbsp;Vente réussie en 2001.</p>",
+                  "currentJob": false
+                },
+                {
+                  "id": "246238b6-606d-49e4-b207-47ea639b57a4",
+                  "startDate": 1992,
+                  "endDate": 1996,
+                  "title": "Gérant et associé",
+                  "location": "TSC Travel | No Limits - Cap travel - Livingstones - Campus travel",
+                  "description": "<p>Gérant d’un Tour opérateur spécialisé dans les Sports d’hiver étudiant.&nbsp;Devient au départ de rien le leader incontesté du segment sous le nom No Limits, avec 11.000 voyages par an en Belgique et France.  Numéro dans les Alpes.&nbsp;Vente en 1996 de mes parts.</p>",
+                  "currentJob": false
+                }
+              ],
+              "skills": []
+            },
+            "counters": {
+              "enableAvatarFalse": 1887,
+              "allArticles": 2273,
+              "enableAvatarTrue": 193
+            },
+            "subdomain": "emmanueldegreve",
+            "expertSettings": {
+              "home": {
+                "mainArticle": null,
+                "mainEvent": null,
+                "bannerArticles": []
+              },
+              "news": {
+                "topRow": [18390, 18267],
+                "bottomRow": []
+              },
+              "events": {
+                "topRow": [],
+                "bottomRow": []
+              }
+            }
+          }
+        },
+        {
+          "firstName": "Gérard",
+          "lastName": "Delvaux",
+          "description": "",
+          "metas": {
+            "quote": {
+              "en": "",
+              "fr": "",
+              "nl": ""
+            },
+            "organization": {
+              "name": "",
+              "url": "",
+              "path": "https://s3.tamtam.pro/prod/organization/metas/e4a8621471fbe54732248a2109fe708039719c01-OECCBB logo Complet Vector.ai"
+            }
+          },
+          "id": 25525,
+          "mainEmail": "gerard.delvaux@delvauxassocies.be",
+          "mainPhone": "+32475265944",
+          "userMobilePhone": {
+            "intlFormat": "+32 475 26 59 44",
+            "countryCode": "be"
+          },
+          "hasPassword": true,
+          "avatar": "storage/media/IMAGE/31340/AVATAR_c7bcf8ad1401bfccf7ab2e95fc6658196f4a243a.png",
+          "avatarUrl": "http://s3.tamtam.pro/local/storage/media/IMAGE/31340/AVATAR_c7bcf8ad1401bfccf7ab2e95fc6658196f4a243a.png",
+          "url": "gerard-delvaux",
+          "signature": {
+            "title": "Gérard Delvaux",
+            "head": "Président de l'Ordre des Experts-Comptables et Comptables Brevetés de Belgique, Société Royale"
+          },
+          "enableAvatar": true,
+          "priority": 1,
+          "authorDetails": {
+            "id": 361,
+            "cvFr": "<p>Qualifications\r\nExpert-comptable IEC N°3350 2 F 45 Réviseur d’entreprises honoraire N°505\r\nRéviseur d’entreprises agréé (société à portefeuille)\r\nReviseur d'entreprises\r\nExpert-comptable CNECB\r\nInstitut d’Enseignement Commercial de Namur - Candidat expert-comptable Institut d’Enseignement Commercial de Namur - Graduat en comptabilité\r\nCarrière professionnelle - Partner honoraire BDO - Administrateur délégué – Réviseurs d’entreprises au sein de la SCRL BDO DFSA Réviseurs d’entreprises - Bedrijfsrevisoren - Administrateur délégué – Expert-comptable au sein de la SCRL BDO DFSA Experts comptables – Accountants - Réviseur d’entreprises fondateur de la SCRL DELVAUX, FRONVILLE, SERVAIS ET ASSOCIES (DFSA) - Réviseur d’entreprises indépendant Expert-comptable IEC - Expert-comptable CNECB indépendant - Stagiaire réviseur d’entreprises auprès de Mr Joseph COLLEYE, Réviseur d’entreprises - Chef-comptable et adjoint au directeur financier chez SA SOBERI à Bruxelles Responsable de la comptabilité des tiers chez RIT à Genval - Comptable chez SA GRESAMBRE à Auvelais\r\nActivités accessoires\r\nConférencier auprès de diverses organisations et auteurs de nombreuses publications professionnelles\r\nMembre cofondateur du Réseau CAP Membre de l’assemblée générale de l’Ephec\r\nVice-Président de la Fondation du Collège National des Experts-Comptables de Belgique (CNECB)\r\nPrésident de la Fondation du Collège National des Experts-Comptables de Belgique (CNECB)\r\nPrésident de diverses Commissions de l’Institut des Experts-comptables et Conseils Fiscaux (IEC) (Chambre Francophone)\r\nPrésident de Jury d’examen de fin de stage à l’I.E.C.\r\nPast-Président de l’Institut des Experts-comptables et Conseils Fiscaux (IEC) Professeur à l’Ecole Pratique des Hautes Etudes Commerciales (EPHEC) Président de l’Institut des Experts-comptables et Conseils Fiscaux (IEC)\r\nMembre du Conseil de l’Institut des Experts-comptables et Conseils Fiscaux (IEC) Vice-Président de l’Institut des Experts-comptables et Conseils Fiscaux (IEC)\r\nDirecteur professionnel de la Maîtrise Pratique de l’Expertise-comptable et du Révisorat (Ordre des Experts-comptables et Comptables Brevetés de Belgique – OECCBB)\r\nDirecteur des « Mercredis de la Comptabilité » (formation permanente des comptables et Experts-comptables) de l’Ordre des Experts-comptables et Comptables Brevetés de Belgique (OECCBB)\r\nMembre du Comité de Rédaction de l’Institut des Experts-comptables et Conseils Fiscaux (IEC)\r\nMembre du Comité de l’Institut des Experts-comptables et Conseils Fiscaux (IEC) Membre du conseil de l’Institut des Réviseurs d’Entreprises (IRE)\r\nChargé de cours (comptabilité analytique) à l’Institut Supérieur de Commerce St Louis\r\nVice-président de l’Ordre des Experts-comptables et Comptables Brevetés de Belgique (OECCBB)\r\nConseiller technique de l’Ordre des Experts-comptables et Comptables Brevetés de Belgique (OECCBB)\r\nMembre titulaire du Conseil National et du Collège National des Experts- comptables (CNECB)\r\nFondateur du réseau CONTINUITE, ACCOMPAGNEMENT, PREVENTION, en abrégé CAP\r\nPrésident de l'Ordre royal des Experts Comptables et Comptables Brevetés de Belgique (OECCBB)\r\nVice-Président de la Commission de Surveillance de l'I.E.C.</p>",
+            "cvEn": "",
+            "cvNl": "",
+            "headlineFr": {
+              "title": "Président de l'Ordre des Experts-Comptables et Comptables Brevetés de Belgique, Société Royale",
+              "signature": ""
+            },
+            "headlineEn": {
+              "title": "",
+              "signature": ""
+            },
+            "headlineNl": {
+              "title": "",
+              "signature": ""
+            },
+            "isSpeaker": false,
+            "isExpert": false,
+            "rubricCounter": 0,
+            "articleCounter": 10,
+            "counters": {
+              "enableAvatarTrue": 10,
+              "allArticles": 10
+            },
+            "subdomain": "gerarddelvaux"
+          }
+        }
+      ],
+      "organization": {
+        "id": 1256,
+        "name": "Ordre des Experts Comptables et Comptables Brevetés de Belgique - Société Royale",
+        "abbreviation": "Oeccbb",
+        "avatarWebPath": "storage/media/IMAGE/6348/AVATAR_e4fb37d14607091b2d1057ac4aa3b56c60e12f77.png",
+        "avatarUrl": "http://s3.tamtam.pro/local/storage/media/IMAGE/6348/AVATAR_e4fb37d14607091b2d1057ac4aa3b56c60e12f77.png",
+        "url": "ordre-des-experts-comptables-et-comptables-brevet-s-de-belgique-soci-t-royale"
+      },
+      "theme": {
+        "id": 125,
+        "titleFr": "OECCBB",
+        "titleEn": "OECCBB",
+        "titleNl": "OECCBB",
+        "isDefault": false,
+        "pages": [
+          {
+            "id": 391,
+            "titleFr": "OECCBB page FR",
+            "titleEn": "OECCBB page FR",
+            "titleNl": "OECCBB page FR",
+            "isPrivate": false,
+            "privateGroups": []
+          }
+        ]
+      },
+      "social": {
+        "isLiked": -1,
+        "isFavorite": 0
+      },
+      "type": {
+        "id": 115,
+        "nameFr": "Paroles d’expert",
+        "nameEn": "Expert Advice",
+        "nameNl": "De expert aan het woord",
+        "colorCode": "#007ba7"
+      }
+    },
+    {
+      "id": 14086,
+      "title": "Mesures ayant un impact pour soutenir les gens : baisse des prix à la pompe et allègement des factures d'énergie",
+      "language": "fr",
+      "status": "PUBLISHED",
+      "isPrivate": false,
+      "authorsNames": "Belgium.be ",
+      "isExternal": false,
+      "externalUrl": "",
+      "shortUrl": "bit.ly/3tewDPo",
+      "fluxType": "FLUX",
+      "csScope": ["PUBLIC"],
+      "groups": [],
+      "privateGroups": [],
+      "readTime": 3,
+      "publishOnTalk": false,
+      "countLikes": 1,
+      "countDislikes": 0,
+      "countComments": 1,
+      "createdAt": "2022-03-17 08:22:23",
+      "publishedAt": "2022-03-15 08:10:00",
+      "updatedAt": "2022-03-17 08:22:23",
+      "introduction": "Aujourd'hui, le gouvernement fédéral propose un nouveau paquet de mesures efficaces. Des mesures qui sont largement financées par les recettes supplémentaires que le gouvernement tire des prix élevés de l'énergie et qui entraîneront des réductions tangibles des prix. « Aujourd'hui, nous allégeons le fardeau de la hausse des prix de l'énergie pour nos ménages et les personnes isolées. Ils sont la pierre angulaire de notre...",
+      "url": "mesures-ayant-un-impact-pour-soutenir-les-gens-baisse-des-prix-a-la-pompe-et-allegement-des-factures-denergie",
+      "main_media": {
+        "id": 25536,
+        "type": "IMAGE",
+        "inHistory": false,
+        "isAttachment": false,
+        "embedUrl": "",
+        "isMain": true,
+        "name": "pexels-skitterphoto-9796.jpg",
+        "createdAt": "2022-03-17 08:22:23",
+        "updatedAt": "2022-03-17 08:22:25",
+        "yPos": 0,
+        "rgb": "#1f1e18",
+        "yHeight": 75,
+        "mainFilename": "a56a312183f30f2ca02de73c9c3f209dff1fb889.jpeg",
+        "path": "a56a312183f30f2ca02de73c9c3f209dff1fb889.jpeg",
+        "titleEn": "",
+        "titleFr": "Mesures ayant un impact pour soutenir les gens : baisse des prix à la pompe et allègement des factures d'énergie",
+        "titleNl": "",
+        "docType": "IMAGE",
+        "inTheNews": false,
+        "publishedAt": null,
+        "meta": [],
+        "webPath": "storage/uploads/medias/a56a312183f30f2ca02de73c9c3f209dff1fb889.jpeg",
+        "fullMediaUrl": "https://s3.tamtam.pro/prod/storage/media/IMAGE/25536/a56a312183f30f2ca02de73c9c3f209dff1fb889.jpeg",
+        "fullReducedWebPath": "https://s3.tamtam.pro/prod/storage/media/IMAGE/25536/REDUCED-a56a312183f30f2ca02de73c9c3f209dff1fb889.jpeg",
+        "fullCroppedWebPath": "https://s3.tamtam.pro/prod/storage/media/IMAGE/25536/CROPPED-a56a312183f30f2ca02de73c9c3f209dff1fb889.jpeg"
+      },
+      "category": {
+        "urlNameFr": "politique-economie",
+        "urlNameEn": "politics-economy",
+        "urlNameNl": "politiek-economie",
+        "colorCode": "#faba09",
+        "id": 6,
+        "nameFr": "Politique et économie",
+        "nameEn": "Politics & Economy",
+        "nameNl": "Politiek en Economie",
+        "idInFlux": 38
+      },
+      "pages": [
+        {
+          "id": 122,
+          "titleFr": "FFFuture : Newsletter du futur",
+          "titleEn": "FFFuture : Futur Newsletter",
+          "titleNl": "FFFuture : Nieuwsbrief van de toekomst",
+          "sharedBy": {
+            "firstName": "Vicky",
+            "lastName": "De Beus",
+            "id": 44744,
+            "mainEmail": "vicky.debeus@forumforthefuture.be",
+            "mainPhone": "+32476444444",
+            "avatar": "storage/uploads/users/44744/AVATAR_4286be4262bf1cdf998ea6191a36e25c39d328b3.png"
+          },
+          "sharedAt": "2022-03-17 08:22:24",
+          "cover": "storage/uploads/blog/media-page/1c12c3c18f9395c2d00b874834f237f8d8d2f1b4.jpeg"
+        }
+      ],
+      "author": [
+        {
+          "firstName": "Vicky",
+          "lastName": "De Beus",
+          "description": "",
+          "metas": {
+            "quote": {
+              "en": "",
+              "fr": "",
+              "nl": ""
+            },
+            "organizations": {
+              "9": {
+                "name": "Forum For the Future",
+                "url": "http://www.forumforthefuture.be",
+                "path": "https://s3.eu-west-1.amazonaws.com/tamtam/prod/organization/metas/4f9a944e71d728d68cba6051ae3d73c504394144-logoFFF%20final.png"
+              }
+            }
+          },
+          "id": 44744,
+          "mainEmail": "vicky.debeus@forumforthefuture.be",
+          "mainPhone": "+32476444444",
+          "userMobilePhone": {
+            "intlFormat": "+32 476 44 44 44",
+            "countryCode": "be"
+          },
+          "avatar": "storage/media/IMAGE/5235/AVATAR_4286be4262bf1cdf998ea6191a36e25c39d328b3.png",
+          "avatarUrl": "https://s3.tamtam.pro/prod/storage/media/IMAGE/5235/AVATAR_4286be4262bf1cdf998ea6191a36e25c39d328b3.png",
+          "url": "vicky-de-beus",
+          "signature": {
+            "title": "Vicky De Beus",
+            "head": "Assistant @ FFF"
+          },
+          "enableAvatar": false,
+          "priority": 0
+        }
+      ],
+      "organization": {
+        "id": 9,
+        "name": "Forum for the future",
+        "abbreviation": "F.F.F.",
+        "avatarWebPath": "storage/media/IMAGE/2174/AVATAR_54cbd68e1ba9284a1e486bd5d8551259cd51d96e.png",
+        "avatarUrl": "https://s3.tamtam.pro/prod/storage/media/IMAGE/2174/AVATAR_54cbd68e1ba9284a1e486bd5d8551259cd51d96e.png",
+        "btbPreferences": {
+          "authorizations": [
+            {
+              "role": "MANAGER",
+              "auth": ["*"]
+            },
+            {
+              "role": "LEGAL_REPRESENTATIVE_ADMIN",
+              "auth": ["*"]
+            },
+            {
+              "role": "LEGAL_REPRESENTATIVE_MANAGER",
+              "auth": ["*"]
+            },
+            {
+              "role": "OFFICIAL",
+              "auth": [
+                "approver",
+                "inbox_viewer",
+                "outbox_viewer",
+                "handle_filter_document_task"
+              ]
+            }
+          ]
+        },
+        "directoryActivated": 1,
+        "dirPreferences": {
+          "btbEmail": "bruno.delescaille@degandpartners.com",
+          "appliedChannelsStatus": [
+            {
+              "id": "BILLTOBOX_INIT_ID",
+              "name": "billtobox",
+              "status": "deactivated"
+            },
+            {
+              "id": "BILLTOBOXFILES_INIT_ID",
+              "name": "billtoboxfiles",
+              "status": "deleted"
+            },
+            {
+              "id": 1303,
+              "name": "billtoboxfiles",
+              "status": "activated"
+            }
+          ]
+        },
+        "directBilling": true,
+        "blogActivated": 1,
+        "mediaActivated": 0,
+        "forumActivated": 0,
+        "webtoolsActivated": 0,
+        "eventActivated": 1,
+        "eventPreferences": {
+          "membership": {
+            "type": "fff",
+            "data": {
+              "groupsIn": [],
+              "groupsEx": []
+            }
+          },
+          "tasks": {
+            "6": [
+              {
+                "name": "ppts_uploads",
+                "nameFr": "Upload des ppts",
+                "nameEn": "Upload des ppts",
+                "nameNl": "Upload des ppts",
+                "weight": "100",
+                "deadline": "-20"
+              },
+              {
+                "name": "examen",
+                "nameFr": "Introduction de l'Examen final",
+                "nameEn": "Final Exam",
+                "nameNl": "Finale exam",
+                "weight": "100",
+                "deadline": "-20"
+              }
+            ]
+          },
+          "groups": {
+            "groups_5": {
+              "guest": ["Congress2021"],
+              "registered": ["Congress2021Ok"]
+            },
+            "groups_6": {
+              "guest": [],
+              "registered": []
+            },
+            "groups_7": {
+              "guest": [],
+              "registered": []
+            }
+          }
+        },
+        "paymentActivated": 1,
+        "dataActivated": 1,
+        "teamActivated": 0,
+        "surveyActivated": 1,
+        "fluxActivated": 1,
+        "chatActivated": 2,
+        "synetonActivated": 0,
+        "socialNetworks": {
+          "linkedin": {
+            "dnuRIWeubQ": {
+              "id": "dnuRIWeubQ",
+              "username": "Emmanuel Degrève",
+              "profile_picture": "https://media-exp1.licdn.com/dms/image/C4E03AQF6iyMYIFYYtA/profile-displayphoto-shrink_100_100/0/1517750856914?e=1645056000&v=beta&t=LiD8vfIPgTn7qQuzuWDzruYFruCfako4JFQs-NYp4xQ",
+              "profile_picture_original": "https://media-exp1.licdn.com/dms/image/C4E03AQF6iyMYIFYYtA/profile-displayphoto-shrink_800_800/0/1517750856914?e=1645056000&v=beta&t=XzcYkB3wQyoOEXbi2gnRFrR6x9PTnizuWGDokYMtcj0",
+              "publicProfileUrl": "https://media-exp1.licdn.com/dms/image/C4E03AQF6iyMYIFYYtA/profile-displayphoto-shrink_100_100/0/1517750856914?e=1645056000&v=beta&t=LiD8vfIPgTn7qQuzuWDzruYFruCfako4JFQs-NYp4xQ",
+              "accesstoken": "AQXPtgCov2rwQTYhy7xE6Ladi_HfGEAhd0WbD6WYNK54_WZaSqTo2vwwBBXOH7pxIhj8T3vPH5d7Hp3MYeoJlfhqRZLgFxvCJXppqsu1ATKhXVMzvO0rzhB-3GueXqC3aBIgxJKobSDlr7xXYHi9kz22HplQmgDUZ9Gywbkaz_miYcbra_iDq9pfqmUf4HvjbrCRF4VF0ixcUtpgn3mng5zmleZviadI-VUnNxztdZwlByycQyqcJbnNIGT4KzAr4wknq2puuNauejeSAjBlpUHJV4yCc8WUy1NCsVCy3cUgDejsSAJ7TsMQk6lX00HW0Ouebd2SZi-vm5A_iSgLNbJ3sPfz_w",
+              "updated_at": "2021-12-13 21:49:02"
+            }
+          }
+        },
+        "emailingPreferences": {
+          "from_email": "info@forumforthefuture.be",
+          "base_url": "http://tamtam.pro/emails2017",
+          "from_name": "ForumForTheFuture",
+          "cs_app_scope": "INTRA_SHARE",
+          "cs_default_scope": "INTRA_SHARE"
+        },
+        "emailingTestingPreferences": {
+          "autoSend": false,
+          "mandatoryTest": false
+        },
+        "emailingActivated": 1,
+        "appsValidationStatus": {
+          "wtb": [],
+          "btb": [],
+          "btbfiles": []
+        },
+        "mediaPreferences": {
+          "languages": "FR,NL,EN",
+          "generalTypes": "IMAGE,VIDEO,PDF,PPT",
+          "publicProfile": "1",
+          "defaultData": "{}"
+        },
+        "hubPreferences": {
+          "layout_settings": [
+            {
+              "name": "Collaborateur",
+              "config": [
+                {
+                  "type": "OTHER",
+                  "order": 1,
+                  "enabled": true,
+                  "label": "Actualité FFF",
+                  "url": "https://hub.tamtam.pro/pages/16",
+                  "icon": "https://s3.tamtam.pro/v2/apps/blog.png",
+                  "app": "BLOG"
+                },
+                {
+                  "type": "OTHER",
+                  "order": 2,
+                  "enabled": true,
+                  "label": "Dos FFF",
+                  "url": "https://hub.tamtam.pro/pages/20",
+                  "icon": "https://s3.tamtam.pro/v2/apps/media.png",
+                  "app": "MEDIA"
+                },
+                {
+                  "type": "OTHER",
+                  "order": 3,
+                  "enabled": true,
+                  "label": "Mes replays",
+                  "url": "https://hub.tamtam.pro/pages/18",
+                  "icon": "https://s3.tamtam.pro/v2/apps/event.png",
+                  "app": "EVENT"
+                },
+                {
+                  "type": "OTHER",
+                  "order": 4,
+                  "enabled": true,
+                  "label": "Alert FFF",
+                  "url": "https://hub.tamtam.pro/pages/19",
+                  "icon": "https://s3.tamtam.pro/v2/apps/blog.png",
+                  "app": "BLOG"
+                },
+                {
+                  "type": "OTHER",
+                  "order": 5,
+                  "enabled": true,
+                  "label": "Galerie",
+                  "url": "https://hub.tamtam.pro/pages/17",
+                  "icon": "https://s3.tamtam.pro/v2/apps/media.png",
+                  "app": "MEDIA"
+                }
+              ],
+              "scope": ["COLLABORATER"],
+              "group": [],
+              "widgets": ["TALK_FLOAT", "SENDING", "ARTICLE", "TAMTAMIT"],
+              "apps": ["DASHBOARD", "POWERTEAM"]
+            },
+            {
+              "name": "ClIENTS",
+              "config": [
+                {
+                  "type": "OTHER",
+                  "order": 1,
+                  "enabled": true,
+                  "label": "",
+                  "url": "",
+                  "icon": "",
+                  "app": ""
+                }
+              ],
+              "scope": ["ALL"],
+              "group": [],
+              "widgets": [],
+              "apps": []
+            }
+          ]
+        },
+        "blogPreferences": {
+          "cs_app_scope": "EXTRA_CROSS",
+          "cs_default_scope": "EXTRA_CROSS",
+          "layout_settings": "model-4",
+          "cropping": "2:1"
+        },
+        "surveyPreferences": {
+          "cs_app_scope": "INTRA_SHARE",
+          "cs_default_scope": "INTRA_SHARE"
+        },
+        "smsCredit": 0,
+        "profitMargin": 0,
+        "defaultMemberAuthorisationMode": "",
+        "gdprAlertEnabled": 0,
+        "csGeneralScope": "EXTRA_CROSS",
+        "portalActivatedApps": "",
+        "portalCustomApps": "",
+        "portalClientActivated": 0,
+        "portalOfficialActivated": 0,
+        "verifiedEmails": [
+          {
+            "email": "info@forumforthefuture.be",
+            "name": "Forum for the Future",
+            "main": 1
+          },
+          {
+            "email": "emmanuel.degreve@forumforthefuture.be",
+            "name": "Emmanuel Degrève",
+            "main": 0
+          }
+        ],
+        "organizationSettingsId": 7,
+        "appsState": [
+          {
+            "code": "blog",
+            "name": {
+              "fr": "Blog",
+              "en": "Blog",
+              "nl": "Blog"
+            },
+            "url": "https://blog.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/blog.png",
+            "activated": true
+          },
+          {
+            "code": "media",
+            "name": {
+              "fr": "Media",
+              "en": "Media",
+              "nl": "Media"
+            },
+            "url": "https://media.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/media.png",
+            "activated": false
+          },
+          {
+            "code": "forum",
+            "name": {
+              "fr": "Forum",
+              "en": "Forum",
+              "nl": "Forum"
+            },
+            "url": "https://forum.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/forum.png",
+            "activated": false
+          },
+          {
+            "code": "emailing",
+            "name": {
+              "fr": "Emailing",
+              "en": "Emailing",
+              "nl": "Emailing"
+            },
+            "url": "https://sending.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/emailing.png",
+            "activated": true
+          },
+          {
+            "code": "ebox",
+            "name": {
+              "fr": "E-Box",
+              "en": "E-Box",
+              "nl": "E-Box"
+            },
+            "url": "https://sending.tamtam.pro/e_box",
+            "icon": "https://s3.tamtam.pro/prod/apps/ebox.png",
+            "activated": true
+          },
+          {
+            "code": "sms",
+            "name": {
+              "fr": "SMS",
+              "en": "SMS",
+              "nl": "SMS"
+            },
+            "url": "https://sending.tamtam.pro/sms",
+            "icon": "https://s3.tamtam.pro/prod/apps/sms.png",
+            "activated": true
+          },
+          {
+            "code": "talk",
+            "name": {
+              "fr": "Talk",
+              "en": "Talk",
+              "nl": "Talk"
+            },
+            "url": "https://talk.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/talk.png",
+            "activated": false
+          },
+          {
+            "code": "data",
+            "name": {
+              "fr": "Accounting",
+              "en": "Accounting",
+              "nl": "Accounting"
+            },
+            "url": "https://accounting.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/accounting.png",
+            "activated": true
+          },
+          {
+            "code": "team",
+            "name": {
+              "fr": "Powerteam",
+              "en": "Powerteam",
+              "nl": "Powerteam"
+            },
+            "url": "https://powerteam.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/powerteam.png",
+            "activated": false
+          },
+          {
+            "code": "webtools",
+            "name": {
+              "fr": "Webtools",
+              "en": "Webtools",
+              "nl": "Webtools"
+            },
+            "url": "https://webtool.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/webtools.png",
+            "activated": false
+          },
+          {
+            "code": "survey",
+            "name": {
+              "fr": "Survey",
+              "en": "Survey",
+              "nl": "Survey"
+            },
+            "url": "https://survey.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/survey.png",
+            "activated": true
+          },
+          {
+            "code": "event",
+            "name": {
+              "fr": "Event",
+              "en": "Event",
+              "nl": "Event"
+            },
+            "url": "https://event.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/event.png",
+            "activated": true
+          },
+          {
+            "code": "directory",
+            "name": {
+              "fr": "Directory (HQ)",
+              "en": "Directory (HQ)",
+              "nl": "Directory (HQ)"
+            },
+            "url": "https://one.tamtam.pro/folders",
+            "icon": "https://s3.tamtam.pro/prod/apps/directory.png",
+            "activated": true
+          },
+          {
+            "code": "payment",
+            "name": {
+              "fr": "Payment",
+              "en": "Payment",
+              "nl": "Payment"
+            },
+            "url": "https://payment.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/payment.png",
+            "activated": true
+          },
+          {
+            "code": "portal",
+            "name": {
+              "fr": "Portal",
+              "en": "Portal",
+              "nl": "Portal"
+            },
+            "url": "https://portal.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/portal.png",
+            "activated": false
+          }
+        ],
+        "startDate": null,
+        "languagePreferences": null,
+        "url": "forum-for-the-future",
+        "hasFiduciariesAdmin": true
+      },
+      "organizationSource": {
+        "id": 16669,
+        "uen": "0900000000",
+        "name": "asdd",
+        "abbreviation": "",
+        "officeType": "ITAA"
+      },
+      "theme": {
+        "id": 27,
+        "titleFr": "Tendances sectorielles",
+        "titleEn": "Sector trends",
+        "titleNl": "Sector trends",
+        "isDefault": false,
+        "pages": [
+          {
+            "id": 122,
+            "titleFr": "FFFuture : Newsletter du futur",
+            "titleEn": "FFFuture : Futur Newsletter",
+            "titleNl": "FFFuture : Nieuwsbrief van de toekomst"
+          },
+          {
+            "id": 146,
+            "titleFr": "Les bureaux du SPF Finances rouvrent à partir du 1er septembre",
+            "titleEn": "Offices SPF Finance reopen from September 1",
+            "titleNl": "Kantoren FOD Financiën heropenen vanaf 1 september"
+          },
+          {
+            "id": 147,
+            "titleFr": "Forum for the future",
+            "titleEn": "Forum for the future",
+            "titleNl": "Forum for the future"
+          }
+        ],
+        "path": "storage/uploads/blog/media-theme/27/77946119f6862bf0bb246ec46c05911424c9c412.jpg"
+      },
+      "social": {
+        "isLiked": 1,
+        "isFavorite": 1
+      },
+      "type": {
+        "id": 3,
+        "nameFr": "Actualité",
+        "nameEn": "News",
+        "nameNl": "Actualiteit",
+        "colorCode": "#faba09"
+      },
+      "tags": [
+        {
+          "articleId": "14086",
+          "nameFr": "tarif social",
+          "nameEn": "",
+          "nameNl": "",
+          "sanitizedNameFr": "tarif social",
+          "counter": 4,
+          "blogCounter": 4,
+          "eventCounter": 0,
+          "mediaCounter": 0,
+          "forumCounter": 0,
+          "webtoolCounter": 0,
+          "isAbbreviation": false,
+          "isUniversal": false,
+          "isSuperTag": false,
+          "isSynonym": false,
+          "isHandled": false,
+          "status": "0",
+          "id": 20191,
+          "createdAt": "2022-01-11 18:13:22",
+          "synonymsCount": 0
+        },
+        {
+          "articleId": "14086",
+          "nameFr": "Primes énergie",
+          "nameEn": "Energy grants",
+          "nameNl": "Energiepremies",
+          "sanitizedNameFr": "primes energie",
+          "counter": 13,
+          "blogCounter": 1,
+          "eventCounter": 0,
+          "mediaCounter": 0,
+          "forumCounter": 0,
+          "webtoolCounter": 0,
+          "isAbbreviation": false,
+          "isUniversal": false,
+          "isSuperTag": false,
+          "isSynonym": false,
+          "isHandled": true,
+          "status": "0",
+          "id": 974,
+          "createdAt": "2015-05-05 00:00:00",
+          "synonymsCount": 0
+        },
+        {
+          "articleId": "14086",
+          "nameFr": "",
+          "nameEn": "",
+          "nameNl": "réduction de la tva",
+          "sanitizedNameFr": "",
+          "counter": 1,
+          "blogCounter": 1,
+          "eventCounter": 0,
+          "mediaCounter": 0,
+          "forumCounter": 0,
+          "webtoolCounter": 0,
+          "isAbbreviation": false,
+          "isUniversal": false,
+          "isSuperTag": false,
+          "isSynonym": false,
+          "isHandled": false,
+          "status": "0",
+          "id": 21316,
+          "createdAt": "2022-03-17 08:22:23",
+          "synonymsCount": 0
+        },
+        {
+          "articleId": "14086",
+          "nameFr": "Prix de l'énergie",
+          "nameEn": "Energy prices",
+          "nameNl": "Energieprijzen",
+          "sanitizedNameFr": "prix de lenergie",
+          "counter": 27,
+          "blogCounter": 16,
+          "eventCounter": 0,
+          "mediaCounter": 0,
+          "forumCounter": 0,
+          "webtoolCounter": 0,
+          "isAbbreviation": false,
+          "isUniversal": false,
+          "isSuperTag": false,
+          "isSynonym": false,
+          "isHandled": true,
+          "status": "0",
+          "id": 976,
+          "createdAt": "2015-05-05 00:00:00",
+          "synonymsCount": 3
+        },
+        {
+          "articleId": "14086",
+          "nameFr": "Prix du pétrole",
+          "nameEn": "Oil price",
+          "nameNl": "Olieprijs",
+          "sanitizedNameFr": "prix du petrole",
+          "counter": 25,
+          "blogCounter": 1,
+          "eventCounter": 0,
+          "mediaCounter": 0,
+          "forumCounter": 0,
+          "webtoolCounter": 0,
+          "isAbbreviation": false,
+          "isUniversal": false,
+          "isSuperTag": false,
+          "isSynonym": false,
+          "isHandled": false,
+          "status": "0",
+          "id": 1898,
+          "createdAt": "2015-05-05 00:00:00",
+          "synonymsCount": 1
+        }
+      ],
+      "relatedArticles": {
+        "en": {
+          "id": 14335,
+          "url": "tax-challenges-arising-from-digitalisation-oecd-public-comments"
+        },
+        "nl": {
+          "id": 14335,
+          "url": "tax-challenges-arising-from-digitalisation-oecd-public-comments"
+        }
+      },
+      "avatars": [
+        {
+          "id": 98,
+          "firstName": "",
+          "lastName": "",
+          "headline": "",
+          "company": "Belgium.be",
+          "preferences": {
+            "isEmailVisible": "0"
+          },
+          "createdAt": "2020-05-05 06:57:17",
+          "updatedAt": "2020-09-22 08:49:45",
+          "avatar": "storage/uploads/blog/media-avatar/10fd92809227fd7b4ccfa1187bf6601f46f385bc.png",
+          "avatarUrl": "https://s3.tamtam.pro/rc/storage/media/IMAGE/24107/7213ad07892aa97e3bfaa12258229e2714721768.png"
+        }
+      ],
+      "chains": [
+        {
+          "id": 184,
+          "nameFr": "StatBel",
+          "nameEn": "StatBel",
+          "nameNl": "StatBel",
+          "descriptionFr": "undefined",
+          "descriptionEn": "undefined",
+          "descriptionNl": "undefined",
+          "headline": "",
+          "company": "Office belge des statistiques - het Belgische statistiekbureau",
+          "preferences": { "isEmailVisible": "0" },
+          "site": "https://statbel.fgov.be/",
+          "createdAt": "2021-11-18 13:28:27",
+          "updatedAt": "2022-05-05 07:40:11",
+          "mediaChain": [
+            {
+              "language": "fr",
+              "avatar": "storage/uploads/blog/media-avatar/8e0ef594412b5018f06909809bd1c31186fc6f54.png",
+              "avatarUrl": "https://s3.tamtam.pro/prod/storage/media/IMAGE/23139/8e0ef594412b5018f06909809bd1c31186fc6f54.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 14052,
+      "title": "Chômage temporaire consécutif à l'épidémie du coronavirus COVID-19 – Prolongation de la procédure simplifiée jusqu'au 31.03.2022",
+      "language": "fr",
+      "status": "PUBLISHED",
+      "isPrivate": false,
+      "authorsNames": "Office National de l'Emploi ",
+      "isExternal": false,
+      "externalUrl": "",
+      "shortUrl": "bit.ly/35T1hoL",
+      "fluxType": "FLUX",
+      "csScope": ["PUBLIC"],
+      "groups": [],
+      "privateGroups": [],
+      "readTime": 5,
+      "publishOnTalk": false,
+      "countLikes": 0,
+      "countDislikes": 0,
+      "countComments": 0,
+      "createdAt": "2022-03-15 08:04:36",
+      "publishedAt": "2022-03-15 08:00:00",
+      "updatedAt": "2022-03-15 08:04:36",
+      "introduction": "Le 10 décembre 2021, le cabinet fédéral, réuni en Kern, a décidé de prolonger la procédure de chômage temporaire jusqu’au 31.03.2022 inclus. Par conséquent, l'intégralité du chômage temporaire dû au coronavirus peut être considéré jusqu'au 31.03.2022 comme du chômage temporaire pour force majeure corona. Il peut donc s'agir :d'une suspension complète de l'exécution du contrat de travail (par exemple, à la suite d'une fermeture imposée)...",
+      "url": "chomage-temporaire-consecutif-a-lepidemie-du-coronavirus-covid-19-prolongation-de-la-procedure-simplifiee-jusquau-31.03.2022",
+      "main_media": {
+        "id": 25486,
+        "type": "IMAGE",
+        "inHistory": false,
+        "isAttachment": false,
+        "embedUrl": "",
+        "isMain": true,
+        "name": "chomageeco_01_PIXA.jpg",
+        "createdAt": "2022-03-15 08:07:34",
+        "updatedAt": "2022-03-15 08:07:34",
+        "yPos": 9,
+        "rgb": "#797781",
+        "yHeight": 75,
+        "mainFilename": "adb33fb0501a8e201c8f56148f64841cc625fe32.jpeg",
+        "path": "adb33fb0501a8e201c8f56148f64841cc625fe32.jpeg",
+        "titleEn": "",
+        "titleFr": "Chômage temporaire consécutif à l'épidémie du coronavirus COVID-19 – Prolongation de la procédure simplifiée jusqu'au 31.03.2022",
+        "titleNl": "",
+        "docType": "IMAGE",
+        "inTheNews": false,
+        "publishedAt": null,
+        "meta": [],
+        "webPath": "storage/uploads/medias/adb33fb0501a8e201c8f56148f64841cc625fe32.jpeg",
+        "fullMediaUrl": "https://s3.tamtam.pro/prod/storage/media/IMAGE/25486/adb33fb0501a8e201c8f56148f64841cc625fe32.jpeg",
+        "fullReducedWebPath": "https://s3.tamtam.pro/prod/storage/media/IMAGE/25486/REDUCED-adb33fb0501a8e201c8f56148f64841cc625fe32.jpeg",
+        "fullCroppedWebPath": "https://s3.tamtam.pro/prod/storage/media/IMAGE/25486/CROPPED-adb33fb0501a8e201c8f56148f64841cc625fe32.jpeg"
+      },
+      "category": {
+        "urlNameFr": "social",
+        "urlNameEn": "social",
+        "urlNameNl": "social",
+        "colorCode": "#e95b2b",
+        "id": 9,
+        "nameFr": "Social",
+        "nameEn": "Social",
+        "nameNl": "Social",
+        "idInFlux": 39
+      },
+      "pages": [
+        {
+          "id": 133,
+          "titleFr": "Coronavirus",
+          "titleEn": "Coronavirus",
+          "titleNl": "Coronavirus",
+          "sharedBy": {
+            "firstName": "Emmanuel",
+            "lastName": "Degrève",
+            "id": 8650,
+            "mainEmail": "emmanuel.degreve@degandpartners.com",
+            "mainPhone": "+32486210211",
+            "avatar": "storage/uploads/users/8650/AVATAR_70d83b21836dec24e6ec10e5d38a0ac3d96cbed2.png"
+          },
+          "sharedAt": "2022-03-15 08:04:37",
+          "cover": "storage/uploads/blog/media-page/5d55f9219ef5972d13854a5e2a7fd33575cc1e70.jpeg"
+        }
+      ],
+      "author": [
+        {
+          "firstName": "Emmanuel",
+          "lastName": "Degrève",
+          "description": "",
+          "metas": {
+            "quote": {
+              "en": "",
+              "fr": "",
+              "nl": ""
+            },
+            "organizations": {
+              "4": {
+                "name": "Deg & Partners",
+                "url": "http://www.degandpartners.com",
+                "path": "https://s3.eu-west-1.amazonaws.com/tamtam/prod/organization/metas/2db7e3774c3b8a7b3e67268324c024fc587f505d-DEG-logo.png"
+              },
+              "4442": {
+                "name": "Deg & Partners",
+                "url": "http://www.degandpartners.com",
+                "path": "https://s3.tamtam.pro/prod/organization/metas/ef166943d8ea17e99a03164eb895c5b5c700fe6e-Deg&PartnersLogo.png"
+              }
+            }
+          },
+          "id": 8650,
+          "mainEmail": "emmanuel.degreve@degandpartners.com",
+          "mainPhone": "+32486210211",
+          "userMobilePhone": "",
+          "avatar": "storage/media/IMAGE/31/AVATAR_70d83b21836dec24e6ec10e5d38a0ac3d96cbed2.png",
+          "avatarUrl": "https://s3.tamtam.pro/prod/storage/media/IMAGE/31/AVATAR_70d83b21836dec24e6ec10e5d38a0ac3d96cbed2.png",
+          "url": "emmanuel-degreve",
+          "creator": {
+            "id": 71367,
+            "organizations": []
+          },
+          "signature": {
+            "title": "Emmanuel Degrève",
+            "head": "Président de la Fondation Forum For the Future"
+          },
+          "enableAvatar": false,
+          "priority": 0
+        }
+      ],
+      "organization": {
+        "id": 9,
+        "name": "Forum for the future",
+        "abbreviation": "F.F.F.",
+        "avatarWebPath": "storage/media/IMAGE/2174/AVATAR_54cbd68e1ba9284a1e486bd5d8551259cd51d96e.png",
+        "avatarUrl": "https://s3.tamtam.pro/prod/storage/media/IMAGE/2174/AVATAR_54cbd68e1ba9284a1e486bd5d8551259cd51d96e.png",
+        "btbPreferences": {
+          "authorizations": [
+            {
+              "role": "MANAGER",
+              "auth": ["*"]
+            },
+            {
+              "role": "LEGAL_REPRESENTATIVE_ADMIN",
+              "auth": ["*"]
+            },
+            {
+              "role": "LEGAL_REPRESENTATIVE_MANAGER",
+              "auth": ["*"]
+            },
+            {
+              "role": "OFFICIAL",
+              "auth": [
+                "approver",
+                "inbox_viewer",
+                "outbox_viewer",
+                "handle_filter_document_task"
+              ]
+            }
+          ]
+        },
+        "directoryActivated": 1,
+        "dirPreferences": {
+          "btbEmail": "bruno.delescaille@degandpartners.com",
+          "appliedChannelsStatus": [
+            {
+              "id": "BILLTOBOX_INIT_ID",
+              "name": "billtobox",
+              "status": "deactivated"
+            },
+            {
+              "id": "BILLTOBOXFILES_INIT_ID",
+              "name": "billtoboxfiles",
+              "status": "deleted"
+            },
+            {
+              "id": 1303,
+              "name": "billtoboxfiles",
+              "status": "activated"
+            }
+          ]
+        },
+        "directBilling": true,
+        "blogActivated": 1,
+        "mediaActivated": 0,
+        "forumActivated": 0,
+        "webtoolsActivated": 0,
+        "eventActivated": 1,
+        "eventPreferences": {
+          "membership": {
+            "type": "fff",
+            "data": {
+              "groupsIn": [],
+              "groupsEx": []
+            }
+          },
+          "tasks": {
+            "6": [
+              {
+                "name": "ppts_uploads",
+                "nameFr": "Upload des ppts",
+                "nameEn": "Upload des ppts",
+                "nameNl": "Upload des ppts",
+                "weight": "100",
+                "deadline": "-20"
+              },
+              {
+                "name": "examen",
+                "nameFr": "Introduction de l'Examen final",
+                "nameEn": "Final Exam",
+                "nameNl": "Finale exam",
+                "weight": "100",
+                "deadline": "-20"
+              }
+            ]
+          },
+          "groups": {
+            "groups_5": {
+              "guest": ["Congress2021"],
+              "registered": ["Congress2021Ok"]
+            },
+            "groups_6": {
+              "guest": [],
+              "registered": []
+            },
+            "groups_7": {
+              "guest": [],
+              "registered": []
+            }
+          }
+        },
+        "paymentActivated": 1,
+        "dataActivated": 1,
+        "teamActivated": 0,
+        "surveyActivated": 1,
+        "fluxActivated": 1,
+        "chatActivated": 2,
+        "synetonActivated": 0,
+        "socialNetworks": {
+          "linkedin": {
+            "dnuRIWeubQ": {
+              "id": "dnuRIWeubQ",
+              "username": "Emmanuel Degrève",
+              "profile_picture": "https://media-exp1.licdn.com/dms/image/C4E03AQF6iyMYIFYYtA/profile-displayphoto-shrink_100_100/0/1517750856914?e=1645056000&v=beta&t=LiD8vfIPgTn7qQuzuWDzruYFruCfako4JFQs-NYp4xQ",
+              "profile_picture_original": "https://media-exp1.licdn.com/dms/image/C4E03AQF6iyMYIFYYtA/profile-displayphoto-shrink_800_800/0/1517750856914?e=1645056000&v=beta&t=XzcYkB3wQyoOEXbi2gnRFrR6x9PTnizuWGDokYMtcj0",
+              "publicProfileUrl": "https://media-exp1.licdn.com/dms/image/C4E03AQF6iyMYIFYYtA/profile-displayphoto-shrink_100_100/0/1517750856914?e=1645056000&v=beta&t=LiD8vfIPgTn7qQuzuWDzruYFruCfako4JFQs-NYp4xQ",
+              "accesstoken": "AQXPtgCov2rwQTYhy7xE6Ladi_HfGEAhd0WbD6WYNK54_WZaSqTo2vwwBBXOH7pxIhj8T3vPH5d7Hp3MYeoJlfhqRZLgFxvCJXppqsu1ATKhXVMzvO0rzhB-3GueXqC3aBIgxJKobSDlr7xXYHi9kz22HplQmgDUZ9Gywbkaz_miYcbra_iDq9pfqmUf4HvjbrCRF4VF0ixcUtpgn3mng5zmleZviadI-VUnNxztdZwlByycQyqcJbnNIGT4KzAr4wknq2puuNauejeSAjBlpUHJV4yCc8WUy1NCsVCy3cUgDejsSAJ7TsMQk6lX00HW0Ouebd2SZi-vm5A_iSgLNbJ3sPfz_w",
+              "updated_at": "2021-12-13 21:49:02"
+            }
+          }
+        },
+        "emailingPreferences": {
+          "from_email": "info@forumforthefuture.be",
+          "base_url": "http://tamtam.pro/emails2017",
+          "from_name": "ForumForTheFuture",
+          "cs_app_scope": "INTRA_SHARE",
+          "cs_default_scope": "INTRA_SHARE"
+        },
+        "emailingTestingPreferences": {
+          "autoSend": false,
+          "mandatoryTest": false
+        },
+        "emailingActivated": 1,
+        "appsValidationStatus": {
+          "wtb": [],
+          "btb": [],
+          "btbfiles": []
+        },
+        "mediaPreferences": {
+          "languages": "FR,NL,EN",
+          "generalTypes": "IMAGE,VIDEO,PDF,PPT",
+          "publicProfile": "1",
+          "defaultData": "{}"
+        },
+        "hubPreferences": {
+          "layout_settings": [
+            {
+              "name": "Collaborateur",
+              "config": [
+                {
+                  "type": "OTHER",
+                  "order": 1,
+                  "enabled": true,
+                  "label": "Actualité FFF",
+                  "url": "https://hub.tamtam.pro/pages/16",
+                  "icon": "https://s3.tamtam.pro/v2/apps/blog.png",
+                  "app": "BLOG"
+                },
+                {
+                  "type": "OTHER",
+                  "order": 2,
+                  "enabled": true,
+                  "label": "Dos FFF",
+                  "url": "https://hub.tamtam.pro/pages/20",
+                  "icon": "https://s3.tamtam.pro/v2/apps/media.png",
+                  "app": "MEDIA"
+                },
+                {
+                  "type": "OTHER",
+                  "order": 3,
+                  "enabled": true,
+                  "label": "Mes replays",
+                  "url": "https://hub.tamtam.pro/pages/18",
+                  "icon": "https://s3.tamtam.pro/v2/apps/event.png",
+                  "app": "EVENT"
+                },
+                {
+                  "type": "OTHER",
+                  "order": 4,
+                  "enabled": true,
+                  "label": "Alert FFF",
+                  "url": "https://hub.tamtam.pro/pages/19",
+                  "icon": "https://s3.tamtam.pro/v2/apps/blog.png",
+                  "app": "BLOG"
+                },
+                {
+                  "type": "OTHER",
+                  "order": 5,
+                  "enabled": true,
+                  "label": "Galerie",
+                  "url": "https://hub.tamtam.pro/pages/17",
+                  "icon": "https://s3.tamtam.pro/v2/apps/media.png",
+                  "app": "MEDIA"
+                }
+              ],
+              "scope": ["COLLABORATER"],
+              "group": [],
+              "widgets": ["TALK_FLOAT", "SENDING", "ARTICLE", "TAMTAMIT"],
+              "apps": ["DASHBOARD", "POWERTEAM"]
+            },
+            {
+              "name": "ClIENTS",
+              "config": [
+                {
+                  "type": "OTHER",
+                  "order": 1,
+                  "enabled": true,
+                  "label": "",
+                  "url": "",
+                  "icon": "",
+                  "app": ""
+                }
+              ],
+              "scope": ["ALL"],
+              "group": [],
+              "widgets": [],
+              "apps": []
+            }
+          ]
+        },
+        "blogPreferences": {
+          "cs_app_scope": "EXTRA_CROSS",
+          "cs_default_scope": "EXTRA_CROSS",
+          "layout_settings": "model-4",
+          "cropping": "2:1"
+        },
+        "surveyPreferences": {
+          "cs_app_scope": "INTRA_SHARE",
+          "cs_default_scope": "INTRA_SHARE"
+        },
+        "smsCredit": 0,
+        "profitMargin": 0,
+        "defaultMemberAuthorisationMode": "",
+        "gdprAlertEnabled": 0,
+        "csGeneralScope": "EXTRA_CROSS",
+        "portalActivatedApps": "",
+        "portalCustomApps": "",
+        "portalClientActivated": 0,
+        "portalOfficialActivated": 0,
+        "verifiedEmails": [
+          {
+            "email": "info@forumforthefuture.be",
+            "name": "Forum for the Future",
+            "main": 1
+          },
+          {
+            "email": "emmanuel.degreve@forumforthefuture.be",
+            "name": "Emmanuel Degrève",
+            "main": 0
+          }
+        ],
+        "organizationSettingsId": 7,
+        "appsState": [
+          {
+            "code": "blog",
+            "name": {
+              "fr": "Blog",
+              "en": "Blog",
+              "nl": "Blog"
+            },
+            "url": "https://blog.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/blog.png",
+            "activated": true
+          },
+          {
+            "code": "media",
+            "name": {
+              "fr": "Media",
+              "en": "Media",
+              "nl": "Media"
+            },
+            "url": "https://media.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/media.png",
+            "activated": false
+          },
+          {
+            "code": "forum",
+            "name": {
+              "fr": "Forum",
+              "en": "Forum",
+              "nl": "Forum"
+            },
+            "url": "https://forum.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/forum.png",
+            "activated": false
+          },
+          {
+            "code": "emailing",
+            "name": {
+              "fr": "Emailing",
+              "en": "Emailing",
+              "nl": "Emailing"
+            },
+            "url": "https://sending.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/emailing.png",
+            "activated": true
+          },
+          {
+            "code": "ebox",
+            "name": {
+              "fr": "E-Box",
+              "en": "E-Box",
+              "nl": "E-Box"
+            },
+            "url": "https://sending.tamtam.pro/e_box",
+            "icon": "https://s3.tamtam.pro/prod/apps/ebox.png",
+            "activated": true
+          },
+          {
+            "code": "sms",
+            "name": {
+              "fr": "SMS",
+              "en": "SMS",
+              "nl": "SMS"
+            },
+            "url": "https://sending.tamtam.pro/sms",
+            "icon": "https://s3.tamtam.pro/prod/apps/sms.png",
+            "activated": true
+          },
+          {
+            "code": "talk",
+            "name": {
+              "fr": "Talk",
+              "en": "Talk",
+              "nl": "Talk"
+            },
+            "url": "https://talk.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/talk.png",
+            "activated": false
+          },
+          {
+            "code": "data",
+            "name": {
+              "fr": "Accounting",
+              "en": "Accounting",
+              "nl": "Accounting"
+            },
+            "url": "https://accounting.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/accounting.png",
+            "activated": true
+          },
+          {
+            "code": "team",
+            "name": {
+              "fr": "Powerteam",
+              "en": "Powerteam",
+              "nl": "Powerteam"
+            },
+            "url": "https://powerteam.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/powerteam.png",
+            "activated": false
+          },
+          {
+            "code": "webtools",
+            "name": {
+              "fr": "Webtools",
+              "en": "Webtools",
+              "nl": "Webtools"
+            },
+            "url": "https://webtool.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/webtools.png",
+            "activated": false
+          },
+          {
+            "code": "survey",
+            "name": {
+              "fr": "Survey",
+              "en": "Survey",
+              "nl": "Survey"
+            },
+            "url": "https://survey.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/survey.png",
+            "activated": true
+          },
+          {
+            "code": "event",
+            "name": {
+              "fr": "Event",
+              "en": "Event",
+              "nl": "Event"
+            },
+            "url": "https://event.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/event.png",
+            "activated": true
+          },
+          {
+            "code": "directory",
+            "name": {
+              "fr": "Directory (HQ)",
+              "en": "Directory (HQ)",
+              "nl": "Directory (HQ)"
+            },
+            "url": "https://one.tamtam.pro/folders",
+            "icon": "https://s3.tamtam.pro/prod/apps/directory.png",
+            "activated": true
+          },
+          {
+            "code": "payment",
+            "name": {
+              "fr": "Payment",
+              "en": "Payment",
+              "nl": "Payment"
+            },
+            "url": "https://payment.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/payment.png",
+            "activated": true
+          },
+          {
+            "code": "portal",
+            "name": {
+              "fr": "Portal",
+              "en": "Portal",
+              "nl": "Portal"
+            },
+            "url": "https://portal.tamtam.pro/",
+            "icon": "https://s3.tamtam.pro/prod/apps/portal.png",
+            "activated": false
+          }
+        ],
+        "startDate": null,
+        "languagePreferences": null,
+        "url": "forum-for-the-future",
+        "hasFiduciariesAdmin": true
+      },
+      "theme": {
+        "id": 29,
+        "titleFr": "Coronavirus",
+        "titleEn": "Coronavirus",
+        "titleNl": "Coronavirus",
+        "isDefault": false,
+        "pages": [
+          {
+            "id": 133,
+            "titleFr": "Coronavirus",
+            "titleEn": "Coronavirus",
+            "titleNl": "Coronavirus"
+          }
+        ]
+      },
+      "social": {
+        "isLiked": -1,
+        "isFavorite": 0
+      },
+      "type": {
+        "id": 3,
+        "nameFr": "Actualité",
+        "nameEn": "News",
+        "nameNl": "Actualiteit",
+        "colorCode": "#faba09"
+      },
+      "tags": [
+        {
+          "articleId": "14052",
+          "nameFr": "Coronavirus",
+          "nameEn": "Coronavirus",
+          "nameNl": "Coronavirus",
+          "sanitizedNameFr": "coronavirus",
+          "counter": 692,
+          "blogCounter": 690,
+          "eventCounter": 0,
+          "mediaCounter": 0,
+          "forumCounter": 0,
+          "webtoolCounter": 2,
+          "isAbbreviation": false,
+          "isUniversal": false,
+          "isSuperTag": false,
+          "isSynonym": false,
+          "isHandled": true,
+          "status": "1",
+          "id": 13769,
+          "createdAt": "2020-08-08 19:03:56",
+          "synonymsCount": 6
+        },
+        {
+          "articleId": "14052",
+          "nameFr": "2022",
+          "nameEn": "2022",
+          "nameNl": "2022",
+          "sanitizedNameFr": "2022",
+          "counter": 324,
+          "blogCounter": 320,
+          "eventCounter": 0,
+          "mediaCounter": 0,
+          "forumCounter": 0,
+          "webtoolCounter": 0,
+          "isAbbreviation": false,
+          "isUniversal": true,
+          "isSuperTag": false,
+          "isSynonym": false,
+          "isHandled": true,
+          "status": "1",
+          "id": 22,
+          "createdAt": "2015-05-05 00:00:00",
+          "synonymsCount": 0
+        },
+        {
+          "articleId": "14052",
+          "nameFr": "Chomage économique",
+          "nameEn": "Economic unemployment",
+          "nameNl": "Economische werkloosheid",
+          "sanitizedNameFr": "chomage economique",
+          "counter": 7,
+          "blogCounter": 2,
+          "eventCounter": 0,
+          "mediaCounter": 0,
+          "forumCounter": 0,
+          "webtoolCounter": 0,
+          "isAbbreviation": false,
+          "isUniversal": false,
+          "isSuperTag": false,
+          "isSynonym": false,
+          "isHandled": false,
+          "status": "0",
+          "id": 495,
+          "createdAt": "2015-05-05 00:00:00",
+          "synonymsCount": 0
+        },
+        {
+          "articleId": "14052",
+          "nameFr": "Mesures de soutien",
+          "nameEn": "Support measures",
+          "nameNl": "Steunmaatregelen",
+          "sanitizedNameFr": "mesures de soutien",
+          "counter": 43,
+          "blogCounter": 7,
+          "eventCounter": 0,
+          "mediaCounter": 0,
+          "forumCounter": 0,
+          "webtoolCounter": 0,
+          "isAbbreviation": false,
+          "isUniversal": false,
+          "isSuperTag": false,
+          "isSynonym": false,
+          "isHandled": false,
+          "status": "0",
+          "id": 3303,
+          "createdAt": "2017-09-15 12:42:12",
+          "synonymsCount": 0
+        },
+        {
+          "articleId": "14052",
+          "nameFr": "Chomage temporaire",
+          "nameEn": "Temporary unemployment",
+          "nameNl": "Tijdelijke werkloosheid",
+          "sanitizedNameFr": "chomage temporaire",
+          "counter": 47,
+          "blogCounter": 9,
+          "eventCounter": 0,
+          "mediaCounter": 0,
+          "forumCounter": 0,
+          "webtoolCounter": 0,
+          "isAbbreviation": false,
+          "isUniversal": false,
+          "isSuperTag": false,
+          "isSynonym": false,
+          "isHandled": true,
+          "status": "0",
+          "id": 2749,
+          "createdAt": "2015-05-05 00:00:00",
+          "synonymsCount": 0
+        }
+      ],
+      "avatars": [
+        {
+          "id": 76,
+          "firstName": "",
+          "lastName": "",
+          "headline": "",
+          "company": "Office National de l'Emploi",
+          "preferences": {
+            "isEmailVisible": "0"
+          },
+          "createdAt": "2020-03-17 09:27:52",
+          "updatedAt": "2020-03-17 09:27:52",
+          "avatar": "storage/uploads/blog/media-avatar/1bfd31aa4ca872f27b69da48a8a56c37f83cb3df.png",
+          "avatarUrl": "https://s3.tamtam.pro/prod/storage/media/IMAGE/11597/1bfd31aa4ca872f27b69da48a8a56c37f83cb3df.png"
+        }
+      ]
+    }
+  ]
+}

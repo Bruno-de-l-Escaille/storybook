@@ -1,0 +1,134 @@
+.articleSlide {
+  padding-bottom: 10px;
+  .category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 6px;
+    min-width: 45px;
+    min-height: 15px;
+    border-radius: 5px;
+    background: #f8626d;
+    color: #fff;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: fit-content;
+  }
+
+  .footer {
+    flex-direction: column;
+
+    .infos {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      .publishedAt,
+      .readTime {
+        color: #f1f2f4;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+
+      .dot {
+        width: 5px;
+        height: 5px;
+        background-color: #f1f2f4;
+        border-radius: 50%;
+      }
+    }
+
+    hr {
+      border: 0.25px solid #e1e4e8;
+      width: 100%;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .reactActions {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+
+        .likes,
+        .comments {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: #f1f2f4;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+
+          path {
+            fill: #b2bcc6;
+          }
+
+          &.active {
+            path {
+              fill: #f8626d;
+            }
+          }
+        }
+
+        &.allowedInteraction {
+          .likes,
+          .comments {
+            cursor: pointer;
+
+            &:hover path {
+              fill: #6d7f92;
+            }
+          }
+        }
+      }
+
+      .share {
+        position: relative;
+        color: #f1f2f4;
+        text-align: right;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        cursor: pointer;
+      }
+
+      .sharePopup {
+        position: absolute;
+        top: -50px;
+        left: -50%;
+        display: flex;
+        padding: 5px 10px;
+        transform: translateX(-50%);
+        background: #f1f2f4;
+        border-radius: 5px;
+        border: 1px solid #fff;
+
+        .action {
+          position: relative;
+          cursor: pointer;
+          width: 32px !important;
+          height: 32px;
+          border-radius: 50px;
+          background-color: #fff;
+          margin-right: 14px;
+          font-size: 10px;
+          line-height: 11px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #f1f2f4;
+        }
+      }
+    }
+  }
+}

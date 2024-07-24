@@ -1,0 +1,1161 @@
+[
+  {
+    "id": 1202,
+    "nameFr": "Cycle Déclaration IPP 2024 et avantages fiscaux : toutes les ficelles pour réduire la facture du contribuable!",
+    "nameEn": "",
+    "nameNl": "",
+    "status": 1,
+    "type": 6,
+    "languages": "{\"Fr\":\"1\",\"Nl\":0,\"En\":0}",
+    "stages": "{\"inscription\":\"true\",\"payBank\":\"false\",\"payOnline\":\"false\",\"printBadge\":\"false\",\"printProgramOnBadge\":\"false\",\"autoActivateInvitePartOnSave\":\"false\",\"lmFull\":\"admin\",\"showSupports\":\"false\",\"Evaluation\":\"true\",\"showProgram\":\"false\",\"showLiberFormMessage\":\"false\",\"showOffProgram\":\"false\",\"showOrateurs\":\"false\",\"showAttestationUser\":\"false\",\"showAttestationForce\":\"false\",\"showAttestation\":\"false\",\"hideProgramInAttestation\":\"false\",\"showSpeedCoaching\":\"false\",\"forceModifPrinted\":\"false\",\"showActivitiesList\":\"false\",\"chooseByActivities\":\"false\",\"fullProgram\":\"true\",\"alwaysDisplayDateProgram\":\"false\",\"doScanSlots\":\"false\",\"attestationOnlyProgram\":\"false\",\"useMemberCard\":\"false\",\"showGeneral\":\"false\",\"showSpeakers\":\"false\",\"showMaps\":\"true\",\"useOldBanner\":\"false\",\"showMeetingsFrontMenu\":\"false\",\"showMobileApps\":\"true\",\"noInvoicing\":\"false\"}",
+    "urlBannerFr": "/eventsFolder/client9/event1202/_model/html/img/bannerFr_2024_01_18_07_06_36-original.jpg",
+    "urlBannerEn": "",
+    "urlBannerNl": "",
+    "descriptionFr": "",
+    "descriptionEn": "",
+    "descriptionNl": "",
+    "placeFr": "",
+    "placeEn": "",
+    "placeNl": "",
+    "template": "unify",
+    "configBag": "{\"linkWebinarFr\":\"\",\"linkWebinarEn\":\"\",\"linkWebinarNl\":\"\",\"blocks\":[],\"membership\":{\"type\":\"fff\",\"data\":{\"groupsIn\":[],\"groupsEx\":[]}},\"groups\":{\"guest\":[\"\"],\"registered\":[\"\"]}}",
+    "memberPrice": 49,
+    "nonMemberPrice": 69,
+    "maxNumber": 500,
+    "isVirtual": 1,
+    "isReplayable": 1,
+    "isOnlyByCycle": 0,
+    "labelFr": "",
+    "labelNl": "",
+    "labelEn": "",
+    "replayStatus": 1,
+    "isMultiDate": 1,
+    "question": "",
+    "isCertificateNotIncluded": 0,
+    "callToActionFr": "",
+    "callToActionNl": "",
+    "updatedAt": "2024-05-02 12:02:10",
+    "createdAt": "2024-01-18 06:06:35",
+    "startDateTime": "2024-08-12 12:15:00",
+    "endDateTime": "2024-08-12 13:15:00",
+    "eventDate": "2024-08-12",
+    "client": 9,
+    "tag": [],
+    "isIncludedPremium": 1,
+    "eventDates": [
+      {
+        "id": "125",
+        "startDateTime": "2024-09-18 13:15:00",
+        "endDateTime": "2024-09-18 14:15:00"
+      }
+    ],
+    "speakers-abstract": {
+      "count": 2,
+      "speakers": [
+        {
+          "id": "25",
+          "firstName": "Emmanuel",
+          "lastName": "Degrève",
+          "pictureUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/31/AVATAR_a838aa75f6239ff4efb921e6dde7adbc3dd7d3d9.png",
+          "userId": "8650",
+          "email": "emmanuel.degreve@users.tamtam.pro",
+          "headlineFr": "Conseil Fiscal, Founding Partner @ Deg & Partners",
+          "headlineEn": "Tax Advisor I Founding Partner @ Deg & Partners",
+          "headlineNl": "Belastingconsulent, Founding Partner @ Deg & Partners",
+          "blogUrlPath": "/author/emmanuel-degreve/8650",
+          "priority": "0",
+          "eventId": "1202",
+          "slots": [
+            {
+              "id": "3685",
+              "type": "1"
+            }
+          ]
+        },
+        {
+          "id": "45",
+          "firstName": "Julien",
+          "lastName": "Limborg",
+          "pictureUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/4587/AVATAR_41374518e612579b2351f1c92b40e5cf409cde91.png",
+          "userId": "25315",
+          "email": "julien.limborg@degandpartners.com",
+          "headlineFr": "Senior Tax Advisor @ Deg & Partners",
+          "headlineEn": "",
+          "headlineNl": "{\"title\":\"\",\"signature\":\"\"}",
+          "blogUrlPath": "/author/julien-limborg/25315",
+          "priority": "0",
+          "eventId": "1202",
+          "slots": [
+            {
+              "id": "3685",
+              "type": "1"
+            }
+          ]
+        }
+      ]
+    },
+    "accreditationHours": 1,
+    "clientData": {
+      "id": "9",
+      "name": "Forum for the future",
+      "abbreviation": "F.F.F.",
+      "mediaId": "2174",
+      "avatarUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/2174/AVATAR_54cbd68e1ba9284a1e486bd5d8551259cd51d96e.png"
+    },
+    "slotsCount": 1,
+    "slotReplayUrls": {
+      "webinarUrlEn": "https://webinar-1.staging.tamtam.pro/webinars/YArDzyCd36Y4EaGe7",
+      "webinarReplayVideoEn": "",
+      "webinarReplayVideoFr": "",
+      "webinarReplayVideoNl": ""
+    },
+    "eventCycles": [
+      {
+        "id": "2643",
+        "number": "0",
+        "cycle": "56",
+        "isCyclePremium": "1",
+        "isCycleSeason": "0",
+        "event": "1202",
+        "cycleStatus": "1"
+      },
+      {
+        "id": "2533",
+        "number": "1",
+        "cycle": "97",
+        "isCyclePremium": "0",
+        "isCycleSeason": "0",
+        "event": "1202",
+        "cycleStatus": "1"
+      },
+      {
+        "id": "2534",
+        "number": "1",
+        "cycle": "110",
+        "isCyclePremium": "0",
+        "isCycleSeason": "0",
+        "event": "1202",
+        "cycleStatus": "1"
+      }
+    ],
+    "registeredCount": "126",
+    "guestCount": "130"
+  },
+  {
+    "id": 1218,
+    "nameFr": "Cycle TVA et livraisons en chaîne (Partie 1)",
+    "nameEn": "",
+    "nameNl": "",
+    "status": 1,
+    "type": 6,
+    "languages": "{\"Fr\":\"1\",\"Nl\":0,\"En\":0}",
+    "stages": "{\"inscription\":\"true\",\"payBank\":\"false\",\"payOnline\":\"false\",\"printBadge\":\"false\",\"printProgramOnBadge\":\"false\",\"autoActivateInvitePartOnSave\":\"false\",\"lmFull\":\"admin\",\"showSupports\":\"false\",\"Evaluation\":\"true\",\"showProgram\":\"false\",\"showLiberFormMessage\":\"false\",\"showOffProgram\":\"false\",\"showOrateurs\":\"false\",\"showAttestationUser\":\"false\",\"showAttestationForce\":\"false\",\"showAttestation\":\"false\",\"hideProgramInAttestation\":\"false\",\"showSpeedCoaching\":\"false\",\"forceModifPrinted\":\"false\",\"showActivitiesList\":\"false\",\"chooseByActivities\":\"false\",\"fullProgram\":\"true\",\"alwaysDisplayDateProgram\":\"false\",\"doScanSlots\":\"false\",\"attestationOnlyProgram\":\"false\",\"useMemberCard\":\"false\",\"showGeneral\":\"false\",\"showSpeakers\":\"false\",\"showMaps\":\"true\",\"useOldBanner\":\"false\",\"showMeetingsFrontMenu\":\"false\",\"showMobileApps\":\"true\",\"noInvoicing\":\"false\"}",
+    "urlBannerFr": "/eventsFolder/client9/event1218/_model/html/img/bannerFr_2024_02_26_12_16_19-original.jpg",
+    "urlBannerEn": "",
+    "urlBannerNl": "",
+    "descriptionFr": "",
+    "descriptionEn": "",
+    "descriptionNl": "",
+    "placeFr": "",
+    "placeEn": "",
+    "placeNl": "",
+    "template": "unify",
+    "configBag": "{\"linkWebinarFr\":\"\",\"linkWebinarEn\":\"\",\"linkWebinarNl\":\"\",\"blocks\":[],\"membership\":{\"type\":\"fff\",\"data\":{\"groupsIn\":[],\"groupsEx\":[]}},\"groups\":{\"guest\":[\"\"],\"registered\":[\"\"]}}",
+    "memberPrice": 49,
+    "nonMemberPrice": 69,
+    "maxNumber": 500,
+    "isVirtual": 1,
+    "isReplayable": 1,
+    "isOnlyByCycle": 0,
+    "labelFr": "",
+    "labelNl": "",
+    "labelEn": "",
+    "replayStatus": 2,
+    "isMultiDate": 1,
+    "question": "",
+    "isCertificateNotIncluded": 0,
+    "updatedAt": "2024-03-20 22:37:27",
+    "createdAt": "2024-01-18 07:29:10",
+    "startDateTime": "2024-03-18 12:15:00",
+    "endDateTime": "2024-03-18 13:15:00",
+    "eventDate": "2024-03-18",
+    "client": 9,
+    "tag": [],
+    "isIncludedPremium": 1,
+    "eventDates": [
+      {
+        "id": "147",
+        "startDateTime": "2024-07-24 15:15:00",
+        "endDateTime": "2024-07-24 16:15:00"
+      }
+    ],
+    "speakers-abstract": {
+      "count": 1,
+      "speakers": [
+        {
+          "id": "1209",
+          "firstName": "Lionel",
+          "lastName": "Wielemans",
+          "pictureUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/37813/AVATAR_e466bd7dc11753fed7dfefd5bf42fa255e989672.png",
+          "userId": "473942",
+          "email": "lionel.wielemans@pwc.com",
+          "headlineFr": "Director @ PWC",
+          "headlineEn": "",
+          "headlineNl": "{\"title\":\"\",\"signature\":\"\"}",
+          "blogUrlPath": "/author/lionel-wielemans/473942",
+          "priority": "0",
+          "eventId": "1218",
+          "slots": [
+            {
+              "id": "3701",
+              "type": "1"
+            }
+          ]
+        }
+      ]
+    },
+    "accreditationHours": 1,
+    "clientData": {
+      "id": "9",
+      "name": "Forum for the future",
+      "abbreviation": "F.F.F.",
+      "mediaId": "2174",
+      "avatarUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/2174/AVATAR_54cbd68e1ba9284a1e486bd5d8551259cd51d96e.png"
+    },
+    "slotsCount": 1,
+    "slotReplayUrls": {
+      "webinarUrlEn": "https://webinar-1.staging.tamtam.pro/webinars/45SBcPeHuQk7gJ5T6",
+      "webinarReplayVideoEn": "",
+      "webinarReplayVideoFr": "https://player.vimeo.com/video/922102440",
+      "webinarReplayVideoNl": ""
+    },
+    "eventCycles": [
+      {
+        "id": "2628",
+        "number": "0",
+        "cycle": "56",
+        "isCyclePremium": "1",
+        "isCycleSeason": "0",
+        "event": "1218",
+        "cycleStatus": "1"
+      },
+      {
+        "id": "2561",
+        "number": "1",
+        "cycle": "97",
+        "isCyclePremium": "0",
+        "isCycleSeason": "0",
+        "event": "1218",
+        "cycleStatus": "1"
+      },
+      {
+        "id": "2562",
+        "number": "1",
+        "cycle": "114",
+        "isCyclePremium": "0",
+        "isCycleSeason": "0",
+        "event": "1218",
+        "cycleStatus": "1"
+      }
+    ],
+    "registeredCount": "131",
+    "guestCount": "134"
+  },
+  {
+    "id": 1203,
+    "nameFr": "Cycle Déclaration IPP 2024 et revenus du patrimoine aux autres revenus : quelles nouveautés et quels conseils pratiques!",
+    "nameEn": "",
+    "nameNl": "",
+    "status": 1,
+    "type": 6,
+    "languages": "{\"Fr\":\"1\",\"Nl\":0,\"En\":0}",
+    "stages": "{\"inscription\":\"true\",\"payBank\":\"false\",\"payOnline\":\"false\",\"printBadge\":\"false\",\"printProgramOnBadge\":\"false\",\"autoActivateInvitePartOnSave\":\"false\",\"lmFull\":\"admin\",\"showSupports\":\"false\",\"Evaluation\":\"true\",\"showProgram\":\"false\",\"showLiberFormMessage\":\"false\",\"showOffProgram\":\"false\",\"showOrateurs\":\"false\",\"showAttestationUser\":\"false\",\"showAttestationForce\":\"false\",\"showAttestation\":\"false\",\"hideProgramInAttestation\":\"false\",\"showSpeedCoaching\":\"false\",\"forceModifPrinted\":\"false\",\"showActivitiesList\":\"false\",\"chooseByActivities\":\"false\",\"fullProgram\":\"true\",\"alwaysDisplayDateProgram\":\"false\",\"doScanSlots\":\"false\",\"attestationOnlyProgram\":\"false\",\"useMemberCard\":\"false\",\"showGeneral\":\"false\",\"showSpeakers\":\"false\",\"showMaps\":\"true\",\"useOldBanner\":\"false\",\"showMeetingsFrontMenu\":\"false\",\"showMobileApps\":\"true\",\"noInvoicing\":\"false\"}",
+    "urlBannerFr": "/eventsFolder/client9/event1203/_model/html/img/bannerFr_2024_01_18_07_14_03-original.jpg",
+    "urlBannerEn": "",
+    "urlBannerNl": "",
+    "descriptionFr": "",
+    "descriptionEn": "",
+    "descriptionNl": "",
+    "placeFr": "",
+    "placeEn": "",
+    "placeNl": "",
+    "template": "unify",
+    "configBag": "{\"linkWebinarFr\":\"\",\"linkWebinarEn\":\"\",\"linkWebinarNl\":\"\",\"blocks\":[],\"membership\":{\"type\":\"fff\",\"data\":{\"groupsIn\":[],\"groupsEx\":[]}},\"groups\":{\"guest\":[\"\"],\"registered\":[\"\"]}}",
+    "memberPrice": 49,
+    "nonMemberPrice": 69,
+    "maxNumber": 500,
+    "isVirtual": 1,
+    "isReplayable": 1,
+    "isOnlyByCycle": 0,
+    "labelFr": "",
+    "labelNl": "",
+    "labelEn": "",
+    "replayStatus": 1,
+    "isMultiDate": 1,
+    "question": "",
+    "isCertificateNotIncluded": 0,
+    "callToActionFr": "",
+    "callToActionNl": "",
+    "updatedAt": "2024-04-24 14:00:38",
+    "createdAt": "2024-01-18 06:14:02",
+    "startDateTime": "2024-06-19 12:15:00",
+    "endDateTime": "2024-06-19 13:15:00",
+    "eventDate": "2024-06-19",
+    "client": 9,
+    "tag": [],
+    "isIncludedPremium": 0,
+    "eventDates": [
+      {
+        "id": "67",
+        "startDateTime": "2024-07-25 12:15:00",
+        "endDateTime": "2024-07-25 13:15:00"
+      }
+    ],
+    "speakers-abstract": {
+      "count": 2,
+      "speakers": [
+        {
+          "id": "25",
+          "firstName": "Emmanuel",
+          "lastName": "Degrève",
+          "pictureUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/31/AVATAR_a838aa75f6239ff4efb921e6dde7adbc3dd7d3d9.png",
+          "userId": "8650",
+          "email": "emmanuel.degreve@users.tamtam.pro",
+          "headlineFr": "Conseil Fiscal, Founding Partner @ Deg & Partners",
+          "headlineEn": "Tax Advisor I Founding Partner @ Deg & Partners",
+          "headlineNl": "Belastingconsulent, Founding Partner @ Deg & Partners",
+          "blogUrlPath": "/author/emmanuel-degreve/8650",
+          "priority": "0",
+          "eventId": "1203",
+          "slots": [
+            {
+              "id": "3686",
+              "type": "1"
+            }
+          ]
+        },
+        {
+          "id": "45",
+          "firstName": "Julien",
+          "lastName": "Limborg",
+          "pictureUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/4587/AVATAR_41374518e612579b2351f1c92b40e5cf409cde91.png",
+          "userId": "25315",
+          "email": "julien.limborg@degandpartners.com",
+          "headlineFr": "Senior Tax Advisor @ Deg & Partners",
+          "headlineEn": "",
+          "headlineNl": "{\"title\":\"\",\"signature\":\"\"}",
+          "blogUrlPath": "/author/julien-limborg/25315",
+          "priority": "0",
+          "eventId": "1203",
+          "slots": [
+            {
+              "id": "3686",
+              "type": "1"
+            }
+          ]
+        }
+      ]
+    },
+    "accreditationHours": 1,
+    "clientData": {
+      "id": "9",
+      "name": "Forum for the future",
+      "abbreviation": "F.F.F.",
+      "mediaId": "2174",
+      "avatarUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/2174/AVATAR_54cbd68e1ba9284a1e486bd5d8551259cd51d96e.png"
+    },
+    "slotsCount": 1,
+    "slotReplayUrls": {
+      "webinarUrlEn": "https://webinar-1.staging.tamtam.pro/webinars/kjLbTRvoinxMzfgDL",
+      "webinarReplayVideoEn": "",
+      "webinarReplayVideoFr": "",
+      "webinarReplayVideoNl": ""
+    },
+    "eventCycles": [
+      {
+        "id": "2535",
+        "number": "1203",
+        "cycle": "97",
+        "isCyclePremium": "0",
+        "isCycleSeason": "0",
+        "event": "1203",
+        "cycleStatus": "1"
+      },
+      {
+        "id": "2536",
+        "number": "1",
+        "cycle": "110",
+        "isCyclePremium": "0",
+        "isCycleSeason": "0",
+        "event": "1203",
+        "cycleStatus": "1"
+      }
+    ],
+    "registeredCount": "124",
+    "guestCount": "127"
+  },
+  {
+    "id": 1217,
+    "nameFr": "Les holdings et la TVA",
+    "nameEn": "",
+    "nameNl": "",
+    "status": 1,
+    "type": 6,
+    "languages": "{\"Fr\":\"1\",\"Nl\":0,\"En\":0}",
+    "stages": "{\"inscription\":\"true\",\"payBank\":\"false\",\"payOnline\":\"false\",\"printBadge\":\"false\",\"printProgramOnBadge\":\"false\",\"autoActivateInvitePartOnSave\":\"false\",\"lmFull\":\"admin\",\"showSupports\":\"false\",\"Evaluation\":\"true\",\"showProgram\":\"false\",\"showLiberFormMessage\":\"false\",\"showOffProgram\":\"false\",\"showOrateurs\":\"false\",\"showAttestationUser\":\"false\",\"showAttestationForce\":\"false\",\"showAttestation\":\"false\",\"hideProgramInAttestation\":\"false\",\"showSpeedCoaching\":\"false\",\"forceModifPrinted\":\"false\",\"showActivitiesList\":\"false\",\"chooseByActivities\":\"false\",\"fullProgram\":\"true\",\"alwaysDisplayDateProgram\":\"false\",\"doScanSlots\":\"false\",\"attestationOnlyProgram\":\"false\",\"useMemberCard\":\"false\",\"showGeneral\":\"false\",\"showSpeakers\":\"false\",\"showMaps\":\"true\",\"useOldBanner\":\"false\",\"showMeetingsFrontMenu\":\"false\",\"showMobileApps\":\"true\",\"noInvoicing\":\"false\"}",
+    "urlBannerFr": "/eventsFolder/client9/event1217/_model/html/img/bannerFr_2024_01_18_08_25_32-original.jpg",
+    "urlBannerEn": "",
+    "urlBannerNl": "",
+    "descriptionFr": "",
+    "descriptionEn": "",
+    "descriptionNl": "",
+    "placeFr": "",
+    "placeEn": "",
+    "placeNl": "",
+    "template": "unify",
+    "configBag": "{\"linkWebinarFr\":\"\",\"linkWebinarEn\":\"\",\"linkWebinarNl\":\"\",\"blocks\":[],\"membership\":{\"type\":\"fff\",\"data\":{\"groupsIn\":[],\"groupsEx\":[]}},\"groups\":{\"guest\":[\"\"],\"registered\":[\"\"]}}",
+    "memberPrice": 49,
+    "nonMemberPrice": 69,
+    "maxNumber": 500,
+    "isVirtual": 1,
+    "isReplayable": 1,
+    "isOnlyByCycle": 0,
+    "labelFr": "",
+    "labelNl": "",
+    "labelEn": "",
+    "replayStatus": 2,
+    "isMultiDate": 1,
+    "question": "",
+    "isCertificateNotIncluded": 0,
+    "callToActionFr": "",
+    "callToActionNl": "",
+    "updatedAt": "2024-05-06 11:35:48",
+    "createdAt": "2024-01-18 07:25:31",
+    "startDateTime": "2024-05-15 12:15:00",
+    "endDateTime": "2024-05-15 13:15:00",
+    "eventDate": "2024-05-15",
+    "client": 9,
+    "tag": [],
+    "isIncludedPremium": 1,
+    "eventDates": [
+      {
+        "id": "122",
+        "startDateTime": "2024-07-26 13:15:00",
+        "endDateTime": "2024-07-26 14:15:00"
+      }
+    ],
+    "speakers-abstract": {
+      "count": 1,
+      "speakers": [
+        {
+          "id": "1209",
+          "firstName": "Lionel",
+          "lastName": "Wielemans",
+          "pictureUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/37813/AVATAR_e466bd7dc11753fed7dfefd5bf42fa255e989672.png",
+          "userId": "473942",
+          "email": "lionel.wielemans@pwc.com",
+          "headlineFr": "Director @ PWC",
+          "headlineEn": "",
+          "headlineNl": "{\"title\":\"\",\"signature\":\"\"}",
+          "blogUrlPath": "/author/lionel-wielemans/473942",
+          "priority": "0",
+          "eventId": "1217",
+          "slots": [
+            {
+              "id": "3700",
+              "type": "1"
+            }
+          ]
+        }
+      ]
+    },
+    "accreditationHours": 1,
+    "clientData": {
+      "id": "9",
+      "name": "Forum for the future",
+      "abbreviation": "F.F.F.",
+      "mediaId": "2174",
+      "avatarUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/2174/AVATAR_54cbd68e1ba9284a1e486bd5d8551259cd51d96e.png"
+    },
+    "slotsCount": 1,
+    "slotReplayUrls": {
+      "webinarUrlEn": "https://webinar-1.staging.tamtam.pro/webinars/dQPTt2B7KvnTptbkS",
+      "webinarReplayVideoEn": "",
+      "webinarReplayVideoFr": "https://player.vimeo.com/video/943189635",
+      "webinarReplayVideoNl": ""
+    },
+    "eventCycles": [
+      {
+        "id": "2637",
+        "number": "0",
+        "cycle": "56",
+        "isCyclePremium": "1",
+        "isCycleSeason": "0",
+        "event": "1217",
+        "cycleStatus": "1"
+      },
+      {
+        "id": "2560",
+        "number": "1",
+        "cycle": "97",
+        "isCyclePremium": "0",
+        "isCycleSeason": "0",
+        "event": "1217",
+        "cycleStatus": "1"
+      },
+      {
+        "id": "2588",
+        "number": "1217",
+        "cycle": "115",
+        "isCyclePremium": "0",
+        "isCycleSeason": "0",
+        "event": "1217",
+        "cycleStatus": "1"
+      }
+    ],
+    "registeredCount": "146",
+    "guestCount": "147"
+  },
+  {
+    "id": 1219,
+    "nameFr": "Cycle TVA et livraisons en chaîne (Partie 2)",
+    "nameEn": "",
+    "nameNl": "",
+    "status": 1,
+    "type": 6,
+    "languages": "{\"Fr\":\"1\",\"Nl\":0,\"En\":0}",
+    "stages": "{\"inscription\":\"true\",\"payBank\":\"false\",\"payOnline\":\"false\",\"printBadge\":\"false\",\"printProgramOnBadge\":\"false\",\"autoActivateInvitePartOnSave\":\"false\",\"lmFull\":\"admin\",\"showSupports\":\"false\",\"Evaluation\":\"true\",\"showProgram\":\"false\",\"showLiberFormMessage\":\"false\",\"showOffProgram\":\"false\",\"showOrateurs\":\"false\",\"showAttestationUser\":\"false\",\"showAttestationForce\":\"false\",\"showAttestation\":\"false\",\"hideProgramInAttestation\":\"false\",\"showSpeedCoaching\":\"false\",\"forceModifPrinted\":\"false\",\"showActivitiesList\":\"false\",\"chooseByActivities\":\"false\",\"fullProgram\":\"true\",\"alwaysDisplayDateProgram\":\"false\",\"doScanSlots\":\"false\",\"attestationOnlyProgram\":\"false\",\"useMemberCard\":\"false\",\"showGeneral\":\"false\",\"showSpeakers\":\"false\",\"showMaps\":\"true\",\"useOldBanner\":\"false\",\"showMeetingsFrontMenu\":\"false\",\"showMobileApps\":\"true\",\"noInvoicing\":\"false\"}",
+    "urlBannerFr": "/eventsFolder/client9/event1219/_model/html/img/bannerFr_2024_02_26_12_17_05-original.jpg",
+    "urlBannerEn": "",
+    "urlBannerNl": "",
+    "descriptionFr": "",
+    "descriptionEn": "",
+    "descriptionNl": "",
+    "placeFr": "",
+    "placeEn": "",
+    "placeNl": "",
+    "template": "unify",
+    "configBag": "{\"linkWebinarFr\":\"\",\"linkWebinarEn\":\"\",\"linkWebinarNl\":\"\",\"blocks\":[],\"membership\":{\"type\":\"fff\",\"data\":{\"groupsIn\":[],\"groupsEx\":[]}},\"groups\":{\"guest\":[\"\"],\"registered\":[\"\"]}}",
+    "memberPrice": 49,
+    "nonMemberPrice": 69,
+    "maxNumber": 500,
+    "isVirtual": 1,
+    "isReplayable": 1,
+    "isOnlyByCycle": 0,
+    "labelFr": "",
+    "labelNl": "",
+    "labelEn": "",
+    "replayStatus": 2,
+    "isMultiDate": 1,
+    "question": "",
+    "isCertificateNotIncluded": 0,
+    "callToActionFr": "",
+    "callToActionNl": "",
+    "updatedAt": "2024-05-16 10:11:32",
+    "createdAt": "2024-01-18 07:31:22",
+    "startDateTime": "2024-03-25 12:15:00",
+    "endDateTime": "2024-03-25 13:15:00",
+    "eventDate": "2024-03-25",
+    "client": 9,
+    "tag": [
+      {
+        "nameFr": "TVA",
+        "nameNl": "BTW",
+        "nameEn": "VAT",
+        "sanitizedNameFr": "tva",
+        "counter": "842",
+        "blogCounter": "805",
+        "eventCounter": "3",
+        "mediaCounter": "0",
+        "rubricCounter": "32",
+        "webtoolCounter": "2",
+        "isAbbreviation": "1",
+        "isUniversal": "0",
+        "isSuperTag": "1",
+        "isSynonym": "0",
+        "isHandled": "0",
+        "status": "0",
+        "state": "TO_VALIDATE",
+        "id": "2882",
+        "idInFlux": "425",
+        "createdAt": "2015-05-05 00:00:00",
+        "superTag": null
+      },
+      {
+        "nameFr": "Commerce international",
+        "nameNl": "Internationale handel",
+        "nameEn": "international trading",
+        "sanitizedNameFr": "commerce international",
+        "counter": "27",
+        "blogCounter": "27",
+        "eventCounter": "0",
+        "mediaCounter": "0",
+        "rubricCounter": "0",
+        "webtoolCounter": "0",
+        "isAbbreviation": "0",
+        "isUniversal": "0",
+        "isSuperTag": "1",
+        "isSynonym": "0",
+        "isHandled": "0",
+        "status": "0",
+        "state": "undefined",
+        "id": "551",
+        "idInFlux": "4101",
+        "createdAt": "2015-05-05 00:00:00",
+        "superTag": null
+      },
+      {
+        "nameFr": "Fiscalité internationale",
+        "nameNl": "Internationale fiscaliteit",
+        "nameEn": "International taxation",
+        "sanitizedNameFr": "fiscalite internationale",
+        "counter": "439",
+        "blogCounter": "435",
+        "eventCounter": "3",
+        "mediaCounter": "0",
+        "rubricCounter": "1",
+        "webtoolCounter": "0",
+        "isAbbreviation": "0",
+        "isUniversal": "0",
+        "isSuperTag": "1",
+        "isSynonym": "0",
+        "isHandled": "0",
+        "status": "1",
+        "state": "TREATED",
+        "id": "1514",
+        "idInFlux": "975",
+        "createdAt": "2015-05-05 00:00:00",
+        "superTag": null
+      }
+    ],
+    "isIncludedPremium": 1,
+    "eventDates": [
+      {
+        "id": "146",
+        "startDateTime": "2024-07-31 15:15:00",
+        "endDateTime": "2024-07-31 16:15:00"
+      }
+    ],
+    "speakers-abstract": {
+      "count": 1,
+      "speakers": [
+        {
+          "id": "1209",
+          "firstName": "Lionel",
+          "lastName": "Wielemans",
+          "pictureUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/37813/AVATAR_e466bd7dc11753fed7dfefd5bf42fa255e989672.png",
+          "userId": "473942",
+          "email": "lionel.wielemans@pwc.com",
+          "headlineFr": "Director @ PWC",
+          "headlineEn": "",
+          "headlineNl": "{\"title\":\"\",\"signature\":\"\"}",
+          "blogUrlPath": "/author/lionel-wielemans/473942",
+          "priority": "0",
+          "eventId": "1219",
+          "slots": [
+            {
+              "id": "3702",
+              "type": "1"
+            }
+          ]
+        }
+      ]
+    },
+    "accreditationHours": 1,
+    "clientData": {
+      "id": "9",
+      "name": "Forum for the future",
+      "abbreviation": "F.F.F.",
+      "mediaId": "2174",
+      "avatarUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/2174/AVATAR_54cbd68e1ba9284a1e486bd5d8551259cd51d96e.png"
+    },
+    "slotsCount": 1,
+    "slotReplayUrls": {
+      "webinarUrlEn": "https://webinar-1.staging.tamtam.pro/webinars/6oQWW64fGqomqS49a",
+      "webinarReplayVideoEn": "",
+      "webinarReplayVideoFr": "https://player.vimeo.com/video/924565239",
+      "webinarReplayVideoNl": ""
+    },
+    "eventCycles": [
+      {
+        "id": "2629",
+        "number": "0",
+        "cycle": "56",
+        "isCyclePremium": "1",
+        "isCycleSeason": "0",
+        "event": "1219",
+        "cycleStatus": "1"
+      },
+      {
+        "id": "2563",
+        "number": "1",
+        "cycle": "97",
+        "isCyclePremium": "0",
+        "isCycleSeason": "0",
+        "event": "1219",
+        "cycleStatus": "1"
+      },
+      {
+        "id": "2564",
+        "number": "1",
+        "cycle": "114",
+        "isCyclePremium": "0",
+        "isCycleSeason": "0",
+        "event": "1219",
+        "cycleStatus": "1"
+      }
+    ],
+    "registeredCount": "132",
+    "guestCount": "133"
+  },
+  {
+    "id": 1204,
+    "nameFr": "Cycle Déclaration IPP 2024 et vos revenus professionnels : recueil des nouveautés!",
+    "nameEn": "",
+    "nameNl": "",
+    "status": 1,
+    "type": 6,
+    "languages": "{\"Fr\":\"1\",\"Nl\":0,\"En\":0}",
+    "stages": "{\"inscription\":\"true\",\"payBank\":\"false\",\"payOnline\":\"false\",\"printBadge\":\"false\",\"printProgramOnBadge\":\"false\",\"autoActivateInvitePartOnSave\":\"false\",\"lmFull\":\"admin\",\"showSupports\":\"false\",\"Evaluation\":\"true\",\"showProgram\":\"false\",\"showLiberFormMessage\":\"false\",\"showOffProgram\":\"false\",\"showOrateurs\":\"false\",\"showAttestationUser\":\"false\",\"showAttestationForce\":\"false\",\"showAttestation\":\"false\",\"hideProgramInAttestation\":\"false\",\"showSpeedCoaching\":\"false\",\"forceModifPrinted\":\"false\",\"showActivitiesList\":\"false\",\"chooseByActivities\":\"false\",\"fullProgram\":\"true\",\"alwaysDisplayDateProgram\":\"false\",\"doScanSlots\":\"false\",\"attestationOnlyProgram\":\"false\",\"useMemberCard\":\"false\",\"showGeneral\":\"false\",\"showSpeakers\":\"false\",\"showMaps\":\"true\",\"useOldBanner\":\"false\",\"showMeetingsFrontMenu\":\"false\",\"showMobileApps\":\"true\",\"noInvoicing\":\"false\"}",
+    "urlBannerFr": "/eventsFolder/client9/event1204/_model/html/img/bannerFr_2024_01_18_07_17_04-original.jpg",
+    "urlBannerEn": "",
+    "urlBannerNl": "",
+    "descriptionFr": "",
+    "descriptionEn": "",
+    "descriptionNl": "",
+    "placeFr": "",
+    "placeEn": "",
+    "placeNl": "",
+    "template": "unify",
+    "configBag": "{\"linkWebinarFr\":\"\",\"linkWebinarEn\":\"\",\"linkWebinarNl\":\"\",\"blocks\":[],\"membership\":{\"type\":\"fff\",\"data\":{\"groupsIn\":[],\"groupsEx\":[]}},\"groups\":{\"guest\":[\"\"],\"registered\":[\"\"]}}",
+    "memberPrice": 49,
+    "nonMemberPrice": 69,
+    "maxNumber": 500,
+    "isVirtual": 1,
+    "isReplayable": 1,
+    "isOnlyByCycle": 0,
+    "labelFr": "",
+    "labelNl": "",
+    "labelEn": "",
+    "replayStatus": 1,
+    "isMultiDate": 1,
+    "question": "",
+    "isCertificateNotIncluded": 0,
+    "callToActionFr": "",
+    "callToActionNl": "",
+    "updatedAt": "2024-04-24 14:19:48",
+    "createdAt": "2024-01-18 06:17:03",
+    "startDateTime": "2024-06-26 12:15:00",
+    "endDateTime": "2024-06-26 13:15:00",
+    "eventDate": "2024-06-26",
+    "client": 9,
+    "tag": [],
+    "isIncludedPremium": 1,
+    "eventDates": [
+      {
+        "id": "126",
+        "startDateTime": "2024-08-01 13:15:00",
+        "endDateTime": "2024-08-01 14:15:00"
+      }
+    ],
+    "speakers-abstract": {
+      "count": 4,
+      "speakers": [
+        {
+          "id": "25",
+          "firstName": "Emmanuel",
+          "lastName": "Degrève",
+          "pictureUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/31/AVATAR_a838aa75f6239ff4efb921e6dde7adbc3dd7d3d9.png",
+          "userId": "8650",
+          "email": "emmanuel.degreve@users.tamtam.pro",
+          "headlineFr": "Conseil Fiscal, Founding Partner @ Deg & Partners",
+          "headlineEn": "Tax Advisor I Founding Partner @ Deg & Partners",
+          "headlineNl": "Belastingconsulent, Founding Partner @ Deg & Partners",
+          "blogUrlPath": "/author/emmanuel-degreve/8650",
+          "priority": "0",
+          "eventId": "1204",
+          "slots": [
+            {
+              "id": "3687",
+              "type": "1"
+            }
+          ]
+        },
+        {
+          "id": "49",
+          "firstName": "Vanessa",
+          "lastName": "Aniset",
+          "pictureUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/13260/AVATAR_f58fe5648e93d22eae7821f793c1d4a3b866db01.png",
+          "userId": "49639",
+          "email": "vanessa.aniset@degandpartners.com",
+          "headlineFr": "Senior Advisor @ Deg & Partners",
+          "headlineEn": "",
+          "headlineNl": "{\"title\":\"\",\"signature\":\"\"}",
+          "blogUrlPath": "/author/vanessa-aniset/49639",
+          "priority": "0",
+          "eventId": "1204",
+          "slots": [
+            {
+              "id": "3687",
+              "type": "1"
+            }
+          ]
+        },
+        {
+          "id": "31",
+          "firstName": "Maurizio",
+          "lastName": "D'AURIA",
+          "pictureUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/3082/AVATAR_1f0f68d74fc7b8c601c3ba3655cc52e4efafde4f.png",
+          "userId": "12506",
+          "email": "maurizio.dauria@degandpartners.com",
+          "headlineFr": "General Manager @ Deg & Partners",
+          "headlineEn": "",
+          "headlineNl": "",
+          "blogUrlPath": "/author/maurizio-dauria/12506",
+          "priority": "0",
+          "eventId": "1204",
+          "slots": [
+            {
+              "id": "3687",
+              "type": "1"
+            }
+          ]
+        },
+        {
+          "id": "45",
+          "firstName": "Julien",
+          "lastName": "Limborg",
+          "pictureUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/4587/AVATAR_41374518e612579b2351f1c92b40e5cf409cde91.png",
+          "userId": "25315",
+          "email": "julien.limborg@degandpartners.com",
+          "headlineFr": "Senior Tax Advisor @ Deg & Partners",
+          "headlineEn": "",
+          "headlineNl": "{\"title\":\"\",\"signature\":\"\"}",
+          "blogUrlPath": "/author/julien-limborg/25315",
+          "priority": "0",
+          "eventId": "1204",
+          "slots": [
+            {
+              "id": "3687",
+              "type": "1"
+            }
+          ]
+        }
+      ]
+    },
+    "accreditationHours": 1,
+    "clientData": {
+      "id": "9",
+      "name": "Forum for the future",
+      "abbreviation": "F.F.F.",
+      "mediaId": "2174",
+      "avatarUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/2174/AVATAR_54cbd68e1ba9284a1e486bd5d8551259cd51d96e.png"
+    },
+    "slotsCount": 1,
+    "slotReplayUrls": {
+      "webinarUrlEn": "https://webinar-1.staging.tamtam.pro/webinars/qqdtwaBAPjHayWMPi",
+      "webinarReplayVideoEn": "",
+      "webinarReplayVideoFr": "",
+      "webinarReplayVideoNl": ""
+    },
+    "eventCycles": [
+      {
+        "id": "2645",
+        "number": "0",
+        "cycle": "56",
+        "isCyclePremium": "1",
+        "isCycleSeason": "0",
+        "event": "1204",
+        "cycleStatus": "1"
+      },
+      {
+        "id": "2537",
+        "number": "1",
+        "cycle": "97",
+        "isCyclePremium": "0",
+        "isCycleSeason": "0",
+        "event": "1204",
+        "cycleStatus": "1"
+      },
+      {
+        "id": "2538",
+        "number": "1",
+        "cycle": "110",
+        "isCyclePremium": "0",
+        "isCycleSeason": "0",
+        "event": "1204",
+        "cycleStatus": "1"
+      }
+    ],
+    "registeredCount": "127",
+    "guestCount": "129"
+  },
+  {
+    "id": 788,
+    "nameFr": "Tendances et nouveautés en matière de procédure fiscale",
+    "nameEn": "",
+    "nameNl": "",
+    "status": 1,
+    "type": 6,
+    "languages": "{\"Fr\":\"1\",\"Nl\":0,\"En\":0}",
+    "stages": "{\"inscription\":\"true\",\"payBank\":\"false\",\"payOnline\":\"false\",\"printBadge\":\"false\",\"printProgramOnBadge\":\"false\",\"autoActivateInvitePartOnSave\":\"false\",\"lmFull\":\"admin\",\"showSupports\":\"false\",\"Evaluation\":\"true\",\"showProgram\":\"false\",\"showLiberFormMessage\":\"false\",\"showOffProgram\":\"false\",\"showOrateurs\":\"false\",\"showAttestationUser\":\"false\",\"showAttestationForce\":\"false\",\"showAttestation\":\"false\",\"hideProgramInAttestation\":\"false\",\"showSpeedCoaching\":\"false\",\"forceModifPrinted\":\"false\",\"showActivitiesList\":\"false\",\"chooseByActivities\":\"false\",\"fullProgram\":\"true\",\"alwaysDisplayDateProgram\":\"false\",\"doScanSlots\":\"false\",\"attestationOnlyProgram\":\"false\",\"useMemberCard\":\"false\",\"showGeneral\":\"false\",\"showSpeakers\":\"false\",\"showMaps\":\"true\",\"useOldBanner\":\"false\",\"showMeetingsFrontMenu\":\"false\",\"showMobileApps\":\"true\",\"noInvoicing\":\"false\"}",
+    "urlBannerFr": "/eventsFolder/client9/event788/_model/html/img/bannerFr_2024_01_23_11_01_47-original.jpg",
+    "urlBannerEn": "",
+    "urlBannerNl": "",
+    "descriptionFr": "",
+    "descriptionEn": "",
+    "descriptionNl": "",
+    "placeFr": "",
+    "placeEn": "",
+    "placeNl": "",
+    "template": "unify",
+    "configBag": "{\"linkWebinarFr\":\"\",\"linkWebinarEn\":\"\",\"linkWebinarNl\":\"\",\"blocks\":[],\"membership\":{\"type\":\"fff\",\"data\":{\"groupsIn\":[],\"groupsEx\":[]}},\"groups\":{\"guest\":[\"\"],\"registered\":[\"\"]}}",
+    "memberPrice": 49,
+    "nonMemberPrice": 69,
+    "maxNumber": 500,
+    "isVirtual": 1,
+    "isReplayable": 1,
+    "isOnlyByCycle": 0,
+    "labelFr": "",
+    "labelNl": "",
+    "labelEn": "",
+    "replayStatus": 2,
+    "isMultiDate": 1,
+    "question": "",
+    "isCertificateNotIncluded": 0,
+    "updatedAt": "2024-02-06 11:12:52",
+    "createdAt": "2024-01-10 10:22:12",
+    "startDateTime": "2024-02-08 12:15:00",
+    "endDateTime": "2024-02-08 13:15:00",
+    "eventDate": "2024-02-08",
+    "client": 9,
+    "tag": [
+      {
+        "nameFr": "Procédure fiscale",
+        "nameNl": "Fiscale procedure",
+        "nameEn": "Tax procedure",
+        "sanitizedNameFr": "procedure fiscale",
+        "counter": "32",
+        "blogCounter": "32",
+        "eventCounter": "0",
+        "mediaCounter": "0",
+        "rubricCounter": "0",
+        "webtoolCounter": "0",
+        "isAbbreviation": "0",
+        "isUniversal": "0",
+        "isSuperTag": "1",
+        "isSynonym": "0",
+        "isHandled": "0",
+        "status": "0",
+        "state": "UNTREATED",
+        "id": "8759",
+        "idInFlux": null,
+        "createdAt": "2019-05-10 08:40:16",
+        "superTag": null
+      },
+      {
+        "nameFr": "Fiscalité internationale",
+        "nameNl": "Internationale fiscaliteit",
+        "nameEn": "International taxation",
+        "sanitizedNameFr": "fiscalite internationale",
+        "counter": "439",
+        "blogCounter": "435",
+        "eventCounter": "3",
+        "mediaCounter": "0",
+        "rubricCounter": "1",
+        "webtoolCounter": "0",
+        "isAbbreviation": "0",
+        "isUniversal": "0",
+        "isSuperTag": "1",
+        "isSynonym": "0",
+        "isHandled": "0",
+        "status": "1",
+        "state": "TREATED",
+        "id": "1514",
+        "idInFlux": "975",
+        "createdAt": "2015-05-05 00:00:00",
+        "superTag": null
+      },
+      {
+        "nameFr": "Audit",
+        "nameNl": "Audit",
+        "nameEn": "Audit",
+        "sanitizedNameFr": "audit",
+        "counter": "46",
+        "blogCounter": "47",
+        "eventCounter": "-1",
+        "mediaCounter": "0",
+        "rubricCounter": "0",
+        "webtoolCounter": "0",
+        "isAbbreviation": "0",
+        "isUniversal": "0",
+        "isSuperTag": "1",
+        "isSynonym": "0",
+        "isHandled": "0",
+        "status": "0",
+        "state": "undefined",
+        "id": "209",
+        "idInFlux": "506",
+        "createdAt": "2015-05-05 00:00:00",
+        "superTag": null
+      }
+    ],
+    "isIncludedPremium": 1,
+    "eventDates": [
+      {
+        "id": "127",
+        "startDateTime": "2024-08-02 14:15:00",
+        "endDateTime": "2024-08-02 15:15:00"
+      }
+    ],
+    "speakers-abstract": {
+      "count": 1,
+      "speakers": [
+        {
+          "id": "100",
+          "firstName": "Baptistin",
+          "lastName": "Alaime",
+          "pictureUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/37599/AVATAR_72c1c61f85cf330dec880b98518fe10fa4d42d3c.jpeg",
+          "userId": "51029",
+          "email": "baptistin@tuerlinckx.eu",
+          "headlineFr": "Avocat fiscaliste – Senior Associate chez Tuerlinckx Tax Lawyers",
+          "headlineEn": "",
+          "headlineNl": "Avocat fiscaliste, Managing Associate Tuerlinckx Tax Lawyers",
+          "blogUrlPath": "/author/baptistin-alaime/51029",
+          "priority": "0",
+          "eventId": "788",
+          "slots": [
+            {
+              "id": "3393",
+              "type": "1"
+            }
+          ]
+        }
+      ]
+    },
+    "accreditationHours": 1,
+    "clientData": {
+      "id": "9",
+      "name": "Forum for the future",
+      "abbreviation": "F.F.F.",
+      "mediaId": "2174",
+      "avatarUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/2174/AVATAR_54cbd68e1ba9284a1e486bd5d8551259cd51d96e.png"
+    },
+    "slotsCount": 1,
+    "slotReplayUrls": {
+      "webinarUrlEn": "https://webinar-1.staging.tamtam.pro/webinars/WbCAkvbqycoEobYke",
+      "webinarReplayVideoEn": "",
+      "webinarReplayVideoFr": "https://player.vimeo.com/video/909521211",
+      "webinarReplayVideoNl": ""
+    },
+    "eventCycles": [
+      {
+        "id": "2614",
+        "number": "0",
+        "cycle": "56",
+        "isCyclePremium": "1",
+        "isCycleSeason": "0",
+        "event": "788",
+        "cycleStatus": "1"
+      },
+      {
+        "id": "2468",
+        "number": "1",
+        "cycle": "97",
+        "isCyclePremium": "0",
+        "isCycleSeason": "0",
+        "event": "788",
+        "cycleStatus": "1"
+      },
+      {
+        "id": "2579",
+        "number": "788",
+        "cycle": "115",
+        "isCyclePremium": "0",
+        "isCycleSeason": "0",
+        "event": "788",
+        "cycleStatus": "1"
+      }
+    ],
+    "registeredCount": "164",
+    "guestCount": "164"
+  },
+  {
+    "id": 770,
+    "nameFr": "Tax Tv Show #2024/08",
+    "nameEn": "",
+    "nameNl": "",
+    "status": 1,
+    "type": 6,
+    "languages": "{\"Fr\":\"1\",\"Nl\":0,\"En\":0}",
+    "stages": "{\"inscription\":\"true\",\"payBank\":\"false\",\"payOnline\":\"false\",\"printBadge\":\"false\",\"printProgramOnBadge\":\"false\",\"autoActivateInvitePartOnSave\":\"false\",\"lmFull\":\"admin\",\"showSupports\":\"false\",\"Evaluation\":\"true\",\"showProgram\":\"false\",\"showLiberFormMessage\":\"false\",\"showOffProgram\":\"false\",\"showOrateurs\":\"false\",\"showAttestationUser\":\"false\",\"showAttestationForce\":\"false\",\"showAttestation\":\"false\",\"hideProgramInAttestation\":\"false\",\"showSpeedCoaching\":\"false\",\"forceModifPrinted\":\"false\",\"showActivitiesList\":\"false\",\"chooseByActivities\":\"false\",\"fullProgram\":\"true\",\"alwaysDisplayDateProgram\":\"false\",\"doScanSlots\":\"false\",\"attestationOnlyProgram\":\"false\",\"useMemberCard\":\"false\",\"showGeneral\":\"false\",\"showSpeakers\":\"false\",\"showMaps\":\"true\",\"useOldBanner\":\"false\",\"showMeetingsFrontMenu\":\"false\",\"showMobileApps\":\"true\",\"noInvoicing\":\"false\"}",
+    "urlBannerFr": "",
+    "urlBannerEn": "",
+    "urlBannerNl": "",
+    "descriptionFr": "",
+    "descriptionEn": "",
+    "descriptionNl": "",
+    "placeFr": "",
+    "placeEn": "",
+    "placeNl": "",
+    "template": "unify",
+    "configBag": "{\"linkWebinarFr\":\"\",\"linkWebinarEn\":\"\",\"linkWebinarNl\":\"\",\"blocks\":[],\"membership\":{\"type\":\"fff\",\"data\":{\"groupsIn\":[],\"groupsEx\":[]}},\"groups\":{\"guest\":[\"\"],\"registered\":[\"\"]}}",
+    "memberPrice": 0,
+    "nonMemberPrice": 0,
+    "maxNumber": 500,
+    "isVirtual": 1,
+    "isReplayable": 1,
+    "isOnlyByCycle": 0,
+    "labelFr": "",
+    "labelNl": "",
+    "labelEn": "",
+    "replayStatus": 1,
+    "isMultiDate": 0,
+    "question": "",
+    "isCertificateNotIncluded": 0,
+    "updatedAt": "2024-04-16 11:49:36",
+    "createdAt": "2024-01-09 10:17:25",
+    "startDateTime": "2024-09-24 12:15:00",
+    "endDateTime": "2024-09-24 13:45:00",
+    "eventDate": "2024-09-24",
+    "client": 9,
+    "tag": [],
+    "isIncludedPremium": 1,
+    "eventDates": [],
+    "speakers-abstract": {
+      "count": 0,
+      "speakers": []
+    },
+    "accreditationHours": 1.5,
+    "clientData": {
+      "id": "9",
+      "name": "Forum for the future",
+      "abbreviation": "F.F.F.",
+      "mediaId": "2174",
+      "avatarUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/2174/AVATAR_54cbd68e1ba9284a1e486bd5d8551259cd51d96e.png"
+    },
+    "slotsCount": 0,
+    "eventCycles": [
+      {
+        "id": "2788",
+        "number": "0",
+        "cycle": "56",
+        "isCyclePremium": "1",
+        "isCycleSeason": "0",
+        "event": "770",
+        "cycleStatus": "1"
+      },
+      {
+        "id": "2447",
+        "number": "1",
+        "cycle": "101",
+        "isCyclePremium": "0",
+        "isCycleSeason": "0",
+        "event": "770",
+        "cycleStatus": "1"
+      }
+    ],
+    "registeredCount": "25",
+    "guestCount": "25"
+  }
+]
