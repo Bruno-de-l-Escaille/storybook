@@ -1,0 +1,83 @@
+@import "~foundation-sites/scss/util/util";
+
+.actionButton a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  box-shadow: 0 1px 10px 0 #29394d;
+  color: #29394d;
+  font-size: medium;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+  height: 43px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background: #e1e4e8;
+  }
+
+  &.default {
+    color: #29394d;
+    background: #fff;
+    border: 1px solid #d8dde2;
+
+    &:hover {
+      background: #e1e4e8;
+    }
+  }
+
+  &.greenTeal {
+    color: #fff;
+    background: #06d9b1;
+
+    &:hover {
+      background: #02af8e;
+    }
+  }
+
+  &.redOrange {
+    color: #fff;
+    background: #fb1e5b;
+
+    &:hover {
+      background: #e70846;
+    }
+  }
+
+  &.blue {
+    color: #fff;
+    background: #18a0fb;
+
+    &:hover {
+      background: #3b8ad5;
+    }
+  }
+
+  &.orangeRoyal {
+    color: #fff;
+    background: #fe3745;
+
+    &:hover {
+      background: #ec1a28;
+    }
+  }
+
+  &.lightBlue {
+    color: #fff;
+    background: #0080c9;
+
+    &:hover {
+      background: #0f6ac8;
+    }
+  }
+}
+
+@include breakpoint(medium down) {
+  .actionButton {
+    width: 100%;
+  }
+}

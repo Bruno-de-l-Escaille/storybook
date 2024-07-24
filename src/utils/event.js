@@ -334,3 +334,15 @@ export const formatDecimalHours = (
 };
 
 export const isCycleRegistrationOpen = (cycle) => cycle.status === 1;
+
+export const getOfffcourseUrl = (env) => {
+  const mapper = {
+    production: "https://offfcourse.be",
+    v2: "https://offfcourse.be",
+    staging: "https://staging.offfcourse.be",
+    dev: "https://dev.offfcourse.be",
+    local: "http://local.offfcourse.be:3005",
+  };
+
+  return mapper[env] ?? mapper["production"];
+};

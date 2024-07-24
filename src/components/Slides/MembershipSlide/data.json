@@ -1,0 +1,431 @@
+{
+  "memberships": [
+    {
+      "id": 1,
+      "nameFr": "Cotisation statutaire",
+      "nameNl": "Cotisation individuelle",
+      "nameEn": "Cotisation individuelle",
+      "status": "ENABLED",
+      "type": "INDIVIDUAL",
+      "descriptionFr": "La cotisation statutaire est accessible à toute personne qui exerce dans le secteur des professions économiques et juridiques.\r\nElle vous donne accès au titre et aux droits attachés à un \"membre cotisant\" de l'OECCBB",
+      "descriptionEn": "",
+      "descriptionNl": "",
+      "hasSlider": 0,
+      "sliderLabelFr": "La cotisation statutaire est accessible à toute personne",
+      "sliderLabelNl": "",
+      "sliderLabelEn": "",
+      "sliderTextFr": "Text Button",
+      "sliderTextNl": "",
+      "sliderTextEn": "",
+      "sliderMin": "0",
+      "sliderMax": "0",
+      "sliderStep": "0",
+      "order": 0,
+      "uaMemberShipFormulas": [],
+      "uaMemberShipCategories": []
+    },
+    {
+      "id": 2,
+      "nameFr": "Cotisation Premium (1+4)",
+      "nameNl": "Cotisation Premium (1+4)",
+      "nameEn": "Cotisation Premium (1+4)",
+      "status": "ENABLED",
+      "type": "FIDUCIARY",
+      "descriptionFr": "La cotisation Premium s'adresse aux cabinets des professions économiques et juridiques.\r\nElle offre un accès pour un cabinet de 5 personnes (1 titré + 4 collaborateurs) et de nombreux avantages\r\nC'est pour ça qu'elle ne peut se rajouter qu'à la cotisation individuelle \"Professions économiques (titrés et non titrés)\".  Vous ne pouvez donc pas l'activer sans préalablement activer cette cotisation au tarif plein.",
+      "descriptionEn": "",
+      "descriptionNl": "",
+      "hasSlider": 1,
+      "sliderLabelFr": "Composition du cabinet",
+      "sliderLabelNl": "Composition du cabinet",
+      "sliderLabelEn": "Composition du cabinet",
+      "sliderTextFr": "Votre cotisation offre un accès pour un cabinet de 5 personnes (1 titré + 4 collaborateurs).\r\nSi vous êtes plus nombreux, l'évolution de la configuration pourra s'aborder avec votre responsable de l'onboarding.",
+      "sliderTextNl": "",
+      "sliderTextEn": "",
+      "sliderMin": "1",
+      "sliderMax": "1",
+      "sliderStep": "1",
+      "order": 0,
+      "uaMemberShipFormulas": [
+        {
+          "id": 5,
+          "nameFr": "Adhésion 2024",
+          "nameNl": "Formule unique d'adhésion",
+          "nameEn": "Formule unique d'adhésion",
+          "status": "ENABLED",
+          "isNew": 0,
+          "annualPrice": 240,
+          "annualStepPrice": 240,
+          "related": ["1"],
+          "apps": [
+            29,
+            30,
+            31,
+            37,
+            33,
+            38,
+            35,
+            40,
+            49,
+            50,
+            51,
+            42,
+            44,
+            47,
+            48,
+            54,
+            52,
+            55,
+            28,
+            43
+          ]
+        }
+      ],
+      "uaMemberShipCategories": [
+        {
+          "id": 24,
+          "nameFr": "La plateforme technologique et confraternelle United Associates",
+          "nameNl": "La plateforme technologique et confraternelle United Associates",
+          "nameEn": "La plateforme technologique et confraternelle United Associates",
+          "descriptionFr": "Accédez à la création de votre univers United Associates pour votre fiduciaire.",
+          "descriptionEn": "",
+          "descriptionNl": "",
+          "type": "CATEGORY",
+          "children": [
+            {
+              "id": 27,
+              "nameFr": "Ma communauté confraternelle et technologique",
+              "nameNl": "Ma communauté confraternelle et technologique",
+              "nameEn": "Ma communauté confraternelle et technologique",
+              "descriptionFr": "",
+              "descriptionEn": "",
+              "descriptionNl": "",
+              "type": "SUB_CATEGORY",
+              "children": [
+                {
+                  "id": 28,
+                  "nameFr": "Inscription de 4 collaborateurs en plus de vous",
+                  "nameNl": "Inscription de 4 collaborateurs en plus de vous",
+                  "nameEn": "Inscription de 4 collaborateurs en plus de vous",
+                  "descriptionFr": "Chaque collaborateur devient membre associé à l'OECCBB",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                },
+                {
+                  "id": 29,
+                  "nameFr": "Création de ma plateforme en quelques clics",
+                  "nameNl": "Création de ma plateforme en quelques clics",
+                  "nameEn": "Création de ma plateforme en quelques clics",
+                  "descriptionFr": "Mon adhésion me donne accès à un outil de configuration de :\r\n- mon portail public (site web, voir infra)\r\n- mon portail collaborateur\r\n- mes clients et contacts",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                },
+                {
+                  "id": 30,
+                  "nameFr": "Rejoignez le réseau de bureaux connectés",
+                  "nameNl": "Rejoignez le réseau de bureaux connectés",
+                  "nameEn": "Rejoignez le réseau de bureaux connectés",
+                  "descriptionFr": "Chaque réseau est virtuellement inscrit dans un réseau connecté de cabinets.",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                },
+                {
+                  "id": 31,
+                  "nameFr": "Activez les modules confraternels",
+                  "nameNl": "Activez les modules confraternels",
+                  "nameEn": "Activez les modules confraternels",
+                  "descriptionFr": "Le travail et les productions de chacun peut être librement partagé pour renforcer la profession et sa capacité de réponse.",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                }
+              ]
+            },
+            {
+              "id": 36,
+              "nameFr": "Mon site web",
+              "nameNl": "Mon site web",
+              "nameEn": "Mon site web",
+              "descriptionFr": "",
+              "descriptionEn": "",
+              "descriptionNl": "",
+              "type": "SUB_CATEGORY",
+              "children": [
+                {
+                  "id": 37,
+                  "nameFr": "Mon site web de base en quelques clics",
+                  "nameNl": "Mon site web de base en quelques clics",
+                  "nameEn": "Mon site web de base en quelques clics",
+                  "descriptionFr": "Obtenez en quelques clics votre site web de base.\r\nIl vous permet de disposer d'un site web opérationnel et naturellement mis à jour.\r\nVous pouvez l'upgrader en optant pour une version plus complète (V2) et largement déployée (V3)",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                }
+              ]
+            },
+            {
+              "id": 41,
+              "nameFr": "Mieux communiquer",
+              "nameNl": "Mieux communiquer",
+              "nameEn": "Mieux communiquer",
+              "descriptionFr": "Accéder au pack d'applications destiné à vous aider à mieux communiquer avec vos clients et vos collaborateurs",
+              "descriptionEn": "",
+              "descriptionNl": "",
+              "type": "SUB_CATEGORY",
+              "children": [
+                {
+                  "id": 42,
+                  "nameFr": "Mon actualité",
+                  "nameNl": "Mon actualité",
+                  "nameEn": "Mon actualité",
+                  "descriptionFr": "Toute l'actualité powered by FFF et par l'OECCBB, dans une configuration particulière selon que l'on s'adresse aux collaborateurs ou aux clients.\r\nCette actualité alimente également votre site web.\r\nLe volume d'actualité est défini selon l'option que vous activez.  Un pack de base est inclus dans le pack premium.",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                },
+                {
+                  "id": 43,
+                  "nameFr": "Mon blog",
+                  "nameNl": "Mon blog",
+                  "nameEn": "Mon blog",
+                  "descriptionFr": "Vous créez votre blog en un clic.\r\nVous partagez vos articles librement avec vos confrères.\r\nLa création de votre blog est une option d'upgrade du pack communication.",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                },
+                {
+                  "id": 44,
+                  "nameFr": "Ma newsletter",
+                  "nameNl": "Ma newsletter",
+                  "nameEn": "Ma newsletter",
+                  "descriptionFr": "Vous pouvez envoyer une newsletter chaque semaine ou chaque mois avec un nombre fixe, imposé ou pas, d'articles à un nombre déterminé de destinataires.\r\nUn pack de base est inclus dans le pack premium pour vous permettre d'apprécier la technologie.",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                }
+              ]
+            },
+            {
+              "id": 45,
+              "nameFr": "Mieux apprendre",
+              "nameNl": "Mieux apprendre",
+              "nameEn": "Mieux apprendre",
+              "descriptionFr": "Accéder au pack d'applications destiné à vous aider à mieux apprendre en équipe.",
+              "descriptionEn": "",
+              "descriptionNl": "",
+              "type": "SUB_CATEGORY",
+              "children": [
+                {
+                  "id": 47,
+                  "nameFr": "Partage de mon abonnement oFFFcourse premium",
+                  "nameNl": "Partage du mon abonnement oFFFcourse premium",
+                  "nameEn": "Partage du mon abonnement oFFFcourse premium",
+                  "descriptionFr": "Vous partagez votre abonnement oFFFcourse premium (99€/mois HTVA) avec 4 collaborateurs gratuitement.  Vous devez donc préalablement souscrire cet abonnement sur la plateforme oFFFcourse, tandis que le partage à 4 collaborateurs devient possible sans frais.\r\nOrganisez des activités de formation en équipe avec vos collaborateurs.",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                },
+                {
+                  "id": 48,
+                  "nameFr": "Complétez votre abonnement Offfcourse Premium du catalogue OECCBB",
+                  "nameNl": "Complétez votre abonnement Offfcourse premium du catalogue OECCBB",
+                  "nameEn": "Complétez votre abonnement Offfcourse premium du catalogue OECCBB",
+                  "descriptionFr": "Vous obtenez un accès complémentaire au catalogue d'E-Learning de l'OECCBB, soit plus de 52 heures de formation",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                }
+              ]
+            },
+            {
+              "id": 46,
+              "nameFr": "Mieux assister",
+              "nameNl": "Mieux assister",
+              "nameEn": "Mieux assister",
+              "descriptionFr": "Accéder au pack d'applications destiné à vous aider à mieux partager et assister vos clients et vos collaborateurs",
+              "descriptionEn": "",
+              "descriptionNl": "",
+              "type": "SUB_CATEGORY",
+              "children": [
+                {
+                  "id": 49,
+                  "nameFr": "FAQ, l'application de base du partage de connaissance",
+                  "nameNl": "FAQ, l'application de base du partage de connaissance",
+                  "nameEn": "FAQ, l'application de base du partage de connaissance",
+                  "descriptionFr": "Obtenez un libre accès aux FAQ de l'administration fiscale et aux FAQ de vos confrères.\r\nL'application est upgradable pour bénéficier de plus d'option de personnalisation ou de recherche.  Ces formules d'upgrade vous seront présentées dès qu'elles seron disponibles.",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                },
+                {
+                  "id": 50,
+                  "nameFr": "Webtools, les outils web partagés",
+                  "nameNl": "Webtools, les outils web partagés",
+                  "nameEn": "Webtools, les outils web partagés",
+                  "descriptionFr": "Vous accédez à une bibliothèque d'outils partagés, entretenue par l'OECCBB et le FFF ainsi que par vos confrères et vos collaborateurs.",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                },
+                {
+                  "id": 51,
+                  "nameFr": "Accès à des extensions de connaissance à prix réduit",
+                  "nameNl": "Accès à des extensions de connaissance à prix réduit",
+                  "nameEn": "Accès à des extensions de connaissance à prix réduit",
+                  "descriptionFr": "Vous pouvez étendre la connaissance moyennant l'acquisition de certains contenus partagés avec vos collaborateurs librement.",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 25,
+          "nameFr": "Cercle de Wallonie : votre nouveau réseau",
+          "nameNl": "Cercle de Wallonie : votre nouveau réseau",
+          "nameEn": "Cercle de Wallonie : votre nouveau réseau",
+          "descriptionFr": "Devenez membre effectif du Cercle de Wallonie et accédez à 150 évènements par an sur plus de 5 sites francophones.",
+          "descriptionEn": "",
+          "descriptionNl": "",
+          "type": "CATEGORY",
+          "children": [
+            {
+              "id": 32,
+              "nameFr": "Membre 'limited'",
+              "nameNl": "Membre à part entière",
+              "nameEn": "Membre à part entière",
+              "descriptionFr": "Participez aux activités du cercle moyennant certaines limites.\r\nVous pouvez également envisager une cotisation pleine à prix réduit.",
+              "descriptionEn": "",
+              "descriptionNl": "",
+              "type": "SUB_CATEGORY",
+              "children": [
+                {
+                  "id": 33,
+                  "nameFr": "Accès à une infrastructure de 7 sites",
+                  "nameNl": "Accès à une infrastructure de 7 sites",
+                  "nameEn": "Accès à une infrastructure de 7 sites",
+                  "descriptionFr": "En tant que membre, vous disposez d'un accès à tous les sites du Cercle de Wallonie.",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                },
+                {
+                  "id": 38,
+                  "nameFr": "Accès à 10 events par an",
+                  "nameNl": "Accès à 150 events par an",
+                  "nameEn": "Accès à 150 events par an",
+                  "descriptionFr": "Vous pouvez accéder à dix événements par an sur la base d'une sélection qui vous sera proposée par l'OECCBB, dans chaque région du pays.",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                }
+              ]
+            },
+            {
+              "id": 34,
+              "nameFr": "Votre fiduciaire devient acteur 'médiatique'",
+              "nameNl": "Votre fiduciaire devient acteur 'médiatique'",
+              "nameEn": "Votre fiduciaire devient acteur 'médiatique'",
+              "descriptionFr": "",
+              "descriptionEn": "",
+              "descriptionNl": "",
+              "type": "SUB_CATEGORY",
+              "children": [
+                {
+                  "id": 35,
+                  "nameFr": "Journée \"Assistance IPP\" avec le CW, Trends et CanalZ",
+                  "nameNl": "Journée \"Assistance IPP\" avec le CW, Trends et CanalZ",
+                  "nameEn": "Journée \"Assistance IPP\" avec le CW, Trends et CanalZ",
+                  "descriptionFr": "Votre fiduciaire devient un professionnel participant de la journée \"Assistance IPP\".\r\nVous êtes acteur de solidarité et exemple d'expertise, chacun là où vous rayonnez.",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                },
+                {
+                  "id": 52,
+                  "nameFr": "Baromètre de l'Expert-comptable, de l'OECCBB et du CW avec Trends Tendances / CanalZ",
+                  "nameNl": "Baromètre de l'Expert-comptable, de l'OECCBB et du CW avec Trends Tendances / CanalZ",
+                  "nameEn": "Baromètre de l'Expert-comptable, de l'OECCBB et du CW avec Trends Tendances / CanalZ",
+                  "descriptionFr": "Participez activement au baromètre du marché en devenant un référent du sondage avec votre fiduciaire et vis-à-vis de vos clients.",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                }
+              ]
+            },
+            {
+              "id": 53,
+              "nameFr": "Activités qui sortent du lot",
+              "nameNl": "Activités qui sortent du lot",
+              "nameEn": "Activités qui sortent du lot",
+              "descriptionFr": "",
+              "descriptionEn": "",
+              "descriptionNl": "",
+              "type": "SUB_CATEGORY",
+              "children": [
+                {
+                  "id": 54,
+                  "nameFr": "Participez à prix réduit à la Garden Party des professions économiques",
+                  "nameNl": "Participez à prix réduit à la Garden Party des professions économiques",
+                  "nameEn": "Participez à prix réduit à la Garden Party des professions économiques",
+                  "descriptionFr": "Participez à l'activité la plus smooth de l'été, pour les professions économiques !",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                },
+                {
+                  "id": 55,
+                  "nameFr": "Participez à prix réduit au MeetUp des jeunes",
+                  "nameNl": "Participez à prix réduit au MeetUp des jeunes",
+                  "nameEn": "Participez à prix réduit au MeetUp des jeunes",
+                  "descriptionFr": "Participez à un meetup inspirant, celui de la jeunesse, à la rencontre du manager de l'année.",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 26,
+          "nameFr": "Avantages partenaires",
+          "nameNl": "Avantages partenaires",
+          "nameEn": "Avantages partenaires",
+          "descriptionFr": "Obtenez des avantages partenaires uniques!",
+          "descriptionEn": "",
+          "descriptionNl": "",
+          "type": "CATEGORY",
+          "children": [
+            {
+              "id": 39,
+              "nameFr": "Communication",
+              "nameNl": "Communication",
+              "nameEn": "Communication",
+              "descriptionFr": "",
+              "descriptionEn": "",
+              "descriptionNl": "",
+              "type": "SUB_CATEGORY",
+              "children": [
+                {
+                  "id": 40,
+                  "nameFr": "Ma vitrine video de 90 sec à prix réduit",
+                  "nameNl": "Ma vitrine video de 90 sec à prix réduit",
+                  "nameEn": "Ma vitrine video de 90 sec à prix réduit",
+                  "descriptionFr": "Bénéficiez chaque année d’une vidéo professionnelle\r\npersonnalisée de 90 sec pour mettre en avant votre cabinet\r\npour 300€ HTVA seulement",
+                  "descriptionEn": "",
+                  "descriptionNl": "",
+                  "type": "OPTION"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
