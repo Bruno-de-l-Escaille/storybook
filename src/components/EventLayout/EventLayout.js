@@ -13,6 +13,7 @@ import {
   formatDateEndOfReplay,
   formatDateFromTo,
   getEventNbMinutes,
+  getOfffcourseUrl,
   getSlotReplayUrl,
   isEventFull,
   isEventLive,
@@ -52,10 +53,8 @@ import ReplayDescriptionIcon from "../Icons/ReplayDescription";
 import ReplayIcon from "../Icons/Replay";
 import HelpIcon from "../Icons/Help";
 
-const S3_FOLDER_URL = "http://s3.tamtam.pro/production";
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =
   "https://tamtam.s3.eu-west-1.amazonaws.com";
-const TTP_OFFFCOURSE_URL = "https://offfcourse.be";
 
 export default function EventLayout({
   language,
@@ -65,6 +64,7 @@ export default function EventLayout({
   dateEndOfReplay,
   isUserMember,
   isFetching,
+  env,
 }) {
   const { startDateTime, endDateTime, memberPrice, nonMemberPrice } = event;
 
@@ -75,16 +75,11 @@ export default function EventLayout({
     : [];
   const isEventInSeason = eventCycles?.some((cycle) => cycle.isCycleSeason);
   const isEventInCycle = eventCycles?.some((cycle) => !cycle.isCycleSeason);
-  const cycleIconStyle = {
-    top: "1px",
-    fontSize: "10.4px",
-    width: "max-content",
-    left: "1px",
-  };
-  const seasonIconStyle = {
-    ...cycleIconStyle,
-    left: "5px",
-  };
+
+  const s3FolderUrl = `http://s3.tamtam.pro/${
+    env === "v2" ? "production" : env
+  }`;
+  const offfcourseUrl = getOfffcourseUrl(env);
   const isExpired = isEventPast(event);
   const isUpcomming = isEventUpcoming(event);
   const isReplayable = isEventReplayable(event);
@@ -96,7 +91,7 @@ export default function EventLayout({
   const urlBanner = getByLanguage(event, "urlBanner", language) ?? "";
   const banner = getCroppedImageUrl(urlBanner, undefined, 280);
   const bannerImgUrl = !isEmpty(banner)
-    ? prepareS3ResourceUrl(S3_FOLDER_URL, banner)
+    ? prepareS3ResourceUrl(s3FolderUrl, banner)
     : `${S3_FOLDER_AWS_URL_WITHOUT_ENV}/image_2024_01_08T20_38_38_750Z.png`;
   const name = getByLanguage(event, "name", language) ?? "";
   const { hours: eventHoursDiffWithNow } = calculateTimeDifference(
@@ -147,8 +142,8 @@ export default function EventLayout({
     ? isRegistrationActive(event)
     : isEventRegistrationOpen(event);
   const eventLink = isFull
-    ? `${TTP_OFFFCOURSE_URL}/event/${event.id}/session`
-    : `${TTP_OFFFCOURSE_URL}/event/${event.id}/reception`;
+    ? `${offfcourseUrl}/event/${event.id}/session`
+    : `${offfcourseUrl}/event/${event.id}/reception`;
 
   const nbMinutes = getEventNbMinutes(event);
 

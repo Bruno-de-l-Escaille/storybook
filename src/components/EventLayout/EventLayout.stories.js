@@ -22,5 +22,6 @@ export const Default = () => (
     event={events[0]}
     isUserMember={false}
     isFetching={boolean("isFetching", false)}
+    env="v2"
   />
 );

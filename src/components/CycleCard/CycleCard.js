@@ -13,6 +13,7 @@ import {
   formatDateFromTo,
   formatDecimalHours,
   getCyclePrice,
+  getOfffcourseUrl,
   isCycleEssential,
   isCycleRegistrationOpen,
   isCycleSeason,
@@ -29,10 +30,8 @@ import LiveIcon from "../Icons/Live";
 import { Shave } from "../../common/components/Shave";
 import { Fetching } from "./Fetching";
 
-const S3_FOLDER_URL = "http://s3.tamtam.pro/production";
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =
   "https://tamtam.s3.eu-west-1.amazonaws.com";
-const TTP_OFFFCOURSE_URL = "https://offfcourse.be";
 
 export const modeLabelMapper = {
   PRESENTIAL: "presential",
@@ -40,7 +39,7 @@ export const modeLabelMapper = {
   HYBRID: "hybrid",
 };
 
-function CycleCard({ cycle, language, isUserMember, isFetching }) {
+function CycleCard({ cycle, language, isUserMember, isFetching, env }) {
   const { startDateTime, endDateTime, clientData } = cycle;
   const name = getByLanguage(cycle, "name", language);
   const dateHelper = formatDateFromTo(startDateTime, endDateTime, language);
@@ -49,6 +48,11 @@ function CycleCard({ cycle, language, isUserMember, isFetching }) {
     cycle.endDateTime
   );
   const { memberPrice, nonMemberPrice } = getCyclePrice(cycle);
+
+  const s3FolderUrl = `http://s3.tamtam.pro/${
+    env === "v2" ? "production" : env
+  }`;
+  const offfcourseUrl = getOfffcourseUrl(env);
 
   const isSeason = isCycleSeason(cycle);
   const isEssential = isCycleEssential(cycle);
@@ -60,7 +64,7 @@ function CycleCard({ cycle, language, isUserMember, isFetching }) {
   const urlBanner = getByLanguage(cycle, "pictureUrl", language) ?? "";
   const banner = getCroppedImageUrl(urlBanner, undefined, 280);
   const bannerImgUrl = !isEmpty(banner)
-    ? prepareS3ResourceUrl(S3_FOLDER_URL, banner)
+    ? prepareS3ResourceUrl(s3FolderUrl, banner)
     : `${S3_FOLDER_AWS_URL_WITHOUT_ENV}/image_2024_01_08T20_38_38_750Z.png`;
 
   const [showIcons, setShowIcons] = useState(false);
@@ -83,7 +87,7 @@ function CycleCard({ cycle, language, isUserMember, isFetching }) {
           {isCycleRegistrationOpen(cycle) && (
             <a
               className={classNames(styles.green, styles.mobileActions)}
-              href={`${TTP_OFFFCOURSE_URL}/cycle/${cycle.id}/reception`}
+              href={`${offfcourseUrl}/cycle/${cycle.id}/reception`}
             >
               {I18N[language]["buy"]}
             </a>
@@ -185,7 +189,7 @@ function CycleCard({ cycle, language, isUserMember, isFetching }) {
         }
       >
         {showIcons && type === "WEBINAR" ? (
-          <a href={`${TTP_OFFFCOURSE_URL}/cycle/${cycle.id}/reception`}>
+          <a href={`${offfcourseUrl}/cycle/${cycle.id}/reception`}>
             <div style={{ bottom: "40px" }}>
               <LiveDescriptionIcon />
               <span className={styles.cycleStateDescriptionIcon}>
@@ -261,7 +265,7 @@ function CycleCard({ cycle, language, isUserMember, isFetching }) {
                 : I18N[language]["cycle"]}
             </div>
             <div className={styles.title}>
-              <a href={`${TTP_OFFFCOURSE_URL}/cycle/${cycle.id}/reception`}>
+              <a href={`${offfcourseUrl}/cycle/${cycle.id}/reception`}>
                 <h3>
                   <Shave maxHeight={76}>{name}</Shave>
                 </h3>

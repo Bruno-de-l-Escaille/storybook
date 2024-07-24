@@ -22,5 +22,6 @@ export const Default = () => (
     cycle={cycles[2]}
     isUserMember={false}
     isFetching={boolean("isFetching", false)}
+    env="v2"
   />
 );
