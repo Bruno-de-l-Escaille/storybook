@@ -3,7 +3,7 @@ import styles from "./Slider.module.scss";
 import IconArrow from "../../Icons/IconArrow";
 import cn from "classnames";
 
-export default function Slider({ cards, autoPlay = true, className }) {
+export const Slider = ({ cards, autoPlay = true, className }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const cardsRef = useRef(null);
@@ -134,4 +134,4 @@ export default function Slider({ cards, autoPlay = true, className }) {
       </div>
     </div>
   );
-}
+};
