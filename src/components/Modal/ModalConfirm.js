@@ -31,6 +31,7 @@ export const ModalConfirm = (props) => {
     secondText = "",
     title,
     isChecked,
+    children = null,
   } = props;
 
   const renderMainIcon = () => {
@@ -83,6 +84,7 @@ export const ModalConfirm = (props) => {
           )}
         >
           {text}
+          {children}
           {isChecked != null && (
             <div className={styles.item}>
               <span className={styles.itemLabel}>{secondText}</span>
