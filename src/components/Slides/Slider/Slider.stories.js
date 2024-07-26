@@ -1,7 +1,7 @@
 import React from "react";
 import { withKnobs, select, boolean } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
-import Slider from "./Slider";
+import { Slider } from "./Slider";
 import { Default as ArticleSlide } from "../ArticleSlide/ArticleSlide.stories";
 import { Default as EventSlide } from "../EventSlide/EventSlide.stories";
 import { Default as MembershipSlide } from "../MembershipSlide/MembershipSlide.stories";
