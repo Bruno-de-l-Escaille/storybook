@@ -39,7 +39,7 @@ export const modeLabelMapper = {
   HYBRID: "hybrid",
 };
 
-function CycleCard({ cycle, language, isUserMember, isFetching, env }) {
+export function CycleCard({ cycle, language, isUserMember, isFetching, env }) {
   const { startDateTime, endDateTime, clientData } = cycle;
   const name = getByLanguage(cycle, "name", language);
   const dateHelper = formatDateFromTo(startDateTime, endDateTime, language);
@@ -282,5 +282,3 @@ function CycleCard({ cycle, language, isUserMember, isFetching, env }) {
     </div>
   );
 }
-
-export default CycleCard;

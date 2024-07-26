@@ -56,7 +56,7 @@ import HelpIcon from "../Icons/Help";
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =
   "https://tamtam.s3.eu-west-1.amazonaws.com";
 
-export default function EventLayout({
+export function EventLayout({
   language,
   event,
   price,

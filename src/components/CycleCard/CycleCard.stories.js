@@ -4,7 +4,7 @@ import { action } from "@storybook/addon-actions";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 import cycles from "./data.json";
-import CycleCard from "./CycleCard";
+import { CycleCard } from "./CycleCard";
 
 export default {
   title: "CycleCard",
