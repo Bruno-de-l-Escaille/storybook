@@ -4,7 +4,7 @@ import { action } from "@storybook/addon-actions";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 import events from "./data.json";
-import EventLayout from "./EventLayout";
+import { EventLayout } from "./EventLayout";
 
 export default {
   title: "EventLayout",
