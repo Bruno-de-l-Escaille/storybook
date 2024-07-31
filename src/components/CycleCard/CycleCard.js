@@ -43,10 +43,10 @@ export function CycleCard({ cycle, language, isUserMember, isFetching, env }) {
   const { startDateTime, endDateTime, clientData } = cycle;
   const name = getByLanguage(cycle, "name", language);
   const dateHelper = formatDateFromTo(startDateTime, endDateTime, language);
-  const dateEndOfReplay = formatDateEndOfReplay(
-    cycle.dateEndOfReplay,
-    cycle.endDateTime
-  );
+  // const dateEndOfReplay = formatDateEndOfReplay(
+  //   cycle.dateEndOfReplay,
+  //   cycle.endDateTime
+  // );
   const { memberPrice, nonMemberPrice } = getCyclePrice(cycle);
 
   const s3FolderUrl = `http://s3.tamtam.pro/${
