@@ -104,7 +104,7 @@ export const I18N = {
     monthly: "Monthly",
     yearly: "Yearly",
     saveAmount: "save",
-    ofCertifiedAttestations: "of certified attestations",
+    buyCycle: "Buy {{definiteLabel}}",
   },
   fr: {
     ARTCILES: "Articles",
@@ -216,7 +216,7 @@ export const I18N = {
     monthly: "Mensuel",
     yearly: "Annuel",
     saveAmount: "économisez",
-    ofCertifiedAttestations: "d’attestations certifiées",
+    buyCycle: "Acheter {{definiteLabel}}",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -330,5 +330,6 @@ export const I18N = {
     yearly: "Jaarlijks",
     saveAmount: "bespaar",
     ofCertifiedAttestations: "geaccrediteerde opleiding",
+    buyCycle: "Koop {{definiteLabel}}",
   },
 };

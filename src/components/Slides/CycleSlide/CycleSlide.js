@@ -5,6 +5,7 @@ import { getCycleSlideConfig } from "./services";
 import {
   formatDateFromTo,
   formatDecimalHours,
+  getCycleLabels,
   getCyclePrice,
   getOfffcourseUrl,
   totalCycleTrainingHours,
@@ -29,10 +30,7 @@ export const CycleSlide = ({ cycle, language, env, isFetching }) => {
     "user-registered": userRegistered,
   } = cycle;
 
-  const { buyButtonText, secondaryBanner, label, theme } = getCycleSlideConfig(
-    cycle,
-    language
-  );
+  const { secondaryBanner, theme } = getCycleSlideConfig(cycle, language);
 
   const name = getByLanguage(cycle, "name", language);
 
@@ -59,6 +57,8 @@ export const CycleSlide = ({ cycle, language, env, isFetching }) => {
   const cycleReceptionUrl = `${offfcourseUrl}/cycle/${cycle.id}/reception`;
   const cycleProgramUrl = `${offfcourseUrl}/cycle/${cycle.id}/events`;
 
+  const { cycleLabel, buyCycleLabel } = getCycleLabels(cycle, language);
+
   const renderCycleDetails = () => {
     return (
       <ul>
@@ -84,7 +84,7 @@ export const CycleSlide = ({ cycle, language, env, isFetching }) => {
     >
       <Slide.Header
         title={name}
-        label={label}
+        label={cycleLabel}
         theme={theme}
         clientImg={clientImg}
         link={cycleReceptionUrl}
@@ -109,7 +109,7 @@ export const CycleSlide = ({ cycle, language, env, isFetching }) => {
           link={cycleReceptionUrl}
           {...(isUserRegistered
             ? { name: I18N[language].moreDetails, theme: "default" }
-            : { name: buyButtonText, theme: "greenTeal" })}
+            : { name: buyCycleLabel, theme: "greenTeal" })}
         />
         <ActionButton name={I18N[language].program} link={cycleProgramUrl} />
       </Slide.Footer>

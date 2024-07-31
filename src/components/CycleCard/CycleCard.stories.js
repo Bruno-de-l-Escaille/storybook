@@ -16,7 +16,7 @@ export default {
   ],
 };
 
-export const Cycle = () => (
+export const Type1 = () => (
   <CycleCard
     language="fr"
     cycle={cycles[0]}
@@ -26,17 +26,19 @@ export const Cycle = () => (
   />
 );
 
-export const Season = () => (
-  <CycleCard
-    language="fr"
-    cycle={cycles[1]}
-    isUserMember={false}
-    isFetching={boolean("isFetching", false)}
-    env="v2"
-  />
-);
+export const Type2 = () => {
+  return (
+    <CycleCard
+      language="fr"
+      cycle={cycles[1]}
+      isUserMember={false}
+      isFetching={boolean("isFetching", false)}
+      env="v2"
+    />
+  );
+};
 
-export const Essential = () => (
+export const Type3 = () => (
   <CycleCard
     language="fr"
     cycle={cycles[2]}

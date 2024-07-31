@@ -346,3 +346,94 @@ export const getOfffcourseUrl = (env) => {
 
   return mapper[env] ?? mapper["production"];
 };
+
+export const ORGANIZATION_CYCLE_LABEL_CONFIGS = {
+  default: {
+    1: {
+      fr: {
+        label: "cycle",
+        definiteLabel: "le cycle",
+      },
+      en: {
+        label: "cycle",
+        definiteLabel: "the cycle",
+      },
+      nl: {
+        label: "cyclus",
+        definiteLabel: "de cyclus",
+      },
+    },
+    2: {
+      fr: {
+        label: "saison",
+        definiteLabel: "la saison",
+      },
+      en: {
+        label: "season",
+        definiteLabel: "the season",
+      },
+      nl: {
+        label: "seizoen",
+        definiteLabel: "het seizoen",
+      },
+    },
+    3: {
+      fr: {
+        label: "essentiel",
+        definiteLabel: "l'essentiel",
+      },
+      en: {
+        label: "essential",
+        definiteLabel: "the essential",
+      },
+      nl: {
+        label: "essentieel",
+        definiteLabel: "het essentieel",
+      },
+    },
+  },
+  1256: {
+    2: {
+      fr: {
+        label: "wake up",
+        definiteLabel: "le wake up",
+      },
+      en: {
+        label: "wake up",
+        definiteLabel: "the wake up",
+      },
+      nl: {
+        label: "wake up",
+        definiteLabel: "de wake up",
+      },
+    },
+    3: {
+      fr: {
+        label: "petit déjeuner",
+        definiteLabel: "le petit déjeuner",
+      },
+      en: {
+        label: "breakfast",
+        definiteLabel: "the breakfast",
+      },
+      nl: {
+        label: "ontbijt",
+        definiteLabel: "het ontbijt",
+      },
+    },
+  },
+};
+
+export const getCycleLabels = (cycle, language) => {
+  const config =
+    ORGANIZATION_CYCLE_LABEL_CONFIGS[cycle.client]?.[cycle.type]?.[language] ??
+    ORGANIZATION_CYCLE_LABEL_CONFIGS["default"]?.[cycle.type]?.[language];
+
+  return {
+    cycleLabel: config?.label,
+    buyCycleLabel: I18N[language]["buyCycle"].replace(
+      "{{definiteLabel}}",
+      config?.definiteLabel
+    ),
+  };
+};

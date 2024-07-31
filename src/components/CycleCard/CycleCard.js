@@ -12,6 +12,7 @@ import {
   formatDateEndOfReplay,
   formatDateFromTo,
   formatDecimalHours,
+  getCycleLabels,
   getCyclePrice,
   getOfffcourseUrl,
   isCycleEssential,
@@ -79,6 +80,8 @@ export function CycleCard({ cycle, language, isUserMember, isFetching, env }) {
 
   const cyclePrice = isUserMember ? memberPrice : nonMemberPrice;
   const trainingsCount = cycle.eventCycles?.length;
+
+  const { cycleLabel } = getCycleLabels(cycle, language);
 
   const renderActions = () => {
     if (!isUserRegistered) {
@@ -257,13 +260,7 @@ export function CycleCard({ cycle, language, isUserMember, isFetching, env }) {
         </div>
         <div className={styles.container}>
           <div className={styles.container_upper}>
-            <div className={styles.type}>
-              {isSeason
-                ? I18N[language]["season"]
-                : isEssential
-                ? I18N[language]["essential"]
-                : I18N[language]["cycle"]}
-            </div>
+            <div className={styles.type}>{cycleLabel}</div>
             <div className={styles.title}>
               <a href={`${offfcourseUrl}/cycle/${cycle.id}/reception`}>
                 <h3>

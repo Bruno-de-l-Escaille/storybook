@@ -18,7 +18,7 @@ export default {
   ],
 };
 
-export function Cycle() {
+export function Type1() {
   return (
     <CycleSlide
       cycle={cycle}
@@ -29,7 +29,7 @@ export function Cycle() {
   );
 }
 
-export const Essential = () => (
+export const Type2 = () => (
   <CycleSlide
     cycle={essential}
     language={select("language", ["fr", "nl", "en"], "fr")}
@@ -38,7 +38,7 @@ export const Essential = () => (
   />
 );
 
-export const Season = () => (
+export const Type3 = () => (
   <CycleSlide
     cycle={season}
     language={select("language", ["fr", "nl", "en"], "fr")}
