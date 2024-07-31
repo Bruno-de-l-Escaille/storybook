@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./RegisteredBadge.module.scss";
 import CheckMarkIcon from "../../../components/Icons/CheckMarkv2";
 
-export function RegisteredBadge({ className, theme = "green" }) {
+export default function RegisteredBadge({ className, theme = "green" }) {
   const fillIcon = theme === "green" ? "#FFFF" : "#02AF8E";
 
   return (
@@ -14,5 +14,3 @@ export function RegisteredBadge({ className, theme = "green" }) {
     </span>
   );
 }
-
-export default RegisteredBadge;
