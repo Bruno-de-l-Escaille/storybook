@@ -21,7 +21,7 @@ import {
 } from "../../utils/event";
 import classNames from "classnames";
 import { I18N } from "../../i18n";
-import RegisteredBadge from "../../common/components/RegisteredBadge/RegisteredBadge";
+import { RegisteredBadge } from "../../common/components/RegisteredBadge";
 import NewCalendarIcon from "../Icons/NewCalendar";
 import PresentialDescriptionIcon from "../Icons/PresentialDescription";
 import PresentialIcon from "../Icons/Presential";
