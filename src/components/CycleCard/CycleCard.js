@@ -41,6 +41,13 @@ export const modeLabelMapper = {
 };
 
 export function CycleCard({ cycle, language, isUserMember, isFetching, env }) {
+  const [showIcons, setShowIcons] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  if (isFetching) {
+    return <Fetching />;
+  }
+
   const { startDateTime, endDateTime, clientData } = cycle;
   const name = getByLanguage(cycle, "name", language);
   const dateHelper = formatDateFromTo(startDateTime, endDateTime, language);
@@ -67,9 +74,6 @@ export function CycleCard({ cycle, language, isUserMember, isFetching, env }) {
   const bannerImgUrl = !isEmpty(banner)
     ? prepareS3ResourceUrl(s3FolderUrl, banner)
     : `${S3_FOLDER_AWS_URL_WITHOUT_ENV}/image_2024_01_08T20_38_38_750Z.png`;
-
-  const [showIcons, setShowIcons] = useState(false);
-  const [hovered, setHovered] = useState(false);
 
   const cycleCertifiedTrainingHours = totalCycleTrainingHours(cycle);
   const cycleTrainingHours = formatDecimalHours(
@@ -208,10 +212,6 @@ export function CycleCard({ cycle, language, isUserMember, isFetching, env }) {
       </div>
     </>
   );
-
-  if (isFetching) {
-    return <Fetching />;
-  }
 
   return (
     <div

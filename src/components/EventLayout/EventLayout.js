@@ -66,9 +66,13 @@ export function EventLayout({
   isFetching,
   env,
 }) {
-  const { startDateTime, endDateTime, memberPrice, nonMemberPrice } = event;
-
   const [showIcons, setShowIcons] = useState(false);
+
+  if (isFetching) {
+    return <Fetching />;
+  }
+
+  const { startDateTime, endDateTime, memberPrice, nonMemberPrice } = event;
 
   const eventCycles = Array.isArray(event?.eventCycles)
     ? event.eventCycles.filter((eventCycle) => !eventCycle.isCyclePremium)
@@ -479,10 +483,6 @@ export function EventLayout({
 
     return null;
   };
-
-  if (isFetching) {
-    return <Fetching />;
-  }
 
   return (
     <div
