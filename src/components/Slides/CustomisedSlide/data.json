@@ -1,0 +1,23 @@
+{
+  "customised": [
+    {
+      "id": 1,
+      "titleFr": "Cotisation statutaire",
+      "titleNl": "Cotisation individuelle",
+      "titleEn": "Cotisation individuelle",
+      "descriptionFr": "La cotisation statutaire est accessible à toute personne qui exerce dans le secteur des professions économiques et juridiques.\r\nElle vous donne accès au titre et aux droits attachés à un \"membre cotisant\" de l'OECCBB",
+      "descriptionEn": "",
+      "descriptionNl": "",
+      "buttonTextFr": "Text Button",
+      "buttonTextEn": "Text Button",
+      "buttonTextNL": "Text Button",
+      "hasButtonFr": "true",
+      "hasButtonEn": "true",
+      "hasButtonNl": "true",
+      "linkFr": "",
+      "linkEn": "",
+      "linkNl": "",
+      "image": "https://s3.tamtam.pro/production/storage/media/IMAGE/43737/70f3acf29cc8e6c29b1112fc94dd7b4fc7b86527.jpeg"
+    }
+  ]
+}
