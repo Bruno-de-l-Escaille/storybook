@@ -26,5 +26,6 @@ export * from "./components/Slides/CycleSlide/CycleSlide";
 export * from "./components/Slides/PremiumSlide/PremiumSlide";
 export * from "./components/Slides/MembershipSlide/MembershipSlide";
 export * from "./components/Slides/ArticleSlide/ArticleSlide";
+export * from "./components/Slides/CustomisedSlide/CustomisedSlide";
 export * from "./components/Slides/Slider/Slider";
 export * from "./components/CycleCard/CycleCard";
