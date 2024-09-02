@@ -1,5 +1,5 @@
 import React from "react";
-import { withKnobs, select, boolean } from "@storybook/addon-knobs";
+import { withKnobs, select, boolean, object } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 import data from "./data.json";
 import { CycleSlide } from "./CycleSlide";
@@ -23,8 +23,11 @@ export function Type1() {
     <CycleSlide
       cycle={cycle}
       language={select("language", ["fr", "nl", "en"], "fr")}
-      env="v2"
       isFetching={boolean("isFetching", false)}
+      env={select("env", ["production", "staging", "local"], "v2")}
+      isUserMember={boolean("isUserMember", false)}
+      isUserPremium={boolean("isUserPremium", false)}
+      queryParams={object("queryParams", {})}
     />
   );
 }
@@ -33,8 +36,11 @@ export const Type2 = () => (
   <CycleSlide
     cycle={essential}
     language={select("language", ["fr", "nl", "en"], "fr")}
-    env="v2"
     isFetching={boolean("isFetching", false)}
+    env={select("env", ["production", "staging", "local"], "v2")}
+    isUserMember={boolean("isUserMember", false)}
+    isUserPremium={boolean("isUserPremium", false)}
+    queryParams={object("queryParams", {})}
   />
 );
 
@@ -42,7 +48,10 @@ export const Type3 = () => (
   <CycleSlide
     cycle={season}
     language={select("language", ["fr", "nl", "en"], "fr")}
-    env="v2"
     isFetching={boolean("isFetching", false)}
+    env={select("env", ["production", "staging", "local"], "v2")}
+    isUserMember={boolean("isUserMember", false)}
+    isUserPremium={boolean("isUserPremium", false)}
+    queryParams={object("queryParams", {})}
   />
 );

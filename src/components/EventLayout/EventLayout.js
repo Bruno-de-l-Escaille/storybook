@@ -65,6 +65,7 @@ export function EventLayout({
   isUserMember,
   isFetching,
   env,
+  queryParams = {},
 }) {
   const [showIcons, setShowIcons] = useState(false);
 
@@ -84,6 +85,7 @@ export function EventLayout({
     env === "v2" ? "production" : env
   }`;
   const offfcourseUrl = getOfffcourseUrl(env);
+  const offfcourseParams = new URLSearchParams(queryParams).toString();
   const isExpired = isEventPast(event);
   const isUpcomming = isEventUpcoming(event);
   const isReplayable = isEventReplayable(event);
@@ -146,8 +148,8 @@ export function EventLayout({
     ? isRegistrationActive(event)
     : isEventRegistrationOpen(event);
   const eventLink = isFull
-    ? `${offfcourseUrl}/event/${event.id}/session`
-    : `${offfcourseUrl}/event/${event.id}/reception`;
+    ? `${offfcourseUrl}/event/${event.id}/session?${offfcourseParams}`
+    : `${offfcourseUrl}/event/${event.id}/reception?${offfcourseParams}`;
 
   const nbMinutes = getEventNbMinutes(event);
 
@@ -250,6 +252,8 @@ export function EventLayout({
         variant="success"
         textSize="md"
         className={buttonClassName}
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <span style={{ fontSize: "14px" }}>{buttonText}</span>
       </Button>
@@ -391,7 +395,7 @@ export function EventLayout({
         }
       >
         {!place && isUpcomming && !showTimeCounter && showIcons ? (
-          <a href={eventLink}>
+          <a href={eventLink} target="_blank" rel="noopener noreferrer">
             <div style={place ? { bottom: "40px" } : {}}>
               <LiveDescriptionIcon />
               <span className={styles.eventStateDescriptionIcon}>
@@ -421,7 +425,7 @@ export function EventLayout({
       <div className={styles.eventStateIcon}>
         {showIcons && isExpired ? (
           <>
-            <a href={eventLink}>
+            <a href={eventLink} target="_blank" rel="noopener noreferrer">
               <ReplayDescriptionIcon />
               <span className={styles.eventStateDescriptionIcon}>
                 {I18N[language]["replay"]}
@@ -559,7 +563,7 @@ export function EventLayout({
         </div>
         <div className={styles.container}>
           <div>
-            <a href={eventLink}>
+            <a href={eventLink} target="_blank" rel="noopener noreferrer">
               <h3>
                 <Shave maxHeight={76}>{name} </Shave>
               </h3>

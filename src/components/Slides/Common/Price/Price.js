@@ -28,7 +28,9 @@ export default function Price({
       </div>
       {!isUserMember && Boolean(price) && memberPrice !== price && (
         <div className={styles.member_discount}>
-          <div className={styles.discount_percent}>{memberPrice} €</div>
+          <div className={styles.discount_percent}>
+            {Number(memberPrice) > 0 ? `${memberPrice} €` : I18N[language].free}
+          </div>
           <div className={styles.discount_description}>
             {I18N[language].forTheMembers} {memberOrg}
           </div>

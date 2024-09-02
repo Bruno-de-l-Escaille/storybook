@@ -27,6 +27,7 @@ export const EventSlide = ({
   isUserMember,
   isUserPremium,
   isFetching,
+  queryParams = {},
 }) => {
   if (isFetching) {
     return <Fetching />;
@@ -57,11 +58,12 @@ export const EventSlide = ({
     env === "v2" ? "production" : env
   }`;
   const offfcourseUrl = getOfffcourseUrl(env);
+  const offfcourseParams = new URLSearchParams(queryParams).toString();
   const bannerUrl = getByLanguage(event, "urlBanner", language) ?? "";
   const bannerSrc = prepareS3ResourceUrl(s3FolderUrl, bannerUrl);
 
-  const eventReceptionUrl = `${offfcourseUrl}/${language}/event/${event.id}/reception`;
-  const eventSessionUrl = `${offfcourseUrl}/${language}/event/${event.id}/session`;
+  const eventReceptionUrl = `${offfcourseUrl}/${language}/event/${event.id}/reception?${offfcourseParams}`;
+  const eventSessionUrl = `${offfcourseUrl}/${language}/event/${event.id}/session?${offfcourseParams}`;
 
   const isSoldOut = isSoldOutEvent(event);
   const isUserRegistered =

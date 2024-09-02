@@ -17,7 +17,15 @@ import ActionButton from "../Common/ActionButton/ActionButton";
 import IconCalendar from "../../Icons/IconCalendar2";
 import { Fetching } from "../Common/Slide/Fetching";
 
-export const CycleSlide = ({ cycle, language, env, isFetching }) => {
+export const CycleSlide = ({
+  cycle,
+  language,
+  env,
+  isFetching,
+  isUserMember,
+  isUserPremium,
+  queryParams = {},
+}) => {
   if (isFetching) {
     return <Fetching />;
   }
@@ -26,7 +34,6 @@ export const CycleSlide = ({ cycle, language, env, isFetching }) => {
     clientData,
     startDateTime,
     endDateTime,
-    isUserMember,
     "user-registered": userRegistered,
   } = cycle;
 
@@ -47,15 +54,18 @@ export const CycleSlide = ({ cycle, language, env, isFetching }) => {
   const { memberPrice, nonMemberPrice } = getCyclePrice(cycle);
   const { originalPrice } = isUserMember ? memberPrice : nonMemberPrice;
 
-  const isUserRegistered = userRegistered;
+  const isPremiumIncludedCycle = +cycle.client === 9;
+  const isUserRegistered =
+    userRegistered || (isPremiumIncludedCycle && isUserPremium);
 
   const cycleCertifiedTrainingHours = totalCycleTrainingHours(cycle);
   const cycleTrainingHours = formatDecimalHours(cycleCertifiedTrainingHours);
   const trainingsCount = cycle.eventCycles?.length;
 
   const offfcourseUrl = getOfffcourseUrl(env);
-  const cycleReceptionUrl = `${offfcourseUrl}/cycle/${cycle.id}/reception`;
-  const cycleProgramUrl = `${offfcourseUrl}/cycle/${cycle.id}/events`;
+  const offfcourseParams = new URLSearchParams(queryParams).toString();
+  const cycleReceptionUrl = `${offfcourseUrl}/cycle/${cycle.id}/reception?${offfcourseParams}`;
+  const cycleProgramUrl = `${offfcourseUrl}/cycle/${cycle.id}/events?${offfcourseParams}`;
 
   const { cycleLabel, buyCycleLabel } = getCycleLabels(cycle, language);
 

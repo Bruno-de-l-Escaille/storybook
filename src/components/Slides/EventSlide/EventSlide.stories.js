@@ -1,5 +1,5 @@
 import React from "react";
-import { withKnobs, select, boolean } from "@storybook/addon-knobs";
+import { withKnobs, select, boolean, object } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 import { EventSlide } from "./EventSlide";
 import data from "./data.json";
@@ -21,6 +21,9 @@ export const Default = () => (
     event={event}
     language={select("language", ["fr", "nl", "en"], "fr")}
     isFetching={boolean("isFetching", false)}
-    env="v2"
+    env={select("env", ["production", "staging", "local"], "v2")}
+    isUserMember={boolean("isUserMember", false)}
+    isUserPremium={boolean("isUserPremium", false)}
+    queryParams={object("queryParams", {})}
   />
 );

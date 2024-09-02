@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { withKnobs, boolean } from "@storybook/addon-knobs";
+import { withKnobs, boolean, select, object } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 import events from "./data.json";
 import { EventLayout } from "./EventLayout";
@@ -18,10 +18,12 @@ export default {
 
 export const Default = () => (
   <EventLayout
-    language="fr"
     event={events[0]}
-    isUserMember={false}
+    language={select("language", ["fr", "nl", "en"], "fr")}
     isFetching={boolean("isFetching", false)}
-    env="v2"
+    env={select("env", ["production", "staging", "local"], "v2")}
+    isUserMember={boolean("isUserMember", false)}
+    isUserPremium={boolean("isUserPremium", false)}
+    queryParams={object("queryParams", {})}
   />
 );

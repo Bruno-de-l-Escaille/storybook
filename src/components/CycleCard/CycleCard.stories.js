@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { withKnobs, boolean } from "@storybook/addon-knobs";
+import { withKnobs, boolean, select, object } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 import cycles from "./data.json";
 import { CycleCard } from "./CycleCard";
@@ -18,32 +18,38 @@ export default {
 
 export const Type1 = () => (
   <CycleCard
-    language="fr"
     cycle={cycles[0]}
-    isUserMember={false}
+    language={select("language", ["fr", "nl", "en"], "fr")}
     isFetching={boolean("isFetching", false)}
-    env="v2"
+    env={select("env", ["production", "staging", "local"], "v2")}
+    isUserMember={boolean("isUserMember", false)}
+    isUserPremium={boolean("isUserPremium", false)}
+    queryParams={object("queryParams", {})}
   />
 );
 
 export const Type2 = () => {
   return (
     <CycleCard
-      language="fr"
       cycle={cycles[1]}
-      isUserMember={false}
+      language={select("language", ["fr", "nl", "en"], "fr")}
       isFetching={boolean("isFetching", false)}
-      env="v2"
+      env={select("env", ["production", "staging", "local"], "v2")}
+      isUserMember={boolean("isUserMember", false)}
+      isUserPremium={boolean("isUserPremium", false)}
+      queryParams={object("queryParams", {})}
     />
   );
 };
 
 export const Type3 = () => (
   <CycleCard
-    language="fr"
     cycle={cycles[2]}
-    isUserMember={false}
+    language={select("language", ["fr", "nl", "en"], "fr")}
     isFetching={boolean("isFetching", false)}
-    env="v2"
+    env={select("env", ["production", "staging", "local"], "v2")}
+    isUserMember={boolean("isUserMember", false)}
+    isUserPremium={boolean("isUserPremium", false)}
+    queryParams={object("queryParams", {})}
   />
 );

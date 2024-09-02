@@ -14,6 +14,7 @@ export const PremiumSlide = ({
   isUserMember,
   env,
   isFetching,
+  queryParams = {},
 }) => {
   if (isFetching) {
     return <Fetching />;
@@ -22,9 +23,9 @@ export const PremiumSlide = ({
   const { "user-registered": userRegistered } = cycle;
   const isUserPremium = userRegistered;
 
-  const cycleReceptionUrl = `${getOfffcourseUrl(env)}/cycle/${
-    cycle.id
-  }/reception`;
+  const offfcourseUrl = getOfffcourseUrl(env);
+  const offfcourseParams = new URLSearchParams(queryParams).toString();
+  const cycleReceptionUrl = `${offfcourseUrl}/cycle/${cycle.id}/reception?${offfcourseParams}`;
 
   const renderPlans = () => {
     const yearlyPrice = isUserMember ? cycle.memberPrice : cycle.nonMemberPrice;

@@ -1,5 +1,5 @@
 import React from "react";
-import { withKnobs, select, boolean } from "@storybook/addon-knobs";
+import { withKnobs, select, boolean, object } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 import data from "./data.json";
 import { PremiumSlide } from "./PremiumSlide";
@@ -20,7 +20,10 @@ export const Default = () => (
   <PremiumSlide
     cycle={cycle}
     language={select("language", ["fr", "nl", "en"], "fr")}
-    env="v2"
     isFetching={boolean("isFetching", false)}
+    env={select("env", ["production", "staging", "local"], "v2")}
+    isUserMember={boolean("isUserMember", false)}
+    isUserPremium={boolean("isUserPremium", false)}
+    queryParams={object("queryParams", {})}
   />
 );

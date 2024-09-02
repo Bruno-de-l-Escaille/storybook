@@ -40,7 +40,15 @@ export const modeLabelMapper = {
   HYBRID: "hybrid",
 };
 
-export function CycleCard({ cycle, language, isUserMember, isFetching, env }) {
+export function CycleCard({
+  cycle,
+  language,
+  isUserMember,
+  isUserPremium,
+  isFetching,
+  env,
+  queryParams = {},
+}) {
   const [showIcons, setShowIcons] = useState(false);
   const [hovered, setHovered] = useState(false);
 
@@ -61,6 +69,7 @@ export function CycleCard({ cycle, language, isUserMember, isFetching, env }) {
     env === "v2" ? "production" : env
   }`;
   const offfcourseUrl = getOfffcourseUrl(env);
+  const offfcourseParams = new URLSearchParams(queryParams).toString();
 
   const isSeason = isCycleSeason(cycle);
   const isEssential = isCycleEssential(cycle);
@@ -94,7 +103,9 @@ export function CycleCard({ cycle, language, isUserMember, isFetching, env }) {
           {isCycleRegistrationOpen(cycle) && (
             <a
               className={classNames(styles.green, styles.mobileActions)}
-              href={`${offfcourseUrl}/cycle/${cycle.id}/reception`}
+              href={`${offfcourseUrl}/cycle/${cycle.id}/reception?${offfcourseParams}`}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               {I18N[language]["buy"]}
             </a>
@@ -196,7 +207,11 @@ export function CycleCard({ cycle, language, isUserMember, isFetching, env }) {
         }
       >
         {showIcons && type === "WEBINAR" ? (
-          <a href={`${offfcourseUrl}/cycle/${cycle.id}/reception`}>
+          <a
+            href={`${offfcourseUrl}/cycle/${cycle.id}/reception?${offfcourseParams}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <div style={{ bottom: "40px" }}>
               <LiveDescriptionIcon />
               <span className={styles.cycleStateDescriptionIcon}>
@@ -262,7 +277,11 @@ export function CycleCard({ cycle, language, isUserMember, isFetching, env }) {
           <div className={styles.container_upper}>
             <div className={styles.type}>{cycleLabel}</div>
             <div className={styles.title}>
-              <a href={`${offfcourseUrl}/cycle/${cycle.id}/reception`}>
+              <a
+                href={`${offfcourseUrl}/cycle/${cycle.id}/reception?${offfcourseParams}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <h3>
                   <Shave maxHeight={76}>{name}</Shave>
                 </h3>

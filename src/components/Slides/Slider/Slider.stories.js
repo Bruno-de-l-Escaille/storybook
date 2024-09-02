@@ -6,9 +6,9 @@ import { Default as ArticleSlide } from "../ArticleSlide/ArticleSlide.stories";
 import { Default as EventSlide } from "../EventSlide/EventSlide.stories";
 import { Default as MembershipSlide } from "../MembershipSlide/MembershipSlide.stories";
 import { Default as PremiumSlide } from "../PremiumSlide/PremiumSlide.stories";
-import { Cycle as CycleSlide } from "../CycleSlide/CycleSlide.stories";
-import { Essential as EssentialSlide } from "../CycleSlide/CycleSlide.stories";
-import { Season as SeasonSlide } from "../CycleSlide/CycleSlide.stories";
+import { Type1 as CycleSlide } from "../CycleSlide/CycleSlide.stories";
+import { Type2 as EssentialSlide } from "../CycleSlide/CycleSlide.stories";
+import { Type3 as SeasonSlide } from "../CycleSlide/CycleSlide.stories";
 
 export default {
   title: "Slides/Slider",
