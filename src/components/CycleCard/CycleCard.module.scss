@@ -632,3 +632,260 @@
     transform: translateX(-50%) translateY(-50%) rotateZ(0deg);
   }
 }
+
+.event {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #f1f2f4;
+  border-radius: 5px;
+  height: 151px;
+
+  &.active {
+    background: #edfaf5;
+    border-color: #dcf5ec;
+  }
+
+  &.clickable {
+    cursor: pointer;
+
+    &:hover {
+      filter: drop-shadow(0 4px 5px #29394d0d);
+    }
+  }
+
+  h3 {
+    font-weight: 500;
+    font-size: 16px;
+    color: #29394d;
+    height: 76px;
+    text-align: start;
+  }
+
+  .speakers {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #6d7f92;
+  }
+
+  .infos {
+    margin: 20px 0;
+
+    ul li {
+      font-weight: normal;
+      font-size: 12px;
+      color: #29394d;
+      display: flex;
+      align-items: center;
+
+      svg {
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  .svgStyle {
+    position: absolute;
+    top: 0;
+    right: -4px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    .seen {
+      position: absolute;
+      margin-bottom: 10px;
+
+      div {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 120%;
+        text-transform: capitalize;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.fetching {
+  filter: none !important;
+
+  h3 {
+    height: 1rem;
+    width: 5rem;
+    background: #e8eaed;
+  }
+
+  h6 {
+    height: 1rem;
+    width: 12rem;
+    background: #e8eaed;
+  }
+}
+
+.banner {
+  position: relative;
+  height: 151px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #d7dbe0;
+  border-radius: 5px;
+
+  .logoWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0.5rem;
+  }
+
+  .cycleIcon {
+    position: absolute;
+    right: 0;
+    bottom: 25px;
+    margin: 0.5rem;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .cycleDescription {
+    position: absolute;
+    right: 28px;
+    top: 1px;
+    font-size: 12px;
+    color: #f47f4d;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .registerBadge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0.25rem;
+    width: 36px;
+    height: 44px;
+  }
+
+  .premiumFlag {
+    position: absolute;
+    text-align: center;
+    width: 200px;
+    height: 25px;
+    top: 23px;
+    right: -70px;
+  }
+
+  .badges {
+    display: flex;
+    position: absolute;
+    bottom: 18px;
+    right: 0;
+    transform: translateY(50%);
+
+    .badge {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 22px;
+      padding: 0 1rem;
+      background: #29394db3;
+      border-radius: 5px;
+      margin-right: 0.25rem;
+      font-size: 12px;
+      font-weight: 500;
+      color: #fff;
+
+      &.redBadge {
+        background: #fb1e5b !important;
+        color: #fff;
+      }
+
+      &.greenBadge {
+        background: #02af8e !important;
+        color: #fff;
+      }
+    }
+
+    .inclusPremium {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 22px;
+      padding: 0 1rem;
+      background: #fff;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #fb1e5b;
+    }
+  }
+
+  .labels {
+    display: flex;
+    margin-left: 0.5rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 1rem;
+    margin-right: 0.5rem;
+
+    .label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 26px;
+      padding: 0 0.75rem;
+      background: #18a0fb;
+      border-radius: 50px;
+
+      &:not(:last-child) {
+        margin-right: 0.25rem;
+      }
+
+      font-size: 12px;
+      font-weight: 400;
+      color: #fff;
+    }
+  }
+}
+
+.speakers {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #6d7f92;
+}
+
+.infos {
+  margin: 20px 0;
+
+  ul li {
+    font-weight: normal;
+    font-size: 12px;
+    color: #29394d;
+    display: flex;
+    align-items: center;
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+}
+
+.mainActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+}
