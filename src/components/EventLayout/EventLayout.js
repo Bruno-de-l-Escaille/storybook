@@ -494,7 +494,6 @@ export function EventLayout({
         styles.event,
         isUserEventRegistered && styles.active
       )}
-      style={{ width: "305px", height: "344px" }}
       onMouseEnter={handleOnMouseEnter}
       onMouseLeave={handleOnMouseLeave}
     >

@@ -234,7 +234,6 @@ export function CycleCard({
         [styles.season]: isSeason,
         [styles.essential]: isEssential,
       })}
-      style={{ width: "305px", height: "344px" }}
     >
       <div
         className={classNames(styles.cycle, styles.active)}
