@@ -7,7 +7,7 @@ export default function Price({
   price,
   language,
   memberPrice,
-  isUserMember,
+  nonMemberPrice,
   memberOrg = "OECCBB.",
   originalPrice,
   className,
@@ -26,7 +26,7 @@ export default function Price({
           <>{I18N[language].free}</>
         )}
       </div>
-      {!isUserMember && Boolean(price) && memberPrice !== price && (
+      {Boolean(price) && memberPrice !== nonMemberPrice && (
         <div className={styles.member_discount}>
           <div className={styles.discount_percent}>
             {Number(memberPrice) > 0 ? `${memberPrice} €` : I18N[language].free}

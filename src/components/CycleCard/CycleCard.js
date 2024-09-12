@@ -142,14 +142,17 @@ export function CycleCard({
       className={styles.badge}
       style={{ display: "flex", alignItems: "center" }}
     >
-      {!isUserMember && memberPrice.price !== nonMemberPrice.price && (
-        <span className={classNames("m-r-s", styles.reductionOrg)}>
+      {memberPrice.price !== nonMemberPrice.price && (
+        <span className={classNames(styles.reductionOrg)}>
           <span style={{ fontSize: "14px" }}> {memberPrice.price} €</span>
           <span> {I18N[language]["forTheMembers"]} OECCBB.</span>
         </span>
       )}
       {isUserMember && memberPrice.price !== nonMemberPrice.price && (
-        <span className={styles.strike} style={{ fontWeight: "500" }}>
+        <span
+          className={classNames(styles.strike, "m-l-xs")}
+          style={{ fontWeight: "500" }}
+        >
           {nonMemberPrice.price} €
         </span>
       )}

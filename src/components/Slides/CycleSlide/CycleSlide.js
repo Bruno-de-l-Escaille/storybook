@@ -116,7 +116,8 @@ export const CycleSlide = ({
         <Price
           price={isUserMember ? memberPrice.price : nonMemberPrice.price}
           memberPrice={memberPrice.price}
-          originalPrice={originalPrice ?? 0}
+          nonMemberPrice={nonMemberPrice.price}
+          originalPrice={nonMemberPrice.price}
           isUserMember={isUserMember}
           language={language}
         />

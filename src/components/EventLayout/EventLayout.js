@@ -336,10 +336,9 @@ export function EventLayout({
           className={styles.badge}
           style={{ display: "flex", alignItems: "center", marginTop: "5px" }}
         >
-          {!isUserMember &&
-            memberPrice !== nonMemberPrice &&
+          {memberPrice !== nonMemberPrice &&
             (event.client === 1256 || event.client === 9) && (
-              <span className={classNames("m-r-s", styles.reductionOrg)}>
+              <span className={classNames(styles.reductionOrg)}>
                 <span style={{ fontSize: "16px" }}> {memberPrice} €</span>
                 <span> {I18N[language]["forTheMembers"]} OECCBB.</span>
               </span>
@@ -347,13 +346,21 @@ export function EventLayout({
           {isUserMember &&
             memberPrice !== nonMemberPrice &&
             (event.client === 1256 || event.client === 9) && (
-              <span className={styles.strike} style={{ fontWeight: "500" }}>
+              <span
+                className={classNames(styles.strike, "m-l-xs")}
+                style={{ fontWeight: "500", whiteSpace: "nowrap" }}
+              >
                 {nonMemberPrice} €
               </span>
             )}
           <span
             className="m-l-xs"
-            style={{ color: "#29394D", fontWeight: "500", fontSize: "20px" }}
+            style={{
+              color: "#29394D",
+              fontWeight: "500",
+              fontSize: "20px",
+              whiteSpace: "nowrap",
+            }}
           >
             {eventPrice} <span style={{ fontSize: "12px" }}>€</span>
           </span>
