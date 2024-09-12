@@ -144,6 +144,7 @@ export const EventSlide = ({
             price={isUserMember ? memberPrice : nonMemberPrice}
             originalPrice={nonMemberPrice}
             memberPrice={memberPrice}
+            nonMemberPrice={nonMemberPrice}
             isUserMember={isUserMember}
             language={language}
           />

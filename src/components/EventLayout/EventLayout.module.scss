@@ -321,6 +321,7 @@
 .strike {
   position: relative;
   color: #eb5757;
+  white-space: nowrap;
 
   &::after {
     position: absolute;
@@ -356,7 +357,7 @@
 }
 
 .reductionOrg {
-  width: 101px;
+  width: 90px;
   display: flex;
   flex-direction: column;
   font-size: 10px;
