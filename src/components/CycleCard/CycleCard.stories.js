@@ -16,6 +16,10 @@ export default {
   ],
 };
 
+const onClick = (id, type, pathname) => {
+  alert(`id: ${id}, type: ${type}, pathname: ${pathname}`);
+};
+
 export const Type1 = () => (
   <CycleCard
     cycle={cycles[0]}
@@ -51,5 +55,6 @@ export const Type3 = () => (
     isUserMember={boolean("isUserMember", false)}
     isUserPremium={boolean("isUserPremium", false)}
     queryParams={object("queryParams", {})}
+    onClick={onClick}
   />
 );
