@@ -153,7 +153,7 @@ export const EventSlide = ({
           onClick={onClick}
           id={event.id}
           type="FORMATION"
-          pathname={`/event/${event.id}/re`}
+          pathname={`/event/${event.id}/reception`}
           {...(isSoldOut || isUserRegistered
             ? { name: I18N[language].moreDetails, theme: "default" }
             : { name: registerBtnTxt, theme: "greenTeal" })}
