@@ -28,6 +28,7 @@ export const EventSlide = ({
   isUserPremium,
   isFetching,
   queryParams = {},
+  onClick,
 }) => {
   if (isFetching) {
     return <Fetching />;
@@ -128,6 +129,10 @@ export const EventSlide = ({
         title={name}
         clientImg={clientImg}
         link={eventReceptionUrl}
+        id={event.id}
+        type="FORMATION"
+        pathname={`/event/${event.id}/reception`}
+        onClick={onClick}
       />
       <Slide.Body className={styles.slideBody}>
         <Speakers speakers={speakers} className={styles.speakers} />
@@ -145,6 +150,9 @@ export const EventSlide = ({
         )}
         <ActionButton
           link={eventReceptionUrl}
+          onClick={onClick}
+          id={event.id}
+          type="FORMATION"
           {...(isSoldOut || isUserRegistered
             ? { name: I18N[language].moreDetails, theme: "default" }
             : { name: registerBtnTxt, theme: "greenTeal" })}
@@ -154,6 +162,10 @@ export const EventSlide = ({
             name={I18N[language].program}
             link={eventSessionUrl}
             theme="default"
+            onClick={onClick}
+            id={event.id}
+            type="FORMATION"
+            pathname={`/event/${event.id}/session`}
           />
         )}
       </Slide.Footer>

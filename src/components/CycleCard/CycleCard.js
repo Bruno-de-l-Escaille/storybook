@@ -48,6 +48,7 @@ export function CycleCard({
   isFetching,
   env,
   queryParams = {},
+  onClick,
 }) {
   const [showIcons, setShowIcons] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -103,9 +104,19 @@ export function CycleCard({
           {isCycleRegistrationOpen(cycle) && (
             <a
               className={classNames(styles.green, styles.mobileActions)}
-              href={`${offfcourseUrl}/cycle/${cycle.id}/reception?${offfcourseParams}`}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={
+                onClick
+                  ? undefined
+                  : `${offfcourseUrl}/cycle/${cycle.id}/reception?${offfcourseParams}`
+              }
+              target={onClick ? undefined : "_blank"}
+              rel={onClick ? undefined : "noopener noreferrer"}
+              onClick={
+                onClick
+                  ? () =>
+                      onClick(cycle.id, "CYCLE", `/cycle/${cycle.id}/reception`)
+                  : undefined
+              }
             >
               {I18N[language]["buy"]}
             </a>
@@ -208,9 +219,19 @@ export function CycleCard({
       >
         {showIcons && type === "WEBINAR" ? (
           <a
-            href={`${offfcourseUrl}/cycle/${cycle.id}/reception?${offfcourseParams}`}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={
+              onClick
+                ? undefined
+                : `${offfcourseUrl}/cycle/${cycle.id}/reception?${offfcourseParams}`
+            }
+            target={onClick ? undefined : "_blank"}
+            rel={onClick ? undefined : "noopener noreferrer"}
+            onClick={
+              onClick
+                ? () =>
+                    onClick(cycle.id, "CYCLE", `/cycle/${cycle.id}/reception`)
+                : undefined
+            }
           >
             <div style={{ bottom: "40px" }}>
               <LiveDescriptionIcon />
@@ -277,9 +298,23 @@ export function CycleCard({
             <div className={styles.type}>{cycleLabel}</div>
             <div className={styles.title}>
               <a
-                href={`${offfcourseUrl}/cycle/${cycle.id}/reception?${offfcourseParams}`}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={
+                  onClick
+                    ? undefined
+                    : `${offfcourseUrl}/cycle/${cycle.id}/reception?${offfcourseParams}`
+                }
+                target={onClick ? undefined : "_blank"}
+                rel={onClick ? undefined : "noopener noreferrer"}
+                onClick={
+                  onClick
+                    ? () =>
+                        onClick(
+                          cycle.id,
+                          "CYCLE",
+                          `/cycle/${cycle.id}/reception`
+                        )
+                    : undefined
+                }
               >
                 <h3>
                   <Shave maxHeight={76}>{name}</Shave>

@@ -25,6 +25,7 @@ export const CycleSlide = ({
   isUserMember,
   isUserPremium,
   queryParams = {},
+  onClick,
 }) => {
   if (isFetching) {
     return <Fetching />;
@@ -98,6 +99,10 @@ export const CycleSlide = ({
         theme={theme}
         clientImg={clientImg}
         link={cycleReceptionUrl}
+        id={cycle.id}
+        type="CYCLE"
+        pathname={`/cycle/${cycle.id}/reception`}
+        onClick={onClick}
       >
         <span className={styles.info}>
           {trainingsCount} {I18N[language].trainings}
@@ -117,11 +122,22 @@ export const CycleSlide = ({
         />
         <ActionButton
           link={cycleReceptionUrl}
+          onClick={onClick}
+          id={cycle.id}
+          type="CYCLE"
+          pathname={`/cycle/${cycle.id}/reception`}
           {...(isUserRegistered
             ? { name: I18N[language].moreDetails, theme: "default" }
             : { name: buyCycleLabel, theme: "greenTeal" })}
         />
-        <ActionButton name={I18N[language].program} link={cycleProgramUrl} />
+        <ActionButton
+          name={I18N[language].program}
+          link={cycleProgramUrl}
+          onClick={onClick}
+          id={cycle.id}
+          type="CYCLE"
+          pathname={`/cycle/${cycle.id}/events`}
+        />
       </Slide.Footer>
     </Slide>
   );

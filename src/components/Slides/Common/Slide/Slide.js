@@ -34,7 +34,18 @@ export function Slide({ children, bannerSrc, flag, style, className }) {
   );
 }
 
-const Header = ({ title, link, label, children, theme, clientImg }) => {
+const Header = ({
+  title,
+  link,
+  label,
+  children,
+  theme,
+  clientImg,
+  onClick,
+  id,
+  type,
+  pathname,
+}) => {
   return (
     <div className={styles.header}>
       <div className={styles.titles}>
@@ -46,9 +57,10 @@ const Header = ({ title, link, label, children, theme, clientImg }) => {
         </div>
         <a
           className={styles.title}
-          href={link}
-          target="_blank"
-          rel="noreferrer"
+          href={onClick ? undefined : link}
+          target={onClick ? undefined : "_blank"}
+          rel={onClick ? undefined : "noopener noreferrer"}
+          onClick={onClick ? () => onClick(id, type, pathname) : undefined}
         >
           <Shave maxHeight={90}>{title}</Shave>
         </a>

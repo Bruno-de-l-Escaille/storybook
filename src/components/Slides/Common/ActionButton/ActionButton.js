@@ -9,15 +9,20 @@ export default function ActionButton({
   link,
   theme = "default",
   className,
+  onClick,
+  id,
+  type,
+  pathname,
   ...props
 }) {
   return (
     <div className={cn(styles.actionButton, className)}>
       <a
-        href={link ?? "#"}
+        href={onClick ? undefined : link}
         className={theme && styles[theme]}
-        target="_blank"
-        rel="noreferrer"
+        target={onClick ? undefined : "_blank"}
+        rel={onClick ? undefined : "noopener noreferrer"}
+        onClick={onClick ? () => onClick(id, type, pathname) : undefined}
         {...props}
       >
         {name}

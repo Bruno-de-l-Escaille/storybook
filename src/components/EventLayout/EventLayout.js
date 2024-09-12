@@ -66,6 +66,7 @@ export function EventLayout({
   isFetching,
   env,
   queryParams = {},
+  onClick,
 }) {
   const [showIcons, setShowIcons] = useState(false);
 
@@ -216,7 +217,7 @@ export function EventLayout({
       if (!isExpired) {
         return (
           <Button
-            link={eventLink}
+            link={onClick ? undefined : eventLink}
             variant="success"
             textSize="sm"
             className={classNames(
@@ -224,8 +225,18 @@ export function EventLayout({
               "greetings",
               isLive ? styles.red : styles.blue
             )}
-            target="_blank"
-            rel="noopener noreferrer"
+            target={onClick ? undefined : "_blank"}
+            rel={onClick ? undefined : "noopener noreferrer"}
+            onClick={
+              onClick
+                ? () =>
+                    onClick(
+                      event.id,
+                      "FORMATION",
+                      `/event/${event.id}/reception`
+                    )
+                : undefined
+            }
             icon={<LiveTrainingIcon className="m-r-xxxs" />}
           >
             <span style={{ fontSize: "14px" }}>{I18N[language]["rejoin"]}</span>
@@ -248,12 +259,18 @@ export function EventLayout({
 
     return (
       <Button
-        link={eventLink}
+        link={onClick ? undefined : eventLink}
         variant="success"
         textSize="md"
         className={buttonClassName}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={onClick ? undefined : "_blank"}
+        rel={onClick ? undefined : "noopener noreferrer"}
+        onClick={
+          onClick
+            ? () =>
+                onClick(event.id, "FORMATION", `/event/${event.id}/reception`)
+            : undefined
+        }
       >
         <span style={{ fontSize: "14px" }}>{buttonText}</span>
       </Button>
@@ -395,7 +412,21 @@ export function EventLayout({
         }
       >
         {!place && isUpcomming && !showTimeCounter && showIcons ? (
-          <a href={eventLink} target="_blank" rel="noopener noreferrer">
+          <a
+            href={onClick ? undefined : eventLink}
+            target={onClick ? undefined : "_blank"}
+            rel={onClick ? undefined : "noopener noreferrer"}
+            onClick={
+              onClick
+                ? () =>
+                    onClick(
+                      event.id,
+                      "FORMATION",
+                      `/event/${event.id}/reception`
+                    )
+                : undefined
+            }
+          >
             <div style={place ? { bottom: "40px" } : {}}>
               <LiveDescriptionIcon />
               <span className={styles.eventStateDescriptionIcon}>
@@ -425,7 +456,21 @@ export function EventLayout({
       <div className={styles.eventStateIcon}>
         {showIcons && isExpired ? (
           <>
-            <a href={eventLink} target="_blank" rel="noopener noreferrer">
+            <a
+              href={onClick ? undefined : eventLink}
+              target={onClick ? undefined : "_blank"}
+              rel={onClick ? undefined : "noopener noreferrer"}
+              onClick={
+                onClick
+                  ? () =>
+                      onClick(
+                        event.id,
+                        "FORMATION",
+                        `/event/${event.id}/reception`
+                      )
+                  : undefined
+              }
+            >
               <ReplayDescriptionIcon />
               <span className={styles.eventStateDescriptionIcon}>
                 {I18N[language]["replay"]}
@@ -562,7 +607,21 @@ export function EventLayout({
         </div>
         <div className={styles.container}>
           <div>
-            <a href={eventLink} target="_blank" rel="noopener noreferrer">
+            <a
+              href={onClick ? undefined : eventLink}
+              target={onClick ? undefined : "_blank"}
+              rel={onClick ? undefined : "noopener noreferrer"}
+              onClick={
+                onClick
+                  ? () =>
+                      onClick(
+                        event.id,
+                        "FORMATION",
+                        `/event/${event.id}/reception`
+                      )
+                  : undefined
+              }
+            >
               <h3>
                 <Shave maxHeight={76}>{name} </Shave>
               </h3>
