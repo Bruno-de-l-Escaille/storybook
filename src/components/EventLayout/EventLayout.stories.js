@@ -25,5 +25,8 @@ export const Default = () => (
     isUserMember={boolean("isUserMember", false)}
     isUserPremium={boolean("isUserPremium", false)}
     queryParams={object("queryParams", {})}
+    token="30165da214f80f1c5de25da2c059fbf29315f3b8"
+    userId={null}
+    dict={null}
   />
 );

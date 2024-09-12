@@ -437,3 +437,5 @@ export const getCycleLabels = (cycle, language) => {
     ),
   };
 };
+
+export const isCycleIncludedInPremium = (cycle) => cycle.client === 9;

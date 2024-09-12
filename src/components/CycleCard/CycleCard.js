@@ -16,6 +16,7 @@ import {
   getCyclePrice,
   getOfffcourseUrl,
   isCycleEssential,
+  isCycleIncludedInPremium,
   isCycleRegistrationOpen,
   isCycleSeason,
   totalCycleTrainingHours,
@@ -30,6 +31,7 @@ import LiveDescriptionIcon from "../Icons/LiveDescription";
 import LiveIcon from "../Icons/Live";
 import { Shave } from "../../common/components/Shave";
 import { Fetching } from "./Fetching";
+import { CardFlag } from "../../common/components/CardFlag";
 
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =
   "https://tamtam.s3.eu-west-1.amazonaws.com";
@@ -98,7 +100,7 @@ export function CycleCard({
   const { cycleLabel } = getCycleLabels(cycle, language);
 
   const renderActions = () => {
-    if (!isUserRegistered) {
+    if (!isUserPremium && !isUserRegistered) {
       return (
         <div className={classNames(styles.actions, styles.fullWidth)}>
           {isCycleRegistrationOpen(cycle) && (
@@ -130,7 +132,9 @@ export function CycleCard({
         <div className={styles.premiumRegistered}>
           <RegisteredBadge theme="green" className={styles.registerBadge} />
           <span className={styles.registerText}>
-            {I18N[language]["subscribed"]}
+            {isUserPremium
+              ? I18N[language]["subscribedPremium"]
+              : I18N[language]["subscribed"]}
           </span>
         </div>
       </div>
@@ -275,7 +279,9 @@ export function CycleCard({
                 />
               </div>
             )}
-
+            {isCycleIncludedInPremium(cycle) && (
+              <CardFlag language={language} flag="premium" />
+            )}
             {renderHoveringIcons()}
 
             {trainingsCount && cycleTrainingHours && (

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   capFirstLetterInSentence,
   getByLanguage,
   getCroppedImageUrl,
   isEmpty,
+  onError,
+  parseBoolean,
   prepareS3ResourceUrl,
   stopPropagation,
 } from "../../utils/common";
@@ -52,6 +54,9 @@ import HybrideIcon from "../Icons/Hybride";
 import ReplayDescriptionIcon from "../Icons/ReplayDescription";
 import ReplayIcon from "../Icons/Replay";
 import HelpIcon from "../Icons/Help";
+import { registerPremiumToEvent } from "../../api/event";
+import { ClipLoader } from "react-spinners";
+import { CardFlag } from "../../common/components/CardFlag";
 
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =
   "https://tamtam.s3.eu-west-1.amazonaws.com";
@@ -63,12 +68,41 @@ export function EventLayout({
   options,
   dateEndOfReplay,
   isUserMember,
+  isUserPremium,
   isFetching,
   env,
   queryParams = {},
   onClick,
+  token,
+  userId,
+  dict,
 }) {
   const [showIcons, setShowIcons] = useState(false);
+  const [registeringPremium, setRegisteringPremium] = useState(false);
+
+  const handleRegisterPremium = useCallback(
+    (e) => {
+      e.preventDefault();
+      const eventId = event.id;
+
+      setRegisteringPremium(true);
+      registerPremiumToEvent({ token, eventId, userId })
+        .finally(() => {
+          setRegisteringPremium(false);
+        })
+        .then(() => {
+          event["user-registered"] = true;
+          if (+event.slotsCount === 1 && event.slotReplayUrls) {
+            const replayLink = getSlotReplayUrl(event.slotReplayUrls, language);
+            if (replayLink) {
+              window.open(replayLink, "_blank", "noreferrer");
+            }
+          }
+        })
+        .catch((e) => onError(dict));
+    },
+    [registeringPremium, userId, event, registerPremiumToEvent, onError]
+  );
 
   if (isFetching) {
     return <Fetching />;
@@ -153,6 +187,9 @@ export function EventLayout({
     : `${offfcourseUrl}/event/${event.id}/reception?${offfcourseParams}`;
 
   const nbMinutes = getEventNbMinutes(event);
+  const isActive =
+    event["user-registered"] ||
+    (isUserPremium && event.isIncludedPremium === 1);
 
   const renderMainAction = () => {
     if (isUserEventRegistered) {
@@ -190,17 +227,27 @@ export function EventLayout({
               target="_blank"
               rel="noopener noreferrer"
               icon={
-                <>
-                  {isFullWatch ? (
-                    <FilledPlayIcon className="m-r-xxs" />
-                  ) : watchedTime > 0 ? (
-                    <FilledResumeIcon className="m-r-xxs" />
-                  ) : (
-                    <FilledPlayIcon className="m-r-xxs" />
-                  )}
-                </>
+                !registeringPremium ? (
+                  <>
+                    {isFullWatch ? (
+                      <FilledPlayIcon className="m-r-xxs" />
+                    ) : watchedTime > 0 ? (
+                      <FilledResumeIcon className="m-r-xxs" />
+                    ) : (
+                      <FilledPlayIcon className="m-r-xxs" />
+                    )}
+                  </>
+                ) : (
+                  <div className="m-r-xxs">
+                    <ClipLoader size={12} color="#FFFFFF" />
+                  </div>
+                )
               }
-              onClick={stopPropagation}
+              onClick={
+                isUserPremium && !event["user-registered"]
+                  ? handleRegisterPremium
+                  : stopPropagation
+              }
             >
               <span style={{ fontSize: "14px" }}>
                 {isFullWatch
@@ -556,6 +603,16 @@ export function EventLayout({
               />
             </div>
           )}
+          <CardFlag
+            language={language}
+            flag={
+              isSoldOut && !isActive
+                ? "sold-out"
+                : parseBoolean(event.isIncludedPremium) && !isActive
+                ? "premium"
+                : undefined
+            }
+          />
           {showTimeCounter && (
             <div className={styles.timeCounter}>
               <TimeCounter
