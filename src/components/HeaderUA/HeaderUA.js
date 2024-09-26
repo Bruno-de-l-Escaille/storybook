@@ -221,6 +221,9 @@ export class HeaderUA extends Component {
           {rightIcons.profile.activated && (
             <MenuItem icon="Profile" href={`${rightIcons.profile.url}`} />
           )}
+          {rightIcons.ebox.activated && (
+            <MenuItem icon="Ebox" href={`${rightIcons.ebox.url}`} />
+          )}
           {rightIcons.notifs.activated && (
             <Notifs
               notifications={notifications}
