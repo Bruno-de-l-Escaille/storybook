@@ -32,6 +32,7 @@ export default function Notifs({
   appName,
   navCommunity,
   isFaqWidgetLoaded,
+  selectedApp,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentNotif, setCurrentNotif] = useState(null);
@@ -49,12 +50,16 @@ export default function Notifs({
 
   const fetchNotifications = () => {
     setIsFetching(true);
+    const app =
+      selectedApp && selectedApp === "NEWSLETTER"
+        ? "E_NEWS"
+        : appName.toUpperCase();
     getNotifications({
       apiUrl,
       token: auth.token,
       userId: auth.user.id,
       navCommunity,
-      appName: appName.toUpperCase(),
+      appName: app,
       options: {
         limit: 6,
       },
