@@ -232,6 +232,7 @@ export class HeaderUA extends Component {
               auth={auth}
               navCommunity={navCommunity}
               appName={app.appName}
+              selectedApp={app.selectedApp}
               isFaqWidgetLoaded={isFaqWidgetLoaded}
             />
           )}
