@@ -85,6 +85,7 @@ export default function Notifs({
       })
       .catch((e) => {
         setIsFetched(true);
+        setNotifications([]);
       });
   };
 
