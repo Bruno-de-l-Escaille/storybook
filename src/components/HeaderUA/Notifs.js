@@ -49,8 +49,8 @@ export default function Notifs({
   const apiUrl = getApiUrl(env);
   useEffect(() => {
     function listener(e) {
-      console.log("Fetch notifications", e, e.activeApp);
-      fetchNotifications(e.activeApp);
+      console.log("Fetch notifications", e.detail);
+      fetchNotifications(e.detail);
     }
 
     window.addEventListener("activeApp", listener);
