@@ -47,11 +47,18 @@ export default function Notifs({
   const [notifications, setNotifications] = useState([]);
 
   const apiUrl = getApiUrl(env);
+  useEffect(() => {
+    function listener() {
+      console.log("Fetch notifications");
+      fetchNotifications();
+    }
 
-  window.addEventListener("stateChange", (e) => {
-    console.log("State changed:", e.detail);
-    fetchNotifications();
-  });
+    window.addEventListener("stateChange", listener);
+    return () => {
+      window.removeEventListener("stateChange", listener);
+    };
+  }, []);
+
   const fetchNotifications = () => {
     setIsFetching(true);
     const app =
