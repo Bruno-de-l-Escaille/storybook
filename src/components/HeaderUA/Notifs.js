@@ -48,6 +48,10 @@ export default function Notifs({
 
   const apiUrl = getApiUrl(env);
 
+  window.addEventListener("stateChange", (e) => {
+    console.log("State changed:", e.detail);
+    fetchNotifications();
+  });
   const fetchNotifications = () => {
     setIsFetching(true);
     const app =
