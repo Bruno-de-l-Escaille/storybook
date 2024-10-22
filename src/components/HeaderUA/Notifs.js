@@ -49,10 +49,8 @@ export default function Notifs({
   const apiUrl = getApiUrl(env);
   useEffect(() => {
     function listener(e) {
-      if (e?.activeApp) {
-        console.log("Fetch notifications", e);
-        fetchNotifications(e.activeApp);
-      }
+      console.log("Fetch notifications", e, e.activeApp);
+      fetchNotifications(e.activeApp);
     }
 
     window.addEventListener("activeApp", listener);
@@ -67,6 +65,8 @@ export default function Notifs({
       (activeApp && activeApp === "NEWSLETTER") ||
       (selectedApp && selectedApp === "NEWSLETTER")
         ? "E_NEWS"
+        : activeApp
+        ? activeApp
         : appName.toUpperCase();
     getNotifications({
       apiUrl,
