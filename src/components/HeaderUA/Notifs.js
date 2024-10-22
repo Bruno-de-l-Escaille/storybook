@@ -48,21 +48,24 @@ export default function Notifs({
 
   const apiUrl = getApiUrl(env);
   useEffect(() => {
-    function listener() {
-      console.log("Fetch notifications");
-      fetchNotifications();
+    function listener(e) {
+      if (e?.activeApp) {
+        console.log("Fetch notifications", e);
+        fetchNotifications(e.activeApp);
+      }
     }
 
-    window.addEventListener("stateChange", listener);
+    window.addEventListener("activeApp", listener);
     return () => {
-      window.removeEventListener("stateChange", listener);
+      window.removeEventListener("activeApp", listener);
     };
   }, []);
 
-  const fetchNotifications = () => {
+  const fetchNotifications = (activeApp) => {
     setIsFetching(true);
     const app =
-      selectedApp && selectedApp === "NEWSLETTER"
+      (activeApp && activeApp === "NEWSLETTER") ||
+      (selectedApp && selectedApp === "NEWSLETTER")
         ? "E_NEWS"
         : appName.toUpperCase();
     getNotifications({
