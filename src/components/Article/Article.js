@@ -12,6 +12,7 @@ import {
   isUserHasRights,
   addLandaSize,
   convertDateFromUTC,
+  getArticleFullUrl,
 } from "../../utils";
 import classnames from "classnames";
 import { I18N } from "../../i18n";
@@ -413,13 +414,25 @@ export const Article = ({
       <div className={styles.version}>
         <span>{I18N[language]["see_version"]}:</span>
         {Object.entries(relatedArticles).map((related) => {
-          if (Link)
+          let articleUrl = `/${related[0]}/article/${related[1].url}/${related[1].id}`;
+          if (user) {
+            articleUrl = getArticleFullUrl(
+              {
+                url: related[1].url,
+                id: related[1].id,
+                organization: article.organization,
+                language: related[0],
+                isExternal: false,
+                externalUrl: "",
+              },
+              env,
+              host
+            );
+          }
+          if (Link) {
             return (
               <span className={styles.vIterm}>
-                <Link
-                  href={`/${related[0]}/article/${related[1].url}/${related[1].id}`}
-                  prefetch={false}
-                >
+                <Link href={articleUrl} prefetch={false}>
                   <img
                     src={`/img/flags/${related[0]}.png`}
                     width="24"
@@ -429,12 +442,10 @@ export const Article = ({
                 </Link>
               </span>
             );
-          else
+          } else {
             return (
               <span className={styles.vIterm}>
-                <a
-                  href={`/${related[0]}/article/${related[1].url}/${related[1].id}`}
-                >
+                <a href={articleUrl}>
                   <img
                     src={`/img/flags/${related[0]}.png`}
                     width="24"
@@ -444,6 +455,7 @@ export const Article = ({
                 </a>
               </span>
             );
+          }
         })}
       </div>
     );
