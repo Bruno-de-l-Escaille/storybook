@@ -6,7 +6,14 @@ import { CardFlag } from "../../../../common/components/CardFlag";
 import cn from "classnames";
 import { Shave } from "../../../../common/components/Shave";
 
-export function Slide({ children, bannerSrc, flag, style, className }) {
+export function Slide({
+  children,
+  bannerSrc,
+  flag,
+  style,
+  className,
+  isSmall = false,
+}) {
   const bgStyle = {
     background: `linear-gradient(to right, #29394d, #29394db2, #29394d00), url(${bannerSrc}) center/cover`,
     ...style,
@@ -23,7 +30,13 @@ export function Slide({ children, bannerSrc, flag, style, className }) {
   );
 
   return (
-    <div className={cn(styles.wrapper, className)} style={bgStyle}>
+    <div
+      className={cn(
+        !isSmall ? styles.wrapper : styles.wrapper_small,
+        className
+      )}
+      style={bgStyle}
+    >
       <CardFlag flag={flag} />
       <div className={styles.top}>
         {header}
@@ -45,6 +58,7 @@ const Header = ({
   id,
   type,
   pathname,
+  isSmall,
 }) => {
   return (
     <div className={styles.header}>
@@ -53,8 +67,13 @@ const Header = ({
           {label && (
             <span className={cn(styles.text, styles[theme])}>{label}</span>
           )}
-          {children}
+          {clientImg && (
+            <div className={styles.clientImg}>
+              <img src={clientImg} alt="organization img" />
+            </div>
+          )}
         </div>
+        {children}
         <a
           className={styles.title}
           href={onClick ? undefined : link}
@@ -62,14 +81,9 @@ const Header = ({
           rel={onClick ? undefined : "noopener noreferrer"}
           onClick={onClick ? () => onClick(id, type, pathname) : undefined}
         >
-          <Shave maxHeight={90}>{title}</Shave>
+          <Shave maxHeight={!isSmall ? 125 : 65}>{title}</Shave>
         </a>
       </div>
-      {clientImg && (
-        <div className={styles.clientImg}>
-          <img src={clientImg} alt="organization img" />
-        </div>
-      )}
     </div>
   );
 };

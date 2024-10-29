@@ -29,10 +29,69 @@
     }
   }
 
+  .counts {
+    display: flex;
+    gap: 10px;
+  }
+
   .footer {
     display: flex;
     align-items: center;
     gap: 10px;
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+}
+
+.wrapper {
+  .title {
+    display: flex;
+    align-items: center;
+    padding: 20px 20px 40px;
+    border-radius: 14px;
+    z-index: 1;
+    margin-bottom: -1rem;
+    overflow: hidden;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+    height: 117px;
+    white-space: pre-wrap;
+
+    &.blue {
+      color: #18a0fb;
+      background-color: #18a0fb1a;
+    }
+
+    &.orange {
+      color: #f47f4d;
+      background-color: #f47f4d1a;
+    }
+
+    &.purple {
+      color: #5f5de8;
+      background: #5f5de81a;
+    }
+
+    &.greenTeal {
+      color: #14b7ad;
+      background: #14b7ad1a;
+    }
+
+    &.redOrange {
+      color: #fb1e5b;
+      background: #fb1e5b1a;
+    }
+  }
+
+  .slideBlock {
+    z-index: 2;
   }
 }
 

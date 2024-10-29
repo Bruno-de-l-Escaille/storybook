@@ -29,6 +29,8 @@ export const EventSlide = ({
   isFetching,
   queryParams = {},
   onClick,
+  isSmall = false,
+  focusTitle,
 }) => {
   if (isFetching) {
     return <Fetching />;
@@ -110,67 +112,166 @@ export const EventSlide = ({
         <div>
           <IconCalendar className="m-r-xs" width={16} height={16} />
         </div>
-        <strong>
-          {modeLabel} {" : "}
-        </strong>
-        {formatDateFromTo(startDateTime, endDateTime, language)}
+        <div>
+          <strong>
+            {modeLabel} {" : "}
+          </strong>
+          {formatDateFromTo(startDateTime, endDateTime, language)}
+        </div>
       </li>
     );
   };
 
-  return (
-    <Slide
-      bannerSrc={bannerSrc || secondaryBanner}
-      className={styles.eventSlide}
-      isFetching={isFetching}
-    >
-      <Slide.Header
-        label={label}
-        title={name}
-        clientImg={clientImg}
-        link={eventReceptionUrl}
-        id={event.id}
-        type="FORMATION"
-        pathname={`/event/${event.id}/reception`}
-        onClick={onClick}
-      />
-      <Slide.Body className={styles.slideBody}>
-        <Speakers speakers={speakers} className={styles.speakers} />
-        <ul className={styles.details}>{renderEventMode()}</ul>
-      </Slide.Body>
-      <Slide.Footer className={styles.slideFooter}>
-        {showPrice && (
-          <Price
-            price={isUserMember ? memberPrice : nonMemberPrice}
-            originalPrice={nonMemberPrice}
-            memberPrice={memberPrice}
-            nonMemberPrice={nonMemberPrice}
-            isUserMember={isUserMember}
-            language={language}
-          />
-        )}
-        <ActionButton
+  if (!focusTitle) {
+    return (
+      <Slide
+        bannerSrc={bannerSrc || secondaryBanner}
+        className={styles.eventSlide}
+        isFetching={isFetching}
+        isSmall={isSmall}
+      >
+        <Slide.Header
+          label={label}
+          title={name}
+          clientImg={clientImg}
           link={eventReceptionUrl}
-          onClick={onClick}
           id={event.id}
           type="FORMATION"
           pathname={`/event/${event.id}/reception`}
-          {...(isSoldOut || isUserRegistered
-            ? { name: I18N[language].moreDetails, theme: "default" }
-            : { name: registerBtnTxt, theme: "greenTeal" })}
+          isSmall={isSmall}
+          onClick={onClick}
         />
-        {showBrowseButton && (
-          <ActionButton
-            name={I18N[language].program}
-            link={eventSessionUrl}
-            theme="default"
-            onClick={onClick}
+        <Slide.Body className={styles.slideBody}>
+          <Speakers speakers={speakers} className={styles.speakers} />
+          <ul
+            className={styles.details}
+            style={{ fontSize: !isSmall ? "14px" : "12px" }}
+          >
+            {renderEventMode()}
+          </ul>
+        </Slide.Body>
+        <Slide.Footer className={styles.slideFooter}>
+          {showPrice && (
+            <Price
+              price={isUserMember ? memberPrice : nonMemberPrice}
+              originalPrice={nonMemberPrice}
+              memberPrice={memberPrice}
+              nonMemberPrice={nonMemberPrice}
+              isUserMember={isUserMember}
+              language={language}
+              isSmall={isSmall}
+            />
+          )}
+          <div className={styles.actions}>
+            <ActionButton
+              link={eventReceptionUrl}
+              onClick={onClick}
+              id={event.id}
+              type="FORMATION"
+              pathname={`/event/${event.id}/reception`}
+              isSmall={isSmall}
+              {...(isSoldOut || isUserRegistered
+                ? {
+                    name: !isSmall
+                      ? I18N[language].moreDetails
+                      : I18N[language].details,
+                    theme: "default",
+                  }
+                : { name: registerBtnTxt, theme: "greenTeal" })}
+            />
+            {showBrowseButton && (
+              <ActionButton
+                name={I18N[language].program}
+                link={eventSessionUrl}
+                theme="default"
+                onClick={onClick}
+                id={event.id}
+                type="FORMATION"
+                pathname={`/event/${event.id}/session`}
+                isSmall={isSmall}
+              />
+            )}
+          </div>
+        </Slide.Footer>
+      </Slide>
+    );
+  }
+
+  return (
+    <div className={styles.wrapper}>
+      <span className={styles.title}>{focusTitle}</span>
+      <div className={styles.slideBlock}>
+        <Slide
+          bannerSrc={bannerSrc || secondaryBanner}
+          className={styles.eventSlide}
+          isFetching={isFetching}
+          isSmall={isSmall}
+        >
+          <Slide.Header
+            label={label}
+            title={name}
+            clientImg={clientImg}
+            link={eventReceptionUrl}
             id={event.id}
             type="FORMATION"
-            pathname={`/event/${event.id}/session`}
+            pathname={`/event/${event.id}/reception`}
+            isSmall={isSmall}
+            onClick={onClick}
           />
-        )}
-      </Slide.Footer>
-    </Slide>
+          <Slide.Body className={styles.slideBody}>
+            <Speakers speakers={speakers} className={styles.speakers} />
+            <ul
+              className={styles.details}
+              style={{ fontSize: !isSmall ? "14px" : "12px" }}
+            >
+              {renderEventMode()}
+            </ul>
+          </Slide.Body>
+          <Slide.Footer className={styles.slideFooter}>
+            {showPrice && (
+              <Price
+                price={isUserMember ? memberPrice : nonMemberPrice}
+                originalPrice={nonMemberPrice}
+                memberPrice={memberPrice}
+                nonMemberPrice={nonMemberPrice}
+                isUserMember={isUserMember}
+                language={language}
+                isSmall={isSmall}
+              />
+            )}
+            <div className={styles.actions}>
+              <ActionButton
+                link={eventReceptionUrl}
+                onClick={onClick}
+                id={event.id}
+                type="FORMATION"
+                pathname={`/event/${event.id}/reception`}
+                isSmall={isSmall}
+                {...(isSoldOut || isUserRegistered
+                  ? {
+                      name: !isSmall
+                        ? I18N[language].moreDetails
+                        : I18N[language].details,
+                      theme: "default",
+                    }
+                  : { name: registerBtnTxt, theme: "greenTeal" })}
+              />
+              {showBrowseButton && (
+                <ActionButton
+                  name={I18N[language].program}
+                  link={eventSessionUrl}
+                  theme="default"
+                  onClick={onClick}
+                  id={event.id}
+                  type="FORMATION"
+                  pathname={`/event/${event.id}/session`}
+                  isSmall={isSmall}
+                />
+              )}
+            </div>
+          </Slide.Footer>
+        </Slide>
+      </div>
+    </div>
   );
 };

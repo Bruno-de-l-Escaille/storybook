@@ -16,6 +16,7 @@ import Price from "../Common/Price/Price";
 import ActionButton from "../Common/ActionButton/ActionButton";
 import IconCalendar from "../../Icons/IconCalendar2";
 import { Fetching } from "../Common/Slide/Fetching";
+import classNames from "classnames";
 
 export const CycleSlide = ({
   cycle,
@@ -26,6 +27,8 @@ export const CycleSlide = ({
   isUserPremium,
   queryParams = {},
   onClick,
+  isSmall = false,
+  focusTitle,
 }) => {
   if (isFetching) {
     return <Fetching />;
@@ -88,58 +91,146 @@ export const CycleSlide = ({
     );
   };
 
-  return (
-    <Slide
-      bannerSrc={bannerSrc || secondaryBanner}
-      className={styles.cycleSlide}
-    >
-      <Slide.Header
-        title={name}
-        label={cycleLabel}
-        theme={theme}
-        clientImg={clientImg}
-        link={cycleReceptionUrl}
-        id={cycle.id}
-        type="CYCLE"
-        pathname={`/cycle/${cycle.id}/reception`}
-        onClick={onClick}
+  if (!focusTitle) {
+    return (
+      <Slide
+        bannerSrc={bannerSrc || secondaryBanner}
+        className={styles.cycleSlide}
+        isSmall={isSmall}
       >
-        <span className={styles.info}>
-          {trainingsCount} {I18N[language].trainings}
-        </span>
-        <span className={styles.info}>
-          {cycleTrainingHours} {I18N[language].ofCertifiedAttestations}
-        </span>
-      </Slide.Header>
-      <Slide.Body>{renderCycleDetails()}</Slide.Body>
-      <Slide.Footer className={styles.footer}>
-        <Price
-          price={isUserMember ? memberPrice.price : nonMemberPrice.price}
-          memberPrice={memberPrice.price}
-          nonMemberPrice={nonMemberPrice.price}
-          originalPrice={nonMemberPrice.price}
-          isUserMember={isUserMember}
-          language={language}
-        />
-        <ActionButton
+        <Slide.Header
+          title={name}
+          label={cycleLabel}
+          theme={theme}
+          clientImg={clientImg}
           link={cycleReceptionUrl}
-          onClick={onClick}
           id={cycle.id}
+          isSmall={isSmall}
           type="CYCLE"
           pathname={`/cycle/${cycle.id}/reception`}
-          {...(isUserRegistered
-            ? { name: I18N[language].moreDetails, theme: "default" }
-            : { name: buyCycleLabel, theme: "greenTeal" })}
-        />
-        <ActionButton
-          name={I18N[language].program}
-          link={cycleProgramUrl}
           onClick={onClick}
-          id={cycle.id}
-          type="CYCLE"
-          pathname={`/cycle/${cycle.id}/events`}
-        />
-      </Slide.Footer>
-    </Slide>
+        >
+          <div className={styles.counts}>
+            <span className={styles.info}>
+              {trainingsCount} {I18N[language].trainings}
+            </span>
+            <span className={styles.info}>
+              {cycleTrainingHours} {I18N[language].ofCertifiedAttestations}
+            </span>
+          </div>
+        </Slide.Header>
+        <Slide.Body>{renderCycleDetails()}</Slide.Body>
+        <Slide.Footer className={styles.footer}>
+          <Price
+            price={isUserMember ? memberPrice.price : nonMemberPrice.price}
+            memberPrice={memberPrice.price}
+            nonMemberPrice={nonMemberPrice.price}
+            originalPrice={nonMemberPrice.price}
+            isUserMember={isUserMember}
+            language={language}
+            isSmall={isSmall}
+          />
+          <div className={styles.actions}>
+            <ActionButton
+              link={cycleReceptionUrl}
+              onClick={onClick}
+              id={cycle.id}
+              type="CYCLE"
+              pathname={`/cycle/${cycle.id}/reception`}
+              isSmall={isSmall}
+              {...(isUserRegistered
+                ? { name: I18N[language].moreDetails, theme: "default" }
+                : {
+                    name: !isSmall ? buyCycleLabel : I18N[language].buy,
+                    theme: "greenTeal",
+                  })}
+            />
+            <ActionButton
+              name={I18N[language].program}
+              link={cycleProgramUrl}
+              onClick={onClick}
+              id={cycle.id}
+              type="CYCLE"
+              pathname={`/cycle/${cycle.id}/events`}
+              isSmall={isSmall}
+            />
+          </div>
+        </Slide.Footer>
+      </Slide>
+    );
+  }
+
+  return (
+    <div className={styles.wrapper}>
+      <span className={classNames(styles.title, styles[theme])}>
+        {focusTitle}
+      </span>
+      <div className={styles.slideBlock}>
+        <Slide
+          bannerSrc={bannerSrc || secondaryBanner}
+          className={styles.cycleSlide}
+          isSmall={isSmall}
+        >
+          <Slide.Header
+            title={name}
+            label={cycleLabel}
+            theme={theme}
+            clientImg={clientImg}
+            link={cycleReceptionUrl}
+            id={cycle.id}
+            isSmall={isSmall}
+            type="CYCLE"
+            pathname={`/cycle/${cycle.id}/reception`}
+            onClick={onClick}
+          >
+            <div className={styles.counts}>
+              <span className={styles.info}>
+                {trainingsCount} {I18N[language].trainings}
+              </span>
+              <span className={styles.info}>
+                {cycleTrainingHours} {I18N[language].ofCertifiedAttestations}
+              </span>
+            </div>
+          </Slide.Header>
+          <Slide.Body>{renderCycleDetails()}</Slide.Body>
+          <Slide.Footer className={styles.footer}>
+            <Price
+              price={isUserMember ? memberPrice.price : nonMemberPrice.price}
+              memberPrice={memberPrice.price}
+              nonMemberPrice={nonMemberPrice.price}
+              originalPrice={nonMemberPrice.price}
+              isUserMember={isUserMember}
+              language={language}
+              isSmall={isSmall}
+            />
+            <div className={styles.actions}>
+              <ActionButton
+                link={cycleReceptionUrl}
+                onClick={onClick}
+                id={cycle.id}
+                type="CYCLE"
+                pathname={`/cycle/${cycle.id}/reception`}
+                isSmall={isSmall}
+                {...(isUserRegistered
+                  ? { name: I18N[language].moreDetails, theme: "default" }
+                  : {
+                      name: !isSmall ? buyCycleLabel : I18N[language].buy,
+                      theme: "greenTeal",
+                    })}
+              />
+              <ActionButton
+                name={I18N[language].program}
+                link={cycleProgramUrl}
+                onClick={onClick}
+                id={cycle.id}
+                type="CYCLE"
+                pathname={`/cycle/${cycle.id}/events`}
+                isSmall={isSmall}
+              />
+            </div>
+          </Slide.Footer>
+        </Slide>
+      </div>
+    </div>
   );
 };
