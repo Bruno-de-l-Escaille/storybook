@@ -9,6 +9,7 @@ import { Default as PremiumSlide } from "../PremiumSlide/PremiumSlide.stories";
 import { Type1 as CycleSlide } from "../CycleSlide/CycleSlide.stories";
 import { Type2 as EssentialSlide } from "../CycleSlide/CycleSlide.stories";
 import { Type3 as SeasonSlide } from "../CycleSlide/CycleSlide.stories";
+import { Default as CustomisedSlide } from "../CustomisedSlide/CustomisedSlide.stories";
 
 export default {
   title: "Slides/Slider",
@@ -30,6 +31,7 @@ export const Default = () => (
       <CycleSlide />,
       <EssentialSlide />,
       <SeasonSlide />,
+      <CustomisedSlide />,
     ]}
     autoPlay={boolean("autoPlay", true)}
   />
