@@ -415,7 +415,7 @@ export const Article = ({
         <span>{I18N[language]["see_version"]}:</span>
         {Object.entries(relatedArticles).map((related) => {
           let articleUrl = `/${related[0]}/article/${related[1].url}/${related[1].id}`;
-          if (user) {
+          if (!user) {
             articleUrl = getArticleUrl(
               {
                 url: related[1].url,
