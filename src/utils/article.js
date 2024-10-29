@@ -49,9 +49,9 @@ export const getArticleFullUrl = (article, env = "", host) => {
 
   let fullUrl = `/${language}/article/${url}/${id}`;
 
-  if (hasRelativePath(organization.id, host)) {
-    return fullUrl;
-  }
+  // if (hasRelativePath(organization.id, host)) {
+  //   return fullUrl;
+  // }
 
   if (organization && [8, 9, 4].includes(organization.id)) {
     if (organization.id === 9) {
