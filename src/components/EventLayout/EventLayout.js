@@ -170,6 +170,7 @@ export function EventLayout({
     null;
   const dateEndOfReplayYear =
     (dateEndOfReplay !== "" && dateEndOfReplay?.match(/\d{4}/)?.[0]) ?? null;
+  const dateEndYear = moment(endDateTime).year();
   const place =
     getByLanguage(event.eventPlace, "place", language) || !event.isVirtual;
   const dateHelper = formatDateFromTo(
@@ -576,9 +577,7 @@ export function EventLayout({
             >
               {capFirstLetterInSentence(I18N[language]["inReplay"])}
             </span>
-            <span className={styles.replayDate}>
-              {dateEndOfReplayYear || eventDateEndOfReplayYear}
-            </span>
+            <span className={styles.replayDate}>{dateEndYear}</span>
           </li>
         </>
       );
