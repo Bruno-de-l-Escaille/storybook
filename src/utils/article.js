@@ -66,7 +66,7 @@ export const getArticleFullUrl = (article, env = "", host) => {
   return `${blog}${fullUrl}`;
 };
 
-const getArticleUrl = (article, env, host) => {
+export const getArticleUrl = (article, env, host) => {
   const { url, id, organization, language, isExternal, externalUrl } = article;
 
   if (isExternal) {

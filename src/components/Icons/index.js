@@ -1,4 +1,5 @@
 export * from "./Ebox";
+export * from "./Help";
 export * from "./Profile";
 export * from "./Notifs";
 export * from "./Apps";
