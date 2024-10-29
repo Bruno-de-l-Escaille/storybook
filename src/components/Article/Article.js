@@ -12,7 +12,7 @@ import {
   isUserHasRights,
   addLandaSize,
   convertDateFromUTC,
-  getArticleFullUrl,
+  getArticleUrl,
 } from "../../utils";
 import classnames from "classnames";
 import { I18N } from "../../i18n";
@@ -415,8 +415,8 @@ export const Article = ({
         <span>{I18N[language]["see_version"]}:</span>
         {Object.entries(relatedArticles).map((related) => {
           let articleUrl = `/${related[0]}/article/${related[1].url}/${related[1].id}`;
-          if (user) {
-            articleUrl = getArticleFullUrl(
+          if (!user) {
+            articleUrl = getArticleUrl(
               {
                 url: related[1].url,
                 id: related[1].id,

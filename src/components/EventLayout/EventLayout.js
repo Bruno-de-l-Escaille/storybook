@@ -53,7 +53,7 @@ import HybridDescriptionIcon from "../Icons/HybrideDescription";
 import HybrideIcon from "../Icons/Hybride";
 import ReplayDescriptionIcon from "../Icons/ReplayDescription";
 import ReplayIcon from "../Icons/Replay";
-import HelpIcon from "../Icons/Help";
+import { Help as HelpIcon } from "../Icons";
 import { registerPremiumToEvent } from "../../api/event";
 import { ClipLoader } from "react-spinners";
 import { CardFlag } from "../../common/components/CardFlag";
