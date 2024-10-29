@@ -1,6 +1,7 @@
 .speakers {
   display: flex;
-  overflow: auto;
+  // overflow: auto;
+  width: 100%;
 
   .speaker {
     display: flex;

@@ -11,9 +11,15 @@ export default function Price({
   memberOrg = "OECCBB.",
   originalPrice,
   className,
+  isSmall = false,
 }) {
   return (
-    <div className={cn(styles.price_container, className)}>
+    <div
+      className={cn(
+        !isSmall ? styles.price_container : styles.price_container_small,
+        className
+      )}
+    >
       {Boolean(originalPrice) && originalPrice !== price && (
         <div className={styles.original_price}>{originalPrice}</div>
       )}

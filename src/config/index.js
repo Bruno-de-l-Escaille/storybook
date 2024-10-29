@@ -18,3 +18,11 @@ export const SOCIAL_NETWORKS_HOSTS = {
   TWITTER: "https://www.twitter.com",
   LINKEDIN: "https://www.linkedin.com",
 };
+
+export const BREAK_POINTS = {
+  SMALL: 0,
+  MEDIUM: 640,
+  LARGE: 1024,
+  X_LARGE: 1200,
+  XX_LARGE: 1440,
+};

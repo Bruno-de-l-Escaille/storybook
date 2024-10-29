@@ -49,7 +49,7 @@
     align-items: flex-end;
 
     .discount_percent {
-      color: #d8dde2;
+      color: #fff;
       font-size: 16px;
       font-style: normal;
       font-weight: 500;
@@ -58,7 +58,77 @@
     }
 
     .discount_description {
-      color: #d8dde2;
+      color: #fff;
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      text-align: right;
+    }
+  }
+}
+
+.price_container_small {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+
+  .price {
+    color: #fff;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+    span {
+      font-size: 16px;
+    }
+  }
+
+  .original_price {
+    position: relative;
+    color: #eb5757;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: lowercase;
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 1px;
+      border-radius: 2px;
+      background: #de4848;
+      top: 50%;
+      right: 0;
+    }
+  }
+
+  .member_discount {
+    // width: 101px;
+    width: 85px;
+    min-height: 42px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+
+    .discount_percent {
+      color: #fff;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      text-align: right;
+    }
+
+    .discount_description {
+      color: #fff;
       font-size: 10px;
       font-style: normal;
       font-weight: 500;

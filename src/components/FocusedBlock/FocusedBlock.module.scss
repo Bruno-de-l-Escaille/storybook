@@ -1,0 +1,12 @@
+@import "~foundation-sites/scss/util/util";
+
+.slidesContainer {
+  display: grid;
+  gap: 20px;
+}
+
+@include breakpoint(medium down) {
+  .slidesContainer {
+    grid-template-columns: 100% !important;
+  }
+}

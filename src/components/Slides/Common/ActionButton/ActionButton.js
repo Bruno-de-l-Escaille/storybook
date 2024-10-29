@@ -13,10 +13,16 @@ export default function ActionButton({
   id,
   type,
   pathname,
+  isSmall = false,
   ...props
 }) {
   return (
-    <div className={cn(styles.actionButton, className)}>
+    <div
+      className={cn(
+        !isSmall ? styles.actionButton : styles.actionButton_small,
+        className
+      )}
+    >
       <a
         href={onClick ? undefined : link}
         className={theme && styles[theme]}
