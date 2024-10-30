@@ -49,6 +49,10 @@ export const getArticleFullUrl = (article, env = "", host) => {
 
   let fullUrl = `/${language}/article/${url}/${id}`;
 
+  if (!host) {
+    return fullUrl;
+  }
+
   // if (hasRelativePath(organization.id, host)) {
   //   return fullUrl;
   // }
