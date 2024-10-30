@@ -5,6 +5,7 @@ import ActionButton from "../Common/ActionButton/ActionButton";
 import { Fetching } from "../Common/Slide/Fetching";
 import styles from "./CustomisedSlide.module.scss";
 import { Shave } from "../../../common/components/Shave";
+import SlideVideo from "../Common/Slide/SlideVideo";
 
 export const CustomisedSlide = ({ data, language, isFetching }) => {
   if (isFetching) {
@@ -29,9 +30,11 @@ export const CustomisedSlide = ({ data, language, isFetching }) => {
 
   if (data?.mediaType === "VIDEO") {
     return (
-      <div style={bgStyle}>
-        <video src={data?.video} height="100%" controls></video>
-      </div>
+      <SlideVideo
+        title={title}
+        description={description}
+        videoUrl={data.video ?? ""}
+      />
     );
   } else {
     return (
