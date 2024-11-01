@@ -16,9 +16,14 @@ export default {
   ],
 };
 
+const indexedEvents = events.reduce((acc, event) => {
+  acc[event.nameFr || event.nameNl || event.nameEn] = event;
+  return acc;
+}, {});
+
 export const Default = () => (
   <EventLayout
-    event={events[0]}
+    event={select("event", indexedEvents, events[0])}
     language={select("language", ["fr", "nl", "en"], "fr")}
     isFetching={boolean("isFetching", false)}
     env={select("env", ["production", "staging", "local"], "v2")}

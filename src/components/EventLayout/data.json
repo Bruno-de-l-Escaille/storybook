@@ -1081,31 +1081,31 @@
     "guestCount": "164"
   },
   {
-    "id": 770,
-    "nameFr": "Tax Tv Show #2024/08",
+    "id": 1615,
+    "nameFr": "Pratiques de Stage : L'audit fiscal des comptes  (séance 2/2)",
     "nameEn": "",
     "nameNl": "",
     "status": 1,
     "type": 6,
     "languages": "{\"Fr\":\"1\",\"Nl\":0,\"En\":0}",
     "stages": "{\"inscription\":\"true\",\"payBank\":\"false\",\"payOnline\":\"false\",\"printBadge\":\"false\",\"printProgramOnBadge\":\"false\",\"autoActivateInvitePartOnSave\":\"false\",\"lmFull\":\"admin\",\"showSupports\":\"false\",\"Evaluation\":\"true\",\"showProgram\":\"false\",\"showLiberFormMessage\":\"false\",\"showOffProgram\":\"false\",\"showOrateurs\":\"false\",\"showAttestationUser\":\"false\",\"showAttestationForce\":\"false\",\"showAttestation\":\"false\",\"hideProgramInAttestation\":\"false\",\"showSpeedCoaching\":\"false\",\"forceModifPrinted\":\"false\",\"showActivitiesList\":\"false\",\"chooseByActivities\":\"false\",\"fullProgram\":\"true\",\"alwaysDisplayDateProgram\":\"false\",\"doScanSlots\":\"false\",\"attestationOnlyProgram\":\"false\",\"useMemberCard\":\"false\",\"showGeneral\":\"false\",\"showSpeakers\":\"false\",\"showMaps\":\"true\",\"useOldBanner\":\"false\",\"showMeetingsFrontMenu\":\"false\",\"showMobileApps\":\"true\",\"noInvoicing\":\"false\"}",
-    "urlBannerFr": "",
+    "urlBannerFr": "/eventsFolder/client1256/event1615/_model/html/img/bannerFr_2024_02_21_09_03_38-original.jpg",
     "urlBannerEn": "",
     "urlBannerNl": "",
     "descriptionFr": "",
     "descriptionEn": "",
     "descriptionNl": "",
-    "placeFr": "",
+    "placeFr": "Business Center de l'OECCBB Chaussée de Louvain 428 1380 Ohain Ransbeck",
     "placeEn": "",
     "placeNl": "",
     "template": "unify",
     "configBag": "{\"linkWebinarFr\":\"\",\"linkWebinarEn\":\"\",\"linkWebinarNl\":\"\",\"blocks\":[],\"membership\":{\"type\":\"fff\",\"data\":{\"groupsIn\":[],\"groupsEx\":[]}},\"groups\":{\"guest\":[\"\"],\"registered\":[\"\"]}}",
-    "memberPrice": 0,
-    "nonMemberPrice": 0,
-    "maxNumber": 500,
-    "isVirtual": 1,
-    "isReplayable": 1,
-    "isOnlyByCycle": 0,
+    "memberPrice": 50,
+    "nonMemberPrice": 66,
+    "maxNumber": 50,
+    "isVirtual": 0,
+    "isReplayable": 0,
+    "isOnlyByCycle": 1,
     "labelFr": "",
     "labelNl": "",
     "labelEn": "",
@@ -1113,49 +1113,116 @@
     "isMultiDate": 0,
     "question": "",
     "isCertificateNotIncluded": 0,
-    "updatedAt": "2024-04-16 11:49:36",
-    "createdAt": "2024-01-09 10:17:25",
-    "startDateTime": "2024-09-24 12:15:00",
-    "endDateTime": "2024-09-24 13:45:00",
-    "eventDate": "2024-09-24",
-    "client": 9,
-    "tag": [],
-    "isIncludedPremium": 1,
+    "callToActionFr": "",
+    "callToActionNl": "",
+    "updatedAt": "2024-06-21 09:19:09",
+    "createdAt": "2024-02-20 11:01:17",
+    "startDateTime": "2024-11-04 18:00:00",
+    "endDateTime": "2024-11-04 21:00:00",
+    "eventDate": "2024-11-04",
+    "client": 1256,
+    "tag": [
+      {
+        "nameFr": "Audit",
+        "nameNl": "Audit",
+        "nameEn": "Audit",
+        "sanitizedNameFr": "audit",
+        "counter": "50",
+        "blogCounter": "64",
+        "eventCounter": "-14",
+        "mediaCounter": "0",
+        "rubricCounter": "0",
+        "webtoolCounter": "0",
+        "isAbbreviation": "0",
+        "isUniversal": "0",
+        "isSuperTag": "1",
+        "isSynonym": "0",
+        "isHandled": "0",
+        "status": "0",
+        "state": "undefined",
+        "id": "209",
+        "idInFlux": "506",
+        "createdAt": "2015-05-05 00:00:00",
+        "superTag": null
+      }
+    ],
+    "eventPlace": {
+      "id": 16,
+      "placeFr": "Business Center de l'OECCBB Chaussée de Louvain 428 1380 Ohain Ransbeck",
+      "placeEn": "",
+      "placeNl": "",
+      "updatedAt": "2024-10-22 13:27:49",
+      "createdAt": "2024-10-22 13:27:49",
+      "city": {
+        "id": 9,
+        "cityFr": "1380 Ohain - Ransbeck",
+        "cityEn": "",
+        "cityNl": ""
+      }
+    },
+    "isIncludedPremium": 0,
     "eventDates": [],
     "speakers-abstract": {
-      "count": 0,
-      "speakers": []
+      "count": 1,
+      "speakers": [
+        {
+          "id": "1497",
+          "firstName": "Vincent",
+          "lastName": "LEGRAND",
+          "pictureUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/42903/AVATAR_f18ac9d9b8d4c4ddad1eea1c6f381bf4749eb005.png",
+          "userId": "3175",
+          "email": "auditfisc@skynet.be",
+          "headlineFr": "{\"title\":\"Expert-comptable fiscal certifi\\u00e9\",\"signature\":\"Expert-comptable fiscal certifi\\u00e9 chez Auditfisc\"}",
+          "headlineEn": "",
+          "headlineNl": "{\"title\":\"\",\"signature\":\"\"}",
+          "blogUrlPath": "/author/vincent-legrand/3175",
+          "priority": "0",
+          "eventId": "1615",
+          "slots": [
+            {
+              "id": "4066",
+              "type": "1"
+            }
+          ]
+        }
+      ]
     },
-    "accreditationHours": 1.5,
+    "accreditationHours": 3,
     "clientData": {
-      "id": "9",
-      "name": "Forum for the future",
-      "abbreviation": "F.F.F.",
-      "mediaId": "2174",
-      "avatarUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/2174/AVATAR_54cbd68e1ba9284a1e486bd5d8551259cd51d96e.png"
+      "id": "1256",
+      "name": "Ordre des Experts Comptables et Comptables Brevetés de Belgique - Société Royale",
+      "abbreviation": "Oeccbb",
+      "mediaId": "6348",
+      "avatarUrl": "https://s3.tamtam.pro/staging/storage/media/IMAGE/6348/AVATAR_e4fb37d14607091b2d1057ac4aa3b56c60e12f77.png"
     },
-    "slotsCount": 0,
+    "slotsCount": 1,
+    "slotReplayUrls": {
+      "webinarUrlEn": "https://webinar-1.staging.tamtam.pro/webinars/fNqJjYBBKk4msMREZ",
+      "webinarReplayVideoEn": "",
+      "webinarReplayVideoFr": "",
+      "webinarReplayVideoNl": ""
+    },
     "eventCycles": [
       {
-        "id": "2788",
-        "number": "0",
-        "cycle": "56",
-        "isCyclePremium": "1",
+        "id": "2691",
+        "number": "1615",
+        "cycle": "117",
+        "isCyclePremium": "0",
         "isCycleSeason": "0",
-        "event": "770",
+        "event": "1615",
         "cycleStatus": "1"
       },
       {
-        "id": "2447",
-        "number": "1",
-        "cycle": "101",
+        "id": "2761",
+        "number": "1615",
+        "cycle": "133",
         "isCyclePremium": "0",
         "isCycleSeason": "0",
-        "event": "770",
+        "event": "1615",
         "cycleStatus": "1"
       }
     ],
-    "registeredCount": "25",
-    "guestCount": "25"
+    "registeredCount": "5",
+    "guestCount": "6"
   }
 ]

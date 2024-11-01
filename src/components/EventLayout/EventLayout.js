@@ -57,6 +57,7 @@ import { Help as HelpIcon } from "../Icons";
 import { registerPremiumToEvent } from "../../api/event";
 import { ClipLoader } from "react-spinners";
 import { CardFlag } from "../../common/components/CardFlag";
+import OnSiteIcon from "../Icons/OnSiteIcon";
 
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =
   "https://tamtam.s3.eu-west-1.amazonaws.com";
@@ -108,7 +109,13 @@ export function EventLayout({
     return <Fetching />;
   }
 
-  const { startDateTime, endDateTime, memberPrice, nonMemberPrice } = event;
+  const {
+    startDateTime,
+    endDateTime,
+    memberPrice,
+    nonMemberPrice,
+    isVirtual,
+  } = event;
 
   const eventCycles = Array.isArray(event?.eventCycles)
     ? event.eventCycles.filter((eventCycle) => !eventCycle.isCyclePremium)
@@ -191,6 +198,9 @@ export function EventLayout({
   const isActive =
     event["user-registered"] ||
     (isUserPremium && event.isIncludedPremium === 1);
+  const city = event.eventPlace?.city
+    ? getByLanguage(event.eventPlace.city, "city", language)
+    : null;
 
   const renderMainAction = () => {
     if (isUserEventRegistered) {
@@ -337,18 +347,18 @@ export function EventLayout({
       return null;
     }
 
-    if (isFree && !isUserEventRegistered) {
+    if (isFree && !isActive) {
       return (
         <div
           className={classNames(styles.badge, "m-t-xs")}
-          style={{ color: "#29394D", fontWeight: "500" }}
+          style={{ color: "#29394D", fontWeight: "500", marginLeft: "110px" }}
         >
           {I18N[language]["free"]}{" "}
         </div>
       );
     }
 
-    if (isUserEventRegistered) {
+    if (isActive) {
       return (
         <div className={classNames(styles.subscribed)}>
           <CheckMarkIcon className="m-r-s" />
@@ -363,14 +373,18 @@ export function EventLayout({
       return (
         <div
           className={styles.badge}
-          style={{ display: "flex", alignItems: "center", marginTop: "5px" }}
+          style={{ display: "flex", alignItems: "center" }}
         >
           <span className={styles.strike} style={{ fontWeight: "500" }}>
             {eventPrice} €
           </span>
           <span
             className="m-l-s"
-            style={{ color: "#29394D", fontWeight: "500" }}
+            style={{
+              color: "#29394D",
+              fontWeight: "500",
+              whiteSpace: "nowrap",
+            }}
           >
             {price} €
           </span>
@@ -379,28 +393,29 @@ export function EventLayout({
     }
 
     if (!isFull) {
+      const showMemberReduction = memberPrice !== nonMemberPrice;
       return (
         <div
           className={styles.badge}
-          style={{ display: "flex", alignItems: "center", marginTop: "5px" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
         >
-          {memberPrice !== nonMemberPrice &&
-            (event.client === 1256 || event.client === 9) && (
-              <span className={classNames(styles.reductionOrg)}>
-                <span style={{ fontSize: "16px" }}> {memberPrice} €</span>
-                <span> {I18N[language]["forTheMembers"]} OECCBB.</span>
-              </span>
-            )}
-          {isUserMember &&
-            memberPrice !== nonMemberPrice &&
-            (event.client === 1256 || event.client === 9) && (
-              <span
-                className={classNames(styles.strike, "m-l-xs")}
-                style={{ fontWeight: "500", whiteSpace: "nowrap" }}
-              >
-                {nonMemberPrice} €
-              </span>
-            )}
+          {showMemberReduction && (
+            <span className={classNames(styles.reductionOrg)}>
+              <span style={{ fontSize: "16px" }}> {memberPrice} €</span>
+              <span> {I18N[language]["forTheMembers"]} OECCBB.</span>
+            </span>
+          )}
+          {isUserMember && memberPrice !== nonMemberPrice && (
+            <span
+              className={classNames(styles.strike, "m-l-xs")}
+              style={{ fontWeight: "500" }}
+            >
+              {nonMemberPrice} €
+            </span>
+          )}
           <span
             className="m-l-xs"
             style={{
@@ -595,139 +610,144 @@ export function EventLayout({
       onMouseEnter={handleOnMouseEnter}
       onMouseLeave={handleOnMouseLeave}
     >
-      <div className="m-b-s">
-        <div
-          className={classNames(styles.banner)}
-          style={{ backgroundImage: `url(${bannerImgUrl})` }}
-        >
-          {!isEmpty(event.clientData?.avatarUrl) && (
-            <div className={styles.logoWrapper}>
-              <span
-                style={{
-                  backgroundImage: `url(${event.clientData?.avatarUrl})`,
-                }}
-              />
+      <div
+        className={classNames(styles.banner)}
+        style={{ backgroundImage: `url(${bannerImgUrl})` }}
+      >
+        {!isEmpty(event.clientData?.avatarUrl) && (
+          <div className={styles.logoWrapper}>
+            <span
+              style={{
+                backgroundImage: `url(${event.clientData?.avatarUrl})`,
+              }}
+            />
+          </div>
+        )}
+        <CardFlag
+          language={language}
+          flag={
+            isSoldOut && !isActive
+              ? "sold-out"
+              : parseBoolean(event.isIncludedPremium) && !isActive
+              ? "premium"
+              : undefined
+          }
+        />
+        {showTimeCounter && (
+          <div className={styles.timeCounter}>
+            <TimeCounter
+              date={event.startDateTime}
+              language={language}
+              showDays={false}
+            />
+          </div>
+        )}
+        {renderHoveringIcons()}
+        {isLive ? (
+          <div className={styles.badges}>
+            <div className={styles.badge} style={{ background: "#FE3745" }}>
+              {I18N[language]["liveNow"].toUpperCase()}
             </div>
-          )}
-          <CardFlag
-            language={language}
-            flag={
-              isSoldOut && !isActive
-                ? "sold-out"
-                : parseBoolean(event.isIncludedPremium) && !isActive
-                ? "premium"
+            <div className={classNames(styles.badge)}>{nbMinutes} min</div>
+          </div>
+        ) : isUserEventRegistered && EventPlayProgress === 0 ? (
+          <div className={styles.badges}>
+            <div className={styles.badge}>{`${0} sur ${eventTime} min`}</div>
+          </div>
+        ) : !isFull && EventPlayProgress <= 0 ? (
+          <div className={styles.badges}>
+            <div className={styles.badge}>{nbMinutes} min</div>
+          </div>
+        ) : isFullWatch ? (
+          <div className={styles.badges}>
+            <div className={classNames(styles.badge)}>{nbMinutes} min</div>
+            <div
+              className={styles.badge}
+              style={{
+                background: "linear-gradient(180deg, #18A0FB 0%, #06D9B1 100%)",
+              }}
+            >
+              {I18N[language]["seen"].toUpperCase()}
+            </div>
+          </div>
+        ) : (
+          EventPlayProgress > 0 && (
+            <div className={styles.badges}>
+              <div className={classNames(styles.badge)}>
+                {`${playProgress} sur ${eventTime} min`}
+              </div>
+            </div>
+          )
+        )}
+        {renderPlayProgress()}
+      </div>
+      <div className={styles.container}>
+        <div>
+          <a
+            href={onClick ? undefined : eventLink}
+            target={onClick ? undefined : "_blank"}
+            rel={onClick ? undefined : "noopener noreferrer"}
+            onClick={
+              onClick
+                ? () =>
+                    onClick(
+                      event.id,
+                      "FORMATION",
+                      `/event/${event.id}/reception`
+                    )
                 : undefined
             }
-          />
-          {showTimeCounter && (
-            <div className={styles.timeCounter}>
-              <TimeCounter
-                date={event.startDateTime}
-                language={language}
-                showDays={false}
-              />
-            </div>
-          )}
-          {renderHoveringIcons()}
-          {isLive ? (
-            <div className={styles.badges}>
-              <div className={styles.badge} style={{ background: "#FE3745" }}>
-                {I18N[language]["liveNow"].toUpperCase()}
-              </div>
-              <div className={classNames(styles.badge)}>{nbMinutes} min</div>
-            </div>
-          ) : isUserEventRegistered && EventPlayProgress === 0 ? (
-            <div className={styles.badges}>
-              <div className={styles.badge}>{`${0} sur ${eventTime} min`}</div>
-            </div>
-          ) : !isFull && EventPlayProgress <= 0 ? (
-            <div className={styles.badges}>
-              <div className={styles.badge}>{nbMinutes} min</div>
-            </div>
-          ) : isFullWatch ? (
-            <div className={styles.badges}>
-              <div className={classNames(styles.badge)}>{nbMinutes} min</div>
-              <div
-                className={styles.badge}
-                style={{
-                  background:
-                    "linear-gradient(180deg, #18A0FB 0%, #06D9B1 100%)",
-                }}
-              >
-                {I18N[language]["seen"].toUpperCase()}
-              </div>
-            </div>
-          ) : (
-            EventPlayProgress > 0 && (
-              <div className={styles.badges}>
-                <div className={classNames(styles.badge)}>
-                  {`${playProgress} sur ${eventTime} min`}
-                </div>
-              </div>
-            )
-          )}
-          {renderPlayProgress()}
+          >
+            <h3>
+              <Shave maxHeight={76}>{name} </Shave>
+            </h3>
+          </a>
+          <div
+            className={classNames(
+              styles.infos,
+              options && !options.showReplayInfo && "m-t-xs"
+              // name.length > 93 && "m-t-m"
+            )}
+          >
+            <ul>
+              <li>
+                {(isUpcomming || isLive) && (
+                  <>
+                    <NewCalendarIcon className="m-r-xs" />
+                    <span>
+                      <strong>
+                        {place && !isWebinar
+                          ? capFirstLetterInSentence(
+                              I18N[language]["presential"]
+                            )
+                          : place && isWebinar
+                          ? capFirstLetterInSentence(I18N[language]["hybrid"])
+                          : capFirstLetterInSentence(
+                              I18N[language]["inLive"]
+                            )}{" "}
+                        :
+                      </strong>
+                      &thinsp;
+                      {dateHelper}
+                    </span>
+                  </>
+                )}
+              </li>
+              <li>
+                {Boolean(!isEmpty(city) && !isVirtual && !isExpired) && (
+                  <>
+                    <OnSiteIcon className="m-r-xs" />
+                    <span>{city}</span>
+                  </>
+                )}
+              </li>
+              {renderInReplayTitleWithDesc()}
+            </ul>
+          </div>
         </div>
-        <div className={styles.container}>
-          <div>
-            <a
-              href={onClick ? undefined : eventLink}
-              target={onClick ? undefined : "_blank"}
-              rel={onClick ? undefined : "noopener noreferrer"}
-              onClick={
-                onClick
-                  ? () =>
-                      onClick(
-                        event.id,
-                        "FORMATION",
-                        `/event/${event.id}/reception`
-                      )
-                  : undefined
-              }
-            >
-              <h3>
-                <Shave maxHeight={76}>{name} </Shave>
-              </h3>
-            </a>
-            <div
-              className={classNames(
-                styles.infos,
-                options && !options.showReplayInfo && "m-t-xs"
-                // name.length > 93 && "m-t-m"
-              )}
-            >
-              <ul>
-                <li>
-                  {(isUpcomming || isLive) && (
-                    <>
-                      <NewCalendarIcon className="m-r-xs" />
-                      <span>
-                        <strong>
-                          {place && !isWebinar
-                            ? capFirstLetterInSentence(
-                                I18N[language]["presential"]
-                              )
-                            : place && isWebinar
-                            ? capFirstLetterInSentence(I18N[language]["hybrid"])
-                            : capFirstLetterInSentence(
-                                I18N[language]["inLive"]
-                              )}{" "}
-                          :
-                        </strong>
-                        &thinsp;
-                        {dateHelper}
-                      </span>
-                    </>
-                  )}
-                </li>
-                {renderInReplayTitleWithDesc()}
-              </ul>
-            </div>
-          </div>
-          <div className={styles.mainActions}>
-            {renderMainAction()}
-            {renderEventPrice()}
-          </div>
+        <div className={styles.mainActions}>
+          {renderMainAction()}
+          {renderEventPrice()}
         </div>
       </div>
     </div>

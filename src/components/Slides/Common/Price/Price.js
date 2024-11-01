@@ -21,7 +21,7 @@ export default function Price({
       )}
     >
       {Boolean(originalPrice) && originalPrice !== price && (
-        <div className={styles.original_price}>{originalPrice}</div>
+        <div className={styles.original_price}>{`${originalPrice} €`}</div>
       )}
       <div className={styles.price}>
         {price ? (
