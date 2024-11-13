@@ -66,8 +66,8 @@ export class FooterUA extends Component {
                 )}
               >
                 <ul>
-                  {firstList.map((el) => (
-                    <li onClick={() => navigateTo(el.url)}>
+                  {firstList.map((el, idx) => (
+                    <li key={`ft-${idx}`} onClick={() => navigateTo(el.url)}>
                       <div className={styles.block}></div>
                       <span>{el.label}</span>
                     </li>
@@ -85,8 +85,8 @@ export class FooterUA extends Component {
                 )}
               >
                 <ul>
-                  {secondList.map((el) => (
-                    <li onClick={() => navigateTo(el.url)}>
+                  {secondList.map((el, idx) => (
+                    <li key={`sc-${idx}`} onClick={() => navigateTo(el.url)}>
                       <div className={styles.block}></div>
                       <span>{el.label}</span>
                     </li>
@@ -104,8 +104,8 @@ export class FooterUA extends Component {
                 )}
               >
                 <ul>
-                  {thirdList.map((el) => (
-                    <li onClick={() => navigateTo(el.url)}>
+                  {thirdList.map((el, idx) => (
+                    <li key={`th-${idx}`} onClick={() => navigateTo(el.url)}>
                       <div className={styles.block}></div>
                       <span>{el.label}</span>
                     </li>
@@ -123,8 +123,8 @@ export class FooterUA extends Component {
                 )}
               >
                 <ul>
-                  {fourthList.map((el) => (
-                    <li onClick={() => navigateTo(el.url)}>
+                  {fourthList.map((el, idx) => (
+                    <li key={`fr-${idx}`} onClick={() => navigateTo(el.url)}>
                       <div className={styles.block}></div>
                       <span>{el.label}</span>
                     </li>

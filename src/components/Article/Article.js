@@ -431,7 +431,7 @@ export const Article = ({
           }
           if (Link) {
             return (
-              <span className={styles.vIterm}>
+              <span className={styles.vIterm} key={`rel${related[0]}`}>
                 <Link href={articleUrl} prefetch={false}>
                   <img
                     src={`/img/flags/${related[0]}.png`}
@@ -444,7 +444,7 @@ export const Article = ({
             );
           } else {
             return (
-              <span className={styles.vIterm}>
+              <span className={styles.vIterm} key={`rel${related[0]}`}>
                 <a href={articleUrl}>
                   <img
                     src={`/img/flags/${related[0]}.png`}

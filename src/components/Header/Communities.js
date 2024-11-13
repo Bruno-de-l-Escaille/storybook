@@ -57,7 +57,7 @@ export default class Communities extends Component {
             key={`client-${communities[i].id}`}
             onClick={() => onSelectCommunity(communities[i])}
           >
-            <a href="javascript:void(0);">
+            <a href="#" onClick={(e) => e.preventDefault()}>
               {logoBlock}
               {clientName}
             </a>
