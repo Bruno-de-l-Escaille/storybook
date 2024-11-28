@@ -1,16 +1,13 @@
-import React from 'react';
-import { ToastContainer, toast, Zoom, Bounce } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React from "react";
+import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-
-export const FlashMessage =({Toastf, status})=>{
-
+export const FlashMessage = ({ Toastf, status }) => {
   return (
-    <div >
-      <ToastContainer draggable={true} autoClose={false}/>
+    <div>
+      <ToastContainer draggable={true} autoClose={false} />
     </div>
   );
-}
+};
 
-export const Toastf = toast ;
-
+export const Toastf = toast;
