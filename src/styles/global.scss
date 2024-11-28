@@ -491,3 +491,38 @@ ul {
     }
   }
 }
+
+.sb-ttp-label-lg {
+  font-size: 14px !important;
+  line-height: 16px !important;
+}
+.sb-ttp-label {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  padding: 9px 15px;
+}
+.sb-ttp-label .star {
+  color: #18a0fb;
+  margin-left: 4px;
+}
+.sb-ttp-input-lg {
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  box-sizing: border-box;
+  border-radius: 14px;
+  padding: 14px 15px !important;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  width: 100%;
+  color: var(--text-black-color);
+}
+.sb-ttp-input-lg:focus,
+.sb-ttp-input-lg:focus-visible {
+  border-color: 1px solid #103d47;
+}
+.sb-ttp-form-group-h {
+  min-height: 90px;
+}

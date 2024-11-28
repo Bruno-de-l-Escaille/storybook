@@ -1,0 +1,113 @@
+.inline {
+  display: flex;
+
+  &_right {
+    width: 100%;
+  }
+}
+.select_group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.875rem;
+
+  &_large {
+    margin-bottom: 12px;
+    .select button {
+      height: 44px !important;
+    }
+  }
+
+  .select {
+    position: relative;
+    margin-right: 0.625rem;
+    button {
+      width: 13.25rem;
+      height: 2.125rem;
+      background: #f8f9fa;
+      border: 1px solid #d1d5db;
+      border-radius: 14px;
+      padding: 0rem 0.813rem 0rem 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 400;
+      font-size: 0.75rem;
+      cursor: pointer;
+      color: var(--text-black-color);
+    }
+
+    .active_btn {
+      border: 1px solid #103d47;
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+    .list {
+      width: 13.25rem;
+      position: absolute;
+      left: 0;
+      background: #ffffff;
+      border: 1px solid #b2bcc6;
+      box-shadow: 0px 4px 10px rgba(41, 57, 77, 0.1);
+      border-radius: 4px;
+      padding: 0.625rem 0rem;
+      z-index: 10;
+      margin: 0;
+      li {
+        font-weight: 400;
+        font-size: 0.75rem;
+        height: 1.875rem;
+        padding-left: 1.313rem;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        &:hover {
+          background-color: #f8f9fa;
+        }
+      }
+    }
+  }
+}
+.input {
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  color: var(--text-black-color);
+  box-sizing: border-box;
+  border-radius: 14px;
+  padding: 9px 15px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  width: 100%;
+
+  &_large {
+    padding: 14px 15px;
+  }
+
+  &:focus,
+  &:focus-visible {
+    border-color: #103d47;
+  }
+  &.error {
+    border: 1px solid #d50000;
+  }
+}
+.codeInput {
+  input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none !important;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+  input:nth-child(3),
+  input:nth-child(6) {
+    margin-left: 0.5rem;
+  }
+}
+.error {
+  color: #d50000 !important;
+  font-size: 12px;
+  display: block;
+  line-height: 16px;
+  margin-top: 4px;
+}

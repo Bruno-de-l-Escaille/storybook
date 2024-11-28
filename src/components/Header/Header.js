@@ -11,6 +11,7 @@ import Communities from "./Communities";
 import Notifs from "./Notifs";
 import TTPFaqWidget from "../TTPFaqWidget";
 import * as icons from "../Icons";
+import AuthModal from "./AuthModal";
 
 const I18N = {
   en: {
@@ -291,7 +292,14 @@ export class Header extends Component {
   }
 
   renderLoggedOut() {
-    const { lng, app, intendedApp, gotoUrl } = this.props;
+    const {
+      lng,
+      app,
+      intendedApp,
+      gotoUrl,
+      env,
+      isOtcAuth = false,
+    } = this.props;
     const { appUrl, homeUrl, withAuthLogin } = app;
     const languages = ["fr", "nl", "en"];
 
@@ -308,20 +316,24 @@ export class Header extends Component {
             </li>
           ))}
         </ul>
-        <a
-          className={styles.signIn}
-          href={
-            intendedApp
-              ? `${homeUrl}/?intendedApp=${intendedApp}`
-              : gotoUrl
-              ? `${homeUrl}/?gotoUrl=${gotoUrl}`
-              : withAuthLogin
-              ? `${homeUrl}/?gotoWithAuth=${appUrl}`
-              : `${homeUrl}/?goto=${appUrl}`
-          }
-        >
-          {I18N[lng]["signIn"]}
-        </a>
+        {isOtcAuth ? (
+          <AuthModal I18N={I18N} lng={lng} app={app} env={env} />
+        ) : (
+          <a
+            className={styles.signIn}
+            href={
+              intendedApp
+                ? `${homeUrl}/?intendedApp=${intendedApp}`
+                : gotoUrl
+                ? `${homeUrl}/?gotoUrl=${gotoUrl}`
+                : withAuthLogin
+                ? `${homeUrl}/?gotoWithAuth=${appUrl}`
+                : `${homeUrl}/?goto=${appUrl}`
+            }
+          >
+            {I18N[lng]["signIn"]}
+          </a>
+        )}
       </div>
     );
   }

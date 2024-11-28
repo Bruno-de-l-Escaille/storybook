@@ -169,6 +169,7 @@
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.34",
     "react-append-head": "^1.0.16",
+    "react-code-input": "^3.10.1",
     "react-input-mask": "^2.0.4",
     "react-loading-skeleton": "^3.0.2",
     "react-modal": "^3.12.1",
@@ -180,6 +181,7 @@
     "shave": "^5.0.4",
     "storybook-react-router": "^1.0.8",
     "suneditor": "^2.45.1",
-    "suneditor-react": "^3.5.0"
+    "suneditor-react": "^3.5.0",
+    "zxcvbn": "^4.4.2"
   }
 }

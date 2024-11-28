@@ -18,6 +18,13 @@ const App = {
   isPrivateBlog: false,
   currentEvent: null,
   withAuthLogin: false,
+  apiUrl: "http://local.api.tamtam.pro",
+  clientCredential: {
+    grant_type: "",
+    client_id: "",
+    client_secret: "",
+    scope: "",
+  },
 };
 
 const AppPrivate = {
@@ -538,6 +545,17 @@ export const HeaderLoggedOutIntendedApp = () => (
     lng={select("language", ["fr", "nl", "en"], "fr")}
     onLanguageChange={(langue) => alert(langue)}
     intendedApp={text("intendedApp", "offfcourse*")}
+  />
+);
+
+export const HeaderLoggedOutOTC = () => (
+  <Header
+    app={object("app", App)}
+    auth={object("auth", authLogout)}
+    env={text("env", "local")}
+    lng={select("language", ["fr", "nl", "en"], "fr")}
+    onLanguageChange={(langue) => alert(langue)}
+    isOtcAuth={boolean("isOtcAuth", true)}
   />
 );
 

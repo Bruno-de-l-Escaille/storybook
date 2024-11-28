@@ -1,0 +1,17 @@
+.checkbox {
+  cursor: pointer;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 5px;
+  background: #f8f9fa;
+  border: 2px solid #b2bcc6;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  justify-content: center;
+  margin-right: 0.5rem;
+  &_active {
+    background: #18a0fb;
+    border: 2px solid #18a0fb;
+  }
+}

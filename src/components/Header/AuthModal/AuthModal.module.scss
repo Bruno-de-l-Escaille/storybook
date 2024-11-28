@@ -1,0 +1,437 @@
+@import "../../../styles/variables";
+
+.modal {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  background-color: #fff;
+  color: #103d47;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background-color: rgba(13, 112, 111, 0.5);
+}
+
+.modalHeader {
+  position: relative;
+  height: 72px;
+  color: #fff;
+  background-color: #0080c9;
+  font-size: 24px;
+  line-height: 33px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-radius: 10px 10px 0 0;
+}
+
+.modalClose {
+  width: 40px;
+  height: 40px;
+  border: 1px solid;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modalActions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 0 0 14px 14px;
+  border-top: 1px solid #9ba795;
+  background-color: #f1f2f4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+.topBar {
+  background-color: #f1f2f4;
+  // color: #9ba795;
+  height: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20px;
+  gap: 20px;
+
+  &_link {
+    color: #18a0fb;
+    cursor: pointer;
+  }
+}
+.container {
+  overflow: scroll;
+  max-height: 80vh;
+  padding: 1rem 1rem 6rem;
+}
+.contentLg {
+  margin: 0 2rem 8rem;
+
+  &_grid {
+    display: flex;
+  }
+
+  &_left {
+    width: 50%;
+    padding-right: 2rem;
+    border-right: 1px solid #d8dde2;
+  }
+
+  &_right {
+    width: 50%;
+    padding-left: 2rem;
+  }
+}
+.loginContent {
+  width: 50%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.flexLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 15px;
+}
+
+.forgotLabel {
+  color: #6d7f92;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0 2rem;
+}
+
+.title {
+  font-size: 18px;
+  line-height: 25px;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+.initPass {
+  text-align: center;
+  font-size: 14px;
+  border-top: 1px solid #d8dde2;
+  padding: 20px 0;
+  margin-top: 50px;
+  span {
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+}
+.emailInputBox {
+  position: relative;
+
+  svg {
+    position: absolute;
+    right: 10px;
+    top: 37px;
+    color: #06d9b1;
+
+    &::before {
+      color: #06d9b1;
+    }
+  }
+}
+.btnChangePwd {
+  position: relative;
+  > span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 14px;
+    color: #18a0fb;
+    cursor: pointer;
+    z-index: 9;
+  }
+}
+
+.emailInput {
+  // background: #ffffff;
+  border: 1px solid #18a0fb;
+}
+
+.signinLink {
+  border-top: 1px solid #d8dde2;
+  border-bottom: none !important;
+  color: #18a0fb;
+  cursor: pointer;
+}
+
+.pwdInput {
+  &.error {
+    border: 1px solid #d50000;
+  }
+}
+span.error {
+  color: #d50000;
+  font-size: 12px;
+  display: block;
+  text-align: right;
+  line-height: 16px;
+  margin-top: 4px;
+}
+
+.acceptActions {
+  max-width: 70%;
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+
+  label {
+    cursor: pointer;
+    // margin: 0 40px 0 auto;
+    font-size: 14px;
+    line-height: 16px;
+    color: #6d7f92;
+  }
+
+  a {
+    color: #18a0fb;
+  }
+}
+
+.acceptError {
+  font-size: 12px;
+  line-height: 14px;
+  color: #fe3745;
+  margin-top: 10px;
+}
+
+.acceptError {
+  font-size: 12px;
+  line-height: 14px;
+  color: #fe3745;
+  margin-top: 10px;
+}
+
+.passwordBox {
+  position: relative;
+}
+
+.progress {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  margin: 0;
+  width: 45%;
+  height: 3px;
+  border-radius: 10px;
+  background: #d8dde2;
+
+  &.error {
+    color: #fe3745;
+  }
+}
+
+.agreationBox {
+  display: flex;
+  background: #f8f9fa;
+  border: 1px solid #b2bcc6;
+  border-radius: 4px;
+}
+
+.agreationSelect {
+  width: 65%;
+}
+
+.agreation {
+  width: 35%;
+  border-left: 1px solid #b2bcc6;
+  box-sizing: border-box;
+  padding-left: 10px;
+  height: 34px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+
+  input {
+    flex: 2;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+  }
+}
+
+.row {
+  display: flex;
+  gap: 2%;
+}
+
+.cell {
+  width: 50%;
+}
+
+.footer {
+  border-bottom: 1px solid #d8dde2;
+  margin-bottom: 3rem;
+  padding: 10px 0 20px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  strong {
+    font-weight: 700;
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+  span {
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 600;
+  }
+}
+
+.successMsg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0;
+  color: #06d9b1;
+  text-align: center;
+
+  svg {
+    margin-bottom: 2rem;
+  }
+
+  span {
+    font-size: 32px;
+    line-height: 36px;
+  }
+
+  &_send {
+    margin-top: 1rem;
+    font-size: 22px !important;
+    line-height: 26px !important;
+    cursor: pointer;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .modal {
+    bottom: initial;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+  }
+  .container {
+    padding-bottom: 2rem;
+  }
+  .loginContent {
+    width: 100%;
+  }
+  .contentLg {
+    margin: 0;
+    padding-bottom: 160px;
+    &_grid {
+      flex-direction: column;
+    }
+    &_left,
+    &_right {
+      width: 100%;
+      padding: 0;
+      border: 0;
+    }
+  }
+  .modalActions {
+    flex-direction: column;
+  }
+  .acceptAction {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+.button {
+  border: none;
+  color: white;
+  //padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  min-width: 230px;
+  height: 40px;
+  background: #18a0fb;
+}
+
+.columnActions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0 2rem;
+}
+
+.signIn {
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  transition: color 0.2s ease-in-out;
+  color: $new-title-color;
+  font-weight: 500;
+  text-transform: none;
+  font-size: 0.9rem;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: nth($transitions, 2);
+
+  &:hover {
+    color: $main-blue;
+  }
+}
+
+.codeBox {
+  text-align: center;
+  margin: 0 auto;
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  .error {
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+.codeInput {
+  input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none !important;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+  input:nth-child(3),
+  input:nth-child(6) {
+    margin-left: 0.5rem;
+  }
+}
