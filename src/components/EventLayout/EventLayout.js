@@ -614,94 +614,91 @@ export function EventLayout({
         className={classNames(styles.banner)}
         style={{ backgroundImage: `url(${bannerImgUrl})` }}
       >
-        {!isEmpty(event.clientData?.avatarUrl) && (
-          <div className={styles.logoWrapper}>
-            <span
-              style={{
-                backgroundImage: `url(${event.clientData?.avatarUrl})`,
-              }}
-            />
-          </div>
-        )}
-        <CardFlag
-          language={language}
-          flag={
-            isSoldOut && !isActive
-              ? "sold-out"
-              : parseBoolean(event.isIncludedPremium) && !isActive
-              ? "premium"
-              : undefined
-          }
-        />
-        {showTimeCounter && (
-          <div className={styles.timeCounter}>
-            <TimeCounter
-              date={event.startDateTime}
-              language={language}
-              showDays={false}
-            />
-          </div>
-        )}
-        {renderHoveringIcons()}
-        {isLive ? (
-          <div className={styles.badges}>
-            <div className={styles.badge} style={{ background: "#FE3745" }}>
-              {I18N[language]["liveNow"].toUpperCase()}
-            </div>
-            <div className={classNames(styles.badge)}>{nbMinutes} min</div>
-          </div>
-        ) : isUserEventRegistered && EventPlayProgress === 0 ? (
-          <div className={styles.badges}>
-            <div className={styles.badge}>{`${0} sur ${eventTime} min`}</div>
-          </div>
-        ) : !isFull && EventPlayProgress <= 0 ? (
-          <div className={styles.badges}>
-            <div className={styles.badge}>{nbMinutes} min</div>
-          </div>
-        ) : isFullWatch ? (
-          <div className={styles.badges}>
-            <div className={classNames(styles.badge)}>{nbMinutes} min</div>
-            <div
-              className={styles.badge}
-              style={{
-                background: "linear-gradient(180deg, #18A0FB 0%, #06D9B1 100%)",
-              }}
-            >
-              {I18N[language]["seen"].toUpperCase()}
-            </div>
-          </div>
-        ) : (
-          EventPlayProgress > 0 && (
-            <div className={styles.badges}>
-              <div className={classNames(styles.badge)}>
-                {`${playProgress} sur ${eventTime} min`}
-              </div>
-            </div>
-          )
-        )}
-        {renderPlayProgress()}
-      </div>
-      <div className={styles.container}>
         <div>
-          <a
-            href={onClick ? undefined : eventLink}
-            target={onClick ? undefined : "_blank"}
-            rel={onClick ? undefined : "noopener noreferrer"}
-            onClick={
-              onClick
-                ? () =>
-                    onClick(
-                      event.id,
-                      "FORMATION",
-                      `/event/${event.id}/reception`
-                    )
+          {!isEmpty(event.clientData?.avatarUrl) && (
+            <div className={styles.logoWrapper}>
+              <span
+                style={{
+                  backgroundImage: `url(${event.clientData?.avatarUrl})`,
+                }}
+              />
+            </div>
+          )}
+          <CardFlag
+            language={language}
+            flag={
+              isSoldOut && !isActive
+                ? "sold-out"
+                : parseBoolean(event.isIncludedPremium) && !isActive
+                ? "premium"
                 : undefined
             }
-          >
-            <h3>
-              <Shave maxHeight={76}>{name} </Shave>
-            </h3>
-          </a>
+          />
+          {showTimeCounter && (
+            <div className={styles.timeCounter}>
+              <TimeCounter
+                date={event.startDateTime}
+                language={language}
+                showDays={false}
+              />
+            </div>
+          )}
+          {renderHoveringIcons()}
+          {isLive ? (
+            <div className={styles.badges}>
+              <div className={styles.badge} style={{ background: "#FE3745" }}>
+                {I18N[language]["liveNow"].toUpperCase()}
+              </div>
+              <div className={classNames(styles.badge)}>{nbMinutes} min</div>
+            </div>
+          ) : isUserEventRegistered && EventPlayProgress === 0 ? (
+            <div className={styles.badges}>
+              <div className={styles.badge}>{`${0} sur ${eventTime} min`}</div>
+            </div>
+          ) : !isFull && EventPlayProgress <= 0 ? (
+            <div className={styles.badges}>
+              <div className={styles.badge}>{nbMinutes} min</div>
+            </div>
+          ) : isFullWatch ? (
+            <div className={styles.badges}>
+              <div className={classNames(styles.badge)}>{nbMinutes} min</div>
+              <div
+                className={styles.badge}
+                style={{
+                  background:
+                    "linear-gradient(180deg, #18A0FB 0%, #06D9B1 100%)",
+                }}
+              >
+                {I18N[language]["seen"].toUpperCase()}
+              </div>
+            </div>
+          ) : (
+            EventPlayProgress > 0 && (
+              <div className={styles.badges}>
+                <div className={classNames(styles.badge)}>
+                  {`${playProgress} sur ${eventTime} min`}
+                </div>
+              </div>
+            )
+          )}
+          {renderPlayProgress()}
+        </div>
+      </div>
+      <div className={styles.container}>
+        <a
+          href={onClick ? undefined : eventLink}
+          target={onClick ? undefined : "_blank"}
+          rel={onClick ? undefined : "noopener noreferrer"}
+          onClick={
+            onClick
+              ? () =>
+                  onClick(event.id, "FORMATION", `/event/${event.id}/reception`)
+              : undefined
+          }
+        >
+          <h3>{name}</h3>
+        </a>
+        <div className={styles.footer}>
           <div
             className={classNames(
               styles.infos,
@@ -744,10 +741,10 @@ export function EventLayout({
               {renderInReplayTitleWithDesc()}
             </ul>
           </div>
-        </div>
-        <div className={styles.mainActions}>
-          {renderMainAction()}
-          {renderEventPrice()}
+          <div className={styles.mainActions}>
+            {renderMainAction()}
+            {renderEventPrice()}
+          </div>
         </div>
       </div>
     </div>
