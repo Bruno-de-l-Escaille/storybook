@@ -94,6 +94,9 @@
   }
 }
 .codeInput {
+  input {
+    display: inline-block;
+  }
   input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none !important;

@@ -148,7 +148,7 @@
   svg {
     position: absolute;
     right: 10px;
-    top: 37px;
+    top: 41px;
     color: #06d9b1;
 
     &::before {
@@ -425,6 +425,9 @@ span.error {
 }
 
 .codeInput {
+  input {
+    display: inline-block;
+  }
   input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none !important;
