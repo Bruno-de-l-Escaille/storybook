@@ -10,6 +10,7 @@ import {
 } from "../../../api";
 import { Toast } from "../../ToastContainer/ToastContainer";
 import { validatePassword } from "./utils";
+import { IconCheckCircle } from "./consts";
 
 import styles from "./AuthModal.module.scss";
 
@@ -214,7 +215,7 @@ const ResetPassword = ({
               className={`${styles.emailInput} sb-ttp-input-lg`}
               labelClassName="sb-ttp-label-lg"
             />
-            <i className="icon-ttp-check-outline"></i>
+            <IconCheckCircle />
           </div>
 
           <div className={styles.passwordBox}>

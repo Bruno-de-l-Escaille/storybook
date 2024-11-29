@@ -508,16 +508,16 @@ ul {
   margin-left: 4px;
 }
 .sb-ttp-input-lg {
-  background: #f9fafb;
-  border: 1px solid #d1d5db;
-  box-sizing: border-box;
-  border-radius: 14px;
+  background: #f9fafb !important;
+  border: 1px solid #d1d5db !important;
+  box-sizing: border-box !important;
+  border-radius: 14px !important;
   padding: 14px 15px !important;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14px;
-  width: 100%;
-  color: var(--text-black-color);
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  line-height: 14px !important;
+  width: 100% !important;
+  color: var(--text-black-color) !important;
 }
 .sb-ttp-input-lg:focus,
 .sb-ttp-input-lg:focus-visible {

@@ -482,7 +482,7 @@ const Register = ({
                       className={`${styles.emailInput} sb-ttp-input-lg`}
                       labelClassName="sb-ttp-label-lg"
                     />
-                    <i className="icon-ttp-check-outline"></i>
+                    <IconCheckCircle />
                   </div>
                   <div className={styles.row}>
                     <div className={styles.cell}>
