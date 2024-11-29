@@ -280,7 +280,7 @@ const ResetPassword = ({
               </button>
             )}
 
-            {isSavingWithout ? (
+            {/* {isSavingWithout ? (
               <button className={styles.button}>
                 <Loader
                   style={{
@@ -300,7 +300,7 @@ const ResetPassword = ({
               >
                 {i18n.auth.login_without_password}
               </button>
-            )}
+            )} */}
           </div>
         </div>
       </div>
