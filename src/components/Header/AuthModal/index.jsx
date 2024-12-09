@@ -43,7 +43,7 @@ const AuthModal = ({ env, lng, app }) => {
         window.location.hash;
       window.history.replaceState(null, "", newUrl);
     }
-  }, [window.location.search]);
+  }, []);
 
   const handleAuthTokenUser = async (data) => {
     if (app.withAuthLogin) {
