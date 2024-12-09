@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import { FlashMessage } from "../../ToastContainer/ToastContainer";
 
+import { FlashMessage } from "../../ToastContainer/ToastContainer";
 import { I18N } from "../../../i18n";
 import Login from "./Login";
 import Register from "./Register";
@@ -11,36 +11,39 @@ import ResetPassword from "./ResetPassword";
 
 // Modal.setAppElement("#modals");
 
-const AuthModal = ({
-  env,
-  lng,
-  setUser,
-  setToken,
-  setCreatedAt,
-  setExpiresIn,
-  app,
-}) => {
-  // const [searchParams, setSearchParams] = useSearchParams();
+const AuthModal = ({ env, lng, app }) => {
   const [showModal, setShowModal] = useState(false);
   const [view, setView] = useState("LOGIN"); // LOGIN | REGISTER | RESET_PASSWORD
   const [email, setEmail] = useState("");
   const [resetParams, setResetParams] = useState(null);
   const [clientToken, setClientToken] = useState("");
 
-  // useEffect(() => {
-  //   if (searchParams.get("source")) {
-  //     if (searchParams.get("source") === "REGISTER") {
-  //       setView("REGISTER");
-  //       setShowModal(true);
-  //     } else if (searchParams.get("source") === "resetPassword") {
-  //       setView("RESET_PASSWORD");
-  //       setShowModal(true);
-  //     } else if (searchParams.get("source") === "LOGIN") {
-  //       setView("LOGIN");
-  //       setShowModal(true);
-  //     }
-  //   }
-  // }, [searchParams]);
+  useEffect(() => {
+    let searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.get("authView")) {
+      if (searchParams.get("authView") === "REGISTER") {
+        setView("REGISTER");
+        setShowModal(true);
+      } else if (searchParams.get("authView") === "resetPassword") {
+        setView("RESET_PASSWORD");
+        setShowModal(true);
+      } else if (searchParams.get("authView") === "LOGIN") {
+        setView("LOGIN");
+        setShowModal(true);
+      }
+      searchParams.delete("authView");
+      let searchString =
+        searchParams.toString().length > 0 ? "?" + searchParams.toString() : "";
+      let newUrl =
+        window.location.protocol +
+        "//" +
+        window.location.host +
+        window.location.pathname +
+        searchString +
+        window.location.hash;
+      window.history.replaceState(null, "", newUrl);
+    }
+  }, [window.location.search]);
 
   const handleAuthTokenUser = async (data) => {
     if (app.withAuthLogin) {
@@ -56,16 +59,26 @@ const AuthModal = ({
       };
       var b = Buffer.from(JSON.stringify(userAuth));
       var s = b.toString("base64");
-      window.location.href = app.appUrl + "?auth=" + s;
+      window.location.href = app.autoLoginUrl + "?auth=" + s;
+    } else if (app.autoLoginUrl) {
+      const { sha256 } = require("js-sha256");
+      const salt = "Aqwxsz32$";
+      const time = Math.floor(new Date().getTime() / 1000);
+      const hashKey = sha256(
+        data.data.user.email + time + data.token.access_token + salt
+      );
+      const params = new URLSearchParams({
+        email: data.data.user.email,
+        time,
+        token: data.token.access_token,
+        expiresIn: data.token.expires_in,
+        createdAt: data.token.createdAt,
+        id: data.data.user.id,
+        key: hashKey,
+        app: app.authAppName,
+      });
+      window.location.href = app.autoLoginUrl + "?" + params.toString();
     }
-  };
-
-  const handleLogout = async (e) => {
-    // await logoutAction();
-    setUser(null);
-    setToken("");
-    setExpiresIn("");
-    setCreatedAt("");
   };
 
   const handleCloseModal = () => {
@@ -83,7 +96,7 @@ const AuthModal = ({
   return (
     <>
       <div className={styles.signIn} onClick={() => setShowModal(true)}>
-        {I18N[lng].auth.signin}
+        {I18N[lng].auth.signInUp}
       </div>
 
       <Modal
@@ -125,7 +138,6 @@ const AuthModal = ({
             handleAuthTokenUser={handleAuthTokenUser}
             clientToken={clientToken}
             setClientToken={setClientToken}
-            handleLogout={handleLogout}
           />
         )}
         {view === "RESET_PASSWORD" && (

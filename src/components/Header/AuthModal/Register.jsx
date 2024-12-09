@@ -39,7 +39,6 @@ const Register = ({
   lng,
   clientToken,
   setClientToken,
-  handleLogout,
   handleAuthTokenUser,
 }) => {
   const AGREATION_OPTIONS = [
@@ -154,7 +153,7 @@ const Register = ({
     }
 
     setIsSaving(true);
-    postUserEmail(app.apiUrl, app.appName, clientToken, emailStr, lng)
+    postUserEmail(app.apiUrl, app.authAppName, clientToken, emailStr, lng)
       .then((resp) => {
         if (resp.data.data.success) {
           if (resp.data.data.data.status === "VALIDATED") {

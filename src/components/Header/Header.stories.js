@@ -19,6 +19,8 @@ const App = {
   currentEvent: null,
   withAuthLogin: false,
   apiUrl: "http://local.api.tamtam.pro",
+  autoLoginUrl: "http://local.blog.tamtam.pro/autologin",
+  authAppName: "BLOG",
   clientCredential: {
     grant_type: "",
     client_id: "",

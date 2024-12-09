@@ -42,7 +42,7 @@ export const postUserEmail = (apiUrl, appName, token, email, language) => {
   formData.append("language", language);
   formData.append("access_token", token);
   formData.append("source", "REGISTER");
-  formData.append("app", "MEMBERSHIP");
+  formData.append("app", appName);
 
   return axios.post(requestUrl, formData);
 };
