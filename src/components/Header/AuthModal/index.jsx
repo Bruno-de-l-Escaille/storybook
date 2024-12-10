@@ -68,7 +68,7 @@ const AuthModal = ({ env, lng, app }) => {
         data.data.user.email + time + data.token.access_token + salt
       );
       const params = new URLSearchParams({
-        email: data.data.user.email,
+        email: data.data.user.mainEmail,
         time,
         token: data.token.access_token,
         expiresIn: data.token.expires_in,

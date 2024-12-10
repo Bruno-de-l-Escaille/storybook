@@ -168,14 +168,10 @@ const Register = ({
         } else {
           if (resp.data.data.data) {
             if (resp.data.data.data.hasPwd) {
-              Toast.info(<ErrorMsg msg={i18n.auth.account_exist_login} />, {
-                autoClose: 15000,
-              });
+              Toast.info(i18n.auth.account_exist_login);
               showLoginWithEmail(emailStr);
             } else {
-              Toast.info(<ErrorMsg msg={i18n.auth.account_exist_pwd} />, {
-                autoClose: 15000,
-              });
+              Toast.info(i18n.auth.account_exist_pwd);
               setShowCheckEmail(true);
             }
           }

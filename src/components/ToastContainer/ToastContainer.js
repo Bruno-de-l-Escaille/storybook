@@ -28,6 +28,9 @@ export const Toast = {
       <Mycomponent title="Warning" message={message} icon="icon-power" />
     );
   },
+  info: (message) => {
+    toast.info(<div dangerouslySetInnerHTML={{ __html: message }}></div>);
+  },
 };
 
 export const Mycomponent = ({ title, message, icon }) => {

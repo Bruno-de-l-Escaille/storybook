@@ -102,6 +102,10 @@
   width: 50%;
   max-width: 500px;
   margin: 0 auto;
+
+  .columnActions button {
+    min-width: 290px;
+  }
 }
 
 .flexLabel {
@@ -379,6 +383,10 @@ span.error {
   min-width: 230px;
   height: 40px;
   background: #18a0fb;
+
+  &_secondary {
+    background-color: #0b706f;
+  }
 }
 
 .columnActions {

@@ -123,7 +123,7 @@ const Login = ({
     }
 
     setIsSaving(true);
-    resetPassword(app.apiUrl, clientToken || tok, email)
+    resetPassword(app.apiUrl, clientToken || tok, email, app.authAppName)
       .then((response) => {
         setShowCheckEmail(true);
         setIsSaving(false);

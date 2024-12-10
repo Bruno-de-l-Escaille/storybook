@@ -69,13 +69,13 @@ export const postValidateEmailCode = ({
   return axios.post(requestUrl, formData);
 };
 
-export const resetPassword = (apiUrl, token, email) => {
+export const resetPassword = (apiUrl, token, email, appName) => {
   let requestUrl = `${apiUrl}/organization/user/resetPassword`;
 
   var formData = new FormData();
   formData.append("access_token", token);
   formData.append("email", email);
-  formData.append("source", "membership");
+  formData.append("source", appName.toLowerCase());
 
   return axios.post(requestUrl, formData);
 };

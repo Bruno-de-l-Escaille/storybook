@@ -26,8 +26,6 @@ const ResetPassword = ({
   email,
   emailKey,
 }) => {
-  // const [emailKey, setEmailKey] = useState("");
-  // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [pwdProgressValue, setPwdProgressValue] = useState(0);
@@ -37,24 +35,6 @@ const ResetPassword = ({
   });
   const [isSaving, setIsSaving] = useState(false);
   const [isSavingWithout, setIsSavingWithout] = useState(false);
-
-  // useEffect(() => {
-  //   if (searchParams.has("email") && searchParams.get("email")) {
-  //     setEmail(searchParams.get("email"));
-  //   }
-  //   if (searchParams.has("key") && searchParams.get("key")) {
-  //     setEmailKey(searchParams.get("key"));
-  //   }
-
-  //   if (!clientToken) {
-  //     getClientCredential()
-  //       .then((resp) => {
-  //         const token = resp.data.token.access_token;
-  //         setClientToken(token);
-  //       })
-  //       .catch((e) => {});
-  //   }
-  // }, []);
 
   const handleTokenWithoutPassword = () => {
     setIsSavingWithout(true);
@@ -280,8 +260,10 @@ const ResetPassword = ({
               </button>
             )}
 
-            {/* {isSavingWithout ? (
-              <button className={styles.button}>
+            {isSavingWithout ? (
+              <button
+                className={classNames(styles.button, styles.button_secondary)}
+              >
                 <Loader
                   style={{
                     height: "10px",
@@ -293,6 +275,7 @@ const ResetPassword = ({
               <button
                 className={classNames(
                   styles.button,
+                  styles.button_secondary,
                   (password.length === 0 || password !== passwordConfirm) &&
                     styles.button_disabled
                 )}
@@ -300,7 +283,7 @@ const ResetPassword = ({
               >
                 {i18n.auth.login_without_password}
               </button>
-            )} */}
+            )}
           </div>
         </div>
       </div>
