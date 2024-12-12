@@ -35,6 +35,7 @@ export class HeaderUA extends Component {
       showSettings: false,
       isFaqWidgetLoaded: false,
       portalSwitchCurrent: null,
+      activeApp: "",
     };
   }
 
@@ -90,8 +91,26 @@ export class HeaderUA extends Component {
 
   handleFaqClick = () => {
     const { app } = this.props;
+    const { activeApp } = this.state;
     if (window.showFAQ) {
-      window.showFAQ(app.appName.toUpperCase());
+      const listener = (e) => {
+        console.log("Faq active app", e.detail);
+        this.setState({ activeApp: e.detail });
+      };
+
+      window.addEventListener("activeApp", listener);
+      const cleanupListener = () => {
+        window.removeEventListener("activeApp", listener);
+      };
+      const selectedApp =
+        (activeApp && activeApp === "NEWSLETTER") ||
+        (app.selectedApp && app.selectedApp === "NEWSLETTER")
+          ? "E_NEWS"
+          : activeApp
+          ? activeApp
+          : app.appName.toUpperCase();
+      window.showFAQ(selectedApp);
+      return cleanupListener;
     }
   };
 
