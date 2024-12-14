@@ -54,7 +54,7 @@ export default class Communities extends Component {
         clientsBlock.push(
           <li
             className={styles.menu__subChild}
-            key={`client-${communities[i].id}`}
+            key={`client-${i}-${communities[i].id}`}
             onClick={() => onSelectCommunity(communities[i])}
           >
             <a href="#" onClick={(e) => e.preventDefault()}>
@@ -68,7 +68,7 @@ export default class Communities extends Component {
           clientsBlock.push(
             <li
               className={styles.menu__subChild}
-              key={`client-${communities[i].id}`}
+              key={`client-${i}-${communities[i].id}`}
             >
               <Link
                 href={`/${lng}/community/${communities[i].url}/${communities[i].id}`}
@@ -83,7 +83,7 @@ export default class Communities extends Component {
           clientsBlock.push(
             <li
               className={styles.menu__subChild}
-              key={`client-${communities[i].id}`}
+              key={`client-${i}-${communities[i].id}`}
             >
               <a
                 href={`${appUrl}/community/${communities[i].url}/${communities[i].id}`}

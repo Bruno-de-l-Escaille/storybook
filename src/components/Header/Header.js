@@ -255,7 +255,7 @@ export class Header extends Component {
           {rightIcons.faq?.activated && (
             <div
               onClick={this.handleFaqClick.bind(this)}
-              className={!isFaqWidgetLoaded && styles.iconLoading}
+              className={!isFaqWidgetLoaded ? styles.iconLoading : ""}
             >
               <MenuItem icon="Help" />
             </div>

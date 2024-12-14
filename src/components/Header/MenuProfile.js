@@ -530,8 +530,11 @@ export default function MenuProfile(props) {
                 {firstList && (
                   <li className={styles.section}>
                     <ul>
-                      {firstList.map((el) => (
-                        <li onClick={() => navigateTo(el.url)}>
+                      {firstList.map((el, idx) => (
+                        <li
+                          key={`fst-list-${idx}`}
+                          onClick={() => navigateTo(el.url)}
+                        >
                           <div className={styles.block}></div>
                           <span>{el.label}</span>
                         </li>
@@ -542,8 +545,11 @@ export default function MenuProfile(props) {
                 {secondList && (
                   <li className={styles.section}>
                     <ul>
-                      {secondList.map((el) => (
-                        <li onClick={() => navigateTo(el.url)}>
+                      {secondList.map((el, idx) => (
+                        <li
+                          key={`scd-list-${idx}`}
+                          onClick={() => navigateTo(el.url)}
+                        >
                           <div className={styles.block}></div>
                           <span>{el.label}</span>
                         </li>
@@ -554,8 +560,11 @@ export default function MenuProfile(props) {
                 {thirdList && (
                   <li className={styles.section}>
                     <ul>
-                      {thirdList.map((el) => (
-                        <li onClick={() => navigateTo(el.url)}>
+                      {thirdList.map((el, idx) => (
+                        <li
+                          key={`thr-list-${idx}`}
+                          onClick={() => navigateTo(el.url)}
+                        >
                           <div className={styles.block}></div>
                           <span>{el.label}</span>
                         </li>

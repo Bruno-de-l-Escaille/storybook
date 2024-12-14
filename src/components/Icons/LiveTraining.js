@@ -10,7 +10,7 @@ export default function LiveTraining({ className }) {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <g clip-path="url(#clip0_65970_44605)">
+      <g clipPath="url(#clip0_65970_44605)">
         <rect
           x="1"
           y="1.68164"

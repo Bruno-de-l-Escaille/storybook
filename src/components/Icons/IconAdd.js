@@ -3,7 +3,7 @@ import React from "react";
 export default ({ width = 12, height = 12, ...props }) => {
   return (
     <svg width={width} height={height} viewBox="0 0 12 12" fill="none">
-      <g clip-path="url(#clip0_54221_63147)">
+      <g clipPath="url(#clip0_54221_63147)">
         <path
           d="M6 0.75V11.25"
           stroke="#18A0FB"
