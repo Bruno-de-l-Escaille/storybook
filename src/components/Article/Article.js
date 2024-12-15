@@ -767,10 +767,16 @@ export const Article = ({
           </div>
           <div className={styles.meta}>
             {articleType && articleType.name ? (
-              <span style={{ backgroundColor: articleType.colorCode }}>
-                {articleType.name}
-              </span>
-            ) : null}
+              articleType.colorCode ? (
+                <span style={{ backgroundColor: articleType.colorCode }}>
+                  {articleType.name}
+                </span>
+              ) : (
+                <span>{articleType.name}</span>
+              )
+            ) : (
+              <></>
+            )}
             <div
               className={styles.community}
               style={{ borderLeftColor: category.colorCode }}
@@ -899,7 +905,9 @@ export const Article = ({
             <div className={styles.meta}>
               {articleType && articleType.name ? (
                 <span>{articleType.name}</span>
-              ) : null}
+              ) : (
+                <></>
+              )}
               <div
                 className={styles.community}
                 style={{ borderLeftColor: category.colorCode }}

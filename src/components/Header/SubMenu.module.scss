@@ -172,7 +172,8 @@
     transition: transform 0.2s, -webkit-transform 0.2s;
     margin-left: 2rem;
   }
-  a {
+  a,
+  span.title {
     text-transform: uppercase;
     font-size: 14px;
     line-height: 14px;

@@ -80,18 +80,18 @@ export class SubMenu extends Component {
         {RouterLink ? (
           <RouterLink to={item.url} className={style.item}>
             <img src={item.iconUrl} />
-            <a className={style.title}>{item.title}</a>
+            <span className={style.title}>{item.title}</span>
             <i className="icon-sb-arrow-down"></i>
           </RouterLink>
         ) : (
           <a href={item.url} className={style.item}>
             <img src={item.iconUrl} />
-            <a className={style.title}>{item.title}</a>
+            <span className={style.title}>{item.title}</span>
             <i className="icon-sb-arrow-down"></i>
           </a>
         )}
         <div style={{ width: item.simple ? "auto" : "24rem" }}>
-          {item.hasSearch && <p>ddddd</p>}
+          {/* {item.hasSearch && <p>ddddd</p>} */}
           <ul>{this.renderSubmenu(item.submenu)}</ul>
           {item.more &&
             (Link ? (
