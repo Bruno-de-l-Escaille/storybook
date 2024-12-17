@@ -14,6 +14,7 @@ import IconUnshare from "../Icons/IconUnshare";
 
 import styles from "./ModalConfirm.module.scss";
 import classnames from "classnames";
+import AlertCircle from "../Icons/AlertCircle";
 
 export const ModalConfirm = (props) => {
   const {
@@ -52,6 +53,8 @@ export const ModalConfirm = (props) => {
         return <IconAdd width={22} height={22} />;
       case "privatize":
         return <IconUnshare />;
+      case "logout":
+        return <AlertCircle width={25} height={25} fill="#2495e1" />;
       default:
         return null;
     }

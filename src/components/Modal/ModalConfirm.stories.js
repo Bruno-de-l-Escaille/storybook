@@ -159,3 +159,19 @@ export const Privatize = () => (
     labelError="Error"
   />
 );
+
+export const Logout = () => (
+  <ModalConfirm
+    type="logout"
+    isOpen={true}
+    onCancel={() => console.log("cancel")}
+    onConfirm={() => console.log("handleOnConfirm")}
+    inProcess={false}
+    actionFailed={false}
+    title="Connexion requise"
+    text="Pour accéder à votre profil, vous devez vous connecter. Voulez-vous continuer ?"
+    labelNo="Annuler"
+    labelYes="S'identifier"
+    labelError="Error"
+  />
+);
