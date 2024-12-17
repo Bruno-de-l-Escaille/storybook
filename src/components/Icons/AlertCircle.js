@@ -1,14 +1,13 @@
 import React from "react";
 
-export default function AlertCircle({ className }) {
+export default ({ width = 16, height = 16, fill = "#2495e1", ...props }) => {
   return (
     <svg
-      width="14"
-      height="14"
+      width={width}
+      height={height}
       viewBox="0 0 14 14"
-      fill="#FFF"
+      fill={fill}
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
     >
       <path
         fillRule="evenodd"
@@ -27,4 +26,4 @@ export default function AlertCircle({ className }) {
       />
     </svg>
   );
-}
+};

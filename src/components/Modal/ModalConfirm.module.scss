@@ -346,6 +346,22 @@
   }
 }
 
+.logout {
+  .header {
+    color: #2495e1;
+    background: #f3faff;
+    border-bottom: 1px solid #c7e8fe;
+    .icon {
+      background: #f3faff;
+      border: 1px solid #c7e8fe;
+    }
+  }
+  .yes,
+  .deleting {
+    background-color: #2495e1;
+  }
+}
+
 @media screen and (max-width: 39.9375em) {
   .body,
   .footer {
