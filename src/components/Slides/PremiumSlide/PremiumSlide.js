@@ -58,7 +58,7 @@ export const PremiumSlide = ({
             <span className={styles.period}>/{I18N[language].year}</span>
           </div>
           <div className={styles.infos}>
-            <span className={styles.originalPrice}>{6778}</span>
+            <span className={styles.originalPrice}>{monthlyPrice * 12}</span>
             <span className={styles.discount}>
               {I18N[language].saveAmount} {savingPercent} %
             </span>
