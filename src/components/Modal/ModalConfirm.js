@@ -11,10 +11,10 @@ import IconCircleClose from "../Icons/IconCircleClose";
 import IconShare from "../Icons/IconShare";
 import IconAdd from "../Icons/IconAdd";
 import IconUnshare from "../Icons/IconUnshare";
+import AlertCircle from "../Icons/AlertCircle";
 
 import styles from "./ModalConfirm.module.scss";
 import classnames from "classnames";
-import AlertCircle from "../Icons/AlertCircle";
 
 export const ModalConfirm = (props) => {
   const {
