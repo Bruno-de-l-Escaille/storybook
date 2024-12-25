@@ -59,6 +59,7 @@ const Header = ({
   type,
   pathname,
   isSmall,
+  titleStyle,
 }) => {
   return (
     <div className={styles.header}>
@@ -80,6 +81,7 @@ const Header = ({
           target={onClick ? undefined : "_blank"}
           rel={onClick ? undefined : "noopener noreferrer"}
           onClick={onClick ? () => onClick(id, type, pathname) : undefined}
+          style={titleStyle}
         >
           <Shave maxHeight={!isSmall ? 125 : 65}>{title}</Shave>
         </a>

@@ -22,8 +22,9 @@
       .plan {
         display: flex;
         flex-direction: column;
-        min-width: 220px;
-        max-width: 300px;
+        // min-width: 220px;
+        // max-width: 300px;
+        width: 100%;
         min-height: 70px;
         padding: 10px;
         border-radius: 5px;
