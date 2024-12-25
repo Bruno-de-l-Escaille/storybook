@@ -106,6 +106,7 @@ export const I18N = {
     yearly: "Yearly",
     saveAmount: "save",
     buyCycle: "Buy {{definiteLabel}}",
+    premiumLabel: "Benefit from over 500 training courses",
     auth: {
       signInUp: "Login / Register",
       continue: "Continue",
@@ -292,6 +293,9 @@ export const I18N = {
     yearly: "Annuel",
     saveAmount: "économisez",
     buyCycle: "Acheter {{definiteLabel}}",
+    premiumLabel: "Profitez de + 500 formations",
+    oeccbbAdvantage1: "membre de l’OECCBB : ",
+    oeccbbAdvantage2: "13ème mois gratuit",
     auth: {
       signInUp: "Connexion / Inscription",
       continue: "Continuer",
@@ -482,6 +486,9 @@ export const I18N = {
     saveAmount: "bespaar",
     ofCertifiedAttestations: "geaccrediteerde opleiding",
     buyCycle: "Koop {{definiteLabel}}",
+    premiumLabel: "Profiteer van meer dan 500 trainingen",
+    oeccbbAdvantage1: "lid van de OECCBB : ",
+    oeccbbAdvantage2: "13e maand gratis",
     auth: {
       signInUp: "Inloggen / Registreren",
       continue: "Doorgaan",

@@ -7,6 +7,7 @@ import { Fetching } from "../Common/Slide/Fetching";
 import CheckMark from "../../Icons/CheckMarkv2";
 import cn from "classnames";
 import { getOfffcourseUrl } from "../../../utils/event";
+import { useResponsive } from "../../../common/hooks/useResponsive";
 
 export const PremiumSlide = ({
   cycle,
@@ -16,10 +17,10 @@ export const PremiumSlide = ({
   isFetching,
   queryParams = {},
 }) => {
+  const { isMobile } = useResponsive();
   if (isFetching) {
     return <Fetching />;
   }
-
   const { "user-registered": userRegistered } = cycle;
   const isUserPremium = userRegistered;
 
@@ -46,22 +47,26 @@ export const PremiumSlide = ({
             <span className={styles.currency}>€</span>
             <span className={styles.period}>/{I18N[language].month}</span>
           </div>
-          <p className={styles.description}>
-            {I18N[language].twelveMonthsCommitment}
-          </p>
         </div>
         <div className={styles.plan}>
-          <span className={styles.label}>{I18N[language].yearly}</span>
+          <div className={styles.titleContainer}>
+            <span className={styles.label}>{I18N[language].yearly}</span>
+            {isMobile && (
+              <span className={styles.originalPrice}>{monthlyPrice * 12}</span>
+            )}
+          </div>
           <div className={styles.price}>
-            <span className={styles.amount}>{yearlyPrice}</span>
-            <span className={styles.currency}>€</span>
+            <span className={styles.amount}>
+              {yearlyPrice} <span className={styles.currency}>€</span>
+            </span>
+            {!isMobile && (
+              <span className={styles.originalPrice}>{monthlyPrice * 12}</span>
+            )}
             <span className={styles.period}>/{I18N[language].year}</span>
           </div>
-          <div className={styles.infos}>
-            <span className={styles.originalPrice}>{monthlyPrice * 12}</span>
-            <span className={styles.discount}>
-              {I18N[language].saveAmount} {savingPercent} %
-            </span>
+          <div className={styles.oeccbbAdvantage}>
+            <span>{I18N[language].oeccbbAdvantage1}</span>
+            <span>{I18N[language].oeccbbAdvantage2}</span>
           </div>
         </div>
       </div>
@@ -79,12 +84,10 @@ export const PremiumSlide = ({
         link={cycleReceptionUrl}
       />
       <Slide.Body className={styles.body}>
-        <div className={styles.note}>
-          {I18N[language].containsExclusiveEvents}
-        </div>
+        <div className={styles.note}>{I18N[language].premiumLabel}</div>
         {renderPlans()}
       </Slide.Body>
-      <Slide.Footer>
+      <Slide.Footer className={styles.footer}>
         {!isUserPremium ? (
           <ActionButton
             name={I18N[language].subscribeToPremium}
@@ -102,6 +105,9 @@ export const PremiumSlide = ({
             {I18N[language].subscribed}
           </div>
         )}
+        <div className={styles.premiumAllCourses}>
+          <span>{I18N[language].containsExclusiveEvents}</span>
+        </div>
       </Slide.Footer>
     </Slide>
   );
