@@ -86,6 +86,7 @@ export const I18N = {
     soonLive: "Coming soon live",
     soonInPerson: "Coming soon in person",
     registerNow: "Register now",
+    register: "Register",
     buyTraining: "Buy training",
     moreDetails: "More details",
     program: "Program",
@@ -180,6 +181,7 @@ export const I18N = {
       invalid_code: "Invalid code",
       login_without_password: "Log in without password",
     },
+    on: "on",
   },
   fr: {
     ARTCILES: "Articles",
@@ -273,6 +275,7 @@ export const I18N = {
     soonLive: "Prochainement en live",
     soonInPerson: "Prochainement en présentiel",
     registerNow: "S'inscrire maintenant",
+    register: "S'inscrire",
     buyTraining: "Acheter la formation",
     moreDetails: "Plus de détails",
     program: "Programme",
@@ -371,6 +374,7 @@ export const I18N = {
       invalid_code: "Code invalide",
       login_without_password: "Connexion sans mot de passe",
     },
+    on: "sur",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -465,6 +469,7 @@ export const I18N = {
     soonLive: "Binnenkort live",
     soonInPerson: "Binnenkort in persoon",
     registerNow: "Registreer nu",
+    register: "Registreren",
     buyTraining: "Koop training",
     moreDetails: "Meer details",
     program: "Programma",
@@ -562,5 +567,6 @@ export const I18N = {
       invalid_code: "Ongeldige code",
       login_without_password: "Inloggen zonder wachtwoord",
     },
+    on: "op",
   },
 };

@@ -439,3 +439,16 @@ export const getCycleLabels = (cycle, language) => {
 };
 
 export const isCycleIncludedInPremium = (cycle) => cycle.client === 9;
+
+export const getEventMode = (event) => {
+  const { isVirtual, eventPlace } = event;
+
+  if (isVirtual === 1 && isEmpty(eventPlace)) {
+    return "VIRTUAL";
+  }
+  if (isVirtual === 1 && !isEmpty(eventPlace)) {
+    return "HYBRID";
+  }
+
+  return "PRESENTIAL";
+};

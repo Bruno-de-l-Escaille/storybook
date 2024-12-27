@@ -1,41 +1,34 @@
-import classNames from "classnames";
+import cn from "classnames";
 import React from "react";
 import styles from "./EventLayout.module.scss";
-import EarthIcon from "../Icons/Earth";
-import CalendarIcon from "../Icons/Calendar";
+import Presential2Icon from "./assets/IconPresential2";
+import CalendarIcon from "./assets/IconCalendar";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 export const Fetching = () => {
   const renderCard = () => {
     return (
-      <div
-        className={classNames(styles.event, styles.fetching)}
-        style={{ width: "305px", height: "318px" }}
-      >
-        <div className={classNames(styles.banner, "m-b-m")} />
-        <h3 className="m-l-xs m-b-xxs" />
-        <div className={classNames(styles.speakers, "greetings")}>
-          <h6 className="m-l-xs" />
+      <SkeletonTheme>
+        <div className={cn(styles.wrapper, styles.fetching)}>
+          <Skeleton className={styles.banner} height={150} />
+          <div className={styles.details}>
+            <Skeleton className={styles.title} height={40} />
+            <div className={styles.infos}>
+              <ul>
+                <li>
+                  <CalendarIcon />
+                  <Skeleton height={20} width={160} />
+                </li>
+                <li>
+                  <Presential2Icon />
+                  <Skeleton height={20} width={160} />
+                </li>
+              </ul>
+            </div>
+            <div className={styles.actions} />
+          </div>
         </div>
-        <div className={styles.infos}>
-          <ul className="m-l-xs">
-            <li>
-              <CalendarIcon />,
-              <span>
-                <h3 />
-              </span>
-            </li>
-            <li>
-              <EarthIcon />,
-              <span>
-                <h3 />
-              </span>
-            </li>
-          </ul>
-        </div>
-        <div className="m-t-auto">
-          <div className={styles.mainActions} />
-        </div>
-      </div>
+      </SkeletonTheme>
     );
   };
   return renderCard();
