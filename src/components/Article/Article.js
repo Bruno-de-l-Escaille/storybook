@@ -409,10 +409,10 @@ export const Article = ({
     );
   };
 
-  const renderRelatedArticles = (relatedArticles, hideTxt = false) => {
+  const renderRelatedArticles = (relatedArticles) => {
     return (
       <div className={styles.version}>
-        {!hideTxt && <span>{I18N[language]["see_version"]}:</span>}
+        <span>{I18N[language]["see_version"]}:</span>
         {Object.entries(relatedArticles).map((related) => {
           let articleUrl = `/${related[0]}/article/${related[1].url}/${related[1].id}`;
           if (!user) {
@@ -1117,7 +1117,7 @@ export const Article = ({
               )} */}
               {!expert &&
                 article.relatedArticles &&
-                renderRelatedArticles(article.relatedArticles, true)}
+                renderRelatedArticles(article.relatedArticles)}
             </div>
 
             <div className={styles.meta}>

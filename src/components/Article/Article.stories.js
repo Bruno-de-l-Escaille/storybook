@@ -150,7 +150,7 @@ export const Type6 = () => (
 export const Type7 = () => (
   <div className="grid-container">
     <div className="grid-x">
-      <div className="cell small-12 medium-3">
+      <div className="cell small-12 medium-4">
         <Article
           article={articles[0]}
           showSummary={true}
