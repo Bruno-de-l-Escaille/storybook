@@ -1,5 +1,3 @@
-"use client";
-
 import cn from "classnames";
 import moment from "moment";
 import React, { useCallback, useState } from "react";
@@ -174,8 +172,8 @@ export function EventLayout({
   };
 
   const showTimeCounter =
-    Math.abs(moment(startDateTime).diff(moment(), "hours")) <
-    EVENT_COUNTER_TIME_DELAY;
+    moment(startDateTime).diff(moment(), "hours") < EVENT_COUNTER_TIME_DELAY &&
+    moment(startDateTime).diff(moment(), "hours") > 0;
 
   const offfcourseUrl = getOfffcourseUrl(env);
   const offfcourseParams = new URLSearchParams(queryParams).toString();
@@ -439,14 +437,14 @@ export function EventLayout({
             ) : null}
           </div>
           <div className={styles.badges}>
-            {Boolean(isFullWatch && !isFull && isVirtual) && (
+            {Boolean(isFullWatch && hasUniqueSlot && isVirtual) && (
               <div className={cn(styles.badge, styles.seen)}>
                 {I18N[language]["seen"]}
               </div>
             )}
-            {Boolean(nbMinutes && hasUniqueSlot && !isFull) && (
+            {Boolean(nbMinutes && hasUniqueSlot) && (
               <div className={styles.badge}>
-                {!playProgress || !isVirtual || isFull
+                {!playProgress || !isVirtual
                   ? `${nbMinutes} min`
                   : `${playProgress} ${I18N[language]["on"]} ${nbMinutes}min`}
               </div>
