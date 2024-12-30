@@ -409,10 +409,10 @@ export const Article = ({
     );
   };
 
-  const renderRelatedArticles = (relatedArticles) => {
+  const renderRelatedArticles = (relatedArticles, hideTxt = false) => {
     return (
       <div className={styles.version}>
-        <span>{I18N[language]["see_version"]}:</span>
+        {!hideTxt && <span>{I18N[language]["see_version"]}:</span>}
         {Object.entries(relatedArticles).map((related) => {
           let articleUrl = `/${related[0]}/article/${related[1].url}/${related[1].id}`;
           if (!user) {
@@ -1107,18 +1107,19 @@ export const Article = ({
               >
                 {category.name}
               </div>
-              {article.avatars && article.avatars.length > 0 && (
+              {/* {article.avatars && article.avatars.length > 0 && (
                 <div
                   className={styles.channel}
                   style={{
                     backgroundImage: `url(${article.avatars[0].avatarUrl})`,
                   }}
                 ></div>
-              )}
+              )} */}
+              {!expert &&
+                article.relatedArticles &&
+                renderRelatedArticles(article.relatedArticles, true)}
             </div>
-            {!expert &&
-              article.relatedArticles &&
-              renderRelatedArticles(article.relatedArticles)}
+
             <div className={styles.meta}>
               {articleType && articleType.name ? (
                 <span>{articleType.name}</span>

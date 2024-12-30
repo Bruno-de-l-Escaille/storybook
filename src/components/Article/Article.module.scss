@@ -1059,7 +1059,11 @@
 
   .version {
     position: absolute;
-    top: 50px;
+    top: 0;
+    right: 0;
+    padding: 0;
+    background-color: transparent;
+    color: #fff;
   }
 
   .buttons {
