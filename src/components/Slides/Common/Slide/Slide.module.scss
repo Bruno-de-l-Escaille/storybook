@@ -10,7 +10,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 344px;
+  height: 345px;
 
   .top {
     display: flex;
@@ -67,6 +67,13 @@
             color: #bce4fa;
           }
         }
+
+        //first div access for styling sass
+        & > div:first-child {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
       }
 
       .title {
@@ -77,6 +84,8 @@
         line-height: 120%; /* 36px */
         cursor: pointer;
         transition: text-decoration 0.3s ease;
+        height: 80px;
+        max-height: 80px;
 
         &:hover {
           text-decoration: underline;
@@ -95,8 +104,8 @@
       width: fit-content;
 
       img {
-        width: 68px;
-        height: 38px;
+        width: 76px;
+        height: 46px;
         object-fit: contain;
       }
     }
@@ -127,7 +136,7 @@
   position: relative;
   overflow: hidden;
   padding: 20px;
-  height: 344px !important;
+  height: 345px !important;
   width: 100% !important;
   max-width: 753px;
 
@@ -213,8 +222,8 @@
       width: fit-content;
 
       img {
-        width: 68px;
-        height: 38px;
+        height: 34px;
+        width: 58px;
         object-fit: contain;
       }
     }
@@ -253,7 +262,7 @@
 @include breakpoint(medium down) {
   .wrapper {
     padding: 20px;
-    height: 344px !important;
+    height: 345px !important;
     width: 100% !important;
     max-width: 753px;
 
@@ -271,6 +280,13 @@
           width: 100%;
         }
       }
+
+      .clientImg {
+        img {
+          height: 34px;
+          width: 58px;
+        }
+      }
     }
 
     .body {
@@ -279,6 +295,7 @@
 
     .footer {
       flex-direction: column;
+      gap: 10px;
     }
   }
 }

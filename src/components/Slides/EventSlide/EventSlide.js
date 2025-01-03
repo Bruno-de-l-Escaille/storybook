@@ -3,7 +3,6 @@ import styles from "./EventSlide.module.scss";
 import Slide from "../Common/Slide/Slide";
 import { getEventSideConfig } from "./services";
 import { getByLanguage, prepareS3ResourceUrl } from "../../../utils/common";
-import { Speakers } from "../Common/Speakers/Speakers";
 import {
   formatDateFromTo,
   getOfffcourseUrl,
@@ -19,6 +18,8 @@ import ActionButton from "../Common/ActionButton/ActionButton";
 import IconReplay from "../../../components/Icons/IconReplay";
 import IconCalendar from "../../../components/Icons/IconCalendar2";
 import { Fetching } from "../Common/Slide/Fetching";
+import { SpeakersSlide } from "../Common/SpeakersSlide/SpeakersSlide";
+import classNames from "classnames";
 
 export const EventSlide = ({
   event,
@@ -94,7 +95,7 @@ export const EventSlide = ({
       return (
         <li>
           <div>
-            <IconReplay className="m-r-xs" width={16} height={16} />
+            <IconReplay className={classNames(styles.icon, "m-r-xs")} />
           </div>
           <strong>{I18N[language].inReplay}</strong>
         </li>
@@ -110,7 +111,7 @@ export const EventSlide = ({
     return (
       <li>
         <div>
-          <IconCalendar className="m-r-xs" width={16} height={16} />
+          <IconCalendar className={classNames(styles.icon, "m-r-xs")} />
         </div>
         <div>
           <strong>
@@ -142,13 +143,8 @@ export const EventSlide = ({
           onClick={onClick}
         />
         <Slide.Body className={styles.slideBody}>
-          <Speakers speakers={speakers} className={styles.speakers} />
-          <ul
-            className={styles.details}
-            style={{ fontSize: !isSmall ? "14px" : "12px" }}
-          >
-            {renderEventMode()}
-          </ul>
+          <SpeakersSlide speakers={speakers} />
+          <ul className={styles.details}>{renderEventMode()}</ul>
         </Slide.Body>
         <Slide.Footer className={styles.slideFooter}>
           {showPrice && (
@@ -219,7 +215,7 @@ export const EventSlide = ({
             onClick={onClick}
           />
           <Slide.Body className={styles.slideBody}>
-            <Speakers speakers={speakers} className={styles.speakers} />
+            <SpeakersSlide speakers={speakers} />
             <ul
               className={styles.details}
               style={{ fontSize: !isSmall ? "14px" : "12px" }}

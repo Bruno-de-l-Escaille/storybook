@@ -183,6 +183,7 @@
     "storybook-react-router": "^1.0.8",
     "suneditor": "^2.45.1",
     "suneditor-react": "^3.5.0",
+    "swiper": "6",
     "zxcvbn": "^4.4.2"
   }
 }

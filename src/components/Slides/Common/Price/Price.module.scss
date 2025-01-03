@@ -50,7 +50,7 @@
 
     .discount_percent {
       color: #fff;
-      font-size: 16px;
+      font-size: 14px;
       font-style: normal;
       font-weight: 500;
       line-height: normal;
@@ -145,6 +145,10 @@
 
     .price {
       font-size: 1.125rem;
+
+      span {
+        font-size: 0.875rem;
+      }
     }
   }
 }

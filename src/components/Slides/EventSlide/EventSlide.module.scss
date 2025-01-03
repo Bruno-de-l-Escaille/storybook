@@ -1,3 +1,5 @@
+@import "~foundation-sites/scss/util/util";
+
 .eventSlide {
   .slideBody {
     display: flex;
@@ -25,12 +27,16 @@
         }
       }
     }
+    .icon {
+      height: 16px !important;
+      width: 16px !important;
+    }
   }
 
   .slideFooter {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 
     .actions {
       display: flex;
@@ -67,4 +73,27 @@
 
 .fetching {
   background-color: #fff !important;
+}
+
+@include breakpoint(medium down) {
+  .eventSlide {
+    .slideBody {
+      ul {
+        li {
+          font-size: 12px;
+        }
+      }
+
+      .icon {
+        height: 14px !important;
+        width: 14px !important;
+      }
+    }
+
+    .slideFooter {
+      .actions {
+        width: 100%;
+      }
+    }
+  }
 }

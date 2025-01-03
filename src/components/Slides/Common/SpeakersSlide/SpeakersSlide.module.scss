@@ -1,0 +1,174 @@
+.slider_container {
+  display: flex;
+  flex-direction: column;
+
+  .swiper_wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    padding: 6px 0;
+
+    a {
+      cursor: auto;
+    }
+
+    & > div > div > div {
+      width: fit-content !important;
+    }
+
+    .arrow_button {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      position: absolute;
+      z-index: 2;
+      width: 50px;
+      height: 36px;
+    }
+
+    .prev_button {
+      justify-content: flex-start;
+      left: 0;
+      background: linear-gradient(to right, #29394d, #29394db2, #29394d00);
+      padding-left: 8px;
+
+      &.white {
+        background: linear-gradient(
+          to right,
+          #fff 0%,
+          #ffffffcc 64.58%,
+          #ffffff00 100%
+        );
+      }
+
+      &.gray {
+        background: linear-gradient(
+          to right,
+          #f1f2f4 0%,
+          #f1f2f4cc 64.58%,
+          #f1f2f400 100%
+        );
+      }
+
+      &.graySelected {
+        background: linear-gradient(
+          to right,
+          #c7e8fe 0%,
+          #c7e8fecc 64.58%,
+          #c7e8fe00 100%
+        );
+      }
+
+      &.greenJewel {
+        background: linear-gradient(
+          to right,
+          #103d47 0%,
+          #103d47cc 64.58%,
+          #103d4700 100%
+        );
+      }
+    }
+
+    .next_button {
+      justify-content: flex-end;
+      right: 0;
+      background: linear-gradient(to left, #29394d, #29394db2, #29394d00);
+      padding-right: 8px;
+
+      &.white {
+        background: linear-gradient(
+          to left,
+          #fff 0%,
+          #ffffffcc 64.58%,
+          #ffffff00 100%
+        );
+      }
+
+      &.gray {
+        background: linear-gradient(
+          to left,
+          #f1f2f4 0%,
+          #f1f2f4cc 64.58%,
+          #f1f2f400 100%
+        );
+      }
+
+      &.graySelected {
+        background: linear-gradient(
+          to left,
+          #c7e8fe 0%,
+          #c7e8fecc 64.58%,
+          #c7e8fe00 100%
+        );
+      }
+
+      &.greenJewel {
+        background: linear-gradient(
+          to left,
+          #103d47 0%,
+          #103d47cc 64.58%,
+          #103d4700 100%
+        );
+      }
+    }
+
+    .speaker {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+
+      .avatar {
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(180deg, #18a0fb 0%, #06d9b1 100%);
+
+        .image {
+          margin: 2px;
+          border-radius: 50%;
+          background-color: #fff;
+        }
+      }
+
+      .emptyAvatar {
+        background: linear-gradient(
+          to bottom right,
+          #ddd,
+          #ccc,
+          #c5c5c5,
+          #bbb,
+          #b5b5b5,
+          #aaa
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 12px 1px rgba(44, 43, 63, 0.1),
+          0 0 0 1px rgba(44, 43, 63, 0.13);
+        border-radius: 50%;
+        border: 2px solid var(--border-color);
+
+        span {
+          color: #fff;
+          font-weight: bold;
+        }
+      }
+
+      .infos {
+        display: flex;
+        flex-direction: column;
+        min-width: 80px;
+
+        .name {
+          color: #fff;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
+      }
+    }
+  }
+}

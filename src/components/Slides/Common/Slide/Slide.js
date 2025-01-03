@@ -5,6 +5,7 @@ import styles from "./Slide.module.scss";
 import { CardFlag } from "../../../../common/components/CardFlag";
 import cn from "classnames";
 import { Shave } from "../../../../common/components/Shave";
+import { useResponsive } from "../../../../common/hooks/useResponsive";
 
 export function Slide({
   children,
@@ -61,20 +62,25 @@ const Header = ({
   isSmall,
   titleStyle,
 }) => {
+  const { isMobile } = useResponsive();
+
   return (
     <div className={styles.header}>
       <div className={styles.titles}>
         <div className={styles.label}>
-          {label && (
-            <span className={cn(styles.text, styles[theme])}>{label}</span>
-          )}
+          <div>
+            {label && (
+              <span className={cn(styles.text, styles[theme])}>{label}</span>
+            )}
+            {!isMobile && type === "CYCLE" && children}
+          </div>
           {clientImg && (
             <div className={styles.clientImg}>
               <img src={clientImg} alt="organization img" />
             </div>
           )}
         </div>
-        {children}
+        {((isMobile && type === "CYCLE") || type !== "CYCLE") && children}
         <a
           className={styles.title}
           href={onClick ? undefined : link}
@@ -83,7 +89,7 @@ const Header = ({
           onClick={onClick ? () => onClick(id, type, pathname) : undefined}
           style={titleStyle}
         >
-          <Shave maxHeight={!isSmall ? 125 : 65}>{title}</Shave>
+          <Shave maxHeight={80}>{title}</Shave>
         </a>
       </div>
     </div>

@@ -2,7 +2,7 @@
   "events": [
     {
       "id": 828,
-      "nameFr": "Quelles sont les responsabilités des administrateurs pour les dette ?",
+      "nameFr": "Quelles sont les responsabilités des administrateurs pour les dette Quelles sont les responsabilités des administrateurs pour les dette Quelles sont les responsabilités des administrateurs pour les dette ?",
       "nameEn": "",
       "nameNl": "",
       "status": 1,
@@ -165,12 +165,72 @@
       "dateEndOfReplay": "2024-12-31 23:59:59",
       "oeccbbEnabled": 1,
       "speakers-abstract": {
-        "count": 1,
+        "count": 10,
         "speakers": [
           {
             "id": "359",
             "firstName": "Thierry",
-            "lastName": "Lauwers",
+            "lastName": "Lauwers1",
+            "pictureUrl": "https://s3.tamtam.pro/production/storage/media/IMAGE/31291/AVATAR_51341a7d67544cc369d1d6be995b497403a313fe.png",
+            "userId": "471406",
+            "email": "tlauwers@lauwers-law.be",
+            "headlineFr": "Avocat – Associé @ Lauwers Tax Lawyers",
+            "headlineEn": "",
+            "headlineNl": "Advocaat-Vennoot @ Lauwers Fiscale Advocaten",
+            "blogUrlPath": "/author/thierry-lauwers/471406",
+            "priority": "0",
+            "eventId": "828",
+            "slots": [
+              {
+                "id": "3432",
+                "type": "1"
+              }
+            ]
+          },
+          {
+            "id": "359",
+            "firstName": "Thierry",
+            "lastName": "Lauwers2",
+            "pictureUrl": "https://s3.tamtam.pro/production/storage/media/IMAGE/31291/AVATAR_51341a7d67544cc369d1d6be995b497403a313fe.png",
+            "userId": "471406",
+            "email": "tlauwers@lauwers-law.be",
+            "headlineFr": "Avocat – Associé @ Lauwers Tax Lawyers",
+            "headlineEn": "",
+            "headlineNl": "Advocaat-Vennoot @ Lauwers Fiscale Advocaten",
+            "blogUrlPath": "/author/thierry-lauwers/471406",
+            "priority": "0",
+            "eventId": "828",
+            "slots": [
+              {
+                "id": "3432",
+                "type": "1"
+              }
+            ]
+          },
+          {
+            "id": "359",
+            "firstName": "Thierry",
+            "lastName": "Lauwers3",
+            "pictureUrl": "https://s3.tamtam.pro/production/storage/media/IMAGE/31291/AVATAR_51341a7d67544cc369d1d6be995b497403a313fe.png",
+            "userId": "471406",
+            "email": "tlauwers@lauwers-law.be",
+            "headlineFr": "Avocat – Associé @ Lauwers Tax Lawyers",
+            "headlineEn": "",
+            "headlineNl": "Advocaat-Vennoot @ Lauwers Fiscale Advocaten",
+            "blogUrlPath": "/author/thierry-lauwers/471406",
+            "priority": "0",
+            "eventId": "828",
+            "slots": [
+              {
+                "id": "3432",
+                "type": "1"
+              }
+            ]
+          },
+          {
+            "id": "359",
+            "firstName": "Thierry",
+            "lastName": "Lauwers4",
             "pictureUrl": "https://s3.tamtam.pro/production/storage/media/IMAGE/31291/AVATAR_51341a7d67544cc369d1d6be995b497403a313fe.png",
             "userId": "471406",
             "email": "tlauwers@lauwers-law.be",

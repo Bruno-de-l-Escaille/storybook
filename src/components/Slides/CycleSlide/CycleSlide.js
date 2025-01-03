@@ -17,6 +17,7 @@ import ActionButton from "../Common/ActionButton/ActionButton";
 import IconCalendar from "../../Icons/IconCalendar2";
 import { Fetching } from "../Common/Slide/Fetching";
 import classNames from "classnames";
+import { useResponsive } from "../../../common/hooks/useResponsive";
 
 export const CycleSlide = ({
   cycle,
@@ -30,6 +31,8 @@ export const CycleSlide = ({
   isSmall = false,
   focusTitle,
 }) => {
+  const { isMobile } = useResponsive();
+
   if (isFetching) {
     return <Fetching />;
   }
@@ -78,7 +81,7 @@ export const CycleSlide = ({
       <ul>
         <li>
           <div>
-            <IconCalendar className="m-r-xs" />
+            <IconCalendar className={classNames(styles.icon, "m-r-xs")} />
           </div>
           <span>
             <strong className="tc">
@@ -141,7 +144,10 @@ export const CycleSlide = ({
               {...(isUserRegistered
                 ? { name: I18N[language].moreDetails, theme: "default" }
                 : {
-                    name: !isSmall ? buyCycleLabel : I18N[language].buy,
+                    name:
+                      !isSmall && !isMobile
+                        ? buyCycleLabel
+                        : I18N[language].buy,
                     theme: "greenTeal",
                   })}
             />
