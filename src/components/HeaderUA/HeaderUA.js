@@ -113,7 +113,7 @@ export class HeaderUA extends Component {
 
       console.log("=====Selected app", app.selectedApp, activeApp);
       window.showFAQ(selectedApp);
-      return cleanupListener;
+      // return cleanupListener;
     }
   };
 
