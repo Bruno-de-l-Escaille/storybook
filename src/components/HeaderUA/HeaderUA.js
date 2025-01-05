@@ -92,6 +92,7 @@ export class HeaderUA extends Component {
   handleFaqClick = () => {
     const { app } = this.props;
     const { activeApp } = this.state;
+    console.log("======window.showFAQ", window.showFAQ);
     if (window.showFAQ) {
       const listener = (e) => {
         console.log("Faq active app", e.detail);
@@ -109,6 +110,8 @@ export class HeaderUA extends Component {
           : activeApp
           ? activeApp
           : app.appName.toUpperCase();
+
+      console.log("=====Selected app", selectedApp, activeApp);
       window.showFAQ(selectedApp);
       return cleanupListener;
     }
