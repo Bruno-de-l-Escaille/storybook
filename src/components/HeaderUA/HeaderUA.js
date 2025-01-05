@@ -52,6 +52,16 @@ export class HeaderUA extends Component {
         )[0],
       });
     }
+    const listener = (e) => {
+      console.log("Faq active app", e.detail);
+      this.setState({ activeApp: e.detail });
+      console.log("==========activeApp", e.detail);
+    };
+    console.log("==========activeApp7777", this.state.activeApp);
+    window.addEventListener("activeApp", listener);
+    /* const cleanupListener = () => {
+       window.removeEventListener("activeApp", listener);
+     };*/
   }
 
   componentDidUpdate(prevProps) {
@@ -93,16 +103,6 @@ export class HeaderUA extends Component {
     const { app } = this.props;
     const { activeApp } = this.state;
     if (window.showFAQ) {
-      const listener = (e) => {
-        console.log("Faq active app", e.detail);
-        this.setState({ activeApp: e.detail });
-        console.log("==========activeApp", e.detail);
-      };
-
-      window.addEventListener("activeApp", listener);
-      const cleanupListener = () => {
-        window.removeEventListener("activeApp", listener);
-      };
       const selectedApp =
         (activeApp && activeApp === "NEWSLETTER") ||
         (app.selectedApp && app.selectedApp === "NEWSLETTER")
@@ -111,9 +111,9 @@ export class HeaderUA extends Component {
           ? activeApp
           : app.appName.toUpperCase();
 
-      console.log("=====Selected app", selectedApp, activeApp);
+      console.log("=====Selected app", app.selectedApp, activeApp);
       window.showFAQ(selectedApp);
-      return cleanupListener;
+      // return cleanupListener;
     }
   };
 
