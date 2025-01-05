@@ -92,11 +92,11 @@ export class HeaderUA extends Component {
   handleFaqClick = () => {
     const { app } = this.props;
     const { activeApp } = this.state;
-    console.log("======window.showFAQ", window.showFAQ);
     if (window.showFAQ) {
       const listener = (e) => {
         console.log("Faq active app", e.detail);
         this.setState({ activeApp: e.detail });
+        console.log("==========activeApp", e.detail);
       };
 
       window.addEventListener("activeApp", listener);
