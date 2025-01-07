@@ -64,7 +64,7 @@ export function EventLayout({
   token,
   userId,
 }) {
-  const [hovered, setHovered] = useState(false);
+  // const [hovered, setHovered] = useState(false);
   const [isActionProcessing, setIsActionProcessing] = useState(false);
 
   const apiUrl = getApiUrl(env);
@@ -373,10 +373,6 @@ export function EventLayout({
 
     return (
       <div className={styles.price}>
-        <div className={styles.mainPrice}>{`${mainPrice} €`}</div>
-        {memberPrice !== nonMemberPrice && isUserMember && (
-          <div className={styles.originalPrice}>{nonMemberPrice} €</div>
-        )}
         {memberPrice !== nonMemberPrice && (
           <div className={cn(styles.memberDiscount)}>
             <div className={styles.discountPercent}>{`${memberPrice} €`}</div>
@@ -385,6 +381,10 @@ export function EventLayout({
             </div>
           </div>
         )}
+        <div className={styles.mainPrice}>{`${mainPrice} €`}</div>
+        {memberPrice !== nonMemberPrice && isUserMember && (
+          <div className={styles.originalPrice}>{nonMemberPrice} €</div>
+        )}
       </div>
     );
   };
@@ -392,8 +392,8 @@ export function EventLayout({
   return (
     <div
       className={styles.wrapper}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      // onMouseEnter={() => setHovered(true)}
+      // onMouseLeave={() => setHovered(false)}
       data-id={event.id}
     >
       <div
@@ -429,10 +429,10 @@ export function EventLayout({
             ) : modeProps ? (
               <div
                 className={styles.mode}
-                style={hovered ? { maxWidth: 120 } : {}}
+                // style={hovered ? { maxWidth: 120 } : {}}
               >
                 <span className={styles.modeIcon}>{modeProps.icon}</span>
-                <span className={styles.modeLabel}>{modeProps.label}</span>
+                {/* <span className={styles.modeLabel}>{modeProps.label}</span> */}
               </div>
             ) : null}
           </div>
@@ -463,7 +463,7 @@ export function EventLayout({
                 <CalendarIcon />
                 <span>
                   <strong>
-                    {capFirstLetterInSentence(modeLabel[mode])} :{" "}
+                    {capFirstLetterInSentence(modeLabel[mode])} :&nbsp;
                   </strong>
                   {dateHelper}
                 </span>

@@ -59,10 +59,19 @@ const Header = ({
   id,
   type,
   pathname,
-  isSmall,
   titleStyle,
 }) => {
   const { isMobile } = useResponsive();
+
+  const onLinkClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (onClick) {
+      onClick(id, type, pathname);
+    } else {
+      window.open(link, "_blank", "noreferrer");
+    }
+  };
 
   return (
     <div className={styles.header}>
@@ -83,10 +92,8 @@ const Header = ({
         {((isMobile && type === "CYCLE") || type !== "CYCLE") && children}
         <a
           className={styles.title}
-          href={onClick ? undefined : link}
-          target={onClick ? undefined : "_blank"}
-          rel={onClick ? undefined : "noopener noreferrer"}
-          onClick={onClick ? () => onClick(id, type, pathname) : undefined}
+          href={link}
+          onClick={onLinkClick}
           style={titleStyle}
         >
           <Shave maxHeight={80}>{title}</Shave>

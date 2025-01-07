@@ -156,18 +156,18 @@ export const formatDateFromTo = (
   }
 
   if (isSameYear && isSameMonth) {
-    return `${I18N[language]["dateFrom"]} ${startDate.format("DD")} ${
+    return `${I18N[language]["dateFrom2"]} ${startDate.format("DD")} ${
       I18N[language]["dateTo"]
     } ${endDate.format(dateFormat)}`;
   }
 
   if (isSameYear) {
-    return `${I18N[language]["dateFrom"]} ${startDate.format("DD MMM")} ${
+    return `${I18N[language]["dateFrom2"]} ${startDate.format("DD MMM")} ${
       I18N[language]["dateTo"]
     } ${endDate.format(dateFormat)}`;
   }
 
-  return `${I18N[language]["dateFrom"]} ${startDate.format(dateFormat)} ${
+  return `${I18N[language]["dateFrom2"]} ${startDate.format(dateFormat)} ${
     I18N[language]["dateTo"]
   } ${endDate.format(dateFormat)}`;
 };
@@ -269,10 +269,10 @@ export const cycleType = (eventCycles) => {
   }
 
   const allVirtual = eventCycles.every(
-    (event) => event?.eventsAbstract.isVirtual == 1
+    (event) => event?.eventsAbstract.isVirtual === 1
   );
   const allPresential = eventCycles.every(
-    (event) => event?.eventsAbstract.isVirtual == 0
+    (event) => event?.eventsAbstract.isVirtual === 0
   );
 
   if (allVirtual) {
@@ -452,3 +452,9 @@ export const getEventMode = (event) => {
 
   return "PRESENTIAL";
 };
+
+export const isCyclePast = (cycle) =>
+  moment(belgiumCurrentdate).isAfter(moment(cycle.endDateTime));
+
+export const isSoldOutCycle = (cycle) =>
+  Number(cycle.maxNumber) <= Number(cycle?.registeredCount);

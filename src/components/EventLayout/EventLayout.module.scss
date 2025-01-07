@@ -8,6 +8,11 @@
   overflow: hidden;
   border: 1px solid #f1f2f4;
   background: #fff;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0px 4px 10px 0px rgba(41, 57, 77, 0.1);
+  }
 
   .banner {
     display: flex;
@@ -140,6 +145,12 @@
 
       &:hover {
         color: #3d5270;
+        text-decoration-line: underline;
+        text-decoration-style: solid;
+        text-decoration-skip-ink: none;
+        text-decoration-thickness: auto;
+        text-underline-offset: auto;
+        text-underline-position: from-font;
       }
     }
 
