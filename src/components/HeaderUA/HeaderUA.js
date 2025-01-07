@@ -52,6 +52,11 @@ export class HeaderUA extends Component {
         )[0],
       });
     }
+    const listener = (e) => {
+      console.log("Faq active app", e.detail);
+      this.setState({ activeApp: e.detail });
+    };
+    window.addEventListener("activeApp", listener);
   }
 
   componentDidUpdate(prevProps) {
@@ -93,15 +98,6 @@ export class HeaderUA extends Component {
     const { app } = this.props;
     const { activeApp } = this.state;
     if (window.showFAQ) {
-      const listener = (e) => {
-        console.log("Faq active app", e.detail);
-        this.setState({ activeApp: e.detail });
-      };
-
-      window.addEventListener("activeApp", listener);
-      const cleanupListener = () => {
-        window.removeEventListener("activeApp", listener);
-      };
       const selectedApp =
         (activeApp && activeApp === "NEWSLETTER") ||
         (app.selectedApp && app.selectedApp === "NEWSLETTER")
@@ -109,8 +105,8 @@ export class HeaderUA extends Component {
           : activeApp
           ? activeApp
           : app.appName.toUpperCase();
+
       window.showFAQ(selectedApp);
-      return cleanupListener;
     }
   };
 
