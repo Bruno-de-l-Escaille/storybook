@@ -6,6 +6,12 @@
   gap: 10px;
   align-items: center;
 
+  .priceWrapper {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
   .price {
     color: #fff;
     font-size: 24px;
@@ -75,6 +81,12 @@
   align-items: center;
   width: 100%;
   justify-content: space-between;
+
+  .priceWrapper {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
 
   .price {
     color: #fff;

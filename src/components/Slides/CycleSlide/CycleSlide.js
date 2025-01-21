@@ -100,6 +100,8 @@ export const CycleSlide = ({
         bannerSrc={bannerSrc || secondaryBanner}
         className={styles.cycleSlide}
         isSmall={isSmall}
+        flag={isPremiumIncludedCycle ? "premium" : undefined}
+        language={language}
       >
         <Slide.Header
           title={name}

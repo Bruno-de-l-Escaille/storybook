@@ -13,6 +13,7 @@ export const PremiumSlide = ({
   cycle,
   language,
   isUserMember,
+  isUserPremium,
   env,
   isFetching,
   queryParams = {},
@@ -22,7 +23,7 @@ export const PremiumSlide = ({
     return <Fetching />;
   }
   const { "user-registered": userRegistered } = cycle;
-  const isUserPremium = userRegistered;
+  const isPremiumUser = userRegistered || isUserPremium;
 
   const offfcourseUrl = getOfffcourseUrl(env);
   const offfcourseParams = new URLSearchParams(queryParams).toString();
@@ -92,7 +93,7 @@ export const PremiumSlide = ({
         {renderPlans()}
       </Slide.Body>
       <Slide.Footer className={styles.footer}>
-        {!isUserPremium ? (
+        {!isPremiumUser ? (
           <ActionButton
             name={I18N[language].subscribeToPremium}
             theme="redOrange"
@@ -106,7 +107,7 @@ export const PremiumSlide = ({
               fill="#02AF8E"
               className="m-r-xs"
             />
-            {I18N[language].subscribed}
+            {I18N[language].subscribedPremium}
           </div>
         )}
         <div className={styles.premiumAllCourses}>

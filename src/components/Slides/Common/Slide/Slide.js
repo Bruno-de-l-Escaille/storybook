@@ -13,6 +13,7 @@ export function Slide({
   flag,
   style,
   className,
+  language,
   isSmall = false,
 }) {
   const bgStyle = {
@@ -38,7 +39,7 @@ export function Slide({
       )}
       style={bgStyle}
     >
-      <CardFlag flag={flag} />
+      <CardFlag language={language} flag={flag} />
       <div className={styles.top}>
         {header}
         {body}

@@ -20,17 +20,19 @@ export default function Price({
         className
       )}
     >
-      {Boolean(originalPrice) && originalPrice !== price && (
-        <div className={styles.original_price}>{`${originalPrice} €`}</div>
-      )}
-      <div className={styles.price}>
-        {price ? (
-          <>
-            {price} <span>€</span>
-          </>
-        ) : (
-          <>{I18N[language].free}</>
+      <div className={styles.priceWrapper}>
+        {Boolean(originalPrice) && originalPrice !== price && (
+          <div className={styles.original_price}>{`${originalPrice} €`}</div>
         )}
+        <div className={styles.price}>
+          {price ? (
+            <>
+              {price} <span>€</span>
+            </>
+          ) : (
+            <>{I18N[language].free}</>
+          )}
+        </div>
       </div>
       {Boolean(price) && memberPrice !== nonMemberPrice && (
         <div className={styles.member_discount}>
