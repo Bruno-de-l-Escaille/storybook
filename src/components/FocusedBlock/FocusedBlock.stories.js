@@ -27,5 +27,6 @@ export const Default = () => (
     isUserMember={boolean("isUserMember", false)}
     isUserPremium={boolean("isUserPremium", false)}
     queryParams={object("queryParams", {})}
+    isOFFFcourse={boolean("isOFFFcourse", false)}
   />
 );

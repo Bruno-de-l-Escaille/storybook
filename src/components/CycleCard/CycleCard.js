@@ -51,6 +51,7 @@ export function CycleCard({
   env,
   queryParams = {},
   onClick,
+  isOFFFcourse,
 }) {
   if (isFetching) {
     return <Fetching />;
@@ -127,8 +128,10 @@ export function CycleCard({
     e.stopPropagation();
     if (onClick) {
       onClick(cycle.id, "CYCLE", `/cycle/${cycle.id}/reception`);
-    } else {
+    } else if (!isOFFFcourse) {
       window.open(cycleLink, "_blank", "noreferrer");
+    } else {
+      window.location.href = cycleLink;
     }
   };
 

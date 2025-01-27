@@ -61,6 +61,7 @@ const Header = ({
   type,
   pathname,
   titleStyle,
+  isOFFFcourse,
 }) => {
   const { isMobile } = useResponsive();
 
@@ -69,8 +70,10 @@ const Header = ({
     e.stopPropagation();
     if (onClick) {
       onClick(id, type, pathname);
-    } else {
+    } else if (!isOFFFcourse) {
       window.open(link, "_blank", "noreferrer");
+    } else {
+      window.location.href = link;
     }
   };
 

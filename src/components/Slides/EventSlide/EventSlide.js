@@ -32,6 +32,7 @@ export const EventSlide = ({
   onClick,
   isSmall = false,
   focusTitle,
+  isOFFFcourse,
 }) => {
   if (isFetching) {
     return <Fetching />;
@@ -149,6 +150,7 @@ export const EventSlide = ({
           pathname={`/event/${event.id}/reception`}
           isSmall={isSmall}
           onClick={onClick}
+          isOFFFcourse={isOFFFcourse}
         />
         <Slide.Body className={styles.slideBody}>
           <SpeakersSlide speakers={speakers} />
@@ -174,6 +176,7 @@ export const EventSlide = ({
               type="FORMATION"
               pathname={`/event/${event.id}/reception`}
               isSmall={isSmall}
+              isOFFFcourse={isOFFFcourse}
               {...(isSoldOut || isUserRegistered
                 ? {
                     name: !isSmall
@@ -193,6 +196,7 @@ export const EventSlide = ({
                 type="FORMATION"
                 pathname={`/event/${event.id}/session`}
                 isSmall={isSmall}
+                isOFFFcourse={isOFFFcourse}
               />
             )}
           </div>
@@ -251,6 +255,7 @@ export const EventSlide = ({
                 type="FORMATION"
                 pathname={`/event/${event.id}/reception`}
                 isSmall={isSmall}
+                isOFFFcourse={isOFFFcourse}
                 {...(isSoldOut || isUserRegistered
                   ? {
                       name: !isSmall
@@ -270,6 +275,7 @@ export const EventSlide = ({
                   type="FORMATION"
                   pathname={`/event/${event.id}/session`}
                   isSmall={isSmall}
+                  isOFFFcourse={isOFFFcourse}
                 />
               )}
             </div>

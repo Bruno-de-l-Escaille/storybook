@@ -14,8 +14,21 @@ export default function ActionButton({
   type,
   pathname,
   isSmall = false,
+  isOFFFcourse,
   ...props
 }) {
+  const onLinkClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (onClick) {
+      onClick(id, type, pathname);
+    } else if (!isOFFFcourse) {
+      window.open(link, "_blank", "noreferrer");
+    } else {
+      window.location.href = link;
+    }
+  };
+
   return (
     <div
       className={cn(
@@ -24,11 +37,9 @@ export default function ActionButton({
       )}
     >
       <a
-        href={onClick ? undefined : link}
+        href={link}
+        onClick={onLinkClick}
         className={theme && styles[theme]}
-        target={onClick ? undefined : "_blank"}
-        rel={onClick ? undefined : "noopener noreferrer"}
-        onClick={onClick ? () => onClick(id, type, pathname) : undefined}
         {...props}
       >
         {name}

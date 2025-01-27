@@ -63,6 +63,7 @@ export function EventLayout({
   onClick,
   token,
   userId,
+  isOFFFcourse,
 }) {
   // const [hovered, setHovered] = useState(false);
   const [isActionProcessing, setIsActionProcessing] = useState(false);
@@ -185,8 +186,10 @@ export function EventLayout({
     e.stopPropagation();
     if (onClick) {
       onClick(event.id, "FORMATION", `/event/${event.id}/reception`);
-    } else {
+    } else if (!isOFFFcourse) {
       window.open(eventLink, "_blank", "noreferrer");
+    } else {
+      window.location.href = eventLink;
     }
   };
 

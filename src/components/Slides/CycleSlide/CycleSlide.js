@@ -30,6 +30,7 @@ export const CycleSlide = ({
   onClick,
   isSmall = false,
   focusTitle,
+  isOFFFcourse,
 }) => {
   const { isMobile } = useResponsive();
 
@@ -114,6 +115,7 @@ export const CycleSlide = ({
           type="CYCLE"
           pathname={`/cycle/${cycle.id}/reception`}
           onClick={onClick}
+          isOFFFcourse={isOFFFcourse}
         >
           <div className={styles.counts}>
             <span className={styles.info}>
@@ -143,6 +145,7 @@ export const CycleSlide = ({
               type="CYCLE"
               pathname={`/cycle/${cycle.id}/reception`}
               isSmall={isSmall}
+              isOFFFcourse={isOFFFcourse}
               {...(isUserRegistered
                 ? { name: I18N[language].moreDetails, theme: "default" }
                 : {
@@ -161,6 +164,7 @@ export const CycleSlide = ({
               type="CYCLE"
               pathname={`/cycle/${cycle.id}/events`}
               isSmall={isSmall}
+              isOFFFcourse={isOFFFcourse}
             />
           </div>
         </Slide.Footer>
@@ -219,6 +223,7 @@ export const CycleSlide = ({
                 type="CYCLE"
                 pathname={`/cycle/${cycle.id}/reception`}
                 isSmall={isSmall}
+                isOFFFcourse={isOFFFcourse}
                 {...(isUserRegistered
                   ? { name: I18N[language].moreDetails, theme: "default" }
                   : {
@@ -234,6 +239,7 @@ export const CycleSlide = ({
                 type="CYCLE"
                 pathname={`/cycle/${cycle.id}/events`}
                 isSmall={isSmall}
+                isOFFFcourse={isOFFFcourse}
               />
             </div>
           </Slide.Footer>

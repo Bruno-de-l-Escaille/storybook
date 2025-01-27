@@ -13,6 +13,7 @@ export const FocusedBlock = ({
   isUserPremium,
   isFetching,
   queryParams = {},
+  isOFFFcourse,
 }) => {
   const focusedEvents = events.slice(0, 4);
   const remainingBlocks = 4 - focusedEvents.length;
@@ -65,6 +66,7 @@ export const FocusedBlock = ({
             queryParams={queryParams}
             focusTitle={focusTitle}
             isSmall={(elementsCount === 3 && index > 0) || elementsCount === 4}
+            isOFFFcourse={isOFFFcourse}
           />
         ) : (
           <CycleSlide
@@ -77,6 +79,7 @@ export const FocusedBlock = ({
             queryParams={queryParams}
             focusTitle={focusTitle}
             isSmall={(elementsCount === 3 && index > 0) || elementsCount === 4}
+            isOFFFcourse={isOFFFcourse}
           />
         )
       );

@@ -17,6 +17,7 @@ export const PremiumSlide = ({
   env,
   isFetching,
   queryParams = {},
+  isOFFFcourse,
 }) => {
   const { isMobile, isDesktop } = useResponsive();
   if (isFetching) {
@@ -87,6 +88,7 @@ export const PremiumSlide = ({
           height: isDesktop ? "80px" : "auto",
           maxHeight: isDesktop ? "80px" : "none",
         }}
+        isOFFFcourse={isOFFFcourse}
       />
       <Slide.Body className={styles.body}>
         <div className={styles.note}>{I18N[language].premiumLabel}</div>
@@ -98,6 +100,7 @@ export const PremiumSlide = ({
             name={I18N[language].subscribeToPremium}
             theme="redOrange"
             link={cycleReceptionUrl}
+            isOFFFcourse={isOFFFcourse}
           />
         ) : (
           <div className={cn(styles.subscribed)}>

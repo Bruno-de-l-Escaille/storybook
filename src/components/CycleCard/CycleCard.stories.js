@@ -29,6 +29,7 @@ export const Type1 = () => (
     isUserMember={boolean("isUserMember", false)}
     isUserPremium={boolean("isUserPremium", false)}
     queryParams={object("queryParams", {})}
+    isOFFFcourse={boolean("isOFFFcourse", false)}
   />
 );
 
@@ -42,6 +43,7 @@ export const Type2 = () => {
       isUserMember={boolean("isUserMember", false)}
       isUserPremium={boolean("isUserPremium", false)}
       queryParams={object("queryParams", {})}
+      isOFFFcourse={boolean("isOFFFcourse", false)}
     />
   );
 };
@@ -56,5 +58,6 @@ export const Type3 = () => (
     isUserPremium={boolean("isUserPremium", false)}
     queryParams={object("queryParams", {})}
     onClick={onClick}
+    isOFFFcourse={boolean("isOFFFcourse", false)}
   />
 );

@@ -33,5 +33,6 @@ export const Default = () => (
     token="30165da214f80f1c5de25da2c059fbf29315f3b8"
     userId={null}
     dict={null}
+    isOFFFcourse={boolean("isOFFFcourse", false)}
   />
 );
