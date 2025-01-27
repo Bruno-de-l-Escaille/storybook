@@ -238,20 +238,16 @@ export const getCyclePrice = (cycle) => {
     nonMemberPrice: cycleNonMemberPrice,
   } = cycle;
 
-  const member =
-    cycle && cycle.allEventsPrices ? cycle.allEventsPrices.member : undefined;
-  const nonMember =
-    cycle && cycle.allEventsPrices
-      ? cycle.allEventsPrices.nonMember
-      : undefined;
+  const member = cycle?.allEventsPrices?.member;
+  const nonMember = cycle?.allEventsPrices?.nonMember;
 
   return {
     memberPrice: {
-      price: cycleMemberPrice,
+      price: cycleMemberPrice ?? 0,
       originalPrice: member && cycleMemberPrice < member ? member : null,
     },
     nonMemberPrice: {
-      price: cycleNonMemberPrice,
+      price: cycleNonMemberPrice ?? 0,
       originalPrice:
         nonMember && cycleNonMemberPrice < nonMember ? nonMember : null,
     },
