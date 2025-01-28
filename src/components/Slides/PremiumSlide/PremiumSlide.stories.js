@@ -21,7 +21,7 @@ export const Default = () => (
     cycle={cycle}
     language={select("language", ["fr", "nl", "en"], "fr")}
     isFetching={boolean("isFetching", false)}
-    env={select("env", ["production", "staging", "local"], "v2")}
+    env={select("env", ["production", "staging", "local", "preprod"], "v2")}
     isUserMember={boolean("isUserMember", false)}
     isUserPremium={boolean("isUserPremium", false)}
     queryParams={object("queryParams", {})}
