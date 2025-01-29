@@ -46,85 +46,24 @@
   }
 }
 
-.modalOverlay {
+.modal {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  background-color: #fff;
+  color: #103d47;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #00000080;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modalContent {
-  background: white;
-  border-radius: 8px;
-  height: 90vh;
-  width: 90%;
-  max-width: 1000px;
-  overflow-y: auto;
-  box-shadow: 0 2px 10px #0000001a;
-}
-
-.modalHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-
-  h2 {
-    margin: 0;
-  }
-}
-
-.closeButton {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 0;
-  color: #666;
-
-  &:hover {
-    color: #333;
-  }
-}
-
-.modalBody {
-  margin-bottom: 20px;
-}
-
-.modalFooter {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.cancelButton,
-.saveButton {
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  border: none;
-}
-
-.cancelButton {
-  background-color: #f5f5f5;
-  color: #333;
-
-  &:hover {
-    background-color: #e5e5e5;
-  }
-}
-
-.saveButton {
-  background-color: #1890ff;
-  color: white;
-
-  &:hover {
-    background-color: #40a9ff;
-  }
+  z-index: 9999;
+  background-color: rgba(13, 112, 111, 0.5);
 }

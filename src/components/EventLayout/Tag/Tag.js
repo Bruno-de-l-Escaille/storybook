@@ -3,6 +3,7 @@ import styles from "./Tag.module.scss";
 import { getByLanguage } from "../../../utils";
 import IconCross from "../../CycleCard/assets/IconCross";
 import TagEdit from "../TagEdit/TagEdit";
+import Modal from "react-modal";
 
 export default function Tag({
   tag,
@@ -30,28 +31,6 @@ export default function Tag({
     setIsModalOpen(false);
   };
 
-  if (isModalOpen) {
-    return (
-      <div className={styles.modalOverlay} onClick={handleModalClose}>
-        <div
-          className={styles.modalContent}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <TagEdit
-            tag={tag}
-            tags={tags}
-            action={action}
-            language={language}
-            handleModalClose={handleModalClose}
-            token={token}
-            apiUrl={apiUrl}
-            env={env}
-          />
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className={styles.tag}>
       <div className={styles.dismissContainer} onClick={handleClick}>
@@ -63,6 +42,24 @@ export default function Tag({
       >
         <IconCross className={styles.tagDismiss} />
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={handleModalClose}
+        shouldCloseOnOverlayClick={false}
+        className={styles.modal}
+        overlayClassName={styles.overlay}
+      >
+        <TagEdit
+          tag={tag}
+          tags={tags}
+          action={action}
+          language={language}
+          handleModalClose={handleModalClose}
+          token={token}
+          apiUrl={apiUrl}
+          env={env}
+        />
+      </Modal>
     </div>
   );
 }
