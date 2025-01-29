@@ -56,3 +56,71 @@ export const registerPremiumToEvent = ({ apiUrl, token, eventId, userId }) => {
 
   return axios.post(requestUrl, formData);
 };
+
+export const getEventWithTag = ({ apiUrl, token, eventId }) => {
+  const fields = ["id", "nameFr", "nameEn", "nameNl", "tag"];
+  const requestUrl = `${apiUrl}/event/event`;
+
+  const filter = [{ property: "id", value: eventId, operator: "eq" }];
+
+  return axios.get(requestUrl, {
+    params: {
+      access_token: token,
+      filter: JSON.stringify(filter),
+      fields: fields.join(","),
+    },
+  });
+};
+
+export const fetchTags = ({ apiUrl, token, inputTag, language = "fr" }) => {
+  const fields = [
+    "id",
+    "nameFr",
+    "nameEn",
+    "nameNl",
+    "sanitizedNameFr",
+    "parent",
+    "isSynonym",
+    "isSuperTag",
+    "superTag",
+  ];
+  const requestUrl = `${apiUrl}/blog/tag`;
+
+  let filter;
+
+  switch (language) {
+    case "fr":
+      filter = [{ property: "nameFr", value: inputTag, operator: "like" }];
+      break;
+    case "nl":
+      filter = [{ property: "nameNl", value: inputTag, operator: "like" }];
+      break;
+    case "en":
+      filter = [{ property: "nameEn", value: inputTag, operator: "like" }];
+      break;
+    default:
+      break;
+  }
+
+  return axios.get(requestUrl, {
+    params: {
+      access_token: token,
+      filter: JSON.stringify(filter),
+      fields: fields.join(","),
+    },
+  });
+};
+
+export const updateEventTags = ({
+  apiUrl,
+  token,
+  eventId,
+  updatedEventTags,
+}) => {
+  const requestUrl = `${apiUrl}/event/event`;
+  var formData = new FormData();
+  formData.append("access_token", token);
+  formData.append("id", eventId);
+  formData.append("tag", JSON.stringify(updatedEventTags));
+  return axios.post(requestUrl, formData);
+};

@@ -153,17 +153,23 @@ export const getThemes = ({
   });
 };
 
-export const saveTag = (token, data, apiUrl) => {
+export const saveTag = (token, data, apiUrl, isSuperTag = false) => {
   const requestUrl = `${apiUrl}/blog/tag`;
 
   var formData = new FormData();
-  formData.append("access_token", token);
-  formData.append("nameFr", data.nameFr);
-  formData.append("nameNl", data.nameNl);
-  formData.append("nameEn", data.nameEn);
-
-  if (data.id) {
+  if (isSuperTag) {
+    formData.append("access_token", token);
     formData.append("id", data.id);
+    formData.append("superTag", data.superTag);
+  } else {
+    formData.append("access_token", token);
+    formData.append("nameFr", data.nameFr);
+    formData.append("nameNl", data.nameNl);
+    formData.append("nameEn", data.nameEn);
+
+    if (data.id) {
+      formData.append("id", data.id);
+    }
   }
 
   return axios.post(requestUrl, formData);

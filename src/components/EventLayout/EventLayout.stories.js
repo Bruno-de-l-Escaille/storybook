@@ -30,9 +30,10 @@ export const Default = () => (
     isUserMember={boolean("isUserMember", false)}
     isUserPremium={boolean("isUserPremium", false)}
     queryParams={object("queryParams", {})}
-    token="30165da214f80f1c5de25da2c059fbf29315f3b8"
+    token="231f67ec6bc68df3bd1cf8d2e53a3ac394f1774f"
     userId={null}
     dict={null}
+    isAdmin={boolean("isAdmin", false)}
     isOFFFcourse={boolean("isOFFFcourse", false)}
   />
 );

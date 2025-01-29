@@ -44,6 +44,8 @@ import { CardFlag } from "../../common/components/CardFlag";
 import { TimeCounter } from "../../common/components/TimeCounter";
 import { Fetching } from "./Fetching";
 import { I18N } from "../../i18n";
+import EventLayoutHover from "./EventLayoutHover/EventLayoutHover";
+import TagsForm from "./TagForm/TagsForm";
 
 const REPLAY_UPTIME = 3;
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =
@@ -64,8 +66,10 @@ export function EventLayout({
   token,
   userId,
   isOFFFcourse,
+  isAdmin,
 }) {
-  // const [hovered, setHovered] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [showAddTags, setShowAddTags] = useState(false);
   const [isActionProcessing, setIsActionProcessing] = useState(false);
 
   const apiUrl = getApiUrl(env);
@@ -395,8 +399,8 @@ export function EventLayout({
   return (
     <div
       className={styles.wrapper}
-      // onMouseEnter={() => setHovered(true)}
-      // onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       data-id={event.id}
     >
       <div
@@ -521,6 +525,25 @@ export function EventLayout({
             : undefined
         }
       />
+      {isAdmin && isOFFFcourse && (
+        <>
+          {(showAddTags || hovered) && (
+            <EventLayoutHover
+              setShowAddTags={setShowAddTags}
+              showAddTags={showAddTags}
+            />
+          )}
+          {showAddTags && (
+            <TagsForm
+              setShowAddTags={setShowAddTags}
+              eventId={event.id}
+              language={language}
+              token={token}
+              env={env}
+            />
+          )}
+        </>
+      )}
     </div>
   );
 }
