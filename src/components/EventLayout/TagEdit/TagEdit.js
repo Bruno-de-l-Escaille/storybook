@@ -110,16 +110,12 @@ export default function TagEdit({
           action(updatedTags);
         }
         setSavingTag(false);
-        Toast.success("Tag ajouté avec succès", {
-          autoClose: 10000,
-        });
+        Toast.success("Tag ajouté avec succès");
         handleModalClose();
       })
       .catch((e) => {
         setSavingTag(false);
-        Toast.error("Errors lors de l'ajout du tag", {
-          autoClose: 10000,
-        });
+        Toast.error("Errors lors de l'ajout du tag");
       });
   };
 
@@ -199,15 +195,11 @@ export default function TagEdit({
       tagIds.push(editTag.id);
     }
     if (!superTag) {
-      Toast.error("Veuillez sélectionner un super tag", {
-        autoClose: 10000,
-      });
+      Toast.error("Veuillez sélectionner un super tag");
       return null;
     }
     if (!tagIds.length) {
-      Toast.error("Veuillez sélectionner un tag", {
-        autoClose: 10000,
-      });
+      Toast.error("Veuillez sélectionner un tag");
       return null;
     }
 
@@ -253,9 +245,7 @@ export default function TagEdit({
       }
       setSavingSuperTag(false);
       setSuperTag(null);
-      Toast.success("Super Tag ajouté avec succès", {
-        autoClose: 10000,
-      });
+      Toast.success("Super Tag ajouté avec succès");
       handleModalClose();
     } catch (e) {
       setSavingSuperTag(false);
