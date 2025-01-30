@@ -48,14 +48,19 @@
 
 .modal {
   position: absolute;
-  top: 40px;
-  left: 40px;
+  top: 50%;
+  left: 50%;
   right: 40px;
-  bottom: 40px;
+  bottom: unset;
   background-color: #fff;
   color: #103d47;
   border-radius: 10px;
   overflow: hidden;
+  max-height: 100%;
+  z-index: 999;
+  transform: translateX(-50%) translateY(-50%);
+  width: 90%;
+  max-width: 1000px;
 }
 
 .overlay {

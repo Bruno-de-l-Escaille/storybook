@@ -4,6 +4,7 @@ import { getByLanguage } from "../../../utils";
 import IconCross from "../../CycleCard/assets/IconCross";
 import TagEdit from "../TagEdit/TagEdit";
 import Modal from "react-modal";
+import { FlashMessage } from "../../ToastContainer/ToastContainer";
 
 export default function Tag({
   tag,
@@ -49,6 +50,7 @@ export default function Tag({
         className={styles.modal}
         overlayClassName={styles.overlay}
       >
+        <FlashMessage />
         <TagEdit
           tag={tag}
           tags={tags}

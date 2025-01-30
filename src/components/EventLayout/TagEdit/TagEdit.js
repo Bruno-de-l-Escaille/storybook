@@ -4,9 +4,9 @@ import { ClipLoader } from "react-spinners";
 import styles from "./TagEdit.module.scss";
 import { getTags, saveTag } from "../../../api";
 import { getTagName } from "../../../utils";
-import { toast } from "react-toastify";
 import { I18N } from "../../../i18n";
 import IconCross from "../assets/IconCross";
+import { Toast } from "../../ToastContainer/ToastContainer";
 
 export default function TagEdit({
   tag,
@@ -110,14 +110,14 @@ export default function TagEdit({
           action(updatedTags);
         }
         setSavingTag(false);
-        toast.success("Tag ajouté avec succès", {
+        Toast.success("Tag ajouté avec succès", {
           autoClose: 10000,
         });
         handleModalClose();
       })
       .catch((e) => {
         setSavingTag(false);
-        toast.error("Errors lors de l'ajout du tag", {
+        Toast.error("Errors lors de l'ajout du tag", {
           autoClose: 10000,
         });
       });
@@ -199,13 +199,13 @@ export default function TagEdit({
       tagIds.push(editTag.id);
     }
     if (!superTag) {
-      toast.error("Veuillez sélectionner un super tag", {
+      Toast.error("Veuillez sélectionner un super tag", {
         autoClose: 10000,
       });
       return null;
     }
     if (!tagIds.length) {
-      toast.error("Veuillez sélectionner un tag", {
+      Toast.error("Veuillez sélectionner un tag", {
         autoClose: 10000,
       });
       return null;
@@ -253,7 +253,7 @@ export default function TagEdit({
       }
       setSavingSuperTag(false);
       setSuperTag(null);
-      toast.success("Super Tag ajouté avec succès", {
+      Toast.success("Super Tag ajouté avec succès", {
         autoClose: 10000,
       });
       handleModalClose();
@@ -353,7 +353,7 @@ export default function TagEdit({
                 <>
                   <div className={styles.formRow}>
                     <label className={styles.configLabel}>
-                      Selectionner Super Tag
+                      Sélectionner un Super Tag
                     </label>
                     <Select
                       cacheOptions
