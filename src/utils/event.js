@@ -337,7 +337,7 @@ export const getOfffcourseUrl = (env) => {
     v2: "https://offfcourse.be",
     staging: "https://staging.offfcourse.be",
     dev: "https://dev.offfcourse.be",
-    local: "http://local.offfcourse.be:3005",
+    local: "http://local.offfcourse.be:3000",
     preprod: "https://preprod.offfcourse.be",
   };
 
