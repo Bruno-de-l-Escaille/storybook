@@ -455,3 +455,51 @@ export const isCyclePast = (cycle) =>
 
 export const isSoldOutCycle = (cycle) =>
   Number(cycle.maxNumber) <= Number(cycle?.registeredCount);
+
+export const isSpecialEvent = (event) => {
+  const callToActionLanguages = getNotNullLanguages(event, "callToAction");
+
+  return !isEmpty(callToActionLanguages);
+};
+
+export const isEventLight = (event) => +event.type === 7;
+
+export const isFreeCoupon = (event, coupon = null) => {
+  if (coupon) {
+    const reduction = coupon.reductions?.find((item) => item.type === "event");
+
+    if (
+      reduction &&
+      +event.memberPrice === +reduction.reductionMembre &&
+      +event.nonMemberPrice === +reduction.reductionNonMembre
+    ) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+export const getRegisterButtonTitle = (event, language, coupon = null) => {
+  if (isSpecialEvent(event)) {
+    return getByLanguage(event, "callToAction", language);
+  }
+
+  if (isFreeEvent(event) && isEventLight(event)) {
+    return I18N[language]["yesIParticipate"];
+  }
+
+  if (isFreeEvent(event)) {
+    return I18N[language]["register"];
+  }
+
+  if (isFreeCoupon(event, coupon)) {
+    return I18N[language]["registerForFree"];
+  }
+
+  if (isEventFull(event)) {
+    return I18N[language]["registerNow"];
+  }
+
+  return I18N[language]["buyTraining"];
+};

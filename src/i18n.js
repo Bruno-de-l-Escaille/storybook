@@ -185,6 +185,8 @@ export const I18N = {
     keywords: "Key words",
     selectKeywords: "Select keywords ...",
     noOptions: "No option",
+    registerForFree: "Register for free",
+    yesIParticipate: "YES, I participate",
   },
   fr: {
     ARTCILES: "Articles",
@@ -381,6 +383,8 @@ export const I18N = {
     keywords: "Mots clés",
     selectKeywords: "Sélectionnez des mots clés ...",
     noOptions: "Aucune option",
+    registerForFree: "Inscrivez-vous gratuitement",
+    yesIParticipate: "OUI, Je participe",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -577,5 +581,7 @@ export const I18N = {
     keywords: "Kernwoorden",
     selectKeywords: "Selecteer trefwoorden ...",
     noOptions: "Geen opties",
+    registerForFree: "Registreer gratis",
+    yesIParticipate: "JA, ik doe mee",
   },
 };

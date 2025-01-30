@@ -6,6 +6,7 @@ import { getByLanguage, prepareS3ResourceUrl } from "../../../utils/common";
 import {
   formatDateFromTo,
   getOfffcourseUrl,
+  getRegisterButtonTitle,
   isEventFull,
   isEventPast,
   isEventReplayable,
@@ -75,8 +76,7 @@ export const EventSlide = ({
   const isUserRegistered =
     userRegistered || (isUserPremium && Boolean(event.isIncludedPremium));
 
-  const registerBtnTxt =
-    isFree || isFull ? I18N[language].registerNow : I18N[language].buyTraining;
+  const registerBtnTxt = getRegisterButtonTitle(event, language);
 
   // **** renders ****
 
