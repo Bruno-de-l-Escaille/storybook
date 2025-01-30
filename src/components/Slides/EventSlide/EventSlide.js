@@ -54,6 +54,7 @@ export const EventSlide = ({
   const { label, secondaryBanner } = getEventSideConfig(event, language);
   const showPrice = !isFull;
   const showBrowseButton = isFull;
+  const showOrateurs = !isFull;
 
   const name = getByLanguage(event, "name", language);
   const clientImg = clientData?.avatarUrl;
@@ -153,7 +154,7 @@ export const EventSlide = ({
           isOFFFcourse={isOFFFcourse}
         />
         <Slide.Body className={styles.slideBody}>
-          <SpeakersSlide speakers={speakers} />
+          {showOrateurs && <SpeakersSlide speakers={speakers} />}
           <ul className={styles.details}>{renderEventMode()}</ul>
         </Slide.Body>
         <Slide.Footer className={styles.slideFooter}>
@@ -227,7 +228,7 @@ export const EventSlide = ({
             onClick={onClick}
           />
           <Slide.Body className={styles.slideBody}>
-            <SpeakersSlide speakers={speakers} />
+            {showOrateurs && <SpeakersSlide speakers={speakers} />}
             <ul
               className={styles.details}
               style={{ fontSize: !isSmall ? "14px" : "12px" }}
