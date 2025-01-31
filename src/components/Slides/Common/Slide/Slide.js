@@ -6,6 +6,8 @@ import { CardFlag } from "../../../../common/components/CardFlag";
 import cn from "classnames";
 import { Shave } from "../../../../common/components/Shave";
 import { useResponsive } from "../../../../common/hooks/useResponsive";
+import LiveCounter from "./LiveCounter/LiveCounter";
+import { TimeCounter } from "../../../../common/components/TimeCounter";
 
 export function Slide({
   children,
@@ -62,6 +64,11 @@ const Header = ({
   pathname,
   titleStyle,
   isOFFFcourse,
+  showLiveBadge,
+  showTimeCounter,
+  startDateTime,
+  endDateTime,
+  language,
 }) => {
   const { isMobile } = useResponsive();
 
@@ -81,18 +88,35 @@ const Header = ({
     <div className={styles.header}>
       <div className={styles.titles}>
         <div className={styles.label}>
-          <div>
-            {label && (
-              <span className={cn(styles.text, styles[theme])}>{label}</span>
-            )}
-            {!isMobile && type === "CYCLE" && children}
-          </div>
+          {!showLiveBadge ? (
+            <div>
+              {label && (
+                <span className={cn(styles.text, styles[theme])}>{label}</span>
+              )}
+              {!isMobile && type === "CYCLE" && children}
+            </div>
+          ) : (
+            <LiveCounter
+              startDateTime={startDateTime}
+              endDateTime={endDateTime}
+              language={language}
+            />
+          )}
           {clientImg && (
             <div className={styles.clientImg}>
               <img src={clientImg} alt="organization img" />
             </div>
           )}
         </div>
+        {showTimeCounter && (
+          <div className={styles.timeCounterWrapper}>
+            <TimeCounter
+              date={startDateTime}
+              language={language}
+              showDays={true}
+            />
+          </div>
+        )}
         {((isMobile && type === "CYCLE") || type !== "CYCLE") && children}
         <a
           className={styles.title}

@@ -33,8 +33,7 @@ export const isEventLive = (event) =>
 export const isWebinarEvent = (event) => event.isVirtual === 1;
 
 export const isSoldOutEvent = (event) =>
-  Number(event.maxNumber) <= Number(event.registeredCount) &&
-  !isEventFull(event);
+  Boolean(event.isSoldOut) && !isEventFull(event);
 
 export const calculateTimeDifference = (startDateTime, endDateTime) => {
   if (!startDateTime) {

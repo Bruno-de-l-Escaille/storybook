@@ -8,6 +8,7 @@ import {
   getOfffcourseUrl,
   getRegisterButtonTitle,
   isEventFull,
+  isEventLive,
   isEventPast,
   isEventReplayable,
   isEventStageOpen,
@@ -22,6 +23,7 @@ import IconCalendar from "../../../components/Icons/IconCalendar2";
 import { Fetching } from "../Common/Slide/Fetching";
 import { SpeakersSlide } from "../Common/SpeakersSlide/SpeakersSlide";
 import classNames from "classnames";
+import moment from "moment";
 
 export const EventSlide = ({
   event,
@@ -52,6 +54,7 @@ export const EventSlide = ({
 
   const isFull = isEventFull(event);
   const isFree = isFreeEvent(event);
+  const isLive = isEventLive(event);
 
   const showProgram = isEventStageOpen(event, "showProgram");
 
@@ -59,6 +62,12 @@ export const EventSlide = ({
   const showPrice = !isFull;
   const showBrowseButton = isFull && showProgram;
   const showOrateurs = !isFull;
+  const showLiveBadge = isLive;
+
+  const showTimeCounter =
+    !isFull &&
+    moment(startDateTime).diff(moment(), "days") < 30 &&
+    moment(startDateTime).diff(moment(), "days") > 0;
 
   const name = getByLanguage(event, "name", language);
   const clientImg = clientData?.avatarUrl;
@@ -155,6 +164,11 @@ export const EventSlide = ({
           isSmall={isSmall}
           onClick={onClick}
           isOFFFcourse={isOFFFcourse}
+          showLiveBadge={showLiveBadge}
+          showTimeCounter={showTimeCounter}
+          language={language}
+          startDateTime={startDateTime}
+          endDateTime={endDateTime}
         />
         <Slide.Body className={styles.slideBody}>
           {showOrateurs && <SpeakersSlide speakers={speakers} />}

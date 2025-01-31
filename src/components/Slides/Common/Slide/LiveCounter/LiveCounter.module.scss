@@ -1,0 +1,30 @@
+.live_now {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+
+  .label {
+    padding: 2px 10px;
+    border-radius: 5px;
+    background: #fe3745;
+    color: #fff;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+    text-transform: uppercase;
+  }
+
+  .time {
+    padding: 2px 10px;
+    border-radius: 5px;
+    background: #29394db3;
+    color: var(--blanc, #fff);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+    text-transform: lowercase;
+  }
+}

@@ -187,6 +187,7 @@ export const I18N = {
     noOptions: "No option",
     registerForFree: "Register for free",
     yesIParticipate: "YES, I participate",
+    min: "min",
   },
   fr: {
     ARTCILES: "Articles",
@@ -385,6 +386,7 @@ export const I18N = {
     noOptions: "Aucune option",
     registerForFree: "Inscrivez-vous gratuitement",
     yesIParticipate: "OUI, Je participe",
+    min: "min",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -583,5 +585,6 @@ export const I18N = {
     noOptions: "Geen opties",
     registerForFree: "Registreer gratis",
     yesIParticipate: "JA, ik doe mee",
+    min: "min",
   },
 };

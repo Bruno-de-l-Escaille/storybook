@@ -259,6 +259,22 @@
 
 // Responsive styling
 
+@include breakpoint(large up) {
+  .wrapper {
+    .header {
+      .titles {
+        .label {
+          align-items: start;
+        }
+      }
+
+      .timeCounterWrapper {
+        margin-top: -30px;
+      }
+    }
+  }
+}
+
 @include breakpoint(medium down) {
   .wrapper {
     padding: 20px;
