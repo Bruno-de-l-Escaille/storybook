@@ -64,9 +64,12 @@ export function EventLayout({
   queryParams = {},
   onClick,
   token,
+  multiDateIndex,
   userId,
   isOFFFcourse,
   isAdmin,
+  isCycle,
+  handleOpenDetails,
 }) {
   const [hovered, setHovered] = useState(false);
   const [showAddTags, setShowAddTags] = useState(false);
@@ -182,9 +185,18 @@ export function EventLayout({
 
   const offfcourseUrl = getOfffcourseUrl(env);
   const offfcourseParams = new URLSearchParams(queryParams).toString();
+  const dateIndexParam = multiDateIndex ? `dateIndex=${multiDateIndex}` : "";
+  const queryString = [dateIndexParam, offfcourseParams]
+    .filter(Boolean)
+    .join("&");
   const eventLink = isFull
-    ? `${offfcourseUrl}/event/${event.id}/session?${offfcourseParams}`
-    : `${offfcourseUrl}/event/${event.id}/reception?${offfcourseParams}`;
+    ? `${offfcourseUrl}/event/${event.id}/session${
+        queryString ? `?${queryString}` : ""
+      }`
+    : `${offfcourseUrl}/event/${event.id}/reception${
+        queryString ? `?${queryString}` : ""
+      }`;
+
   const onEventClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -241,6 +253,15 @@ export function EventLayout({
   };
 
   const getActionProps = () => {
+    if (isCycle) {
+      return {
+        onClick: (e) => handleOpenDetails(e, event),
+        link: "",
+        label: I18N[language]["details"],
+        theme: "default",
+      };
+    }
+
     if (isActive) {
       const joinWebinar =
         isUserPremium && isIncludedPremium && !isRegistered
