@@ -282,7 +282,7 @@ export function CycleCard({
         </a>
         <div className={styles.infos}>
           <ul>
-            {Boolean(isPast) && (
+            {Boolean(!isPast) && (
               <li>
                 <CalendarIcon />
                 <span>
