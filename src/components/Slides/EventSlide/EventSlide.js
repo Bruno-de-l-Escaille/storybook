@@ -65,7 +65,7 @@ export const EventSlide = ({
   const showLiveBadge = isLive;
 
   const showTimeCounter =
-    !isFull &&
+    isFull &&
     moment(startDateTime).diff(moment(), "days") < 30 &&
     moment(startDateTime).diff(moment(), "days") > 0;
 
