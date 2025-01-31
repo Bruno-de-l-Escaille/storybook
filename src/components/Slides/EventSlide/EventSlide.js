@@ -10,6 +10,7 @@ import {
   isEventFull,
   isEventPast,
   isEventReplayable,
+  isEventStageOpen,
   isFreeEvent,
   isSoldOutEvent,
 } from "../../../utils/event";
@@ -52,9 +53,11 @@ export const EventSlide = ({
   const isFull = isEventFull(event);
   const isFree = isFreeEvent(event);
 
+  const showProgram = isEventStageOpen(event, "showProgram");
+
   const { label, secondaryBanner } = getEventSideConfig(event, language);
   const showPrice = !isFull;
-  const showBrowseButton = isFull;
+  const showBrowseButton = isFull && showProgram;
   const showOrateurs = !isFull;
 
   const name = getByLanguage(event, "name", language);

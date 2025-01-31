@@ -503,3 +503,24 @@ export const getRegisterButtonTitle = (event, language, coupon = null) => {
 
   return I18N[language]["buyTraining"];
 };
+
+export const isEventHasStage = (pageStatus) => {
+  if (!pageStatus || isEmpty(pageStatus)) {
+    return false;
+  }
+
+  switch (pageStatus) {
+    case true:
+    case 1:
+    case "1":
+    case "true":
+      return true;
+    default:
+      return false;
+  }
+};
+
+export const isEventStageOpen = (event, stage) => {
+  const stages = parseJson(event.stages);
+  return isEventHasStage(stages?.[stage]);
+};
