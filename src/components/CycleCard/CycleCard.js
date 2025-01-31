@@ -293,17 +293,6 @@ export function CycleCard({
                 </span>
               </li>
             )}
-            {Boolean(type === "PRESENTIAL" && !isPast) && (
-              <li>
-                <Presential2Icon />
-                <span>
-                  <strong>
-                    {capFirstLetterInSentence(modeLabel[type])} :&nbsp;
-                  </strong>
-                  {dateHelper}
-                </span>
-              </li>
-            )}
             {Boolean(
               isPast && isReplayable && type === "WEBINAR" && !isReplayExpired
             ) && (
