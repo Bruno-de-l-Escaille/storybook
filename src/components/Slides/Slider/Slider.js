@@ -6,25 +6,25 @@ import cn from "classnames";
 export const Slider = ({ cards, autoPlay = true, className }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const cardsRef = useRef(null);
 
-  const prevIndex =
-    cards.length > 2
-      ? activeIndex - 1 < 0
-        ? cards.length - 1
-        : activeIndex - 1
-      : null;
-  const nextIndex =
-    cards.length > 1
-      ? activeIndex + 1 >= cards.length
-        ? 0
-        : activeIndex + 1
-      : null;
+  const getIndexPrev = (index) =>
+    index - 1 < 0 ? cards.length - 1 : index - 1;
+  const getIndexNext = (index) => (index + 1 >= cards.length ? 0 : index + 1);
+
+  const prevIndex = cards.length > 2 ? getIndexPrev(activeIndex) : null;
+  const nextIndex = cards.length > 1 ? getIndexNext(activeIndex) : null;
+
+  const prevPrevIndex = cards.length > 3 ? getIndexPrev(prevIndex) : null;
+  const nextNextIndex = cards.length > 3 ? getIndexNext(nextIndex) : null;
 
   useEffect(() => {
     let timerId;
 
-    if (autoPlay && !isHovered && cards.length > 1) {
+    const isPageVisible = () => document.visibilityState === "visible";
+
+    if (autoPlay && !isHovered && cards.length > 1 && isPageVisible()) {
       timerId = setTimeout(() => {
         setActiveIndex(nextIndex);
       }, 8000);
@@ -35,13 +35,9 @@ export const Slider = ({ cards, autoPlay = true, className }) => {
     };
   }, [autoPlay, activeIndex, isHovered]);
 
-  useEffect(() => {
-    cardsRef.current.addEventListener("mousedown", (e) => {
-      const isPressed = true;
-      const cursorX = e.offsetX - cards.offsetLeft;
-      cardsRef.style.cursor = "grabbing";
-    });
-  }, [activeIndex]);
+  if (!cards || cards.length === 0) {
+    return null;
+  }
 
   const renderArrow = (direction) => {
     if (cards.length <= 1 || (cards.length <= 2 && direction === "left")) {
@@ -49,7 +45,16 @@ export const Slider = ({ cards, autoPlay = true, className }) => {
     }
 
     const onClick = () => {
+      if (isTransitioning) {
+        return;
+      }
+
       setActiveIndex(direction === "left" ? prevIndex : nextIndex);
+
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 800);
     };
 
     return (
@@ -94,8 +99,15 @@ export const Slider = ({ cards, autoPlay = true, className }) => {
                   index === prevIndex && styles.prevCard,
                   index === nextIndex && styles.nextCard,
                   index === activeIndex && styles.activeCard,
-                  ![prevIndex, activeIndex, nextIndex].includes(index) &&
-                    styles.hiddenCard
+                  index === prevPrevIndex && styles.prevPrevCard,
+                  index === nextNextIndex && styles.nextNextCard,
+                  ![
+                    prevIndex,
+                    activeIndex,
+                    nextIndex,
+                    prevPrevIndex,
+                    nextNextIndex,
+                  ].includes(index) && styles.hiddenCard
                 )}
                 key={index}
               >

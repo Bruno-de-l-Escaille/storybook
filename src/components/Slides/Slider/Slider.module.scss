@@ -72,7 +72,7 @@
 
     .hiddenCard {
       position: absolute;
-      display: none;
+      opacity: 0;
     }
 
     .activeCard {
@@ -81,16 +81,16 @@
       opacity: 1;
       top: 50%;
       left: 50%;
-      transform: scale(1) translate(-50%, -50%);
+      transform: translate(-50%, -50%) scale(1);
     }
 
     .prevCard {
       position: absolute;
       z-index: 2;
       opacity: 0.9;
-      top: 0;
+      top: 50%;
       left: 0;
-      transform: scale(0.5) translateX(-50%);
+      transform: translate(-25%, -50%) scale(0.5);
       pointer-events: none;
     }
 
@@ -98,9 +98,29 @@
       position: absolute;
       z-index: 2;
       opacity: 0.9;
-      top: 0;
+      top: 50%;
       left: 100%;
-      transform: scale(0.5) translateX(-150%);
+      transform: translate(-75%, -50%) scale(0.5);
+      pointer-events: none;
+    }
+
+    .prevPrevCard {
+      position: absolute;
+      z-index: 1;
+      opacity: 0;
+      top: 50%;
+      left: 0;
+      transform: translate(-25%, -50%) scale(0.5);
+      pointer-events: none;
+    }
+
+    .nextNextCard {
+      position: absolute;
+      z-index: 1;
+      opacity: 0;
+      top: 50%;
+      left: 100%;
+      transform: translate(-75%, -50%) scale(0.5);
       pointer-events: none;
     }
   }
