@@ -58,31 +58,16 @@ const Header = ({
   children,
   theme,
   clientImg,
-  onClick,
-  id,
   type,
-  pathname,
   titleStyle,
-  isOFFFcourse,
   showLiveBadge,
   showTimeCounter,
   startDateTime,
   endDateTime,
   language,
+  openNewTab,
 }) => {
   const { isMobile } = useResponsive();
-
-  const onLinkClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (onClick) {
-      onClick(id, type, pathname);
-    } else if (!isOFFFcourse) {
-      window.open(link, "_blank", "noreferrer");
-    } else {
-      window.location.href = link;
-    }
-  };
 
   return (
     <div className={styles.header}>
@@ -121,8 +106,9 @@ const Header = ({
         <a
           className={styles.title}
           href={link}
-          onClick={onLinkClick}
           style={titleStyle}
+          target={openNewTab ? "_blank" : "_self"}
+          rel={openNewTab ? "noopener noreferrer" : undefined}
         >
           <Shave maxHeight={80}>{title}</Shave>
         </a>

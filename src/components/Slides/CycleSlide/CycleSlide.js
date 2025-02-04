@@ -7,6 +7,7 @@ import {
   formatDecimalHours,
   getCycleLabels,
   getCyclePrice,
+  getMasterChaineUrl,
   getOfffcourseUrl,
   totalCycleTrainingHours,
 } from "../../../utils/event";
@@ -27,10 +28,9 @@ export const CycleSlide = ({
   isUserMember,
   isUserPremium,
   queryParams = {},
-  onClick,
   isSmall = false,
   focusTitle,
-  isOFFFcourse,
+  isMasterChaine,
 }) => {
   const { isMobile } = useResponsive();
 
@@ -72,8 +72,13 @@ export const CycleSlide = ({
 
   const offfcourseUrl = getOfffcourseUrl(env);
   const offfcourseParams = new URLSearchParams(queryParams).toString();
-  const cycleReceptionUrl = `${offfcourseUrl}/cycle/${cycle.id}/reception?${offfcourseParams}`;
-  const cycleProgramUrl = `${offfcourseUrl}/cycle/${cycle.id}/events?${offfcourseParams}`;
+  const masterChaineUrl = getMasterChaineUrl(env);
+  const cycleReceptionUrl = !isMasterChaine
+    ? `${offfcourseUrl}/cycle/${cycle.id}/reception?${offfcourseParams}`
+    : `${masterChaineUrl}/${language}/cycles/${cycle.id}/reception`;
+  const cycleProgramUrl = !isMasterChaine
+    ? `${offfcourseUrl}/cycle/${cycle.id}/events?${offfcourseParams}`
+    : `${masterChaineUrl}/${language}/cycles/${cycle.id}/events`;
 
   const { cycleLabel, buyCycleLabel } = getCycleLabels(cycle, language);
 
@@ -110,12 +115,8 @@ export const CycleSlide = ({
           theme={theme}
           clientImg={clientImg}
           link={cycleReceptionUrl}
-          id={cycle.id}
           isSmall={isSmall}
           type="CYCLE"
-          pathname={`/cycle/${cycle.id}/reception`}
-          onClick={onClick}
-          isOFFFcourse={isOFFFcourse}
         >
           <div className={styles.counts}>
             <span className={styles.info}>
@@ -140,12 +141,7 @@ export const CycleSlide = ({
           <div className={styles.actions}>
             <ActionButton
               link={cycleReceptionUrl}
-              onClick={onClick}
-              id={cycle.id}
-              type="CYCLE"
-              pathname={`/cycle/${cycle.id}/reception`}
               isSmall={isSmall}
-              isOFFFcourse={isOFFFcourse}
               {...(isUserRegistered
                 ? { name: I18N[language].moreDetails, theme: "default" }
                 : {
@@ -159,12 +155,7 @@ export const CycleSlide = ({
             <ActionButton
               name={I18N[language].program}
               link={cycleProgramUrl}
-              onClick={onClick}
-              id={cycle.id}
-              type="CYCLE"
-              pathname={`/cycle/${cycle.id}/events`}
               isSmall={isSmall}
-              isOFFFcourse={isOFFFcourse}
             />
           </div>
         </Slide.Footer>
@@ -189,11 +180,8 @@ export const CycleSlide = ({
             theme={theme}
             clientImg={clientImg}
             link={cycleReceptionUrl}
-            id={cycle.id}
             isSmall={isSmall}
             type="CYCLE"
-            pathname={`/cycle/${cycle.id}/reception`}
-            onClick={onClick}
           >
             <div className={styles.counts}>
               <span className={styles.info}>
@@ -218,12 +206,7 @@ export const CycleSlide = ({
             <div className={styles.actions}>
               <ActionButton
                 link={cycleReceptionUrl}
-                onClick={onClick}
-                id={cycle.id}
-                type="CYCLE"
-                pathname={`/cycle/${cycle.id}/reception`}
                 isSmall={isSmall}
-                isOFFFcourse={isOFFFcourse}
                 {...(isUserRegistered
                   ? { name: I18N[language].moreDetails, theme: "default" }
                   : {
@@ -234,12 +217,7 @@ export const CycleSlide = ({
               <ActionButton
                 name={I18N[language].program}
                 link={cycleProgramUrl}
-                onClick={onClick}
-                id={cycle.id}
-                type="CYCLE"
-                pathname={`/cycle/${cycle.id}/events`}
                 isSmall={isSmall}
-                isOFFFcourse={isOFFFcourse}
               />
             </div>
           </Slide.Footer>

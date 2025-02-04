@@ -17,7 +17,7 @@ export const PremiumSlide = ({
   env,
   isFetching,
   queryParams = {},
-  isOFFFcourse,
+  isMasterChaine,
 }) => {
   const { isMobile, isDesktop } = useResponsive();
   if (isFetching) {
@@ -25,7 +25,7 @@ export const PremiumSlide = ({
   }
   const { "user-registered": userRegistered } = cycle;
   const isPremiumUser = userRegistered || isUserPremium;
-
+  const isPremiumCycle = true;
   const offfcourseUrl = getOfffcourseUrl(env);
   const offfcourseParams = new URLSearchParams(queryParams).toString();
   const cycleReceptionUrl = `${offfcourseUrl}/cycle/${cycle.id}/reception?${offfcourseParams}`;
@@ -88,7 +88,7 @@ export const PremiumSlide = ({
           height: isDesktop ? "80px" : "auto",
           maxHeight: isDesktop ? "80px" : "none",
         }}
-        isOFFFcourse={isOFFFcourse}
+        openNewTab={isMasterChaine && isPremiumCycle}
       />
       <Slide.Body className={styles.body}>
         <div className={styles.note}>{I18N[language].premiumLabel}</div>
@@ -100,7 +100,8 @@ export const PremiumSlide = ({
             name={I18N[language].subscribeToPremium}
             theme="redOrange"
             link={cycleReceptionUrl}
-            isOFFFcourse={isOFFFcourse}
+            isMasterChaine={isMasterChaine}
+            isPremium
           />
         ) : (
           <div className={cn(styles.subscribed)}>

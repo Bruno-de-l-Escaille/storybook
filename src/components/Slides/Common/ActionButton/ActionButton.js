@@ -9,26 +9,10 @@ export default function ActionButton({
   link,
   theme = "default",
   className,
-  onClick,
-  id,
-  type,
-  pathname,
   isSmall = false,
-  isOFFFcourse,
+  isPremium,
   ...props
 }) {
-  const onLinkClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (onClick) {
-      onClick(id, type, pathname);
-    } else if (!isOFFFcourse) {
-      window.open(link, "_blank", "noreferrer");
-    } else {
-      window.location.href = link;
-    }
-  };
-
   return (
     <div
       className={cn(
@@ -38,8 +22,9 @@ export default function ActionButton({
     >
       <a
         href={link}
-        onClick={onLinkClick}
         className={theme && styles[theme]}
+        target={isPremium ? "_blank" : "_self"}
+        rel={isPremium ? "noopener noreferrer" : undefined}
         {...props}
       >
         {name}

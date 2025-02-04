@@ -27,6 +27,7 @@ import {
   formatDateFromTo,
   getEventMode,
   getEventNbMinutes,
+  getMasterChaineUrl,
   getOfffcourseUrl,
   getSlotReplayUrl,
   isEventFull,
@@ -62,7 +63,6 @@ export function EventLayout({
   isFetching,
   env,
   queryParams = {},
-  onClick,
   token,
   multiDateIndex,
   userId,
@@ -70,6 +70,7 @@ export function EventLayout({
   isAdmin,
   isCycle,
   handleOpenDetails,
+  isMasterChaine,
 }) {
   const [hovered, setHovered] = useState(false);
   const [showAddTags, setShowAddTags] = useState(false);
@@ -185,29 +186,22 @@ export function EventLayout({
 
   const offfcourseUrl = getOfffcourseUrl(env);
   const offfcourseParams = new URLSearchParams(queryParams).toString();
+  const masterChaineUrl = getMasterChaineUrl(env);
   const dateIndexParam = multiDateIndex ? `dateIndex=${multiDateIndex}` : "";
   const queryString = [dateIndexParam, offfcourseParams]
     .filter(Boolean)
     .join("&");
-  const eventLink = isFull
-    ? `${offfcourseUrl}/event/${event.id}/session${
-        queryString ? `?${queryString}` : ""
-      }`
-    : `${offfcourseUrl}/event/${event.id}/reception${
-        queryString ? `?${queryString}` : ""
-      }`;
-
-  const onEventClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (onClick) {
-      onClick(event.id, "FORMATION", `/event/${event.id}/reception`);
-    } else if (!isOFFFcourse) {
-      window.open(eventLink, "_blank", "noreferrer");
-    } else {
-      window.location.href = eventLink;
-    }
-  };
+  const eventLink = !isMasterChaine
+    ? isFull
+      ? `${offfcourseUrl}/event/${event.id}/session${
+          queryString ? `?${queryString}` : ""
+        }`
+      : `${offfcourseUrl}/event/${event.id}/reception${
+          queryString ? `?${queryString}` : ""
+        }`
+    : isFull
+    ? `${masterChaineUrl}/${language}/events/${event.id}/session`
+    : `${masterChaineUrl}/${language}/events/${event.id}/reception`;
 
   const replayLink =
     +event.slotsCount === 1 && event.slotReplayUrls
@@ -285,7 +279,6 @@ export function EventLayout({
             label: I18N[language]["rejoin"],
             theme: "red",
             icon: <OngoingIcon />,
-            onClick: onEventClick,
           };
         }
       }
@@ -324,7 +317,6 @@ export function EventLayout({
           theme: "blue",
           link: eventLink,
           disabled: true,
-          onClick: onEventClick,
         };
       }
 
@@ -332,7 +324,6 @@ export function EventLayout({
         label: I18N[language]["details"],
         theme: "default",
         link: eventLink,
-        onClick: onEventClick,
       };
     }
 
@@ -352,7 +343,6 @@ export function EventLayout({
         link: eventLink,
         label: registerLabel,
         theme: "green",
-        onClick: onEventClick,
       };
     }
 
@@ -360,7 +350,6 @@ export function EventLayout({
       label: I18N[language]["details"],
       theme: "default",
       link: eventLink,
-      onClick: onEventClick,
     };
   };
 
@@ -481,7 +470,7 @@ export function EventLayout({
         </div>
       </div>
       <div className={styles.details}>
-        <a className={styles.title} href={eventLink} onClick={onEventClick}>
+        <a className={styles.title} href={eventLink}>
           <Shave maxHeight={70}>{name}</Shave>
         </a>
         <div className={styles.infos}>

@@ -5,6 +5,7 @@ import { getEventSideConfig } from "./services";
 import { getByLanguage, prepareS3ResourceUrl } from "../../../utils/common";
 import {
   formatDateFromTo,
+  getMasterChaineUrl,
   getOfffcourseUrl,
   getRegisterButtonTitle,
   isEventFull,
@@ -33,10 +34,9 @@ export const EventSlide = ({
   isUserPremium,
   isFetching,
   queryParams = {},
-  onClick,
   isSmall = false,
   focusTitle,
-  isOFFFcourse,
+  isMasterChaine,
 }) => {
   if (isFetching) {
     return <Fetching />;
@@ -78,11 +78,16 @@ export const EventSlide = ({
   }`;
   const offfcourseUrl = getOfffcourseUrl(env);
   const offfcourseParams = new URLSearchParams(queryParams).toString();
+  const masterChaineUrl = getMasterChaineUrl(env);
   const bannerUrl = getByLanguage(event, "urlBanner", language) ?? "";
   const bannerSrc = prepareS3ResourceUrl(s3FolderUrl, bannerUrl);
 
-  const eventReceptionUrl = `${offfcourseUrl}/${language}/event/${event.id}/reception?${offfcourseParams}`;
-  const eventSessionUrl = `${offfcourseUrl}/${language}/event/${event.id}/session?${offfcourseParams}`;
+  const eventReceptionUrl = !isMasterChaine
+    ? `${offfcourseUrl}/${language}/event/${event.id}/reception?${offfcourseParams}`
+    : `${masterChaineUrl}/${language}/events/${event.id}/reception`;
+  const eventSessionUrl = !isMasterChaine
+    ? `${offfcourseUrl}/${language}/event/${event.id}/session?${offfcourseParams}`
+    : `${masterChaineUrl}/${language}/events/${event.id}/session`;
 
   const isSoldOut = isSoldOutEvent(event);
   const isUserRegistered =
@@ -158,12 +163,8 @@ export const EventSlide = ({
           title={name}
           clientImg={clientImg}
           link={eventReceptionUrl}
-          id={event.id}
           type="FORMATION"
-          pathname={`/event/${event.id}/reception`}
           isSmall={isSmall}
-          onClick={onClick}
-          isOFFFcourse={isOFFFcourse}
           showLiveBadge={showLiveBadge}
           showTimeCounter={showTimeCounter}
           language={language}
@@ -189,12 +190,7 @@ export const EventSlide = ({
           <div className={styles.actions}>
             <ActionButton
               link={eventReceptionUrl}
-              onClick={onClick}
-              id={event.id}
-              type="FORMATION"
-              pathname={`/event/${event.id}/reception`}
               isSmall={isSmall}
-              isOFFFcourse={isOFFFcourse}
               {...(isSoldOut || isUserRegistered
                 ? {
                     name: !isSmall
@@ -209,12 +205,7 @@ export const EventSlide = ({
                 name={I18N[language].program}
                 link={eventSessionUrl}
                 theme="default"
-                onClick={onClick}
-                id={event.id}
-                type="FORMATION"
-                pathname={`/event/${event.id}/session`}
                 isSmall={isSmall}
-                isOFFFcourse={isOFFFcourse}
               />
             )}
           </div>
@@ -238,11 +229,8 @@ export const EventSlide = ({
             title={name}
             clientImg={clientImg}
             link={eventReceptionUrl}
-            id={event.id}
             type="FORMATION"
-            pathname={`/event/${event.id}/reception`}
             isSmall={isSmall}
-            onClick={onClick}
           />
           <Slide.Body className={styles.slideBody}>
             {showOrateurs && <SpeakersSlide speakers={speakers} />}
@@ -268,12 +256,7 @@ export const EventSlide = ({
             <div className={styles.actions}>
               <ActionButton
                 link={eventReceptionUrl}
-                onClick={onClick}
-                id={event.id}
-                type="FORMATION"
-                pathname={`/event/${event.id}/reception`}
                 isSmall={isSmall}
-                isOFFFcourse={isOFFFcourse}
                 {...(isSoldOut || isUserRegistered
                   ? {
                       name: !isSmall
@@ -288,12 +271,7 @@ export const EventSlide = ({
                   name={I18N[language].program}
                   link={eventSessionUrl}
                   theme="default"
-                  onClick={onClick}
-                  id={event.id}
-                  type="FORMATION"
-                  pathname={`/event/${event.id}/session`}
                   isSmall={isSmall}
-                  isOFFFcourse={isOFFFcourse}
                 />
               )}
             </div>

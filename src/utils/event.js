@@ -343,6 +343,19 @@ export const getOfffcourseUrl = (env) => {
   return mapper[env] ?? mapper["production"];
 };
 
+export const getMasterChaineUrl = (env) => {
+  const mapper = {
+    production: "https://oeccbb.be",
+    v2: "https://oeccbb.be",
+    staging: "https://mc.staging.tamtam.pro",
+    dev: "https://dev.mc.be",
+    local: "http://local.oeccbb.be:3000",
+    preprod: "https://mc.preprod.tamtam.pro",
+  };
+
+  return mapper[env] ?? mapper["production"];
+};
+
 export const ORGANIZATION_CYCLE_LABEL_CONFIGS = {
   default: {
     1: {

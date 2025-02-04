@@ -28,7 +28,7 @@ export function Type1() {
       isUserMember={boolean("isUserMember", false)}
       isUserPremium={boolean("isUserPremium", false)}
       queryParams={object("queryParams", {})}
-      isOFFFcourse={boolean("isOFFFcourse", false)}
+      isMasterChaine={boolean("isMasterChaine", false)}
     />
   );
 }
@@ -42,7 +42,7 @@ export const Type2 = () => (
     isUserMember={boolean("isUserMember", false)}
     isUserPremium={boolean("isUserPremium", false)}
     queryParams={object("queryParams", {})}
-    isOFFFcourse={boolean("isOFFFcourse", false)}
+    isMasterChaine={boolean("isMasterChaine", false)}
   />
 );
 
@@ -55,6 +55,6 @@ export const Type3 = () => (
     isUserMember={boolean("isUserMember", false)}
     isUserPremium={boolean("isUserPremium", false)}
     queryParams={object("queryParams", {})}
-    isOFFFcourse={boolean("isOFFFcourse", false)}
+    isMasterChaine={boolean("isMasterChaine", false)}
   />
 );

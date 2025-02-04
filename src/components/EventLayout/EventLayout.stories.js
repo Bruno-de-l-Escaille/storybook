@@ -35,5 +35,6 @@ export const Default = () => (
     dict={null}
     isAdmin={boolean("isAdmin", false)}
     isOFFFcourse={boolean("isOFFFcourse", false)}
+    isMasterChaine={boolean("isMasterChaine", false)}
   />
 );
