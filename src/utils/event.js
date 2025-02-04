@@ -345,8 +345,8 @@ export const getOfffcourseUrl = (env) => {
 
 export const getMasterChaineUrl = (env) => {
   const mapper = {
-    production: "https://oeccbb.be",
-    v2: "https://oeccbb.be",
+    production: "https://www.oeccbb.be",
+    v2: "https://www.oeccbb.be",
     staging: "https://mc.staging.tamtam.pro",
     dev: "https://dev.mc.be",
     local: "http://local.oeccbb.be:3000",
