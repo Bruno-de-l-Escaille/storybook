@@ -61,7 +61,7 @@ export const EventSlide = ({
   const { label, secondaryBanner } = getEventSideConfig(event, language);
   const showPrice = !isFull;
   const showBrowseButton = isFull && showProgram;
-  const showOrateurs = !isFull;
+  const showOrateurs = !isFull ? true : showProgram;
   const showLiveBadge = isLive;
 
   const showTimeCounter =
