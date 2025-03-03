@@ -66,6 +66,7 @@ const Header = ({
   endDateTime,
   language,
   openNewTab,
+  isSmall,
 }) => {
   const { isMobile } = useResponsive();
 
@@ -78,7 +79,7 @@ const Header = ({
               {label && (
                 <span className={cn(styles.text, styles[theme])}>{label}</span>
               )}
-              {!isMobile && type === "CYCLE" && children}
+              {!isMobile && !isSmall && type === "CYCLE" && children}
             </div>
           ) : (
             <LiveCounter
@@ -102,7 +103,8 @@ const Header = ({
             />
           </div>
         )}
-        {((isMobile && type === "CYCLE") || type !== "CYCLE") && children}
+        {(((isMobile || isSmall) && type === "CYCLE") || type !== "CYCLE") &&
+          children}
         <a
           className={styles.title}
           href={link}
