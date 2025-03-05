@@ -67,6 +67,7 @@ const Header = ({
   language,
   openNewTab,
   isSmall,
+  Link = "a",
 }) => {
   const { isMobile } = useResponsive();
 
@@ -105,7 +106,7 @@ const Header = ({
         )}
         {(((isMobile || isSmall) && type === "CYCLE") || type !== "CYCLE") &&
           children}
-        <a
+        <Link
           className={styles.title}
           href={link}
           style={titleStyle}
@@ -113,7 +114,7 @@ const Header = ({
           rel={openNewTab ? "noopener noreferrer" : undefined}
         >
           <Shave maxHeight={80}>{title}</Shave>
-        </a>
+        </Link>
       </div>
     </div>
   );

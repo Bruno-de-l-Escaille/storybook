@@ -11,6 +11,7 @@ export default function ActionButton({
   className,
   isSmall = false,
   isPremium,
+  Link = "a",
   ...props
 }) {
   return (
@@ -20,7 +21,7 @@ export default function ActionButton({
         className
       )}
     >
-      <a
+      <Link
         href={link}
         className={theme && styles[theme]}
         target={isPremium ? "_blank" : "_self"}
@@ -28,7 +29,7 @@ export default function ActionButton({
         {...props}
       >
         {name}
-      </a>
+      </Link>
     </div>
   );
 }

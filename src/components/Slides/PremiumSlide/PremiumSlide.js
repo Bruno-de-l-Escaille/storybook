@@ -18,6 +18,7 @@ export const PremiumSlide = ({
   isFetching,
   queryParams = {},
   isMasterChaine,
+  Link = "a",
 }) => {
   const { isMobile, isDesktop } = useResponsive();
   if (isFetching) {
@@ -89,6 +90,7 @@ export const PremiumSlide = ({
           maxHeight: isDesktop ? "80px" : "none",
         }}
         openNewTab={isMasterChaine && isPremiumCycle}
+        Link={Link}
       />
       <Slide.Body className={styles.body}>
         <div className={styles.note}>{I18N[language].premiumLabel}</div>
@@ -102,6 +104,7 @@ export const PremiumSlide = ({
             link={cycleReceptionUrl}
             isMasterChaine={isMasterChaine}
             isPremium
+            Link={Link}
           />
         ) : (
           <div className={cn(styles.subscribed)}>

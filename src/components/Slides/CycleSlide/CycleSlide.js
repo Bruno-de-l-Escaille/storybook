@@ -31,6 +31,7 @@ export const CycleSlide = ({
   isSmall = false,
   focusTitle,
   isMasterChaine,
+  Link = "a",
 }) => {
   const { isMobile } = useResponsive();
 
@@ -117,6 +118,7 @@ export const CycleSlide = ({
           link={cycleReceptionUrl}
           isSmall={isSmall}
           type="CYCLE"
+          Link={Link}
         >
           <div className={styles.counts}>
             <span className={styles.info}>
@@ -142,6 +144,7 @@ export const CycleSlide = ({
             <ActionButton
               link={cycleReceptionUrl}
               isSmall={isSmall}
+              Link={Link}
               {...(isUserRegistered
                 ? { name: I18N[language].moreDetails, theme: "default" }
                 : {
@@ -156,6 +159,7 @@ export const CycleSlide = ({
               name={I18N[language].program}
               link={cycleProgramUrl}
               isSmall={isSmall}
+              Link={Link}
             />
           </div>
         </Slide.Footer>
@@ -182,6 +186,7 @@ export const CycleSlide = ({
             link={cycleReceptionUrl}
             isSmall={isSmall}
             type="CYCLE"
+            Link={Link}
           >
             <div className={styles.counts}>
               <span className={styles.info}>
@@ -207,6 +212,7 @@ export const CycleSlide = ({
               <ActionButton
                 link={cycleReceptionUrl}
                 isSmall={isSmall}
+                Link={Link}
                 {...(isUserRegistered
                   ? { name: I18N[language].moreDetails, theme: "default" }
                   : {
@@ -218,6 +224,7 @@ export const CycleSlide = ({
                 name={I18N[language].program}
                 link={cycleProgramUrl}
                 isSmall={isSmall}
+                Link={Link}
               />
             </div>
           </Slide.Footer>

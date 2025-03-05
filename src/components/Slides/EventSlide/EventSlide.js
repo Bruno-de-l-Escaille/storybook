@@ -37,6 +37,7 @@ export const EventSlide = ({
   isSmall = false,
   focusTitle,
   isMasterChaine,
+  Link = "a",
 }) => {
   if (isFetching) {
     return <Fetching />;
@@ -170,6 +171,7 @@ export const EventSlide = ({
           language={language}
           startDateTime={startDateTime}
           endDateTime={endDateTime}
+          Link={Link}
         />
         <Slide.Body className={styles.slideBody}>
           {showOrateurs && <SpeakersSlide speakers={speakers} />}
@@ -191,6 +193,7 @@ export const EventSlide = ({
             <ActionButton
               link={eventReceptionUrl}
               isSmall={isSmall}
+              Link={Link}
               {...(isSoldOut || isUserRegistered
                 ? {
                     name: !isSmall
@@ -206,6 +209,7 @@ export const EventSlide = ({
                 link={eventSessionUrl}
                 theme="default"
                 isSmall={isSmall}
+                Link={Link}
               />
             )}
           </div>
@@ -231,6 +235,7 @@ export const EventSlide = ({
             link={eventReceptionUrl}
             type="FORMATION"
             isSmall={isSmall}
+            Link={Link}
           />
           <Slide.Body className={styles.slideBody}>
             {showOrateurs && <SpeakersSlide speakers={speakers} />}
@@ -257,6 +262,7 @@ export const EventSlide = ({
               <ActionButton
                 link={eventReceptionUrl}
                 isSmall={isSmall}
+                Link={Link}
                 {...(isSoldOut || isUserRegistered
                   ? {
                       name: !isSmall
@@ -272,6 +278,7 @@ export const EventSlide = ({
                   link={eventSessionUrl}
                   theme="default"
                   isSmall={isSmall}
+                  Link={Link}
                 />
               )}
             </div>

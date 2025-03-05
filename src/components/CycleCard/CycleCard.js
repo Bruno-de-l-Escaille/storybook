@@ -52,6 +52,8 @@ export function CycleCard({
   queryParams = {},
   onClick,
   isOFFFcourse,
+  Link = "a",
+  router,
 }) {
   if (isFetching) {
     return <Fetching />;
@@ -130,6 +132,8 @@ export function CycleCard({
       onClick(cycle.id, "CYCLE", `/cycle/${cycle.id}/reception`);
     } else if (!isOFFFcourse) {
       window.open(cycleLink, "_blank", "noreferrer");
+    } else if (router) {
+      router.push(cycleLink);
     } else {
       window.location.href = cycleLink;
     }
@@ -277,9 +281,9 @@ export function CycleCard({
         })}
       >
         <div className={styles.type}>{cycleLabel}</div>
-        <a className={styles.title} href={cycleLink} onClick={onCycleClick}>
+        <Link className={styles.title} href={cycleLink} onClick={onCycleClick}>
           <Shave maxHeight={70}>{name}</Shave>
-        </a>
+        </Link>
         <div className={styles.infos}>
           <ul>
             {Boolean(!isPast) && (
@@ -307,7 +311,7 @@ export function CycleCard({
           </ul>
         </div>
         <div className={styles.actions}>
-          <a
+          <Link
             href={actionProps.link}
             onClick={actionProps.onClick}
             className={classNames(
@@ -318,7 +322,7 @@ export function CycleCard({
           >
             {actionProps.icon}
             {actionProps.label}
-          </a>
+          </Link>
           {renderPrice()}
         </div>
       </div>

@@ -71,6 +71,8 @@ export function EventLayout({
   isCycle,
   handleOpenDetails,
   isMasterChaine,
+  Link = "a",
+  onBeforeJoinWebinar,
 }) {
   const [hovered, setHovered] = useState(false);
   const [showAddTags, setShowAddTags] = useState(false);
@@ -81,6 +83,7 @@ export function EventLayout({
   const handleRegisterPremium = useCallback(
     (e) => {
       e.preventDefault();
+      e.stopPropagation();
       const eventId = event.id;
 
       setIsActionProcessing(true);
@@ -92,8 +95,10 @@ export function EventLayout({
           event["user-registered"] = true;
           if (+event.slotsCount === 1 && event.slotReplayUrls) {
             const replayLink = getSlotReplayUrl(event.slotReplayUrls, language);
-            console.log("xLog1", replayLink);
             if (replayLink) {
+              if (onBeforeJoinWebinar) {
+                onBeforeJoinWebinar();
+              }
               window.open(replayLink, "_blank", "noreferrer");
             }
           }
@@ -260,7 +265,14 @@ export function EventLayout({
       const joinWebinar =
         isUserPremium && isIncludedPremium && !isRegistered
           ? handleRegisterPremium
-          : () => {
+          : (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+
+              if (onBeforeJoinWebinar) {
+                onBeforeJoinWebinar();
+              }
+
               window.open(webinarLink, "_blank", "noreferrer");
             };
 
@@ -470,9 +482,9 @@ export function EventLayout({
         </div>
       </div>
       <div className={styles.details}>
-        <a className={styles.title} href={eventLink}>
+        <Link className={styles.title} href={eventLink}>
           <Shave maxHeight={70}>{name}</Shave>
-        </a>
+        </Link>
         <div className={styles.infos}>
           <ul>
             {Boolean(!isPast) && (
@@ -506,7 +518,7 @@ export function EventLayout({
           </ul>
         </div>
         <div className={styles.actions}>
-          <a
+          <Link
             href={actionProps.link}
             onClick={actionProps.onClick}
             className={cn(
@@ -521,7 +533,7 @@ export function EventLayout({
               <ClipLoader color="#fff" loading={true} size={14} />
             )}
             {actionProps.label}
-          </a>
+          </Link>
           {renderPrice()}
         </div>
       </div>
