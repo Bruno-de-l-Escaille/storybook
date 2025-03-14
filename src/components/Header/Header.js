@@ -299,9 +299,7 @@ export class Header extends Component {
       gotoUrl,
       env,
       isOtcAuth = false,
-      rightIcons,
     } = this.props;
-    const { isFaqWidgetLoaded } = this.state;
     const { appUrl, homeUrl, withAuthLogin } = app;
     const languages = ["fr", "nl", "en"];
 
@@ -318,14 +316,6 @@ export class Header extends Component {
             </li>
           ))}
         </ul>
-        {rightIcons.faq?.activated && (
-          <div
-            onClick={this.handleFaqClick.bind(this)}
-            className={!isFaqWidgetLoaded ? styles.iconLoading : ""}
-          >
-            <MenuItem icon="Help" />
-          </div>
-        )}
         {isOtcAuth ? (
           <AuthModal I18N={I18N} lng={lng} app={app} env={env} />
         ) : (
