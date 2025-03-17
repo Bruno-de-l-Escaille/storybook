@@ -19,9 +19,9 @@ import IconCalendar from "../../Icons/IconCalendar2";
 import { Fetching } from "../Common/Slide/Fetching";
 import classNames from "classnames";
 import { useResponsive } from "../../../common/hooks/useResponsive";
-import EventLayoutHover from "../../EventLayout/EventLayoutHover/EventLayoutHover";
+import { EventLayoutHover } from "../../EventLayout/EventLayoutHover/EventLayoutHover";
 import TagsForm from "../../EventLayout/TagForm/TagsForm";
-import FocusForm from "../../EventLayout/EventLayoutHover/FocusForm/FocusForm";
+import { FocusForm } from "../../EventLayout/EventLayoutHover/FocusForm/FocusForm";
 
 export const CycleSlide = ({
   cycle,

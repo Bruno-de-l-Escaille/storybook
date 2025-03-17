@@ -11,7 +11,7 @@ import {
   updateEventFocusConfig,
 } from "../../../../api";
 
-function FocusForm({
+export function FocusForm({
   setShowFocusConfig,
   eventId,
   cycleId,
@@ -218,5 +218,3 @@ function FocusForm({
     </div>
   );
 }
-
-export default FocusForm;

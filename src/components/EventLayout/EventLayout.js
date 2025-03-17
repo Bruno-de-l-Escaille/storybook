@@ -46,9 +46,9 @@ import { CardFlag } from "../../common/components/CardFlag";
 import { TimeCounter } from "../../common/components/TimeCounter";
 import { Fetching } from "./Fetching";
 import { I18N } from "../../i18n";
-import EventLayoutHover from "./EventLayoutHover/EventLayoutHover";
+import { EventLayoutHover } from "./EventLayoutHover/EventLayoutHover";
 import TagsForm from "./TagForm/TagsForm";
-import FocusForm from "./EventLayoutHover/FocusForm/FocusForm";
+import { FocusForm } from "./EventLayoutHover/FocusForm/FocusForm";
 
 const REPLAY_UPTIME = 3;
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =

@@ -29,9 +29,9 @@ import { Fetching } from "../Common/Slide/Fetching";
 import { SpeakersSlide } from "../Common/SpeakersSlide/SpeakersSlide";
 import classNames from "classnames";
 import moment from "moment";
-import EventLayoutHover from "../../EventLayout/EventLayoutHover/EventLayoutHover";
+import { EventLayoutHover } from "../../EventLayout/EventLayoutHover/EventLayoutHover";
 import TagsForm from "../../EventLayout/TagForm/TagsForm";
-import FocusForm from "../../EventLayout/EventLayoutHover/FocusForm/FocusForm";
+import { FocusForm } from "../../EventLayout/EventLayoutHover/FocusForm/FocusForm";
 
 export const EventSlide = ({
   event,
