@@ -92,7 +92,7 @@ function FocusForm({
       }).then((result) => {
         setSaving(false);
       });
-    } else {
+    } else if (cycleId) {
       updateCycleFocusConfig({
         apiUrl,
         token,
