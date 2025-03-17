@@ -124,3 +124,31 @@ export const updateEventTags = ({
   formData.append("tag", JSON.stringify(updatedEventTags));
   return axios.post(requestUrl, formData);
 };
+
+export const updateEventFocusConfig = ({
+  apiUrl,
+  token,
+  eventId,
+  updatedFocusConfig,
+}) => {
+  const requestUrl = `${apiUrl}/event/event`;
+  var formData = new FormData();
+  formData.append("access_token", token);
+  formData.append("id", eventId);
+  formData.append("focusConfig", JSON.stringify(updatedFocusConfig));
+  return axios.post(requestUrl, formData);
+};
+
+export const updateCycleFocusConfig = ({
+  apiUrl,
+  token,
+  cycleId,
+  updatedFocusConfig,
+}) => {
+  const requestUrl = `${apiUrl}/event/cycle`;
+  var formData = new FormData();
+  formData.append("access_token", token);
+  formData.append("id", cycleId);
+  formData.append("focusConfig", JSON.stringify(updatedFocusConfig));
+  return axios.post(requestUrl, formData);
+};

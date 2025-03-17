@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./EventSlide.module.scss";
 import Slide from "../Common/Slide/Slide";
 import { getEventSideConfig } from "./services";
-import { getByLanguage, prepareS3ResourceUrl } from "../../../utils/common";
+import {
+  getByLanguage,
+  parseJson,
+  prepareS3ResourceUrl,
+} from "../../../utils/common";
 import {
   formatDateFromTo,
   getMasterChaineUrl,
@@ -25,6 +29,9 @@ import { Fetching } from "../Common/Slide/Fetching";
 import { SpeakersSlide } from "../Common/SpeakersSlide/SpeakersSlide";
 import classNames from "classnames";
 import moment from "moment";
+import EventLayoutHover from "../../EventLayout/EventLayoutHover/EventLayoutHover";
+import TagsForm from "../../EventLayout/TagForm/TagsForm";
+import FocusForm from "../../EventLayout/EventLayoutHover/FocusForm/FocusForm";
 
 export const EventSlide = ({
   event,
@@ -38,7 +45,13 @@ export const EventSlide = ({
   focusTitle,
   isMasterChaine,
   Link = "a",
+  isAdmin,
+  isOFFFcourse,
+  token,
 }) => {
+  const [hovered, setHovered] = useState(false);
+  const [showAddTags, setShowAddTags] = useState(false);
+  const [showFocusConfig, setShowFocusConfig] = useState(false);
   if (isFetching) {
     return <Fetching />;
   }
@@ -145,81 +158,128 @@ export const EventSlide = ({
 
   if (!focusTitle) {
     return (
-      <Slide
-        bannerSrc={bannerSrc || secondaryBanner}
-        className={styles.eventSlide}
-        isFetching={isFetching}
-        isSmall={isSmall}
-        flag={
-          isSoldOut && !isUserRegistered
-            ? "sold-out"
-            : event.isIncludedPremium === 1
-            ? "premium"
-            : undefined
-        }
-        language={language}
+      <div
+        className={styles.wrapper}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        data-id={event.id}
       >
-        <Slide.Header
-          label={label}
-          title={name}
-          clientImg={clientImg}
-          link={eventReceptionUrl}
-          type="FORMATION"
+        <Slide
+          bannerSrc={bannerSrc || secondaryBanner}
+          className={styles.eventSlide}
+          isFetching={isFetching}
           isSmall={isSmall}
-          showLiveBadge={showLiveBadge}
-          showTimeCounter={showTimeCounter}
+          flag={
+            isSoldOut && !isUserRegistered
+              ? "sold-out"
+              : event.isIncludedPremium === 1
+              ? "premium"
+              : undefined
+          }
           language={language}
-          startDateTime={startDateTime}
-          endDateTime={endDateTime}
-          Link={Link}
-        />
-        <Slide.Body className={styles.slideBody}>
-          {showOrateurs && <SpeakersSlide speakers={speakers} />}
-          <ul className={styles.details}>{renderEventMode()}</ul>
-        </Slide.Body>
-        <Slide.Footer className={styles.slideFooter}>
-          {showPrice && (
-            <Price
-              price={isUserMember ? memberPrice : nonMemberPrice}
-              originalPrice={nonMemberPrice}
-              memberPrice={memberPrice}
-              nonMemberPrice={nonMemberPrice}
-              isUserMember={isUserMember}
-              language={language}
-              isSmall={isSmall}
-            />
-          )}
-          <div className={styles.actions}>
-            <ActionButton
-              link={eventReceptionUrl}
-              isSmall={isSmall}
-              Link={Link}
-              {...(isSoldOut || isUserRegistered
-                ? {
-                    name: !isSmall
-                      ? I18N[language].moreDetails
-                      : I18N[language].details,
-                    theme: "default",
-                  }
-                : { name: registerBtnTxt, theme: "greenTeal" })}
-            />
-            {showBrowseButton && (
-              <ActionButton
-                name={I18N[language].program}
-                link={eventSessionUrl}
-                theme="default"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          data-id={event.id}
+        >
+          <Slide.Header
+            label={label}
+            title={name}
+            clientImg={clientImg}
+            link={eventReceptionUrl}
+            type="FORMATION"
+            isSmall={isSmall}
+            showLiveBadge={showLiveBadge}
+            showTimeCounter={showTimeCounter}
+            language={language}
+            startDateTime={startDateTime}
+            endDateTime={endDateTime}
+            Link={Link}
+          />
+          <Slide.Body className={styles.slideBody}>
+            {showOrateurs && <SpeakersSlide speakers={speakers} />}
+            <ul className={styles.details}>{renderEventMode()}</ul>
+          </Slide.Body>
+          <Slide.Footer className={styles.slideFooter}>
+            {showPrice && (
+              <Price
+                price={isUserMember ? memberPrice : nonMemberPrice}
+                originalPrice={nonMemberPrice}
+                memberPrice={memberPrice}
+                nonMemberPrice={nonMemberPrice}
+                isUserMember={isUserMember}
+                language={language}
                 isSmall={isSmall}
-                Link={Link}
               />
             )}
-          </div>
-        </Slide.Footer>
-      </Slide>
+            <div className={styles.actions}>
+              <ActionButton
+                link={eventReceptionUrl}
+                isSmall={isSmall}
+                Link={Link}
+                {...(isSoldOut || isUserRegistered
+                  ? {
+                      name: !isSmall
+                        ? I18N[language].moreDetails
+                        : I18N[language].details,
+                      theme: "default",
+                    }
+                  : { name: registerBtnTxt, theme: "greenTeal" })}
+              />
+              {showBrowseButton && (
+                <ActionButton
+                  name={I18N[language].program}
+                  link={eventSessionUrl}
+                  theme="default"
+                  isSmall={isSmall}
+                  Link={Link}
+                />
+              )}
+            </div>
+          </Slide.Footer>
+        </Slide>
+        {isAdmin && isOFFFcourse && (
+          <>
+            {(showAddTags || showFocusConfig || hovered) && (
+              <EventLayoutHover
+                setShowAddTags={setShowAddTags}
+                showAddTags={showAddTags}
+                setShowFocusConfig={setShowFocusConfig}
+                showFocusConfig={showFocusConfig}
+                isEvent={true}
+              />
+            )}
+            {showAddTags && (
+              <TagsForm
+                setShowAddTags={setShowAddTags}
+                eventId={event.id}
+                language={language}
+                token={token}
+                env={env}
+              />
+            )}
+            {showFocusConfig && (
+              <FocusForm
+                setShowFocusConfig={setShowFocusConfig}
+                eventId={event.id}
+                focusConfig={parseJson(event.focusConfig)}
+                language={language}
+                token={token}
+                env={env}
+              />
+            )}
+          </>
+        )}
+      </div>
     );
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={styles.wrapper}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      data-id={event.id}
+    >
       <span className={styles.title}>{focusTitle}</span>
       <div className={styles.slideBlock}>
         <Slide
@@ -285,6 +345,38 @@ export const EventSlide = ({
           </Slide.Footer>
         </Slide>
       </div>
+      {isAdmin && isOFFFcourse && (
+        <>
+          {(showAddTags || showFocusConfig || hovered) && (
+            <EventLayoutHover
+              setShowAddTags={setShowAddTags}
+              showAddTags={showAddTags}
+              setShowFocusConfig={setShowFocusConfig}
+              showFocusConfig={showFocusConfig}
+              isEvent={true}
+            />
+          )}
+          {showAddTags && (
+            <TagsForm
+              setShowAddTags={setShowAddTags}
+              eventId={event.id}
+              language={language}
+              token={token}
+              env={env}
+            />
+          )}
+          {showFocusConfig && (
+            <FocusForm
+              setShowFocusConfig={setShowFocusConfig}
+              eventId={event.id}
+              focusConfig={parseJson(event.focusConfig)}
+              language={language}
+              token={token}
+              env={env}
+            />
+          )}
+        </>
+      )}
     </div>
   );
 };

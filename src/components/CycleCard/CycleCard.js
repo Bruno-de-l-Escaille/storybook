@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./CycleCard.module.scss";
 import {
   capFirstLetterInSentence,
   getByLanguage,
   getCroppedImageUrl,
   isEmpty,
+  parseJson,
   prepareS3ResourceUrl,
 } from "../../utils/common";
 import {
@@ -30,11 +31,12 @@ import CalendarIcon from "./assets/IconCalendar";
 import ReplayIcon from "./assets/IconReplay";
 import PresentialIcon from "./assets/IconPresential";
 import LiveIcon from "./assets/IconLive";
-import Presential2Icon from "./assets/IconPresential2";
 import Replay2Icon from "./assets/IconReplay2";
 import moment from "moment";
 import CheckMarkIcon from "./assets/IconCheckmark";
 import HybridIcon from "./assets/IconHybrid";
+import EventLayoutHover from "../EventLayout/EventLayoutHover/EventLayoutHover";
+import FocusForm from "../EventLayout/EventLayoutHover/FocusForm/FocusForm";
 
 const REPLAY_UPTIME = 3;
 
@@ -54,7 +56,11 @@ export function CycleCard({
   isOFFFcourse,
   Link = "a",
   router,
+  isAdmin,
+  token,
 }) {
+  const [hovered, setHovered] = useState(false);
+  const [showFocusConfig, setShowFocusConfig] = useState(false);
   if (isFetching) {
     return <Fetching />;
   }
@@ -90,7 +96,7 @@ export function CycleCard({
   const isReplayExpired = moment().isAfter(endOfReplay);
 
   const type = cycle.eventCycles ? cycleType(cycle.eventCycles) : "WEBINAR";
-  console.log("AAAA", type);
+
   const urlBanner = getByLanguage(cycle, "pictureUrl", language) ?? "";
   const banner = getCroppedImageUrl(urlBanner, undefined, 280);
   const bannerImgUrl = !isEmpty(banner)
@@ -233,7 +239,12 @@ export function CycleCard({
   const actionProps = getActionProps();
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={styles.wrapper}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      data-id={cycle.id}
+    >
       <div
         className={classNames(styles.banner)}
         style={{ backgroundImage: `url(${bannerImgUrl})` }}
@@ -336,6 +347,26 @@ export function CycleCard({
             : undefined
         }
       />
+      {isAdmin && isOFFFcourse && (
+        <>
+          {(showFocusConfig || hovered) && (
+            <EventLayoutHover
+              setShowFocusConfig={setShowFocusConfig}
+              showFocusConfig={showFocusConfig}
+            />
+          )}
+          {showFocusConfig && (
+            <FocusForm
+              setShowFocusConfig={setShowFocusConfig}
+              cycleId={cycle.id}
+              focusConfig={parseJson(cycle.focusConfig)}
+              language={language}
+              token={token}
+              env={env}
+            />
+          )}
+        </>
+      )}
     </div>
   );
 }

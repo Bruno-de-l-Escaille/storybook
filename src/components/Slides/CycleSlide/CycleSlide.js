@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Slide from "../Common/Slide/Slide";
-import { getByLanguage, prepareS3ResourceUrl } from "../../../utils";
+import { getByLanguage, parseJson, prepareS3ResourceUrl } from "../../../utils";
 import { getCycleSlideConfig } from "./services";
 import {
   formatDateFromTo,
@@ -19,6 +19,9 @@ import IconCalendar from "../../Icons/IconCalendar2";
 import { Fetching } from "../Common/Slide/Fetching";
 import classNames from "classnames";
 import { useResponsive } from "../../../common/hooks/useResponsive";
+import EventLayoutHover from "../../EventLayout/EventLayoutHover/EventLayoutHover";
+import TagsForm from "../../EventLayout/TagForm/TagsForm";
+import FocusForm from "../../EventLayout/EventLayoutHover/FocusForm/FocusForm";
 
 export const CycleSlide = ({
   cycle,
@@ -32,7 +35,12 @@ export const CycleSlide = ({
   focusTitle,
   isMasterChaine,
   Link = "a",
+  isAdmin,
+  isOFFFcourse,
+  token,
 }) => {
+  const [hovered, setHovered] = useState(false);
+  const [showFocusConfig, setShowFocusConfig] = useState(false);
   const { isMobile } = useResponsive();
 
   if (isFetching) {
@@ -103,72 +111,104 @@ export const CycleSlide = ({
 
   if (!focusTitle) {
     return (
-      <Slide
-        bannerSrc={bannerSrc || secondaryBanner}
-        className={styles.cycleSlide}
-        isSmall={isSmall}
-        flag={isPremiumIncludedCycle ? "premium" : undefined}
-        language={language}
+      <div
+        className={styles.wrapper}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        data-id={cycle.id}
       >
-        <Slide.Header
-          title={name}
-          label={cycleLabel}
-          theme={theme}
-          clientImg={clientImg}
-          link={cycleReceptionUrl}
+        <Slide
+          bannerSrc={bannerSrc || secondaryBanner}
+          className={styles.cycleSlide}
           isSmall={isSmall}
-          type="CYCLE"
-          Link={Link}
+          flag={isPremiumIncludedCycle ? "premium" : undefined}
+          language={language}
         >
-          <div className={styles.counts}>
-            <span className={styles.info}>
-              {trainingsCount} {I18N[language].trainings}
-            </span>
-            <span className={styles.info}>
-              {cycleTrainingHours} {I18N[language].ofCertifiedAttestations}
-            </span>
-          </div>
-        </Slide.Header>
-        <Slide.Body>{renderCycleDetails()}</Slide.Body>
-        <Slide.Footer className={styles.footer}>
-          <Price
-            price={isUserMember ? memberPrice.price : nonMemberPrice.price}
-            memberPrice={memberPrice.price}
-            nonMemberPrice={nonMemberPrice.price}
-            originalPrice={nonMemberPrice.price}
-            isUserMember={isUserMember}
-            language={language}
+          <Slide.Header
+            title={name}
+            label={cycleLabel}
+            theme={theme}
+            clientImg={clientImg}
+            link={cycleReceptionUrl}
             isSmall={isSmall}
-          />
-          <div className={styles.actions}>
-            <ActionButton
-              link={cycleReceptionUrl}
+            type="CYCLE"
+            Link={Link}
+          >
+            <div className={styles.counts}>
+              <span className={styles.info}>
+                {trainingsCount} {I18N[language].trainings}
+              </span>
+              <span className={styles.info}>
+                {cycleTrainingHours} {I18N[language].ofCertifiedAttestations}
+              </span>
+            </div>
+          </Slide.Header>
+          <Slide.Body>{renderCycleDetails()}</Slide.Body>
+          <Slide.Footer className={styles.footer}>
+            <Price
+              price={isUserMember ? memberPrice.price : nonMemberPrice.price}
+              memberPrice={memberPrice.price}
+              nonMemberPrice={nonMemberPrice.price}
+              originalPrice={nonMemberPrice.price}
+              isUserMember={isUserMember}
+              language={language}
               isSmall={isSmall}
-              Link={Link}
-              {...(isUserRegistered
-                ? { name: I18N[language].moreDetails, theme: "default" }
-                : {
-                    name:
-                      !isSmall && !isMobile
-                        ? buyCycleLabel
-                        : I18N[language].buy,
-                    theme: "greenTeal",
-                  })}
             />
-            <ActionButton
-              name={I18N[language].program}
-              link={cycleProgramUrl}
-              isSmall={isSmall}
-              Link={Link}
-            />
-          </div>
-        </Slide.Footer>
-      </Slide>
+            <div className={styles.actions}>
+              <ActionButton
+                link={cycleReceptionUrl}
+                isSmall={isSmall}
+                Link={Link}
+                {...(isUserRegistered
+                  ? { name: I18N[language].moreDetails, theme: "default" }
+                  : {
+                      name:
+                        !isSmall && !isMobile
+                          ? buyCycleLabel
+                          : I18N[language].buy,
+                      theme: "greenTeal",
+                    })}
+              />
+              <ActionButton
+                name={I18N[language].program}
+                link={cycleProgramUrl}
+                isSmall={isSmall}
+                Link={Link}
+              />
+            </div>
+          </Slide.Footer>
+        </Slide>
+        {isAdmin && isOFFFcourse && (
+          <>
+            {(showFocusConfig || hovered) && (
+              <EventLayoutHover
+                setShowFocusConfig={setShowFocusConfig}
+                showFocusConfig={showFocusConfig}
+              />
+            )}
+            {showFocusConfig && (
+              <FocusForm
+                setShowFocusConfig={setShowFocusConfig}
+                eventId={cycle.id}
+                focusConfig={parseJson(cycle.focusConfig)}
+                language={language}
+                token={token}
+                env={env}
+              />
+            )}
+          </>
+        )}
+      </div>
     );
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={styles.wrapper}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      data-id={cycle.id}
+    >
       <span className={classNames(styles.title, styles[theme])}>
         {focusTitle}
       </span>
@@ -230,6 +270,26 @@ export const CycleSlide = ({
           </Slide.Footer>
         </Slide>
       </div>
+      {isAdmin && isOFFFcourse && (
+        <>
+          {(showFocusConfig || hovered) && (
+            <EventLayoutHover
+              setShowFocusConfig={setShowFocusConfig}
+              showFocusConfig={showFocusConfig}
+            />
+          )}
+          {showFocusConfig && (
+            <FocusForm
+              setShowFocusConfig={setShowFocusConfig}
+              eventId={cycle.id}
+              focusConfig={parseJson(cycle.focusConfig)}
+              language={language}
+              token={token}
+              env={env}
+            />
+          )}
+        </>
+      )}
     </div>
   );
 };

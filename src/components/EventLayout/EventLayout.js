@@ -21,6 +21,7 @@ import {
   isEmpty,
   onError,
   parseBoolean,
+  parseJson,
   prepareS3ResourceUrl,
 } from "../../utils/common";
 import {
@@ -47,6 +48,7 @@ import { Fetching } from "./Fetching";
 import { I18N } from "../../i18n";
 import EventLayoutHover from "./EventLayoutHover/EventLayoutHover";
 import TagsForm from "./TagForm/TagsForm";
+import FocusForm from "./EventLayoutHover/FocusForm/FocusForm";
 
 const REPLAY_UPTIME = 3;
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =
@@ -76,6 +78,7 @@ export function EventLayout({
 }) {
   const [hovered, setHovered] = useState(false);
   const [showAddTags, setShowAddTags] = useState(false);
+  const [showFocusConfig, setShowFocusConfig] = useState(false);
   const [isActionProcessing, setIsActionProcessing] = useState(false);
 
   const apiUrl = getApiUrl(env);
@@ -153,7 +156,6 @@ export function EventLayout({
   const bannerImgUrl = !isEmpty(banner)
     ? prepareS3ResourceUrl(s3FolderUrl, banner)
     : `${S3_FOLDER_AWS_URL_WITHOUT_ENV}/image_2024_01_08T20_38_38_750Z.png`;
-
   const nbMinutes = getEventNbMinutes(event);
   const isFullWatch = event?.fullWatch ?? 0;
   const playProgress = playProgressTime(
@@ -549,16 +551,29 @@ export function EventLayout({
       />
       {isAdmin && isOFFFcourse && (
         <>
-          {(showAddTags || hovered) && (
+          {(showAddTags || showFocusConfig || hovered) && (
             <EventLayoutHover
               setShowAddTags={setShowAddTags}
               showAddTags={showAddTags}
+              setShowFocusConfig={setShowFocusConfig}
+              showFocusConfig={showFocusConfig}
+              isEvent={true}
             />
           )}
           {showAddTags && (
             <TagsForm
               setShowAddTags={setShowAddTags}
               eventId={event.id}
+              language={language}
+              token={token}
+              env={env}
+            />
+          )}
+          {showFocusConfig && (
+            <FocusForm
+              setShowFocusConfig={setShowFocusConfig}
+              eventId={event.id}
+              focusConfig={parseJson(event.focusConfig)}
               language={language}
               token={token}
               env={env}

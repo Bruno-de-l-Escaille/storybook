@@ -29,6 +29,9 @@ export function Type1() {
       isUserPremium={boolean("isUserPremium", false)}
       queryParams={object("queryParams", {})}
       isMasterChaine={boolean("isMasterChaine", false)}
+      isAdmin={boolean("isAdmin", false)}
+      isOFFFcourse={boolean("isOFFFcourse", false)}
+      token="231f67ec6bc68df3bd1cf8d2e53a3ac394f1774f"
     />
   );
 }
@@ -43,6 +46,9 @@ export const Type2 = () => (
     isUserPremium={boolean("isUserPremium", false)}
     queryParams={object("queryParams", {})}
     isMasterChaine={boolean("isMasterChaine", false)}
+    isAdmin={boolean("isAdmin", false)}
+    isOFFFcourse={boolean("isOFFFcourse", false)}
+    token="231f67ec6bc68df3bd1cf8d2e53a3ac394f1774f"
   />
 );
 
@@ -56,5 +62,8 @@ export const Type3 = () => (
     isUserPremium={boolean("isUserPremium", false)}
     queryParams={object("queryParams", {})}
     isMasterChaine={boolean("isMasterChaine", false)}
+    isAdmin={boolean("isAdmin", false)}
+    isOFFFcourse={boolean("isOFFFcourse", false)}
+    token="231f67ec6bc68df3bd1cf8d2e53a3ac394f1774f"
   />
 );

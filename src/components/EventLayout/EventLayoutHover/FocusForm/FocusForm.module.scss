@@ -1,4 +1,13 @@
-.TagsForm {
+$primary-color: #4a6bff;
+$primary-hover: #3a5bf9;
+$gray-light: #f5f5f5;
+$gray-medium: #e0e0e0;
+$gray-dark: #666;
+$text-color: #333;
+$border-radius: 8px;
+$transition-speed: 0.2s;
+
+.FocusForm {
   position: absolute;
   top: 0;
   left: 0;
@@ -44,7 +53,7 @@
     width: 100%;
     height: calc(100% - 1.5rem);
 
-    .tagAndSelectContainer {
+    .focusContainer {
       position: relative;
       width: 100%;
       height: 100%;
@@ -131,5 +140,114 @@
       background-color: #d3e6ff94;
       border-radius: 5px;
     }
+  }
+}
+
+.optionsContainer {
+  margin-bottom: 1.5rem;
+
+  .optionItem {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.radioContainer {
+  display: flex;
+  align-items: center;
+
+  .radioInput {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+
+    &:checked + .radioLabel {
+      font-weight: 600;
+      color: $primary-color;
+    }
+  }
+
+  .radioLabel {
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    color: $text-color;
+    cursor: pointer;
+    transition: color $transition-speed ease;
+  }
+}
+
+.optionDetails {
+  margin-left: 1.5rem;
+  margin-top: 0.75rem;
+  padding: 1rem;
+  background-color: $gray-light;
+  border-radius: $border-radius;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.formField {
+  margin-bottom: 1rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .fieldLabel {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: $gray-dark;
+  }
+
+  .dateInput,
+  .textInput {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid $gray-medium;
+    border-radius: $border-radius;
+    font-size: 0.875rem;
+    transition: border-color $transition-speed ease;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    }
+  }
+}
+
+.saveButton {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  border-radius: $border-radius;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color $transition-speed ease;
+
+  &:hover {
+    background-color: $primary-hover;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
