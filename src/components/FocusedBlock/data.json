@@ -4,6 +4,7 @@
     "events": [
       {
         "id": 1798,
+        "focusConfig": "{\"positionFr\":4,\"positionNl\":0,\"positionEn\":0,\"titleFr\":\"Fr\",\"titleNl\":\"Nl\",\"titleEn\":\"En\",\"displayDateFr\":\"2025-02-30 10:39:17\",\"displayDateNl\":\"2025-03-30 10:39:17\",\"displayDateEn\":\"2025-03-30 10:39:17\"}",
         "uid": "248FBB13-7172-4B8E-A3C8-F801E29F9C8A",
         "nameFr": "Cycle Missions spéciales | Les liquidations : aspects réglementaires et fiscaux",
         "nameEn": "",
@@ -121,6 +122,7 @@
       },
       {
         "id": 1870,
+        "focusConfig": "{\"positionFr\":1,\"positionNl\":0,\"positionEn\":0,\"titleFr\":\"Fr\",\"titleNl\":\"Nl\",\"titleEn\":\"En\",\"displayDateFr\":\"2025-03-30 10:39:17\",\"displayDateNl\":\"2025-03-30 10:39:17\",\"displayDateEn\":\"2025-03-30 10:39:17\"}",
         "uid": "81CBDCA4-2611-4F08-8B05-02A83E9D420A",
         "nameFr": "Cycle Missions spéciales : expertise-comptable, CSA et fiscalité, le tour des fusions, scissions et liquidations! | Les transformations",
         "nameEn": "",
@@ -238,6 +240,7 @@
       },
       {
         "id": 1893,
+        "focusConfig": "{\"positionFr\":2,\"positionNl\":0,\"positionEn\":0,\"titleFr\":\"Fr\",\"titleNl\":\"Nl\",\"titleEn\":\"En\",\"displayDateFr\":\"2025-03-30 10:39:17\",\"displayDateNl\":\"2025-03-30 10:39:17\",\"displayDateEn\":\"2025-03-30 10:39:17\"}",
         "uid": "E055B779-40A3-405C-9DA4-6621DE284FA4",
         "nameFr": "Pratiques de Stage 2025 : Liquidations de sociétés, aspects fiscaux (séance 3/3)  - webinaire",
         "nameEn": "",
@@ -354,6 +357,7 @@
     "cycles": [
       {
         "id": 185,
+        "focusConfig": "{\"positionFr\":3,\"positionNl\":0,\"positionEn\":0,\"titleFr\":\"Fr\",\"titleNl\":\"Nl\",\"titleEn\":\"En\",\"displayDateFr\":\"2025-03-30 10:39:17\",\"displayDateNl\":\"2025-03-30 10:39:17\",\"displayDateEn\":\"2025-03-30 10:39:17\"}",
         "uid": "737B50DD-1187-4DC8-974F-549CDE866EB8",
         "nameFr": "LA CHAMPAGNE - Cycle de formation du 21 au 26 novembre 2024 - 10 h de formation continue",
         "nameEn": null,
