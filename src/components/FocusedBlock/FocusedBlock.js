@@ -64,6 +64,9 @@ export const FocusedBlock = ({
   queryParams = {},
   isMasterChaine,
   Link = "a",
+  isAdmin,
+  isOFFFcourse,
+  token,
 }) => {
   const focusedItems = prepareFocusedItems(events, cycles, language);
 
@@ -107,6 +110,9 @@ export const FocusedBlock = ({
             isSmall={(elementsCount === 3 && index > 0) || elementsCount === 4}
             isMasterChaine={isMasterChaine}
             Link={Link}
+            isAdmin={isAdmin}
+            isOFFFcourse={isOFFFcourse}
+            token={token}
           />
         ) : (
           <CycleSlide
@@ -121,6 +127,9 @@ export const FocusedBlock = ({
             isSmall={(elementsCount === 3 && index > 0) || elementsCount === 4}
             isMasterChaine={isMasterChaine}
             Link={Link}
+            isAdmin={isAdmin}
+            isOFFFcourse={isOFFFcourse}
+            token={token}
           />
         )
       );
