@@ -35,6 +35,13 @@ const prepareFocusedItems = (events, cycles, language) => {
       return false;
     }
 
+    const position =
+      focusConfig["position" + capFirstLetterInSentence(language)];
+
+    if (position == 0) {
+      return false;
+    }
+
     return moment(displayDate).isAfter(moment());
   });
 
