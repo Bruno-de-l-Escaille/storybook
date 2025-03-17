@@ -30,3 +30,5 @@ export * from "./components/Slides/CustomisedSlide/CustomisedSlide";
 export * from "./components/Slides/Slider/Slider";
 export * from "./components/CycleCard/CycleCard";
 export * from "./components/FocusedBlock/FocusedBlock";
+export * from "./components/EventLayout/EventLayoutHover/EventLayoutHover";
+export * from "./components/EventLayout/EventLayoutHover/FocusForm/FocusForm";
