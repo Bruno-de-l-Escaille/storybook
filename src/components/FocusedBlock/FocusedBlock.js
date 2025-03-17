@@ -2,7 +2,56 @@ import React from "react";
 import styles from "./FocusedBlock.module.scss";
 import { EventSlide } from "../Slides/EventSlide/EventSlide";
 import { CycleSlide } from "../Slides/CycleSlide/CycleSlide";
-import { getByLanguage } from "../../utils";
+import {
+  capFirstLetterInSentence,
+  getByLanguage,
+  parseJson,
+} from "../../utils";
+import moment from "moment";
+
+const prepareFocusedItems = (events, cycles, language) => {
+  const items = [
+    ...cycles.map((cycle) => ({
+      item: cycle,
+      type: "cycle",
+    })),
+    ...events.map((event) => ({
+      item: event,
+      type: "event",
+    })),
+  ];
+
+  const filteredItems = items.filter(({ item }) => {
+    const focusConfig = parseJson(item.focusConfig);
+
+    if (!focusConfig) {
+      return false;
+    }
+
+    const displayDate =
+      focusConfig["displayDate" + capFirstLetterInSentence(language)];
+
+    if (!displayDate) {
+      return false;
+    }
+
+    return moment(displayDate).isAfter(moment());
+  });
+
+  const sortedItems = filteredItems.sort((a, b) => {
+    const focusConfigA = parseJson(a.item.focusConfig);
+    const focusConfigB = parseJson(b.item.focusConfig);
+
+    const positionA =
+      focusConfigA["position" + capFirstLetterInSentence(language)];
+    const positionB =
+      focusConfigB["position" + capFirstLetterInSentence(language)];
+
+    return positionA - positionB;
+  });
+
+  return sortedItems.slice(0, 4);
+};
 
 export const FocusedBlock = ({
   events,
@@ -16,28 +65,15 @@ export const FocusedBlock = ({
   isMasterChaine,
   Link = "a",
 }) => {
-  const focusedEvents = events.slice(0, 4);
-  const remainingBlocks = 4 - focusedEvents.length;
-  const focusedCycles =
-    remainingBlocks > 0 ? cycles.slice(0, remainingBlocks) : [];
-
-  if (focusedEvents.length === 0 && focusedCycles.length === 0) {
-    return null;
-  }
+  const focusedItems = prepareFocusedItems(events, cycles, language);
 
   const renderFocusedBlock = () => {
     const blocks = [];
 
-    const focusedElements = [
-      ...focusedCycles.map((cycle) => ({
-        ...cycle,
-        elementType: "cycle",
-      })),
-      ...focusedEvents.map((event) => ({
-        ...event,
-        elementType: "event",
-      })),
-    ];
+    const focusedElements = focusedItems.map(({ item, type }) => ({
+      ...item,
+      elementType: type,
+    }));
 
     const elementsCount = focusedElements.length;
 
@@ -53,7 +89,9 @@ export const FocusedBlock = ({
     };
 
     focusedElements.forEach((focusedElement, index) => {
-      const focusTitle = getByLanguage(focusedElement, "focusTitle", language);
+      const focusConfig = parseJson(focusedElement.focusConfig);
+      const focusTitle = getByLanguage(focusConfig, "title", language);
+
       const isEvent = focusedElement.elementType === "event";
       blocks.push(
         isEvent ? (
