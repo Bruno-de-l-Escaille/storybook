@@ -71,7 +71,10 @@ export function FocusForm({
     const formattedDate = value
       ? moment(value).format("YYYY-MM-DD HH:mm:ss")
       : "";
-    handleChange(`displayDate${lang}`, formattedDate);
+    setSelectedFocusConfig((prev) => ({
+      ...prev,
+      [`displayDate${lang}`]: formattedDate,
+    }));
   };
 
   const handleSave = async () => {
