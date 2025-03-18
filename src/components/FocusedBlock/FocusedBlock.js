@@ -28,18 +28,16 @@ const prepareFocusedItems = (events, cycles, language) => {
       return false;
     }
 
-    const displayDate =
-      focusConfig["displayDate" + capFirstLetterInSentence(language)];
-
-    if (!displayDate) {
+    const position =
+      focusConfig["position" + capFirstLetterInSentence(language)];
+    if (position == 0) {
       return false;
     }
 
-    const position =
-      focusConfig["position" + capFirstLetterInSentence(language)];
-
-    if (position == 0) {
-      return false;
+    const displayDate =
+      focusConfig["displayDate" + capFirstLetterInSentence(language)];
+    if (!displayDate) {
+      return true;
     }
 
     return moment(displayDate).isAfter(moment());
