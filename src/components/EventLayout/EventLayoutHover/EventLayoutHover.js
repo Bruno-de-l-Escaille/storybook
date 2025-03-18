@@ -3,7 +3,7 @@ import styles from "./EventLayoutHover.module.scss";
 import IconHash from "../../CycleCard/assets/IconHash";
 import IconCalendarWhite from "../assets/IconCalendarWhite";
 
-export default function EventLayoutHover({
+export function EventLayoutHover({
   setShowAddTags,
   showAddTags,
   setShowFocusConfig,

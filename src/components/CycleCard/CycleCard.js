@@ -35,8 +35,8 @@ import Replay2Icon from "./assets/IconReplay2";
 import moment from "moment";
 import CheckMarkIcon from "./assets/IconCheckmark";
 import HybridIcon from "./assets/IconHybrid";
-import EventLayoutHover from "../EventLayout/EventLayoutHover/EventLayoutHover";
-import FocusForm from "../EventLayout/EventLayoutHover/FocusForm/FocusForm";
+import { EventLayoutHover } from "../EventLayout/EventLayoutHover/EventLayoutHover";
+import { FocusForm } from "../EventLayout/EventLayoutHover/FocusForm/FocusForm";
 
 const REPLAY_UPTIME = 3;
 
