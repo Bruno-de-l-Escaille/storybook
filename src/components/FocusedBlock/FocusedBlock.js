@@ -98,7 +98,7 @@ export const FocusedBlock = ({
 
     focusedElements.forEach((focusedElement, index) => {
       const focusConfig = parseJson(focusedElement.focusConfig);
-      const focusTitle = getByLanguage(focusConfig, "title", language);
+      const focusTitle = getByLanguage(focusConfig, "title", language) || " ";
 
       const isEvent = focusedElement.elementType === "event";
       blocks.push(

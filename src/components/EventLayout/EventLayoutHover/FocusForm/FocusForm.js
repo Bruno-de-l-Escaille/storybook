@@ -74,13 +74,6 @@ export function FocusForm({
     handleChange(`displayDate${lang}`, formattedDate);
   };
 
-  const formatDateForInput = (dateString) => {
-    if (!dateString) return "";
-    return moment(dateString).isValid()
-      ? moment(dateString).format("YYYY-MM-DDTHH:mm")
-      : "";
-  };
-
   const handleSave = async () => {
     setSaving(true);
     if (eventId) {
@@ -162,11 +155,11 @@ export function FocusForm({
                         <label className={styles.fieldLabel}>Date</label>
                         <input
                           type="datetime-local"
-                          value={formatDateForInput(
+                          value={
                             selectedFocusConfig[
                               `displayDate${capitalizeFirstLetter(language)}`
                             ]
-                          )}
+                          }
                           onChange={(e) =>
                             handleDateChange(
                               capitalizeFirstLetter(language),
