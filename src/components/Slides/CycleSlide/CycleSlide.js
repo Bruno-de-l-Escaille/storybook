@@ -189,7 +189,7 @@ export const CycleSlide = ({
             {showFocusConfig && (
               <FocusForm
                 setShowFocusConfig={setShowFocusConfig}
-                eventId={cycle.id}
+                cycleId={cycle.id}
                 focusConfig={parseJson(cycle.focusConfig)}
                 language={language}
                 token={token}
@@ -281,7 +281,7 @@ export const CycleSlide = ({
           {showFocusConfig && (
             <FocusForm
               setShowFocusConfig={setShowFocusConfig}
-              eventId={cycle.id}
+              cycleId={cycle.id}
               focusConfig={parseJson(cycle.focusConfig)}
               language={language}
               token={token}
