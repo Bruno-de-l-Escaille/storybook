@@ -39,7 +39,6 @@ export function FocusForm({
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    setSelectedFocusConfig(focusConfig || defaultFocusConfig);
     const currentPosition =
       focusConfig?.[`position${capitalizeFirstLetter(language)}`];
     if (currentPosition) {
@@ -65,6 +64,11 @@ export function FocusForm({
       ...prev,
       [field]: value,
     }));
+  };
+
+  const formatDateForInput = (dateString) => {
+    if (!dateString) return "";
+    return moment(dateString).format("YYYY-MM-DDTHH:mm");
   };
 
   const handleDateChange = (lang, value) => {
@@ -158,11 +162,11 @@ export function FocusForm({
                         <label className={styles.fieldLabel}>Date</label>
                         <input
                           type="datetime-local"
-                          value={
+                          value={formatDateForInput(
                             selectedFocusConfig[
                               `displayDate${capitalizeFirstLetter(language)}`
                             ]
-                          }
+                          )}
                           onChange={(e) =>
                             handleDateChange(
                               capitalizeFirstLetter(language),
