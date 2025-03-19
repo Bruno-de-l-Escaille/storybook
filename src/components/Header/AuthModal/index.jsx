@@ -17,6 +17,7 @@ const AuthModal = ({ env, lng, app }) => {
   const [email, setEmail] = useState("");
   const [resetParams, setResetParams] = useState(null);
   const [clientToken, setClientToken] = useState("");
+  const [showForgotCheckEmail, setShowForgotCheckEmail] = useState(false);
 
   useEffect(() => {
     let searchParams = new URLSearchParams(window.location.search);
@@ -122,6 +123,7 @@ const AuthModal = ({ env, lng, app }) => {
               setResetParams(e);
               setView("RESET_PASSWORD");
             }}
+            showForgotCheckEmail={showForgotCheckEmail}
           />
         )}
         {view === "REGISTER" && (
@@ -138,6 +140,11 @@ const AuthModal = ({ env, lng, app }) => {
             handleAuthTokenUser={handleAuthTokenUser}
             clientToken={clientToken}
             setClientToken={setClientToken}
+            showForgotResetPassword={(e) => {
+              setEmail(e);
+              setShowForgotCheckEmail(true);
+              setView("LOGIN");
+            }}
           />
         )}
         {view === "RESET_PASSWORD" && (

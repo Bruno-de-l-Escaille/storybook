@@ -22,10 +22,10 @@ const App = {
   autoLoginUrl: "http://local.blog.tamtam.pro/autologin",
   authAppName: "BLOG",
   clientCredential: {
-    grant_type: "",
-    client_id: "",
-    client_secret: "",
-    scope: "",
+    grant_type: "client_credentials",
+    client_id: "10020",
+    client_secret: "UASecrectS#K$",
+    scope: "ttp",
   },
 };
 

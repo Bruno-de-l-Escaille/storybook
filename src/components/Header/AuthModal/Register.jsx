@@ -40,6 +40,7 @@ const Register = ({
   clientToken,
   setClientToken,
   handleAuthTokenUser,
+  showForgotResetPassword,
 }) => {
   const AGREATION_OPTIONS = [
     { value: "NOTARIAL_OFFICE", label: i18n.auth.notarial_office },
@@ -172,7 +173,7 @@ const Register = ({
               showLoginWithEmail(emailStr);
             } else {
               Toast.info(i18n.auth.account_exist_pwd);
-              setShowCheckEmail(true);
+              showForgotResetPassword(emailStr);
             }
           }
         }

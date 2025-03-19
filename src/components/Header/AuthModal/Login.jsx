@@ -28,6 +28,7 @@ const Login = ({
   handleAuthTokenUser,
   initialEmail,
   showResetPassword,
+  showForgotCheckEmail = false,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,7 +38,7 @@ const Login = ({
     password: "",
   });
   const [isSaving, setIsSaving] = useState(false);
-  const [showCheckEmail, setShowCheckEmail] = useState(false);
+  const [showCheckEmail, setShowCheckEmail] = useState(showForgotCheckEmail);
   const [keyValidation, setKeyValidation] = useState("");
   const [showCodeError, setShowCodeError] = useState(false);
 
