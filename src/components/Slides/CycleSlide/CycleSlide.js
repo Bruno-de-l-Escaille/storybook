@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Slide from "../Common/Slide/Slide";
-import { getByLanguage, parseJson, prepareS3ResourceUrl } from "../../../utils";
+import { getByLanguage, prepareS3ResourceUrl } from "../../../utils";
 import { getCycleSlideConfig } from "./services";
 import {
   formatDateFromTo,
@@ -19,8 +19,7 @@ import IconCalendar from "../../Icons/IconCalendar2";
 import { Fetching } from "../Common/Slide/Fetching";
 import classNames from "classnames";
 import { useResponsive } from "../../../common/hooks/useResponsive";
-import { EventLayoutHover } from "../../EventLayout/EventLayoutHover/EventLayoutHover";
-import { FocusForm } from "../../EventLayout/EventLayoutHover/FocusForm/FocusForm";
+import { CycleMask } from "../../Masks/CycleMask/CycleMask";
 
 export const CycleSlide = ({
   cycle,
@@ -178,24 +177,14 @@ export const CycleSlide = ({
           </Slide.Footer>
         </Slide>
         {isAdmin && isOFFFcourse && (
-          <>
-            {(showFocusConfig || hovered) && (
-              <EventLayoutHover
-                setShowFocusConfig={setShowFocusConfig}
-                showFocusConfig={showFocusConfig}
-              />
-            )}
-            {showFocusConfig && (
-              <FocusForm
-                setShowFocusConfig={setShowFocusConfig}
-                cycleId={cycle.id}
-                focusConfig={parseJson(cycle.focusConfig)}
-                language={language}
-                token={token}
-                env={env}
-              />
-            )}
-          </>
+          <CycleMask
+            cycle={cycle}
+            language={language}
+            token={token}
+            env={env}
+            isHovered={hovered}
+            style={{ borderRadius: "14px" }}
+          />
         )}
       </div>
     );
@@ -270,24 +259,14 @@ export const CycleSlide = ({
         </Slide>
       </div>
       {isAdmin && isOFFFcourse && (
-        <>
-          {(showFocusConfig || hovered) && (
-            <EventLayoutHover
-              setShowFocusConfig={setShowFocusConfig}
-              showFocusConfig={showFocusConfig}
-            />
-          )}
-          {showFocusConfig && (
-            <FocusForm
-              setShowFocusConfig={setShowFocusConfig}
-              cycleId={cycle.id}
-              focusConfig={parseJson(cycle.focusConfig)}
-              language={language}
-              token={token}
-              env={env}
-            />
-          )}
-        </>
+        <CycleMask
+          cycle={cycle}
+          language={language}
+          token={token}
+          env={env}
+          isHovered={hovered}
+          style={{ borderRadius: "14px" }}
+        />
       )}
     </div>
   );

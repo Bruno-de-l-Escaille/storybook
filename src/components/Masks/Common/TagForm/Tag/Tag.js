@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styles from "./Tag.module.scss";
-import { getByLanguage } from "../../../utils";
-import IconCross from "../../CycleCard/assets/IconCross";
+import { getByLanguage } from "../../../../../utils";
+import IconCross from "../../../../CycleCard/assets/IconCross";
 import TagEdit from "../TagEdit/TagEdit";
 import Modal from "react-modal";
-import { FlashMessage } from "../../ToastContainer/ToastContainer";
+import { FlashMessage } from "../../../../ToastContainer/ToastContainer";
 
 export default function Tag({
   tag,

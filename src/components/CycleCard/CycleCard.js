@@ -5,7 +5,6 @@ import {
   getByLanguage,
   getCroppedImageUrl,
   isEmpty,
-  parseJson,
   prepareS3ResourceUrl,
 } from "../../utils/common";
 import {
@@ -35,8 +34,7 @@ import Replay2Icon from "./assets/IconReplay2";
 import moment from "moment";
 import CheckMarkIcon from "./assets/IconCheckmark";
 import HybridIcon from "./assets/IconHybrid";
-import { EventLayoutHover } from "../EventLayout/EventLayoutHover/EventLayoutHover";
-import { FocusForm } from "../EventLayout/EventLayoutHover/FocusForm/FocusForm";
+import { CycleMask } from "../Masks/CycleMask/CycleMask";
 
 const REPLAY_UPTIME = 3;
 
@@ -348,24 +346,13 @@ export function CycleCard({
         }
       />
       {isAdmin && isOFFFcourse && (
-        <>
-          {(showFocusConfig || hovered) && (
-            <EventLayoutHover
-              setShowFocusConfig={setShowFocusConfig}
-              showFocusConfig={showFocusConfig}
-            />
-          )}
-          {showFocusConfig && (
-            <FocusForm
-              setShowFocusConfig={setShowFocusConfig}
-              cycleId={cycle.id}
-              focusConfig={parseJson(cycle.focusConfig)}
-              language={language}
-              token={token}
-              env={env}
-            />
-          )}
-        </>
+        <CycleMask
+          cycle={cycle}
+          language={language}
+          token={token}
+          env={env}
+          isHovered={hovered}
+        />
       )}
     </div>
   );

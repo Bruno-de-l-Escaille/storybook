@@ -5,7 +5,7 @@ export default function IconCalendarWhite(props) {
     <svg
       width="14"
       height="14"
-      viewBox="0 0 14 14"
+      viewBox="-1 0 14 14"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}

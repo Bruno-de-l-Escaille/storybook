@@ -1,5 +1,5 @@
 import cn from "classnames";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { capitalizeFirstLetter, getApiUrl } from "../../../../utils";
 import styles from "./FocusForm.module.scss";
 import IconCross from "../../../CycleCard/assets/IconCross";
@@ -10,8 +10,12 @@ import {
   updateCycleFocusConfig,
   updateEventFocusConfig,
 } from "../../../../api";
+import { DatePicker } from "antd";
+import momentGenerateConfig from "rc-picker/lib/generate/moment";
 
-export function FocusForm({
+const MomentDatePicker = DatePicker.generatePicker(momentGenerateConfig);
+
+export const FocusForm = ({
   setShowFocusConfig,
   eventId,
   cycleId,
@@ -19,7 +23,8 @@ export function FocusForm({
   token,
   env,
   focusConfig,
-}) {
+  updateFocusConfig,
+}) => {
   const defaultFocusConfig = {
     positionFr: 0,
     positionNl: 0,
@@ -35,21 +40,9 @@ export function FocusForm({
   const [selectedFocusConfig, setSelectedFocusConfig] = useState(
     focusConfig || defaultFocusConfig
   );
-  const [selectedOption, setSelectedOption] = useState(null);
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    const currentPosition =
-      focusConfig?.[`position${capitalizeFirstLetter(language)}`];
-    if (currentPosition) {
-      const option = positionOptions.find(
-        (opt) => opt.value === currentPosition
-      );
-      if (option) {
-        setSelectedOption(option);
-      }
-    }
-  }, [focusConfig, language]);
+  console.log("xLog1", eventId, selectedFocusConfig);
 
   const positionOptions = [
     { value: 1, label: I18N[language]["inFirst"] },
@@ -59,6 +52,12 @@ export function FocusForm({
     { value: 0, label: I18N[language]["noOptions"] },
   ];
 
+  const currentPosition =
+    selectedFocusConfig?.[`position${capitalizeFirstLetter(language)}`] ?? 0;
+  const selectedOption = positionOptions.find(
+    (opt) => opt.value === currentPosition
+  );
+
   const handleChange = (field, value) => {
     setSelectedFocusConfig((prev) => ({
       ...prev,
@@ -66,15 +65,10 @@ export function FocusForm({
     }));
   };
 
-  const formatDateForInput = (dateString) => {
-    if (!dateString) return "";
-    return moment(dateString).format("YYYY-MM-DDTHH:mm");
-  };
+  const handleDateChange = (value) => {
+    const lang = capitalizeFirstLetter(language);
 
-  const handleDateChange = (lang, value) => {
-    const formattedDate = value
-      ? moment(value).format("YYYY-MM-DD HH:mm:ss")
-      : "";
+    const formattedDate = value ? value : "";
     setSelectedFocusConfig((prev) => ({
       ...prev,
       [`displayDate${lang}`]: formattedDate,
@@ -89,8 +83,11 @@ export function FocusForm({
         token,
         eventId,
         updatedFocusConfig: selectedFocusConfig,
-      }).then((result) => {
+      }).then(({ data }) => {
+        const updatedEvent = data.data;
         setSaving(false);
+        setShowFocusConfig(false);
+        updateFocusConfig(updatedEvent.focusConfig);
       });
     } else if (cycleId) {
       updateCycleFocusConfig({
@@ -98,8 +95,11 @@ export function FocusForm({
         token,
         cycleId,
         updatedFocusConfig: selectedFocusConfig,
-      }).then((result) => {
+      }).then(({ data }) => {
+        const updatedCycle = data.data;
         setSaving(false);
+        setShowFocusConfig(false);
+        updateFocusConfig(updatedCycle.focusConfig);
       });
     }
   };
@@ -127,8 +127,8 @@ export function FocusForm({
                     type="radio"
                     id={`position${capitalizeFirstLetter(language)}-${
                       option.value
-                    }`}
-                    name="option"
+                    }-${eventId || cycleId}`}
+                    name={`option-${eventId || cycleId}`}
                     value={option.value}
                     checked={
                       selectedFocusConfig[
@@ -140,14 +140,13 @@ export function FocusForm({
                         `position${capitalizeFirstLetter(language)}`,
                         option.value
                       );
-                      setSelectedOption(option);
                     }}
                     className={styles.radioInput}
                   />
                   <label
                     htmlFor={`position${capitalizeFirstLetter(language)}-${
                       option.value
-                    }`}
+                    }-${eventId || cycleId}`}
                     className={styles.radioLabel}
                   >
                     {capitalizeFirstLetter(option.label)}
@@ -158,25 +157,6 @@ export function FocusForm({
                   selectedOption.value === option.value &&
                   selectedOption.value !== 0 && (
                     <div className={styles.optionDetails}>
-                      <div className={styles.formField}>
-                        <label className={styles.fieldLabel}>Date</label>
-                        <input
-                          type="datetime-local"
-                          value={formatDateForInput(
-                            selectedFocusConfig[
-                              `displayDate${capitalizeFirstLetter(language)}`
-                            ]
-                          )}
-                          onChange={(e) =>
-                            handleDateChange(
-                              capitalizeFirstLetter(language),
-                              e.target.value
-                            )
-                          }
-                          className={styles.dateInput}
-                        />
-                      </div>
-
                       <div className={styles.formField}>
                         <label className={styles.fieldLabel}>
                           {I18N[language]["title"]}
@@ -198,6 +178,39 @@ export function FocusForm({
                           className={styles.textInput}
                         />
                       </div>
+                      <div className={styles.formField}>
+                        <label className={styles.fieldLabel}>
+                          {I18N[language]["Until"]}
+                        </label>
+                        <MomentDatePicker
+                          value={
+                            selectedFocusConfig[
+                              `displayDate${capitalizeFirstLetter(language)}`
+                            ]
+                              ? moment(
+                                  selectedFocusConfig[
+                                    `displayDate${capitalizeFirstLetter(
+                                      language
+                                    )}`
+                                  ]
+                                )
+                              : null
+                          }
+                          onChange={(date) =>
+                            handleDateChange(
+                              date ? date.format("YYYY-MM-DD HH:mm:ss") : null
+                            )
+                          }
+                          format="DD/MM/YYYY HH:mm"
+                          showTime={{ format: "HH:mm" }}
+                          className={styles.dateInput}
+                          disabledDate={(current) =>
+                            current && current < moment().startOf("second")
+                          }
+                          placeholder={I18N[language]["Until"]}
+                          showNow={false}
+                        />
+                      </div>
                     </div>
                   )}
               </div>
@@ -217,4 +230,4 @@ export function FocusForm({
       </div>
     </div>
   );
-}
+};

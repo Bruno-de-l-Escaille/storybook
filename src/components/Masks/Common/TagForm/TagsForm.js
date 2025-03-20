@@ -1,15 +1,15 @@
 import cn from "classnames";
 import React, { useEffect, useState } from "react";
-import { fetchTags, getEventWithTag, updateEventTags } from "../../../api";
-import { getApiUrl, getByLanguage } from "../../../utils";
+import { fetchTags, getEventWithTag, updateEventTags } from "../../../../api";
+import { getApiUrl, getByLanguage } from "../../../../utils";
 import styles from "./TagsForm.module.scss";
 import TagsSelect from "react-select/async";
-import IconCross from "../../CycleCard/assets/IconCross";
+import IconCross from "../../../CycleCard/assets/IconCross";
 import { ClipLoader } from "react-spinners";
-import Tag from "../Tag/Tag";
-import { I18N } from "../../../i18n";
+import Tag from "./Tag/Tag";
+import { I18N } from "../../../../i18n";
 
-function TagsForm({ setShowAddTags, eventId, language, token, env }) {
+const TagsForm = ({ setShowAddTags, eventId, language, token, env }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [eventWithTag, setEventWithTag] = useState(null);
   const [eventTags, setEventTags] = useState([]);
@@ -255,6 +255,6 @@ function TagsForm({ setShowAddTags, eventId, language, token, env }) {
       </div>
     </div>
   );
-}
+};
 
 export default TagsForm;

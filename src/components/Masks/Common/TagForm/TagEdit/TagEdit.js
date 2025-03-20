@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select/async";
 import { ClipLoader } from "react-spinners";
 import styles from "./TagEdit.module.scss";
-import { getTags, saveTag } from "../../../api";
-import { getTagName } from "../../../utils";
-import { I18N } from "../../../i18n";
-import IconCross from "../assets/IconCross";
-import { Toast } from "../../ToastContainer/ToastContainer";
+import { getTags, saveTag } from "../../../../../api";
+import { getTagName } from "../../../../../utils";
+import { I18N } from "../../../../../i18n";
+import IconCross from "../../../../EventLayout/assets/IconCross";
+import { Toast } from "../../../../ToastContainer/ToastContainer";
 
 export default function TagEdit({
   tag,

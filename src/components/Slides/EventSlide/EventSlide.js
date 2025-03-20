@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import styles from "./EventSlide.module.scss";
 import Slide from "../Common/Slide/Slide";
 import { getEventSideConfig } from "./services";
-import {
-  getByLanguage,
-  parseJson,
-  prepareS3ResourceUrl,
-} from "../../../utils/common";
+import { getByLanguage, prepareS3ResourceUrl } from "../../../utils/common";
 import {
   formatDateFromTo,
   getMasterChaineUrl,
@@ -29,9 +25,7 @@ import { Fetching } from "../Common/Slide/Fetching";
 import { SpeakersSlide } from "../Common/SpeakersSlide/SpeakersSlide";
 import classNames from "classnames";
 import moment from "moment";
-import { EventLayoutHover } from "../../EventLayout/EventLayoutHover/EventLayoutHover";
-import TagsForm from "../../EventLayout/TagForm/TagsForm";
-import { FocusForm } from "../../EventLayout/EventLayoutHover/FocusForm/FocusForm";
+import { EventMask } from "../../Masks/EventMask/EventMask";
 
 export const EventSlide = ({
   event,
@@ -238,36 +232,14 @@ export const EventSlide = ({
           </Slide.Footer>
         </Slide>
         {isAdmin && isOFFFcourse && (
-          <>
-            {(showAddTags || showFocusConfig || hovered) && (
-              <EventLayoutHover
-                setShowAddTags={setShowAddTags}
-                showAddTags={showAddTags}
-                setShowFocusConfig={setShowFocusConfig}
-                showFocusConfig={showFocusConfig}
-                isEvent={true}
-              />
-            )}
-            {showAddTags && (
-              <TagsForm
-                setShowAddTags={setShowAddTags}
-                eventId={event.id}
-                language={language}
-                token={token}
-                env={env}
-              />
-            )}
-            {showFocusConfig && (
-              <FocusForm
-                setShowFocusConfig={setShowFocusConfig}
-                eventId={event.id}
-                focusConfig={parseJson(event.focusConfig)}
-                language={language}
-                token={token}
-                env={env}
-              />
-            )}
-          </>
+          <EventMask
+            event={event}
+            language={language}
+            token={token}
+            env={env}
+            isHovered={hovered}
+            style={{ borderRadius: "14px" }}
+          />
         )}
       </div>
     );
@@ -346,36 +318,14 @@ export const EventSlide = ({
         </Slide>
       </div>
       {isAdmin && isOFFFcourse && (
-        <>
-          {(showAddTags || showFocusConfig || hovered) && (
-            <EventLayoutHover
-              setShowAddTags={setShowAddTags}
-              showAddTags={showAddTags}
-              setShowFocusConfig={setShowFocusConfig}
-              showFocusConfig={showFocusConfig}
-              isEvent={true}
-            />
-          )}
-          {showAddTags && (
-            <TagsForm
-              setShowAddTags={setShowAddTags}
-              eventId={event.id}
-              language={language}
-              token={token}
-              env={env}
-            />
-          )}
-          {showFocusConfig && (
-            <FocusForm
-              setShowFocusConfig={setShowFocusConfig}
-              eventId={event.id}
-              focusConfig={parseJson(event.focusConfig)}
-              language={language}
-              token={token}
-              env={env}
-            />
-          )}
-        </>
+        <EventMask
+          event={event}
+          language={language}
+          token={token}
+          env={env}
+          isHovered={hovered}
+          style={{ borderRadius: "14px" }}
+        />
       )}
     </div>
   );

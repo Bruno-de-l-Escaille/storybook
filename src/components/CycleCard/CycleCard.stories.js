@@ -25,7 +25,7 @@ export const Type1 = () => (
     cycle={cycles[0]}
     language={select("language", ["fr", "nl", "en"], "fr")}
     isFetching={boolean("isFetching", false)}
-    env={select("env", ["production", "staging", "local", "preprod"], "v2")}
+    env={select("env", ["production", "staging", "local", "preprod"], "local")}
     isUserMember={boolean("isUserMember", false)}
     isUserPremium={boolean("isUserPremium", false)}
     queryParams={object("queryParams", {})}

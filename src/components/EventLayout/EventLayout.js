@@ -21,7 +21,6 @@ import {
   isEmpty,
   onError,
   parseBoolean,
-  parseJson,
   prepareS3ResourceUrl,
 } from "../../utils/common";
 import {
@@ -46,9 +45,7 @@ import { CardFlag } from "../../common/components/CardFlag";
 import { TimeCounter } from "../../common/components/TimeCounter";
 import { Fetching } from "./Fetching";
 import { I18N } from "../../i18n";
-import { EventLayoutHover } from "./EventLayoutHover/EventLayoutHover";
-import TagsForm from "./TagForm/TagsForm";
-import { FocusForm } from "./EventLayoutHover/FocusForm/FocusForm";
+import { EventMask } from "../Masks/EventMask/EventMask";
 
 const REPLAY_UPTIME = 3;
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =
@@ -77,8 +74,6 @@ export function EventLayout({
   onBeforeJoinWebinar,
 }) {
   const [hovered, setHovered] = useState(false);
-  const [showAddTags, setShowAddTags] = useState(false);
-  const [showFocusConfig, setShowFocusConfig] = useState(false);
   const [isActionProcessing, setIsActionProcessing] = useState(false);
 
   const apiUrl = getApiUrl(env);
@@ -550,36 +545,13 @@ export function EventLayout({
         }
       />
       {isAdmin && isOFFFcourse && (
-        <>
-          {(showAddTags || showFocusConfig || hovered) && (
-            <EventLayoutHover
-              setShowAddTags={setShowAddTags}
-              showAddTags={showAddTags}
-              setShowFocusConfig={setShowFocusConfig}
-              showFocusConfig={showFocusConfig}
-              isEvent={true}
-            />
-          )}
-          {showAddTags && (
-            <TagsForm
-              setShowAddTags={setShowAddTags}
-              eventId={event.id}
-              language={language}
-              token={token}
-              env={env}
-            />
-          )}
-          {showFocusConfig && (
-            <FocusForm
-              setShowFocusConfig={setShowFocusConfig}
-              eventId={event.id}
-              focusConfig={parseJson(event.focusConfig)}
-              language={language}
-              token={token}
-              env={env}
-            />
-          )}
-        </>
+        <EventMask
+          event={event}
+          language={language}
+          token={token}
+          env={env}
+          isHovered={hovered}
+        />
       )}
     </div>
   );

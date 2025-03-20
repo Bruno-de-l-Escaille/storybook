@@ -21,13 +21,13 @@ export const Default = () => (
     event={event}
     language={select("language", ["fr", "nl", "en"], "fr")}
     isFetching={boolean("isFetching", false)}
-    env={select("env", ["production", "staging", "local", "preprod"], "v2")}
+    env={select("env", ["production", "staging", "local", "preprod"], "local")}
     isUserMember={boolean("isUserMember", false)}
     isUserPremium={boolean("isUserPremium", false)}
     queryParams={object("queryParams", {})}
     isMasterChaine={boolean("isMasterChaine", false)}
     isAdmin={boolean("isAdmin", false)}
     isOFFFcourse={boolean("isOFFFcourse", false)}
-    token="231f67ec6bc68df3bd1cf8d2e53a3ac394f1774f"
+    token="59fe1c09d5d0d1454539d61bb01ffae9a7ed3095"
   />
 );
