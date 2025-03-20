@@ -42,8 +42,6 @@ export const FocusForm = ({
   );
   const [saving, setSaving] = useState(false);
 
-  console.log("xLog1", eventId, selectedFocusConfig);
-
   const positionOptions = [
     { value: 1, label: I18N[language]["inFirst"] },
     { value: 2, label: I18N[language]["inSecond"] },
@@ -77,12 +75,32 @@ export const FocusForm = ({
 
   const handleSave = async () => {
     setSaving(true);
+
+    const updatedFocusConfig = {
+      ...selectedFocusConfig,
+      displayDateFr: selectedFocusConfig.displayDateFr
+        ? moment(selectedFocusConfig.displayDateFr)
+            .utc()
+            .format("YYYY-MM-DD HH:mm:ss")
+        : "",
+      displayDateNl: selectedFocusConfig.displayDateNl
+        ? moment(selectedFocusConfig.displayDateNl)
+            .utc()
+            .format("YYYY-MM-DD HH:mm:ss")
+        : "",
+      displayDateEn: selectedFocusConfig.displayDateEn
+        ? moment(selectedFocusConfig.displayDateEn)
+            .utc()
+            .format("YYYY-MM-DD HH:mm:ss")
+        : "",
+    };
+
     if (eventId) {
       updateEventFocusConfig({
         apiUrl,
         token,
         eventId,
-        updatedFocusConfig: selectedFocusConfig,
+        updatedFocusConfig: updatedFocusConfig,
       }).then(({ data }) => {
         const updatedEvent = data.data;
         setSaving(false);
@@ -94,7 +112,7 @@ export const FocusForm = ({
         apiUrl,
         token,
         cycleId,
-        updatedFocusConfig: selectedFocusConfig,
+        updatedFocusConfig: updatedFocusConfig,
       }).then(({ data }) => {
         const updatedCycle = data.data;
         setSaving(false);

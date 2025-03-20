@@ -40,7 +40,7 @@ const prepareFocusedItems = (events, cycles, language) => {
       return true;
     }
 
-    return moment(displayDate).isAfter(moment());
+    return moment(displayDate).utc().isAfter(moment().utc());
   });
 
   const sortedItems = filteredItems.sort((a, b) => {
