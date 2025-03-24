@@ -134,6 +134,15 @@ export const FocusForm = ({
         : moment().add(1, "month").endOf("day").format("YYYY-MM-DD HH:mm:ss");
 
       handleDateChange(defaultDisplayDate);
+    } else {
+      const displayDate = moment
+        .utc(
+          selectedFocusConfig[`displayDate${capitalizeFirstLetter(language)}`]
+        )
+        .local()
+        .format("YYYY-MM-DD HH:mm:ss");
+
+      handleDateChange(displayDate);
     }
   }, [language]);
 
