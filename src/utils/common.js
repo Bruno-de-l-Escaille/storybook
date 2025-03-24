@@ -104,6 +104,9 @@ export const getApiUrl = (env) => {
     case "staging":
       apiUrl = "https://api.staging.tamtam.pro";
       break;
+    case "preprod":
+      apiUrl = "https://api.preprod.tamtam.pro";
+      break;
     default:
       apiUrl = "https://api.tamtam.pro";
       break;
