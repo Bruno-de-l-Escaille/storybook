@@ -52,6 +52,7 @@ export const EventMask = ({
             updateFocusConfig={(newFocusConfig) => {
               event.focusConfig = newFocusConfig;
             }}
+            endDateTime={event.endDateTime}
           />
         );
       default:

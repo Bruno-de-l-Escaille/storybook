@@ -13,7 +13,6 @@ export const CycleMask = ({
   ...restProps
 }) => {
   const [activeForm, setActiveForm] = useState(null);
-  const formRefs = useRef({});
 
   const toggleForm = (form) => {
     if (activeForm === form) {
@@ -41,9 +40,7 @@ export const CycleMask = ({
             updateFocusConfig={(newFocusConfig) => {
               cycle.focusConfig = newFocusConfig;
             }}
-            ref={(el) => {
-              formRefs.current["focus"] = el;
-            }}
+            endDateTime={cycle.endDateTime}
           />
         );
       default:
@@ -62,7 +59,6 @@ export const CycleMask = ({
       renderForm={renderForm}
       isActive={isHovered || activeForm !== null}
       closeForm={closeForm}
-      formRefs={formRefs}
       {...restProps}
     />
   );

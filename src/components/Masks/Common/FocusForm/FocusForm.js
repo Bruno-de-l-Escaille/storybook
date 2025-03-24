@@ -1,6 +1,6 @@
 import cn from "classnames";
-import React, { useState } from "react";
-import { capitalizeFirstLetter, getApiUrl } from "../../../../utils";
+import React, { useEffect, useState } from "react";
+import { capitalizeFirstLetter, getApiUrl, isEmpty } from "../../../../utils";
 import styles from "./FocusForm.module.scss";
 import IconCross from "../../../CycleCard/assets/IconCross";
 import { ClipLoader } from "react-spinners";
@@ -24,6 +24,7 @@ export const FocusForm = ({
   env,
   focusConfig,
   updateFocusConfig,
+  endDateTime,
 }) => {
   const defaultFocusConfig = {
     positionFr: 0,
@@ -121,6 +122,20 @@ export const FocusForm = ({
       });
     }
   };
+
+  useEffect(() => {
+    if (
+      isEmpty(
+        selectedFocusConfig[`displayDate${capitalizeFirstLetter(language)}`]
+      )
+    ) {
+      const defaultDisplayDate = moment(endDateTime).isAfter(moment())
+        ? moment(endDateTime).endOf("day").format("YYYY-MM-DD HH:mm:ss")
+        : moment().add(1, "month").endOf("day").format("YYYY-MM-DD HH:mm:ss");
+
+      handleDateChange(defaultDisplayDate);
+    }
+  }, [language]);
 
   return (
     <div className={styles.FocusForm}>
@@ -227,6 +242,7 @@ export const FocusForm = ({
                           }
                           placeholder={I18N[language]["Until"]}
                           showNow={false}
+                          allowClear={false}
                         />
                       </div>
                     </div>
