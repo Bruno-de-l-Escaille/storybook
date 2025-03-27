@@ -58,6 +58,7 @@ export const EventSlide = ({
     endDateTime,
     memberPrice,
     nonMemberPrice,
+    isVirtual,
   } = event;
 
   const isFull = isEventFull(event);
@@ -188,6 +189,7 @@ export const EventSlide = ({
             startDateTime={startDateTime}
             endDateTime={endDateTime}
             Link={Link}
+            isVirtual={isVirtual}
           />
           <Slide.Body className={styles.slideBody}>
             {showOrateurs && <SpeakersSlide speakers={speakers} />}
@@ -268,6 +270,7 @@ export const EventSlide = ({
             type="FORMATION"
             isSmall={isSmall}
             Link={Link}
+            isVirtual={isVirtual}
           />
           <Slide.Body className={styles.slideBody}>
             {showOrateurs && <SpeakersSlide speakers={speakers} />}

@@ -68,6 +68,7 @@ const Header = ({
   openNewTab,
   isSmall,
   Link = "a",
+  isVirtual = false,
 }) => {
   const { isMobile } = useResponsive();
 
@@ -87,6 +88,7 @@ const Header = ({
               startDateTime={startDateTime}
               endDateTime={endDateTime}
               language={language}
+              isVirtual={isVirtual}
             />
           )}
           {clientImg && (

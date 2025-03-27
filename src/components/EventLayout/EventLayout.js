@@ -383,7 +383,7 @@ export function EventLayout({
       );
     }
 
-    if (isFull) {
+    if (isFull && !isFree) {
       return null;
     }
 
@@ -444,7 +444,9 @@ export function EventLayout({
           <div>
             {isLive ? (
               <div className={cn(styles.badge, styles.live)}>
-                {I18N[language]["liveNow"]}
+                {isVirtual
+                  ? I18N[language]["liveNow"]
+                  : I18N[language]["inProgress"]}
               </div>
             ) : showTimeCounter ? (
               <TimeCounter

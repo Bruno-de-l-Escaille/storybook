@@ -4,7 +4,12 @@ import { getEventNbMinutes } from "../../../../../utils/event";
 import styles from "./LiveCounter.module.scss";
 import { useTimeCounter } from "../../../../../common/hooks/useTimeCounter";
 
-export default function LiveCounter({ startDateTime, endDateTime, language }) {
+export default function LiveCounter({
+  startDateTime,
+  endDateTime,
+  isVirtual,
+  language,
+}) {
   const nbMinutes = getEventNbMinutes({ startDateTime, endDateTime });
 
   const timeCount = useTimeCounter(startDateTime);
@@ -13,7 +18,9 @@ export default function LiveCounter({ startDateTime, endDateTime, language }) {
 
   return (
     <div className={styles.live_now}>
-      <div className={styles.label}>{I18N[language]["liveNow"]}</div>
+      <div className={styles.label}>
+        {isVirtual ? I18N[language]["liveNow"] : I18N[language]["inProgress"]}
+      </div>
       {!!showTimeCounter && (
         <div className={styles.time}>
           {`${timeCount.minutes}:${timeCount.seconds}`} {I18N[language]["on"]}{" "}
