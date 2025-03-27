@@ -4,6 +4,7 @@ import Slide from "../Common/Slide/Slide";
 import { getEventSideConfig } from "./services";
 import { getByLanguage, prepareS3ResourceUrl } from "../../../utils/common";
 import {
+  filterEventSpeakers,
   formatDateFromTo,
   getMasterChaineUrl,
   getOfffcourseUrl,
@@ -80,7 +81,7 @@ export const EventSlide = ({
 
   const name = getByLanguage(event, "name", language);
   const clientImg = clientData?.avatarUrl;
-  const speakers = speakersData?.speakers;
+  const speakers = filterEventSpeakers(speakersData?.speakers);
 
   const s3FolderUrl = `http://s3.tamtam.pro/${
     env === "v2" ? "production" : env

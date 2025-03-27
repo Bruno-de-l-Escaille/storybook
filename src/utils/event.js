@@ -536,3 +536,13 @@ export const isEventStageOpen = (event, stage) => {
   const stages = parseJson(event.stages);
   return isEventHasStage(stages?.[stage]);
 };
+
+export const filterEventSpeakers = (speakers) =>
+  speakers.filter((speaker) => {
+    const { slots } = speaker;
+
+    return slots?.some((slot) => {
+      const { type } = slot;
+      return type == 1;
+    });
+  });
