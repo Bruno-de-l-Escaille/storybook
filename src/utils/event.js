@@ -175,7 +175,7 @@ export const isFreeEvent = (event) => {
   const { memberPrice, nonMemberPrice, type } = event;
 
   if (+type === 5) {
-    return event.isFreeMember && event.isFreeNonMember;
+    return false;
   }
 
   const isEmptyMemberPrice = +memberPrice === 0 || Number.isNaN(+memberPrice);

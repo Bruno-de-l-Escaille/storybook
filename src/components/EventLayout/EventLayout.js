@@ -383,7 +383,7 @@ export function EventLayout({
       );
     }
 
-    if (isFull && !isFree) {
+    if (isFull) {
       return null;
     }
 
