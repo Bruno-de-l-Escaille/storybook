@@ -46,11 +46,15 @@ export const EventMask = ({
             setShowFocusConfig={closeForm}
             eventId={event.id}
             focusConfig={parseJson(event.focusConfig)}
+            carouselConfig={parseJson(event.carouselConfig)}
             language={language}
             token={token}
             env={env}
             updateFocusConfig={(newFocusConfig) => {
               event.focusConfig = newFocusConfig;
+            }}
+            updateCarouselConfig={(newCarouselConfig) => {
+              event.carouselConfig = newCarouselConfig;
             }}
             endDateTime={event.endDateTime}
           />

@@ -22,7 +22,8 @@ $transition-speed: 0.2s;
   animation: slideForm 0.2s ease-in-out forwards;
   margin-left: 8px;
   width: calc(100% - 1rem);
-  overflow: hidden;
+  overflow: auto; // Permet le scrolling
+  max-height: 90vh; // Empêche que le formulaire dépasse l'écran
 
   .header {
     width: 100%;

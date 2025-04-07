@@ -34,11 +34,15 @@ export const CycleMask = ({
             setShowFocusConfig={closeForm}
             cycleId={cycle.id}
             focusConfig={parseJson(cycle.focusConfig)}
+            carouselConfig={parseJson(cycle.carouselConfig)}
             language={language}
             token={token}
             env={env}
             updateFocusConfig={(newFocusConfig) => {
               cycle.focusConfig = newFocusConfig;
+            }}
+            updateCarouselConfig={(newCarouselConfig) => {
+              cycle.carouselConfig = newCarouselConfig;
             }}
             endDateTime={cycle.endDateTime}
           />

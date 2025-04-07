@@ -130,12 +130,14 @@ export const updateEventFocusConfig = ({
   token,
   eventId,
   updatedFocusConfig,
+  updatedCarouselConfig,
 }) => {
   const requestUrl = `${apiUrl}/event/event`;
   var formData = new FormData();
   formData.append("access_token", token);
   formData.append("id", eventId);
   formData.append("focusConfig", JSON.stringify(updatedFocusConfig));
+  formData.append("carouselConfig", JSON.stringify(updatedCarouselConfig));
   return axios.post(requestUrl, formData);
 };
 
@@ -144,11 +146,13 @@ export const updateCycleFocusConfig = ({
   token,
   cycleId,
   updatedFocusConfig,
+  updatedCarouselConfig,
 }) => {
   const requestUrl = `${apiUrl}/event/cycle`;
   var formData = new FormData();
   formData.append("access_token", token);
   formData.append("id", cycleId);
   formData.append("focusConfig", JSON.stringify(updatedFocusConfig));
+  formData.append("carouselConfig", JSON.stringify(updatedCarouselConfig));
   return axios.post(requestUrl, formData);
 };

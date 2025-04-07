@@ -10,8 +10,11 @@ import {
   updateCycleFocusConfig,
   updateEventFocusConfig,
 } from "../../../../api";
-import { DatePicker } from "antd";
+import { DatePicker, Tabs } from "antd";
 import momentGenerateConfig from "rc-picker/lib/generate/moment";
+import TabPane from "antd/es/tabs/TabPane";
+import FocusTab from "./FocusTab";
+import CarouselTab from "./CarouselTab";
 
 const MomentDatePicker = DatePicker.generatePicker(momentGenerateConfig);
 
@@ -24,6 +27,8 @@ export const FocusForm = ({
   env,
   focusConfig,
   updateFocusConfig,
+  carouselConfig,
+  updateCarouselConfig,
   endDateTime,
 }) => {
   const defaultFocusConfig = {
@@ -37,44 +42,71 @@ export const FocusForm = ({
     displayDateNl: "",
     displayDateEn: "",
   };
+  const defaultCarousselConfig = {
+    positionFr: 0,
+    positionNl: 0,
+    positionEn: 0,
+    displayDateFr: "",
+    displayDateNl: "",
+    displayDateEn: "",
+  };
   const apiUrl = getApiUrl(env);
   const [selectedFocusConfig, setSelectedFocusConfig] = useState(
     focusConfig || defaultFocusConfig
   );
+  const [selectedCarouselConfig, setSelectedCarouselConfig] = useState(
+    carouselConfig || defaultCarousselConfig
+  );
   const [saving, setSaving] = useState(false);
+  const [activeTab, setActiveTab] = useState("focus");
 
   const positionOptions = [
     { value: 1, label: I18N[language]["inFirst"] },
     { value: 2, label: I18N[language]["inSecond"] },
     { value: 3, label: I18N[language]["inThird"] },
     { value: 4, label: I18N[language]["inFourth"] },
+  ];
+
+  const positionOptionsFocus = [
+    ...positionOptions,
+    { value: 0, label: I18N[language]["noOptions"] },
+  ];
+  const positionOptionsCarousel = [
+    ...positionOptions,
+    { value: 5, label: I18N[language]["inFifth"] },
     { value: 0, label: I18N[language]["noOptions"] },
   ];
 
-  const currentPosition =
+  const currentPositionFocus =
     selectedFocusConfig?.[`position${capitalizeFirstLetter(language)}`] ?? 0;
-  const selectedOption = positionOptions.find(
-    (opt) => opt.value === currentPosition
-  );
+  const currentPositionCarousel =
+    selectedCarouselConfig?.[`position${capitalizeFirstLetter(language)}`] ?? 0;
 
-  const handleChange = (field, value) => {
-    setSelectedFocusConfig((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
+  const selectedOption = positionOptionsFocus.find(
+    (opt) => opt.value === currentPositionFocus
+  );
+  const selectedCarouselOption = positionOptionsCarousel.find(
+    (opt) => opt.value === currentPositionCarousel
+  );
 
   const handleDateChange = (value) => {
     const lang = capitalizeFirstLetter(language);
 
     const formattedDate = value ? value : "";
-    setSelectedFocusConfig((prev) => ({
-      ...prev,
-      [`displayDate${lang}`]: formattedDate,
-    }));
+    if (activeTab === "focus") {
+      setSelectedFocusConfig((prev) => ({
+        ...prev,
+        [`displayDate${lang}`]: formattedDate,
+      }));
+    } else {
+      setSelectedCarouselConfig((prev) => ({
+        ...prev,
+        [`displayDate${lang}`]: formattedDate,
+      }));
+    }
   };
 
-  const handleSave = async () => {
+  const handleSave = async (tab) => {
     setSaving(true);
 
     const updatedFocusConfig = {
@@ -96,17 +128,38 @@ export const FocusForm = ({
         : "",
     };
 
+    const updatedCarouselConfig = {
+      ...selectedCarouselConfig,
+      displayDateFr: selectedCarouselConfig.displayDateFr
+        ? moment(selectedCarouselConfig.displayDateFr)
+            .utc()
+            .format("YYYY-MM-DD HH:mm:ss")
+        : "",
+      displayDateNl: selectedCarouselConfig.displayDateNl
+        ? moment(selectedCarouselConfig.displayDateNl)
+            .utc()
+            .format("YYYY-MM-DD HH:mm:ss")
+        : "",
+      displayDateEn: selectedCarouselConfig.displayDateEn
+        ? moment(selectedCarouselConfig.displayDateEn)
+            .utc()
+            .format("YYYY-MM-DD HH:mm:ss")
+        : "",
+    };
+
     if (eventId) {
       updateEventFocusConfig({
         apiUrl,
         token,
         eventId,
         updatedFocusConfig: updatedFocusConfig,
+        updatedCarouselConfig: updatedCarouselConfig,
       }).then(({ data }) => {
         const updatedEvent = data.data;
         setSaving(false);
         setShowFocusConfig(false);
         updateFocusConfig(updatedEvent.focusConfig);
+        updateCarouselConfig(updatedEvent.carouselConfig);
       });
     } else if (cycleId) {
       updateCycleFocusConfig({
@@ -114,11 +167,13 @@ export const FocusForm = ({
         token,
         cycleId,
         updatedFocusConfig: updatedFocusConfig,
+        updatedCarouselConfig: updatedCarouselConfig,
       }).then(({ data }) => {
         const updatedCycle = data.data;
         setSaving(false);
         setShowFocusConfig(false);
         updateFocusConfig(updatedCycle.focusConfig);
+        updateCarouselConfig(updatedCycle.carouselConfig);
       });
     }
   };
@@ -149,7 +204,7 @@ export const FocusForm = ({
   return (
     <div className={styles.FocusForm}>
       <div className={styles.header}>
-        <div className={styles.headerTitle}>{I18N[language]["position"]}</div>
+        <div className={styles.headerTitle}>{I18N[language][activeTab]}</div>
         <div className={styles.i}>
           <div
             className={cn(styles.close_icon, "col small-1")}
@@ -159,118 +214,48 @@ export const FocusForm = ({
           </div>
         </div>
       </div>
-      <div className={styles.mainContainer}>
-        <div className={styles.focusContainer}>
-          <div className={styles.optionsContainer}>
-            {positionOptions.map((option) => (
-              <div key={option.value} className={styles.optionItem}>
-                <div className={styles.radioContainer}>
-                  <input
-                    type="radio"
-                    id={`position${capitalizeFirstLetter(language)}-${
-                      option.value
-                    }-${eventId || cycleId}`}
-                    name={`option-${eventId || cycleId}`}
-                    value={option.value}
-                    checked={
-                      selectedFocusConfig[
-                        `position${capitalizeFirstLetter(language)}`
-                      ] === option.value
-                    }
-                    onChange={() => {
-                      handleChange(
-                        `position${capitalizeFirstLetter(language)}`,
-                        option.value
-                      );
-                    }}
-                    className={styles.radioInput}
-                  />
-                  <label
-                    htmlFor={`position${capitalizeFirstLetter(language)}-${
-                      option.value
-                    }-${eventId || cycleId}`}
-                    className={styles.radioLabel}
-                  >
-                    {capitalizeFirstLetter(option.label)}
-                  </label>
-                </div>
-
-                {selectedOption &&
-                  selectedOption.value === option.value &&
-                  selectedOption.value !== 0 && (
-                    <div className={styles.optionDetails}>
-                      <div className={styles.formField}>
-                        <label className={styles.fieldLabel}>
-                          {I18N[language]["title"]}
-                        </label>
-                        <input
-                          type="text"
-                          value={
-                            selectedFocusConfig[
-                              `title${capitalizeFirstLetter(language)}`
-                            ] || ""
-                          }
-                          onChange={(e) =>
-                            handleChange(
-                              `title${capitalizeFirstLetter(language)}`,
-                              e.target.value
-                            )
-                          }
-                          placeholder={I18N[language]["title"]}
-                          className={styles.textInput}
-                        />
-                      </div>
-                      <div className={styles.formField}>
-                        <label className={styles.fieldLabel}>
-                          {I18N[language]["Until"]}
-                        </label>
-                        <MomentDatePicker
-                          value={
-                            selectedFocusConfig[
-                              `displayDate${capitalizeFirstLetter(language)}`
-                            ]
-                              ? moment(
-                                  selectedFocusConfig[
-                                    `displayDate${capitalizeFirstLetter(
-                                      language
-                                    )}`
-                                  ]
-                                )
-                              : null
-                          }
-                          onChange={(date) =>
-                            handleDateChange(
-                              date ? date.format("YYYY-MM-DD HH:mm:ss") : null
-                            )
-                          }
-                          format="DD/MM/YYYY HH:mm"
-                          showTime={{ format: "HH:mm" }}
-                          className={styles.dateInput}
-                          disabledDate={(current) =>
-                            current && current < moment().startOf("second")
-                          }
-                          placeholder={I18N[language]["Until"]}
-                          showNow={false}
-                          allowClear={false}
-                        />
-                      </div>
-                    </div>
-                  )}
-              </div>
-            ))}
-          </div>
-          <button className={styles.saveButton} onClick={handleSave}>
-            {I18N[language]["save"]}
-          </button>
-        </div>
-        {saving && (
-          <div className={styles.saving}>
-            <div className={styles.loader}>
-              <ClipLoader size="30px" color="#18a0fb" />
-            </div>
-          </div>
-        )}
-      </div>
+      <Tabs defaultActiveKey="focus" onChange={(key) => setActiveTab(key)}>
+        <TabPane tab="Focus" key="focus">
+          <FocusTab
+            positionOptions={positionOptionsFocus}
+            selectedFocusConfig={selectedFocusConfig}
+            selectedOption={selectedOption}
+            handleChange={(field, value) => {
+              setSelectedFocusConfig((prev) => ({
+                ...prev,
+                [field]: value,
+              }));
+            }}
+            handleDateChange={handleDateChange}
+            handleSave={handleSave}
+            saving={saving}
+            language={language}
+            eventId={eventId}
+            cycleId={cycleId}
+            MomentDatePicker={MomentDatePicker}
+          />
+        </TabPane>
+        <TabPane tab="Carousel" key="carousel">
+          <CarouselTab
+            positionOptions={positionOptionsCarousel}
+            selectedCarouselConfig={selectedCarouselConfig}
+            selectedCarouselOption={selectedCarouselOption}
+            handleChange={(field, value) => {
+              setSelectedCarouselConfig((prev) => ({
+                ...prev,
+                [field]: value,
+              }));
+            }}
+            handleDateChange={handleDateChange}
+            handleSave={handleSave}
+            saving={saving}
+            language={language}
+            eventId={eventId}
+            cycleId={cycleId}
+            MomentDatePicker={MomentDatePicker}
+          />
+        </TabPane>
+      </Tabs>
     </div>
   );
 };

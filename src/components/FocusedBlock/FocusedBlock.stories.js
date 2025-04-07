@@ -30,6 +30,6 @@ export const Default = () => (
     isMasterChaine={boolean("isMasterChaine", false)}
     isAdmin={boolean("isAdmin", false)}
     isOFFFcourse={boolean("isOFFFcourse", false)}
-    token="231f67ec6bc68df3bd1cf8d2e53a3ac394f1774f"
+    token="b939a3e931ad83d6cdfa258b7f77ec6eac734778"
   />
 );

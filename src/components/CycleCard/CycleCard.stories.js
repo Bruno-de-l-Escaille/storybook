@@ -31,7 +31,7 @@ export const Type1 = () => (
     queryParams={object("queryParams", {})}
     isOFFFcourse={boolean("isOFFFcourse", false)}
     isAdmin={boolean("isAdmin", false)}
-    token="231f67ec6bc68df3bd1cf8d2e53a3ac394f1774f"
+    token="b939a3e931ad83d6cdfa258b7f77ec6eac734778"
   />
 );
 
@@ -47,7 +47,7 @@ export const Type2 = () => {
       queryParams={object("queryParams", {})}
       isOFFFcourse={boolean("isOFFFcourse", false)}
       isAdmin={boolean("isAdmin", false)}
-      token="231f67ec6bc68df3bd1cf8d2e53a3ac394f1774f"
+      token="b939a3e931ad83d6cdfa258b7f77ec6eac734778"
     />
   );
 };
@@ -64,6 +64,6 @@ export const Type3 = () => (
     onClick={onClick}
     isOFFFcourse={boolean("isOFFFcourse", false)}
     isAdmin={boolean("isAdmin", false)}
-    token="231f67ec6bc68df3bd1cf8d2e53a3ac394f1774f"
+    token="b939a3e931ad83d6cdfa258b7f77ec6eac734778"
   />
 );
