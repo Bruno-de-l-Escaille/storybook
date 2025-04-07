@@ -29,10 +29,11 @@ const Login = ({
   initialEmail,
   showResetPassword,
   showForgotCheckEmail = false,
+  showForgotStep,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showForgot, setShowForgot] = useState(false);
+  const [showForgot, setShowForgot] = useState(showForgotStep);
   const [errors, setErrors] = useState({
     email: "",
     password: "",
