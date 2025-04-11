@@ -156,3 +156,17 @@ export const updateCycleFocusConfig = ({
   formData.append("carouselConfig", JSON.stringify(updatedCarouselConfig));
   return axios.post(requestUrl, formData);
 };
+
+export const updateEventWatchConfig = ({
+  id,
+  apiUrl,
+  updatedWatchConfig,
+  token,
+}) => {
+  const requestUrl = `${apiUrl}/event/event`;
+  var formData = new FormData();
+  formData.append("access_token", token);
+  formData.append("id", id);
+  formData.append("watchConfig", updatedWatchConfig);
+  return axios.post(requestUrl, formData);
+};

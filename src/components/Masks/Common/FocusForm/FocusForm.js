@@ -179,11 +179,11 @@ export const FocusForm = ({
   };
 
   useEffect(() => {
-    if (
-      isEmpty(
-        selectedFocusConfig[`displayDate${capitalizeFirstLetter(language)}`]
-      )
-    ) {
+    const langKey = `displayDate${capitalizeFirstLetter(language)}`;
+    const selectedConfig =
+      activeTab === "focus" ? selectedFocusConfig : selectedCarouselConfig;
+
+    if (isEmpty(selectedConfig[langKey])) {
       const defaultDisplayDate = moment(endDateTime).isAfter(moment())
         ? moment(endDateTime).endOf("day").format("YYYY-MM-DD HH:mm:ss")
         : moment().add(1, "month").endOf("day").format("YYYY-MM-DD HH:mm:ss");
@@ -191,15 +191,13 @@ export const FocusForm = ({
       handleDateChange(defaultDisplayDate);
     } else {
       const displayDate = moment
-        .utc(
-          selectedFocusConfig[`displayDate${capitalizeFirstLetter(language)}`]
-        )
+        .utc(selectedConfig[langKey])
         .local()
         .format("YYYY-MM-DD HH:mm:ss");
 
       handleDateChange(displayDate);
     }
-  }, [language]);
+  }, [language, activeTab]);
 
   return (
     <div className={styles.FocusForm}>
