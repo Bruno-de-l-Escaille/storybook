@@ -199,9 +199,7 @@ export class UserCard extends Component {
   }
 
   showUserFormModal() {
-    const { metas, id } = this.props.user;
-    let user = { metas, id };
-    this.props.displayUserMetaFormModal(user);
+    this.props.displayUserMetaFormModal(this.props.user);
   }
 
   render() {

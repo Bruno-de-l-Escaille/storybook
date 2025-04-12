@@ -29,6 +29,7 @@ export const Light = () => (
           theme="light"
           user={users[Math.floor(Math.random() * 10)]}
           isFetching={boolean("isFetching", false)}
+          displayUserMetaFormModal={(e) => console.log(e)}
         />
       </div>
     </div>
