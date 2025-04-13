@@ -179,10 +179,36 @@ export class UserCard extends Component {
 
   renderUserExtraButton() {
     const { metas } = this.props.user;
-    let logoPath =
-      metas && metas.organization && metas.organization.path
-        ? metas.organization.path
-        : null;
+    let logoPath = null;
+    if (metas?.avatar?.type) {
+      if (
+        metas.avatar.type === "MANUAL" &&
+        metas.organization &&
+        metas.organization.path
+      ) {
+        logoPath = metas.organization.path;
+      } else {
+        if (metas.avatar.type === "CHAIN" && metas.avatar.mediaChain) {
+          let mediaChain = null;
+          if (metas.avatar.mediaChain.length > 0) {
+            metas.avatar.mediaChain.forEach((media) => {
+              if (media.language === this.props.lng) {
+                mediaChain = media;
+              }
+            });
+          }
+          if (mediaChain) {
+            logoPath = mediaChain.avatarUrl
+              ? addLandaSize(mediaChain.avatarUrl, 80)
+              : mediaChain.avatar
+              ? TTP_API_URL + "/" + mediaChain.avatar
+              : null;
+          }
+        }
+      }
+    } else if (metas && metas.organization && metas.organization.path) {
+      logoPath = metas.organization.path;
+    }
     return (
       <div className={styles.extraInfos} onClick={this.showUserFormModal}>
         {logoPath ? (
