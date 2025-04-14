@@ -18,9 +18,7 @@ export const EventMask = ({
   ...restProps
 }) => {
   const [activeForm, setActiveForm] = useState(null);
-  const [watchConfig, setWatchConfig] = useState(
-    event.watchConfig === 1 ? true : false
-  );
+  const [watchConfig, setWatchConfig] = useState(event.watchConfig === 1);
   const iconUrl = "	https://unitedassociates.be/img/apps/offfcourse.svg";
 
   const handleWatchConfigChange = (newWatchConfig) => {
@@ -31,7 +29,7 @@ export const EventMask = ({
     updateEventWatchConfig({ id, apiUrl, updatedWatchConfig, token })
       .then(({ data }) => {
         const updatedEvent = data.data;
-        setWatchConfig(updatedEvent.watchConfig);
+        setWatchConfig(updatedEvent.watchConfig == 1);
 
         Toast.success(
           newWatchConfig
