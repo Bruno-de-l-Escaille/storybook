@@ -29,6 +29,7 @@ export const Light = () => (
           theme="light"
           user={users[Math.floor(Math.random() * 10)]}
           isFetching={boolean("isFetching", false)}
+          displayUserMetaFormModal={(e) => console.log(e)}
         />
       </div>
     </div>
@@ -45,6 +46,7 @@ export const LightEdit = () => (
           onAvatarClick={action("onAvatarClick")}
           user={users[Math.floor(Math.random() * 10)]}
           isFetching={boolean("isFetching", false)}
+          displayUserMetaFormModal={(e) => console.log(e)}
         />
       </div>
     </div>
@@ -60,6 +62,7 @@ export const Dark = () => (
             theme="dark"
             user={users[Math.floor(Math.random() * 10)]}
             isFetching={boolean("isFetching", false)}
+            displayUserMetaFormModal={(e) => console.log(e)}
           />
         </div>
       </div>
@@ -78,6 +81,7 @@ export const DarkEdit = () => (
             onAvatarClick={action("onAvatarClick")}
             user={users[Math.floor(Math.random() * 10)]}
             isFetching={boolean("isFetching", false)}
+            displayUserMetaFormModal={(e) => console.log(e)}
           />
         </div>
       </div>
