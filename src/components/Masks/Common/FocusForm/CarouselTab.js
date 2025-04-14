@@ -27,10 +27,10 @@ const CarouselTab = ({
               <div className={styles.radioContainer}>
                 <input
                   type="radio"
-                  id={`position${capitalizeFirstLetter(language)}-${
+                  id={`carousel-position${capitalizeFirstLetter(language)}-${
                     option.value
                   }-${eventId || cycleId}`}
-                  name={`option-${eventId || cycleId}`}
+                  name={`caroussel-option-${eventId || cycleId}`}
                   value={option.value}
                   checked={
                     selectedCarouselConfig[
@@ -46,9 +46,9 @@ const CarouselTab = ({
                   className={styles.radioInput}
                 />
                 <label
-                  htmlFor={`position${capitalizeFirstLetter(language)}-${
-                    option.value
-                  }-${eventId || cycleId}`}
+                  htmlFor={`carousel-position${capitalizeFirstLetter(
+                    language
+                  )}-${option.value}-${eventId || cycleId}`}
                   className={styles.radioLabel}
                 >
                   {capitalizeFirstLetter(option.label)}
