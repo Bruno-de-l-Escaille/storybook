@@ -254,7 +254,6 @@ export default function TagEdit({
 
   return (
     <>
-      <FlashMessage time={3000} />
       <div className={styles.modal_header}>
         <span>Modifier le tag</span>
         <div className={styles.close_icon} onClick={handleModalClose}>

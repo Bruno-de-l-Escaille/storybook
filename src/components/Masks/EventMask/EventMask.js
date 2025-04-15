@@ -107,7 +107,6 @@ export const EventMask = ({
 
   return (
     <>
-      <FlashMessage />
       <Mask
         actions={[
           {
