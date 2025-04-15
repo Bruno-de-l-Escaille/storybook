@@ -170,3 +170,37 @@ export const updateEventWatchConfig = ({
   formData.append("watchConfig", updatedWatchConfig);
   return axios.post(requestUrl, formData);
 };
+export const getCarouselEventsTitels = async ({ apiUrl, token, language }) => {
+  const fields = [
+    "id",
+    "nameFr",
+    "nameEn",
+    "nameNl",
+    "carouselConfig",
+    "startDateTime",
+    "endDateTime",
+  ];
+  const requestUrl = `${apiUrl}/event/get-slider-entities`;
+
+  try {
+    const response = await axios.get(requestUrl, {
+      params: {
+        languages: language,
+        access_token: token,
+        fields: fields.join(","),
+      },
+    });
+
+    const entities = response.data.data.entities.map((entity) => ({
+      ...entity,
+      carouselConfig: entity.carouselConfig
+        ? JSON.parse(entity.carouselConfig)
+        : null,
+    }));
+
+    return entities;
+  } catch (error) {
+    console.error("Error fetching carousel events:", error);
+    return [];
+  }
+};

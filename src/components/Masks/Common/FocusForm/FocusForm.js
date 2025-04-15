@@ -1,5 +1,5 @@
 import cn from "classnames";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { capitalizeFirstLetter, getApiUrl, isEmpty } from "../../../../utils";
 import styles from "./FocusForm.module.scss";
 import IconCross from "../../../CycleCard/assets/IconCross";
@@ -7,6 +7,7 @@ import { ClipLoader } from "react-spinners";
 import { I18N } from "../../../../i18n";
 import moment from "moment";
 import {
+  getCarouselEventsTitels,
   updateCycleFocusConfig,
   updateEventFocusConfig,
 } from "../../../../api";
@@ -59,6 +60,8 @@ export const FocusForm = ({
   );
   const [saving, setSaving] = useState(false);
   const [activeTab, setActiveTab] = useState("focus");
+  const [carouselEvents, setCarouselEvents] = useState([]);
+  const [loadingEvents, setLoadingEvents] = useState(false);
 
   const positionOptions = [
     { value: 1, label: I18N[language]["inFirst"] },
@@ -71,11 +74,46 @@ export const FocusForm = ({
     ...positionOptions,
     { value: 0, label: I18N[language]["noOptions"] },
   ];
-  const positionOptionsCarousel = [
-    ...positionOptions,
-    { value: 5, label: I18N[language]["inFifth"] },
-    { value: 0, label: I18N[language]["noOptions"] },
-  ];
+
+  // Fonction pour obtenir le titre d'un événement par position et langue
+  const getEventTitleByPosition = (position) => {
+    if (!Array.isArray(carouselEvents)) return "--";
+
+    const langKey = `name${capitalizeFirstLetter(language)}`;
+    const event = carouselEvents.find((event) => {
+      if (!event.carouselConfig) return false;
+
+      // Si carouselConfig est une string, on la parse
+      const config =
+        typeof event.carouselConfig === "string"
+          ? JSON.parse(event.carouselConfig)
+          : event.carouselConfig;
+
+      return (
+        config?.[`position${capitalizeFirstLetter(language)}`] === position
+      );
+    });
+
+    return event ? event[langKey] || "--" : "--";
+  };
+
+  // Options du carousel avec les titres des événements
+  const positionOptionsCarousel = useMemo(() => {
+    const baseOptions = [
+      ...positionOptions,
+      { value: 5, label: I18N[language]["inFifth"] },
+      { value: 0, label: I18N[language]["noOptions"] },
+    ];
+
+    return baseOptions.map((option) => ({
+      ...option,
+      label: loadingEvents
+        ? `${option.label} (loading...)`
+        : `${option.label} (${
+            option.value > 0 ? getEventTitleByPosition(option.value) : "--"
+          })`,
+    }));
+  }, [positionOptions, language, carouselEvents, loadingEvents]);
 
   const currentPositionFocus =
     selectedFocusConfig?.[`position${capitalizeFirstLetter(language)}`] ?? 0;
@@ -179,6 +217,39 @@ export const FocusForm = ({
   };
 
   useEffect(() => {
+    const fetchCarouselEvents = async () => {
+      setLoadingEvents(true);
+      try {
+        const response = await getCarouselEventsTitels({
+          apiUrl,
+          token,
+          language,
+        });
+
+        // Parser les configurations du carousel si nécessaire
+        const events = Array.isArray(response)
+          ? response.map((event) => ({
+              ...event,
+              carouselConfig:
+                typeof event.carouselConfig === "string"
+                  ? JSON.parse(event.carouselConfig)
+                  : event.carouselConfig,
+            }))
+          : [];
+
+        setCarouselEvents(events);
+      } catch (error) {
+        console.error("Error fetching carousel events:", error);
+        setCarouselEvents([]);
+      } finally {
+        setLoadingEvents(false);
+      }
+    };
+
+    fetchCarouselEvents();
+  }, [apiUrl, token, language]);
+
+  useEffect(() => {
     const langKey = `displayDate${capitalizeFirstLetter(language)}`;
     const selectedConfig =
       activeTab === "focus" ? selectedFocusConfig : selectedCarouselConfig;
@@ -251,6 +322,7 @@ export const FocusForm = ({
             eventId={eventId}
             cycleId={cycleId}
             MomentDatePicker={MomentDatePicker}
+            loadingEvents={loadingEvents}
           />
         </TabPane>
       </Tabs>

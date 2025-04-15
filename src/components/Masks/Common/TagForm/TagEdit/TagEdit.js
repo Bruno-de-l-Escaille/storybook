@@ -6,7 +6,7 @@ import { getTags, saveTag } from "../../../../../api";
 import { getTagName } from "../../../../../utils";
 import { I18N } from "../../../../../i18n";
 import IconCross from "../../../../EventLayout/assets/IconCross";
-import { Toast } from "../../../../ToastContainer/ToastContainer";
+import { FlashMessage, Toast } from "../../../../ToastContainer/ToastContainer";
 
 export default function TagEdit({
   tag,
@@ -254,6 +254,7 @@ export default function TagEdit({
 
   return (
     <>
+      <FlashMessage time={3000} />
       <div className={styles.modal_header}>
         <span>Modifier le tag</span>
         <div className={styles.close_icon} onClick={handleModalClose}>
