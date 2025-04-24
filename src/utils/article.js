@@ -7,9 +7,10 @@ const hasRelativePath = (organizationId, host) => {
     org_8: "be.accountants",
     org_9: "forumforthefuture.be",
     org_4: "degandpartners.com",
+    org_1256: "oeccbb.be",
   };
   if (
-    [8, 9, 4].includes(organizationId) &&
+    [8, 9, 4, 1256].includes(organizationId) &&
     !host.includes(hosts[`org_${organizationId}`])
   ) {
     return false;
@@ -23,22 +24,26 @@ export const getArticleFullUrl = (article, env = "", host) => {
   let baBlog = "https://blog.be.accountants";
   let fffBlog = "https://blog.forumforthefuture.be";
   let dapBlog = "https://blog.degandpartners.com";
+  let oeccbbBlog = "https://blog.oeccbb.be";
   let blog = "https://blog.tamtam.pro";
 
   if (env === "local") {
     baBlog = "http://local.blog.be.accountants:3000";
     fffBlog = "http://local.blog.forumforthefuture.be:3000";
     dapBlog = "http://local.blog.degandpartners.com:3000";
+    oeccbbBlog = "http://local.blog.oeccbb.be:3000";
     blog = "http://local.blog.tamtam.pro:3000";
   } else if (env === "v2" || env === "production") {
     baBlog = "https://blog.be.accountants";
     fffBlog = "https://blog.forumforthefuture.be";
     dapBlog = "https://blog.degandpartners.com";
+    oeccbbBlog = "https://blog.oeccbb.be";
     blog = "https://blog.tamtam.pro";
   } else if (env) {
     baBlog = `https://blog.${env}.be.accountants`;
     fffBlog = `https://blog.${env}.forumforthefuture.be`;
     dapBlog = `https://blog.${env}.degandpartners.com`;
+    oeccbbBlog = `https://${env}.blog.oeccbb.be`;
     blog = `https://blog.${env}.tamtam.pro`;
   }
 
@@ -57,13 +62,15 @@ export const getArticleFullUrl = (article, env = "", host) => {
   //   return fullUrl;
   // }
 
-  if (organization && [8, 9, 4].includes(organization.id)) {
+  if (organization && [8, 9, 4, 1256].includes(organization.id)) {
     if (organization.id === 9) {
       return `${fffBlog}${fullUrl}`;
     } else if (organization.id === 8) {
       return `${baBlog}${fullUrl}`;
     } else if (organization.id === 4) {
       return `${dapBlog}${fullUrl}`;
+    } else if (organization.id === 1256) {
+      return `${oeccbbBlog}${fullUrl}`;
     }
   }
 
@@ -80,30 +87,36 @@ export const getArticleUrl = (article, env, host) => {
   let baBlog = "https://blog.be.accountants";
   let fffBlog = "https://blog.forumforthefuture.be";
   let dapBlog = "https://blog.degandpartners.com";
+  let oeccbbBlog = "https://blog.oeccbb.be";
 
   if (env === "local") {
     baBlog = "http://local.blog.be.accountants:3000";
     fffBlog = "http://local.blog.forumforthefuture.be:3000";
     dapBlog = "http://local.blog.degandpartners.com:3000";
+    oeccbbBlog = "http://local.blog.oeccbb.be:3000";
   } else if (env === "v2" || env === "production") {
     baBlog = "https://blog.be.accountants";
     fffBlog = "https://blog.forumforthefuture.be";
     dapBlog = "https://blog.degandpartners.com";
+    oeccbbBlog = "https://blog.oeccbb.be";
   } else if (env) {
     baBlog = `https://blog.${env}.be.accountants`;
     fffBlog = `https://blog.${env}.forumforthefuture.be`;
     dapBlog = `https://blog.${env}.degandpartners.com`;
+    oeccbbBlog = `https://${env}.blog.oeccbb.be`;
   }
 
   let fullUrl = `/${language}/article/${url}/${id}`;
 
-  if (organization && [8, 9, 4].includes(organization.id)) {
+  if (organization && [8, 9, 4, 1256].includes(organization.id)) {
     if (organization.id === 9) {
       return `${fffBlog}${fullUrl}`;
     } else if (organization.id === 8) {
       return `${baBlog}${fullUrl}`;
     } else if (organization.id === 4) {
       return `${dapBlog}${fullUrl}`;
+    } else if (organization.id === 1256) {
+      return `${oeccbbBlog}${fullUrl}`;
     }
   }
 
