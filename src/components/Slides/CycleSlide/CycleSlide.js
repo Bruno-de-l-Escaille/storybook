@@ -36,6 +36,7 @@ export const CycleSlide = ({
   isAdmin,
   isOFFFcourse,
   token,
+  host,
 }) => {
   const [hovered, setHovered] = useState(false);
   const [showFocusConfig, setShowFocusConfig] = useState(false);
@@ -77,7 +78,7 @@ export const CycleSlide = ({
   const cycleTrainingHours = formatDecimalHours(cycleCertifiedTrainingHours);
   const trainingsCount = cycle.eventCycles?.length;
 
-  const offfcourseUrl = getOfffcourseUrl(env);
+  const offfcourseUrl = host ?? getOfffcourseUrl(env);
   const offfcourseParams = new URLSearchParams(queryParams).toString();
   const masterChaineUrl = getMasterChaineUrl(env);
   const cycleReceptionUrl = !isMasterChaine

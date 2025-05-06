@@ -56,6 +56,7 @@ export function CycleCard({
   router,
   isAdmin,
   token,
+  host,
 }) {
   const [hovered, setHovered] = useState(false);
   const [showFocusConfig, setShowFocusConfig] = useState(false);
@@ -78,7 +79,7 @@ export function CycleCard({
   const s3FolderUrl = `http://s3.tamtam.pro/${
     env === "v2" ? "production" : env
   }`;
-  const offfcourseUrl = getOfffcourseUrl(env);
+  const offfcourseUrl = host ?? getOfffcourseUrl(env);
   const offfcourseParams = new URLSearchParams(queryParams).toString();
 
   const isSeason = isCycleSeason(cycle);

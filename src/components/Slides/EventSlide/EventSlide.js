@@ -43,6 +43,7 @@ export const EventSlide = ({
   isAdmin,
   isOFFFcourse,
   token,
+  host,
 }) => {
   const [hovered, setHovered] = useState(false);
   const [showAddTags, setShowAddTags] = useState(false);
@@ -86,7 +87,7 @@ export const EventSlide = ({
   const s3FolderUrl = `http://s3.tamtam.pro/${
     env === "v2" ? "production" : env
   }`;
-  const offfcourseUrl = getOfffcourseUrl(env);
+  const offfcourseUrl = host ?? getOfffcourseUrl(env);
   const offfcourseParams = new URLSearchParams(queryParams).toString();
   const masterChaineUrl = getMasterChaineUrl(env);
   const bannerUrl = getByLanguage(event, "urlBanner", language) ?? "";

@@ -19,6 +19,7 @@ export const PremiumSlide = ({
   queryParams = {},
   isMasterChaine,
   Link = "a",
+  host,
 }) => {
   const { isMobile, isDesktop } = useResponsive();
   if (isFetching) {
@@ -27,7 +28,7 @@ export const PremiumSlide = ({
   const { "user-registered": userRegistered } = cycle;
   const isPremiumUser = userRegistered || isUserPremium;
   const isPremiumCycle = true;
-  const offfcourseUrl = getOfffcourseUrl(env);
+  const offfcourseUrl = host ?? getOfffcourseUrl(env);
   const offfcourseParams = new URLSearchParams(queryParams).toString();
   const cycleReceptionUrl = `${offfcourseUrl}/cycle/${cycle.id}/reception?${offfcourseParams}`;
 

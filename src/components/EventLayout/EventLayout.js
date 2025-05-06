@@ -71,6 +71,7 @@ export function EventLayout({
   handleOpenDetails,
   isMasterChaine,
   Link = "a",
+  host,
   onBeforeJoinWebinar,
 }) {
   const [hovered, setHovered] = useState(false);
@@ -186,7 +187,7 @@ export function EventLayout({
     moment(startDateTime).diff(moment(), "hours") < EVENT_COUNTER_TIME_DELAY &&
     moment(startDateTime).diff(moment(), "hours") > 0;
 
-  const offfcourseUrl = getOfffcourseUrl(env);
+  const offfcourseUrl = host ?? getOfffcourseUrl(env);
   const offfcourseParams = new URLSearchParams(queryParams).toString();
   const masterChaineUrl = getMasterChaineUrl(env);
   const dateIndexParam = multiDateIndex ? `dateIndex=${multiDateIndex}` : "";
