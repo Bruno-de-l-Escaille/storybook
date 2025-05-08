@@ -48,9 +48,6 @@ const AuthModal = ({ env, lng, app }) => {
   }, []);
 
   const handleAuthTokenUser = async (data) => {
-    const currentParams = new URLSearchParams(window.location.search);
-    const gotoUrl = currentParams.get("gotoUrl");
-
     if (app.withAuthLogin) {
       const userAuth = {
         id: data.data.user.id,
@@ -64,9 +61,6 @@ const AuthModal = ({ env, lng, app }) => {
       };
       var b = Buffer.from(JSON.stringify(userAuth));
       var s = b.toString("base64");
-      if (gotoUrl) {
-        s += `&gotoUrl=${encodeURIComponent(gotoUrl)}`;
-      }
       window.location.href = app.autoLoginUrl + "?auth=" + s;
     } else if (app.autoLoginUrl) {
       const { sha256 } = require("js-sha256");
@@ -85,10 +79,22 @@ const AuthModal = ({ env, lng, app }) => {
         key: hashKey,
         app: app.authAppName,
       });
-      if (gotoUrl) {
-        params.append("gotoUrl", gotoUrl);
-      }
-      window.location.href = app.autoLoginUrl + "?" + params.toString();
+
+      const autoLoginUrl = (() => {
+        try {
+          const url = new URL(app.autoLoginUrl);
+          params.forEach((value, key) => {
+            url.searchParams.append(key, value);
+          });
+          return url.toString();
+        } catch (e) {
+          console.error("Invalid auto login URL:", e);
+          const separator = app.autoLoginUrl.includes("?") ? "&" : "?";
+          return app.autoLoginUrl + separator + params.toString();
+        }
+      })();
+
+      window.location.href = autoLoginUrl;
     }
   };
 
