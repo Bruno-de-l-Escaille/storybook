@@ -451,3 +451,23 @@ span.error {
   text-align: center;
   margin-bottom: 5px;
 }
+
+.pwdBox {
+  position: relative;
+
+  button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: #d1d5db;
+
+    &:focus {
+      color: #18a0fb;
+      outline: hidden;
+    }
+    // absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-hidden focus:text-[#18a0fb] dark:text-neutral-600 dark:focus:text-[#18a0fb]
+  }
+}
