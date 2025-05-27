@@ -1,5 +1,6 @@
 import React from "react";
 import { Header } from "./Header";
+import { AuthLink } from "./AuthLink";
 import { SubMenu } from "./SubMenu";
 import {
   withKnobs,
@@ -558,6 +559,19 @@ export const HeaderLoggedOutOTC = () => (
     lng={select("language", ["fr", "nl", "en"], "fr")}
     onLanguageChange={(langue) => alert(langue)}
     isOtcAuth={boolean("isOtcAuth", true)}
+  />
+);
+
+export const HeaderAuthLink = () => (
+  <AuthLink
+    app={object("app", App)}
+    // auth={object("auth", authLogout)}
+    auth={authLogin}
+    env={text("env", "local")}
+    lng={select("language", ["fr", "nl", "en"], "fr")}
+    onLanguageChange={(langue) => alert(langue)}
+    isOtcAuth={boolean("isOtcAuth", true)}
+    rightIcons={object("rightIcons", rightIcons)}
   />
 );
 
