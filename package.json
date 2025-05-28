@@ -4,8 +4,8 @@
   "private": true,
   "main": "build/js/main.js",
   "scripts": {
-    "start": "start-storybook -p 9009 -s public",
-    "build": "node scripts/build.js",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 9009 -s public",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider node scripts/build.js",
     "test": "node scripts/test.js",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
