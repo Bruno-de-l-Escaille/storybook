@@ -335,7 +335,9 @@ export const Article = ({
             className={classnames(
               styles.likes,
               socialData.isLiked === 1 && styles.likesActive,
-              isSavingLike ? "animate__bounceIn" : ""
+              articleId === article.id && isSavingLike
+                ? "animate__bounceIn"
+                : ""
             )}
             onClick={() => onLike()}
           >
