@@ -59,6 +59,9 @@ const AuthModal = ({ env, lng, app }) => {
           env,
         },
       };
+      if (data.token.scope) {
+        userAuth.scope = data.token.scope;
+      }
       var b = Buffer.from(JSON.stringify(userAuth));
       var s = b.toString("base64");
       window.location.href = app.autoLoginUrl + "?auth=" + s;
@@ -69,7 +72,7 @@ const AuthModal = ({ env, lng, app }) => {
       const hashKey = sha256(
         data.data.user.email + time + data.token.access_token + salt
       );
-      const params = new URLSearchParams({
+      const userAuth = {
         email: data.data.user.mainEmail,
         time,
         token: data.token.access_token,
@@ -78,7 +81,11 @@ const AuthModal = ({ env, lng, app }) => {
         id: data.data.user.id,
         key: hashKey,
         app: app.authAppName,
-      });
+      };
+      if (data.token.scope) {
+        userAuth.scope = data.token.scope;
+      }
+      const params = new URLSearchParams(userAuth);
 
       const autoLoginUrl = (() => {
         try {
