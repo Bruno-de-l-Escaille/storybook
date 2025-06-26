@@ -205,6 +205,8 @@ export const I18N = {
     inFifth: "in fifth",
     title: "Title",
     Until: "Until",
+    for_period: "for the period",
+    is_used: "Already sent",
   },
   fr: {
     ARTCILES: "Articles",
@@ -421,6 +423,8 @@ export const I18N = {
     inFifth: "à la cinq",
     title: "Titre",
     Until: "Jusqu'au",
+    for_period: "pour la période",
+    is_used: "déjà envoyé",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -637,5 +641,7 @@ export const I18N = {
     inFifth: "Bij de vijf",
     title: "Titel",
     Until: "Tot",
+    for_period: "voor periode",
+    is_used: "al verzonden",
   },
 };
