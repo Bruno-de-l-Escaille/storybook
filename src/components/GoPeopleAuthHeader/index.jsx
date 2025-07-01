@@ -8,7 +8,7 @@ import FormInput from "../common/FormInput";
 import Loader from "../common/Loader";
 import { Toast } from "../ToastContainer/ToastContainer";
 import { initiateAuth, loginWithPassword, verifyOTP, requestPasswordReset } from "./api";
-import { validateEmail, validatePhone } from "./utils";
+import { validateEmail, validatePhone, processJWTToken } from "./utils";
 import styles from "./GoPeopleAuthHeader.module.scss";
 
 const GoPeopleAuthHeader = ({ 
@@ -40,6 +40,22 @@ const GoPeopleAuthHeader = ({
     setHasPassword(false);
     setErrors({});
     if (onClose) onClose();
+  };
+
+  const handleAuthSuccess = (token) => {
+    try {
+      const tokenData = processJWTToken(token);
+      
+      if (onSuccess) {
+        onSuccess(tokenData);
+      }
+    } catch (error) {
+      console.error("Error processing JWT token:", error);
+      Toast.error(I18N[lng].auth.error_occurred);
+      if (onError) {
+        onError(new Error(`JWT processing failed: ${error.message}`));
+      }
+    }
   };
 
   const validateIdentifier = (value) => {
@@ -98,9 +114,7 @@ const GoPeopleAuthHeader = ({
       
       if (response.token) {
         Toast.success(I18N[lng].auth.successfully_saved);
-        if (onSuccess) {
-          onSuccess(response.token);
-        }
+        handleAuthSuccess(response.token);
         handleCloseModal();
       }
     } catch (error) {
@@ -145,9 +159,7 @@ const GoPeopleAuthHeader = ({
       
       if (response.token) {
         Toast.success(I18N[lng].auth.successfully_saved);
-        if (onSuccess) {
-          onSuccess(response.token);
-        }
+        handleAuthSuccess(response.token);
         handleCloseModal();
       }
     } catch (error) {

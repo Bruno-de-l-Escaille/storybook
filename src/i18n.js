@@ -185,7 +185,8 @@ export const I18N = {
       continueWithoutPassword: "Continue without password",
       enterOTP: "Enter verification code",
       verifyOTP: "Verify",
-      otpSentMessage: "Please enter the 6-digit code sent to your email or phone",
+      otpSentMessage:
+        "Please enter the 6-digit code sent to your email or phone",
     },
     on: "on",
     keywords: "Key words",
@@ -406,7 +407,8 @@ export const I18N = {
       continueWithoutPassword: "Continuer sans mot de passe",
       enterOTP: "Entrez le code de vérification",
       verifyOTP: "Vérifier",
-      otpSentMessage: "Veuillez entrer le code à 6 chiffres envoyé à votre email ou téléphone",
+      otpSentMessage:
+        "Veuillez entrer le code à 6 chiffres envoyé à votre email ou téléphone",
     },
     on: "sur",
     keywords: "Mots clés",
@@ -627,7 +629,8 @@ export const I18N = {
       continueWithoutPassword: "Doorgaan zonder wachtwoord",
       enterOTP: "Voer verificatiecode in",
       verifyOTP: "Verifiëren",
-      otpSentMessage: "Voer de 6-cijferige code in die naar uw e-mail of telefoon is gestuurd",
+      otpSentMessage:
+        "Voer de 6-cijferige code in die naar uw e-mail of telefoon is gestuurd",
     },
     on: "op",
     keywords: "Kernwoorden",
