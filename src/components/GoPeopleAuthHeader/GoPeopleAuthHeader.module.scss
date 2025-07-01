@@ -1,0 +1,209 @@
+@import "../../styles/variables";
+
+.modal {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  background-color: #fff;
+  color: #103d47;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background-color: rgba(13, 112, 111, 0.5);
+}
+
+.modalHeader {
+  position: relative;
+  height: 72px;
+  color: #fff;
+  background-color: #0080c9;
+  font-size: 24px;
+  line-height: 33px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-radius: 10px 10px 0 0;
+}
+
+.modalClose {
+  width: 40px;
+  height: 40px;
+  border: 1px solid;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 80vh;
+  padding: 1rem 1rem 6rem;
+}
+
+.loginContent {
+  width: 50%;
+  max-width: 500px;
+  margin: 0 auto;
+
+  .columnActions button {
+    min-width: 290px;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0 2rem;
+}
+
+.columnActions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0 2rem;
+}
+
+.title {
+  font-size: 18px;
+  line-height: 25px;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.button {
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  min-width: 230px;
+  height: 40px;
+  background: #18a0fb;
+
+  &_secondary {
+    background-color: #0b706f;
+  }
+}
+
+.signIn {
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  transition: color 0.2s ease-in-out;
+  color: $new-title-color;
+  font-weight: 500;
+  text-transform: none;
+  font-size: 0.9rem;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: nth($transitions, 2);
+
+  &:hover {
+    color: $main-blue;
+  }
+}
+
+.codeBox {
+  text-align: center;
+  margin: 0 auto;
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  .error {
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+.codeInput {
+  input {
+    display: inline-block;
+  }
+  
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0;
+  }
+  
+  input:nth-child(3),
+  input:nth-child(6) {
+    margin-left: 0.5rem;
+  }
+}
+
+.error {
+  color: #d50000;
+  font-size: 12px;
+  display: block;
+  text-align: right;
+  line-height: 16px;
+  margin-top: 4px;
+}
+
+.otpMessage {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 14px;
+  color: #6d7f92;
+}
+
+.forgotPasswordLink {
+  text-align: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #d8dde2;
+}
+
+.linkText {
+  color: #18a0fb;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  
+  &:hover {
+    color: #1595e5;
+    text-decoration: none;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .modal {
+    bottom: initial;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+  }
+  
+  .container {
+    padding-bottom: 2rem;
+  }
+  
+  .loginContent {
+    width: 100%;
+  }
+}
