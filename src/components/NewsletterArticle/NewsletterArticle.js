@@ -32,7 +32,6 @@ export const NewsletterArticle = ({
   isPersonnalizedOrDeg,
   nbOfArticles,
   nbOfFffArticles,
-  setIsEdit,
   periodNumber,
   isLocked,
   checkedPlans,
@@ -279,7 +278,6 @@ export const NewsletterArticle = ({
               if (handleRemoveArticle) {
                 handleRemoveArticle(articles, setArticles, periodConfig, article);
               }
-              if (setIsEdit) setIsEdit(true);
             }}
           >
             <i className="icon-ttp-close"></i>
@@ -403,7 +401,6 @@ export const NewsletterArticle = ({
                       if (nbArticles < 32) {
                         if (setArticles) setArticles([article, ...articles]);
                         if (planSelected) handleCheckboxChange(planSelected);
-                        if (setIsEdit) setIsEdit(true);
                       } else {
                         toast.warning(_("Vous n'avez pas le droit d'ajouter plus d'articles"), {
                           autoClose: 2500,
@@ -422,7 +419,6 @@ export const NewsletterArticle = ({
                     if (setArticles) {
                       setArticles(articles.filter((item) => item.id !== article.id));
                     }
-                    if (setIsEdit) setIsEdit(true);
                   }}
                 >
                   <i className="icon-ttp-close"></i>
@@ -454,7 +450,6 @@ export const NewsletterArticle = ({
                       if (setArticles) {
                         setArticles(articles.filter((item) => item.id !== article.id));
                       }
-                      if (setIsEdit) setIsEdit(true);
                     }
                   }}
                 />

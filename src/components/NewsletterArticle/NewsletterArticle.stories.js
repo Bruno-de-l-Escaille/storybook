@@ -81,8 +81,6 @@ export default {
 export const Default = () => {
   const [articles, setArticles] = useState([]);
   const [articlesByPlanAndPeriod, setArticlesByPlanAndPeriod] = useState([]);
-  const [isEdit, setIsEdit] = useState(false);
-
   // Knobs for interactive props
   const language = select("Language", ["en", "fr", "nl"], "en");
   const checkedPlans = boolean("Checked Plans", true);
@@ -109,7 +107,6 @@ export const Default = () => {
             checkedPlans={checkedPlans}
             NL_PLANS={NL_PLANS}
             navCommunity={navCommunity}
-            setIsEdit={setIsEdit}
             getCurrentPeriod={getCurrentPeriod}
             formatDate={formatDate}
             formatEndDate={formatEndDate}
