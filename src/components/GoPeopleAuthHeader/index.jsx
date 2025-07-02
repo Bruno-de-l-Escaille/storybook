@@ -173,7 +173,7 @@ const GoPeopleAuthHeader = ({
 
   const renderIdentifierStep = () => (
     <div className={styles.loginContent}>
-      <h1 className={styles.title}>{I18N[lng].auth.signInUp}</h1>
+      <h1 className={styles.title}>{I18N[lng].auth.authenticate}</h1>
       
       <FormInput
         name="identifier"

@@ -111,6 +111,7 @@ export const I18N = {
     premiumLabel: "Benefit from over 500 training courses",
     auth: {
       signInUp: "Login / Register",
+      authenticate: "Authenticate",
       continue: "Continue",
       signup: "Register",
       signin: "Log in",
@@ -330,7 +331,8 @@ export const I18N = {
     oeccbbAdvantage1: "membre de l’OECCBB : ",
     oeccbbAdvantage2: "13ème mois gratuit",
     auth: {
-      signInUp: "S'authentifier",
+      signInUp: "Connexion / Inscription",
+      authenticate: "S'authentifier",
       continue: "Continuer",
       signup: "S’inscrire",
       signin: "Se connecter",
@@ -555,6 +557,7 @@ export const I18N = {
     oeccbbAdvantage2: "13e maand gratis",
     auth: {
       signInUp: "Inloggen / Registreren",
+      authenticate: "Authenticeren",
       continue: "Doorgaan",
       signup: "Aanmelden",
       signin: "Aanmelden",
