@@ -345,4 +345,4 @@ const GoPeopleAuthHeader = ({
   );
 };
 
-export default GoPeopleAuthHeader;
+export { GoPeopleAuthHeader };

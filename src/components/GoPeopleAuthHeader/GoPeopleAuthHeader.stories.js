@@ -1,5 +1,5 @@
 import React from "react";
-import GoPeopleAuthHeader from "./index";
+import { GoPeopleAuthHeader } from "./index";
 import { withKnobs, text, select } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 
