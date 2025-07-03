@@ -144,12 +144,12 @@
   input {
     display: inline-block;
   }
-  
+
   input::-webkit-inner-spin-button {
     -webkit-appearance: none !important;
     margin: 0;
   }
-  
+
   input:nth-child(3),
   input:nth-child(6) {
     margin-left: 0.5rem;
@@ -184,7 +184,7 @@
   cursor: pointer;
   font-size: 14px;
   text-decoration: underline;
-  
+
   &:hover {
     color: #1595e5;
     text-decoration: none;
@@ -198,11 +198,11 @@
     left: 20px;
     right: 20px;
   }
-  
+
   .container {
     padding-bottom: 2rem;
   }
-  
+
   .loginContent {
     width: 100%;
   }

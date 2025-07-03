@@ -72,17 +72,17 @@ export const GoPeopleAuthHeaderWithCustomAPI = () => (
 );
 
 export const GoPeopleAuthHeaderInHeaderContext = () => (
-  <div style={{ 
-    display: "flex", 
-    justifyContent: "space-between", 
-    alignItems: "center", 
-    padding: "1rem 2rem",
-    backgroundColor: "#f8f9fa",
-    borderBottom: "1px solid #dee2e6"
-  }}>
-    <div style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
-      My Application
-    </div>
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      padding: "1rem 2rem",
+      backgroundColor: "#f8f9fa",
+      borderBottom: "1px solid #dee2e6",
+    }}
+  >
+    <div style={{ fontSize: "1.5rem", fontWeight: "bold" }}>My Application</div>
     <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
       <span>Navigation</span>
       <GoPeopleAuthHeader

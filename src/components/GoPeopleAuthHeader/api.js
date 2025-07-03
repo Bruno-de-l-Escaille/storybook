@@ -2,9 +2,9 @@
 
 export const initiateAuth = async (apiBaseUrl, identifier) => {
   const response = await fetch(`${apiBaseUrl}/auth/initiate`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ identifier }),
   });
@@ -24,9 +24,9 @@ export const initiateAuth = async (apiBaseUrl, identifier) => {
 
 export const loginWithPassword = async (apiBaseUrl, identifier, password) => {
   const response = await fetch(`${apiBaseUrl}/auth/login`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ identifier, password }),
   });
@@ -42,9 +42,9 @@ export const loginWithPassword = async (apiBaseUrl, identifier, password) => {
 
 export const verifyOTP = async (apiBaseUrl, otp) => {
   const response = await fetch(`${apiBaseUrl}/auth/verify-otp`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ otp }),
   });
@@ -60,9 +60,9 @@ export const verifyOTP = async (apiBaseUrl, otp) => {
 
 export const requestPasswordReset = async (apiBaseUrl, identifier) => {
   const response = await fetch(`${apiBaseUrl}/auth/request-reset`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ identifier }),
   });

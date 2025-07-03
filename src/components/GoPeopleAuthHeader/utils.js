@@ -7,26 +7,26 @@ export const validateEmail = (email) => {
 
 export const validatePhone = (phone) => {
   // Remove any non-digit characters except +
-  const cleanPhone = phone.replace(/[^\d+]/g, '');
-  
+  const cleanPhone = phone.replace(/[^\d+]/g, "");
+
   // Check if it starts with + and has 10-15 digits
   const phoneRegex = /^\+\d{10,15}$/;
-  
+
   // Also allow phones without + if they are 10-15 digits
   const phoneWithoutPlusRegex = /^\d{10,15}$/;
-  
+
   return phoneRegex.test(cleanPhone) || phoneWithoutPlusRegex.test(cleanPhone);
 };
 
 export const formatPhone = (phone) => {
   // Remove any non-digit characters except +
-  let cleanPhone = phone.replace(/[^\d+]/g, '');
-  
+  let cleanPhone = phone.replace(/[^\d+]/g, "");
+
   // If it doesn't start with + and is a valid length, add +
-  if (!cleanPhone.startsWith('+') && cleanPhone.length >= 10) {
-    cleanPhone = '+' + cleanPhone;
+  if (!cleanPhone.startsWith("+") && cleanPhone.length >= 10) {
+    cleanPhone = "+" + cleanPhone;
   }
-  
+
   return cleanPhone;
 };
 
@@ -44,20 +44,20 @@ export const cleanEmail = (email) => {
  */
 export const decodeJWT = (token) => {
   try {
-    if (!token || typeof token !== 'string') {
-      throw new Error('Token must be a valid string');
+    if (!token || typeof token !== "string") {
+      throw new Error("Token must be a valid string");
     }
 
-    const parts = token.split('.');
+    const parts = token.split(".");
     if (parts.length !== 3) {
-      throw new Error('Invalid JWT format');
+      throw new Error("Invalid JWT format");
     }
 
     const payload = parts[1];
     // Add padding if needed for base64 decoding
-    const paddedPayload = payload + '='.repeat((4 - payload.length % 4) % 4);
+    const paddedPayload = payload + "=".repeat((4 - (payload.length % 4)) % 4);
     const decoded = JSON.parse(atob(paddedPayload));
-    
+
     return decoded;
   } catch (error) {
     throw new Error(`Invalid JWT token: ${error.message}`);
@@ -70,20 +70,20 @@ export const decodeJWT = (token) => {
  * @returns {object} User information object
  */
 export const extractUserInfo = (decodedToken) => {
-  if (!decodedToken || typeof decodedToken !== 'object') {
-    throw new Error('Decoded token must be a valid object');
+  if (!decodedToken || typeof decodedToken !== "object") {
+    throw new Error("Decoded token must be a valid object");
   }
 
   return {
-    userId: decodedToken.user_id || '',
-    email: decodedToken.email || '',
-    phone: decodedToken.phone || '',
-    subject: decodedToken.sub || '',
-    issuer: decodedToken.iss || '',
+    userId: decodedToken.user_id || "",
+    email: decodedToken.email || "",
+    phone: decodedToken.phone || "",
+    subject: decodedToken.sub || "",
+    issuer: decodedToken.iss || "",
     issuedAt: decodedToken.iat || 0,
     expiresAt: decodedToken.exp || 0,
     notBefore: decodedToken.nbf || 0,
-    jwtId: decodedToken.jti || ''
+    jwtId: decodedToken.jti || "",
   };
 };
 
@@ -93,20 +93,20 @@ export const extractUserInfo = (decodedToken) => {
  * @returns {object} API TTP token object
  */
 export const extractApiTtpToken = (decodedToken) => {
-  if (!decodedToken || typeof decodedToken !== 'object') {
+  if (!decodedToken || typeof decodedToken !== "object") {
     return {
-      access_token: '',
+      access_token: "",
       expires_in: 0,
-      scope: ''
+      scope: "",
     };
   }
 
   const apiTtpToken = decodedToken.apiTtp_token || {};
-  
+
   return {
-    access_token: apiTtpToken.access_token || '',
+    access_token: apiTtpToken.access_token || "",
     expires_in: apiTtpToken.expires_in || 0,
-    scope: apiTtpToken.scope || ''
+    scope: apiTtpToken.scope || "",
   };
 };
 
@@ -119,7 +119,7 @@ export const isTokenExpired = (decodedToken) => {
   if (!decodedToken || !decodedToken.exp) {
     return true;
   }
-  
+
   const now = Math.floor(Date.now() / 1000);
   return decodedToken.exp < now;
 };
@@ -133,7 +133,7 @@ export const getTokenExpirationTime = (decodedToken) => {
   if (!decodedToken || !decodedToken.exp) {
     return 0;
   }
-  
+
   return decodedToken.exp * 1000;
 };
 
@@ -156,7 +156,7 @@ export const processJWTToken = (token) => {
       apiTtpToken,
       decodedToken,
       isExpired: expired,
-      expirationTime
+      expirationTime,
     };
   } catch (error) {
     throw error;
