@@ -111,6 +111,7 @@ export const I18N = {
     premiumLabel: "Benefit from over 500 training courses",
     auth: {
       signInUp: "Login / Register",
+      authenticate: "Authenticate",
       continue: "Continue",
       signup: "Register",
       signin: "Log in",
@@ -181,6 +182,12 @@ export const I18N = {
       logout: "Log out",
       invalid_code: "Invalid code",
       login_without_password: "Log in without password",
+      enterEmailOrPhone: "Enter your email or phone number",
+      continueWithoutPassword: "Continue without password",
+      enterOTP: "Enter verification code",
+      verifyOTP: "Verify",
+      otpSentMessage:
+        "Please enter the 6-digit code sent to your email or phone",
     },
     on: "on",
     keywords: "Key words",
@@ -327,6 +334,7 @@ export const I18N = {
     oeccbbAdvantage2: "13ème mois gratuit",
     auth: {
       signInUp: "Connexion / Inscription",
+      authenticate: "S'authentifier",
       continue: "Continuer",
       signup: "S’inscrire",
       signin: "Se connecter",
@@ -399,6 +407,12 @@ export const I18N = {
       logout: "Se déconnecter",
       invalid_code: "Code invalide",
       login_without_password: "Connexion sans mot de passe",
+      enterEmailOrPhone: "Entrez votre email ou numéro de téléphone",
+      continueWithoutPassword: "Continuer sans mot de passe",
+      enterOTP: "Entrez le code de vérification",
+      verifyOTP: "Vérifier",
+      otpSentMessage:
+        "Veuillez entrer le code à 6 chiffres envoyé à votre email ou téléphone",
     },
     on: "sur",
     keywords: "Mots clés",
@@ -547,6 +561,7 @@ export const I18N = {
     oeccbbAdvantage2: "13e maand gratis",
     auth: {
       signInUp: "Inloggen / Registreren",
+      authenticate: "Authenticeren",
       continue: "Doorgaan",
       signup: "Aanmelden",
       signin: "Aanmelden",
@@ -617,6 +632,12 @@ export const I18N = {
       logout: "Uitloggen",
       invalid_code: "Ongeldige code",
       login_without_password: "Inloggen zonder wachtwoord",
+      enterEmailOrPhone: "Voer uw e-mail of telefoonnummer in",
+      continueWithoutPassword: "Doorgaan zonder wachtwoord",
+      enterOTP: "Voer verificatiecode in",
+      verifyOTP: "Verifiëren",
+      otpSentMessage:
+        "Voer de 6-cijferige code in die naar uw e-mail of telefoon is gestuurd",
     },
     on: "op",
     keywords: "Kernwoorden",

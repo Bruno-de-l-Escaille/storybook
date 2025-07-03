@@ -377,7 +377,6 @@ export const HeaderLoggedIn = () => (
   <Header
     app={object("app", App)}
     auth={object("auth", authLogin)}
-    auth={authLogin}
     env={text("env", "local")}
     settings={object("settings", settings)}
     lng={select("language", ["fr", "nl", "en"], "fr")}
@@ -443,7 +442,6 @@ export const HeaderSpaceLoggedIn = () => (
   <Header
     app={object("app", App)}
     auth={object("auth", authLogin)}
-    auth={authLogin}
     env={text("env", "local")}
     settings={object("settings", settings)}
     lng={select("language", ["fr", "nl", "en"], "fr")}
@@ -574,6 +572,7 @@ export const HeaderAuthLink = () => (
     rightIcons={object("rightIcons", rightIcons)}
   />
 );
+
 
 export const SubMenuHeader = () => (
   <div style={{ padding: "3rem" }}>
