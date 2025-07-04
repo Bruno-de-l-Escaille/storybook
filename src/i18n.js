@@ -188,6 +188,80 @@ export const I18N = {
       verifyOTP: "Verify",
       otpSentMessage:
         "Please enter the 6-digit code sent to your email or phone",
+
+      // Enhanced error messages
+      errors: {
+        otp: {
+          invalid:
+            "The verification code you entered is incorrect. Please check your email or SMS and try again.",
+          expired:
+            "Your verification code has expired. Please request a new one.",
+          missing:
+            "Please enter the verification code sent to your email or phone.",
+          network_error:
+            "Unable to verify the code. Please check your connection and try again.",
+        },
+        authentication: {
+          invalid_credentials:
+            "The email or password you entered is incorrect. Please verify your credentials and try again.",
+          account_not_found:
+            "No account found with this email or phone number. Please check your information or create a new account.",
+          account_exists_password:
+            "An account already exists with this email. Please enter your password to continue.",
+          account_locked:
+            "Your account has been temporarily locked. Please try again later or contact support.",
+          session_expired: "Your session has expired. Please log in again.",
+        },
+        validation: {
+          email_format:
+            "Please enter a valid email address (e.g., name@example.com).",
+          email_domain_invalid: "Please enter a valid email domain.",
+          phone_format:
+            "Please enter a valid phone number (10-15 digits, optionally starting with +).",
+          phone_length: "Phone number must be between 10 and 15 digits.",
+          identifier_required:
+            "Please enter your email address or phone number.",
+          password_required: "Password is required.",
+          otp_required: "Verification code is required.",
+        },
+        password: {
+          too_short: "Password must be at least 8 characters long.",
+          missing_digit: "Password must contain at least one number (0-9).",
+          missing_special:
+            "Password must contain at least one special character (!@#$%^&*()_+).",
+          missing_uppercase:
+            "Password must contain at least one uppercase letter (A-Z).",
+          missing_lowercase:
+            "Password must contain at least one lowercase letter (a-z).",
+          mismatch:
+            "Passwords do not match. Please enter the same password in both fields.",
+          incorrect_old: "Current password is incorrect. Please try again.",
+          already_set:
+            "A password is already set for this account. Use 'Change Password' instead.",
+        },
+        system: {
+          network_error:
+            "Unable to connect to the server. Please check your internet connection and try again.",
+          server_error:
+            "A temporary server error occurred. Please try again in a few moments.",
+          otp_send_failed:
+            "Failed to send verification code. Please try again or contact support.",
+          token_generation_failed:
+            "Authentication failed. Please try logging in again.",
+          service_unavailable:
+            "Service is temporarily unavailable. Please try again later.",
+        },
+        account: {
+          not_found:
+            "Account not found. Please check your information or create a new account.",
+          already_exists:
+            "An account with this email or phone number already exists.",
+          identifier_in_use:
+            "This email or phone number is already associated with another account.",
+          multiple_identifiers_mismatch:
+            "Email and phone number must be of the same type for this operation.",
+        },
+      },
     },
     on: "on",
     keywords: "Key words",
@@ -413,6 +487,83 @@ export const I18N = {
       verifyOTP: "Vérifier",
       otpSentMessage:
         "Veuillez entrer le code à 6 chiffres envoyé à votre email ou téléphone",
+
+      // Enhanced error messages
+      errors: {
+        otp: {
+          invalid:
+            "Le code de vérification que vous avez saisi est incorrect. Veuillez vérifier votre email ou SMS et réessayer.",
+          expired:
+            "Votre code de vérification a expiré. Veuillez en demander un nouveau.",
+          missing:
+            "Veuillez saisir le code de vérification envoyé à votre email ou téléphone.",
+          network_error:
+            "Impossible de vérifier le code. Veuillez vérifier votre connexion et réessayer.",
+        },
+        authentication: {
+          invalid_credentials:
+            "L'email ou le mot de passe que vous avez saisi est incorrect. Veuillez vérifier vos identifiants et réessayer.",
+          account_not_found:
+            "Aucun compte trouvé avec cet email ou numéro de téléphone. Veuillez vérifier vos informations ou créer un nouveau compte.",
+          account_exists_password:
+            "Un compte existe déjà avec cet email. Veuillez saisir votre mot de passe pour continuer.",
+          account_locked:
+            "Votre compte a été temporairement verrouillé. Veuillez réessayer plus tard ou contacter le support.",
+          session_expired: "Votre session a expiré. Veuillez vous reconnecter.",
+        },
+        validation: {
+          email_format:
+            "Veuillez saisir une adresse email valide (ex : nom@exemple.com).",
+          email_domain_invalid: "Veuillez saisir un domaine email valide.",
+          phone_format:
+            "Veuillez saisir un numéro de téléphone valide (10-15 chiffres, éventuellement commençant par +).",
+          phone_length:
+            "Le numéro de téléphone doit contenir entre 10 et 15 chiffres.",
+          identifier_required:
+            "Veuillez saisir votre adresse email ou numéro de téléphone.",
+          password_required: "Le mot de passe est obligatoire.",
+          otp_required: "Le code de vérification est obligatoire.",
+        },
+        password: {
+          too_short: "Le mot de passe doit contenir au moins 8 caractères.",
+          missing_digit:
+            "Le mot de passe doit contenir au moins un chiffre (0-9).",
+          missing_special:
+            "Le mot de passe doit contenir au moins un caractère spécial (!@#$%^&*()_+).",
+          missing_uppercase:
+            "Le mot de passe doit contenir au moins une lettre majuscule (A-Z).",
+          missing_lowercase:
+            "Le mot de passe doit contenir au moins une lettre minuscule (a-z).",
+          mismatch:
+            "Les mots de passe ne correspondent pas. Veuillez saisir le même mot de passe dans les deux champs.",
+          incorrect_old:
+            "Le mot de passe actuel est incorrect. Veuillez réessayer.",
+          already_set:
+            "Un mot de passe est déjà défini pour ce compte. Utilisez 'Changer le mot de passe' à la place.",
+        },
+        system: {
+          network_error:
+            "Impossible de se connecter au serveur. Veuillez vérifier votre connexion internet et réessayer.",
+          server_error:
+            "Une erreur temporaire du serveur s'est produite. Veuillez réessayer dans quelques instants.",
+          otp_send_failed:
+            "Échec de l'envoi du code de vérification. Veuillez réessayer ou contacter le support.",
+          token_generation_failed:
+            "Échec de l'authentification. Veuillez essayer de vous reconnecter.",
+          service_unavailable:
+            "Le service est temporairement indisponible. Veuillez réessayer plus tard.",
+        },
+        account: {
+          not_found:
+            "Compte non trouvé. Veuillez vérifier vos informations ou créer un nouveau compte.",
+          already_exists:
+            "Un compte avec cet email ou numéro de téléphone existe déjà.",
+          identifier_in_use:
+            "Cet email ou numéro de téléphone est déjà associé à un autre compte.",
+          multiple_identifiers_mismatch:
+            "L'email et le numéro de téléphone doivent être du même type pour cette opération.",
+        },
+      },
     },
     on: "sur",
     keywords: "Mots clés",
@@ -638,6 +789,81 @@ export const I18N = {
       verifyOTP: "Verifiëren",
       otpSentMessage:
         "Voer de 6-cijferige code in die naar uw e-mail of telefoon is gestuurd",
+
+      // Enhanced error messages
+      errors: {
+        otp: {
+          invalid:
+            "De verificatiecode die u heeft ingevoerd is onjuist. Controleer uw e-mail of SMS en probeer het opnieuw.",
+          expired: "Uw verificatiecode is verlopen. Vraag een nieuwe aan.",
+          missing:
+            "Voer de verificatiecode in die naar uw e-mail of telefoon is gestuurd.",
+          network_error:
+            "Kan de code niet verifiëren. Controleer uw verbinding en probeer het opnieuw.",
+        },
+        authentication: {
+          invalid_credentials:
+            "Het e-mailadres of wachtwoord dat u heeft ingevoerd is onjuist. Controleer uw inloggegevens en probeer het opnieuw.",
+          account_not_found:
+            "Geen account gevonden met dit e-mailadres of telefoonnummer. Controleer uw gegevens of maak een nieuw account aan.",
+          account_exists_password:
+            "Er bestaat al een account met dit e-mailadres. Voer uw wachtwoord in om door te gaan.",
+          account_locked:
+            "Uw account is tijdelijk vergrendeld. Probeer het later opnieuw of neem contact op met de support.",
+          session_expired: "Uw sessie is verlopen. Log opnieuw in.",
+        },
+        validation: {
+          email_format:
+            "Voer een geldig e-mailadres in (bijv. naam@voorbeeld.com).",
+          email_domain_invalid: "Voer een geldig e-maildomein in.",
+          phone_format:
+            "Voer een geldig telefoonnummer in (10-15 cijfers, eventueel beginnend met +).",
+          phone_length:
+            "Het telefoonnummer moet tussen de 10 en 15 cijfers bevatten.",
+          identifier_required: "Voer uw e-mailadres of telefoonnummer in.",
+          password_required: "Wachtwoord is verplicht.",
+          otp_required: "Verificatiecode is verplicht.",
+        },
+        password: {
+          too_short: "Het wachtwoord moet minimaal 8 tekens lang zijn.",
+          missing_digit:
+            "Het wachtwoord moet minimaal één cijfer bevatten (0-9).",
+          missing_special:
+            "Het wachtwoord moet minimaal één speciaal teken bevatten (!@#$%^&*()_+).",
+          missing_uppercase:
+            "Het wachtwoord moet minimaal één hoofdletter bevatten (A-Z).",
+          missing_lowercase:
+            "Het wachtwoord moet minimaal één kleine letter bevatten (a-z).",
+          mismatch:
+            "De wachtwoorden komen niet overeen. Voer hetzelfde wachtwoord in beide velden in.",
+          incorrect_old:
+            "Het huidige wachtwoord is onjuist. Probeer het opnieuw.",
+          already_set:
+            "Er is al een wachtwoord ingesteld voor dit account. Gebruik in plaats daarvan 'Wachtwoord wijzigen'.",
+        },
+        system: {
+          network_error:
+            "Kan geen verbinding maken met de server. Controleer uw internetverbinding en probeer het opnieuw.",
+          server_error:
+            "Er is een tijdelijke serverfout opgetreden. Probeer het over een paar ogenblikken opnieuw.",
+          otp_send_failed:
+            "Verzenden van verificatiecode mislukt. Probeer het opnieuw of neem contact op met de support.",
+          token_generation_failed:
+            "Authenticatie mislukt. Probeer opnieuw in te loggen.",
+          service_unavailable:
+            "De service is tijdelijk niet beschikbaar. Probeer het later opnieuw.",
+        },
+        account: {
+          not_found:
+            "Account niet gevonden. Controleer uw gegevens of maak een nieuw account aan.",
+          already_exists:
+            "Er bestaat al een account met dit e-mailadres of telefoonnummer.",
+          identifier_in_use:
+            "Dit e-mailadres of telefoonnummer is al gekoppeld aan een ander account.",
+          multiple_identifiers_mismatch:
+            "E-mailadres en telefoonnummer moeten van hetzelfde type zijn voor deze bewerking.",
+        },
+      },
     },
     on: "op",
     keywords: "Kernwoorden",

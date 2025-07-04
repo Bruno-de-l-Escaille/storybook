@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import ReactCodeInput from "react-code-input";
 
@@ -13,7 +13,12 @@ import {
   verifyOTP,
   requestPasswordReset,
 } from "./api";
-import { validateEmail, validatePhone, processJWTToken } from "./utils";
+import {
+  validateEmail,
+  validatePhone,
+  processJWTToken,
+  processErrorMessage,
+} from "./utils";
 import styles from "./GoPeopleAuthHeader.module.scss";
 
 const GoPeopleAuthHeader = ({
@@ -35,6 +40,16 @@ const GoPeopleAuthHeader = ({
     password: "",
     otp: "",
   });
+
+  // Set the app element for react-modal accessibility
+  useEffect(() => {
+    // Try to find a suitable app element, fallback to body if not found
+    const appElement =
+      document.getElementById("root") ||
+      document.getElementById("app") ||
+      document.body;
+    Modal.setAppElement(appElement);
+  }, []);
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -65,14 +80,18 @@ const GoPeopleAuthHeader = ({
 
   const validateIdentifier = (value) => {
     if (!value) {
-      return I18N[lng].auth.required_field;
+      return I18N[lng].auth.errors.validation.identifier_required;
     }
 
     const isEmail = value.includes("@");
     if (isEmail) {
-      return validateEmail(value) ? "" : I18N[lng].auth.validate_email;
+      return validateEmail(value)
+        ? ""
+        : I18N[lng].auth.errors.validation.email_format;
     } else {
-      return validatePhone(value) ? "" : I18N[lng].auth.validate_phone;
+      return validatePhone(value)
+        ? ""
+        : I18N[lng].auth.errors.validation.phone_format;
     }
   };
 
@@ -87,7 +106,7 @@ const GoPeopleAuthHeader = ({
     setErrors({ ...errors, identifier: "" });
 
     try {
-      const response = await initiateAuth(apiBaseUrl, identifier);
+      const response = await initiateAuth(apiBaseUrl, identifier, lng);
 
       if (response.message === "Account exists with password") {
         setHasPassword(true);
@@ -107,7 +126,10 @@ const GoPeopleAuthHeader = ({
 
   const handlePasswordLogin = async () => {
     if (!password) {
-      setErrors({ ...errors, password: I18N[lng].auth.validate_password });
+      setErrors({
+        ...errors,
+        password: I18N[lng].auth.errors.validation.password_required,
+      });
       return;
     }
 
@@ -118,7 +140,8 @@ const GoPeopleAuthHeader = ({
       const response = await loginWithPassword(
         apiBaseUrl,
         identifier,
-        password
+        password,
+        lng
       );
 
       if (response.token) {
@@ -130,7 +153,9 @@ const GoPeopleAuthHeader = ({
       console.error("Error logging in with password:", error);
       setErrors({
         ...errors,
-        password: error.message || I18N[lng].auth.invalid_credentials,
+        password:
+          error.message ||
+          I18N[lng].auth.errors.authentication.invalid_credentials,
       });
       if (onError) onError(error);
     } finally {
@@ -142,7 +167,7 @@ const GoPeopleAuthHeader = ({
     setLoading(true);
 
     try {
-      const response = await requestPasswordReset(apiBaseUrl, identifier);
+      const response = await requestPasswordReset(apiBaseUrl, identifier, lng);
 
       if (response.message) {
         setStep("OTP");
@@ -159,7 +184,10 @@ const GoPeopleAuthHeader = ({
 
   const handleOTPVerification = async () => {
     if (!otp || otp.length < 6) {
-      setErrors({ ...errors, otp: I18N[lng].auth.invalid_code });
+      setErrors({
+        ...errors,
+        otp: I18N[lng].auth.errors.validation.otp_required,
+      });
       return;
     }
 
@@ -167,7 +195,7 @@ const GoPeopleAuthHeader = ({
     setErrors({ ...errors, otp: "" });
 
     try {
-      const response = await verifyOTP(apiBaseUrl, otp);
+      const response = await verifyOTP(apiBaseUrl, otp, lng);
 
       if (response.token) {
         Toast.success(I18N[lng].auth.successfully_saved);
@@ -178,7 +206,7 @@ const GoPeopleAuthHeader = ({
       console.error("Error verifying OTP:", error);
       setErrors({
         ...errors,
-        otp: error.message || I18N[lng].auth.invalid_code,
+        otp: error.message || I18N[lng].auth.errors.otp.invalid,
       });
       if (onError) onError(error);
     } finally {
