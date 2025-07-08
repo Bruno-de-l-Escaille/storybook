@@ -7,16 +7,21 @@ import { I18N } from "../../i18n";
 import FormInput from "../common/FormInput";
 import Loader from "../common/Loader";
 import { Toast } from "../ToastContainer/ToastContainer";
-import { initiateAuth, loginWithPassword, verifyOTP, requestPasswordReset } from "./api";
+import {
+  initiateAuth,
+  loginWithPassword,
+  verifyOTP,
+  requestPasswordReset,
+} from "./api";
 import { validateEmail, validatePhone, processJWTToken } from "./utils";
 import styles from "./GoPeopleAuthHeader.module.scss";
 
-const GoPeopleAuthHeader = ({ 
+const GoPeopleAuthHeader = ({
   apiBaseUrl = "http://localhost:8080",
   lng = "fr",
   onSuccess,
   onError,
-  onClose
+  onClose,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [step, setStep] = useState("IDENTIFIER"); // IDENTIFIER | PASSWORD | OTP
@@ -28,7 +33,7 @@ const GoPeopleAuthHeader = ({
   const [errors, setErrors] = useState({
     identifier: "",
     password: "",
-    otp: ""
+    otp: "",
   });
 
   const handleCloseModal = () => {
@@ -45,7 +50,7 @@ const GoPeopleAuthHeader = ({
   const handleAuthSuccess = (token) => {
     try {
       const tokenData = processJWTToken(token);
-      
+
       if (onSuccess) {
         onSuccess(tokenData);
       }
@@ -62,7 +67,7 @@ const GoPeopleAuthHeader = ({
     if (!value) {
       return I18N[lng].auth.required_field;
     }
-    
+
     const isEmail = value.includes("@");
     if (isEmail) {
       return validateEmail(value) ? "" : I18N[lng].auth.validate_email;
@@ -83,7 +88,7 @@ const GoPeopleAuthHeader = ({
 
     try {
       const response = await initiateAuth(apiBaseUrl, identifier);
-      
+
       if (response.message === "Account exists with password") {
         setHasPassword(true);
         setStep("PASSWORD");
@@ -110,8 +115,12 @@ const GoPeopleAuthHeader = ({
     setErrors({ ...errors, password: "" });
 
     try {
-      const response = await loginWithPassword(apiBaseUrl, identifier, password);
-      
+      const response = await loginWithPassword(
+        apiBaseUrl,
+        identifier,
+        password
+      );
+
       if (response.token) {
         Toast.success(I18N[lng].auth.successfully_saved);
         handleAuthSuccess(response.token);
@@ -119,7 +128,10 @@ const GoPeopleAuthHeader = ({
       }
     } catch (error) {
       console.error("Error logging in with password:", error);
-      setErrors({ ...errors, password: error.message || I18N[lng].auth.invalid_credentials });
+      setErrors({
+        ...errors,
+        password: error.message || I18N[lng].auth.invalid_credentials,
+      });
       if (onError) onError(error);
     } finally {
       setLoading(false);
@@ -131,7 +143,7 @@ const GoPeopleAuthHeader = ({
 
     try {
       const response = await requestPasswordReset(apiBaseUrl, identifier);
-      
+
       if (response.message) {
         setStep("OTP");
         Toast.info(I18N[lng].auth.reset_pwd_check_your_email);
@@ -156,7 +168,7 @@ const GoPeopleAuthHeader = ({
 
     try {
       const response = await verifyOTP(apiBaseUrl, otp);
-      
+
       if (response.token) {
         Toast.success(I18N[lng].auth.successfully_saved);
         handleAuthSuccess(response.token);
@@ -164,7 +176,10 @@ const GoPeopleAuthHeader = ({
       }
     } catch (error) {
       console.error("Error verifying OTP:", error);
-      setErrors({ ...errors, otp: error.message || I18N[lng].auth.invalid_code });
+      setErrors({
+        ...errors,
+        otp: error.message || I18N[lng].auth.invalid_code,
+      });
       if (onError) onError(error);
     } finally {
       setLoading(false);
@@ -174,7 +189,7 @@ const GoPeopleAuthHeader = ({
   const renderIdentifierStep = () => (
     <div className={styles.loginContent}>
       <h1 className={styles.title}>{I18N[lng].auth.authenticate}</h1>
-      
+
       <FormInput
         name="identifier"
         value={identifier}
@@ -207,7 +222,7 @@ const GoPeopleAuthHeader = ({
   const renderPasswordStep = () => (
     <div className={styles.loginContent}>
       <h1 className={styles.title}>{I18N[lng].auth.signin}</h1>
-      
+
       <FormInput
         name="identifier"
         value={identifier}
@@ -244,10 +259,10 @@ const GoPeopleAuthHeader = ({
           </button>
         )}
       </div>
-      
+
       <div className={styles.forgotPasswordLink}>
-        <span 
-          className={styles.linkText} 
+        <span
+          className={styles.linkText}
           onClick={handleContinueWithoutPassword}
         >
           {I18N[lng].auth.continueWithoutPassword}
@@ -259,10 +274,8 @@ const GoPeopleAuthHeader = ({
   const renderOTPStep = () => (
     <div className={styles.loginContent}>
       <h1 className={styles.title}>{I18N[lng].auth.enterOTP}</h1>
-      
-      <p className={styles.otpMessage}>
-        {I18N[lng].auth.otpSentMessage}
-      </p>
+
+      <p className={styles.otpMessage}>{I18N[lng].auth.otpSentMessage}</p>
 
       <div className={styles.codeBox}>
         <ReactCodeInput
@@ -283,9 +296,7 @@ const GoPeopleAuthHeader = ({
           }}
           autoFocus={true}
         />
-        {errors.otp && (
-          <span className={styles.error}>{errors.otp}</span>
-        )}
+        {errors.otp && <span className={styles.error}>{errors.otp}</span>}
       </div>
 
       <div className={styles.actions}>
@@ -334,7 +345,7 @@ const GoPeopleAuthHeader = ({
             </svg>
           </span>
         </div>
-        
+
         <div className={styles.container}>
           {step === "IDENTIFIER" && renderIdentifierStep()}
           {step === "PASSWORD" && renderPasswordStep()}

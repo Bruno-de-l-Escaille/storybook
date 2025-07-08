@@ -11,7 +11,7 @@ import Communities from "./Communities";
 import Notifs from "./Notifs";
 import TTPFaqWidget from "../TTPFaqWidget";
 import * as icons from "../Icons";
-import AuthModal from "./AuthModal";
+import GoPeopleAuthHeader from "../GoPeopleAuthHeader";
 
 const I18N = {
   en: {
@@ -317,7 +317,24 @@ export class Header extends Component {
           ))}
         </ul>
         {isOtcAuth ? (
-          <AuthModal I18N={I18N} lng={lng} app={app} env={env} />
+          <GoPeopleAuthHeader
+            apiBaseUrl="http://localhost:8081"
+            lng={lng}
+            onSuccess={(tokenData) => {
+              console.log("Authentication successful:", tokenData.token);
+              const redirectUrl = intendedApp
+                ? `${homeUrl}/?intendedApp=${intendedApp}`
+                : gotoUrl
+                ? `${homeUrl}/?gotoUrl=${gotoUrl}`
+                : withAuthLogin
+                ? `${homeUrl}/?gotoWithAuth=${appUrl}`
+                : `${homeUrl}/?goto=${appUrl}`;
+              window.location.href = redirectUrl;
+            }}
+            onError={(error) => {
+              console.error("Authentication error:", error);
+            }}
+          />
         ) : (
           <a
             className={styles.signIn}
