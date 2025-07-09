@@ -13,9 +13,8 @@ export const DefaultGoPeopleAuthHeader = () => (
   <GoPeopleAuthHeader
     apiBaseUrl={text("API Base URL", "http://localhost:8080")}
     lng={select("Language", ["fr", "nl", "en"], "fr")}
-    onSuccess={(token) => {
-      console.log("Authentication successful:", token);
-      alert(`Authentication successful! Token: ${token.substring(0, 20)}...`);
+    onSuccess={(data) => {
+      console.log("Authentication successful:", data);
     }}
     onError={(error) => {
       console.error("Authentication error:", error);
@@ -30,9 +29,11 @@ export const GoPeopleAuthHeaderEnglish = () => (
   <GoPeopleAuthHeader
     apiBaseUrl="http://localhost:8080"
     lng="en"
-    onSuccess={(token) => {
-      console.log("Authentication successful:", token);
-      alert(`Authentication successful! Token: ${token.substring(0, 20)}...`);
+    onSuccess={(data) => {
+      console.log("Authentication successful:", data);
+      alert(
+        `Authentication successful! Token: ${data.token.substring(0, 20)}...`
+      );
     }}
     onError={(error) => {
       console.error("Authentication error:", error);
@@ -44,9 +45,11 @@ export const GoPeopleAuthHeaderDutch = () => (
   <GoPeopleAuthHeader
     apiBaseUrl="http://localhost:8080"
     lng="nl"
-    onSuccess={(token) => {
-      console.log("Authentication successful:", token);
-      alert(`Authentication successful! Token: ${token.substring(0, 20)}...`);
+    onSuccess={(data) => {
+      console.log("Authentication successful:", data);
+      alert(
+        `Authentication successful! Token: ${data.token.substring(0, 20)}...`
+      );
     }}
     onError={(error) => {
       console.error("Authentication error:", error);
@@ -58,9 +61,9 @@ export const GoPeopleAuthHeaderWithCustomAPI = () => (
   <GoPeopleAuthHeader
     apiBaseUrl="https://api.gopeople.com"
     lng="fr"
-    onSuccess={(token) => {
+    onSuccess={(data) => {
       // Custom success handler - could store token in localStorage
-      localStorage.setItem("authToken", token);
+      localStorage.setItem("authToken", data.token);
       console.log("Token stored in localStorage");
       alert("Authentication successful! Token stored.");
     }}
@@ -88,8 +91,8 @@ export const GoPeopleAuthHeaderInHeaderContext = () => (
       <GoPeopleAuthHeader
         apiBaseUrl="http://localhost:8080"
         lng="fr"
-        onSuccess={(token) => {
-          console.log("User authenticated in header:", token);
+        onSuccess={(data) => {
+          console.log("User authenticated in header:", data);
           alert("Welcome! You are now logged in.");
         }}
         onError={(error) => {

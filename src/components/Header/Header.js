@@ -321,15 +321,7 @@ export class Header extends Component {
             apiBaseUrl="http://localhost:8081"
             lng={lng}
             onSuccess={(tokenData) => {
-              console.log("Authentication successful:", tokenData.token);
-              const redirectUrl = intendedApp
-                ? `${homeUrl}/?intendedApp=${intendedApp}`
-                : gotoUrl
-                ? `${homeUrl}/?gotoUrl=${gotoUrl}`
-                : withAuthLogin
-                ? `${homeUrl}/?gotoWithAuth=${appUrl}`
-                : `${homeUrl}/?goto=${appUrl}`;
-              window.location.href = redirectUrl;
+              console.log("Authentication successful:", tokenData);
             }}
             onError={(error) => {
               console.error("Authentication error:", error);

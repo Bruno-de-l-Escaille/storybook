@@ -138,6 +138,65 @@ export const getTokenExpirationTime = (decodedToken) => {
 };
 
 /**
+ * Normalize authentication data to a consistent format
+ * @param {object} processedData - Processed token data (from JWT or legacy format)
+ * @param {string} env - Environment (e.g., 'dev', 'prod')
+ * @param {object} app - Application configuration object
+ * @returns {object} Normalized authentication data
+ */
+export const normalizeAuthData = (processedData, env, app) => {
+  // Check if the data comes from a JWT with embedded apiTtp_token
+  if (processedData.apiTtpToken) {
+    const { userInfo, apiTtpToken } = processedData;
+    console.log(
+      "Processing JWT token with embedded apiTtp_token",
+      processedData.access_token
+    );
+    return {
+      id: userInfo.userId,
+      token: apiTtpToken.access_token,
+      expiresIn: apiTtpToken.expires_in,
+      createdAt: userInfo.issuedAt,
+      scope: apiTtpToken.scope,
+      extra: {
+        lang: userInfo.language || "en", // Default to "en" if not provided
+        env,
+      },
+      email: userInfo.email,
+      phone: userInfo.phone,
+      jti: userInfo.jwtId,
+      exp: userInfo.expiresAt,
+    };
+  } else {
+    // Legacy opaque token format
+    const { sha256 } = require("js-sha256");
+    const salt = "Aqwxsz32$";
+    const time = Math.floor(Date.now() / 1000);
+
+    return {
+      id: processedData.data.user.id,
+      token: processedData.token.access_token,
+      expiresIn: processedData.token.expires_in,
+      createdAt: processedData.token.createdAt,
+      scope: processedData.token.scope,
+      extra: {
+        lang: processedData.data.user.language || "en",
+        env,
+      },
+      email: processedData.data.user.mainEmail,
+      key: sha256(
+        processedData.data.user.email +
+          time +
+          processedData.token.access_token +
+          salt
+      ),
+      time,
+      app: app.authAppName,
+    };
+  }
+};
+
+/**
  * Process JWT token and extract all relevant information
  * @param {string} token - JWT token string
  * @returns {object} Complete token data object

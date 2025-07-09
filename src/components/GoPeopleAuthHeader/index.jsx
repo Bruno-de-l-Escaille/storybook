@@ -13,7 +13,12 @@ import {
   verifyOTP,
   requestPasswordReset,
 } from "./api";
-import { validateEmail, validatePhone, processJWTToken } from "./utils";
+import {
+  validateEmail,
+  validatePhone,
+  processJWTToken,
+  normalizeAuthData,
+} from "./utils";
 import styles from "./GoPeopleAuthHeader.module.scss";
 
 const GoPeopleAuthHeader = ({
@@ -22,6 +27,8 @@ const GoPeopleAuthHeader = ({
   onSuccess,
   onError,
   onClose,
+  app = {},
+  env = "dev",
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [step, setStep] = useState("IDENTIFIER"); // IDENTIFIER | PASSWORD | OTP
@@ -49,16 +56,41 @@ const GoPeopleAuthHeader = ({
 
   const handleAuthSuccess = (token) => {
     try {
-      const tokenData = processJWTToken(token);
-
+      const processedData = processJWTToken(token);
+      const normalizedData = normalizeAuthData(processedData, env, app);
+      // Store the token in localStorage
+      localStorage.setItem("authToken", token);
       if (onSuccess) {
-        onSuccess(tokenData);
+        onSuccess(normalizedData);
+      }
+
+      // Handle redirection based on the application's configuration
+      if (app.withAuthLogin) {
+        const b = Buffer.from(JSON.stringify(normalizedData));
+        const s = b.toString("base64");
+        window.location.href = `${app.autoLoginUrl}?auth=${s}`;
+      } else if (app.autoLoginUrl) {
+        const params = new URLSearchParams(normalizedData);
+        const autoLoginUrl = (() => {
+          try {
+            const url = new URL(app.autoLoginUrl);
+            params.forEach((value, key) => {
+              url.searchParams.append(key, value);
+            });
+            return url.toString();
+          } catch (e) {
+            console.error("Invalid auto login URL:", e);
+            const separator = app.autoLoginUrl.includes("?") ? "&" : "?";
+            return app.autoLoginUrl + separator + params.toString();
+          }
+        })();
+        window.location.href = autoLoginUrl;
       }
     } catch (error) {
-      console.error("Error processing JWT token:", error);
+      console.error("Error processing token:", error);
       Toast.error(I18N[lng].auth.error_occurred);
       if (onError) {
-        onError(new Error(`JWT processing failed: ${error.message}`));
+        onError(new Error(`Token processing failed: ${error.message}`));
       }
     }
   };
