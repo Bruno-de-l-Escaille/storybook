@@ -16,6 +16,7 @@ import {
   DotLoader,
   MoonLoader,
 } from "react-spinners";
+import { Help } from "../../Icons/Help";
 
 export const EventMask = ({
   event,
@@ -159,6 +160,19 @@ export const EventMask = ({
               </Tooltip>
             ),
             onClick: () => handleWatchConfigChange(!watchConfig),
+          },
+          {
+            children: (
+              <Tooltip title={I18N[language]["faqConfig"]}>
+                <Help width="17px" height="20px" />
+              </Tooltip>
+            ),
+            onClick: () => {
+              const url = new URL(window.location.href);
+              url.searchParams.set("appSelected", "EVENT");
+              url.searchParams.set("eventId", event.id);
+              window.history.pushState({}, "", url.toString());
+            },
           },
         ]}
         renderForm={renderForm}
