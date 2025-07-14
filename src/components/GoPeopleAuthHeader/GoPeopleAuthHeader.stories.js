@@ -63,7 +63,7 @@ export const GoPeopleAuthHeaderWithCustomAPI = () => (
     lng="fr"
     onSuccess={(data) => {
       // Custom success handler - could store token in localStorage
-      localStorage.setItem("authToken", data.token);
+      localStorage.setItem("authToken4555", data.token);
       console.log("Token stored in localStorage");
       alert("Authentication successful! Token stored.");
     }}
