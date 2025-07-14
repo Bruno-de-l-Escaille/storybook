@@ -332,15 +332,15 @@ export class Header extends Component {
         ) : (
           <a
             className={styles.signIn}
-            href={
-              intendedApp
-                ? `${homeUrl}/?intendedApp=${intendedApp}`
-                : gotoUrl
-                ? `${homeUrl}/?gotoUrl=${gotoUrl}`
-                : withAuthLogin
-                ? `${homeUrl}/?gotoWithAuth=${appUrl}`
-                : `${homeUrl}/?goto=${appUrl}`
-            }
+            // href={
+            //   intendedApp
+            //     ? `${homeUrl}/?intendedApp=${intendedApp}`
+            //     : gotoUrl
+            //     ? `${homeUrl}/?gotoUrl=${gotoUrl}`
+            //     : withAuthLogin
+            //     ? `${homeUrl}/?gotoWithAuth=${appUrl}`
+            //     : `${homeUrl}/?goto=${appUrl}`
+            // }
           >
             {I18N[lng]["signIn"]}
           </a>
