@@ -321,7 +321,9 @@ export class Header extends Component {
             apiBaseUrl="http://localhost:8081"
             lng={lng}
             onSuccess={(tokenData) => {
-              console.log("Authentication successful:", tokenData);
+              if (this.props.onSuccess) {
+                this.props.onSuccess(tokenData);
+              }
             }}
             onError={(error) => {
               console.error("Authentication error:", error);
