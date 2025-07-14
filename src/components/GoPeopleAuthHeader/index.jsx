@@ -60,6 +60,8 @@ const GoPeopleAuthHeader = ({
       const normalizedData = normalizeAuthData(processedData, env, app);
       // Store the token in localStorage
       localStorage.setItem("authToken", token);
+      localStorage.setItem("access_token", normalizedData.token);
+      console.log("Normalized Auth Data:", normalizedData.token);
       if (onSuccess) {
         onSuccess(normalizedData);
       }
