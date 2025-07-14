@@ -65,6 +65,7 @@ const GoPeopleAuthHeader = ({
       }
 
       // Handle redirection based on the application's configuration
+      /*
       if (app.withAuthLogin) {
         const b = Buffer.from(JSON.stringify(normalizedData));
         const s = b.toString("base64");
@@ -85,7 +86,7 @@ const GoPeopleAuthHeader = ({
           }
         })();
         window.location.href = autoLoginUrl;
-      }
+      }*/
     } catch (error) {
       console.error("Error processing token:", error);
       Toast.error(I18N[lng].auth.error_occurred);
