@@ -59,7 +59,7 @@ const GoPeopleAuthHeader = ({
       const processedData = processJWTToken(token);
       const normalizedData = normalizeAuthData(processedData, env, app);
       // Store the token in localStorage
-      localStorage.setItem("authToken", token);
+      localStorage.setItem("authToken from handler success", token);
       localStorage.setItem("access_token", normalizedData.token);
       console.log("Normalized Auth Data:", normalizedData.token);
       if (onSuccess) {
