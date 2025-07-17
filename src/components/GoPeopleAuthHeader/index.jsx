@@ -58,37 +58,9 @@ const GoPeopleAuthHeader = ({
     try {
       const processedData = processJWTToken(token);
       const normalizedData = normalizeAuthData(processedData, env, app);
-      // Store the token in localStorage
-      localStorage.setItem("authToken from handler success", token);
-      localStorage.setItem("access_token", normalizedData.token);
-      console.log("Normalized Auth Data:", normalizedData.token);
       if (onSuccess) {
-        onSuccess(normalizedData);
+        onSuccess({ ...normalizedData, jwt: token });
       }
-
-      // Handle redirection based on the application's configuration
-      /*
-      if (app.withAuthLogin) {
-        const b = Buffer.from(JSON.stringify(normalizedData));
-        const s = b.toString("base64");
-        window.location.href = `${app.autoLoginUrl}?auth=${s}`;
-      } else if (app.autoLoginUrl) {
-        const params = new URLSearchParams(normalizedData);
-        const autoLoginUrl = (() => {
-          try {
-            const url = new URL(app.autoLoginUrl);
-            params.forEach((value, key) => {
-              url.searchParams.append(key, value);
-            });
-            return url.toString();
-          } catch (e) {
-            console.error("Invalid auto login URL:", e);
-            const separator = app.autoLoginUrl.includes("?") ? "&" : "?";
-            return app.autoLoginUrl + separator + params.toString();
-          }
-        })();
-        window.location.href = autoLoginUrl;
-      }*/
     } catch (error) {
       console.error("Error processing token:", error);
       Toast.error(I18N[lng].auth.error_occurred);
