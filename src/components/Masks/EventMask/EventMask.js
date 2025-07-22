@@ -164,7 +164,7 @@ export const EventMask = ({
           {
             children: (
               <Tooltip title={I18N[language]["faqConfig"]}>
-                <Help width="17px" height="20px" />
+                <Help style={{ paddingLeft: "0.25rem" }} />
               </Tooltip>
             ),
             onClick: () => {
