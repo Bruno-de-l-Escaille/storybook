@@ -41,6 +41,7 @@ const GoPeopleAuthHeader = ({
   const [loading, setLoading] = useState(false);
   const [clientToken, setClientToken] = useState("");
   const [userId, setUserId] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [errors, setErrors] = useState({
     identifier: "",
     password: "",
@@ -266,7 +267,29 @@ const GoPeopleAuthHeader = ({
 
   const renderPasswordStep = () => (
     <div className={styles.loginContent}>
-      <h1 className={styles.title}>{I18N[lng].auth.signin}</h1>
+      <div className={styles.titleContainer}>
+        <span
+          className={styles.backButton}
+          onClick={() => setStep("IDENTIFIER")}
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15 18L9 12L15 6"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+        <h1 className={styles.title}>{I18N[lng].auth.signin}</h1>
+      </div>
 
       <FormInput
         name="identifier"
@@ -281,7 +304,7 @@ const GoPeopleAuthHeader = ({
         name="password"
         value={password}
         label={I18N[lng].auth.password}
-        type="password"
+        type={isPasswordVisible ? "text" : "password"}
         error={errors.password}
         className="sb-ttp-input-lg"
         labelClassName="sb-ttp-label-lg"
@@ -291,6 +314,81 @@ const GoPeopleAuthHeader = ({
             handlePasswordLogin();
           }
         }}
+        rightIcon={
+          <span
+            className={styles.passwordToggle}
+            onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+          >
+            {!isPasswordVisible ? (
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5Z"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M12 9C13.6569 9 15 10.3431 15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9Z"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            ) : (
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M2 2L22 22"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M6.71277 6.7226C3.66477 8.0226 1.63277 10.7126 1.00277 12.0026C2.73277 16.3926 7.00277 19.5026 12.0028 19.5026C14.1328 19.5026 16.1228 18.9826 17.8928 18.0726"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M12.0019 14.9999C10.345 14.9999 9.00195 13.6568 9.00195 11.9999C9.00195 11.4399 9.16195 10.9299 9.42195 10.4999"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M14.5723 9.42716C15.9623 10.2172 16.9923 11.5672 16.9923 12.0022C16.9323 12.1822 16.8223 12.3822 16.7023 12.5822"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M21.2678 14.8816C21.9378 13.8216 22.5478 12.7116 22.9978 12.0016C21.2678 7.61164 16.9978 4.50164 11.9978 4.50164C10.9278 4.50164 9.89778 4.64164 8.94778 4.90164"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            )}
+          </span>
+        }
       />
 
       <div className={styles.actions}>

@@ -70,3 +70,18 @@ span.error {
     color: #fff;
   }
 }
+
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.rightIcon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
