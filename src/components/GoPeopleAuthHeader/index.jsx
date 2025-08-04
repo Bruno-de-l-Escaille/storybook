@@ -7,6 +7,7 @@ import { I18N } from "../../i18n";
 import FormInput from "../common/FormInput";
 import Loader from "../common/Loader";
 import { Toast } from "../ToastContainer/ToastContainer";
+import GoPeopleRegistrationModal from "./GoPeopleRegistrationModal";
 import {
   initiateAuth,
   loginWithPassword,
@@ -31,12 +32,15 @@ const GoPeopleAuthHeader = ({
   env = "dev",
 }) => {
   const [showModal, setShowModal] = useState(false);
-  const [step, setStep] = useState("IDENTIFIER"); // IDENTIFIER | PASSWORD | OTP
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [step, setStep] = useState("IDENTIFIER"); // IDENTIFIER | PASSWORD | OTP | REGISTER
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [otp, setOtp] = useState("");
   const [hasPassword, setHasPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [clientToken, setClientToken] = useState("");
+  const [userId, setUserId] = useState("");
   const [errors, setErrors] = useState({
     identifier: "",
     password: "",
@@ -45,6 +49,7 @@ const GoPeopleAuthHeader = ({
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setShowRegisterModal(false);
     setStep("IDENTIFIER");
     setIdentifier("");
     setPassword("");
@@ -52,6 +57,20 @@ const GoPeopleAuthHeader = ({
     setHasPassword(false);
     setErrors({});
     if (onClose) onClose();
+  };
+
+  const handleAuthTokenUser = (authData) => {
+    try {
+      if (authData.token) {
+        Toast.success(I18N[lng].auth.successfully_saved);
+        handleAuthSuccess(authData.token);
+        handleCloseModal();
+      }
+    } catch (error) {
+      console.error("Error processing auth token:", error);
+      Toast.error(I18N[lng].auth.error_occurred);
+      if (onError) onError(error);
+    }
   };
 
   const handleAuthSuccess = (token) => {
@@ -177,9 +196,28 @@ const GoPeopleAuthHeader = ({
       const response = await verifyOTP(apiBaseUrl, otp);
 
       if (response.token) {
-        Toast.success(I18N[lng].auth.successfully_saved);
-        handleAuthSuccess(response.token);
-        handleCloseModal();
+        // Decode the token to get the user ID
+        const decodedToken = processJWTToken(response.token);
+        const currentUserId = decodedToken.userInfo.userId;
+
+        if (!currentUserId) {
+          throw new Error("User ID not found in token.");
+        }
+
+        // Store the token and user ID
+        setClientToken(response.token);
+        setUserId(currentUserId);
+
+        if (!hasPassword) {
+          // New user path - needs to complete registration
+          setShowModal(false);
+          setShowRegisterModal(true);
+        } else {
+          // Existing user path - complete authentication
+          Toast.success(I18N[lng].auth.successfully_saved);
+          handleAuthSuccess(response.token);
+          handleCloseModal();
+        }
       }
     } catch (error) {
       console.error("Error verifying OTP:", error);
@@ -358,6 +396,28 @@ const GoPeopleAuthHeader = ({
           {step === "PASSWORD" && renderPasswordStep()}
           {step === "OTP" && renderOTPStep()}
         </div>
+      </Modal>
+
+      {/* Registration Modal for new users */}
+      <Modal
+        isOpen={showRegisterModal}
+        onRequestClose={handleCloseModal}
+        shouldCloseOnOverlayClick={false}
+        className={styles.modal}
+        overlayClassName={styles.overlay}
+      >
+        <GoPeopleRegistrationModal
+          app={app}
+          i18n={I18N[lng]}
+          closeModal={handleCloseModal}
+          lng={lng}
+          clientToken={clientToken}
+          setClientToken={setClientToken}
+          handleAuthTokenUser={handleAuthTokenUser}
+          email={identifier}
+          apiBaseUrl={apiBaseUrl}
+          userId={userId}
+        />
       </Modal>
     </>
   );

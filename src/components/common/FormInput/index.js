@@ -14,9 +14,10 @@ const FormInput = ({
   handleBlur,
   handleKeyUp,
   handleChange,
+  hideLockIcon,
   ...otherProps
 }) => {
-  const { disabled, hideLockIcon } = otherProps;
+  const { disabled } = otherProps;
 
   return (
     <div className={styles.group}>
