@@ -273,14 +273,16 @@ const GoPeopleAuthHeader = ({
           onClick={() => setStep("IDENTIFIER")}
         >
           <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
+            width="35"
+            height="19"
+            viewBox="0 0 40 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M15 18L9 12L15 6"
+              d="M38 12H10       
+              M10 12L16 6      
+              M10 12L16 18"
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
@@ -288,7 +290,9 @@ const GoPeopleAuthHeader = ({
             />
           </svg>
         </span>
-        <h1 className={styles.title}>{I18N[lng].auth.signin}</h1>
+        <h1 className={styles.title} onClick={() => setStep("IDENTIFIER")}>
+          {I18N[lng].auth.modifyIdentifier}
+        </h1>
       </div>
 
       <FormInput

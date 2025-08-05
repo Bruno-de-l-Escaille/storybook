@@ -188,6 +188,7 @@ export const I18N = {
       verifyOTP: "Verify",
       otpSentMessage:
         "Please enter the 6-digit code sent to your email or phone",
+      modifyIdentifier: "Modify identifier",
     },
     on: "on",
     keywords: "Key words",
@@ -411,6 +412,7 @@ export const I18N = {
       verifyOTP: "Vérifier",
       otpSentMessage:
         "Veuillez entrer le code à 6 chiffres envoyé à votre email ou téléphone",
+      modifyIdentifier: "Modifier l'identifiant",
     },
     on: "sur",
     keywords: "Mots clés",
@@ -634,6 +636,7 @@ export const I18N = {
       verifyOTP: "Verifiëren",
       otpSentMessage:
         "Voer de 6-cijferige code in die naar uw e-mail of telefoon is gestuurd",
+      modifyIdentifier: "Identificatie wijzigen",
     },
     on: "op",
     keywords: "Kernwoorden",

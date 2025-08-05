@@ -86,7 +86,7 @@
   line-height: 25px;
   font-weight: 500;
   margin-bottom: 2rem;
-  
+  cursor: pointer;
   .titleContainer & {
     margin-bottom: 0;
   }
@@ -194,15 +194,20 @@
   cursor: pointer;
   color: #6b7280;
   margin-right: 10px;
-
+  transform: translateY(3px);
   &:hover {
     color: #111827;
   }
 }
 
 .passwordToggle {
+  position: absolute;
+  right: 0.2rem;
   cursor: pointer;
   color: #6b7280;
+  display: flex;
+  align-items: center;
+  height: 100%;
 
   &:hover {
     color: #111827;
