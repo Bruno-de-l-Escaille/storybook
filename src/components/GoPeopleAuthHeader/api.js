@@ -17,8 +17,16 @@ export const initiateAuth = async (apiBaseUrl, identifier) => {
     return data;
   } else {
     // Handle error responses
-    const errorData = await response.json();
-    throw new Error(errorData.error || `HTTP ${response.status}`);
+    try {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message ||
+          errorData.error ||
+          `HTTP ${response.status}: ${response.statusText}`
+      );
+    } catch (jsonError) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
   }
 };
 
@@ -35,8 +43,16 @@ export const loginWithPassword = async (apiBaseUrl, identifier, password) => {
     const data = await response.json();
     return data;
   } else {
-    const errorData = await response.json();
-    throw new Error(errorData.error || `HTTP ${response.status}`);
+    try {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message ||
+          errorData.error ||
+          `HTTP ${response.status}: ${response.statusText}`
+      );
+    } catch (jsonError) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
   }
 };
 
@@ -60,10 +76,16 @@ export const verifyOTP = async (apiBaseUrl, otp) => {
       // This would typically be determined by checking if user has completed registration
     };
   } else {
-    const errorData = await response.json();
-    throw new Error(
-      errorData.message || errorData.error || `HTTP ${response.status}`
-    );
+    try {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message ||
+          errorData.error ||
+          `HTTP ${response.status}: ${response.statusText}`
+      );
+    } catch (jsonError) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
   }
 };
 
@@ -80,8 +102,16 @@ export const requestPasswordReset = async (apiBaseUrl, identifier) => {
     const data = await response.json();
     return data;
   } else {
-    const errorData = await response.json();
-    throw new Error(errorData.error || `HTTP ${response.status}`);
+    try {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message ||
+          errorData.error ||
+          `HTTP ${response.status}: ${response.statusText}`
+      );
+    } catch (jsonError) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
   }
 };
 
@@ -113,10 +143,16 @@ export const updateUser = async (apiBaseUrl, token, userId, userData) => {
     const data = await response.json();
     return data;
   } else {
-    const errorData = await response.json();
-    throw new Error(
-      errorData.message || errorData.error || `HTTP ${response.status}`
-    );
+    try {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message ||
+          errorData.error ||
+          `HTTP ${response.status}: ${response.statusText}`
+      );
+    } catch (jsonError) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
   }
 };
 
@@ -134,10 +170,16 @@ export const setUserPassword = async (apiBaseUrl, token, password) => {
     const data = await response.json();
     return data;
   } else {
-    const errorData = await response.json();
-    throw new Error(
-      errorData.message || errorData.error || `HTTP ${response.status}`
-    );
+    try {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message ||
+          errorData.error ||
+          `HTTP ${response.status}: ${response.statusText}`
+      );
+    } catch (jsonError) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
   }
 };
 
@@ -154,7 +196,36 @@ export const authenticateUser = async (apiBaseUrl, email, password) => {
     const data = await response.json();
     return data;
   } else {
-    const errorData = await response.json();
+    try {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message ||
+          errorData.error ||
+          `HTTP ${response.status}: ${response.statusText}`
+      );
+    } catch (jsonError) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+  }
+};
+
+export const syncUserCreation = async (apiBaseUrl, token, userId) => {
+  const response = await fetch(
+    `${apiBaseUrl}/users/sync-user-creation/${userId}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  if (response.ok) {
+    const data = await response.json();
+    return data;
+  } else {
+    const errorData = await response.json().catch(() => ({}));
     throw new Error(
       errorData.message || errorData.error || `HTTP ${response.status}`
     );

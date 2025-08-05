@@ -125,7 +125,68 @@ const GoPeopleAuthHeader = ({
       }
     } catch (error) {
       console.error("Error initiating auth:", error);
-      Toast.error(error.message || I18N[lng].auth.error_occurred);
+
+      // Handle specific 409 conflicts for phone/email during auth initiation
+      const conflictErrorMessage = error.message || "";
+      const isConflictError =
+        error.message.includes("409") ||
+        conflictErrorMessage.includes("409") ||
+        conflictErrorMessage.toLowerCase().includes("already exists") ||
+        conflictErrorMessage.toLowerCase().includes("conflict");
+
+      if (isConflictError) {
+        if (conflictErrorMessage.toLowerCase().includes("phone")) {
+          setErrors({
+            ...errors,
+            identifier:
+              I18N[lng].auth.phone_already_exists ||
+              "This phone number is already registered",
+          });
+          Toast.error(
+            I18N[lng].auth.phone_conflict ||
+              "Phone number already exists. Please use a different phone number."
+          );
+        } else if (conflictErrorMessage.toLowerCase().includes("email")) {
+          setErrors({
+            ...errors,
+            identifier:
+              I18N[lng].auth.email_already_exists ||
+              "This email address is already registered",
+          });
+          Toast.error(
+            I18N[lng].auth.email_conflict ||
+              "Email address already exists. Please use a different email address."
+          );
+        } else {
+          // Show the actual error message from the server
+          Toast.error(conflictErrorMessage || "User already exists");
+          console.log("409 Conflict Error Details:", error);
+        }
+        if (onError) onError(error);
+        return;
+      }
+
+      // Provide more specific error messages
+      let errorMessage = I18N[lng].auth.error_occurred || "An error occurred";
+
+      if (error.message.includes("400")) {
+        errorMessage =
+          I18N[lng].auth.invalid_email || "Invalid email or phone number";
+      } else if (error.message.includes("404")) {
+        errorMessage = I18N[lng].auth.user_not_found || "User not found";
+      } else if (error.message.includes("500")) {
+        errorMessage = I18N[lng].auth.server_error || "Server error occurred";
+      } else if (
+        error.message.toLowerCase().includes("network") ||
+        error.message.toLowerCase().includes("fetch")
+      ) {
+        errorMessage =
+          I18N[lng].auth.network_error || "Network connection failed";
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+
+      Toast.error(errorMessage);
       if (onError) onError(error);
     } finally {
       setLoading(false);
@@ -155,9 +216,34 @@ const GoPeopleAuthHeader = ({
       }
     } catch (error) {
       console.error("Error logging in with password:", error);
+
+      // Provide more specific error messages for password login
+      let errorMessage =
+        I18N[lng].auth.invalid_credentials || "Invalid credentials";
+
+      if (error.message.includes("401")) {
+        errorMessage = I18N[lng].auth.wrong_password || "Incorrect password";
+      } else if (error.message.includes("403")) {
+        errorMessage = I18N[lng].auth.account_locked || "Account is locked";
+      } else if (error.message.includes("429")) {
+        errorMessage =
+          I18N[lng].auth.too_many_attempts ||
+          "Too many login attempts. Please try again later";
+      } else if (error.message.includes("500")) {
+        errorMessage = I18N[lng].auth.server_error || "Server error occurred";
+      } else if (
+        error.message.toLowerCase().includes("network") ||
+        error.message.toLowerCase().includes("fetch")
+      ) {
+        errorMessage =
+          I18N[lng].auth.network_error || "Network connection failed";
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+
       setErrors({
         ...errors,
-        password: error.message || I18N[lng].auth.invalid_credentials,
+        password: errorMessage,
       });
       if (onError) onError(error);
     } finally {
@@ -177,7 +263,31 @@ const GoPeopleAuthHeader = ({
       }
     } catch (error) {
       console.error("Error requesting password reset:", error);
-      Toast.error(error.message || I18N[lng].auth.error_occurred);
+
+      // Provide more specific error messages
+      let errorMessage = I18N[lng].auth.error_occurred || "An error occurred";
+
+      if (error.message.includes("400")) {
+        errorMessage = I18N[lng].auth.invalid_email || "Invalid email address";
+      } else if (error.message.includes("404")) {
+        errorMessage = I18N[lng].auth.user_not_found || "User not found";
+      } else if (error.message.includes("429")) {
+        errorMessage =
+          I18N[lng].auth.too_many_requests ||
+          "Too many requests. Please try again later";
+      } else if (error.message.includes("500")) {
+        errorMessage = I18N[lng].auth.server_error || "Server error occurred";
+      } else if (
+        error.message.toLowerCase().includes("network") ||
+        error.message.toLowerCase().includes("fetch")
+      ) {
+        errorMessage =
+          I18N[lng].auth.network_error || "Network connection failed";
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+
+      Toast.error(errorMessage);
       if (onError) onError(error);
     } finally {
       setLoading(false);
@@ -222,9 +332,36 @@ const GoPeopleAuthHeader = ({
       }
     } catch (error) {
       console.error("Error verifying OTP:", error);
+
+      // Provide more specific error messages for OTP verification
+      let errorMessage =
+        I18N[lng].auth.invalid_code || "Invalid verification code";
+
+      if (error.message.includes("400")) {
+        errorMessage =
+          I18N[lng].auth.invalid_otp || "Invalid verification code";
+      } else if (error.message.includes("401")) {
+        errorMessage =
+          I18N[lng].auth.expired_otp || "Verification code has expired";
+      } else if (error.message.includes("429")) {
+        errorMessage =
+          I18N[lng].auth.too_many_attempts ||
+          "Too many attempts. Please try again later";
+      } else if (error.message.includes("500")) {
+        errorMessage = I18N[lng].auth.server_error || "Server error occurred";
+      } else if (
+        error.message.toLowerCase().includes("network") ||
+        error.message.toLowerCase().includes("fetch")
+      ) {
+        errorMessage =
+          I18N[lng].auth.network_error || "Network connection failed";
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+
       setErrors({
         ...errors,
-        otp: error.message || I18N[lng].auth.invalid_code,
+        otp: errorMessage,
       });
       if (onError) onError(error);
     } finally {

@@ -7,7 +7,12 @@ import { Toast } from "../ToastContainer/ToastContainer";
 import AgreationNumber from "../common/AgreationNumber";
 import Checkbox from "../common/Checkbox";
 
-import { updateUser, setUserPassword, authenticateUser } from "./api";
+import {
+  updateUser,
+  setUserPassword,
+  authenticateUser,
+  syncUserCreation,
+} from "./api";
 import {
   validatePhone,
   validatePassword,
@@ -206,11 +211,83 @@ const GoPeopleRegistrationModal = ({
         password
       );
 
+      // Step 4: Sync user creation after successful registration
+      try {
+        await syncUserCreation(
+          app.apiUrl || apiBaseUrl,
+          authResponse.token,
+          userId
+        );
+      } catch (syncError) {
+        console.warn("User sync warning:", syncError);
+        // Don't fail the registration if sync fails, just log the warning
+        // The user registration was successful, sync is just a secondary step
+      }
+
       // Handle successful authentication
       handleAuthTokenUser(authResponse);
     } catch (error) {
       console.error("Registration error:", error);
-      Toast.error(error.message || i18n.auth.error);
+
+      // Handle specific 409 conflicts for phone/email
+      const conflictErrorMessage = error.message || "";
+      const isConflictError =
+        error.message.includes("409") ||
+        conflictErrorMessage.includes("409") ||
+        conflictErrorMessage.toLowerCase().includes("already exists") ||
+        conflictErrorMessage.toLowerCase().includes("conflict");
+
+      if (isConflictError) {
+        // Parse the conflict error to determine which field is conflicting
+        if (conflictErrorMessage.toLowerCase().includes("phone")) {
+          setErrors({
+            ...errors,
+            phone:
+              i18n.auth.phone_already_exists ||
+              "This phone number is already registered",
+          });
+          Toast.error(
+            i18n.auth.phone_conflict ||
+              "Phone number already exists. Please use a different phone number."
+          );
+        } else if (conflictErrorMessage.toLowerCase().includes("email")) {
+          Toast.error(
+            i18n.auth.email_conflict ||
+              "Email address already exists. Please use a different email address."
+          );
+        } else {
+          // Show the actual error message from the server
+          Toast.error(conflictErrorMessage || "User already exists");
+          console.log("409 Conflict Error Details:", error);
+        }
+        setIsSaving(false);
+        return;
+      }
+
+      // Provide more specific error messages based on the error type
+      let errorMessage =
+        i18n.auth.error || "An error occurred during registration";
+
+      if (error.message.includes("400")) {
+        errorMessage = i18n.auth.invalid_data || "Invalid data provided";
+      } else if (error.message.includes("401")) {
+        errorMessage = i18n.auth.unauthorized || "Authentication failed";
+      } else if (error.message.includes("403")) {
+        errorMessage = i18n.auth.forbidden || "Access denied";
+      } else if (error.message.includes("404")) {
+        errorMessage = i18n.auth.not_found || "Resource not found";
+      } else if (error.message.includes("500")) {
+        errorMessage = i18n.auth.server_error || "Server error occurred";
+      } else if (
+        error.message.toLowerCase().includes("network") ||
+        error.message.toLowerCase().includes("fetch")
+      ) {
+        errorMessage = i18n.auth.network_error || "Network connection failed";
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+
+      Toast.error(errorMessage);
       setIsSaving(false);
     }
   };

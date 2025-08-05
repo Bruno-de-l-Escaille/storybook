@@ -201,17 +201,13 @@
 }
 
 .passwordToggle {
+  display: flex;
+  align-items: center; /* vertical center */
+  height: 100%;
   position: absolute;
-  right: 0.2rem;
+  right: 0.5rem;
   cursor: pointer;
   color: #6b7280;
-  display: flex;
-  align-items: center;
-  height: 100%;
-
-  &:hover {
-    color: #111827;
-  }
 }
 
 .linkText {
