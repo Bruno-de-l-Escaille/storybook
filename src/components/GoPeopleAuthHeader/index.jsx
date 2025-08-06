@@ -62,6 +62,7 @@ const GoPeopleAuthHeader = ({
 
   const handleAuthTokenUser = (authData) => {
     try {
+      console.log("Processing auth token:", authData);
       if (authData.token) {
         Toast.success(I18N[lng].auth.successfully_saved);
         handleAuthSuccess(authData.token);

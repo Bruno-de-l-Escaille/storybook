@@ -213,11 +213,16 @@ const GoPeopleRegistrationModal = ({
 
       // Step 4: Sync user creation after successful registration
       try {
-        await syncUserCreation(
+        const syncResponse = await syncUserCreation(
           app.apiUrl || apiBaseUrl,
           authResponse.token,
           userId
         );
+
+        if (syncResponse && syncResponse.token) {
+          // Replace the token with the new one from the sync endpoint
+          authResponse.token = syncResponse.token;
+        }
       } catch (syncError) {
         console.warn("User sync warning:", syncError);
         // Don't fail the registration if sync fails, just log the warning
