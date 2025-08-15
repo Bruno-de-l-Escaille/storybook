@@ -15,3 +15,4 @@ export * from "./IconTranslate";
 export * from "./IconStar";
 export * from "./IconSlider";
 export * from "./IconWhiteCheck";
+export * from "./Image";

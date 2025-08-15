@@ -10,6 +10,7 @@ import MenuProfile from "./MenuProfile";
 import Communities from "./Communities";
 import Notifs from "./Notifs";
 import TTPFaqWidget from "../TTPFaqWidget";
+import TTPGalleryWidget from "../TTPGalleryWidget";
 import * as icons from "../Icons";
 import AuthModal from "./AuthModal";
 
@@ -31,6 +32,7 @@ export class Header extends Component {
     this.state = {
       showSettings: false,
       isFaqWidgetLoaded: false,
+      isGalleryWidgetLoaded: false,
       portalSwitchCurrent: null,
       isBackOffice: this.props.rightIcons?.backoffice?.clicked || false,
     };
@@ -42,6 +44,11 @@ export class Header extends Component {
       this.setState({ isFaqWidgetLoaded: true });
     }
     // }
+
+    if (window.TTPGalleryWidget !== undefined) {
+      this.setState({ isGalleryWidgetLoaded: true });
+    }
+
     if (this.props.portalSwitch && this.props.currentPortal) {
       this.setState({
         portalSwitchCurrent: this.props.portalSwitch.items.filter(
@@ -55,6 +62,10 @@ export class Header extends Component {
     if (prevProps !== this.props) {
       if (window.TTPFAQWidget !== undefined) {
         this.setState({ isFaqWidgetLoaded: true });
+      }
+
+      if (window.TTPGalleryWidget !== undefined) {
+        this.setState({ isGalleryWidgetLoaded: true });
       }
 
       if (this.props.portalSwitch && this.props.currentPortal) {
@@ -80,9 +91,19 @@ export class Header extends Component {
     setTimeout(() => this.setState({ isFaqWidgetLoaded: true }), 4000);
   };
 
+  handleShowGalleryWidget = () => {
+    setTimeout(() => this.setState({ isGalleryWidgetLoaded: true }), 4000);
+  };
+
   handleOnLoadFAQ = () => {
     if (this.props.onFAQLoad) {
       this.props.onFAQLoad();
+    }
+  };
+
+  handleOnLoadGallery = () => {
+    if (this.props.onGalleryLoad) {
+      this.props.onGalleryLoad();
     }
   };
 
@@ -92,6 +113,12 @@ export class Header extends Component {
       app.currentEvent
         ? window.showFAQ(app.appName.toUpperCase(), app.currentEvent)
         : window.showFAQ(app.appName.toUpperCase());
+    }
+  };
+
+  handleGalleryClick = () => {
+    if (window.showGallery) {
+      window.showGallery();
     }
   };
 
@@ -125,7 +152,12 @@ export class Header extends Component {
       personalData,
       onAfterSavePersonal,
     } = this.props;
-    const { isFaqWidgetLoaded, portalSwitchCurrent, isBackOffice } = this.state;
+    const {
+      isFaqWidgetLoaded,
+      portalSwitchCurrent,
+      isBackOffice,
+      isGalleryWidgetLoaded,
+    } = this.state;
     const { navCommunity, user } = auth;
 
     const Icon = icons["Portal"];
@@ -258,6 +290,14 @@ export class Header extends Component {
               className={!isFaqWidgetLoaded ? styles.iconLoading : ""}
             >
               <MenuItem icon="Help" />
+            </div>
+          )}
+          {rightIcons.gallery?.activated && (
+            <div
+              onClick={this.handleGalleryClick.bind(this)}
+              className={!isGalleryWidgetLoaded ? styles.iconLoading : ""}
+            >
+              <MenuItem icon="Image" />
             </div>
           )}
           {rightIcons.apps?.activated && navCommunity && (
@@ -430,12 +470,14 @@ export class Header extends Component {
 
   render() {
     const { auth, app, env, lng, rightIcons } = this.props;
-    const { isFaqWidgetLoaded } = this.state;
+    const { isFaqWidgetLoaded, isGalleryWidgetLoaded } = this.state;
 
     const loadNotifWidget =
       app.appName.toUpperCase() === "EVENT" ||
       (rightIcons &&
         (rightIcons.notifs?.activated || rightIcons.faq?.activated));
+
+    const loadGalleryWidget = rightIcons && rightIcons.gallery?.activated;
 
     return (
       <>
@@ -452,6 +494,19 @@ export class Header extends Component {
             />
           </AppendHead>
         )}
+        {loadGalleryWidget && (
+          <AppendHead onLoad={this.handleShowGalleryWidget.bind(this)}>
+            <link
+              name="gallery-widget"
+              rel="stylesheet"
+              href={`https://tamtam.s3-eu-west-1.amazonaws.com/cdn/gallery/${env}/static/css/widget.css`}
+            />
+            <script
+              name="gallery-widget-script"
+              src={`https://tamtam.s3-eu-west-1.amazonaws.com/cdn/gallery/${env}/static/js/widget.js`}
+            />
+          </AppendHead>
+        )}
         <header className={styles.header}>
           {this.renderLeftSide()}
           {!auth.user ? this.renderLoggedOut() : this.renderLoggedIn()}
@@ -462,6 +517,14 @@ export class Header extends Component {
             auth={auth}
             faq
             onLoadFAQ={this.handleOnLoadFAQ.bind(this)}
+          />
+        )}
+        {loadGalleryWidget && isGalleryWidgetLoaded && (
+          <TTPGalleryWidget
+            language={lng}
+            auth={auth}
+            gallery
+            onLoadGallery={this.handleOnLoadGallery.bind(this)}
           />
         )}
       </>

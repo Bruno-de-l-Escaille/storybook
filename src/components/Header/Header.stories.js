@@ -69,6 +69,9 @@ const rightIcons = {
     url: "https://blog.tamtam.pro/fr",
     clicked: false,
   },
+  gallery: {
+    activated: true,
+  },
 };
 
 const portalRightIcons = {
@@ -572,7 +575,6 @@ export const HeaderAuthLink = () => (
     rightIcons={object("rightIcons", rightIcons)}
   />
 );
-
 
 export const SubMenuHeader = () => (
   <div style={{ padding: "3rem" }}>
