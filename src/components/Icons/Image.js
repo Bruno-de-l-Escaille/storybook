@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Image() {
+export function Image(props) {
   return (
     <svg
       width="24"
@@ -8,6 +8,7 @@ export function Image() {
       viewBox="0 0 24 24"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <g id="image">
         <path
