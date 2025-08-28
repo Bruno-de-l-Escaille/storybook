@@ -1,0 +1,37 @@
+.ttp_select_indicator {
+  border-top: solid 6px #6d7f92;
+  border-left: solid 6px transparent;
+  border-right: solid 6px transparent;
+  border-radius: 1px;
+}
+
+.menuHeader {
+  background: #f1f2f4;
+  border-radius: 4px 4px 0 0;
+  font-weight: 400;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #2495e1;
+  padding: 0.5rem 1rem;
+}
+
+.optionWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.optionIcon {
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-right: 0.5rem;
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}

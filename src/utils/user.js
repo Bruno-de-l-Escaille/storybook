@@ -1,3 +1,5 @@
+import { isEmpty } from "./common";
+
 export const getUserNameForAvatar = (firstName, lastName) => {
   let fName = firstName.split(" ");
   if (fName.length >= 3) {
@@ -17,3 +19,10 @@ function extractFirstLettre(arrayStr, length) {
   }
   return result.toUpperCase();
 }
+export const getUserAvatarUrl = ({ avatar, avatarUrl }) => {
+  if (isEmpty(avatar) && isEmpty(avatarUrl)) {
+    return undefined;
+  }
+
+  return avatarUrl || `https://api2.tamtam.pro/${avatar}`;
+};

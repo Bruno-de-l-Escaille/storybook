@@ -1,0 +1,185 @@
+@import '~foundation-sites/scss/util/util';
+
+$dark-color: var(--dark-color, #29394d);
+
+.wrapper {
+  overflow-y: scroll; 
+  flex: 1;
+
+  &.greenJewel {
+    --dark-color: #175352;
+  }
+}
+
+.wrapper {
+  overflow-x: auto;
+  position: relative;
+  height: 100%;
+  display: flex;
+  .content {
+    padding: 20px 46px;
+    gap: 40px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding-bottom: 76px;
+    color: #29394d;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+    .addAdress{
+      flex: 1 1;
+      overflow-y: auto;
+    }
+    h3 {
+      color: #29394d;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 140%;
+    }
+  }
+}
+
+.addresses {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+
+  & > div {
+    min-width: calc(50% - 40px);
+  }
+
+  .separator {
+    width: 0.5px;
+    background-color: #b2bcc6;
+  }
+}
+
+.invoicing {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .invoicingTitle {
+    color: #29394d;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%; /* 19.6px */
+  }
+}
+
+.summary > div {
+  position: static;
+  min-height: unset;
+}
+
+.footerContent {
+  display: flex;
+  padding: 1rem 2rem;
+  width: 100%;
+
+  & > div {
+    width: 100%;
+  }
+
+  .actions {
+    display: flex;
+    flex: 1 1;
+    justify-content: space-between;
+    gap: 30px;
+    width: 100%;
+
+    & > div:first-child {
+      flex-grow: 1;
+    }
+  }
+
+  .termsAndConditions {
+    gap: 30px;
+    display: flex;
+    align-items: center;
+    .acceptConditions {
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 16px;
+      color: $dark-color;
+
+      a {
+        color: $dark-color;
+        text-decoration-line: underline;
+      }
+    }
+  }
+}
+
+@include breakpoint(medium only) {
+  .summary > div {
+    position: static;
+    width: 290px;
+  }
+
+  .footerContent {
+    .actions {
+      gap: 10px;
+    }
+
+    .termsAndConditions {
+      gap: 10px;
+    }
+  }
+
+  .content {
+    gap: 20px;
+  }
+}
+
+@include breakpoint(medium down) {
+  .addresses {
+    flex-direction: column;
+
+    & > div {
+      width: 100%;
+    }
+  }
+}
+
+@include breakpoint(small only) {
+  .wrapper {
+    padding-bottom: 160px;
+  }
+
+  .content {
+    padding: 10px 20px;
+    justify-content: center;
+  }
+
+  .footerContent {
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px 10px 20px;
+
+    .actions {
+      padding-top: 4px;
+      gap: 10px;
+    }
+
+    .termsAndConditions {
+      padding: 10px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+  }
+}
+
+.yupError p{
+  font-size: 12px;
+  margin: .2rem .5rem;
+  font-weight: 400;
+  line-height: 1.66;
+  letter-spacing: .0333em;
+  color: #fe3745;
+}

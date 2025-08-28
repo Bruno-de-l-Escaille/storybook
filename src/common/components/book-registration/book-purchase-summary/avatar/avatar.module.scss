@@ -1,0 +1,86 @@
+.avatar_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+
+  --border-color: linear-gradient(
+    180deg,
+    #18a0fb 0%,
+    var(--second-text-color, #06d9b1) 100%
+  );
+
+  &.greenJewel {
+    --border-color: #58e60c;
+  }
+
+  &.blueRed {
+    --border-color: #fe5756;
+  }
+
+  .avatar {
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--border-color);
+
+    .image {
+      margin: 2px;
+      border-radius: 50%;
+      background-color: #fff;
+    }
+  }
+
+  .emptyAvatar {
+    background: linear-gradient(to bottom right, #ddd, #ccc, #c5c5c5, #bbb, #b5b5b5, #aaa);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 12px 1px #2C2B3F, 0 0 0 1px #2C2B3F;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+
+    span {
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+
+  .infos {
+    display: flex;
+    flex-direction: column;
+    min-width: 80px;
+  }
+
+  .name {
+    color: #29394d;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  &.darkBlue {
+    .name {
+      color: #29394d;
+    }
+  }
+
+  &.white {
+    .name {
+      color: #fff;
+    }
+  }
+
+  &.greenJewel {
+    .name {
+      color: #e9ffde;
+    }
+  }
+
+  &.blueRed {
+    .name {
+      color: #fcebeb;
+    }
+  }
+}

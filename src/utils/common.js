@@ -206,7 +206,18 @@ export const isEmpty = (value) => {
   }
   return !value;
 };
+export const formatUen = (uen) => {
+  const updateduen = (uen ?? "").replace(/[^a-zA-Z0-9]/, "");
 
+  if (updateduen.length !== 12) {
+    return uen;
+  }
+
+  return updateduen.replace(
+    /^([a-zA-Z0-9]{2})(\d{4})(\d{3})(\d{3})$/,
+    "$1 $2.$3.$4"
+  );
+};
 export const getKeyByLanguage = (key, language) =>
   `${key}${language?.charAt(0).toUpperCase()}${language
     ?.slice(1)
@@ -408,3 +419,12 @@ export const parseBoolean = (value) => {
 
 export const capitalizeFirstLetter = (string) =>
   string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+
+export function pick(object, keys) {
+  return keys.reduce((acc, key) => {
+    if (object && Object.prototype.hasOwnProperty.call(object, key)) {
+      acc[key] = object[key];
+    }
+    return acc;
+  }, {});
+}

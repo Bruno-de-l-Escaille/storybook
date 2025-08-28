@@ -1,0 +1,31 @@
+.goBack {
+  padding: 0.8rem 1rem;
+  background: #fff;
+  border: 1px solid #d7dbe0;
+  box-sizing: border-box;
+  box-shadow: 0 2px 10px #29394D1A;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  span {
+    font-weight: 500;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #6d7f92;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &:hover {
+    border-color: #b2bcc6;
+  }
+
+  &:not(.disabled):hover {
+    background: #f1f2f4;
+  }
+}
