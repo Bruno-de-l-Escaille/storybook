@@ -22,6 +22,7 @@ function StepPayment({
   fromMobileApp = false,
   token,
   language = "fr",
+  env,
 }) {
   const [showTerminate, setShowTerminate] = useState(false);
 
@@ -30,7 +31,17 @@ function StepPayment({
   };
 
   const { closeBookEventRegistrationModal } = useEventBookRegistrationModal();
-  const TTP_PAYMENT_URL = "https://billing.staging.tamtam.pro";
+  var TTP_PAYMENT_URL = "";
+  if (env === "production") {
+    TTP_PAYMENT_URL = "https://billing.tamtam.pro";
+  } else if (env === "staging") {
+    TTP_PAYMENT_URL = "https://billing.staging.tamtam.pro";
+  } else if (env === "preprod") {
+    TTP_PAYMENT_URL = "https://billing.preprod.tamtam.pro";
+  } else {
+    TTP_PAYMENT_URL = "http://local.billing.tamtam.pro";
+  }
+
   const { isMobile } = useResponsive();
   // const pathname = usePathname();
 

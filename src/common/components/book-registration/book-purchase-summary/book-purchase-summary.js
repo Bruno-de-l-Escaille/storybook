@@ -6,16 +6,39 @@ import summaryStyles from "./books-purchase-summary.module.scss";
 import { I18N } from "../../../../i18n";
 import { PersonalData } from "./personal-data";
 import BillingAddressStep from "./billing-address-step/BillingAddressStep";
+import FiduciaireData from "./fiduciaire-data/fiduciaire-data";
 
 export default function BookPurchaseSummary({
   invoiceAddress,
   product,
   user,
   language,
+  fiduciaire,
 }) {
   const translate = (text) => {
     return I18N[language][text];
   };
+
+  let pricingTier = null;
+
+  if (product && product.pricing_tiers) {
+    product.pricing_tiers.forEach((pricing_tier) => {
+      if (
+        fiduciaire?.organizationSize >= pricing_tier.min &&
+        pricing_tier.max &&
+        fiduciaire?.organizationSize <= pricing_tier.max
+      ) {
+        pricingTier = pricing_tier;
+      }
+      if (
+        fiduciaire?.organizationSize >= pricing_tier.min &&
+        !pricing_tier.max
+      ) {
+        pricingTier = pricing_tier;
+      }
+    });
+  }
+
   const userInscriptionState = {
     id: user?.id ?? 0,
     userId: user?.id ?? 0,
@@ -40,12 +63,23 @@ export default function BookPurchaseSummary({
         // styles[theme]
       )}
     >
-      <h3>{translate("summary")}</h3>
+      <h3>
+        {translate("summary")}{" "}
+        {fiduciaire ? <span> ( {translate("buyForFiduciaire")})</span> : ""}
+      </h3>
       <PersonalData
         userInscriptionState={userInscriptionState}
         language={language}
         user={user}
       />
+
+      {fiduciaire && (
+        <FiduciaireData
+          language={language}
+          fiduciaire={fiduciaire}
+          pricingTier={pricingTier}
+        />
+      )}
 
       {invoiceAddress && (
         <BillingAddressStep
@@ -55,7 +89,16 @@ export default function BookPurchaseSummary({
       )}
       <div className={styles.total}>
         <p>{translate("total_to_pay")} :</p>
-        <span>{totalPrice} €</span>
+        <span>
+          {fiduciaire && fiduciaire?.organizationSize
+            ? pricingTier && pricingTier.discount
+              ? totalPrice *
+                fiduciaire?.organizationSize *
+                (1 - pricingTier.discount)
+              : totalPrice * fiduciaire?.organizationSize
+            : totalPrice}{" "}
+          €
+        </span>
       </div>
     </div>
   );

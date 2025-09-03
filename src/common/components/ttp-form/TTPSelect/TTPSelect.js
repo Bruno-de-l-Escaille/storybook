@@ -35,23 +35,7 @@ function TTPSelect({
   ...props
 }) {
   const { isAsync } = props ?? {};
-  console.log("test", props.isCreatable, isAsync, {
-    theme,
-    name,
-    required,
-    labelClassName,
-    options,
-    value,
-    wrapperClassName,
-    isHorizontal,
-    label,
-    children,
-    textStyle,
-    inputStyle,
-    hasError,
-    selected,
-    ...props,
-  });
+
   const SelectComponent = props.isCreatable
     ? CreatableSelect
     : isAsync

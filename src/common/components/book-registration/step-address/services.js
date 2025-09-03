@@ -109,22 +109,9 @@ export const prepareGuestAddress = (guest, addresses, uen) => {
 
 export const getInitialValues = (guest, addresses, coupons) => {
   if (!guest) {
-    console.log("invoicing adress", addresses.length, addresses);
     if (addresses.length > 0) {
       const address = addresses[0];
-      console.log("invoicing adress", address, addresses, {
-        billingCompanyNumber: address.uen,
-        billingOrganization: address.organization,
-        billingStreet: address.street,
-        billingPostalCode: `${address.zip} ${address.city}`.trim(),
-        billingSubjectToVAT: address.vatApply === "1" ? "1" : "0",
-        billingSignature: address.signature,
-        billingAddress2: address.address2 ?? "",
-        billingOrderNumber: address.orderNumber ?? "",
-        billingCountry: address.country ?? "",
-        privacyTerms: "0",
-        termsOfSales: "0",
-      });
+
       return {
         billingCompanyNumber: address.uen,
         billingOrganization: address.organization,

@@ -8,10 +8,17 @@ import { Onboarding } from "./onboarding";
 import StepAddress from "./step-address/step-address";
 import StepPayment from "./step-payment/step-payment";
 import { fetchBillingAddress } from "../../../api/adress";
+import { getApiUrl } from "../../../utils";
 
-export function BookRegistartaion({ token, product, user }) {
+export function BookRegistartaion({
+  token,
+  product,
+  user,
+  language,
+  env,
+  fiduciaire,
+}) {
   const [step, setStep] = useState(RegistrationQuickSteps.ADDRESS);
-
   const [userBillingAdress, setUserBillingAddress] = useState([]);
   const [isFetchingAdress, setIsFetchingAdress] = useState(false);
   useEffect(() => {
@@ -19,8 +26,7 @@ export function BookRegistartaion({ token, product, user }) {
       setIsFetchingAdress(true);
 
       try {
-        const data = await fetchBillingAddress(token, user?.id);
-        console.log("userBillingAdress", data);
+        const data = await fetchBillingAddress(token, getApiUrl(env), user?.id);
         setUserBillingAddress(data?.data ?? []);
       } catch (err) {
         console.error("Error fetching user billing address:", err);
@@ -29,17 +35,15 @@ export function BookRegistartaion({ token, product, user }) {
       }
     };
     fetchUserBillingAddress();
-  }, [token, user]);
+  }, [env, token, user]);
 
-  const data = [];
-  console.log("logs", token, step);
   const [order, setOrder] = useState(null);
+
   // const searchParams = useSearchParams();
 
   // if (isFetching) {
   //   return <TTPLoader />;
   // }
-
   const titleUpdated =
     product.title.length > 105
       ? `${product.title.slice(0, 105)}...`
@@ -67,6 +71,9 @@ export function BookRegistartaion({ token, product, user }) {
           product={product}
           token={token}
           user={user}
+          language={language}
+          env={env}
+          fiduciaire={fiduciaire}
         />
       )}
       {step === RegistrationQuickSteps.PAYMENT && (
@@ -77,6 +84,8 @@ export function BookRegistartaion({ token, product, user }) {
           // OnboardingNavs={()}
           selectOneClickPayment={false}
           token={token}
+          language={language}
+          env={env}
         />
       )}
     </div>

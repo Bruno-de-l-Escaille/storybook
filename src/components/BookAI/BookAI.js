@@ -6,6 +6,8 @@ import style from "./BookAI.module.scss";
 import CheckMarkIcon from "../Icons/CheckMarkv2";
 import { I18N } from "../../i18n";
 import { useEventBookRegistrationModal } from "../../common/components/modal/event-book-registration/use-event-book-registration-modal";
+import { useRegistrationTypeModal } from "../../common/components/modal/registration-type/use-registration-type-modal";
+import { useFiduciaireRegistrationTypeModal } from "../../common/components/modal/fiduciaire-registration-type/use-fiduciaire-registration-type-modal";
 
 export default function BookAI({
   product,
@@ -16,13 +18,48 @@ export default function BookAI({
   language = "fr",
   token,
   user,
+  env,
+  fiduciaires,
 }) {
   const { openBookEventRegistrationModal } = useEventBookRegistrationModal();
+
+  const { openRegistrationTypeModal } = useRegistrationTypeModal();
+
+  const {
+    openFiduciaireRegistrationTypeModal,
+  } = useFiduciaireRegistrationTypeModal();
 
   const TTP_OECCBB_URL_AI = "https://www.oeccbb.be/fr/ia";
 
   const showPaymentModal = () => {
-    openBookEventRegistrationModal(token, product, user);
+    if (!user) {
+      const loginSearchParams = new URLSearchParams();
+      loginSearchParams.set("authView", "LOGIN");
+      const url = `?${loginSearchParams.toString()}`;
+      if (typeof window !== "undefined") {
+        window.location.assign(url);
+      }
+    }
+    if (fiduciaires && fiduciaires.length > 0) {
+      openRegistrationTypeModal({
+        openRegistration: () => {
+          openBookEventRegistrationModal(token, product, user, language, env);
+        },
+        openFiduciareRegistration: () => {
+          openFiduciaireRegistrationTypeModal(
+            token,
+            product,
+            user,
+            language,
+            env,
+            fiduciaires
+          );
+        },
+        language,
+      });
+    } else {
+      openBookEventRegistrationModal(token, product, user, language, env);
+    }
   };
   return (
     <div

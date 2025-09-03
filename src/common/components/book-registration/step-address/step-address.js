@@ -10,7 +10,7 @@ import s from "./step-adress.module.scss";
 import { RegistrationFullSteps, RegistrationQuickSteps } from "../enums";
 import { useResponsive } from "../../../hooks/useResponsive";
 import { getInitialValues } from "./services";
-import { isEmpty, parseBoolean, pick } from "../../../../utils";
+import { getAiUrl, isEmpty, parseBoolean, pick } from "../../../../utils";
 import { TTPCheckBoxField } from "../../ttp-form/TTPCheckBox";
 import LocalLoader, {
   LocalLoaderWrapper,
@@ -33,6 +33,8 @@ function StepAddress({
   language = "fr",
   user,
   token,
+  env,
+  fiduciaire,
 }) {
   const summaryStep = RegistrationQuickSteps.SUMMARY;
 
@@ -59,11 +61,7 @@ function StepAddress({
     isEmpty(initialValues.billingSignature) ||
       isEmpty(invoicingAddresses[0]?.organization)
   );
-  console.log(
-    "invoicingDataadressFormOpened",
-    addressFormOpened,
-    addressFormOpened
-  );
+
   useEffect(() => {
     if (JSON.stringify(invoicingAddresses) !== JSON.stringify(invoicingData)) {
       setInvoicingAddresses(invoicingData ?? []);
@@ -242,18 +240,18 @@ function StepAddress({
       user: user?.id,
       appRef: "paper-subscription",
       product_ids: `[${product.id}]`,
+      fiduciaireId: fiduciaire?.id ?? 0,
     };
 
     return createOrder({
       token,
+      AiUrl: getAiUrl(env),
+
       ...newData,
     })
       .then(({ data: order }) => {
-        console.log("order", order);
-        console.log(RegistrationFullSteps.PAYMENT);
         if (!order || !order.id) {
           setSubmitting(false);
-          console.log("order test", order);
           toast.error(translate("channel.commandErrorCreation"));
         } else {
           toast.success("channel.commandSuccessCreation");
@@ -389,12 +387,7 @@ function StepAddress({
       </div>
     </div>
   );
-  console.log("invoicingData", invoicingAddresses);
-  console.log(
-    "invoicingDataadressFormOpened",
-    addressFormOpened,
-    addressFormOpened
-  );
+
   return (
     <Formik
       initialValues={initialValues}
@@ -457,6 +450,7 @@ function StepAddress({
                             theme={theme}
                             token={token}
                             language={language}
+                            env={env}
                           />
                         </div>
                         <div style={{ marginLeft: "-0.5rem" }}>
@@ -489,6 +483,7 @@ function StepAddress({
                     user={user}
                     product={product}
                     language={language}
+                    fiduciaire={fiduciaire}
                   />
                 </div>
               )}

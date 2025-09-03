@@ -1,25 +1,12 @@
 import cn from "classnames";
 import moment from "moment";
 import React, { useState } from "react";
-// import { Address } from "./address";
 import { ReactComponent as ArrowRightIcon } from "./assets/arrow-right.svg";
 import styles from "./guest-address.module.scss";
 import { AddAddress } from "./add-address";
 import { Address } from "./address";
 import { I18N } from "../../../../../i18n";
 import { getGuestAddressFromInvoiceAddress } from "../services";
-// import { getGuestAddressFromInvoiceAddress } from "../services";
-// import { deleteAddress } from "@/api/guest/api";
-// import BinIcon from "@/common/assets/bin.svg";
-// import { LayoutTheme } from "@/common/constants/themes";
-// import { useToken } from "@/common/hooks/use-token";
-// import { useTranslate } from "@/common/hooks/use-translate";
-
-// import { Address as AddressType } from "@/common/types/invoicing/interfaces";
-// import { useAuth } from "@/contexts/auth/use-auth";
-// import { ActionType } from "@/contexts/dialog/action/types";
-// import { useActionDialog } from "@/contexts/dialog/action/use-action-dialog";
-// import { useGuest } from "@/contexts/guest/use-guest";
 
 export function GuestAddress({
   dict,
@@ -37,6 +24,7 @@ export function GuestAddress({
   token,
   user,
   language = "fr",
+  env,
 }) {
   const translate = (text) => {
     return I18N[language][text];
@@ -53,23 +41,6 @@ export function GuestAddress({
     toggleShowForm(value);
     // onOpenForm?.(value);
   };
-
-  // const handleDelete = (address) => {
-  //   // openActionDialog({
-  //   //   onAsyncAction: () =>
-  //   //     deleteAddress({ token, userId: user?.id ?? 0, signature: address.signature }).then(
-  //   //       ({ data }) => {
-  //   //         const updatedGuest = { ...guest, invoicingData: data } as Guest;
-  //   //         setGuest(updatedGuest);
-  //   //         setInvoicing?.(data);
-  //   //       },
-  //   //     ),
-  //   //   message: translate('inscription.reallyWantDeleteAddress'),
-  //   //   title: translate('inscription.confirmDelete'),
-  //   //   type: ActionType.DELETE,
-  //   //   icon: <BinIcon />,
-  //   // });
-  // };
 
   const isShowForm = showForm || allAddresses.length === 0;
 
@@ -116,12 +87,13 @@ export function GuestAddress({
               };
 
               setManualAddresses((address) => [newAddress, ...address]);
-              // onSelectAddress?.(newAddress);
+              onSelectAddress(newAddress);
               handleToggleForm(false);
             }}
             onCancel={() => handleToggleForm(false)}
             token={token}
             lng="fr"
+            env={env}
           />
         ) : (
           [

@@ -18,11 +18,6 @@ export function ModalProvider({ children }) {
   const [state, dispatch] = useReducer(modalReducer, initialState);
 
   const openModal = (modalId, params) => {
-    console.log({
-      type: "OPEN_MODAL",
-      modalId,
-      ...params,
-    });
     return dispatch({
       type: "OPEN_MODAL",
       modalId,

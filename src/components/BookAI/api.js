@@ -3,10 +3,8 @@
 // import { I18N } from "../../i18n";
 import { isEmpty } from "../../utils";
 
-const TTP_AI_URL = "https://ai.staging.tamtam.pro";
-
-export const getProducts = async (token, clientId) => {
-  let requestUrl = `${TTP_AI_URL}/products`;
+export const getProducts = async (token, AiUrl, clientId) => {
+  let requestUrl = `${AiUrl}/products`;
 
   if (!isEmpty(clientId) && clientId !== 0) {
     const searchParams = new URLSearchParams({
@@ -47,6 +45,8 @@ export const generateFormData = (data) => {
 
 export const createOrder = async ({
   token,
+  AiUrl,
+  fiduciaireId,
   billingCompanyNumber,
   billingOrganization,
   billingStreet,
@@ -56,7 +56,7 @@ export const createOrder = async ({
   appRef,
   product_ids,
 }) => {
-  const requestUrl = `${TTP_AI_URL}/billing/order`;
+  const requestUrl = `${AiUrl}/billing/order`;
   const data = {
     access_token: token, // token added
     billingCompanyNumber,
@@ -69,6 +69,9 @@ export const createOrder = async ({
     product_ids,
     language: "fr",
   };
+  if (fiduciaireId && fiduciaireId !== 0) {
+    data.community = fiduciaireId;
+  }
   const formData = generateFormData(data);
   const response = await fetch(`${requestUrl}`, {
     method: "POST",
@@ -90,11 +93,11 @@ export const createOrder = async ({
   return { data: jsonData.data ?? jsonData };
 };
 
-export const getAuthAccess = async (token, user) => {
+export const getAuthAccess = async (token, AiUrl, user) => {
   if (!user) {
     throw new Error("userId and collectionId are required");
   }
-  const requestUrl = `${TTP_AI_URL}/auth`;
+  const requestUrl = `${AiUrl}/auth`;
   const searchParams = new URLSearchParams({
     user_id: String(user),
   });

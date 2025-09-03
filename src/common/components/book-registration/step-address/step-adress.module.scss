@@ -71,9 +71,14 @@ $dark-color: var(--dark-color, #29394d);
   }
 }
 
+.summary {
+  overflow-y: auto;
+}
+
 .summary > div {
   position: static;
   min-height: unset;
+
 }
 
 .footerContent {

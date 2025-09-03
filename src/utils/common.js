@@ -114,6 +114,25 @@ export const getApiUrl = (env) => {
   return apiUrl;
 };
 
+export const getAiUrl = (env) => {
+  let apiUrl = "";
+  switch (env) {
+    case "local":
+      apiUrl = "http://local.ai.tamtam.pro";
+      break;
+    case "staging":
+      apiUrl = "https://ai.staging.tamtam.pro";
+      break;
+    case "preprod":
+      apiUrl = "https://ai.preprod.tamtam.pro";
+      break;
+    default:
+      apiUrl = "https://ai.tamtam.pro";
+      break;
+  }
+  return apiUrl;
+};
+
 export const getEventUrl = (env) => {
   let eventUrl = "";
   switch (env) {

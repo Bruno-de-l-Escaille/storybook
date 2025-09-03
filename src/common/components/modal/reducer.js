@@ -15,15 +15,6 @@ export const modalReducer = (state, action) => {
       return initialState;
     }
     case "OPEN_MODAL": {
-      console.log("testelem", {
-        ...state,
-        isOpen: true,
-        modalId: action.modalId,
-        data: action.data,
-        onClose: action.onClose,
-        onSuccess: action.onSuccess,
-        onCancel: action.onCancel,
-      });
       return {
         ...state,
         isOpen: true,

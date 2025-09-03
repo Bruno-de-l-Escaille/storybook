@@ -29,6 +29,7 @@ export default function TTPSlider({
   slidesPerView = 3, // swiper props
   slidesPerGroup = slidesPerView,
   centeredSlides = false,
+  loop = true,
   ...swiperProps
 }) {
   const { isMobile, isTablet } = useResponsive();
@@ -46,7 +47,7 @@ export default function TTPSlider({
   const [showActions, setShowActions] = useState(true);
 
   const [updateSwiper, setUpdateSwiper] = useState("update1");
-  console.log("cards", cards);
+
   useEffect(() => {
     if (isTablet && nbrOfSlidesPerView !== 2) {
       setNbrOfSlidesPerView(2);
@@ -84,17 +85,7 @@ export default function TTPSlider({
       Math.ceil(
         (nbrOfSlidesPerView - nbrOfSlidesPerGroup) / nbrOfSlidesPerGroup
       );
-    console.log(
-      "slidesTotal",
-      slidesTotal,
-      totalCards,
-      nbrOfSlidesPerGroup,
-      nbrOfSlidesPerView,
-      Math.ceil(totalCards / nbrOfSlidesPerGroup),
-      Math.ceil(
-        (nbrOfSlidesPerView - nbrOfSlidesPerGroup) / nbrOfSlidesPerGroup
-      )
-    );
+
     setTotalSlides(slidesTotal);
     const bool = slidesTotal > 1;
     setShowActions(bool);
@@ -155,7 +146,6 @@ export default function TTPSlider({
     );
 
     const renderActions = () => {
-      console.log("renderActions", showActions, totalSlides);
       if (!showActions) {
         return null;
       }
@@ -182,7 +172,6 @@ export default function TTPSlider({
               slideIndex === 0 && styles.disabled
             )}
             onClick={() => {
-              console.log("handlePrevClick", slideIndex);
               return slideIndex !== 0 && handlePrevClick();
             }}
           >
@@ -224,19 +213,11 @@ export default function TTPSlider({
   };
 
   const handleSwiperInit = (s) => {
-    // console.log("Swiper instance", s);
-    // setSwiper(s);
-    // s.allowSlideNext = true; // 👈 force unlock
-    // s.allowSlidePrev = true;
     if (!s.wrapperEl && s.$wrapperEl && s.$wrapperEl[0]) {
       s.wrapperEl = s.$wrapperEl[0];
     }
     setSwiper(s);
   };
-  console.log("cards.length", cards.length);
-  console.log("totalSlides", totalSlides);
-  console.log("nbrOfSlidesPerView", nbrOfSlidesPerView);
-  console.log("nbrOfSlidesPerGroup", nbrOfSlidesPerGroup);
   return (
     <div className={classNames(styles.ttp_slider, className)}>
       {renderHeader()}
@@ -244,7 +225,7 @@ export default function TTPSlider({
         className={classNames(styles.swiperWrapper, styles[theme])}
         slidesPerView={!isAuto && !isMobile ? nbrOfSlidesPerView : "auto"}
         slidesPerGroup={nbrOfSlidesPerGroup}
-        loop={true}
+        loop={loop}
         // navigation
         // pagination={{ clickable: true }}
         // scrollbar={{ draggable: true }}
@@ -255,7 +236,6 @@ export default function TTPSlider({
             s.wrapperEl = s.$wrapperEl[0]; // sécurité
           }
           setSwiper(s);
-          console.log("Swiper ready", s);
         }}
       >
         {centeredSlides && isMobile

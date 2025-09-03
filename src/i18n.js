@@ -352,6 +352,20 @@ export const I18N = {
     organisation: "organization",
     numItaa: "ITAA number",
     profession: "Occupation",
+    registrationType: "Type of Registration",
+    chooseRegistrationType: "Choose the desired type of registration",
+    chooseFiduciaites: "Choose the fiduciary you want to register with",
+    personal: "PERSONAL",
+    personalRegistrationDescription:
+      "Recommended if you only want to complete your own personal registration.",
+    fiduciaries: "Fiduciaires",
+    fiduciaresRegistrationDescription:
+      "Ideal if you want to provide access to all members of a fiduciary.",
+    personalRegistration: "Personal Registration",
+    buyFiduciares: "Purchase for fiduciaries",
+    buyForFiduciaire: "Purchase for a fiduciary",
+    fiduciaireSize: "Fiduciary Size",
+    fiduciaireReduction: "Fiduciary Reduction",
   },
   fr: {
     ARTCILES: "Articles",
@@ -718,6 +732,20 @@ export const I18N = {
     organisation: "Organisation",
     numItaa: "Numéro ITAA",
     profession: "Fonction",
+    registrationType: "Type d’inscription",
+    chooseRegistrationType: "Choisissez le type d’inscription souhaité",
+    chooseFiduciaites: "Choisissez la fiduciaire souhaitée pour l’inscription",
+    personal: "PERSONNELLE(S)",
+    personalRegistrationDescription:
+      "Recommandée si vous souhaitez effectuer uniquement votre propre inscription personnelle.",
+    fiduciaries: "Fiduciaires",
+    fiduciariesRegistrationDescription:
+      "Idéal si vous souhaitez offrir l’accès à tous les membres d’une fiduciaire.",
+    personalRegistration: "Inscription personnelle(s)",
+    buyFiduciares: "Acheter pour les fiduciaires",
+    buyForFiduciaire: "Acheter pour une fiduciaire",
+    fiduciaireSize: "Taille de la fiduciaire",
+    fiduciaireReduction: "Réduction fiduciaire",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -1082,5 +1110,19 @@ export const I18N = {
     organisation: "Organisatie",
     numItaa: "ITAA-nummer",
     profession: "Beroep",
+    registrationType: "Type registratie",
+    chooseRegistrationType: "Kies het gewenste registratietype",
+    chooseFiduciaites: "Kies de gewenste fiduciaire om u in te schrijven",
+    personal: "PERSOONLIJK",
+    personalRegistrationDescription:
+      "Aanbevolen als u enkel uw eigen persoonlijke inschrijving wilt uitvoeren.",
+    fiduciaries: "Fiduciaires",
+    fiduciariesRegistrationDescription:
+      "Ideaal als u toegang wilt geven aan alle leden van een fiduciaire.",
+    personalRegistration: "Persoonlijke registratie",
+    buyFiduciares: "Kopen voor fiduciairs",
+    buyForFiduciaire: "Kopen voor een fiduciaire",
+    fiduciaireSize: "Grootte van de fiduciaire",
+    fiduciaireReduction: "Fiduciaire korting",
   },
 };

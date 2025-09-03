@@ -1,6 +1,5 @@
-const TTP_API_URL = "https://api.staging.tamtam.pro";
-export const validateOrganizationNumber = async (token, uen) => {
-  let requestUrl = `${TTP_API_URL}/billing/document/validate-uen`;
+export const validateOrganizationNumber = async (token, ApiUrl, uen) => {
+  let requestUrl = `${ApiUrl}/billing/document/validate-uen`;
   const params = {
     access_token: token,
     uen,
@@ -22,8 +21,8 @@ export const validateOrganizationNumber = async (token, uen) => {
   }
 };
 
-export const fetchBillingAddress = async (token, user) => {
-  let requestUrl = `${TTP_API_URL}/billing/document/get-billing-addresses`;
+export const fetchBillingAddress = async (token, ApiUrl, user) => {
+  let requestUrl = `${ApiUrl}/billing/document/get-billing-addresses`;
   const params = {
     access_token: token,
     userId: user,

@@ -6,15 +6,21 @@ import { useModal } from "../use-modal";
 
 export const useEventBookRegistrationModal = () => {
   const { openModal, ...modalContext } = useModal();
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const TTP_OECCBB_URL_AI = "https://www.oeccbb.be/fr/ia";
 
-  const openBookEventRegistrationModal = (token, product, user) => {
+  const openBookEventRegistrationModal = (
+    token,
+    product,
+    user,
+    language,
+    env,
+    fiduciaire = null
+  ) => {
     return openModal("EVENT_BOOK_REGISTRATION", {
-      data: { token, product, user },
+      data: { token, product, user, language, env, fiduciaire },
       onSuccess: () => {
         if (typeof window !== "undefined") {
-          console.log("redirect to AI page");
           window.location.href = `${TTP_OECCBB_URL_AI}`;
         }
       },
@@ -22,7 +28,6 @@ export const useEventBookRegistrationModal = () => {
   };
 
   const closeBookEventRegistrationModal = () => {
-    console.log("test");
     modalContext.modal.onClose();
     modalContext.closeModal();
   };

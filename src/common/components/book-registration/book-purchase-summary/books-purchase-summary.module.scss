@@ -74,6 +74,10 @@ $themes: (
     font-weight: 600;
     line-height: 140%;
     margin-bottom: 10px;
+    span{
+      text-transform: none;
+      font-size: 14px;
+    }
   }
 
   .total {
@@ -83,6 +87,7 @@ $themes: (
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    margin: 0 10px;
 
     p {
       color: #29394d;

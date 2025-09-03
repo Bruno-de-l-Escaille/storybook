@@ -3,18 +3,20 @@ import React, { useEffect, useState } from "react";
 import BookAI from "./BookAI";
 import style from "./BookAI.module.scss";
 import { getAuthAccess, getProducts } from "./api";
-import { isEmpty } from "../../utils";
+import { getAiUrl, getApiUrl, isEmpty } from "../../utils";
 import { useQuery } from "@tanstack/react-query";
 import Slider from "react-slick";
 import { TTPSlider } from "../../common/components/sliders/ttp-slider";
 import { useResponsive } from "../../common/hooks/useResponsive";
 import { I18N } from "../../i18n";
+import { fetchOrganizations, getUser } from "../../api/user";
 export const BookAIList = ({
   language,
   token,
   organization,
   organizationImage = "",
   user,
+  env,
 }) => {
   const translate = (text) => {
     return I18N[language][text];
@@ -23,8 +25,11 @@ export const BookAIList = ({
   const [isFetchingProduct, setIsFetchingProduct] = useState(false);
   const [error, setError] = useState(null);
 
+  const [fiduciaires, setFiduciaires] = useState([]);
+  const [isFetchingFiduciaires, setIsFetchingFiduciaires] = useState(false);
+
   const [isFetchingAuth, setIsFetchingAuth] = useState(false);
-  const [userAccess, setUserAccess] = useState(null);
+  const [userAccess, setUserAccess] = useState([]);
   const { isMobile } = useResponsive();
   useEffect(() => {
     if (!token) return;
@@ -34,9 +39,9 @@ export const BookAIList = ({
       setError(null);
 
       try {
-        const data = await getProducts(token, organization);
+        const data = await getProducts(token, getAiUrl(env), organization);
         setProducts(data);
-        setProducts([data[0], data[1], data[0], data[1], data[1], data[0]]);
+        // setProducts([data[0], data[1], data[0], data[1], data[1], data[0]]);
       } catch (err) {
         setError(err);
       } finally {
@@ -45,26 +50,49 @@ export const BookAIList = ({
     };
 
     const fetchUserAccess = async () => {
+      if (isEmpty(user) || !user?.id) {
+        setUserAccess([]);
+        return;
+      }
+
       setIsFetchingAuth(true);
       try {
-        const data = await getAuthAccess(token, user?.id);
+        const data = await getAuthAccess(token, getAiUrl(env), user?.id);
         setUserAccess(data);
       } catch (err) {
         setError(err);
+        setUserAccess([]);
       } finally {
         setIsFetchingAuth(false);
       }
     };
+
+    const fetchOrganization = async () => {
+      setIsFetchingFiduciaires(true);
+      try {
+        const data = await fetchOrganizations(getApiUrl(env), token, user?.id);
+        const organizationsData = data?.data?.data ?? [];
+        const organizations = organizationsData.filter(
+          (org) => org.membershipOrder?.hasFiduciaryPlan
+        );
+        setFiduciaires([organizations[0], organizations[1], organizations[2]]);
+        setFiduciaires(organizations);
+      } finally {
+        setIsFetchingFiduciaires(false);
+      }
+    };
+
     fetchUserAccess();
     fetchProducts();
-  }, [token, organization, user]);
+    fetchOrganization();
+  }, [token, organization, user, env]);
 
   if (isFetchingProduct || isEmpty(products) || !Array.isArray(products)) {
     return <></>;
   }
+
   const productsLength = products.length;
-  // to have more than 3 books for the slider
-  console.log("productsLength", JSON.stringify(products), productsLength);
+
   const renderBooks = () =>
     products.map((product) => (
       <div
@@ -89,7 +117,7 @@ export const BookAIList = ({
             userAccess.length > 0 &&
             userAccess.some(
               (userAuth) =>
-                userAuth.collection?.id === product.collection_id &&
+                userAuth.collection?.id === (product?.collection_id ?? 0) &&
                 new Date(userAuth.expire_at).getTime() >= new Date().getTime()
             )
           }
@@ -98,7 +126,8 @@ export const BookAIList = ({
               ? (() => {
                   const expireAtStr = userAccess.filter(
                     (userAuth) =>
-                      userAuth.collection?.id === product.collection_id &&
+                      userAuth.collection?.id ===
+                        (product?.collection_id ?? 0) &&
                       new Date(userAuth.expire_at).getTime() >=
                         new Date().getTime()
                   )[0]?.expire_at;
@@ -122,6 +151,8 @@ export const BookAIList = ({
           }
           token={token}
           user={user}
+          env={env}
+          fiduciaires={fiduciaires}
         />
       </div>
     ));
@@ -147,7 +178,7 @@ export const BookAIList = ({
           speed={500}
           isAuto
           centeredSlides
-          // loop
+          loop={productsLength > 3 ? true : false}
         />
       </div>
     </div>

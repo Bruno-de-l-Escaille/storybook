@@ -5,8 +5,7 @@ import { BookRegistartaion } from "../../book-registration/book-registration";
 import CloseModalInner from "../close-modal/close-modal-inner";
 
 export default memo(({ modal, onCloseModal }) => {
-  const { product, token, user } = modal.data;
-
+  const { product, token, user, language, env, fiduciaire } = modal.data;
   useEffect(() => {
     const handler = (e) => {
       if (e?.data?.message === "CLOSE_REGISTRATION_MODAL") {
@@ -32,7 +31,14 @@ export default memo(({ modal, onCloseModal }) => {
       className={s.modal_content}
     >
       <CloseModalInner onClose={onCloseModal} />
-      <BookRegistartaion product={product} token={token} user={user} />
+      <BookRegistartaion
+        product={product}
+        token={token}
+        user={user}
+        language={language}
+        env={env}
+        fiduciaire={fiduciaire}
+      />
     </Modal>
   );
 });

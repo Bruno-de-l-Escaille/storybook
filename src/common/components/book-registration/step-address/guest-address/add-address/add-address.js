@@ -12,7 +12,12 @@ import { countryUenOptions } from "./constans";
 import { TTPSelectField } from "../../../../ttp-form/TTPSelect";
 import { TTPInput } from "../../../../ttp-form/TTPInput";
 import TTPRadioGroup from "../../../../ttp-form/TTPRadioGroup";
-import { formatUen, isEmpty, parseBoolean } from "../../../../../../utils";
+import {
+  formatUen,
+  getApiUrl,
+  isEmpty,
+  parseBoolean,
+} from "../../../../../../utils";
 import { LocalLoader } from "../../../../local-loader";
 import { LocalLoaderWrapper } from "../../../../local-loader/local-loader";
 import { validateOrganizationNumber } from "../../../../../../api/adress";
@@ -26,11 +31,12 @@ export function AddAddress({
   onCancel,
   token,
   lng = "fr",
+  env,
 }) {
   const translate = (text) => {
     return I18N[lng][text];
   };
-  console.log("testtt");
+
   const [saving, setSaving] = useState(false);
   const [inputMask, setInputMask] = useState("");
   const [isFetching, setIsFetching] = useState(false);
@@ -126,8 +132,8 @@ export function AddAddress({
     }
 
     let isValid = false;
-    console.log("test", companyNumber);
-    await validateOrganizationNumber(token, companyNumber)
+
+    await validateOrganizationNumber(token, getApiUrl(env), companyNumber)
       .then((res) => {
         const organzationInfo = res.data;
         const address = organzationInfo.address.split("\n");
@@ -428,7 +434,7 @@ export function AddAddress({
       }
     }
   };
-  console.log("flagsOptions", flagsOptions);
+
   return (
     <div
       className={cn("m-b-s", s.wrapper, s[theme])}
