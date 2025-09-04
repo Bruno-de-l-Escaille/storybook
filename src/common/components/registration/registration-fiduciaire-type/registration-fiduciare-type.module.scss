@@ -41,9 +41,10 @@
     .fiduciaires {
       display: flex;
       gap: 60px;
-      // justify-content: center;
       overflow: auto;
-
+      &.center{
+        justify-content: center;
+      }
       .fiduciaire{
         display: flex;
         flex-direction: column;

@@ -81,6 +81,7 @@ export const getSelectStyles = (
     }),
     valueContainer: (styles) => ({
       ...styles,
+      padding: "2px 0px 2px 4px",
     }),
     singleValue: (styles) => ({
       ...styles,

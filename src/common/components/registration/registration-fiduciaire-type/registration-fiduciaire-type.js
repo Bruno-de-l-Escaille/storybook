@@ -3,6 +3,7 @@ import cn from "classnames";
 import styles from "./registration-fiduciare-type.module.scss";
 import { I18N } from "../../../../i18n";
 import { useEventBookRegistrationModal } from "../../modal/event-book-registration/use-event-book-registration-modal";
+import classNames from "classnames";
 
 export default function RegistrationFiduciaireType({
   token,
@@ -26,7 +27,13 @@ export default function RegistrationFiduciaireType({
       </div>
       <div className={styles.body}>
         <div className={styles.title}>{translate("chooseFiduciaites")} : </div>
-        <div className={styles.fiduciaires}>
+        <div
+          className={
+            fiduciaires.lenght > 3
+              ? classNames(styles.fiduciaires)
+              : classNames(styles.fiduciaires, styles.center)
+          }
+        >
           {fiduciaires.map((fiduciaire, index) => (
             <div
               className={styles.fiduciaire}
