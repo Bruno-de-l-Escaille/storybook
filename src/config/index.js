@@ -1,5 +1,6 @@
 export const APP_ENV = "local";
 export const TTP_API_URL = `http://local.api.tamtam.pro`;
+export const TTP_AI_URL = `http://local.api.tamtam.pro`;
 export const TTP_HOME_URL = `http://local.tamtam.pro/`;
 
 export const CAROUSEL_DISPOSITIONS = {

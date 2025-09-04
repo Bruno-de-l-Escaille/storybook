@@ -1,0 +1,21 @@
+.wrapper {
+  position: relative;
+}
+
+.loading {
+  position: absolute;
+  background-color: #ffffffbf;
+  z-index: 100;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .counter {
+    color: #18a0fb;
+    position: absolute;
+    margin-top: 13%;
+    font-size: larger;
+    padding-left: 1%;
+  }
+}

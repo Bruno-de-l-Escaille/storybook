@@ -1,0 +1,31 @@
+.content {
+  height: 420px;
+  h3 {
+    font-weight: 500;
+    font-size: 16px;
+    color: #29394d;
+  }
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    box-shadow: none;
+    border: none;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  width: 100%;
+
+  & > div:first-child {
+    flex-grow: 1;
+  }
+}

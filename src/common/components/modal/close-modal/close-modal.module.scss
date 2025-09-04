@@ -1,0 +1,23 @@
+@import '~foundation-sites/scss/util/util';
+
+.closeModal {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  position: absolute;
+  right: 20px !important;
+  top: 14px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+@include breakpoint(small only) {
+  .closeModal {
+    width: 30px;
+    height: 30px;
+    top: 40px;
+  }
+}

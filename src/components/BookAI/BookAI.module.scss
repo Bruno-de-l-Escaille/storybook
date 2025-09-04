@@ -1,0 +1,404 @@
+@import "../../styles/variables";
+$primary-color: #02af8e;
+$secondary-color: #06d9b1;
+$accent-color: #fb1e5b;
+$text-color: #29394d;
+$grey: #6d7f92;
+
+%book-image-base {
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 160% 110%;
+  border-radius: 8px;
+  display: flex;
+
+  .book_channel_avatar {
+    margin: 10px;
+    margin-left: auto;
+
+    // padding: 6px 2px 0;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-bottom: 5px;
+
+    // img {
+    height: 27px;
+    width: 50px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    //   object-fit: contain;
+    // }
+  }
+}
+
+%book-content-base {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+
+  .book_channel_avatar {
+    margin-left: auto;
+
+    // padding: 6px 2px 0;
+    border: 1px solid #f1f2f4;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-bottom: 5px;
+
+    // img {
+    height: 30px;
+    width: 52px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    // object-fit: contain;
+
+    // }
+  }
+
+  .book_title,
+  .book_title_bought {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 120%;
+    margin: 4px 0;
+  }
+
+  .book_title_bought {
+    color: $primary-color;
+  }
+
+  .book_author_wrapper {
+    color: $grey;
+    font-size: 12px;
+  }
+
+  .book_version {
+    font-size: 9px;
+    margin: 8px 0;
+    font-style: italic;
+  }
+
+  .book_bought {
+    @extend %book-status;
+
+    color: $primary-color;
+
+    svg path {
+      stroke: $primary-color;
+    }
+  }
+
+  .book_price {
+    @extend %book-status;
+
+    color: $accent-color;
+  }
+
+  .book_action {
+    margin-top: 5px;
+    width: 100%;
+
+    .book_button {
+      margin: 4px 0;
+
+      a {
+        background-color: $secondary-color;
+        padding: 10px 22px;
+        text-transform: uppercase;
+        color: #fff;
+        font-weight: 500;
+        border-radius: 8px;
+        display: inline-block;
+
+        &:hover {
+          background-color: $primary-color;
+        }
+
+        &.book_access_button {
+          background-color: #18a0fb;
+          padding: 8px 26px;
+
+          &:hover {
+            background-color: #2495e1;
+          }
+        }
+      }
+    }
+
+    .book_paper a {
+      color: $grey;
+      font-size: 12px;
+      font-weight: 500;
+      margin: 4px 0;
+      text-decoration: underline;
+
+      &:hover {
+        color: $grey;
+      }
+    }
+  }
+}
+
+%book-status {
+  font-weight: 700;
+  font-size: 14px;
+  margin: 4px 0;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+}
+
+.wrapperLivres {
+  position: relative;
+  margin-top: 10px;
+
+  h1 {
+    color: $text-color;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 120%;
+    top: 8px;
+  }
+
+  .channel_book_list,
+  .channel_two_book {
+    width: 100%;
+    display: flex;
+    background-color: #fff;
+    border-radius: 14px;
+    padding: 10px;
+    gap: 15px;
+    font-weight: 400;
+    color: $text-color;
+    font-size: 12px;
+    min-height: 350px;
+
+    .book_image {
+      @extend %book-image-base;
+
+      width: 100px;
+      height: 150px;
+    }
+
+    .book_content {
+      @extend %book-content-base;
+
+      max-width: calc(100% - 115px);
+
+      .book_title {
+        min-height: 90px;
+      }
+
+      .book_author_wrapper {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+        display: inline-block;
+      }
+
+      .book_action {
+        .book_button_section {
+          border-bottom: 1px solid #e1e4e8;
+          padding-bottom: 0;
+          margin-bottom: 6px;
+        }
+
+        .book_version {
+          margin: 4px;
+        }
+      }
+    }
+  }
+
+  .channel_two_book {
+    .book_image {
+      width: 128px;
+      height: 181px;
+
+      .book_channel_avatar {
+        width: 80px;
+        height: 44px;
+
+        // object-fit: contain;
+      }
+    }
+
+    .book_content {
+      max-width: calc(100% - 148px);
+
+      .book_title,
+      .book_title_bought {
+        min-height: 82px;
+      }
+
+      .book_channel_avatar {
+        width: 80px;
+        height: 44px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        // object-fit: contain;
+      }
+
+      .book_version {
+        font-size: 10px;
+        font-style: italic;
+      }
+    }
+  }
+
+  .channel_book {
+    width: 100%;
+    display: flex;
+    background-color: #fff;
+    border-radius: 14px;
+    padding: 30px;
+    gap: 30px;
+    font-weight: 400;
+    color: $text-color;
+    font-size: 16px;
+    min-height: 350px;
+
+    .book_image {
+      @extend %book-image-base;
+
+      width: 200px;
+      height: 285px;
+    }
+
+    .book_content {
+      @extend %book-content-base;
+
+      max-width: calc(100% - 230px);
+
+      .book_title,
+      .book_title_bought {
+        font-size: 22px;
+        margin-bottom: 5px;
+      }
+
+      .book_channel_avatar {
+        height: 44px;
+        width: 80px;
+
+        // object-fit: contain;
+      }
+
+      .book_action {
+        .book_button_section {
+          border-bottom: 1px solid #e1e4e8;
+          display: flex;
+          align-items: center;
+          padding-bottom: 4px;
+          margin-bottom: 4px;
+          gap: 8px;
+
+          .book_version {
+            font-size: 12px;
+            margin: 8px 0;
+            font-style: italic;
+          }
+        }
+      }
+    }
+
+    // @media (width <= 640px) {
+    //   .channel_book {
+    //     gap: 10;
+    //     padding: 5px;
+    //   }
+
+    //   .book_image {
+    //     width: 100px;
+    //     height: 150px;
+    //   }
+
+    //   .book_content {
+    //     max-width: calc(100% - 100px);
+
+    //     .book_title,
+    //     .book_title_bought {
+    //       min-height: 90px;
+    //       font-size: 18px;
+    //     }
+
+    //     .book_button_section {
+    //       display: block !important;
+
+    //       .book_button {
+    //         a {
+    //           font-size: 12px;
+    //           padding: 5px 11px;
+    //         }
+    //       }
+
+    //       .book_version {
+    //         font-size: 6px;
+    //       }
+    //     }
+    //   }
+    // }
+
+    // @media (width <= 850px) {
+    //   .book_button_section {
+    //     display: block !important;
+    //   }
+    // }
+
+    // @media (width <= 640px) {
+    //   flex-direction: column;
+    //   gap: 20px;
+
+    //   .book_image {
+    //     &.channel_two_book & {
+    //       width: 128px;
+    //       height: 181px;
+
+    //       .book_channel_avatar img {
+    //         height: 27px;
+    //         width: 48px;
+    //       }
+    //     }
+
+    //     // background-size: 110% 110%;
+    //   }
+
+    //   .book_content {
+    //     .book_title,
+    //     .book_title_bought {
+    //       font-size: 16px;
+    //     }
+
+    //     .book_version,
+    //     .book_price,
+    //     .book_button {
+    //       font-size: 12px;
+    //     }
+    //   }
+    // }
+
+    // @media (width <= 450px) {
+    //   .book_image {
+    //     height: 200px;
+    //   }
+    // }
+  }
+
+  .bought {
+    background-color: #edfaf5;
+    border: 1px solid #adffef;
+    border-radius: 5px;
+  }
+
+  .channel_loader {
+    justify-content: center;
+    align-items: center;
+  }
+}

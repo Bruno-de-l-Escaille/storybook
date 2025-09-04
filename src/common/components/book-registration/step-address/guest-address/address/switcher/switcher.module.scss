@@ -1,0 +1,110 @@
+$blue-color: #18a0fb;
+$blue-light-2-color: '#c7e8fe';
+$orange-color: #f47f4d;
+$orange-light-2-color: #ffe1cc;
+$red-orange-color: #fb1e5b;
+$red-orange-light-4-color: #ffabc2;
+$purple-color: #6f6cec;
+$purple-light-2-color: #d7cfff;
+$green-teal-color: #14b7ad;
+$green-teal-light-color: #6fd3c9;
+$green-jewel-color: #58e60c;
+$green-jewel-light-color: #e9ffde;
+$main-color: var(--primary-color);
+$secondary-color: var(--secondary-color);
+
+.switcher {
+  --primary-color: #{$blue-color};
+  --secondary-color: #{$blue-light-2-color};
+
+  &.orange {
+    --primary-color: #{$orange-color};
+    --secondary-color: #{$orange-light-2-color};
+  }
+
+  &.redOrange {
+    --primary-color: #{$red-orange-color};
+    --secondary-color: #{$red-orange-light-4-color};
+  }
+
+  &.purple {
+    --primary-color: #{$purple-color};
+    --secondary-color: #{$purple-light-2-color};
+  }
+
+  &.greenTeal {
+    --primary-color: #{$green-teal-color};
+    --secondary-color: #{$green-teal-light-color};
+  }
+
+  &.greenJewel {
+    --primary-color: #{$green-jewel-color};
+    --secondary-color: #{$green-jewel-light-color};
+  }
+
+  cursor: pointer;
+  display: flex;
+
+  &.disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  input {
+    display: none;
+    opacity: 0;
+
+    & + span {
+      &:not(.checkMark) {
+        margin-right: 0.3rem;
+      }
+    }
+
+    &:checked {
+      & + span {
+        color: $main-color;
+      }
+
+      & + .checkMark,
+      & + * + .checkMark {
+        background: $main-color;
+
+        &::after {
+          // box-shadow: 0 4px 10px rgb(41 57 77 / 10%);
+          left: unset;
+          right: 3px;
+        }
+      }
+    }
+  }
+
+  span {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #6d7f92;
+  }
+
+  .checkMark {
+    position: relative;
+    width: 48px;
+    height: 30px;
+    background: #dbe0e5;
+    border-radius: 20px;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      border-radius: 50%;
+      left: 3px;
+      top: 50%;
+      width: 24px;
+      height: 24px;
+      background: #fff;
+      // box-shadow: 0 4px 10px rgb(41 57 77 / 10%);
+      transition: all 0.5s ease;
+      transform: translateY(-50%);
+    }
+  }
+}

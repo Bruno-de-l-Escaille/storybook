@@ -1,0 +1,25 @@
+.title {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  svg {
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.fiduciaireContainer {
+  display: flex;
+  flex-direction: column;
+  // margin-left: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 140%;
+  flex-grow: 1;
+  font-size: 12px;
+}
