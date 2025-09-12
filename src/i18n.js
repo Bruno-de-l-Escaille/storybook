@@ -364,10 +364,11 @@ export const I18N = {
     fiduciaresRegistrationDescription:
       "Ideal if you want to provide access to all members of a fiduciary.",
     personalRegistration: "Personal Registration",
-    buyFiduciares: "Purchase for fiduciaries",
+    buyFiduciares: "Purchase for my fiduciarie",
     buyForFiduciaire: "Purchase for a fiduciary",
-    fiduciaireSize: "Fiduciary Size",
-    fiduciaireReduction: "Fiduciary Reduction",
+    fiduciaireSize:
+      "Exclusive access for {{size}} members within the fiduciary",
+    fiduciaireReduction: "Exclusive discount:",
   },
   fr: {
     ARTCILES: "Articles",
@@ -746,10 +747,11 @@ export const I18N = {
     fiduciariesRegistrationDescription:
       "Idéal si vous souhaitez offrir l’accès à tous les membres d’une fiduciaire.",
     personalRegistration: "Inscription personnelle(s)",
-    buyFiduciares: "Acheter pour les fiduciaires",
+    buyFiduciares: "Acheter pour ma fiduciaire",
     buyForFiduciaire: "Acheter pour une fiduciaire",
-    fiduciaireSize: "Taille de la fiduciaire",
-    fiduciaireReduction: "Réduction fiduciaire",
+    fiduciaireSize:
+      "Accès exclusif pour {{size}} membres au sein de la fiduciaire",
+    fiduciaireReduction: "Réduction exclusive de",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -1126,9 +1128,10 @@ export const I18N = {
     fiduciariesRegistrationDescription:
       "Ideaal als u toegang wilt geven aan alle leden van een fiduciaire.",
     personalRegistration: "Persoonlijke registratie",
-    buyFiduciares: "Kopen voor fiduciairs",
+    buyFiduciares: "Aankoop voor mijn fiduciaire",
     buyForFiduciaire: "Kopen voor een fiduciaire",
-    fiduciaireSize: "Grootte van de fiduciaire",
-    fiduciaireReduction: "Fiduciaire korting",
+    fiduciaireSize:
+      "Exclusieve toegang voor {{size}} leden binnen de fiduciaire",
+    fiduciaireReduction: "Exclusieve korting van",
   },
 };

@@ -1,0 +1,173 @@
+@import '~foundation-sites/scss/util/util';
+// @import '~@/common/styles/mixins';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+
+  .header {
+    display: flex;
+    padding: 16px 20px;
+    background-color: #29394d;
+    justify-content: space-between;
+
+    span {
+      padding: 5.5px 0;
+      color: #fff;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 120%;
+    }
+    .modalClose {
+      width: 40px;
+      height: 40px;
+      border: 1px solid;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 52px;
+    gap: 52px;
+    overflow: auto;
+
+    .title {
+      color: #29394d;;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 140%;
+    }
+
+    .types {
+      display: flex;
+      gap: 60px;
+      justify-content: center;
+
+      .type {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 20px;
+        border: 1px solid #b2bcc6;
+        padding: 60px 30px;
+        width: 420px;
+
+        .icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 15px;
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background-color: #c7e8fe;
+
+          path {
+            stroke: #18a0fb;
+          }
+        }
+
+        .title {
+          margin-top: 10px;
+          color: #29394d;
+          text-align: center;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 140%;
+        }
+
+        .description {
+          margin-top: 30px;
+          min-height: 100px;
+          color: #29394d;
+          text-align: center;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 140%;
+        }
+
+        .action {
+          margin-top: 30px;
+          width: 100%;
+
+          button {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 16px;
+            border-radius: 8px;
+            background: #18a0fb;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+
+            // text
+            color: #fff;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 140%;
+
+            &:hover {
+              background: #2495e1;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include breakpoint(medium only) {
+  .wrapper {
+    .body {
+      padding: 10px 22px;
+      gap: 32px;
+
+      .types {
+        gap: 20px;
+      }
+    }
+  }
+}
+
+@include breakpoint(small only) {
+  .wrapper {
+    border-radius: unset;
+
+    .header {
+      span {
+        font-size: 16px;
+        line-height: 140%;
+      }
+    }
+
+    .body {
+      padding: 10px 22px;
+      gap: 20px;
+
+      .types {
+        flex-direction: column;
+        gap: 20px;
+
+        .type {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
