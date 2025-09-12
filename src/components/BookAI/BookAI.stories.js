@@ -58,6 +58,7 @@ export const Default = () => (
     organization={number("organization", 4442)}
     token={text("token", "db78fd047032fa01962b51f4bf6f008a5e561d5e")}
     user={object("user", user)}
+    showFiduciareModal={false}
     env={text("env", "staging")}
   />
 );

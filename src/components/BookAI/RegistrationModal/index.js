@@ -17,8 +17,13 @@ const RegistrationModal = ({
   fiduciaires,
   showModal,
   setShowModal,
+  showFiduciareModal,
 }) => {
   const modalType = (fiduciaires) => {
+    if (!showFiduciareModal) {
+      return "BOOK";
+    }
+
     if (fiduciaires && fiduciaires.length > 0) {
       return "TYPE";
     } else {

@@ -18,6 +18,7 @@ export default function BookAI({
   user,
   env,
   fiduciaires,
+  showFiduciareModal,
 }) {
   const [showModal, setShowModal] = useState(false);
 
@@ -163,6 +164,7 @@ export default function BookAI({
           fiduciaires={fiduciaires}
           showModal={showModal}
           setShowModal={setShowModal}
+          showFiduciareModal={showFiduciareModal}
         />
       )}
     </>

@@ -21,6 +21,7 @@ export const BookAIListComponent = ({
   organizationImage = "",
   user,
   env,
+  showFiduciareModal = true,
 }) => {
   const translate = (text) => {
     return I18N[language][text];
@@ -159,6 +160,7 @@ export const BookAIListComponent = ({
           user={user}
           env={env}
           fiduciaires={fiduciaires}
+          showFiduciareModal={showFiduciareModal}
         />
       </div>
     ));
