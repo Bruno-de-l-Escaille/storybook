@@ -27,3 +27,5 @@ export const BREAK_POINTS = {
   X_LARGE: 1200,
   XX_LARGE: 1440,
 };
+
+export const URL_HASH_KEY = "Y3YZVA6uSLVqJhAWHdsb9CsGgcBXIhmY";

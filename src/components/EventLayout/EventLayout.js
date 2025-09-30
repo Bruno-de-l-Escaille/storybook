@@ -15,6 +15,7 @@ import OngoingIcon from "./assets/IconOngoing";
 import styles from "./EventLayout.module.scss";
 import {
   capFirstLetterInSentence,
+  encryptAES,
   getApiUrl,
   getByLanguage,
   getCroppedImageUrl,
@@ -210,12 +211,20 @@ export function EventLayout({
     +event.slotsCount === 1 && event.slotReplayUrls
       ? getSlotReplayUrl(event.slotReplayUrls, language)
       : undefined;
-  const webinarLink = replayLink
+  let webinarLink = replayLink
     ? replayLink +
       (event.selectedDate
         ? `&selectedDate=${event.selectedDate}&eventDate=${event.startDateTime}`
         : "")
     : undefined;
+  if (webinarLink) {
+    let param = [`token=${token}`];
+    if (userId) {
+      param = [`token=${token}`, `userId=${userId}`];
+    }
+    webinarLink += webinarLink.includes("?") ? "&" : "?";
+    webinarLink += `params=${encodeURIComponent(encryptAES(param.join()))}`;
+  }
 
   const getModeProps = () => {
     if (isPast) {

@@ -3,6 +3,8 @@ import "moment/locale/fr";
 import "moment/locale/nl";
 import { I18N } from "../i18n";
 import { toast } from "react-toastify";
+import { URL_HASH_KEY } from "../config";
+import CryptoJS from "crypto-js";
 
 const API_DATE_FORMAT = "YYYY-MM-DD HH:mm:ss";
 
@@ -447,3 +449,37 @@ export function pick(object, keys) {
     return acc;
   }, {});
 }
+
+export const encryptAES = (string) => {
+  const encryptMethod = "AES-256-CBC";
+  const match = encryptMethod.match(/\d+/);
+  const aesNumber = match ? match[0] : "256";
+  let encryptMethodLength = parseInt(aesNumber, 10);
+
+  const iv = CryptoJS.lib.WordArray.random(16);
+  const salt = CryptoJS.lib.WordArray.random(256);
+  const iterations = 999;
+  encryptMethodLength /= 4; // example: AES number is 256 / 4 = 64
+  const hashKey = CryptoJS.PBKDF2(URL_HASH_KEY, salt, {
+    hasher: CryptoJS.algo.SHA512,
+    keySize: encryptMethodLength / 8,
+    iterations,
+  });
+
+  const encrypted = CryptoJS.AES.encrypt(string, hashKey, {
+    mode: CryptoJS.mode.CBC,
+    iv,
+  });
+  const encryptedString = CryptoJS.enc.Base64.stringify(encrypted.ciphertext);
+
+  const output = {
+    ciphertext: encryptedString,
+    iv: CryptoJS.enc.Hex.stringify(iv),
+    salt: CryptoJS.enc.Hex.stringify(salt),
+    iterations,
+  };
+
+  return CryptoJS.enc.Base64.stringify(
+    CryptoJS.enc.Utf8.parse(JSON.stringify(output))
+  );
+};
