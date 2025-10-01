@@ -47,6 +47,7 @@ import { TimeCounter } from "../../common/components/TimeCounter";
 import { Fetching } from "./Fetching";
 import { I18N } from "../../i18n";
 import { EventMask } from "../Masks/EventMask/EventMask";
+import WithoutCertificate from "../Icons/WithoutCertificate";
 
 const REPLAY_UPTIME = 3;
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =
@@ -74,6 +75,7 @@ export function EventLayout({
   Link = "a",
   host,
   onBeforeJoinWebinar,
+  isCertificateNotIncluded = false,
 }) {
   const [hovered, setHovered] = useState(false);
   const [isActionProcessing, setIsActionProcessing] = useState(false);
@@ -225,6 +227,21 @@ export function EventLayout({
     webinarLink += webinarLink.includes("?") ? "&" : "?";
     webinarLink += `params=${encodeURIComponent(encryptAES(param.join()))}`;
   }
+
+  const renderEventCertificate = () => {
+    if (!isCertificateNotIncluded) {
+      return null;
+    }
+    return (
+      <li style={{ marginBottom: "6px" }}>
+        <WithoutCertificate
+          style={{ width: 16, height: 16, fill: "#29394D" }}
+          strokeline="#FFF"
+        />
+        <span>{I18N[language].certificateNotIncluded}</span>
+      </li>
+    );
+  };
 
   const getModeProps = () => {
     if (isPast) {
@@ -524,6 +541,7 @@ export function EventLayout({
                 </span>
               </li>
             )}
+            {renderEventCertificate()}
           </ul>
         </div>
         <div className={styles.actions}>

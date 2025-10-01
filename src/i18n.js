@@ -369,6 +369,7 @@ export const I18N = {
     fiduciaireSize:
       "Exclusive access for {{size}} members within the fiduciary",
     fiduciaireReduction: "Exclusive discount:",
+    certificateNotIncluded: "No ITAA certificate required",
   },
   fr: {
     ARTCILES: "Articles",
@@ -752,6 +753,7 @@ export const I18N = {
     fiduciaireSize:
       "Accès exclusif pour {{size}} membres au sein de la fiduciaire",
     fiduciaireReduction: "Réduction exclusive de",
+    certificateNotIncluded: "Pas d’attestation ITAA prévue",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -1133,5 +1135,6 @@ export const I18N = {
     fiduciaireSize:
       "Exclusieve toegang voor {{size}} leden binnen de fiduciaire",
     fiduciaireReduction: "Exclusieve korting van",
+    certificateNotIncluded: "Geen ITAA-attest vereist",
   },
 };

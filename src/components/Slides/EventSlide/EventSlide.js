@@ -27,6 +27,7 @@ import { SpeakersSlide } from "../Common/SpeakersSlide/SpeakersSlide";
 import classNames from "classnames";
 import moment from "moment";
 import { EventMask } from "../../Masks/EventMask/EventMask";
+import WithoutCertificate from "../../Icons/WithoutCertificate";
 
 export const EventSlide = ({
   event,
@@ -44,6 +45,7 @@ export const EventSlide = ({
   isOFFFcourse,
   token,
   host,
+  isCertificateNotIncluded = false,
 }) => {
   const [hovered, setHovered] = useState(false);
   const [showAddTags, setShowAddTags] = useState(false);
@@ -153,6 +155,21 @@ export const EventSlide = ({
     );
   };
 
+  const renderEventCertificate = () => {
+    if (!isCertificateNotIncluded) {
+      return null;
+    }
+    return (
+      <li style={{ marginBottom: "6px" }}>
+        <WithoutCertificate
+          style={{ width: 16, height: 16, fill: "#29394D" }}
+          className={classNames(styles.icon, "m-r-xs")}
+        />
+        <span>{I18N[language].certificateNotIncluded}</span>
+      </li>
+    );
+  };
+
   if (!focusTitle) {
     return (
       <div
@@ -195,7 +212,10 @@ export const EventSlide = ({
           />
           <Slide.Body className={styles.slideBody}>
             {showOrateurs && <SpeakersSlide speakers={speakers} />}
-            <ul className={styles.details}>{renderEventMode()}</ul>
+            <ul className={styles.details}>
+              {renderEventMode()}
+              {renderEventCertificate()}
+            </ul>
           </Slide.Body>
           <Slide.Footer className={styles.slideFooter}>
             {showPrice && (
@@ -281,6 +301,7 @@ export const EventSlide = ({
               style={{ fontSize: !isSmall ? "14px" : "12px" }}
             >
               {renderEventMode()}
+              {renderEventCertificate()}
             </ul>
           </Slide.Body>
           <Slide.Footer className={styles.slideFooter}>
