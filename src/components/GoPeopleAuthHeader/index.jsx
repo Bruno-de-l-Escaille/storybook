@@ -63,9 +63,9 @@ const GoPeopleAuthHeader = ({
   const handleAuthTokenUser = (authData) => {
     try {
       console.log("Processing auth token:", authData);
-      if (authData.token) {
+      if (authData.token || authData.jwt) {
         Toast.success(I18N[lng].auth.successfully_saved);
-        handleAuthSuccess(authData.token);
+        handleAuthSuccess(authData);
         handleCloseModal();
       }
     } catch (error) {
@@ -75,19 +75,186 @@ const GoPeopleAuthHeader = ({
     }
   };
 
-  const handleAuthSuccess = (token) => {
+  const handleAuthSuccess = async (data) => {
     try {
-      const processedData = processJWTToken(token);
-      const normalizedData = normalizeAuthData(processedData, env, app);
-      if (onSuccess) {
-        onSuccess({ ...normalizedData, jwt: token });
+      console.log("OTC Auth Success - received data:", data);
+
+      // Check if we have at least a JWT token
+      if (!data.jwt && !data.token) {
+        throw new Error("No JWT token received from authentication");
+      }
+
+      const jwt = data.jwt || data.token;
+
+      // Validate JWT token
+      const { isJWTValid } = require("../../components/GoPeopleAuthHeader/utils");
+      if (!isJWTValid(jwt)) {
+        throw new Error("Invalid or expired JWT token");
+      }
+
+      // Extract auth context from JWT
+      const { extractAuthContextFromJWT } = require("./api");
+      const authContext = extractAuthContextFromJWT(jwt);
+
+      // Set up base auth data from the token/data
+      const baseAuthData = {
+        token: data.token || authContext.ttpAccessToken,
+        jwt: jwt,
+        expiresIn: data.expiresIn || (authContext.exp - Math.floor(Date.now() / 1000)),
+        createdAt: data.createdAt || Math.floor(Date.now() / 1000),
+        scope: data.scope || "ttp",
+        jti: data.jti || authContext.jti,
+        exp: data.exp || authContext.exp,
+        email: data.email || authContext.email,
+        phone: data.phone || authContext.phone,
+        id: data.id || authContext.ttpUserId,
+        extra: data.extra || {
+          lang: "fr",
+          env,
+        },
+      };
+
+      // Set cookies for persistence
+      let dtExpire = new Date();
+      dtExpire.setTime(dtExpire.getTime() + baseAuthData.expiresIn * 1000);
+
+      const { setCookie } = require("./utils");
+      setCookie(
+        `ttp_auth_${env}`,
+        JSON.stringify(baseAuthData),
+        dtExpire,
+        "/",
+        "tamtam.pro"
+      );
+      setCookie(
+        `ttp_auth_${env}`,
+        JSON.stringify(baseAuthData),
+        dtExpire,
+        "/"
+      );
+
+      // Fetch user data
+      console.log("Fetching user data with available tokens");
+      let userResponse;
+      let preferences;
+      let normalizedUserData;
+
+      try {
+        // Try GoPeople API first if we have JWT token
+        const { getGoPeopleUserProfile } = require("./api");
+        console.log("Using GoPeople API for user data");
+        userResponse = await getGoPeopleUserProfile(
+          apiBaseUrl,
+          jwt
+        );
+        
+        // Get organization settings from TTP API using TTP access token
+        const { getOrganizationSettings } = require("./api");
+        preferences = await getOrganizationSettings(
+          authContext.ttpAccessToken,
+          authContext.selectedOrganizationId
+        );
+      } catch (error) {
+        console.error("Failed to fetch user profile or organization settings:", error);
+        // No fallback needed since GoPeople API is the primary source
+        throw error;
+      }
+
+      if (
+        userResponse.data &&
+        userResponse.data.data &&
+        userResponse.data.data.length > 0
+      ) {
+        const userData = userResponse.data.data[0];
+        console.log("User data fetched successfully:", userData);
+
+        const { toSlug } = require("./utils");
+
+        // The complete profile response should have this structure based on the API
+        const completeProfile = userData.user ? userData : { user: userData };
+        const user = completeProfile.user || userData;
+        const organizations = completeProfile.organizations || [];
+        const organizationRoles = completeProfile.organization_roles || [];
+        const selectedOrganization = completeProfile.selected_organization || userData.selectedOrganization;
+
+        // Transform organization_roles from GoPeople API to legacy roles format
+        const transformedRoles = organizationRoles.map((orgRole) => {
+          // Find the corresponding organization to get the numeric ID
+          const organization = organizations.find(
+            (org) => org.uuid === orgRole.organization_id
+          );
+
+          return {
+            type: orgRole.role,
+            typeStatus: orgRole.type_status,
+            organization: {
+              id: organization?.ttp_organization_id,
+              uuid: organization?.uuid || orgRole.organization_id,
+              name: organization?.short_name || organization?.official_name,
+              url: `/${toSlug(organization?.official_name || "")}`,
+              blogPreferences: preferences?.data?.[0]?.blogPreferences || {},
+            },
+          };
+        });
+
+        // Normalize user data with all required fields
+        normalizedUserData = {
+          ...user,
+          id: user.id || authContext.ttpUserId,
+          firstName: user.firstname || user.firstName,
+          lastName: user.lastname || user.lastName,
+          mainEmail: user.email || user.mainEmail || authContext.email,
+          phone: user.phone || authContext.phone || '',
+          language: user.main_language || user.language || 'fr',
+          communities: organizations.map((organization) => ({
+            ...organization,
+            id: organization.ttp_organization_id,
+            name: organization.short_name || organization.name || "",
+            url: `/${toSlug(organization?.official_name)}`,
+            blogPreferences: preferences?.data?.[0]?.blogPreferences || {},
+          })),
+          // Use transformed roles if available, fallback to existing roles
+          roles: transformedRoles.length > 0 ? transformedRoles : [],
+          organizations: organizations.map((organization) => ({
+            ...organization,
+            id: organization.ttp_organization_id || organization.id,
+            name: organization.short_name || organization.name || "",
+            url: `/${toSlug(organization?.official_name)}`,
+            blogPreferences: preferences?.data?.[0]?.blogPreferences || {},
+          })),
+          selectedOrganization: selectedOrganization ? {
+            ...selectedOrganization,
+            id: selectedOrganization.ttp_organization_id || selectedOrganization.id,
+            name: selectedOrganization.short_name,
+            url: `/${toSlug(selectedOrganization.official_name)}`,
+            blogPreferences: preferences?.data?.[0]?.blogPreferences || {},
+          } : null,
+          pages: completeProfile.pages || [],
+          socialNetworks: completeProfile.socialNetworks || [],
+          contactSocialNetworks: completeProfile.contactSocialNetworks || [],
+          groups: completeProfile.groups || [],
+        };
+
+        // Create the complete auth state using utility functions
+        const { createCompleteAuthState } = require("./utils");
+        const completeAuthState = createCompleteAuthState(
+          baseAuthData,
+          normalizedUserData,
+          preferences?.data?.[0],
+          env
+        );
+
+        console.log("Authentication setup complete, returning auth state:", completeAuthState);
+
+        // Return the complete auth state through the callback
+        if (onSuccess) {
+          onSuccess(completeAuthState);
+        }
       }
     } catch (error) {
-      console.error("Error processing token:", error);
+      console.error("Error in auth success handler:", error);
       Toast.error(I18N[lng].auth.error_occurred);
-      if (onError) {
-        onError(new Error(`Token processing failed: ${error.message}`));
-      }
+      if (onError) onError(error);
     }
   };
 
@@ -210,9 +377,9 @@ const GoPeopleAuthHeader = ({
         password
       );
 
-      if (response.token) {
+      if (response.token || response.jwt) {
         Toast.success(I18N[lng].auth.successfully_saved);
-        handleAuthSuccess(response.token);
+        handleAuthSuccess(response);
         handleCloseModal();
       }
     } catch (error) {

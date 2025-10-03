@@ -138,6 +138,20 @@ export const getTokenExpirationTime = (decodedToken) => {
 };
 
 /**
+ * Check if JWT token is valid (not expired and properly formatted)
+ * @param {string} jwt - JWT token string
+ * @returns {boolean} True if token is valid
+ */
+export const isJWTValid = (jwt) => {
+  try {
+    const decodedToken = decodeJWT(jwt);
+    return !isTokenExpired(decodedToken);
+  } catch (error) {
+    return false;
+  }
+};
+
+/**
  * Normalize authentication data to a consistent format
  * @param {object} processedData - Processed token data (from JWT or legacy format)
  * @param {string} env - Environment (e.g., 'dev', 'prod')
@@ -150,7 +164,7 @@ export const normalizeAuthData = (processedData, env, app) => {
     const { userInfo, apiTtpToken } = processedData;
     console.log(
       "Processing JWT token with embedded apiTtp_token",
-      processedData.access_token
+      processedData.token
     );
     return {
       id: userInfo.userId,
@@ -166,6 +180,7 @@ export const normalizeAuthData = (processedData, env, app) => {
       phone: userInfo.phone,
       jti: userInfo.jwtId,
       exp: userInfo.expiresAt,
+      jwt: processedData.token // Include the JWT token itself
     };
   } else {
     // Legacy opaque token format
@@ -220,4 +235,131 @@ export const processJWTToken = (token) => {
   } catch (error) {
     throw error;
   }
+};
+
+// Utility functions for slug generation
+export const toSlug = (text) => {
+  if (!text) return '';
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
+
+// Cookie utilities
+export const setCookie = (name, value, expires, path = '/', domain = null) => {
+  let cookieString = `${name}=${encodeURIComponent(value)}`;
+  
+  if (expires) {
+    cookieString += `; expires=${expires.toUTCString()}`;
+  }
+  
+  cookieString += `; path=${path}`;
+  
+  if (domain) {
+    cookieString += `; domain=${domain}`;
+  }
+  
+  document.cookie = cookieString;
+};
+
+export const getCookie = (name) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    return decodeURIComponent(parts.pop().split(';').shift());
+  }
+  return null;
+};
+
+// Navigation community utilities
+export const getUserCurrentNavCommunity = (userData, currentCommunityId) => {
+  if (!userData || !userData.communities) return null;
+  
+  const community = userData.communities.find(
+    (c) => c.id === currentCommunityId || c.ttp_organization_id === currentCommunityId
+  );
+  
+  if (community) {
+    return {
+      id: community.ttp_organization_id || community.id,
+      name: community.short_name || community.name,
+      url: community.url || `/${toSlug(community.official_name || community.name)}`,
+      uuid: community.uuid,
+      official_name: community.official_name || community.name,
+      blogPreferences: community.blogPreferences || {}
+    };
+  }
+  
+  // Return first community if no specific match
+  if (userData.communities.length > 0) {
+    const firstCommunity = userData.communities[0];
+    return {
+      id: firstCommunity.ttp_organization_id || firstCommunity.id,
+      name: firstCommunity.short_name || firstCommunity.name,
+      url: firstCommunity.url || `/${toSlug(firstCommunity.official_name || firstCommunity.name)}`,
+      uuid: firstCommunity.uuid,
+      official_name: firstCommunity.official_name || firstCommunity.name,
+      blogPreferences: firstCommunity.blogPreferences || {}
+    };
+  }
+  
+  return null;
+};
+
+
+
+/**
+ * Create complete auth state object matching the required structure
+ * @param {object} authData - Raw authentication data
+ * @param {object} userData - User profile data
+ * @param {object} preferences - Organization preferences
+ * @param {string} env - Environment
+ * @returns {object} Complete auth state object
+ */
+export const createCompleteAuthState = (authData, userData, preferences, env) => {
+  const navCommunity = getUserCurrentNavCommunity(userData, userData.selectedOrganization?.ttp_organization_id);
+  
+  return {
+    blogPreferences: preferences?.blogPreferences || null,
+    createdAt: authData.createdAt || null,
+    currentCommunity: navCommunity?.id || 4,
+    email: userData.mainEmail || authData.email,
+    error: null,
+    exp: authData.exp,
+    expiresIn: authData.expiresIn,
+    extra: authData.extra,
+    fetched: true,
+    fetching: false,
+    isSubscribed: false,
+    jti: authData.jti,
+    jwtToken: authData.jwt,
+    navCommunity,
+    phone: userData.phone || authData.phone,
+    saving: false,
+    savingError: null,
+    scope: authData.scope,
+    stoken: '',
+    token: authData.token,
+    ttpOrganizationId: navCommunity?.id || null,
+    ttpUserId: userData.id || authData.id,
+    user: {
+      id: userData.id,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      mainEmail: userData.mainEmail,
+      phone: userData.phone,
+      language: userData.language,
+      communities: userData.communities || [],
+      roles: userData.roles || [],
+      organizations: userData.organizations || [],
+      selectedOrganization: userData.selectedOrganization,
+      pages: userData.pages || [],
+      socialNetworks: userData.socialNetworks || [],
+      contactSocialNetworks: userData.contactSocialNetworks || [],
+      groups: userData.groups || []
+    }
+  };
 };
