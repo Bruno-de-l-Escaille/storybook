@@ -87,7 +87,9 @@ const GoPeopleAuthHeader = ({
       const jwt = data.jwt || data.token;
 
       // Validate JWT token
-      const { isJWTValid } = require("../../components/GoPeopleAuthHeader/utils");
+      const {
+        isJWTValid,
+      } = require("../../components/GoPeopleAuthHeader/utils");
       if (!isJWTValid(jwt)) {
         throw new Error("Invalid or expired JWT token");
       }
@@ -100,7 +102,8 @@ const GoPeopleAuthHeader = ({
       const baseAuthData = {
         token: data.token || authContext.ttpAccessToken,
         jwt: jwt,
-        expiresIn: data.expiresIn || (authContext.exp - Math.floor(Date.now() / 1000)),
+        expiresIn:
+          data.expiresIn || authContext.exp - Math.floor(Date.now() / 1000),
         createdAt: data.createdAt || Math.floor(Date.now() / 1000),
         scope: data.scope || "ttp",
         jti: data.jti || authContext.jti,
@@ -126,12 +129,7 @@ const GoPeopleAuthHeader = ({
         "/",
         "tamtam.pro"
       );
-      setCookie(
-        `ttp_auth_${env}`,
-        JSON.stringify(baseAuthData),
-        dtExpire,
-        "/"
-      );
+      setCookie(`ttp_auth_${env}`, JSON.stringify(baseAuthData), dtExpire, "/");
 
       // Fetch user data
       console.log("Fetching user data with available tokens");
@@ -143,11 +141,8 @@ const GoPeopleAuthHeader = ({
         // Try GoPeople API first if we have JWT token
         const { getGoPeopleUserProfile } = require("./api");
         console.log("Using GoPeople API for user data");
-        userResponse = await getGoPeopleUserProfile(
-          apiBaseUrl,
-          jwt
-        );
-        
+        userResponse = await getGoPeopleUserProfile(apiBaseUrl, jwt);
+
         // Get organization settings from TTP API using TTP access token
         const { getOrganizationSettings } = require("./api");
         preferences = await getOrganizationSettings(
@@ -155,7 +150,10 @@ const GoPeopleAuthHeader = ({
           authContext.selectedOrganizationId
         );
       } catch (error) {
-        console.error("Failed to fetch user profile or organization settings:", error);
+        console.error(
+          "Failed to fetch user profile or organization settings:",
+          error
+        );
         // No fallback needed since GoPeople API is the primary source
         throw error;
       }
@@ -175,7 +173,9 @@ const GoPeopleAuthHeader = ({
         const user = completeProfile.user || userData;
         const organizations = completeProfile.organizations || [];
         const organizationRoles = completeProfile.organization_roles || [];
-        const selectedOrganization = completeProfile.selected_organization || userData.selectedOrganization;
+        const selectedOrganization =
+          completeProfile.selected_organization ||
+          userData.selectedOrganization;
 
         // Transform organization_roles from GoPeople API to legacy roles format
         const transformedRoles = organizationRoles.map((orgRole) => {
@@ -204,8 +204,8 @@ const GoPeopleAuthHeader = ({
           firstName: user.firstname || user.firstName,
           lastName: user.lastname || user.lastName,
           mainEmail: user.email || user.mainEmail || authContext.email,
-          phone: user.phone || authContext.phone || '',
-          language: user.main_language || user.language || 'fr',
+          phone: user.phone || authContext.phone || "",
+          language: user.main_language || user.language || "fr",
           communities: organizations.map((organization) => ({
             ...organization,
             id: organization.ttp_organization_id,
@@ -222,13 +222,17 @@ const GoPeopleAuthHeader = ({
             url: `/${toSlug(organization?.official_name)}`,
             blogPreferences: preferences?.data?.[0]?.blogPreferences || {},
           })),
-          selectedOrganization: selectedOrganization ? {
-            ...selectedOrganization,
-            id: selectedOrganization.ttp_organization_id || selectedOrganization.id,
-            name: selectedOrganization.short_name,
-            url: `/${toSlug(selectedOrganization.official_name)}`,
-            blogPreferences: preferences?.data?.[0]?.blogPreferences || {},
-          } : null,
+          selectedOrganization: selectedOrganization
+            ? {
+                ...selectedOrganization,
+                id:
+                  selectedOrganization.ttp_organization_id ||
+                  selectedOrganization.id,
+                name: selectedOrganization.short_name,
+                url: `/${toSlug(selectedOrganization.official_name)}`,
+                blogPreferences: preferences?.data?.[0]?.blogPreferences || {},
+              }
+            : null,
           pages: completeProfile.pages || [],
           socialNetworks: completeProfile.socialNetworks || [],
           contactSocialNetworks: completeProfile.contactSocialNetworks || [],
@@ -244,7 +248,10 @@ const GoPeopleAuthHeader = ({
           env
         );
 
-        console.log("Authentication setup complete, returning auth state:", completeAuthState);
+        console.log(
+          "Authentication setup complete, returning auth state:",
+          completeAuthState
+        );
 
         // Return the complete auth state through the callback
         if (onSuccess) {

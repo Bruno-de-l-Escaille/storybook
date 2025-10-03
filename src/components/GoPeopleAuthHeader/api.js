@@ -235,7 +235,7 @@ export const syncUserCreation = async (apiBaseUrl, token, userId) => {
 // JWT and Auth Context Functions
 export const extractAuthContextFromJWT = (jwt) => {
   try {
-    const payload = JSON.parse(atob(jwt.split('.')[1]));
+    const payload = JSON.parse(atob(jwt.split(".")[1]));
     return {
       goPeopleUserId: payload.user_id,
       email: payload.email,
@@ -245,10 +245,12 @@ export const extractAuthContextFromJWT = (jwt) => {
       ttpAccessToken: payload.apiTtp_token?.access_token,
       role: payload.role,
       exp: payload.exp,
-      jti: payload.jti
+      jti: payload.jti,
     };
   } catch (error) {
-    throw new Error(`Failed to extract auth context from JWT: ${error.message}`);
+    throw new Error(
+      `Failed to extract auth context from JWT: ${error.message}`
+    );
   }
 };
 
@@ -295,23 +297,23 @@ export const getOrganizationSettings = (ttpAccessToken, organizationId) => {
   // Simple GET request without custom headers to avoid CORS preflight
   const queryParams = new URLSearchParams(params).toString();
   return fetch(`${requestUrl}?${queryParams}`, {
-    method: 'GET',
+    method: "GET",
   })
-    .then(response => {
+    .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
       return response.json();
     })
-    .catch(error => {
-      console.error('Error fetching organization settings:', error);
+    .catch((error) => {
+      console.error("Error fetching organization settings:", error);
       // Return default settings if API call fails
       return {
         blogPreferences: {
           showAuthorCard: true,
           allowComments: true,
-          moderateComments: false
-        }
+          moderateComments: false,
+        },
       };
     });
 };

@@ -180,7 +180,7 @@ export const normalizeAuthData = (processedData, env, app) => {
       phone: userInfo.phone,
       jti: userInfo.jwtId,
       exp: userInfo.expiresAt,
-      jwt: processedData.token // Include the JWT token itself
+      jwt: processedData.token, // Include the JWT token itself
     };
   } else {
     // Legacy opaque token format
@@ -239,29 +239,29 @@ export const processJWTToken = (token) => {
 
 // Utility functions for slug generation
 export const toSlug = (text) => {
-  if (!text) return '';
+  if (!text) return "";
   return text
     .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 };
 
 // Cookie utilities
-export const setCookie = (name, value, expires, path = '/', domain = null) => {
+export const setCookie = (name, value, expires, path = "/", domain = null) => {
   let cookieString = `${name}=${encodeURIComponent(value)}`;
-  
+
   if (expires) {
     cookieString += `; expires=${expires.toUTCString()}`;
   }
-  
+
   cookieString += `; path=${path}`;
-  
+
   if (domain) {
     cookieString += `; domain=${domain}`;
   }
-  
+
   document.cookie = cookieString;
 };
 
@@ -269,7 +269,7 @@ export const getCookie = (name) => {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) {
-    return decodeURIComponent(parts.pop().split(';').shift());
+    return decodeURIComponent(parts.pop().split(";").shift());
   }
   return null;
 };
@@ -277,39 +277,43 @@ export const getCookie = (name) => {
 // Navigation community utilities
 export const getUserCurrentNavCommunity = (userData, currentCommunityId) => {
   if (!userData || !userData.communities) return null;
-  
+
   const community = userData.communities.find(
-    (c) => c.id === currentCommunityId || c.ttp_organization_id === currentCommunityId
+    (c) =>
+      c.id === currentCommunityId ||
+      c.ttp_organization_id === currentCommunityId
   );
-  
+
   if (community) {
     return {
       id: community.ttp_organization_id || community.id,
       name: community.short_name || community.name,
-      url: community.url || `/${toSlug(community.official_name || community.name)}`,
+      url:
+        community.url ||
+        `/${toSlug(community.official_name || community.name)}`,
       uuid: community.uuid,
       official_name: community.official_name || community.name,
-      blogPreferences: community.blogPreferences || {}
+      blogPreferences: community.blogPreferences || {},
     };
   }
-  
+
   // Return first community if no specific match
   if (userData.communities.length > 0) {
     const firstCommunity = userData.communities[0];
     return {
       id: firstCommunity.ttp_organization_id || firstCommunity.id,
       name: firstCommunity.short_name || firstCommunity.name,
-      url: firstCommunity.url || `/${toSlug(firstCommunity.official_name || firstCommunity.name)}`,
+      url:
+        firstCommunity.url ||
+        `/${toSlug(firstCommunity.official_name || firstCommunity.name)}`,
       uuid: firstCommunity.uuid,
       official_name: firstCommunity.official_name || firstCommunity.name,
-      blogPreferences: firstCommunity.blogPreferences || {}
+      blogPreferences: firstCommunity.blogPreferences || {},
     };
   }
-  
+
   return null;
 };
-
-
 
 /**
  * Create complete auth state object matching the required structure
@@ -319,9 +323,17 @@ export const getUserCurrentNavCommunity = (userData, currentCommunityId) => {
  * @param {string} env - Environment
  * @returns {object} Complete auth state object
  */
-export const createCompleteAuthState = (authData, userData, preferences, env) => {
-  const navCommunity = getUserCurrentNavCommunity(userData, userData.selectedOrganization?.ttp_organization_id);
-  
+export const createCompleteAuthState = (
+  authData,
+  userData,
+  preferences,
+  env
+) => {
+  const navCommunity = getUserCurrentNavCommunity(
+    userData,
+    userData.selectedOrganization?.ttp_organization_id
+  );
+
   return {
     blogPreferences: preferences?.blogPreferences || null,
     createdAt: authData.createdAt || null,
@@ -341,7 +353,7 @@ export const createCompleteAuthState = (authData, userData, preferences, env) =>
     saving: false,
     savingError: null,
     scope: authData.scope,
-    stoken: '',
+    stoken: "",
     token: authData.token,
     ttpOrganizationId: navCommunity?.id || null,
     ttpUserId: userData.id || authData.id,
@@ -359,7 +371,7 @@ export const createCompleteAuthState = (authData, userData, preferences, env) =>
       pages: userData.pages || [],
       socialNetworks: userData.socialNetworks || [],
       contactSocialNetworks: userData.contactSocialNetworks || [],
-      groups: userData.groups || []
-    }
+      groups: userData.groups || [],
+    },
   };
 };
