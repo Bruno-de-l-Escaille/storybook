@@ -161,6 +161,7 @@ function StepAddress({
         billingPostalCode: undefined,
         billingSubjectToVAT: undefined,
         billingSignature: undefined,
+        billingRegion: undefined,
       },
       touched: {
         ...touched,
@@ -170,6 +171,7 @@ function StepAddress({
         billingPostalCode: undefined,
         billingSubjectToVAT: undefined,
         billingSignature: undefined,
+        billingRegion: undefined,
       },
     });
 
@@ -182,6 +184,7 @@ function StepAddress({
         billingPostalCode: "",
         billingSubjectToVAT: "0",
         billingSignature: "",
+        billingRegion: "",
       });
     } else {
       setValues({
@@ -206,6 +209,9 @@ function StepAddress({
         billingSignature: address
           ? address.billingSignature
           : initialValues.billingSignature,
+        billingRegion: address
+          ? address.billingRegion
+          : initialValues.billingRegion,
       });
 
       // handleChangeData({
@@ -242,6 +248,7 @@ function StepAddress({
       billingStreet: values.billingStreet,
       billingPostalCode: values.billingPostalCode,
       billingSubjectToVAT: values.billingSubjectToVAT,
+      billingRegion: values.billingRegion,
       user: user?.id,
       appRef: "paper-subscription",
       product_ids: `[${product.id}]`,
@@ -282,13 +289,15 @@ function StepAddress({
       touched.billingCompanyNumber ||
       touched.billingOrganization ||
       touched.billingStreet ||
-      touched.billingPostalCode;
+      touched.billingPostalCode ||
+      touched.billingRegion;
 
     const withErrors =
       !isEmpty(errors.billingCompanyNumber) ||
       !isEmpty(errors.billingOrganization) ||
       !isEmpty(errors.billingStreet) ||
-      !isEmpty(errors.billingPostalCode);
+      !isEmpty(errors.billingPostalCode) ||
+      !isEmpty(errors.billingRegion);
 
     if (addressTouched && withErrors) {
       return (
@@ -482,6 +491,7 @@ function StepAddress({
                             "billingPostalCode",
                             "billingSubjectToVAT",
                             "billingSignature",
+                            "billingRegion",
                           ])
                         : undefined
                     }

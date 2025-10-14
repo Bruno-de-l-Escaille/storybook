@@ -44,8 +44,8 @@ export default function Address({
             {billingOrderNumber && <div>{billingOrderNumber}</div>}
             <div>
               {parseBoolean(billingSubjectToVAT)
-                ? translate("inscription.soumis_tva")
-                : translate("inscription.non_soumis_tva")}
+                ? translate("soumis_tva")
+                : translate("non_soumis_tva")}
             </div>
           </div>
         );
@@ -77,8 +77,8 @@ export default function Address({
               {address2 && <div>{address2}</div>}
               {orderNumber && <div>{orderNumber}</div>}
               {vatApply === "1"
-                ? translate("inscription.soumis_tva")
-                : translate("inscription.non_soumis_tva")}
+                ? translate("soumis_tva")
+                : translate("non_soumis_tva")}
             </div>
           </div>
         );

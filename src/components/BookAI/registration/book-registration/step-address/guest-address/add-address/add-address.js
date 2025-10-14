@@ -13,8 +13,12 @@ import { TTPSelectField } from "../../../../../../../common/components/ttp-form/
 import { TTPInput } from "../../../../../../../common/components/ttp-form/TTPInput";
 import TTPRadioGroup from "../../../../../../../common/components/ttp-form/TTPRadioGroup";
 import {
+  extractRegionFromPlace,
   formatUen,
   getApiUrl,
+  getCountryFromCompanyNumber,
+  getPlaceDetails,
+  getRegionFromAddress,
   isEmpty,
   parseBoolean,
 } from "../../../../../../../utils";
@@ -51,6 +55,7 @@ export function AddAddress({
     billingAddress2: "",
     billingOrderNumber: "",
     billingCountry: "",
+    billingRegion: "",
   });
   const GOOGLE_MAP_API_KEY = "AIzaSyAiOtVCQorixsHMcyagZDJVDGhdbbfANl4";
 
@@ -97,6 +102,7 @@ export function AddAddress({
       ...data,
       billingStreet: "",
       billingPostalCode: "",
+      billingRegion: "",
     }));
   }, [selectedFlag]);
 
@@ -109,6 +115,7 @@ export function AddAddress({
     billingAddress2: "",
     billingOrderNumber: "",
     billingCountry: "",
+    billingRegion: "",
   });
 
   const validateCompanyNumber = async (
@@ -135,7 +142,7 @@ export function AddAddress({
     let isValid = false;
 
     await validateOrganizationNumber(token, getApiUrl(env), companyNumber)
-      .then((res) => {
+      .then(async (res) => {
         const organzationInfo = res.data;
         const address = organzationInfo.address.split("\n");
         if (organzationInfo) {
@@ -146,6 +153,14 @@ export function AddAddress({
             organzationInfo.address !== "---"
           ) {
             if (autoComplete) {
+              const streetAddress = address[0] ?? organzationInfo.address;
+              const postalCode = address[1]?.split(" ")[0];
+              const country = getCountryFromCompanyNumber(companyNumber);
+              const region = await getRegionFromAddress(
+                streetAddress,
+                country,
+                postalCode
+              );
               setData((data) => ({
                 ...data,
                 billingCompanyNumber: companyNumber ?? "",
@@ -157,6 +172,7 @@ export function AddAddress({
                 billingStreet: address[0] ?? organzationInfo.address,
                 billingPostalCode: address[1] ?? "",
                 billingSubjectToVAT: "1",
+                billingRegion: region ?? "",
               }));
             }
           }
@@ -176,6 +192,7 @@ export function AddAddress({
             billingOrganization: "",
             billingStreet: "",
             billingPostalCode: "",
+            billingRegion: "",
           }));
         }
         isValid = false;
@@ -373,10 +390,18 @@ export function AddAddress({
     setSelectedFlag(value);
   };
 
-  const handlePlaceSelect = (fieldName) => {
+  const handlePlaceSelect = async (fieldName) => {
     if (fieldName === "billingStreet") {
       const place = streetAutocompleteRef.current?.getPlace();
+      let billingRegion = "";
       if (place) {
+        if (place.place_id) {
+          const detailedPlace = await getPlaceDetails(place.place_id);
+
+          if (detailedPlace) {
+            billingRegion = extractRegionFromPlace(detailedPlace);
+          }
+        }
         const street = place.address_components?.find((component) =>
           component.types.includes("route")
         );
@@ -409,6 +434,12 @@ export function AddAddress({
           setData((data) => ({
             ...data,
             billingPostalCode: "",
+          }));
+        }
+        if (billingRegion) {
+          setData((data) => ({
+            ...data,
+            billingRegion: billingRegion ?? "",
           }));
         }
       }
@@ -613,6 +644,28 @@ export function AddAddress({
             </Autocomplete>
           </LoadScript>
         </div>
+        {/* billingRegion */}
+        <TTPInput
+          key="billingRegion"
+          theme={theme}
+          name="billingRegion"
+          label={translate("inscription.billingRegion")}
+          isHorizontal={horizontalInputs}
+          labelClassName={styles.inputLabel}
+          onChange={handleChange}
+          onBlur={onFieldBlur}
+          value={data.billingRegion}
+          hasError={!isEmpty(errors.billingRegion)}
+          beforeMaskStateChange={beforeMaskedValueChange}
+          disabled
+          wrapperClassName={cn(
+            horizontalInputs ? s.inputsContainer : s.inputsContainerVertical,
+            s[theme],
+            s.disabled
+          )}
+        >
+          {!isEmpty(errors.billingRegion) && <p>{errors.billingRegion}</p>}
+        </TTPInput>
         {/* billingAddress2 */}
         <TTPInput
           key="billingAddress2"
