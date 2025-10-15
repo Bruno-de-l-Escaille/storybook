@@ -20,8 +20,8 @@ const queryClient = new QueryClient();
 const user = {
   uid: "70FF3651-066C-4F9E-B1F2-0DA285DB5B0F",
   enabled: true,
-  firstName: "Yassine",
-  lastName: "El Bekkali",
+  firstName: "Bruno",
+  lastName: "de lescaille",
   language: "fr",
   type: "ADMIN",
   status: "CREATED",
@@ -41,8 +41,8 @@ const user = {
   isUaAdmin: true,
   uaStatus: "VALIDATED",
   acceptCookies: true,
-  id: 471421,
-  mainEmail: "yassine.elbekkali21@gmail.com",
+  id: 8863,
+  mainEmail: "bruno.delescaille@gmail.com",
   mainPhone: "+32487324449",
 };
 
@@ -56,7 +56,7 @@ export const Default = () => (
   <BookAIList
     language={select("language", ["fr", "nl", "en"], "fr")}
     organization={number("organization", 4442)}
-    token={text("token", "0183c54015e5dce6795bf4cf2cc7061528b163ab")}
+    token={text("token", "303673882c62bede9bc9980d6bad916590b1dcf0")}
     user={object("user", user)}
     showFiduciareModal={false}
     env={text("env", "staging")}

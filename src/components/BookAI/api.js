@@ -78,6 +78,10 @@ export const createOrder = async ({
   const response = await fetch(`${requestUrl}`, {
     method: "POST",
     body: formData,
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${token}`, // token added
+    },
   });
 
   let jsonData;

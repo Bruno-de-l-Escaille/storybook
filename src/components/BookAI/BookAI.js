@@ -137,7 +137,9 @@ export default function BookAI({
               <div className={style.book_version}>
                 {!isBought
                   ? `${I18N[language].book.untilTheReleaseOfTheVersion}`
-                  : `${I18N[language].book.accessExpiration} ${expireAt}`}
+                  : expireAt != null
+                  ? `${I18N[language].book.accessExpiration} ${expireAt}`
+                  : `${I18N[language].book.accessPermanent}`}
               </div>
             </div>
             <div className={style.book_paper}>

@@ -125,7 +125,9 @@ export const BookAIListComponent = ({
             userAccess.some(
               (userAuth) =>
                 userAuth.collection?.id === (product?.collection_id ?? 0) &&
-                new Date(userAuth.expire_at).getTime() >= new Date().getTime()
+                (new Date(userAuth.expire_at).getTime() >=
+                  new Date().getTime() ||
+                  userAuth.expire_at === null)
             )
           }
           expireAt={
@@ -147,7 +149,7 @@ export const BookAIListComponent = ({
                       .toString()
                       .padStart(2, "0")}/${expireDate.getFullYear()}`;
                   }
-                  return "";
+                  return null;
                 })()
               : ""
           }
