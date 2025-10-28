@@ -140,8 +140,9 @@ const GoPeopleAuthHeader = ({
       try {
         // Try GoPeople API first if we have JWT token
         const { getGoPeopleUserProfile } = require("./api");
-        console.log("Using GoPeople API for user data");
+        console.log("Using GoPeople API for user data", apiBaseUrl, jwt);
         userResponse = await getGoPeopleUserProfile(apiBaseUrl, jwt);
+        console.log("======== userResponse ==========", userResponse);
 
         // Get organization settings from TTP API using TTP access token
         const { getOrganizationSettings } = require("./api");
@@ -150,6 +151,7 @@ const GoPeopleAuthHeader = ({
           authContext.selectedOrganizationId
         );
       } catch (error) {
+        console.log(error);
         console.error(
           "Failed to fetch user profile or organization settings:",
           error
