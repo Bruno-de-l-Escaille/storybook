@@ -296,7 +296,7 @@ export class Header extends Component {
       lng,
       app,
       intendedApp,
-      gotoUrl,
+      apiBaseUrl,
       env,
       isOtcAuth = false,
     } = this.props;
@@ -318,7 +318,7 @@ export class Header extends Component {
         </ul>
         {isOtcAuth ? (
           <GoPeopleAuthHeader
-            apiBaseUrl="http://localhost:8081"
+            apiBaseUrl={apiBaseUrl}
             lng={lng}
             onSuccess={(tokenData) => {
               if (this.props.onSuccess) {
