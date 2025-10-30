@@ -1280,6 +1280,9 @@ nav {
     font-weight: normal;
     font-size: 14px;
     line-height: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 100vh;
   }
 
   &_header {
