@@ -55,8 +55,7 @@ export const getUser = (apiUrl, token, userId) => {
 };
 
 export const fetchOrganizations = (apiUrl, token, userId) => {
-  const requestUrl = `${apiUrl}/organization/organization`;
-  const filter = [{ property: "user.id", value: userId, operator: "eq" }];
+  const requestUrl = `${apiUrl}/organization/user-organizations`;
   const fields = [
     "*",
     "url",
@@ -67,9 +66,8 @@ export const fetchOrganizations = (apiUrl, token, userId) => {
   return axios.get(requestUrl, {
     params: {
       access_token: token,
-      filter: JSON.stringify(filter),
+      userId: userId,
       fields: fields.join(","),
-      workspace: "user",
     },
   });
 };

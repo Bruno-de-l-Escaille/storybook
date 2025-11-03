@@ -56,7 +56,7 @@ export const Default = () => (
   <BookAIList
     language={select("language", ["fr", "nl", "en"], "fr")}
     organization={number("organization", 4442)}
-    token={text("token", "303673882c62bede9bc9980d6bad916590b1dcf0")}
+    token={text("token", "91bd6d1fec3d1ebe77ae1407159a4440fe4b7e16")}
     user={object("user", user)}
     showFiduciareModal={false}
     env={text("env", "staging")}
