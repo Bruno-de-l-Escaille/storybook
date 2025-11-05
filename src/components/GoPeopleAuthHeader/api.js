@@ -285,9 +285,9 @@ export const getOrganizationSettings = (ttpAccessToken, organizationId) => {
   if (!ttpAccessToken) {
     return Promise.reject(new Error("TTP access token is required"));
   }
-  if (!organizationId) {
-    return Promise.reject(new Error("organizationId is required"));
-  }
+  // if (!organizationId) {
+  //   return Promise.reject(new Error("organizationId is required"));
+  // }
 
   const params = {
     access_token: ttpAccessToken,
