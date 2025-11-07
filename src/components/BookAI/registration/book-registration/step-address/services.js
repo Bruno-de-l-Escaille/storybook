@@ -29,6 +29,7 @@ export const prepareGuestAddress = (guest, addresses, uen) => {
           billingAddress2: address[0].address2 ?? "",
           billingOrderNumber: address[0].orderNumber ?? "",
           billingCountry: address[0].country ?? "",
+          billingDoNotSendInvoice: address[0].doNotSendInvoice ?? false,
         }
       : {
           billingCompanyNumber: uen,
@@ -40,6 +41,7 @@ export const prepareGuestAddress = (guest, addresses, uen) => {
           billingAddress2: "",
           billingOrderNumber: "",
           billingCountry: "",
+          billingDoNotSendInvoice: false,
         };
 
     return addressData;
@@ -71,6 +73,7 @@ export const prepareGuestAddress = (guest, addresses, uen) => {
       billingAddress2: address.address2 ?? "",
       billingOrderNumber: address.orderNumber ?? "",
       billingCountry: address.country ?? "",
+      billingDoNotSendInvoice: address.doNotSendInvoice ?? false,
     };
   } else if (addresses.length > 0 && !isAddressAvailable) {
     /**
@@ -86,6 +89,7 @@ export const prepareGuestAddress = (guest, addresses, uen) => {
       billingAddress2: "",
       billingOrderNumber: "",
       billingCountry: "",
+      billingDoNotSendInvoice: false,
     };
   } else {
     /**
@@ -101,6 +105,7 @@ export const prepareGuestAddress = (guest, addresses, uen) => {
       billingAddress2: guest.billingAddress2 ?? "",
       billingOrderNumber: guest.billingOrderNumber ?? "",
       billingCountry: guest.billingCountry ?? "",
+      billingDoNotSendInvoice: parseBoolean(guest.billingDoNotSendInvoice),
     };
   }
 
@@ -122,6 +127,7 @@ export const getInitialValues = (guest, addresses, coupons) => {
         billingAddress2: address.address2 ?? "",
         billingOrderNumber: address.orderNumber ?? "",
         billingCountry: address.country ?? "",
+        billingDoNotSendInvoice: address.doNotSendInvoice ?? false,
         privacyTerms: "0",
         termsOfSales: "0",
       };
@@ -136,6 +142,7 @@ export const getInitialValues = (guest, addresses, coupons) => {
       billingCountry: "",
       billingSubjectToVAT: "0",
       billingSignature: "",
+      billingDoNotSendInvoice: false,
       privacyTerms: "0",
       termsOfSales: "0",
     };
@@ -168,4 +175,5 @@ export const getGuestAddressFromInvoiceAddress = (invoiceAddress) => ({
   billingAddress2: invoiceAddress.address2 ?? "",
   billingOrderNumber: invoiceAddress.orderNumber ?? "",
   billingCountry: invoiceAddress.country ?? "",
+  billingDoNotSendInvoice: parseBoolean(invoiceAddress.doNotSendInvoice),
 });

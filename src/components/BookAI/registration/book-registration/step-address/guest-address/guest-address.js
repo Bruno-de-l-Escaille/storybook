@@ -25,6 +25,7 @@ export function GuestAddress({
   user,
   language = "fr",
   env,
+  isPeppolActive,
 }) {
   const translate = (text) => {
     return I18N[language][text];
@@ -105,6 +106,22 @@ export function GuestAddress({
                   data={{ type: "GUEST", address }}
                   onClick={() => onSelectAddress?.(address)}
                   isSelected={billingSignature === address.billingSignature}
+                  language={language}
+                  env={env}
+                  isPeppolActive={isPeppolActive}
+                  token={token}
+                  onChange={(newAddress) => {
+                    if (newAddress.type === "GUEST") {
+                      const updatedAddresses = manualAddresses.map(
+                        (addr, idx) =>
+                          idx === index ? newAddress.address : addr
+                      );
+                      setManualAddresses(updatedAddresses);
+                      if (billingSignature === address.billingSignature) {
+                        onSelectAddress(newAddress.address);
+                      }
+                    }
+                  }}
                 />
               </div>
             )),
@@ -121,6 +138,25 @@ export function GuestAddress({
                   }
                   isSelected={billingSignature === address.signature}
                   // onDelete={() => handleDelete(address)}
+                  language={language}
+                  env={env}
+                  isPeppolActive={isPeppolActive}
+                  token={token}
+                  onChange={(newAddress) => {
+                    if (newAddress.type === "INVOICING") {
+                      const updatedInvoicings = invoicings.map((inv) =>
+                        inv.signature === address.signature
+                          ? newAddress.address
+                          : inv
+                      );
+                      setInvoicing(updatedInvoicings);
+                      if (billingSignature === address.signature) {
+                        onSelectAddress(
+                          getGuestAddressFromInvoiceAddress(newAddress.address)
+                        );
+                      }
+                    }
+                  }}
                 />
               </div>
             )),

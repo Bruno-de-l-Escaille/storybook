@@ -7,7 +7,10 @@ import { RegistrationFullSteps, RegistrationQuickSteps } from "./enums";
 // import { Onboarding } from "./onboarding";
 import StepAddress from "./step-address/step-address";
 import StepPayment from "./step-payment/step-payment";
-import { fetchBillingAddress } from "../../../../api/adress";
+import {
+  fetchBillingAddress,
+  fetchBillingConfiguration,
+} from "../../../../api/adress";
 import { getApiUrl } from "../../../../utils";
 
 export function BookRegistartaion({
@@ -33,6 +36,7 @@ export function BookRegistartaion({
 
   const [userBillingAdress, setUserBillingAddress] = useState([]);
   const [isFetchingAdress, setIsFetchingAdress] = useState(false);
+  const [billingConfig, setBillingConfig] = useState(null);
   useEffect(() => {
     const fetchUserBillingAddress = async () => {
       setIsFetchingAdress(true);
@@ -46,7 +50,27 @@ export function BookRegistartaion({
         setIsFetchingAdress(false);
       }
     };
+
+    const fetchBillingConfig = async () => {
+      const productOrganizationId = product?.issuer?.id;
+
+      if (!productOrganizationId) return;
+
+      try {
+        const response = await fetchBillingConfiguration({
+          token,
+          apiUrl: getApiUrl(env),
+          organizationId: productOrganizationId,
+        });
+
+        setBillingConfig(response?.data?.data?.[0] || null);
+      } catch (err) {
+        console.error("Error fetching organization billing address:", err);
+      }
+    };
+
     fetchUserBillingAddress();
+    fetchBillingConfig();
   }, [env, token, user]);
 
   const [order, setOrder] = useState(null);
@@ -115,6 +139,7 @@ export function BookRegistartaion({
           language={language}
           env={env}
           fiduciaire={fiduciaire}
+          isPeppolActive={billingConfig?.isPeppolActive}
         />
       )}
       {stepRef.current === RegistrationQuickSteps.PAYMENT && (

@@ -1,6 +1,6 @@
 $blue-color: #18a0fb;
-$blue-light-2-color: '#c7e8fe';
-$blue-light-3-color: '#f3faff';
+$blue-light-2-color: "#c7e8fe";
+$blue-light-3-color: "#f3faff";
 $orange-color: #f47f4d;
 $orange-light-2-color: #ffe1cc;
 $orange-light-3-color: #fcfaf3;
@@ -66,7 +66,7 @@ $gris-color: var(--gris-color, #f1f2f4);
     }
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       width: 100%;
       background: var(--dark-3, #6d7f92);
@@ -87,7 +87,7 @@ $gris-color: var(--gris-color, #f1f2f4);
     padding: 12px;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       width: 100%;
       background: #6d7f92;
@@ -174,11 +174,93 @@ $gris-color: var(--gris-color, #f1f2f4);
   }
 
   .actions {
-    .termsAndConditions{
+    .termsAndConditions {
       display: flex;
     }
     & > * {
       cursor: pointer;
+    }
+  }
+}
+
+.billingOptions {
+  --color-text: #29394d;
+  --color-primary: #18a0fb;
+
+  margin: 8px 0;
+
+  .peppolInfo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 8px;
+
+    .infoIcon {
+      display: grid;
+      place-items: center;
+
+      svg {
+        stroke: var(--color-primary);
+        stroke-width: 0.1;
+      }
+    }
+
+    .infoText {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 140%;
+    }
+  }
+
+  .peppolCheckbox {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+
+    .checkboxIcon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 19px;
+      height: 19px;
+      margin: 0 0.5px;
+      border: 2px solid var(--color-primary);
+      border-radius: 4px;
+      background: #fff;
+      transition: all 0.2s ease;
+
+      svg {
+        opacity: 0;
+        transform: scale(0);
+        transition: all 0.2s ease;
+
+        path {
+          stroke: white;
+          stroke-width: 2;
+        }
+      }
+    }
+
+    .checkboxText {
+      font-size: 12px;
+      color: var(--color-text);
+      line-height: 140%;
+      font-weight: 400;
+    }
+
+    &.checked {
+      .checkboxIcon {
+        background: var(--color-primary);
+        border-color: var(--color-primary);
+
+        svg {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
     }
   }
 }

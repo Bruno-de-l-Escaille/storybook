@@ -35,6 +35,7 @@ function StepAddress({
   token,
   env,
   fiduciaire,
+  isPeppolActive,
 }) {
   const summaryStep = RegistrationQuickSteps.SUMMARY;
 
@@ -162,6 +163,7 @@ function StepAddress({
         billingSubjectToVAT: undefined,
         billingSignature: undefined,
         billingRegion: undefined,
+        billingDoNotSendInvoice: undefined,
       },
       touched: {
         ...touched,
@@ -172,6 +174,7 @@ function StepAddress({
         billingSubjectToVAT: undefined,
         billingSignature: undefined,
         billingRegion: undefined,
+        billingDoNotSendInvoice: undefined,
       },
     });
 
@@ -185,6 +188,7 @@ function StepAddress({
         billingSubjectToVAT: "0",
         billingSignature: "",
         billingRegion: "",
+        billingDoNotSendInvoice: false,
       });
     } else {
       setValues({
@@ -212,6 +216,9 @@ function StepAddress({
         billingRegion: address
           ? address.billingRegion
           : initialValues.billingRegion,
+        billingDoNotSendInvoice: address
+          ? parseBoolean(address.billingDoNotSendInvoice)
+          : initialValues.billingDoNotSendInvoice,
       });
 
       // handleChangeData({
@@ -249,6 +256,9 @@ function StepAddress({
       billingPostalCode: values.billingPostalCode,
       billingSubjectToVAT: values.billingSubjectToVAT,
       billingRegion: values.billingRegion,
+      billingDoNotSendInvoice: parseBoolean(values.billingDoNotSendInvoice)
+        ? 1
+        : 0,
       user: user?.id,
       appRef: "paper-subscription",
       product_ids: `[${product.id}]`,
@@ -465,6 +475,7 @@ function StepAddress({
                             token={token}
                             language={language}
                             env={env}
+                            isPeppolActive={isPeppolActive}
                           />
                         </div>
                         <div style={{ marginLeft: "-0.5rem" }}>
