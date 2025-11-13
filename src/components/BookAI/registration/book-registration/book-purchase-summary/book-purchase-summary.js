@@ -94,7 +94,7 @@ export default function BookPurchaseSummary({
       <div className={styles.total}>
         <p>{translate("total_to_pay")} :</p>
         <span>
-          {isFiduciareReduction && isFiduciareReduction && (
+          {isFiduciare && isFiduciareReduction && (
             <p>
               <span className={styles.price}>
                 {totalPrice *
@@ -108,14 +108,14 @@ export default function BookPurchaseSummary({
               </span>
             </p>
           )}
-          {isFiduciareReduction && !isFiduciareReduction && (
+          {isFiduciare && !isFiduciareReduction && (
             <p>
               <span className={styles.price}>
                 {totalPrice * fiduciaire?.organizationSize} €
               </span>
             </p>
           )}
-          {!isFiduciareReduction && !isFiduciareReduction && (
+          {!isFiduciare && (
             <p>
               <span className={styles.price}>{totalPrice} €</span>
             </p>
