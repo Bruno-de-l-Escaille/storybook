@@ -318,6 +318,11 @@ export const I18N = {
     privacy_p1: "I accept the",
     privacy_p2: "Privacy terms",
     billingCompanyNumber: "Company Number",
+    peppolInvoiceInfoExists:
+      "This VAT number exists on peppol, your invoice will be sent via peppol",
+    peppolInvoiceInfoNotExists:
+      "This VAT number does not exist on peppol, your invoice will be sent via email",
+    peppolEmailOption: "I would also like to receive the invoice by email",
     billingOrganization: "Organization",
     billingStreet: "Street",
     billingStreetPlaceholder: "Number, street name",
@@ -704,6 +709,11 @@ export const I18N = {
     privacy_p1: "J'accepte les",
     privacy_p2: "Conditions sur la vie privée",
     billingCompanyNumber: "N° d'entreprise",
+    peppolInvoiceInfoExists:
+      "Ce numéro TVA existe sur peppol, votre facture sera envoyée via peppol",
+    peppolInvoiceInfoNotExists:
+      "Ce numéro TVA n'existe pas sur peppol, votre facture sera envoyée via email",
+    peppolEmailOption: "Je désire également recevoir la facture par email",
     billingOrganization: "Organisation",
     billingStreet: "Rue",
     billingStreetPlaceholder: "Numéro, nom de la rue",
@@ -1087,6 +1097,11 @@ export const I18N = {
     privacy_p1: "Ik accepteer de",
     privacy_p2: "Privacyvoorwaarden",
     billingCompanyNumber: "Bedrijfsnummer",
+    peppolInvoiceInfoExists:
+      "Dit BTW-nummer bestaat op peppol, uw factuur wordt verzonden via peppol",
+    peppolInvoiceInfoNotExists:
+      "Dit BTW-nummer bestaat niet op peppol, uw factuur wordt verzonden via e-mail",
+    peppolEmailOption: "Ik wil ook de factuur per e-mail ontvangen",
     billingOrganization: "Organisatie",
     billingStreet: "Straat",
     billingStreetPlaceholder: "Nummer, straatnaam",

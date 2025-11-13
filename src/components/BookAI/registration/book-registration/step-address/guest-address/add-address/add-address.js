@@ -56,6 +56,7 @@ export function AddAddress({
     billingOrderNumber: "",
     billingCountry: "",
     billingRegion: "",
+    billingDoNotSendInvoice: false,
   });
   const GOOGLE_MAP_API_KEY = "AIzaSyAiOtVCQorixsHMcyagZDJVDGhdbbfANl4";
 
@@ -116,6 +117,7 @@ export function AddAddress({
     billingOrderNumber: "",
     billingCountry: "",
     billingRegion: "",
+    billingDoNotSendInvoice: "",
   });
 
   const validateCompanyNumber = async (

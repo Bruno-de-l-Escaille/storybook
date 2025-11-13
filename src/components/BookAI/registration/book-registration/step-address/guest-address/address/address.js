@@ -1,19 +1,101 @@
 import classNames from "classnames";
-import React from "react";
+import React, { useEffect } from "react";
 import { ReactComponent as TrashIcon } from "../assets/delete.svg";
 import styles from "../guest-address.module.scss";
 import { Switcher } from "./switcher";
-import { formatUen, parseBoolean } from "../../../../../../../utils";
+import {
+  formatUen,
+  getApiUrl,
+  isEmpty,
+  parseBoolean,
+} from "../../../../../../../utils";
+import { useQuery } from "@tanstack/react-query";
+import IconCheckmark from "../../../../../../EventLayout/assets/IconCheckmark";
+import IconAlertCircle from "../../../../../../../components/Icons/AlertCircle";
+import { PulseLoader } from "react-spinners";
+import { checkOrganizationExistsInPeppol } from "../../../../../../../api/adress";
+import { I18N } from "../../../../../../../i18n";
 
 export default function Address({
   dict,
   data,
   isSelected,
   theme = "",
+  isPeppolActive,
   onClick,
   onDelete,
+  onChange,
+  token,
+  language,
+  env,
 }) {
-  const translate = (value) => value;
+  const translate = (value) => {
+    return I18N[language][value];
+  };
+
+  const organizationNumber =
+    data.type === "INVOICING"
+      ? data.address.uen
+      : data.type === "GUEST"
+      ? data.address.billingCompanyNumber ?? ""
+      : "";
+
+  const {
+    data: isPeppolAvailable,
+    isFetching: isCheckingPeppolAvailability,
+  } = useQuery({
+    queryKey: ["checkOrganizationExistsInPeppol", organizationNumber],
+    queryFn: async () => {
+      let orgNumber = organizationNumber;
+
+      if (isEmpty(orgNumber)) {
+        return false;
+      }
+
+      if (/^\d/.test(orgNumber)) {
+        orgNumber = `BE${orgNumber}`;
+      }
+
+      const response = await checkOrganizationExistsInPeppol({
+        token,
+        organizationNumber: orgNumber,
+        apiUrl: getApiUrl(env),
+      });
+
+      const isExists = response?.data?.data?.exists ?? false;
+
+      return isExists;
+    },
+    enabled: isSelected && isPeppolActive,
+    staleTime: 60 * 60 * 1000,
+    cacheTime: 60 * 60 * 1000,
+  });
+
+  useEffect(() => {
+    if (isSelected && !isCheckingPeppolAvailability && !isPeppolAvailable) {
+      if (data.type === "INVOICING" && data.address.doNotSendInvoice) {
+        onChange({
+          ...data,
+          address: {
+            ...data.address,
+            doNotSendInvoice: false,
+          },
+        });
+      } else if (
+        data.type === "GUEST" &&
+        data.address.billingDoNotSendInvoice
+      ) {
+        onChange({
+          ...data,
+          address: {
+            ...data.address,
+            billingDoNotSendInvoice: false,
+          },
+        });
+      }
+    }
+  }, [isSelected, isPeppolAvailable, isCheckingPeppolAvailability]);
+
   const renderData = () => {
     switch (data.type) {
       case "GUEST": {
@@ -105,6 +187,79 @@ export default function Address({
 
     return null;
   };
+
+  const renderBillingOptions = () => {
+    if (isCheckingPeppolAvailability) {
+      return (
+        <div className={styles.billingOptions}>
+          <div className={styles.peppolInfo}>
+            <PulseLoader size={7} color="var(--color-text)" />
+          </div>
+        </div>
+      );
+    }
+
+    const doNotSendInvoice =
+      data.type === "GUEST"
+        ? parseBoolean(data.address.billingDoNotSendInvoice)
+        : data.type === "INVOICING"
+        ? parseBoolean(data.address.doNotSendInvoice)
+        : false;
+
+    return (
+      <div className={styles.billingOptions}>
+        <div className={styles.peppolInfo}>
+          <span className={styles.infoIcon}>
+            <IconAlertCircle width={20} height={20} />
+          </span>
+          <span className={styles.infoText}>
+            {translate(
+              isPeppolAvailable
+                ? "peppolInvoiceInfoExists"
+                : "peppolInvoiceInfoNotExists"
+            )}
+          </span>
+        </div>
+        {isPeppolAvailable && (
+          <div
+            className={classNames(
+              styles.peppolCheckbox,
+              !doNotSendInvoice && styles.checked
+            )}
+            onClick={() => {
+              if (data.type === "GUEST") {
+                const updatedData = {
+                  ...data,
+                  address: {
+                    ...data.address,
+                    billingDoNotSendInvoice: !doNotSendInvoice,
+                  },
+                };
+                onChange(updatedData);
+              } else if (data.type === "INVOICING") {
+                const updatedData = {
+                  ...data,
+                  address: {
+                    ...data.address,
+                    doNotSendInvoice: !doNotSendInvoice,
+                  },
+                };
+                onChange(updatedData);
+              }
+            }}
+          >
+            <span className={styles.checkboxIcon}>
+              <IconCheckmark />
+            </span>
+            <span className={styles.checkboxText}>
+              {translate("peppolEmailOption")}
+            </span>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <div
       className={classNames(
@@ -129,6 +284,9 @@ export default function Address({
             />
           </div>
         </div>
+        {Boolean(isPeppolActive && isSelected) && (
+          <div className="cell small-12">{renderBillingOptions()}</div>
+        )}
         <div className="cell small-12">
           {onDelete && (
             <div
