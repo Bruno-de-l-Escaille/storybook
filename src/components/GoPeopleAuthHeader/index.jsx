@@ -160,6 +160,7 @@ const GoPeopleAuthHeader = ({
         // Get organization settings from TTP API using TTP access token
         const { getOrganizationSettings } = require("./api");
         preferences = await getOrganizationSettings(
+          apiBaseUrl,
           authContext.ttpAccessToken,
           selectedOrganizationId
         );

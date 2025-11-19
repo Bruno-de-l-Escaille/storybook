@@ -277,17 +277,21 @@ export const getGoPeopleUserProfile = async (apiBaseUrl, jwt) => {
 // User data is always fetched from GoPeople API only
 // No TTP API user fetching needed
 
-export const getOrganizationSettings = (ttpAccessToken, organizationId) => {
+export const getOrganizationSettings = (
+  apiBaseUrl,
+  ttpAccessToken,
+  organizationId
+) => {
   // Use TTP access token (not JWT) for this request
-  const TTP_API_URL = "http://local.api.tamtam.pro"; // Replace with actual URL or config
+  const TTP_API_URL = apiBaseUrl ? apiBaseUrl : "http://local.api.tamtam.pro"; // Replace with actual URL or config
   const requestUrl = `${TTP_API_URL}/organization/organization-settings`;
 
   if (!ttpAccessToken) {
     return Promise.reject(new Error("TTP access token is required"));
   }
-  // if (!organizationId) {
-  //   return Promise.reject(new Error("organizationId is required"));
-  // }
+  if (!organizationId) {
+    return Promise.reject(new Error("organizationId is required"));
+  }
 
   const params = {
     access_token: ttpAccessToken,
