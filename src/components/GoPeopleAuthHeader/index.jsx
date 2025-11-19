@@ -23,6 +23,7 @@ import {
 import styles from "./GoPeopleAuthHeader.module.scss";
 
 const GoPeopleAuthHeader = ({
+  apiUrl = "http://local.api.tamtam.pro",
   apiBaseUrl = "http://localhost:8080",
   lng = "fr",
   onSuccess,
@@ -160,7 +161,7 @@ const GoPeopleAuthHeader = ({
         // Get organization settings from TTP API using TTP access token
         const { getOrganizationSettings } = require("./api");
         preferences = await getOrganizationSettings(
-          apiBaseUrl,
+          apiUrl,
           authContext.ttpAccessToken,
           selectedOrganizationId
         );

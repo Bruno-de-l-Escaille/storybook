@@ -278,12 +278,12 @@ export const getGoPeopleUserProfile = async (apiBaseUrl, jwt) => {
 // No TTP API user fetching needed
 
 export const getOrganizationSettings = (
-  apiBaseUrl,
+  apiUrl,
   ttpAccessToken,
   organizationId
 ) => {
   // Use TTP access token (not JWT) for this request
-  const TTP_API_URL = apiBaseUrl ? apiBaseUrl : "http://local.api.tamtam.pro"; // Replace with actual URL or config
+  const TTP_API_URL = apiUrl; // Replace with actual URL or config
   const requestUrl = `${TTP_API_URL}/organization/organization-settings`;
 
   if (!ttpAccessToken) {
