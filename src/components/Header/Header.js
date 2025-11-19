@@ -296,6 +296,7 @@ export class Header extends Component {
       lng,
       app,
       intendedApp,
+      apiUrl,
       apiBaseUrl,
       env,
       isOtcAuth = false,
@@ -318,6 +319,7 @@ export class Header extends Component {
         </ul>
         {isOtcAuth ? (
           <GoPeopleAuthHeader
+            apiUrl={apiUrl}
             apiBaseUrl={apiBaseUrl}
             lng={lng}
             onSuccess={(tokenData) => {
