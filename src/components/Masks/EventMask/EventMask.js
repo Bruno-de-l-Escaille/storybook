@@ -183,6 +183,7 @@ export const EventMask = ({
             ),
             onClick: () => {
               const url = new URL(window.location.href);
+              url.searchParams.set("openGallery", "1");
               url.searchParams.set("eventId", event.id);
               window.history.pushState({}, "", url.toString());
             },
