@@ -922,6 +922,7 @@ export const Article = ({
                 <div
                   className={styles.fff_lib}
                   style={{ background: `${category.colorCode}` }}
+                  title="oFFFcourse library"
                 >
                   <RepeatIcon width="16" />
                 </div>
@@ -976,6 +977,7 @@ export const Article = ({
                 <div
                   className={styles.fff_lib}
                   style={{ background: `${category.colorCode}` }}
+                  title="oFFFcourse library"
                 >
                   <RepeatIcon width="16" />
                 </div>
@@ -1138,6 +1140,7 @@ export const Article = ({
                 <div
                   className={styles.fff_lib}
                   style={{ background: `${category.colorCode}` }}
+                  title="oFFFcourse library"
                 >
                   <RepeatIcon width="16" />
                 </div>
@@ -1236,6 +1239,7 @@ export const Article = ({
                 <div
                   className={styles.fff_lib}
                   style={{ background: `${category.colorCode}` }}
+                  title="oFFFcourse library"
                 >
                   <RepeatIcon width="16" />
                 </div>
@@ -1349,6 +1353,7 @@ export const Article = ({
                   <div
                     className={styles.fff_lib}
                     style={{ background: `${category.colorCode}` }}
+                    title="oFFFcourse library"
                   >
                     <RepeatIcon width="16" />
                   </div>
