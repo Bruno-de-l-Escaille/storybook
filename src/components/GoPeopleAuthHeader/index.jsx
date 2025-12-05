@@ -124,13 +124,13 @@ const GoPeopleAuthHeader = ({
       dtExpire.setTime(dtExpire.getTime() + baseAuthData.expiresIn * 1000);
 
       const { setCookie } = require("./utils");
-      setCookie(
-        `ttp_auth_${env}`,
-        JSON.stringify(baseAuthData),
-        dtExpire,
-        "/",
-        cookieUrl
-      );
+      // setCookie(
+      //   `ttp_auth_${env}`,
+      //   JSON.stringify(baseAuthData),
+      //   dtExpire,
+      //   "/",
+      //   cookieUrl
+      // );
       setCookie(`ttp_auth_${env}`, JSON.stringify(baseAuthData), dtExpire, "/");
 
       // Fetch user data
