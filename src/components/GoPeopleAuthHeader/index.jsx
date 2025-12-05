@@ -25,6 +25,7 @@ import styles from "./GoPeopleAuthHeader.module.scss";
 const GoPeopleAuthHeader = ({
   apiUrl = "http://local.api.tamtam.pro",
   apiBaseUrl = "http://localhost:8080",
+  cookieUrl = "tamtam.pro",
   lng = "fr",
   onSuccess,
   onError,
@@ -128,7 +129,7 @@ const GoPeopleAuthHeader = ({
         JSON.stringify(baseAuthData),
         dtExpire,
         "/",
-        "tamtam.pro"
+        cookieUrl
       );
       setCookie(`ttp_auth_${env}`, JSON.stringify(baseAuthData), dtExpire, "/");
 

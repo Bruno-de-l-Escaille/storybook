@@ -297,6 +297,7 @@ export class Header extends Component {
       app,
       intendedApp,
       apiUrl,
+      cookieUrl,
       apiBaseUrl,
       env,
       isOtcAuth = false,
@@ -322,6 +323,8 @@ export class Header extends Component {
             apiUrl={apiUrl}
             apiBaseUrl={apiBaseUrl}
             lng={lng}
+            env={env}
+            cookieUrl={cookieUrl}
             onSuccess={(tokenData) => {
               if (this.props.onSuccess) {
                 this.props.onSuccess(tokenData);
