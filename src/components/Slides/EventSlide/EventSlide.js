@@ -283,6 +283,17 @@ export const EventSlide = ({
           className={styles.eventSlide}
           isFetching={isFetching}
           isSmall={isSmall}
+          flag={
+            isSoldOut && !isUserRegistered
+              ? "sold-out"
+              : event.isIncludedPremium === 1
+              ? "premium"
+              : undefined
+          }
+          language={language}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          data-id={event.id}
         >
           <Slide.Header
             label={label}

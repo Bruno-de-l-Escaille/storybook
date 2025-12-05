@@ -145,7 +145,7 @@ export function CycleCard({
   };
 
   const getActionProps = () => {
-    if (!isActive && isCycleRegistrationOpen(cycle)) {
+    if (!isActive && isCycleRegistrationOpen(cycle) && !isSoldOut) {
       return {
         link: cycleLink,
         label: I18N[language]["buy"],
