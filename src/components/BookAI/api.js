@@ -66,7 +66,7 @@ export const createOrder = async ({
     billingStreet,
     billingPostalCode,
     billingSubjectToVAT,
-    billingRegion,
+    billingRegion: billingRegion || "",
     billingDoNotSendInvoice,
     user,
     appRef,
