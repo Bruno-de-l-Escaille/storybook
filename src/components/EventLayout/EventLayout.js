@@ -32,6 +32,7 @@ import {
   getOfffcourseUrl,
   getSlotReplayUrl,
   isEventFull,
+  isEventLight,
   isEventLive,
   isEventPast,
   isEventRegistrationOpen,
@@ -135,6 +136,7 @@ export function EventLayout({
   const isPast = isEventPast(event);
   const isLive = isEventLive(event);
   const isFull = isEventFull(event);
+  const isLight = isEventLight(event);
   const isSoldOut = isSoldOutEvent(event);
   const isFree = isFreeEvent(event);
   const hasUniqueSlot = +event.slotsCount === 1;
@@ -363,6 +365,14 @@ export function EventLayout({
       };
     }
 
+    if (isPast && isLight) {
+      return {
+        label: I18N[language]["details"],
+        theme: "default",
+        link: eventLink,
+      };
+    }
+
     if (
       isRegistrationOpen &&
       !isSoldOut &&
@@ -401,7 +411,9 @@ export function EventLayout({
         </div>
       );
     }
-
+    if (isPast && isLight) {
+      return null;
+    }
     if (price) {
       return (
         <div className={styles.price}>
