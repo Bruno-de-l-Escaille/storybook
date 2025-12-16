@@ -129,6 +129,29 @@
     justify-content: flex-end;
     gap: 20px;
 
+    &_previousButton {
+      display: flex;
+      padding: 10px 16px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      border-radius: 8px;
+      border: 0.5px solid #29394d;
+      cursor: pointer;
+      color: #29394d;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 140%;
+      background: #fff;
+      margin-right: auto;
+    }
+
+    &_actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     &_saveButton {
       padding: 10px 16px;
       border-radius: 8px;
@@ -144,6 +167,11 @@
 
       &:hover {
         background: #02af8e;
+      }
+
+      &_disabled {
+        pointer-events: none;
+        opacity: 0.5;
       }
     }
 

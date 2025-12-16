@@ -32,6 +32,16 @@ export const getEvent = ({ apiUrl, token, eventId }) => {
     "speakers-abstract",
     "user-registered",
     "eventCycles",
+    "maxNumber",
+    "contactFr",
+    "contactNl",
+    "contactEn",
+    "emailContactFr",
+    "emailContactNl",
+    "emailContactEn",
+    "phoneNumberContactFr",
+    "phoneNumberContactNl",
+    "phoneNumberContactEn",
   ];
   const requestUrl = `${apiUrl}/event/event`;
 
@@ -203,4 +213,50 @@ export const getCarouselEventsTitels = async ({ apiUrl, token, language }) => {
     console.error("Error fetching carousel events:", error);
     return [];
   }
+};
+
+export const saveEventLight = ({ apiUrl, token, data }) => {
+  const requestUrl = `${apiUrl}/event/event`;
+  var formData = new FormData();
+  formData.append("access_token", token);
+  formData.append("nameFr", data.nameFr);
+  formData.append("nameNl", data.nameNl);
+  formData.append("nameEn", data.nameEn);
+  formData.append("descriptionFr", data.descriptionFr);
+  formData.append("descriptionNl", data.descriptionNl);
+  formData.append("descriptionEn", data.descriptionEn);
+  formData.append("languages", JSON.stringify(data.languages));
+  formData.append("client", data.client);
+  formData.append("startDateTime", data.startDateTime);
+  formData.append("endDateTime", data.endDateTime);
+  formData.append("eventDate", data.eventDate);
+  formData.append("placeFr", data.placeFr);
+  formData.append("placeNl", data.placeNl);
+  formData.append("placeEn", data.placeEn);
+  formData.append("status", data.status);
+  formData.append("maxNumber", data.maxPlaces);
+  formData.append("labelFr", data.labelFr);
+  formData.append("labelNl", data.labelNl);
+  formData.append("labelEn", data.labelEn);
+  formData.append("contactFr", data.contactFr);
+  formData.append("contactNl", data.contactNl);
+  formData.append("contactEn", data.contactEn);
+  formData.append("emailContactFr", data.emailContactFr);
+  formData.append("emailContactNl", data.emailContactNl);
+  formData.append("emailContactEn", data.emailContactEn);
+  formData.append("phoneNumberContactFr", data.phoneNumberContactFr);
+  formData.append("phoneNumberContactNl", data.phoneNumberContactNl);
+  formData.append("phoneNumberContactEn", data.phoneNumberContactEn);
+  formData.append("type", data.type);
+  formData.append("isVirtual", data.isVirtual);
+  formData.append("stages", JSON.stringify(data.stages));
+  formData.append("urlBannerFr", data.urlBannerFr);
+  formData.append("urlBannerNl", data.urlBannerNl);
+  formData.append("urlBannerEn", data.urlBannerEn);
+
+  if (data.eventId > 0) {
+    formData.append("id", data.eventId);
+  }
+
+  return axios.post(requestUrl, formData);
 };

@@ -24,17 +24,17 @@ export const Config = (props) => {
   } = props;
 
   const handleDateChange = (date) => {
-    const dateStr = date ? date.format("DD/MM/YYYY") : "";
+    const dateStr = date ? date.format("YYYY-MM-DD") : "";
 
     setData((prevData) => {
       const updates = { eventDate: dateStr };
 
       if (prevData.startTime && dateStr) {
-        updates.startDateTime = `${dateStr} ${prevData.startTime}`;
+        updates.startDateTime = `${dateStr}T${prevData.startTime}:00`;
       }
 
       if (prevData.endTime && dateStr) {
-        updates.endDateTime = `${dateStr} ${prevData.endTime}`;
+        updates.endDateTime = `${dateStr}T${prevData.endTime}:00`;
       }
 
       return { ...prevData, ...updates };
@@ -55,7 +55,7 @@ export const Config = (props) => {
       const updates = { startTime: timeStr };
 
       if (prevData.eventDate && timeStr) {
-        updates.startDateTime = `${prevData.eventDate} ${timeStr}`;
+        updates.startDateTime = `${prevData.eventDate}T${timeStr}:00`;
       }
 
       return { ...prevData, ...updates };
@@ -80,7 +80,7 @@ export const Config = (props) => {
       const updates = { endTime: timeStr };
 
       if (prevData.eventDate && timeStr) {
-        updates.endDateTime = `${prevData.eventDate} ${timeStr}`;
+        updates.endDateTime = `${prevData.eventDate}T${timeStr}:00`;
       }
 
       return { ...prevData, ...updates };
@@ -188,7 +188,7 @@ export const Config = (props) => {
               <div className={styles.config_inputWithIcon}>
                 <MomentDatePicker
                   value={
-                    data.eventDate ? moment(data.eventDate, "DD/MM/YYYY") : null
+                    data.eventDate ? moment(data.eventDate, "YYYY-MM-DD") : null
                   }
                   onChange={handleDateChange}
                   format="DD/MM/YYYY"
@@ -285,7 +285,9 @@ export const Config = (props) => {
                   ] || ""
                 }
                 onChange={handleChangeAddress}
-                className={styles.config_input}
+                className={`${styles.config_input} ${
+                  validationErrors.addressError ? styles.config_input_error : ""
+                }`}
               />
               <div className={styles.config_inputSeparator}></div>
               <IconLocation />
@@ -309,7 +311,11 @@ export const Config = (props) => {
                   value={data.maxPlaces || ""}
                   onChange={handleChangeMaxPlaces}
                   min="0"
-                  className={styles.config_input}
+                  className={`${styles.config_input} ${
+                    validationErrors.maxPlacesError
+                      ? styles.config_input_error
+                      : ""
+                  }`}
                 />
                 <div className={styles.config_inputSeparator}></div>
                 <span className={styles.config_inputLabel}>

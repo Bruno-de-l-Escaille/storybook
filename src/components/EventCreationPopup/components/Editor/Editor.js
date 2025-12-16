@@ -28,7 +28,11 @@ export const Editor = (props) => {
     if (file && file.type.startsWith("image/")) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setData((prevData) => ({ ...prevData, image: reader.result }));
+        setData((prevData) => ({
+          ...prevData,
+          image: reader.result,
+          imageFile: file,
+        }));
       };
       reader.readAsDataURL(file);
     }
@@ -51,7 +55,11 @@ export const Editor = (props) => {
     if (file && file.type.startsWith("image/")) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setData((prevData) => ({ ...prevData, image: reader.result }));
+        setData((prevData) => ({
+          ...prevData,
+          image: reader.result,
+          imageFile: file,
+        }));
       };
       reader.readAsDataURL(file);
     }
@@ -79,7 +87,10 @@ export const Editor = (props) => {
 
   const handleRemoveImage = (e) => {
     e.stopPropagation();
-    setData((prevData) => ({ ...prevData, image: null }));
+    setData((prevData) => ({
+      ...prevData,
+      imageFile: null,
+    }));
 
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -175,14 +186,9 @@ export const Editor = (props) => {
               validationErrors.titleError ? styles.editor_titleInput_error : ""
             }`}
           />
-          {/* <hr
-            className={`${styles.editor_divider} ${
-              validationErrors.titleError ? styles.editor_divider_error : ""
-            }`}
-          /> */}
           {validationErrors.titleError && (
             <span className={styles.editor_errorMessage}>
-              {I18N[language]["titleRequired"] || "Le titre est obligatoire"}
+              {I18N[language]["titleRequired"]}
             </span>
           )}
         </div>
@@ -200,7 +206,7 @@ export const Editor = (props) => {
             setOptions={{
               height: "200",
               buttonList: editorButtonList,
-              placeholder: I18N[language]["description"] || "Description ...",
+              placeholder: `${I18N[language]["description"]}...`,
             }}
           />
         </div>

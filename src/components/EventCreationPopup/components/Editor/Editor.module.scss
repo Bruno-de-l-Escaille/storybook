@@ -139,19 +139,16 @@
     }
 
     &_error {
-      color: #fc5d2b;
-
-      &::placeholder {
-        color: #fc5d2b;
-        opacity: 0.6;
-      }
+      border-bottom: 0.5px solid #fc5d2b;
     }
   }
 
-  &_errorText {
+  &_errorMessage {
+    display: block;
     color: #fc5d2b;
     font-size: 12px;
-    margin-top: -4px;
+    font-weight: 500;
+    margin-top: 4px;
   }
 
   &_descriptionEditor {
