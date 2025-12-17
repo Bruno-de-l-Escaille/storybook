@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./Config.module.scss";
 import { I18N } from "../../../../i18n";
 import IconCalendarV3 from "../../../Icons/IconCalendarV3";
@@ -11,6 +11,8 @@ import { StatusSelect } from "../StatusSelect";
 import { DatePicker } from "antd";
 import momentGenerateConfig from "rc-picker/lib/generate/moment";
 import moment from "moment";
+import { getTags } from "../../../../api";
+import { getApiUrl, isEmpty } from "../../../../utils";
 
 const MomentDatePicker = DatePicker.generatePicker(momentGenerateConfig);
 
@@ -21,7 +23,46 @@ export const Config = (props) => {
     setData,
     validationErrors,
     setValidationErrors,
+    env,
+    auth,
   } = props;
+
+  const [tags, setTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+  const inputRef = useRef(null);
+  const apiUrl = getApiUrl(env);
+
+  useEffect(() => {
+    getTags({ token: auth.token, language, customFilter: null, apiUrl }).then(
+      (resp) => {
+        setTags(resp.data.data || []);
+      }
+    );
+  }, []);
+
+  useEffect(() => {
+    if (!isEmpty(data.tag)) {
+      setSelectedTags(data.tag);
+    }
+  }, [data.tag, tags]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target) &&
+        inputRef.current &&
+        !inputRef.current.contains(e.target)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleDateChange = (date) => {
     const dateStr = date ? date.format("YYYY-MM-DD") : "";
@@ -132,9 +173,55 @@ export const Config = (props) => {
     setData((prevData) => ({ ...prevData, [labelField]: e.target.value }));
   };
 
-  const handleAddKeywords = (e) => {
-    setData((prevData) => ({ ...prevData, keywords: e.target.value }));
+  const handleTagInput = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+    setShowDropdown(value.trim().length > 0);
   };
+
+  const handleSelectTag = (tag) => {
+    if (!selectedTags.find((t) => t.id === tag.id)) {
+      const newSelected = [...selectedTags, tag];
+      setSelectedTags(newSelected);
+      setData((prev) => ({
+        ...prev,
+        tag: newSelected.map((t) => ({
+          id: t.id,
+          nameFr: t.nameFr,
+          nameNl: t.nameNl,
+          nameEn: t.nameEn,
+        })),
+      }));
+    }
+    setInputValue("");
+    setShowDropdown(false);
+  };
+
+  const handleRemoveTag = (tagId) => {
+    const newSelected = selectedTags.filter((t) => t.id !== tagId);
+    setSelectedTags(newSelected);
+    setData((prev) => ({
+      ...prev,
+      tag: newSelected.map((t) => ({
+        id: t.id,
+        nameFr: t.nameFr,
+        nameNl: t.nameNl,
+        nameEn: t.nameEn,
+      })),
+    }));
+  };
+
+  const getTagName = (tag) => {
+    const field = `name${language.charAt(0).toUpperCase() + language.slice(1)}`;
+    return tag[field] || tag.nameFr || tag.nameEn || tag.nameNl || "";
+  };
+
+  const filteredTags = tags.filter((tag) => {
+    if (!inputValue.trim()) return false;
+    if (selectedTags.find((t) => t.id === tag.id)) return false;
+    const tagName = getTagName(tag).toLowerCase();
+    return tagName.includes(inputValue.toLowerCase());
+  });
 
   const handleContactChange = (e) => {
     const contactField = `contact${
@@ -372,13 +459,55 @@ export const Config = (props) => {
               <label className={styles.config_label}>
                 {I18N[language]["keywords"]}
               </label>
-              <input
-                type="text"
-                placeholder={I18N[language]["addKeywords"]}
-                value={data.keywords || ""}
-                onChange={handleAddKeywords}
-                className={styles.config_input}
-              />
+              <div className={styles.config_tagContainer}>
+                <div className={styles.config_tagInputWrapper}>
+                  {selectedTags.map((tag) => (
+                    <span key={tag.id} className={styles.config_tagBubble}>
+                      {getTagName(tag)}
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveTag(tag.id)}
+                        className={styles.config_tagBubble_close}
+                      >
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                        >
+                          <path
+                            d="M9 3L3 9M3 3L9 9"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                      </button>
+                    </span>
+                  ))}
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    placeholder={I18N[language]["addKeywords"]}
+                    value={inputValue}
+                    onChange={handleTagInput}
+                    className={styles.config_tagInput}
+                  />
+                </div>
+                {showDropdown && filteredTags.length > 0 && (
+                  <div ref={dropdownRef} className={styles.config_tagDropdown}>
+                    {filteredTags.map((tag) => (
+                      <div
+                        key={tag.id}
+                        onClick={() => handleSelectTag(tag)}
+                        className={styles.config_tagDropdownItem}
+                      >
+                        {getTagName(tag)}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 

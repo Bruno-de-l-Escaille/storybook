@@ -49,7 +49,7 @@ export const EventCreationPopup = (props) => {
     labelFr: "",
     labelNl: "",
     labelEn: "",
-    keywords: "",
+    tag: [],
     contactFr: "",
     contactNl: "",
     contactEn: "",
@@ -191,6 +191,7 @@ export const EventCreationPopup = (props) => {
           labelFr: eventData.labelFr || "",
           labelNl: eventData.labelNl || "",
           labelEn: eventData.labelEn || "",
+          tag: eventData.tag || [],
           image:
             prepareS3ResourceUrl(
               s3FolderUrl,
@@ -447,6 +448,8 @@ export const EventCreationPopup = (props) => {
             validationErrors={validationErrors}
             setValidationErrors={setValidationErrors}
             setStep={setStep}
+            env={env}
+            auth={auth}
           />
         )}
         {step === 2 && (

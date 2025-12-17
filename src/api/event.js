@@ -42,6 +42,7 @@ export const getEvent = ({ apiUrl, token, eventId }) => {
     "phoneNumberContactFr",
     "phoneNumberContactNl",
     "phoneNumberContactEn",
+    "tag",
   ];
   const requestUrl = `${apiUrl}/event/event`;
 
@@ -262,6 +263,10 @@ export const saveEventLight = ({ apiUrl, token, data }) => {
 
   if (data.languages) {
     formData.append("languages", JSON.stringify(data.languages));
+  }
+
+  if (data.tag) {
+    formData.append("tag", JSON.stringify(data.tag));
   }
 
   return axios.post(requestUrl, formData);
