@@ -225,7 +225,6 @@ export const saveEventLight = ({ apiUrl, token, data }) => {
   formData.append("descriptionFr", data.descriptionFr);
   formData.append("descriptionNl", data.descriptionNl);
   formData.append("descriptionEn", data.descriptionEn);
-  formData.append("languages", JSON.stringify(data.languages));
   formData.append("client", data.client);
   formData.append("startDateTime", data.startDateTime);
   formData.append("endDateTime", data.endDateTime);
@@ -249,13 +248,20 @@ export const saveEventLight = ({ apiUrl, token, data }) => {
   formData.append("phoneNumberContactEn", data.phoneNumberContactEn);
   formData.append("type", data.type);
   formData.append("isVirtual", data.isVirtual);
-  formData.append("stages", JSON.stringify(data.stages));
   formData.append("urlBannerFr", data.urlBannerFr);
   formData.append("urlBannerNl", data.urlBannerNl);
   formData.append("urlBannerEn", data.urlBannerEn);
 
   if (data.eventId > 0) {
     formData.append("id", data.eventId);
+  }
+
+  if (data.stages) {
+    formData.append("stages", JSON.stringify(data.stages));
+  }
+
+  if (data.languages) {
+    formData.append("languages", JSON.stringify(data.languages));
   }
 
   return axios.post(requestUrl, formData);

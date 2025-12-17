@@ -14,7 +14,7 @@ import { Config } from "./components/Config";
 import { Guests } from "./components/Guests";
 import { Tickets } from "./components/Tickets";
 import IconArrowWhite from "../Icons/IconArrowWhite";
-import { getApiUrl, isEmpty } from "../../utils";
+import { getApiUrl, isEmpty, prepareS3ResourceUrl } from "../../utils";
 import IconArrowBlack from "../Icons/IconArrowBlack";
 import { getEvent, saveEventLight, uploadMedia } from "../../api";
 import { Toast, FlashMessage } from "../ToastContainer/ToastContainer";
@@ -116,6 +116,9 @@ export const EventCreationPopup = (props) => {
   const [isSaving, setIsSaving] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const apiUrl = getApiUrl(env);
+  const s3FolderUrl = `http://s3.tamtam.pro/${
+    env === "v2" ? "production" : env
+  }`;
 
   const tabs = [
     {
@@ -173,6 +176,7 @@ export const EventCreationPopup = (props) => {
           placeEn: eventData.placeEn || "",
           maxPlaces: eventData.maxNumber || "",
           status: eventData.status ? eventData.status.toString() : "2",
+          client: eventData.client,
           type: eventData.type || 7,
           isVirtual: eventData.isVirtual || 0,
           contactFr: eventData.contactFr || "",
@@ -184,6 +188,20 @@ export const EventCreationPopup = (props) => {
           phoneNumberContactFr: eventData.phoneNumberContactFr || "",
           phoneNumberContactNl: eventData.phoneNumberContactNl || "",
           phoneNumberContactEn: eventData.phoneNumberContactEn || "",
+          labelFr: eventData.labelFr || "",
+          labelNl: eventData.labelNl || "",
+          labelEn: eventData.labelEn || "",
+          image:
+            prepareS3ResourceUrl(
+              s3FolderUrl,
+              language === "fr" && !isEmpty(eventData.urlBannerFr)
+                ? eventData.urlBannerFr
+                : language === "nl" && !isEmpty(eventData.urlBannerNl)
+                ? eventData.urlBannerNl
+                : language === "en" && !isEmpty(eventData.urlBannerEn)
+                ? eventData.urlBannerEn
+                : ""
+            ) || "",
         });
       });
     }
@@ -268,14 +286,17 @@ export const EventCreationPopup = (props) => {
 
       saveEventLight({ apiUrl, token: auth.token, data })
         .then((resp) => {
-          const eventId = resp.data.data.id;
-          setData((prevData) => ({
-            ...prevData,
-            eventId: eventId,
-          }));
+          const savedEventId = data.eventId || resp.data.data.id;
 
-          if (data.image) {
-            return uploadImage(eventId).then(() => {
+          if (!data.eventId) {
+            setData((prevData) => ({
+              ...prevData,
+              eventId: savedEventId,
+            }));
+          }
+
+          if (data.imageFile) {
+            return uploadImage(savedEventId).then(() => {
               Toast.success(I18N[language]["eventSavedSuccessfully"]);
               setIsProcessing(false);
               setStep((prevStep) => prevStep + 1);
@@ -304,10 +325,13 @@ export const EventCreationPopup = (props) => {
       apiUrl,
       token: auth.token,
       data: data.imageFile,
-      filePath: `/eventsFolder/client${clientId}/event${eventId}/_model/html/img/`,
+      filePath: `/events-folder/client${clientId}/event${eventId}/_model/html/img`,
     })
       .then((resp) => {
-        const imagePath = "/" + resp.data.data.image_path;
+        const imagePath = ("/" + resp.data.data.image_path).replace(
+          "events-folder",
+          "eventsFolder"
+        );
         let urlBannerField = "";
 
         if (language === "fr") {
@@ -343,14 +367,17 @@ export const EventCreationPopup = (props) => {
 
     saveEventLight({ apiUrl, token: auth.token, data })
       .then((resp) => {
-        const eventId = resp.data.data.id;
-        setData((prevData) => ({
-          ...prevData,
-          eventId: eventId,
-        }));
+        const savedEventId = data.eventId || resp.data.data.id;
 
-        if (data.image) {
-          return uploadImage(eventId).then(() => {
+        if (!data.eventId) {
+          setData((prevData) => ({
+            ...prevData,
+            eventId: savedEventId,
+          }));
+        }
+
+        if (data.imageFile) {
+          return uploadImage(savedEventId).then(() => {
             Toast.success(I18N[language]["eventSavedSuccessfully"]);
             setIsSaving(false);
           });

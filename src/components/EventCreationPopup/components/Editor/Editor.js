@@ -87,9 +87,16 @@ export const Editor = (props) => {
 
   const handleRemoveImage = (e) => {
     e.stopPropagation();
+
+    const urlBannerField = `urlBanner${
+      language.charAt(0).toUpperCase() + language.slice(1)
+    }`;
+
     setData((prevData) => ({
       ...prevData,
+      image: "",
       imageFile: null,
+      [urlBannerField]: "",
     }));
 
     if (fileInputRef.current) {
