@@ -16,13 +16,14 @@ import { Tickets } from "./components/Tickets";
 import IconArrowWhite from "../Icons/IconArrowWhite";
 import { getApiUrl, isEmpty, prepareS3ResourceUrl } from "../../utils";
 import IconArrowBlack from "../Icons/IconArrowBlack";
-import { getEvent, saveEventLight, uploadMedia } from "../../api";
+import { getEvent, saveEventLight, uploadMedia, getTags } from "../../api";
 import { Toast, FlashMessage } from "../ToastContainer/ToastContainer";
 import { ClipLoader } from "react-spinners";
 
 export const EventCreationPopup = (props) => {
   const { isOpen, language, env, auth, clientId, eventId } = props;
   const [step, setStep] = useState(0);
+  const [tags, setTags] = useState([]);
   const [data, setData] = useState({
     eventId: eventId || 0,
     nameFr: "",
@@ -102,6 +103,7 @@ export const EventCreationPopup = (props) => {
       showMobileApps: "true",
       noInvoicing: "false",
     },
+    template: "unify",
   });
 
   const [validationErrors, setValidationErrors] = useState({
@@ -206,6 +208,14 @@ export const EventCreationPopup = (props) => {
         });
       });
     }
+  }, []);
+
+  useEffect(() => {
+    getTags({ token: auth.token, language, customFilter: null, apiUrl }).then(
+      (resp) => {
+        setTags(resp.data.data || []);
+      }
+    );
   }, []);
 
   const checkValidations = () => {
@@ -448,8 +458,7 @@ export const EventCreationPopup = (props) => {
             validationErrors={validationErrors}
             setValidationErrors={setValidationErrors}
             setStep={setStep}
-            env={env}
-            auth={auth}
+            tags={tags}
           />
         )}
         {step === 2 && (

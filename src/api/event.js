@@ -269,5 +269,9 @@ export const saveEventLight = ({ apiUrl, token, data }) => {
     formData.append("tag", JSON.stringify(data.tag));
   }
 
+  if (data.template) {
+    formData.append("template", data.template);
+  }
+
   return axios.post(requestUrl, formData);
 };
