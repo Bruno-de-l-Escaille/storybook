@@ -104,6 +104,8 @@ export const EventCreationPopup = (props) => {
       noInvoicing: "false",
     },
     template: "unify",
+    speakers: [],
+    slots: [],
   });
 
   const [validationErrors, setValidationErrors] = useState({
@@ -121,6 +123,37 @@ export const EventCreationPopup = (props) => {
   const s3FolderUrl = `http://s3.tamtam.pro/${
     env === "v2" ? "production" : env
   }`;
+
+  const processLightSlot = (eventData) => {
+    const languages = {
+      Fr: language === "fr" ? "1" : 0,
+      Nl: language === "nl" ? "1" : 0,
+      En: language === "en" ? "1" : 0,
+    };
+
+    const startDate = new Date(`${eventData.eventDate} ${eventData.startTime}`);
+    const endDate = new Date(`${eventData.eventDate} ${eventData.endTime}`);
+    const durationMinutes =
+      Math.round((Math.abs(endDate - startDate) / 60000) * 100) / 100;
+
+    const slot = {
+      nameFr: eventData.nameFr,
+      nameNl: eventData.nameNl,
+      nameEn: eventData.nameEn,
+      startDateTime: eventData.startDateTime,
+      endDateTime: eventData.endDateTime,
+      status: 2,
+      full: true,
+      placesNumber: eventData.maxPlaces,
+      languages: JSON.stringify(languages),
+      isPostPlayVideo: 0,
+      room: "",
+      activity: "",
+      duration: durationMinutes,
+    };
+
+    return slot;
+  };
 
   const tabs = [
     {
@@ -194,6 +227,7 @@ export const EventCreationPopup = (props) => {
           labelNl: eventData.labelNl || "",
           labelEn: eventData.labelEn || "",
           tag: eventData.tag || [],
+          slots: eventData.slots || [],
           image:
             prepareS3ResourceUrl(
               s3FolderUrl,
@@ -295,7 +329,13 @@ export const EventCreationPopup = (props) => {
     if (step === 1) {
       setIsProcessing(true);
 
-      saveEventLight({ apiUrl, token: auth.token, data })
+      const processedSlot = processLightSlot(data);
+      const dataToSave = {
+        ...data,
+        slots: [processedSlot],
+      };
+
+      saveEventLight({ apiUrl, token: auth.token, data: dataToSave })
         .then((resp) => {
           const savedEventId = data.eventId || resp.data.data.id;
 
@@ -303,6 +343,12 @@ export const EventCreationPopup = (props) => {
             setData((prevData) => ({
               ...prevData,
               eventId: savedEventId,
+              slots: [processedSlot],
+            }));
+          } else {
+            setData((prevData) => ({
+              ...prevData,
+              slots: [processedSlot],
             }));
           }
 
@@ -376,7 +422,13 @@ export const EventCreationPopup = (props) => {
 
     setIsSaving(true);
 
-    saveEventLight({ apiUrl, token: auth.token, data })
+    const processedSlot = processLightSlot(data);
+    const dataToSave = {
+      ...data,
+      slots: [processedSlot],
+    };
+
+    saveEventLight({ apiUrl, token: auth.token, data: dataToSave })
       .then((resp) => {
         const savedEventId = data.eventId || resp.data.data.id;
 
@@ -384,6 +436,12 @@ export const EventCreationPopup = (props) => {
           setData((prevData) => ({
             ...prevData,
             eventId: savedEventId,
+            slots: [processedSlot],
+          }));
+        } else {
+          setData((prevData) => ({
+            ...prevData,
+            slots: [processedSlot],
           }));
         }
 
@@ -459,6 +517,9 @@ export const EventCreationPopup = (props) => {
             setValidationErrors={setValidationErrors}
             setStep={setStep}
             tags={tags}
+            env={env}
+            auth={auth}
+            clientId={clientId}
           />
         )}
         {step === 2 && (

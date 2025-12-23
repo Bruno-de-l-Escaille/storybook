@@ -421,6 +421,7 @@ export const I18N = {
     eventSavedSuccessfully: "Event saved successfully",
     errorSavingEvent: "Error saving event",
     errorUploadingImage: "Error uploading image",
+    typeSpeakerName: "Type speaker name",
   },
   fr: {
     ARTCILES: "Articles",
@@ -854,6 +855,7 @@ export const I18N = {
     eventSavedSuccessfully: "Événement enregistré avec succès",
     errorSavingEvent: "Erreur lors de l'enregistrement de l'événement",
     errorUploadingImage: "Erreur lors du téléchargement de l'image",
+    typeSpeakerName: "Tapez le nom de l'orateur",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -1286,5 +1288,6 @@ export const I18N = {
     eventSavedSuccessfully: "Evenement succesvol opgeslagen",
     errorSavingEvent: "Fout bij het opslaan van evenement",
     errorUploadingImage: "Fout bij het uploaden van de afbeelding",
+    typeSpeakerName: "Typ de naam van de spreker",
   },
 };

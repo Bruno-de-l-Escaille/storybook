@@ -273,5 +273,13 @@ export const saveEventLight = ({ apiUrl, token, data }) => {
     formData.append("template", data.template);
   }
 
+  if (data.slots && Array.isArray(data.slots)) {
+    data.slots.forEach((slot, index) => {
+      Object.keys(slot).forEach((key) => {
+        formData.append(`slots[${index}][${key}]`, slot[key]);
+      });
+    });
+  }
+
   return axios.post(requestUrl, formData);
 };

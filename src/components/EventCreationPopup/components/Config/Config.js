@@ -11,7 +11,10 @@ import { StatusSelect } from "../StatusSelect";
 import { DatePicker } from "antd";
 import momentGenerateConfig from "rc-picker/lib/generate/moment";
 import moment from "moment";
-import { isEmpty } from "../../../../utils";
+import { getApiUrl, isEmpty } from "../../../../utils";
+import { searchSpeakers } from "../../../../api";
+import IconPlus from "../../../Icons/IconPlus";
+import IconCloseV2 from "../../../Icons/IconCloseV2";
 
 const MomentDatePicker = DatePicker.generatePicker(momentGenerateConfig);
 
@@ -23,12 +26,23 @@ export const Config = (props) => {
     validationErrors,
     setValidationErrors,
     tags,
+    env,
+    auth,
+    clientId,
   } = props;
   const [selectedTags, setSelectedTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
+
+  const [speakers, setSpeakers] = useState([]);
+  const [selectedSpeakers, setSelectedSpeakers] = useState([]);
+  const [speakerInputValue, setSpeakerInputValue] = useState("");
+  const [showSpeakerDropdown, setShowSpeakerDropdown] = useState(false);
+  const [showSpeakerInput, setShowSpeakerInput] = useState(false);
+  const speakerDropdownRef = useRef(null);
+  const speakerInputRef = useRef(null);
 
   useEffect(() => {
     if (!isEmpty(data.tag)) {
@@ -46,10 +60,41 @@ export const Config = (props) => {
       ) {
         setShowDropdown(false);
       }
+      if (
+        speakerDropdownRef.current &&
+        !speakerDropdownRef.current.contains(e.target) &&
+        speakerInputRef.current &&
+        !speakerInputRef.current.contains(e.target)
+      ) {
+        setShowSpeakerDropdown(false);
+      }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    if (speakerInputValue.trim().length > 0 && auth?.token) {
+      const apiUrl = getApiUrl(env);
+      searchSpeakers({
+        apiUrl,
+        token: auth.token,
+        searchValue: speakerInputValue,
+        organizationId: clientId,
+      })
+        .then((resp) => {
+          setSpeakers(resp.data.data?.Authors || []);
+          setShowSpeakerDropdown(true);
+        })
+        .catch((err) => {
+          setSpeakers([]);
+          setShowSpeakerDropdown(false);
+        });
+    } else {
+      setSpeakers([]);
+      setShowSpeakerDropdown(false);
+    }
+  }, [speakerInputValue, auth, env, clientId]);
 
   const handleDateChange = (date) => {
     const dateStr = date ? date.format("YYYY-MM-DD") : "";
@@ -231,6 +276,51 @@ export const Config = (props) => {
     setData((prevData) => ({ ...prevData, [phoneField]: e.target.value }));
   };
 
+  const handleSpeakerInput = (e) => {
+    const value = e.target.value;
+    setSpeakerInputValue(value);
+  };
+
+  const handleSelectSpeaker = (speaker) => {
+    if (!selectedSpeakers.find((s) => s.id === speaker.id)) {
+      const newSelected = [...selectedSpeakers, speaker];
+      setSelectedSpeakers(newSelected);
+      setData((prev) => ({
+        ...prev,
+        speakers: newSelected.map((s) => ({
+          id: s.id,
+          name: `${s.user?.firstName || ""} ${s.user?.lastName || ""}`.trim(),
+          avatar: s.user?.avatar,
+          role:
+            s[`headline${language.charAt(0).toUpperCase() + language.slice(1)}`]
+              ?.title,
+        })),
+      }));
+    }
+    setSpeakerInputValue("");
+    setShowSpeakerDropdown(false);
+  };
+
+  const handleRemoveSpeaker = (speakerId) => {
+    const newSelected = selectedSpeakers.filter((s) => s.id !== speakerId);
+    setSelectedSpeakers(newSelected);
+    setData((prev) => ({
+      ...prev,
+      speakers: newSelected.map((s) => ({
+        id: s.id,
+        name: `${s.user?.firstName || ""} ${s.user?.lastName || ""}`.trim(),
+        avatar: s.user?.avatar,
+        role:
+          s[`headline${language.charAt(0).toUpperCase() + language.slice(1)}`]
+            ?.title,
+      })),
+    }));
+  };
+
+  const handleShowSpeakerInput = () => {
+    setShowSpeakerInput(!showSpeakerInput);
+  };
+
   return (
     <div className={styles.config}>
       <div className={styles.config_content}>
@@ -239,18 +329,125 @@ export const Config = (props) => {
             {I18N[language]["speakers"]}
           </label>
           <div className={styles.config_speakers}>
-            <div className={styles.config_speakers_empty}>
-              <button className={styles.config_speakers_addButton}>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path
-                    d="M10 4V16M4 10H16"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
+            <div className={styles.config_speakerList}>
+              {selectedSpeakers.map((speaker) => (
+                <div key={speaker.id} className={styles.config_speakerCard}>
+                  <img
+                    src={speaker.user?.avatar || "/default-avatar.png"}
+                    alt={`${speaker.user?.firstName || ""} ${
+                      speaker.user?.lastName || ""
+                    }`}
+                    className={styles.config_speakerCard_avatar}
                   />
-                </svg>
-              </button>
+                  <div className={styles.config_speakerCard_name}>
+                    {speaker.user?.firstName} {speaker.user?.lastName}
+                  </div>
+                  <hr className={styles.config_speakerCard_separator} />
+                  {speaker?.[
+                    `headline${
+                      language.charAt(0).toUpperCase() + language.slice(1)
+                    }`
+                  ]?.title && (
+                    <div className={styles.config_speakerCard_role}>
+                      {
+                        speaker[
+                          `headline${
+                            language.charAt(0).toUpperCase() + language.slice(1)
+                          }`
+                        ]?.title
+                      }
+                    </div>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveSpeaker(speaker.id)}
+                    className={styles.config_speakerCard_remove}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path
+                        d="M6 6L14 14M6 14L14 6"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              ))}
             </div>
+            <div className={styles.config_speakerAddContainer}>
+              <div
+                className={styles.config_speakersAdd}
+                onClick={handleShowSpeakerInput}
+              >
+                {!showSpeakerInput ? <IconPlus /> : <IconCloseV2 />}
+              </div>
+            </div>
+            {showSpeakerInput && (
+              <div className={styles.config_speakerSearch}>
+                <input
+                  ref={speakerInputRef}
+                  type="text"
+                  placeholder={I18N[language]["typeSpeakerName"]}
+                  value={speakerInputValue}
+                  onChange={handleSpeakerInput}
+                  className={styles.config_input}
+                />
+                {showSpeakerDropdown && speakers.length > 0 && (
+                  <div
+                    ref={speakerDropdownRef}
+                    className={styles.config_speakerDropdown}
+                  >
+                    <div className={styles.config_speakerDropdown_header}>
+                      {I18N[language]["speakers"]}
+                    </div>
+                    {speakers.map((speaker) => (
+                      <div
+                        key={speaker.id}
+                        onClick={() => handleSelectSpeaker(speaker)}
+                        className={styles.config_speakerDropdownItem}
+                      >
+                        <img
+                          src={speaker.user?.avatar || "/default-avatar.png"}
+                          alt={
+                            speaker.user?.firstName +
+                            " " +
+                            speaker.user?.lastName
+                          }
+                          className={styles.config_speakerDropdownItem_avatar}
+                        />
+                        <div className={styles.config_speakerDropdownItem_info}>
+                          <div
+                            className={styles.config_speakerDropdownItem_name}
+                          >
+                            {speaker.user?.firstName} {speaker.user?.lastName}
+                          </div>
+                          {speaker[
+                            `headline${
+                              language.charAt(0).toUpperCase() +
+                              language.slice(1)
+                            }`
+                          ]?.title && (
+                            <div
+                              className={styles.config_speakerDropdownItem_role}
+                            >
+                              {
+                                speaker[
+                                  `headline${
+                                    language.charAt(0).toUpperCase() +
+                                    language.slice(1)
+                                  }`
+                                ]?.title
+                              }
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
         <div className={styles.config_section_right}>
