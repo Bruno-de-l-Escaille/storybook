@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import styles from "./EventSlide.module.scss";
 import Slide from "../Common/Slide/Slide";
 import { getEventSideConfig } from "./services";
-import { getByLanguage, prepareS3ResourceUrl } from "../../../utils/common";
+import {
+  getByLanguage,
+  isEmpty,
+  prepareS3ResourceUrl,
+} from "../../../utils/common";
 import {
   filterEventSpeakers,
   formatDateFromTo,
@@ -10,6 +14,7 @@ import {
   getOfffcourseUrl,
   getRegisterButtonTitle,
   isEventFull,
+  isEventLight,
   isEventLive,
   isEventPast,
   isEventReplayable,
@@ -22,6 +27,7 @@ import Price from "../Common/Price/Price";
 import ActionButton from "../Common/ActionButton/ActionButton";
 import IconReplay from "../../../components/Icons/IconReplay";
 import IconCalendar from "../../../components/Icons/IconCalendar2";
+import Presential2Icon from "../../../components/Icons/IconPresential2";
 import { Fetching } from "../Common/Slide/Fetching";
 import { SpeakersSlide } from "../Common/SpeakersSlide/SpeakersSlide";
 import classNames from "classnames";
@@ -46,6 +52,7 @@ export const EventSlide = ({
   token,
   host,
   isCertificateNotIncluded = false,
+  handleRegistration,
 }) => {
   const [hovered, setHovered] = useState(false);
   const [showAddTags, setShowAddTags] = useState(false);
@@ -68,7 +75,9 @@ export const EventSlide = ({
   const isFull = isEventFull(event);
   const isFree = isFreeEvent(event);
   const isLive = isEventLive(event);
+  const isLight = isEventLight(event);
 
+  const place = getByLanguage(event.eventPlace, "place", language);
   const showProgram = isEventStageOpen(event, "showProgram");
 
   const { label, secondaryBanner } = getEventSideConfig(event, language);
@@ -141,17 +150,29 @@ export const EventSlide = ({
       : I18N[language].hybrid;
 
     return (
-      <li>
-        <div>
-          <IconCalendar className={classNames(styles.icon, "m-r-xs")} />
-        </div>
-        <div>
-          <strong>
-            {modeLabel} {" : "}
-          </strong>
-          {formatDateFromTo(startDateTime, endDateTime, language)}
-        </div>
-      </li>
+      <>
+        <li>
+          <div>
+            <IconCalendar className={classNames(styles.icon, "m-r-xs")} />
+          </div>
+          <div>
+            <strong>
+              {modeLabel} {" : "}
+            </strong>
+            {formatDateFromTo(startDateTime, endDateTime, language)}
+          </div>
+        </li>
+        {Boolean(!isEmpty(place) && !isVirtual && isLight) && (
+          <li>
+            <div>
+              <Presential2Icon className={classNames(styles.icon, "m-r-xs")} />
+            </div>
+            <div>
+              <span>{place}</span>
+            </div>
+          </li>
+        )}
+      </>
     );
   };
 
@@ -234,6 +255,8 @@ export const EventSlide = ({
                 link={eventReceptionUrl}
                 isSmall={isSmall}
                 Link={Link}
+                isLightRegistration={isFree && isLight && !isUserRegistered}
+                handleRegistration={handleRegistration}
                 {...(isSoldOut || isUserRegistered
                   ? {
                       name: !isSmall
@@ -332,6 +355,8 @@ export const EventSlide = ({
                 link={eventReceptionUrl}
                 isSmall={isSmall}
                 Link={Link}
+                isLightRegistration={isFree && isLight && !isUserRegistered}
+                handleRegistration={handleRegistration}
                 {...(isSoldOut || isUserRegistered
                   ? {
                       name: !isSmall
