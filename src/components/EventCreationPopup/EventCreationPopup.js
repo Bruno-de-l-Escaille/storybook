@@ -16,7 +16,14 @@ import { Tickets } from "./components/Tickets";
 import IconArrowWhite from "../Icons/IconArrowWhite";
 import { getApiUrl, isEmpty, prepareS3ResourceUrl } from "../../utils";
 import IconArrowBlack from "../Icons/IconArrowBlack";
-import { getEvent, saveEventLight, uploadMedia, getTags } from "../../api";
+import {
+  getEvent,
+  saveEventLight,
+  uploadMedia,
+  getTags,
+  saveEventAuthor,
+  deleteSpeaker,
+} from "../../api";
 import { Toast, FlashMessage } from "../ToastContainer/ToastContainer";
 import { ClipLoader } from "react-spinners";
 
@@ -24,6 +31,7 @@ export const EventCreationPopup = (props) => {
   const { isOpen, language, env, auth, clientId, eventId } = props;
   const [step, setStep] = useState(0);
   const [tags, setTags] = useState([]);
+  const [speakersToDelete, setSpeakersToDelete] = useState([]);
   const [data, setData] = useState({
     eventId: eventId || 0,
     nameFr: "",
@@ -104,10 +112,9 @@ export const EventCreationPopup = (props) => {
       noInvoicing: "false",
     },
     template: "unify",
-    speakers: [],
     slots: [],
   });
-
+  const [selectedSpeakers, setSelectedSpeakers] = useState([]);
   const [validationErrors, setValidationErrors] = useState({
     titleError: false,
     dateError: false,
@@ -227,7 +234,7 @@ export const EventCreationPopup = (props) => {
           labelNl: eventData.labelNl || "",
           labelEn: eventData.labelEn || "",
           tag: eventData.tag || [],
-          slots: eventData.slots || [],
+          slotId: eventData.slotIds?.[0] || 0,
           image:
             prepareS3ResourceUrl(
               s3FolderUrl,
@@ -240,6 +247,41 @@ export const EventCreationPopup = (props) => {
                 : ""
             ) || "",
         });
+        const retrievedSpeakers =
+          eventData["speakers-abstract"].speakers.map((speaker) => ({
+            ...speaker,
+            isExisting: true,
+          })) || [];
+
+        if (retrievedSpeakers.length > 0) {
+          const mappedSpeakers = retrievedSpeakers.map((speaker) => {
+            return {
+              id: Number(speaker.id),
+              isExisting: true,
+              user: {
+                avatar: speaker.pictureUrl || "/default-avatar.png",
+                firstName: speaker.firstName,
+                lastName: speaker.lastName,
+              },
+              headlineFr: speaker.headlineFr
+                ? typeof speaker.headlineFr === "string"
+                  ? JSON.parse(speaker.headlineFr)
+                  : speaker.headlineFr
+                : { title: "" },
+              headlineNl: speaker.headlineNl
+                ? typeof speaker.headlineNl === "string"
+                  ? JSON.parse(speaker.headlineNl)
+                  : speaker.headlineNl
+                : { title: "" },
+              headlineEn: speaker.headlineEn
+                ? typeof speaker.headlineEn === "string"
+                  ? JSON.parse(speaker.headlineEn)
+                  : speaker.headlineEn
+                : { title: "" },
+            };
+          });
+          setSelectedSpeakers(mappedSpeakers);
+        }
       });
     }
   }, []);
@@ -338,6 +380,7 @@ export const EventCreationPopup = (props) => {
       saveEventLight({ apiUrl, token: auth.token, data: dataToSave })
         .then((resp) => {
           const savedEventId = data.eventId || resp.data.data.id;
+          const savedSlotId = data.slotId || resp.data.data.slots?.[0]?.data.id;
 
           if (!data.eventId) {
             setData((prevData) => ({
@@ -352,8 +395,18 @@ export const EventCreationPopup = (props) => {
             }));
           }
 
+          const promises = [];
+
           if (data.imageFile) {
-            return uploadImage(savedEventId).then(() => {
+            promises.push(uploadImage(savedEventId));
+          }
+
+          if (savedSlotId && selectedSpeakers && selectedSpeakers.length > 0) {
+            promises.push(saveSpeakersToSlot(savedEventId, savedSlotId));
+          }
+
+          if (promises.length > 0) {
+            return Promise.all(promises).then(() => {
               Toast.success(I18N[language]["eventSavedSuccessfully"]);
               setIsProcessing(false);
               setStep((prevStep) => prevStep + 1);
@@ -404,15 +457,91 @@ export const EventCreationPopup = (props) => {
           [urlBannerField]: imagePath,
         }));
 
-        return saveEventLight({
-          apiUrl,
-          token: auth.token,
-          data: { ...data, eventId, [urlBannerField]: imagePath },
-        });
+        return { urlBannerField, imagePath };
       })
       .catch((e) => {
         Toast.error(I18N[language]["errorUploadingImage"]);
         throw e;
+      });
+  };
+
+  const saveSpeakersToSlot = (eventId) => {
+    if (!selectedSpeakers || selectedSpeakers.length === 0) {
+      return Promise.resolve();
+    }
+    const newSpeakers = selectedSpeakers.filter(
+      (speaker) =>
+        !speaker.isExisting &&
+        !speakersToDelete.some((s) => s.id === speaker.id)
+    );
+    if (newSpeakers.length === 0) {
+      return Promise.resolve();
+    }
+
+    const eventAuthorPromises = newSpeakers.map((speaker) => {
+      const eventAuthorData = {
+        author: speaker.id,
+        event: eventId,
+        priority: 0,
+        isValid: 1,
+        headLineFr: speaker.headLineFr || "",
+        headLineNl: speaker.headLineNl || "",
+        headLineEn: speaker.headLineEn || "",
+      };
+
+      return saveEventAuthor({
+        apiUrl,
+        token: auth.token,
+        data: eventAuthorData,
+      }).then((resp) => ({
+        eventAuthorId: resp.data.data.id,
+        authorId: speaker.id,
+      }));
+    });
+
+    return Promise.all(eventAuthorPromises)
+      .then((eventAuthors) => {
+        const speakers = eventAuthors.map((eventAuthor) => {
+          return {
+            orateur: {
+              id: eventAuthor.eventAuthorId,
+              author: eventAuthor.authorId,
+            },
+            type: 1,
+            priority: 0,
+          };
+        });
+
+        return { speakers };
+      })
+      .catch((e) => {
+        Toast.error(I18N[language]["errorSavingSpeakers"]);
+        throw e;
+      });
+  };
+
+  const deleteSpeakersMarkedForDeletion = (eventId) => {
+    console.log("AAAA deleteSpeakersMarkedForDeletion", speakersToDelete);
+    if (speakersToDelete.length === 0) {
+      return Promise.resolve();
+    }
+
+    const deletePromises = speakersToDelete.map((speaker) => {
+      return deleteSpeaker({
+        apiUrl,
+        token: auth.token,
+        eventId: eventId,
+        authorId: speaker.id,
+      });
+    });
+
+    return Promise.all(deletePromises)
+      .then(() => {
+        setSpeakersToDelete([]);
+      })
+      .catch((error) => {
+        Toast.error(I18N[language]["errorDeletingSpeakers"]);
+        throw error;
       });
   };
 
@@ -431,31 +560,79 @@ export const EventCreationPopup = (props) => {
     saveEventLight({ apiUrl, token: auth.token, data: dataToSave })
       .then((resp) => {
         const savedEventId = data.eventId || resp.data.data.id;
+        const savedSlotId = data.slotId || resp.data.data.slots?.[0]?.data.id;
 
-        if (!data.eventId) {
-          setData((prevData) => ({
-            ...prevData,
+        setData((prevData) => ({
+          ...prevData,
+          eventId: savedEventId,
+          slotId: savedSlotId,
+        }));
+
+        const promises = [];
+        if (data.imageFile) {
+          promises.push(uploadImage(savedEventId));
+        }
+        if (savedSlotId && selectedSpeakers && selectedSpeakers.length > 0) {
+          promises.push(saveSpeakersToSlot(savedEventId, savedSlotId));
+        }
+        if (promises.length > 0) {
+          return Promise.all(promises).then((results) => ({
+            results,
+            savedEventId,
+          }));
+        }
+        return Promise.resolve({ results: [], savedEventId });
+      })
+      .then(({ results, savedEventId }) => {
+        const hasNewImage = results.some((r) => r && r.urlBannerField);
+        const hasNewSpeakers = results.some((r) => r && r.speakers);
+
+        if (hasNewSpeakers) {
+          setSelectedSpeakers((prevSpeakers) =>
+            prevSpeakers.map((speaker) => ({
+              ...speaker,
+              isExisting: true,
+            }))
+          );
+        }
+
+        if (hasNewImage || hasNewSpeakers) {
+          const processedSlot = processLightSlot(data);
+          const finalDataToSave = {
+            ...data,
             eventId: savedEventId,
             slots: [processedSlot],
-          }));
-        } else {
-          setData((prevData) => ({
-            ...prevData,
-            slots: [processedSlot],
-          }));
-        }
+          };
 
-        if (data.imageFile) {
-          return uploadImage(savedEventId).then(() => {
-            Toast.success(I18N[language]["eventSavedSuccessfully"]);
-            setIsSaving(false);
+          const imageResult = results.find((r) => r && r.urlBannerField);
+          if (imageResult) {
+            finalDataToSave[imageResult.urlBannerField] = imageResult.imagePath;
+          }
+
+          const speakersResult = results.find((r) => r && r.speakers);
+          if (speakersResult) {
+            finalDataToSave.slots[0].speakers = speakersResult.speakers;
+          }
+
+          return saveEventLight({
+            apiUrl,
+            token: auth.token,
+            data: finalDataToSave,
           });
-        } else {
-          Toast.success(I18N[language]["eventSavedSuccessfully"]);
-          setIsSaving(false);
         }
+        return Promise.resolve();
+      })
+      .then((results) => {
+        console.log("AAAAHHHH", results);
+        const eventId = results.data.data.id;
+        return deleteSpeakersMarkedForDeletion(eventId);
+      })
+      .then(() => {
+        Toast.success(I18N[language]["eventSavedSuccessfully"]);
+        setIsSaving(false);
       })
       .catch((e) => {
+        console.error("Save error:", e);
         Toast.error(
           e.response?.data?.message || I18N[language]["errorSavingEvent"]
         );
@@ -520,6 +697,9 @@ export const EventCreationPopup = (props) => {
             env={env}
             auth={auth}
             clientId={clientId}
+            selectedSpeakers={selectedSpeakers}
+            setSelectedSpeakers={setSelectedSpeakers}
+            setSpeakersToDelete={setSpeakersToDelete}
           />
         )}
         {step === 2 && (

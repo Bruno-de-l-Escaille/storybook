@@ -43,6 +43,7 @@ export const getEvent = ({ apiUrl, token, eventId }) => {
     "phoneNumberContactNl",
     "phoneNumberContactEn",
     "tag",
+    "slotIds",
   ];
   const requestUrl = `${apiUrl}/event/event`;
 
@@ -252,34 +253,47 @@ export const saveEventLight = ({ apiUrl, token, data }) => {
   formData.append("urlBannerFr", data.urlBannerFr);
   formData.append("urlBannerNl", data.urlBannerNl);
   formData.append("urlBannerEn", data.urlBannerEn);
+  formData.append("stages", JSON.stringify(data.stages));
+  formData.append("languages", JSON.stringify(data.languages));
+  formData.append("template", data.template);
+  formData.append("tag", JSON.stringify(data.tag));
 
   if (data.eventId > 0) {
     formData.append("id", data.eventId);
   }
 
-  if (data.stages) {
-    formData.append("stages", JSON.stringify(data.stages));
-  }
-
-  if (data.languages) {
-    formData.append("languages", JSON.stringify(data.languages));
-  }
-
-  if (data.tag) {
-    formData.append("tag", JSON.stringify(data.tag));
-  }
-
-  if (data.template) {
-    formData.append("template", data.template);
-  }
-
   if (data.slots && Array.isArray(data.slots)) {
     data.slots.forEach((slot, index) => {
       Object.keys(slot).forEach((key) => {
-        formData.append(`slots[${index}][${key}]`, slot[key]);
+        const value =
+          typeof slot[key] === "object" && slot[key] !== null
+            ? JSON.stringify(slot[key])
+            : slot[key];
+
+        formData.append(`slots[${index}][${key}]`, value);
       });
     });
   }
 
+  return axios.post(requestUrl, formData);
+};
+
+export const saveEventAuthor = ({ apiUrl, token, data }) => {
+  const requestUrl = `${apiUrl}/event/event-author`;
+  var formData = new FormData();
+  formData.append("access_token", token);
+  formData.append("event", data.event);
+  formData.append("author", data.author);
+  formData.append("priority", data.priority);
+  formData.append("isValid", data.isValid);
+
+  return axios.post(requestUrl, formData);
+};
+
+export const deleteSpeaker = ({ apiUrl, token, eventId, authorId }) => {
+  const requestUrl = `${apiUrl}/event/speaker/delete-author/${eventId}/${authorId}`;
+  var formData = new FormData();
+  formData.append("access_token", token);
+  console.log("AAAA delete", eventId, authorId);
   return axios.post(requestUrl, formData);
 };

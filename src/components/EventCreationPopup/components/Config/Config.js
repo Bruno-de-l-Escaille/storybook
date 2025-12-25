@@ -29,6 +29,9 @@ export const Config = (props) => {
     env,
     auth,
     clientId,
+    setSpeakersToDelete,
+    selectedSpeakers,
+    setSelectedSpeakers,
   } = props;
   const [selectedTags, setSelectedTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -37,12 +40,12 @@ export const Config = (props) => {
   const inputRef = useRef(null);
 
   const [speakers, setSpeakers] = useState([]);
-  const [selectedSpeakers, setSelectedSpeakers] = useState([]);
   const [speakerInputValue, setSpeakerInputValue] = useState("");
   const [showSpeakerDropdown, setShowSpeakerDropdown] = useState(false);
   const [showSpeakerInput, setShowSpeakerInput] = useState(false);
   const speakerDropdownRef = useRef(null);
   const speakerInputRef = useRef(null);
+  const apiUrl = getApiUrl(env);
 
   useEffect(() => {
     if (!isEmpty(data.tag)) {
@@ -74,8 +77,7 @@ export const Config = (props) => {
   }, []);
 
   useEffect(() => {
-    if (speakerInputValue.trim().length > 0 && auth?.token) {
-      const apiUrl = getApiUrl(env);
+    if (speakerInputValue.trim().length > 0) {
       searchSpeakers({
         apiUrl,
         token: auth.token,
@@ -283,38 +285,23 @@ export const Config = (props) => {
 
   const handleSelectSpeaker = (speaker) => {
     if (!selectedSpeakers.find((s) => s.id === speaker.id)) {
-      const newSelected = [...selectedSpeakers, speaker];
+      const newSelected = [
+        ...selectedSpeakers,
+        { ...speaker, isExisting: false },
+      ];
       setSelectedSpeakers(newSelected);
-      setData((prev) => ({
-        ...prev,
-        speakers: newSelected.map((s) => ({
-          id: s.id,
-          name: `${s.user?.firstName || ""} ${s.user?.lastName || ""}`.trim(),
-          avatar: s.user?.avatar,
-          role:
-            s[`headline${language.charAt(0).toUpperCase() + language.slice(1)}`]
-              ?.title,
-        })),
-      }));
     }
     setSpeakerInputValue("");
     setShowSpeakerDropdown(false);
   };
 
   const handleRemoveSpeaker = (speakerId) => {
+    const speakerToRemove = selectedSpeakers.find((s) => s.id === speakerId);
+    if (speakerToRemove?.isExisting) {
+      setSpeakersToDelete((prev) => [...prev, speakerToRemove]);
+    }
     const newSelected = selectedSpeakers.filter((s) => s.id !== speakerId);
     setSelectedSpeakers(newSelected);
-    setData((prev) => ({
-      ...prev,
-      speakers: newSelected.map((s) => ({
-        id: s.id,
-        name: `${s.user?.firstName || ""} ${s.user?.lastName || ""}`.trim(),
-        avatar: s.user?.avatar,
-        role:
-          s[`headline${language.charAt(0).toUpperCase() + language.slice(1)}`]
-            ?.title,
-      })),
-    }));
   };
 
   const handleShowSpeakerInput = () => {

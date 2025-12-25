@@ -387,6 +387,8 @@ export const I18N = {
     fromMedia: "From media",
     titleRequired: "Title is required",
     speakers: "Speaker(s)",
+    errorSavingSpeakers: "Error saving speakers",
+    errorDeletingSpeakers: "Error deleting speakers",
     date: "Date",
     eventDay: "Event day",
     hourStart: "Hour start",
@@ -856,6 +858,8 @@ export const I18N = {
     errorSavingEvent: "Erreur lors de l'enregistrement de l'événement",
     errorUploadingImage: "Erreur lors du téléchargement de l'image",
     typeSpeakerName: "Tapez le nom de l'orateur",
+    errorSavingSpeakers: "Erreur lors de l'enregistrement des orateurs",
+    errorDeletingSpeakers: "Erreur lors de la suppression des orateurs",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -1289,5 +1293,7 @@ export const I18N = {
     errorSavingEvent: "Fout bij het opslaan van evenement",
     errorUploadingImage: "Fout bij het uploaden van de afbeelding",
     typeSpeakerName: "Typ de naam van de spreker",
+    errorSavingSpeakers: "Fout bij het opslaan van sprekers",
+    errorDeletingSpeakers: "Fout bij het verwijderen van sprekers",
   },
 };
