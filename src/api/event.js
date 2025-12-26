@@ -253,10 +253,19 @@ export const saveEventLight = ({ apiUrl, token, data }) => {
   formData.append("urlBannerFr", data.urlBannerFr);
   formData.append("urlBannerNl", data.urlBannerNl);
   formData.append("urlBannerEn", data.urlBannerEn);
-  formData.append("stages", JSON.stringify(data.stages));
-  formData.append("languages", JSON.stringify(data.languages));
-  formData.append("template", data.template);
   formData.append("tag", JSON.stringify(data.tag));
+
+  if (data.stages) {
+    formData.append("stages", JSON.stringify(data.stages));
+  }
+
+  if (data.languages) {
+    formData.append("languages", JSON.stringify(data.languages));
+  }
+
+  if (data.template) {
+    formData.append("template", data.template);
+  }
 
   if (data.eventId > 0) {
     formData.append("id", data.eventId);

@@ -125,7 +125,6 @@ export const EventCreationPopup = (props) => {
     maxPlacesError: false,
   });
   const [isSaving, setIsSaving] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
   const apiUrl = getApiUrl(env);
   const s3FolderUrl = `http://s3.tamtam.pro/${
     env === "v2" ? "production" : env
@@ -364,72 +363,6 @@ export const EventCreationPopup = (props) => {
     return true;
   };
 
-  const handleContinue = () => {
-    const validated = checkValidations();
-    if (!validated) return;
-
-    if (step === 1) {
-      setIsProcessing(true);
-
-      const processedSlot = processLightSlot(data);
-      const dataToSave = {
-        ...data,
-        slots: [processedSlot],
-      };
-
-      saveEventLight({ apiUrl, token: auth.token, data: dataToSave })
-        .then((resp) => {
-          const savedEventId = data.eventId || resp.data.data.id;
-          const savedSlotId = data.slotId || resp.data.data.slots?.[0]?.data.id;
-
-          if (!data.eventId) {
-            setData((prevData) => ({
-              ...prevData,
-              eventId: savedEventId,
-              slots: [processedSlot],
-            }));
-          } else {
-            setData((prevData) => ({
-              ...prevData,
-              slots: [processedSlot],
-            }));
-          }
-
-          const promises = [];
-
-          if (data.imageFile) {
-            promises.push(uploadImage(savedEventId));
-          }
-
-          if (savedSlotId && selectedSpeakers && selectedSpeakers.length > 0) {
-            promises.push(saveSpeakersToSlot(savedEventId, savedSlotId));
-          }
-
-          if (promises.length > 0) {
-            return Promise.all(promises).then(() => {
-              Toast.success(I18N[language]["eventSavedSuccessfully"]);
-              setIsProcessing(false);
-              setStep((prevStep) => prevStep + 1);
-            });
-          } else {
-            Toast.success(I18N[language]["eventSavedSuccessfully"]);
-            setIsProcessing(false);
-            setStep((prevStep) => prevStep + 1);
-          }
-        })
-        .catch((e) => {
-          Toast.error(
-            e.response?.data?.message || I18N[language]["errorSavingEvent"]
-          );
-          setIsProcessing(false);
-        });
-    }
-
-    if (!isProcessing) {
-      setStep((prevStep) => prevStep + 1);
-    }
-  };
-
   const uploadImage = (eventId) => {
     return uploadMedia({
       apiUrl,
@@ -521,7 +454,6 @@ export const EventCreationPopup = (props) => {
   };
 
   const deleteSpeakersMarkedForDeletion = (eventId) => {
-    console.log("AAAA deleteSpeakersMarkedForDeletion", speakersToDelete);
     if (speakersToDelete.length === 0) {
       return Promise.resolve();
     }
@@ -547,7 +479,7 @@ export const EventCreationPopup = (props) => {
 
   const handleSave = () => {
     const validated = checkValidations();
-    if (!validated) return;
+    if (!validated) return Promise.reject("Validation failed");
 
     setIsSaving(true);
 
@@ -557,7 +489,7 @@ export const EventCreationPopup = (props) => {
       slots: [processedSlot],
     };
 
-    saveEventLight({ apiUrl, token: auth.token, data: dataToSave })
+    return saveEventLight({ apiUrl, token: auth.token, data: dataToSave })
       .then((resp) => {
         const savedEventId = data.eventId || resp.data.data.id;
         const savedSlotId = data.slotId || resp.data.data.slots?.[0]?.data.id;
@@ -620,11 +552,10 @@ export const EventCreationPopup = (props) => {
             data: finalDataToSave,
           });
         }
-        return Promise.resolve();
+        return Promise.resolve({ results: [], savedEventId });
       })
-      .then((results) => {
-        console.log("AAAAHHHH", results);
-        const eventId = results.data.data.id;
+      .then(({ results, savedEventId }) => {
+        const eventId = savedEventId;
         return deleteSpeakersMarkedForDeletion(eventId);
       })
       .then(() => {
@@ -640,12 +571,28 @@ export const EventCreationPopup = (props) => {
       });
   };
 
+  const handleContinue = () => {
+    if (step > 0) {
+      handleSave()
+        .then(() => {
+          setStep((prevStep) => prevStep + 1);
+        })
+        .catch(() => {
+          // Save failed, don't advance
+        });
+    } else {
+      setStep((prevStep) => prevStep + 1);
+    }
+  };
+
   return (
     <Modal isOpen={isOpen} className={styles.modal}>
       <FlashMessage />
       <div className={styles.header}>
         <span className={styles.header_title}>
-          {I18N[language]["createEvent"]}
+          {eventId > 0 || data.eventId > 0
+            ? I18N[language]["manageEvent"]
+            : I18N[language]["createEvent"]}
         </span>
         <div className={styles.header_actions}>
           <div className={styles.header_actions_icons}>
@@ -739,7 +686,7 @@ export const EventCreationPopup = (props) => {
             className={`${styles.footer_saveButton} ${
               step === 0 ? styles.footer_saveButton_disabled : ""
             }`}
-            disabled={step === 0 || isSaving || isProcessing}
+            disabled={step === 0 || isSaving}
             onClick={handleSave}
           >
             {isSaving && <ClipLoader size={16} color="#ffffff" />}
@@ -749,7 +696,7 @@ export const EventCreationPopup = (props) => {
             <button
               className={styles.footer_nextButton}
               onClick={handleContinue}
-              disabled={isProcessing || isSaving}
+              disabled={isSaving}
             >
               <span>
                 {step === 0
@@ -760,7 +707,7 @@ export const EventCreationPopup = (props) => {
                   ? I18N[language]["manageTickets"]
                   : ""}
               </span>
-              {isProcessing ? (
+              {isSaving ? (
                 <ClipLoader size={16} color="#ffffff" />
               ) : (
                 <IconArrowWhite />
