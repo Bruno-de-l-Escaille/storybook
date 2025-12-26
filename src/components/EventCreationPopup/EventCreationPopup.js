@@ -22,7 +22,7 @@ import { ClipLoader } from "react-spinners";
 
 export const EventCreationPopup = (props) => {
   const { isOpen, language, env, auth, clientId, eventId } = props;
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(2);
   const [data, setData] = useState({
     eventId: eventId || 0,
     nameFr: "",
@@ -453,14 +453,7 @@ export const EventCreationPopup = (props) => {
           />
         )}
         {step === 2 && (
-          <Guests
-            language={language}
-            data={data}
-            setData={setData}
-            validationErrors={validationErrors}
-            setValidationErrors={setValidationErrors}
-            setStep={setStep}
-          />
+          <Guests language={language} data={data} env={env} auth={auth} />
         )}
         {step === 3 && (
           <Tickets

@@ -1,6 +1,10 @@
 .modal {
   padding: 0;
   background: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
 
   .header {
     display: flex;
@@ -62,6 +66,9 @@
 
   .content {
     padding: 0 30px;
+    overflow: auto;
+    flex: 1;
+    min-height: 0;
 
     .tabs {
       display: flex;
