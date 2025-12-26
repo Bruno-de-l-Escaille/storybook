@@ -7,6 +7,8 @@ import IconUserRoundX from "../../../Icons/IconUserRoundX";
 import IconSend from "../../../Icons/IconSendV2";
 import AlertCircle from "../../../Icons/AlertCircle";
 import ClipLoader from "react-spinners/ClipLoader";
+import { I18N } from "../../../../i18n";
+import { getSendingUrl } from "../../../../utils";
 
 const MODAL_TYPES = {
   ACCEPT: "accept",
@@ -20,10 +22,14 @@ export const GuestActionModal = ({
   onConfirm,
   type = MODAL_TYPES.ACCEPT,
   guestStats = {},
+  language,
+  env,
 }) => {
   const [selectedStatuses, setSelectedStatuses] = useState([]);
   const [sendImmediately, setSendImmediately] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const sendingUrl = getSendingUrl(env);
 
   const handleStatusToggle = useCallback((status) => {
     setSelectedStatuses((prev) => {
@@ -64,107 +70,99 @@ export const GuestActionModal = ({
       [MODAL_TYPES.ACCEPT]: {
         icon: <IconUserRoundCheck width={30} height={30} />,
         iconBg: "#EDFAF5",
-        title: 'Changer le statut des invités sélectionnés en "Accepté"',
-        titleHighlight: "Accepté",
+        title: I18N[language].changeStatusToAccepted,
+        titleHighlight: I18N[language].guestsConfirmed,
         highlightColor: "#02AF8E",
-        description:
-          "Les utilisateurs seront automatiquement inscrits à l'événement.",
-        statusLabel:
-          "Veuillez spécifier les statuts que vous souhaitez accepter :",
+        description: I18N[language].usersWillBeAutomaticallyRegistered,
+        statusLabel: I18N[language].specifyStatusesToAccept,
         statuses: [
           {
             key: "pending",
-            label: "En attente",
+            label: I18N[language].guestsPending,
             color: "#FFAC3A",
             count: guestStats.pending || 0,
           },
           {
             key: "invited",
-            label: "À invités",
+            label: I18N[language].guestsInvited,
             color: "#6D7F92",
             count: guestStats.invited || 0,
           },
           {
             key: "declined",
-            label: "Décliné",
+            label: I18N[language].guestsDeclined,
             color: "#FC5D2B",
             count: guestStats.declined || 0,
           },
         ],
-        confirmationLabel: "Demande de confirmation",
+        confirmationLabel: I18N[language].confirmationRequest,
         sendOptions: [
-          { value: true, label: "Envoyer immédiatement" },
-          { value: false, label: "Non, ne pas envoyer" },
+          { value: true, label: I18N[language].sendImmediately },
+          { value: false, label: I18N[language].doNotSend },
         ],
-        emailNotice:
-          "Un email de confirmation sera envoyé aux invités pour valider leur inscription à l'événement.",
-        buttonLabel: "Appliquer",
+        emailNotice: I18N[language].confirmationEmailWillBeSent,
+        buttonLabel: I18N[language].apply,
       },
       [MODAL_TYPES.DECLINE]: {
         icon: <IconUserRoundX width={30} height={30} />,
         iconBg: "#FEDFD5",
-        title: 'Changer le statut des invités sélectionnés en "Décliné"',
-        titleHighlight: "Décliné",
+        title: I18N[language].changeStatusToDeclined,
+        titleHighlight: I18N[language].guestsDeclined,
         highlightColor: "#FC5D2B",
-        description:
-          "Les utilisateurs seront automatiquement désinscrits de l'événement.",
-        statusLabel:
-          "Veuillez spécifier les statuts que vous souhaitez décliner :",
+        description: I18N[language].usersWillBeAutomaticallyUnregistered,
+        statusLabel: I18N[language].specifyStatusesToDecline,
         statuses: [
           {
             key: "pending",
-            label: "En attente",
+            label: I18N[language].guestsPending,
             color: "#FFAC3A",
             count: guestStats.pending || 0,
           },
           {
             key: "invited",
-            label: "À invités",
+            label: I18N[language].guestsInvited,
             color: "#6D7F92",
             count: guestStats.invited || 0,
           },
           {
             key: "confirmed",
-            label: "Accepté",
+            label: I18N[language].guestsConfirmed,
             color: "#02AF8E",
             count: guestStats.confirmed || 0,
           },
         ],
-        confirmationLabel: "Demande de confirmation",
+        confirmationLabel: I18N[language].confirmationRequest,
         sendOptions: [
-          { value: true, label: "Envoyer immédiatement" },
-          { value: false, label: "Non, ne pas envoyer" },
+          { value: true, label: I18N[language].sendImmediately },
+          { value: false, label: I18N[language].doNotSend },
         ],
-        emailNotice:
-          "Un email sera envoyé aux invités pour confirmer leur désinscription à l'événement.",
-        buttonLabel: "Appliquer",
+        emailNotice: I18N[language].emailWillBeSentForUnregistration,
+        buttonLabel: I18N[language].apply,
       },
       [MODAL_TYPES.SEND]: {
         icon: <IconSend width={30} height={30} />,
         iconBg: "#F1F2F4",
-        title: "Envoyer les emails de confirmation à votre sélection d'invités",
+        title: I18N[language].sendConfirmationEmails,
         titleHighlight: null,
         highlightColor: null,
-        description:
-          "Les utilisateurs recevront un email de confirmation adapté à leur statut.",
-        statusLabel:
-          "Veuillez spécifier les statuts pour lesquels vous souhaitez envoyer l'email :",
+        description: I18N[language].usersWillReceiveAdaptedEmail,
+        statusLabel: I18N[language].specifyStatusesForEmail,
         statuses: [
           {
-            key: "pending",
-            label: "En attente",
-            color: "#FFAC3A",
-            count: guestStats.pending || 0,
+            key: "declined",
+            label: I18N[language].guestsDeclined,
+            color: "#FC5D2B",
+            count: guestStats.declined || 0,
           },
           {
             key: "invited",
-            label: "À invités",
+            label: I18N[language].guestsInvited,
             color: "#6D7F92",
             count: guestStats.invited || 0,
           },
           {
             key: "confirmed",
-            label: "Accepté",
+            label: I18N[language].guestsConfirmed,
             color: "#02AF8E",
             count: guestStats.confirmed || 0,
           },
@@ -172,12 +170,12 @@ export const GuestActionModal = ({
         confirmationLabel: null,
         sendOptions: null,
         emailNotice: null,
-        buttonLabel: "Envoyer",
+        buttonLabel: I18N[language].send,
       },
     };
 
     return configs[type] || configs[MODAL_TYPES.ACCEPT];
-  }, [type, guestStats]);
+  }, [type, guestStats, language]);
 
   const totalSelected = useMemo(() => {
     return selectedStatuses.reduce((total, status) => {
@@ -208,7 +206,10 @@ export const GuestActionModal = ({
         const statusData = config.statuses.find((s) => s.key === status);
         return {
           key: status,
-          message: `Un email de confirmation sera envoyé aux invités en statut « ${statusData?.label} ».`,
+          message: I18N[language].confirmationEmailWillBeSentToStatus.replace(
+            "{{status}}",
+            statusData?.label || ""
+          ),
         };
       });
     }
@@ -221,6 +222,7 @@ export const GuestActionModal = ({
     config.emailNotice,
     selectedStatuses,
     config.statuses,
+    language,
   ]);
 
   return (
@@ -286,14 +288,14 @@ export const GuestActionModal = ({
                       />
                     </div>
                     <span className={styles.statusCount}>
-                      {status.count} utilisateurs
+                      {status.count} {I18N[language].users}
                     </span>
                   </div>
                 </button>
               ))}
             </div>
             <p className={styles.totalCount}>
-              {totalSelected} utilisateur(s) au total
+              {totalSelected} {I18N[language].totalUsers}
             </p>
           </div>
 
@@ -337,15 +339,13 @@ export const GuestActionModal = ({
                         </div>
                         <div className={styles.noticeText}>
                           <p>{notice.message}</p>
-                          <button
+                          <a
                             className={styles.viewEmailLink}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              // TODO: Open email preview
-                            }}
+                            href={`${sendingUrl}`}
+                            target="_blank"
                           >
-                            Voir le mail
-                          </button>
+                            {I18N[language].viewEmail}
+                          </a>
                         </div>
                       </div>
                     ))}
@@ -365,15 +365,13 @@ export const GuestActionModal = ({
                     </div>
                     <div className={styles.noticeText}>
                       <p>{notice.message}</p>
-                      <button
+                      <a
                         className={styles.viewEmailLink}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          // TODO: Open email preview
-                        }}
+                        href={`${sendingUrl}`}
+                        target="_blank"
                       >
-                        Voir le mail
-                      </button>
+                        {I18N[language].viewEmail}
+                      </a>
                     </div>
                   </div>
                 ))}
@@ -388,7 +386,7 @@ export const GuestActionModal = ({
             onClick={handleCancel}
             disabled={isLoading}
           >
-            Annuler
+            {I18N[language].cancel}
           </button>
           <button
             className={styles.confirmButton}
@@ -418,6 +416,7 @@ GuestActionModal.propTypes = {
     confirmed: PropTypes.number,
     declined: PropTypes.number,
   }),
+  language: PropTypes.string,
 };
 
 export { MODAL_TYPES };

@@ -6,14 +6,24 @@ import styles from "./GuestDetailsModal.module.scss";
 import IconX from "../../../Icons/IconX";
 import IconSend from "../../../Icons/IconSendV2";
 import IconEdit from "../../../Icons/IconEdit";
-import IconPolygon from "../../../Icons/IconPolygon";
 import AlertCircle from "../../../Icons/AlertCircle";
 import IconCheck from "../../../Icons/IconCheck";
 import ClipLoader from "react-spinners/ClipLoader";
-import { fetchGuestLogs, confirmGuestStep, forceGuest } from "../../../../api";
+import {
+  fetchGuestLogs,
+  confirmGuestStep,
+  forceGuest,
+  fetchGuests,
+} from "../../../../api";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import moment from "moment";
 import { toast } from "react-toastify";
+import { STATUS_SELECT_STYLES } from "./services";
+import IconCloseBlack from "../../../Icons/IconCloseBlack";
+import IconKey from "../../../Icons/IconKey";
+import { I18N } from "../../../../i18n";
+import cryptoJs from "crypto-js";
+import { getOfffcourseUrl } from "../../../../utils/event";
 
 const DropdownIndicator = ({ innerProps, isFocused }) => {
   return (
@@ -46,120 +56,120 @@ const DropdownIndicator = ({ innerProps, isFocused }) => {
   );
 };
 
-const SELECT_STYLES = {
-  control: (base, state) => ({
-    ...base,
-    minHeight: "32px",
-    height: "32px",
-    borderColor: state.menuIsOpen ? "#29394d" : "#b2bcc6",
-    borderWidth: "0.5px",
-    borderRadius: "8px",
-    boxShadow: "none",
-    cursor: "pointer",
-    "&:hover": {
-      borderColor: state.menuIsOpen ? "#29394d" : "#b2bcc6",
-    },
-  }),
-  valueContainer: (base) => ({
-    ...base,
-    height: "32px",
-    padding: "0 10px",
-  }),
-  input: (base) => ({
-    ...base,
-    margin: "0",
-    padding: "0",
-  }),
-  indicatorSeparator: () => ({
-    display: "none",
-  }),
-  indicatorsContainer: (base) => ({
-    ...base,
-    height: "32px",
-  }),
-  menu: (base) => ({
-    ...base,
-    marginTop: "4px",
-    borderRadius: "8px",
-    border: "0.5px solid #e1e4e8",
-    boxShadow: "0 4px 12px rgba(41, 57, 77, 0.1)",
-  }),
-  menuList: (base) => ({
-    ...base,
-    padding: "4px",
-    borderRadius: "8px",
-  }),
-  option: (base, state) => ({
-    ...base,
-    backgroundColor: state.isDisabled
-      ? "white"
-      : state.isSelected
-      ? "#f3faff"
-      : state.isFocused
-      ? "#f4f7f9"
-      : "white",
-    color: state.isDisabled ? "#b2bcc6" : "#29394d",
-    cursor: state.isDisabled ? "not-allowed" : "pointer",
-    padding: "8px 10px",
-    borderRadius: "6px",
-    margin: "2px 0",
-    fontSize: "12px",
-    fontFamily: "Roboto, sans-serif",
-    fontWeight: 600,
-    opacity: state.isDisabled ? 0.6 : 1,
-    "&:active": {
-      backgroundColor: state.isDisabled ? "white" : "#f3faff",
-    },
-  }),
-  singleValue: (base) => ({
-    ...base,
-    fontSize: "12px",
-    fontFamily: "Roboto, sans-serif",
-    fontWeight: 600,
-    margin: 0,
-  }),
-};
+const getActionLabel = (action, language) => {
+  if (action.includes("auto-confirm-step-5")) {
+    return {
+      text: I18N[language].acceptedWithEmail,
+      icon: "check",
+      type: "accepted",
+    };
+  }
+  if (action.includes("auto-confirm-step-8")) {
+    return {
+      text: I18N[language].declinedWithEmail,
+      icon: "x",
+      type: "declined",
+    };
+  }
 
-const getActionLabel = (action) => {
+  if (action.includes("force-confirm-step-0")) {
+    return {
+      text: I18N[language].sentInvitationEmail,
+      icon: "send",
+      type: "invited",
+    };
+  }
   if (action.includes("force-confirm-step-5")) {
-    return { text: "A accepté", icon: "check", type: "accepted" };
+    return {
+      text: I18N[language].sentRegistrationEmail,
+      icon: "send",
+      type: "invited",
+    };
   }
   if (action.includes("force-confirm-step-8")) {
-    return { text: "A décliné", icon: "x", type: "declined" };
+    return {
+      text: I18N[language].sentCancellationEmail,
+      icon: "send",
+      type: "invited",
+    };
   }
-  if (action.includes("confirm-step")) {
-    return { text: "A envoyé une confirmation", icon: "send", type: "sent" };
+
+  if (action.includes("confirm-step-5-no-email")) {
+    return {
+      text: I18N[language].acceptedWithoutEmail,
+      icon: "check",
+      type: "accepted",
+    };
   }
-  if (action.includes("force-add")) {
-    return { text: "A invité", icon: "send", type: "invited" };
+  if (action.includes("confirm-step-8-no-email")) {
+    return {
+      text: I18N[language].declinedWithoutEmail,
+      icon: "x",
+      type: "declined",
+    };
   }
+  if (action.includes("confirm-step-0-no-email")) {
+    return {
+      text: I18N[language].invitedWithoutEmail,
+      icon: "send",
+      type: "invited",
+    };
+  }
+
   return { text: action, icon: null, type: "default" };
 };
 
 export const GuestDetailsModal = ({
   isOpen,
   onClose,
-  guest,
+  guest: initialGuest,
   eventId,
   apiUrl,
   token,
   auth,
   getGuestStatus,
+  env,
   language,
 }) => {
   const queryClient = useQueryClient();
+
   const [isLoadingSendEmail, setIsLoadingSendEmail] = useState(false);
+  const [isLoadingStatusChange, setIsLoadingStatusChange] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(null);
+  const [guest, setGuest] = useState(initialGuest);
+
+  useEffect(() => {
+    setGuest(initialGuest);
+  }, [initialGuest]);
+
+  const refetchGuest = useCallback(async () => {
+    if (!initialGuest?.id) return;
+
+    try {
+      const guestData = await fetchGuests({
+        apiUrl,
+        token,
+        filters: [{ property: "id", operator: "eq", value: initialGuest.id }],
+      });
+
+      if (guestData?.data?.[0]) {
+        setGuest(guestData.data[0]);
+      }
+    } catch (error) {
+      console.error("Error refetching guest:", error);
+    }
+  }, [initialGuest?.id, apiUrl, token]);
 
   const { data: logsData, isFetching: isLoadingLogs } = useQuery({
     queryKey: ["guest-logs", guest?.id, apiUrl],
     queryFn: async () => {
       const logs = await fetchGuestLogs({
         guestId: guest.id,
+        eventId: guest.event,
         apiUrl,
         token,
       });
-      return logs;
+      return { data: (logs.data || []).reverse() };
     },
     enabled: Boolean(guest?.id && isOpen),
   });
@@ -183,15 +193,29 @@ export const GuestDetailsModal = ({
     return getGuestStatus(guest);
   }, [guest, getGuestStatus]);
 
-  const isConfirmed = useMemo(() => {
-    if (!guest) return false;
-    return guest.step === guest.stepConfirmedByEmail;
-  }, [guest]);
+  const unconfirmedMessage = useMemo(() => {
+    if (!guest || guest.step === guest.stepConfirmedByEmail) return null;
+    const stepMessages = {
+      0: I18N[language].invitationNotConfirmed,
+      5: I18N[language].registrationNotConfirmed,
+      8: I18N[language].cancellationNotConfirmed,
+    };
+    return stepMessages[guest.step] || null;
+  }, [guest, language]);
 
   const handleCopyAutoLogin = useCallback(() => {
-    // TODO: Implement auto-login URL copy
-    toast.success("Lien copié dans le presse-papiers");
-  }, []);
+    const usedId = guest.user;
+    const eventId = guest.event;
+    const offfcourseUrl = getOfffcourseUrl(env);
+
+    const autoLoginUrl = `${offfcourseUrl}/autolog?idApi2=${usedId}&check=${cryptoJs.MD5(
+      usedId + "FFFCONTROL"
+    )}&eventId=${eventId}`;
+
+    navigator.clipboard.writeText(autoLoginUrl);
+
+    toast.success(I18N[language].linkCopiedToClipboard);
+  }, [guest, env, language]);
 
   const handleSendConfirmation = useCallback(async () => {
     if (!guest) return;
@@ -212,14 +236,15 @@ export const GuestDetailsModal = ({
       queryClient.invalidateQueries({
         queryKey: ["guest-logs", guest.id],
       });
+      await refetchGuest();
 
-      toast.success("Email de confirmation envoyé");
+      toast.success(I18N[language].confirmationEmailSent);
     } catch (error) {
-      toast.error("Erreur lors de l'envoi de l'email");
+      toast.error(I18N[language].errorSendingEmail);
     } finally {
       setIsLoadingSendEmail(false);
     }
-  }, [guest, eventId, apiUrl, token, queryClient]);
+  }, [guest, eventId, apiUrl, token, queryClient, language, refetchGuest]);
 
   const handleStatusChange = useCallback(
     async (option) => {
@@ -227,6 +252,7 @@ export const GuestDetailsModal = ({
 
       const newStatus = option.key;
 
+      setIsLoadingStatusChange(true);
       try {
         const userId = guest.user;
         let type = "register";
@@ -235,6 +261,8 @@ export const GuestDetailsModal = ({
           type = "decline";
         } else if (newStatus === "accepted") {
           type = "register";
+        } else if (newStatus === "invited") {
+          type = "add";
         }
 
         await forceGuest({
@@ -253,58 +281,73 @@ export const GuestDetailsModal = ({
         queryClient.invalidateQueries({
           queryKey: ["guest-logs", guest.id],
         });
+        await refetchGuest();
 
         setSelectedStatus(newStatus);
-        toast.success("Statut mis à jour");
+        toast.success(I18N[language].statusUpdated);
       } catch (error) {
-        toast.error("Erreur lors de la mise à jour du statut");
+        toast.error(I18N[language].errorUpdatingStatus);
+      } finally {
+        setIsLoadingStatusChange(false);
       }
     },
-    [guest, selectedStatus, eventId, apiUrl, token, queryClient]
+    [
+      guest,
+      selectedStatus,
+      eventId,
+      apiUrl,
+      token,
+      queryClient,
+      refetchGuest,
+      language,
+    ]
   );
 
-  const formatOptionLabel = useCallback((option) => {
-    return (
-      <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-        <span
-          style={{
-            width: "6px",
-            height: "6px",
-            borderRadius: "50%",
-            backgroundColor: option.color,
-            flexShrink: 0,
-          }}
-        />
-        <span style={{ color: option.color }}>{option.label}</span>
-      </div>
-    );
-  }, []);
+  const formatOptionLabel = useCallback(
+    (option) => {
+      return (
+        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <span
+            style={{
+              width: "6px",
+              height: "6px",
+              borderRadius: "50%",
+              backgroundColor: option.color,
+              flexShrink: 0,
+            }}
+          />
+          <span style={{ color: option.color }}>{option.label}</span>
+        </div>
+      );
+    },
+    [language]
+  );
 
   const statusOptions = useMemo(() => {
     return [
       {
         key: "pending",
-        label: "En attente",
+        label: I18N[language].guestsPending,
         color: "#FFAC3A",
         isDisabled: true,
       },
       {
         key: "invited",
-        label: "À invité",
+        label: I18N[language].guestsInvited,
         color: "#6D7F92",
       },
       {
         key: "accepted",
-        label: "Accepté",
+        label: I18N[language].guestsConfirmed,
         color: "#02AF8E",
       },
       {
         key: "declined",
-        label: "Décliné",
+        label: I18N[language].guestsDeclined,
         color: "#FC5D2B",
       },
     ];
-  }, []);
+  }, [language]);
 
   const currentStatusOption = useMemo(() => {
     return statusOptions.find((opt) => opt.key === selectedStatus);
@@ -325,6 +368,8 @@ export const GuestDetailsModal = ({
 
   if (!guest) return null;
 
+  const isLoading = isLoadingSendEmail || isLoadingStatusChange;
+
   return (
     <Modal
       isOpen={isOpen}
@@ -341,14 +386,21 @@ export const GuestDetailsModal = ({
       }}
       closeTimeoutMS={200}
     >
+      {isLoading && (
+        <div className={styles.loadingOverlay}>
+          <ClipLoader size={40} color="#29394d" />
+        </div>
+      )}
       <div className={styles.modal}>
         <div className={styles.header}>
           <div className={styles.headerLeft}>
             <IconEdit width={20} height={20} />
-            <span className={styles.headerTitle}>Détails de l'invité</span>
+            <span className={styles.headerTitle}>
+              {I18N[language].guestDetails}
+            </span>
           </div>
           <button className={styles.closeButton} onClick={onClose}>
-            <IconX width={20} height={20} />
+            <IconCloseBlack />
           </button>
         </div>
 
@@ -356,11 +408,15 @@ export const GuestDetailsModal = ({
           <div className={styles.leftPanel}>
             <div className={styles.section}>
               <div className={styles.sectionHeader}>
-                <h3 className={styles.sectionTitle}>Données générales</h3>
+                <h3 className={styles.sectionTitle}>
+                  {I18N[language].generalData}
+                </h3>
               </div>
 
               <div className={styles.field}>
-                <label className={styles.fieldLabel}>Nom</label>
+                <label className={styles.fieldLabel}>
+                  {I18N[language].name}
+                </label>
                 <p className={styles.fieldValue}>
                   {userInscriptionState.firstName}{" "}
                   {userInscriptionState.lastName}
@@ -378,35 +434,36 @@ export const GuestDetailsModal = ({
                 className={styles.copyButton}
                 onClick={handleCopyAutoLogin}
               >
-                <IconEdit width={16} height={16} />
-                <span>Copier le lien d'auto-login</span>
+                <IconKey />
+                <span>{I18N[language].copyAutoLoginLink}</span>
               </button>
 
               <div className={styles.divider} />
 
               <div className={styles.field}>
                 <label className={styles.fieldLabel}>
-                  Statut d'inscription
+                  {I18N[language].registrationStatus}
                 </label>
                 <Select
                   value={currentStatusOption}
                   options={statusOptions}
                   onChange={handleStatusChange}
-                  styles={SELECT_STYLES}
+                  styles={STATUS_SELECT_STYLES}
                   formatOptionLabel={formatOptionLabel}
                   components={{ DropdownIndicator }}
                   isSearchable={false}
                   getOptionValue={(option) => option.key}
+                  menuPlacement="top"
                 />
               </div>
 
               <div className={styles.divider} />
 
-              {!isConfirmed && (
+              {unconfirmedMessage && (
                 <div className={styles.confirmationSection}>
                   <div className={styles.confirmationNotice}>
                     <AlertCircle width={20} height={20} fill="#18A0FB" />
-                    <span>Son inscription n'est pas confirmée</span>
+                    <span>{unconfirmedMessage}</span>
                   </div>
                   <button
                     className={styles.sendButton}
@@ -418,7 +475,7 @@ export const GuestDetailsModal = ({
                     ) : (
                       <>
                         <IconSend width={16} height={16} />
-                        <span>Envoyer la confirmation</span>
+                        <span>{I18N[language].sendConfirmation}</span>
                       </>
                     )}
                   </button>
@@ -431,15 +488,21 @@ export const GuestDetailsModal = ({
             <div className={styles.section}>
               <div className={styles.sectionHeader}>
                 <h3 className={styles.sectionTitle}>
-                  Historique des activités
+                  {I18N[language].activityHistory}
                 </h3>
               </div>
 
               <div className={styles.activityList}>
                 <div className={styles.activityHeader}>
-                  <span className={styles.activityHeaderCell}>Utilisateur</span>
-                  <span className={styles.activityHeaderCell}>Date</span>
-                  <span className={styles.activityHeaderCell}>Activité</span>
+                  <span className={styles.activityHeaderCell}>
+                    {I18N[language].user}
+                  </span>
+                  <span className={styles.activityHeaderCell}>
+                    {I18N[language].date}
+                  </span>
+                  <span className={styles.activityHeaderCell}>
+                    {I18N[language].activity}
+                  </span>
                 </div>
 
                 {isLoadingLogs ? (
@@ -448,17 +511,16 @@ export const GuestDetailsModal = ({
                   </div>
                 ) : logs.length === 0 ? (
                   <div className={styles.activityEmpty}>
-                    <p>Aucune activité enregistrée</p>
+                    <p>{I18N[language].noActivityRecorded}</p>
                   </div>
                 ) : (
                   logs.map((log, index) => {
-                    const actionInfo = getActionLabel(log.action);
-                    const isCurrentUser =
-                      log.actor === auth?.id || log.actor === auth?.user?.id;
+                    const actionInfo = getActionLabel(log.action, language);
+                    const isCurrentUser = log.actor == auth?.user?.id;
                     const actorName = isCurrentUser
-                      ? "Vous"
+                      ? I18N[language].you
                       : `${log.firstName || ""} ${log.lastName || ""}`.trim() ||
-                        "Utilisateur";
+                        I18N[language].user;
 
                     return (
                       <div
@@ -471,7 +533,10 @@ export const GuestDetailsModal = ({
                       >
                         <span className={styles.activityCell}>{actorName}</span>
                         <span className={styles.activityCell}>
-                          {moment(log.createdAt).format("DD/MM/YYYY HH:mm")}
+                          {moment
+                            .utc(log.createdAt)
+                            .local()
+                            .format("DD/MM/YYYY HH:mm")}
                         </span>
                         <span className={styles.activityCellAction}>
                           {renderActivityIcon(actionInfo)}

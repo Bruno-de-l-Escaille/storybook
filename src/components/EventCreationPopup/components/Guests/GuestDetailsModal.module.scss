@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 99;
   opacity: 0;
   transition: opacity 200ms ease-in-out;
 
@@ -48,6 +48,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  max-height: 90vh;
 }
 
 .header {
@@ -55,7 +56,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 15px 20px;
-  border-bottom: 1px solid #e1e4e8;
+  flex-shrink: 0;
 }
 
 .headerLeft {
@@ -65,7 +66,6 @@
 }
 
 .headerTitle {
-  font-family: "Roboto", sans-serif;
   font-weight: 600;
   font-size: 14px;
   color: #29394d;
@@ -102,8 +102,13 @@
   display: flex;
   gap: 30px;
   flex: 1;
-  overflow: hidden;
+  min-height: 0;
   padding: 20px;
+  padding-top: 0;
+
+  p {
+    text-align: left;
+  }
 }
 
 .leftPanel,
@@ -116,8 +121,6 @@
 .leftPanel {
   flex-shrink: 0;
   width: 370px;
-  overflow-y: auto;
-  overflow-x: hidden;
 }
 
 .rightPanel {
@@ -132,12 +135,9 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  overflow: visible;
-}
-
-.rightPanel .section {
+  overflow-y: auto;
+  overflow-x: hidden;
   height: 100%;
-  overflow: hidden;
 }
 
 .sectionHeader {
@@ -147,7 +147,6 @@
 }
 
 .sectionTitle {
-  font-family: "Roboto", sans-serif;
   font-weight: 600;
   font-size: 16px;
   color: #29394d;
@@ -161,14 +160,12 @@
 }
 
 .fieldLabel {
-  font-family: "Roboto", sans-serif;
   font-weight: 600;
   font-size: 12px;
   color: #29394d;
 }
 
 .fieldValue {
-  font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 12px;
   color: #29394d;
@@ -186,13 +183,14 @@
   background: white;
   border: 0.5px solid #b2bcc6;
   border-radius: 8px;
-  font-family: "Roboto", sans-serif;
   font-weight: 600;
   font-size: 12px;
   color: #29394d;
   cursor: pointer;
   transition: all 0.2s;
   height: 32px;
+  width: fit-content;
+  min-width: 150px;
 
   &:hover {
     background: #f4f7f9;
@@ -225,7 +223,6 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 12px;
   color: #6d7f92;
@@ -247,14 +244,13 @@
 
 .activityHeader {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 2fr 2fr 3fr;
   gap: 10px;
   padding: 10px 5px;
   border-radius: 5px;
 }
 
 .activityHeaderCell {
-  font-family: "Roboto", sans-serif;
   font-weight: 600;
   font-size: 12px;
   color: #29394d;
@@ -263,7 +259,7 @@
 
 .activityRow {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 2fr 2fr 3fr;
   gap: 10px;
   padding: 10px 5px;
   border: 1px solid #f1f2f4;
@@ -279,7 +275,6 @@
 }
 
 .activityCell {
-  font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 12px;
   color: #29394d;
@@ -292,7 +287,6 @@
 }
 
 .activityCellAction {
-  font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 12px;
   color: #29394d;
@@ -311,11 +305,25 @@
 .activityLoading,
 .activityEmpty {
   display: flex;
-  align-items: center;
   justify-content: center;
   padding: 40px 20px;
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  font-size: 12px;
-  color: #6d7f92;
+  text-align: center;
+
+  p {
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    color: #6d7f92;
+  }
+}
+
+.loadingOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: 20px;
 }

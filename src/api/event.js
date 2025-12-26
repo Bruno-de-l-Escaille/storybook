@@ -370,7 +370,7 @@ export const confirmGuestStep = async ({
   return data.data;
 };
 
-export const fetchGuestLogs = async ({ apiUrl, token, guestId }) => {
+export const fetchGuestLogs = async ({ apiUrl, token, guestId, eventId }) => {
   const requestUrl = `${apiUrl}/event/log/get-all-logs-optimized`;
 
   const data = await axios.get(requestUrl, {
@@ -378,6 +378,7 @@ export const fetchGuestLogs = async ({ apiUrl, token, guestId }) => {
       access_token: token,
       objectName: "guest",
       objectId: guestId,
+      eventId: eventId,
     },
   });
 

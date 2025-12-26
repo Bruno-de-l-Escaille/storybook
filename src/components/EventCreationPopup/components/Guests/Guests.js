@@ -7,7 +7,6 @@ import { I18N } from "../../../../i18n";
 import cn from "classnames";
 import { Search as IconSearch } from "../../../Icons/Search";
 import Select from "react-select";
-import { SELECT_STYLES } from "./services";
 import IconUserRoundPlus from "../../../Icons/IconUserRoundPlus";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import moment from "moment";
@@ -24,6 +23,7 @@ import IconInvites from "../../../Icons/IconInvites";
 import { GuestActionModal, MODAL_TYPES } from "./GuestActionModal";
 import { GuestDetailsModal } from "./GuestDetailsModal";
 import { toast } from "react-toastify";
+import { PAGE_SIZE_SELECT_STYLES } from "./services";
 
 const DropdownIndicator = () => {
   return (
@@ -33,14 +33,14 @@ const DropdownIndicator = () => {
   );
 };
 
-export const Guests = ({ language, data: eventData, env, auth }) => {
+export const Guests = ({ language, eventId, env, auth }) => {
   const queryClient = useQueryClient();
   const guestsRef = useRef(null);
   const [filters, setFilters] = useState({
     tab: "all",
     search: "",
     page: 1,
-    pageSize: 20,
+    pageSize: 25,
   });
   const [selectedGuests, setSelectedGuests] = useState([]);
   const [loadingActions, setLoadingActions] = useState({});
@@ -51,41 +51,42 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
   const [selectedGuestForEdit, setSelectedGuestForEdit] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  // const eventId = eventData.id;
-  const eventId = 2293;
   const apiUrl = getApiUrl(env);
   const token = auth.token;
 
-  const getGuestStatus = useCallback((guest) => {
-    const step = guest.step;
+  const getGuestStatus = useCallback(
+    (guest) => {
+      const step = guest.step;
 
-    if (step === 0) {
+      if (step === 0) {
+        return {
+          key: "invited",
+          label: I18N[language].guestsInvited,
+          color: "#6D7F92",
+        };
+      }
+      if (step === 5) {
+        return {
+          key: "accepted",
+          label: I18N[language].guestsConfirmed,
+          color: "#02AF8E",
+        };
+      }
+      if (step === 8) {
+        return {
+          key: "declined",
+          label: I18N[language].guestsDeclined,
+          color: "#FC5D2B",
+        };
+      }
       return {
-        key: "invited",
-        label: "À invité",
-        color: "#6D7F92",
+        key: "pending",
+        label: I18N[language].guestsPending,
+        color: "#FFAC3A",
       };
-    }
-    if (step === 5) {
-      return {
-        key: "accepted",
-        label: "Accepté",
-        color: "#02AF8E",
-      };
-    }
-    if (step === 8) {
-      return {
-        key: "declined",
-        label: "Décliné",
-        color: "#FC5D2B",
-      };
-    }
-    return {
-      key: "pending",
-      label: "En attente",
-      color: "#FFAC3A",
-    };
-  }, []);
+    },
+    [language]
+  );
 
   const { data, isFetching } = useQuery({
     queryKey: ["bo-guests", eventId, apiUrl],
@@ -153,20 +154,55 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
     };
   }, [guests, matchesTab]);
 
+  const shouldShowAction = useCallback(
+    (action, guest) => {
+      const status = getGuestStatus(guest);
+
+      switch (action) {
+        case "accept":
+          return status.key !== "accepted";
+        case "decline":
+          return status.key !== "declined";
+        case "send":
+          return (
+            ["accepted", "declined", "invited"].includes(status.key) &&
+            guest.step !== guest.stepConfirmedByEmail
+          );
+        default:
+          return false;
+      }
+    },
+    [getGuestStatus]
+  );
+
   const selectedGuestsStats = useMemo(() => {
     const selected = guests.filter((guest) =>
       selectedGuests.includes(guest.id)
     );
     return {
       all: selected.length,
-      confirmed: selected.filter((guest) => matchesTab(guest, "confirmed"))
-        .length,
-      declined: selected.filter((guest) => matchesTab(guest, "declined"))
-        .length,
-      pending: selected.filter((guest) => matchesTab(guest, "pending")).length,
-      invited: selected.filter((guest) => matchesTab(guest, "invited")).length,
+      confirmed: selected.filter(
+        (guest) =>
+          matchesTab(guest, "confirmed") &&
+          shouldShowAction(modalState.type, guest)
+      ).length,
+      declined: selected.filter(
+        (guest) =>
+          matchesTab(guest, "declined") &&
+          shouldShowAction(modalState.type, guest)
+      ).length,
+      pending: selected.filter(
+        (guest) =>
+          matchesTab(guest, "pending") &&
+          shouldShowAction(modalState.type, guest)
+      ).length,
+      invited: selected.filter(
+        (guest) =>
+          matchesTab(guest, "invited") &&
+          shouldShowAction(modalState.type, guest)
+      ).length,
     };
-  }, [guests, selectedGuests, matchesTab]);
+  }, [guests, selectedGuests, matchesTab, modalState, shouldShowAction]);
 
   const tabs = useMemo(() => {
     return [
@@ -184,7 +220,7 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
       },
       {
         key: "invited",
-        label: "À invités",
+        label: I18N[language].guestsInvited,
         count: guestStats.invited,
       },
       {
@@ -235,25 +271,25 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
     );
 
     if (selectedGuestsData.length === 0) {
-      toast.error("Aucun invité sélectionné");
+      toast.error(I18N[language].noGuestSelected);
       return;
     }
 
     const headers = [
-      "Id",
-      "Prénom",
-      "Nom",
-      "Email",
-      "Numéro",
-      "Langue",
-      "Statut",
-      "Date d'inscription",
+      I18N[language].id,
+      I18N[language].firstName,
+      I18N[language].lastName,
+      I18N[language].email,
+      I18N[language].number,
+      I18N[language].language,
+      I18N[language].status,
+      I18N[language].registrationDate,
     ];
     const csvRows = [headers.join(",")];
     const languages = {
-      fr: "Français",
-      en: "Anglais",
-      nl: "Néerlandais",
+      fr: I18N[language].french,
+      en: I18N[language].english,
+      nl: I18N[language].dutch,
     };
 
     selectedGuestsData.forEach((guest) => {
@@ -304,8 +340,13 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
-    toast.success(`${selectedGuestsData.length} invité(s) exporté(s)`);
-  }, [guests, selectedGuests]);
+    toast.success(
+      I18N[language].guestsExported.replace(
+        "{{count}}",
+        selectedGuestsData.length
+      )
+    );
+  }, [guests, selectedGuests, language, eventId, getGuestStatus]);
 
   const handleSelectGuest = useCallback((guestId) => {
     setSelectedGuests((prev) => {
@@ -352,7 +393,7 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
         setLoadingActions((prev) => ({ ...prev, [loadingKey]: false }));
       }
     },
-    [eventId]
+    [eventId, apiUrl, language, queryClient, token]
   );
 
   const handleDeclineGuest = useCallback(
@@ -383,33 +424,36 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
         setLoadingActions((prev) => ({ ...prev, [loadingKey]: false }));
       }
     },
-    [eventId]
+    [eventId, apiUrl, language, queryClient, token]
   );
 
-  const handleSendConfirmation = useCallback(async (guest) => {
-    const loadingKey = `send_${guest.id}`;
-    try {
-      setLoadingActions((prev) => ({ ...prev, [loadingKey]: true }));
+  const handleSendConfirmation = useCallback(
+    async (guest) => {
+      const loadingKey = `send_${guest.id}`;
+      try {
+        setLoadingActions((prev) => ({ ...prev, [loadingKey]: true }));
 
-      await confirmGuestStep({
-        eventId,
-        userId: guest.user,
-        step: guest.step,
-        apiUrl,
-        token,
-      });
+        await confirmGuestStep({
+          eventId,
+          userId: guest.user,
+          step: guest.step,
+          apiUrl,
+          token,
+        });
 
-      toast.success(I18N[language]["confirmationEmailSent"]);
+        toast.success(I18N[language]["confirmationEmailSent"]);
 
-      queryClient.invalidateQueries({
-        queryKey: ["bo-guests"],
-      });
-    } catch (error) {
-      toast.error(I18N[language]["errorSendingEmail"]);
-    } finally {
-      setLoadingActions((prev) => ({ ...prev, [loadingKey]: false }));
-    }
-  }, []);
+        queryClient.invalidateQueries({
+          queryKey: ["bo-guests"],
+        });
+      } catch (error) {
+        toast.error(I18N[language]["errorSendingEmail"]);
+      } finally {
+        setLoadingActions((prev) => ({ ...prev, [loadingKey]: false }));
+      }
+    },
+    [eventId, apiUrl, language, queryClient, token]
+  );
 
   const handleOpenModal = useCallback((type) => {
     setModalState({
@@ -448,7 +492,8 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
                 return guestStatus.key === "invited";
               }
               return false;
-            })
+            }) &&
+            shouldShowAction(type, guest)
         );
 
         if (type === MODAL_TYPES.ACCEPT) {
@@ -494,14 +539,16 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
         handleCloseModal();
 
         const actionMessages = {
-          [MODAL_TYPES.ACCEPT]: "Invités acceptés avec succès",
-          [MODAL_TYPES.DECLINE]: "Invités déclinés avec succès",
-          [MODAL_TYPES.SEND]: "Emails de confirmation envoyés avec succès",
+          [MODAL_TYPES.ACCEPT]: I18N[language].guestsAcceptedSuccessfully,
+          [MODAL_TYPES.DECLINE]: I18N[language].guestsDeclinedSuccessfully,
+          [MODAL_TYPES.SEND]: I18N[language].confirmationEmailsSentSuccessfully,
         };
 
-        toast.success(actionMessages[type] || "Action effectuée avec succès");
+        toast.success(
+          actionMessages[type] || I18N[language].actionPerformedSuccessfully
+        );
       } catch (error) {
-        toast.error("Une erreur s'est produite");
+        toast.error(I18N[language].anErrorOccurred);
       }
     },
     [
@@ -514,28 +561,9 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
       queryClient,
       handleCloseModal,
       getGuestStatus,
+      shouldShowAction,
+      language,
     ]
-  );
-
-  const shouldShowAction = useCallback(
-    (action, guest) => {
-      const status = getGuestStatus(guest);
-
-      switch (action) {
-        case "accept":
-          return status.key !== "accepted";
-        case "decline":
-          return status.key !== "declined";
-        case "send":
-          return (
-            ["accepted", "declined", "invited"].includes(status.key) &&
-            guest.step !== guest.stepConfirmedByEmail
-          );
-        default:
-          return false;
-      }
-    },
-    [getGuestStatus]
   );
 
   // Rendering functions
@@ -595,7 +623,7 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
                 className={cn(styles.actionButton, styles.confirmButton)}
                 onClick={() => handleConfirmGuest(guest)}
                 disabled={loadingActions[`confirm_${guest.id}`]}
-                data-tooltip="Accepter l'invité"
+                data-tooltip={I18N[language].acceptGuest}
               >
                 {loadingActions[`confirm_${guest.id}`] ? (
                   <ClipLoader size={10} color="#02AF8E" />
@@ -611,7 +639,7 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
                 className={cn(styles.actionButton, styles.declineButton)}
                 onClick={() => handleDeclineGuest(guest)}
                 disabled={loadingActions[`decline_${guest.id}`]}
-                data-tooltip="Décliner l'invité"
+                data-tooltip={I18N[language].declineGuest}
               >
                 {loadingActions[`decline_${guest.id}`] ? (
                   <ClipLoader size={10} color="#FC5D2B" />
@@ -632,10 +660,10 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
                 disabled={loadingActions[`send_${guest.id}`]}
                 data-tooltip={
                   status.key === "accepted"
-                    ? "Envoyer l'email d'inscription"
+                    ? I18N[language].sendRegistrationEmail
                     : status.key === "declined"
-                    ? "Envoyer l'email d'annulation"
-                    : "Envoyer l'email d'invitation"
+                    ? I18N[language].sendCancellationEmail
+                    : I18N[language].sendInvitationEmail
                 }
               >
                 {loadingActions[`send_${guest.id}`] ? (
@@ -667,6 +695,7 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
       getGuestStatus,
       handleEditGuest,
       shouldShowAction,
+      language,
     ]
   );
 
@@ -717,7 +746,11 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
             checked={isAllGuestsSelected}
             onChange={handleSelectAll}
           />
-          <span>Sélectionner tous</span>
+          <span>
+            {isAllGuestsSelected
+              ? I18N[language].deselectAll
+              : I18N[language].selectAll}
+          </span>
         </button>
       );
     }
@@ -748,18 +781,20 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
             onChange={handleSelectAll}
           />
           <span>
-            {isAllGuestsSelected ? "Désélectionner tous" : "Sélectionner tous"}
+            {isAllGuestsSelected
+              ? I18N[language].deselectAll
+              : I18N[language].selectAll}
           </span>
         </div>
         <span className={styles.center}>
-          {selectedGuests.length} éléments sélectionnées
+          {selectedGuests.length} {I18N[language].selectedItems}
         </span>
         <div className={styles.right}>
           <div className={styles.actionWrapper}>
             <button
               className={styles.actionButton}
               onClick={handleImportGuests}
-              data-tooltip="Télécharger la sélection en .csv"
+              data-tooltip={I18N[language].downloadSelectionCsv}
             >
               <IconDownload />
             </button>
@@ -772,7 +807,7 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
               <button
                 className={cn(styles.actionButton, styles.confirmButton)}
                 onClick={() => handleOpenModal(MODAL_TYPES.ACCEPT)}
-                data-tooltip="Accepté la sélection"
+                data-tooltip={I18N[language].acceptSelection}
               >
                 <IconCheck />
               </button>
@@ -783,7 +818,7 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
               <button
                 className={cn(styles.actionButton, styles.declineButton)}
                 onClick={() => handleOpenModal(MODAL_TYPES.DECLINE)}
-                data-tooltip="Décliné la sélection"
+                data-tooltip={I18N[language].declineSelection}
               >
                 <IconX />
               </button>
@@ -797,7 +832,7 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
               <button
                 className={styles.actionButton}
                 onClick={() => handleOpenModal(MODAL_TYPES.SEND)}
-                data-tooltip="Envoyer les emails de confirmation (inscription/annulation/invitation) à la sélection"
+                data-tooltip={I18N[language].sendConfirmationEmailsToSelection}
               >
                 <IconSend />
               </button>
@@ -817,22 +852,16 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
             <AlertCircle width={20} height={20} fill="#18A0FB" />
           </div>
           <p className={styles.emptyStateTitle}>
-            Vous pouvez ajouter vos invités manuellement.
+            {I18N[language].addGuestsManually}
           </p>
           <div className={styles.emptyStateDescription}>
-            <p>
-              Cette option vous permet d'ajouter rapidement des personnes à
-              votre événement.
-            </p>
-            <p>
-              Il vous sera également possible de choisir si vous souhaitez
-              envoyer une confirmation à vos invités.
-            </p>
+            <p>{I18N[language].addGuestsQuickly}</p>
+            <p>{I18N[language].chooseSendConfirmation}</p>
           </div>
         </div>
         <button className={styles.addButton} onClick={handleAddGuest}>
           <IconUserRoundPlus />
-          <span>Ajouter des invités</span>
+          <span>{I18N[language].addGuests}</span>
         </button>
       </div>
     );
@@ -844,7 +873,7 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
         <div className={styles.iconWrapper}>
           <IconInvites width={20} height={20} />
         </div>
-        <h5>Aucun invité ne correspond à vos filtres.</h5>
+        <h5>{I18N[language].noGuestsMatchFilters}</h5>
       </div>
     );
   };
@@ -882,14 +911,14 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
           <div className={styles.filters}>
             <button className={styles.addButton} onClick={handleAddGuest}>
               <IconUserRoundPlus />
-              <span>Ajouter des invités</span>
+              <span>{I18N[language].addGuests}</span>
             </button>
             <div className={styles.right}>
               <div className={styles.searchContainer}>
                 <IconSearch />
                 <input
                   type="text"
-                  placeholder={"Rechercher"}
+                  placeholder={I18N[language].search}
                   value={filters.search}
                   onChange={(e) =>
                     handleFiltersChange({ search: e.target.value })
@@ -899,7 +928,7 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
               <Select
                 options={[
                   { value: 10, label: "10" },
-                  { value: 20, label: "20" },
+                  { value: 25, label: "25" },
                   { value: 50, label: "50" },
                   { value: 100, label: "100" },
                 ]}
@@ -910,7 +939,7 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
                 onChange={(selected) => {
                   handleFiltersChange({ pageSize: selected.value });
                 }}
-                styles={SELECT_STYLES}
+                styles={PAGE_SIZE_SELECT_STYLES}
                 components={{ DropdownIndicator }}
                 isSearchable={false}
               />
@@ -924,10 +953,10 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
                   <thead>
                     <tr>
                       <th />
-                      <th>Nom</th>
-                      <th>Email</th>
-                      <th>Statut</th>
-                      <th>Date d'inscription</th>
+                      <th>{I18N[language].name}</th>
+                      <th>{I18N[language].email}</th>
+                      <th>{I18N[language].status}</th>
+                      <th>{I18N[language].registrationDate}</th>
                       <th colSpan={7} />
                     </tr>
                   </thead>
@@ -964,6 +993,8 @@ export const Guests = ({ language, data: eventData, env, auth }) => {
         onConfirm={handleBulkAction}
         type={modalState.type}
         guestStats={selectedGuestsStats}
+        language={language}
+        env={env}
       />
 
       <GuestDetailsModal

@@ -586,129 +586,137 @@ export const EventCreationPopup = (props) => {
   };
 
   return (
-    <Modal isOpen={isOpen} className={styles.modal}>
+    <>
       <FlashMessage />
-      <div className={styles.header}>
-        <span className={styles.header_title}>
-          {eventId > 0 || data.eventId > 0
-            ? I18N[language]["manageEvent"]
-            : I18N[language]["createEvent"]}
-        </span>
-        <div className={styles.header_actions}>
-          <div className={styles.header_actions_icons}>
-            <div className={styles.header_actions_icon}>
-              <IconMaximize />
+      <Modal isOpen={isOpen} className={styles.modal}>
+        <div className={styles.header}>
+          <span className={styles.header_title}>
+            {eventId > 0 || data.eventId > 0
+              ? I18N[language]["manageEvent"]
+              : I18N[language]["createEvent"]}
+          </span>
+          <div className={styles.header_actions}>
+            <div className={styles.header_actions_icons}>
+              <div className={styles.header_actions_icon}>
+                <IconMaximize />
+              </div>
+              <div className={styles.header_actions_icon}>
+                <IconDots />
+              </div>
             </div>
-            <div className={styles.header_actions_icon}>
-              <IconDots />
-            </div>
+            <IconCloseBlack />
           </div>
-          <IconCloseBlack />
-        </div>
-      </div>
-
-      <div className={styles.content}>
-        <div className={styles.tabs}>
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              className={`${styles.tab} ${
-                step === tab.id ? styles.tab_active : ""
-              }`}
-            >
-              <span className={styles.tab_icon}>{tab.icon}</span>
-              <span className={styles.tab_label}>{tab.label}</span>
-            </button>
-          ))}
         </div>
 
-        {step === 0 && (
-          <Editor
-            language={language}
-            data={data}
-            setData={setData}
-            validationErrors={validationErrors}
-            setValidationErrors={setValidationErrors}
-            setStep={setStep}
-          />
-        )}
-        {step === 1 && (
-          <Config
-            language={language}
-            data={data}
-            setData={setData}
-            validationErrors={validationErrors}
-            setValidationErrors={setValidationErrors}
-            setStep={setStep}
-            tags={tags}
-            env={env}
-            auth={auth}
-            clientId={clientId}
-            selectedSpeakers={selectedSpeakers}
-            setSelectedSpeakers={setSelectedSpeakers}
-            setSpeakersToDelete={setSpeakersToDelete}
-          />
-        )}
-        {step === 2 && (
-          <Guests language={language} data={data} env={env} auth={auth} />
-        )}
-        {step === 3 && (
-          <Tickets
-            language={language}
-            data={data}
-            setData={setData}
-            validationErrors={validationErrors}
-            setValidationErrors={setValidationErrors}
-            setStep={setStep}
-          />
-        )}
-      </div>
+        <div className={styles.content}>
+          <div className={styles.tabs}>
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                className={`${styles.tab} ${
+                  step === tab.id ? styles.tab_active : ""
+                }`}
+              >
+                <span className={styles.tab_icon}>{tab.icon}</span>
+                <span className={styles.tab_label}>{tab.label}</span>
+              </button>
+            ))}
+          </div>
 
-      <div className={styles.footer}>
-        {step > 0 && (
-          <button
-            className={styles.footer_previousButton}
-            onClick={() => setStep(step - 1)}
-          >
-            <IconArrowBlack />
-            {I18N[language]["previous"]}
-          </button>
-        )}
-        <div className={styles.footer_actions}>
-          <button
-            className={`${styles.footer_saveButton} ${
-              step === 0 ? styles.footer_saveButton_disabled : ""
-            }`}
-            disabled={step === 0 || isSaving}
-            onClick={handleSave}
-          >
-            {isSaving && <ClipLoader size={16} color="#ffffff" />}
-            {I18N[language]["save"]}
-          </button>
-          {step < 3 && (
-            <button
-              className={styles.footer_nextButton}
-              onClick={handleContinue}
-              disabled={isSaving}
-            >
-              <span>
-                {step === 0
-                  ? I18N[language]["configNext"]
-                  : step === 1
-                  ? I18N[language]["addGuests"]
-                  : step === 2
-                  ? I18N[language]["manageTickets"]
-                  : ""}
-              </span>
-              {isSaving ? (
-                <ClipLoader size={16} color="#ffffff" />
-              ) : (
-                <IconArrowWhite />
-              )}
-            </button>
+          {step === 0 && (
+            <Editor
+              language={language}
+              data={data}
+              setData={setData}
+              validationErrors={validationErrors}
+              setValidationErrors={setValidationErrors}
+              setStep={setStep}
+            />
+          )}
+          {step === 1 && (
+            <Config
+              language={language}
+              data={data}
+              setData={setData}
+              validationErrors={validationErrors}
+              setValidationErrors={setValidationErrors}
+              setStep={setStep}
+              tags={tags}
+              env={env}
+              auth={auth}
+              clientId={clientId}
+              selectedSpeakers={selectedSpeakers}
+              setSelectedSpeakers={setSelectedSpeakers}
+              setSpeakersToDelete={setSpeakersToDelete}
+            />
+          )}
+          {step === 2 && (
+            <Guests
+              language={language}
+              data={data}
+              env={env}
+              auth={auth}
+              eventId={eventId || data.eventId}
+            />
+          )}
+          {step === 3 && (
+            <Tickets
+              language={language}
+              data={data}
+              setData={setData}
+              validationErrors={validationErrors}
+              setValidationErrors={setValidationErrors}
+              setStep={setStep}
+            />
           )}
         </div>
-      </div>
-    </Modal>
+
+        <div className={styles.footer}>
+          {step > 0 && (
+            <button
+              className={styles.footer_previousButton}
+              onClick={() => setStep(step - 1)}
+            >
+              <IconArrowBlack />
+              {I18N[language]["previous"]}
+            </button>
+          )}
+          <div className={styles.footer_actions}>
+            <button
+              className={`${styles.footer_saveButton} ${
+                step === 0 ? styles.footer_saveButton_disabled : ""
+              }`}
+              disabled={step === 0 || isSaving}
+              onClick={handleSave}
+            >
+              {isSaving && <ClipLoader size={16} color="#ffffff" />}
+              {I18N[language]["save"]}
+            </button>
+            {step < 3 && (
+              <button
+                className={styles.footer_nextButton}
+                onClick={handleContinue}
+                disabled={isSaving}
+              >
+                <span>
+                  {step === 0
+                    ? I18N[language]["configNext"]
+                    : step === 1
+                    ? I18N[language]["addGuests"]
+                    : step === 2
+                    ? I18N[language]["manageTickets"]
+                    : ""}
+                </span>
+                {isSaving ? (
+                  <ClipLoader size={16} color="#ffffff" />
+                ) : (
+                  <IconArrowWhite />
+                )}
+              </button>
+            )}
+          </div>
+        </div>
+      </Modal>
+    </>
   );
 };

@@ -154,6 +154,25 @@ export const getEventUrl = (env) => {
   return eventUrl;
 };
 
+export const getSendingUrl = (env) => {
+  let sendingUrl = "";
+  switch (env) {
+    case "local":
+      sendingUrl = "http://local.sending.tamtam.pro:3003";
+      break;
+    case "preprod":
+      sendingUrl = "https://sending.preprod.tamtam.pro";
+      break;
+    case "staging":
+      sendingUrl = "https://sending.staging.tamtam.pro";
+      break;
+    default:
+      sendingUrl = "https://sending.tamtam.pro";
+      break;
+  }
+  return sendingUrl;
+};
+
 export const getDateLabel = (date) => {
   const d = new Date(date);
 

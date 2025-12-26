@@ -1,4 +1,4 @@
-export const SELECT_STYLES = {
+export const PAGE_SIZE_SELECT_STYLES = {
   control: (provided, state) => ({
     ...provided,
     minHeight: "32px",
@@ -91,5 +91,79 @@ export const SELECT_STYLES = {
     "&:active": {
       backgroundColor: "#f3faff",
     },
+  }),
+};
+
+export const STATUS_SELECT_STYLES = {
+  control: (base, state) => ({
+    ...base,
+    minHeight: "32px",
+    height: "32px",
+    borderColor: state.menuIsOpen ? "#29394d" : "#b2bcc6",
+    borderWidth: "0.5px",
+    borderRadius: "8px",
+    boxShadow: "none",
+    cursor: "pointer",
+    "&:hover": {
+      borderColor: state.menuIsOpen ? "#29394d" : "#b2bcc6",
+    },
+  }),
+  valueContainer: (base) => ({
+    ...base,
+    height: "32px",
+    padding: "0 10px",
+  }),
+  input: (base) => ({
+    ...base,
+    margin: "0",
+    padding: "0",
+  }),
+  indicatorSeparator: () => ({
+    display: "none",
+  }),
+  indicatorsContainer: (base) => ({
+    ...base,
+    height: "32px",
+  }),
+  menu: (base) => ({
+    ...base,
+    marginTop: "4px",
+    borderRadius: "8px",
+    border: "0.5px solid #e1e4e8",
+    boxShadow: "0 4px 12px rgba(41, 57, 77, 0.1)",
+  }),
+  menuList: (base) => ({
+    ...base,
+    padding: "4px",
+    borderRadius: "8px",
+  }),
+  option: (base, state) => ({
+    ...base,
+    backgroundColor: state.isDisabled
+      ? "white"
+      : state.isSelected
+      ? "#f3faff"
+      : state.isFocused
+      ? "#f4f7f9"
+      : "white",
+    color: state.isDisabled ? "#b2bcc6" : "#29394d",
+    cursor: state.isDisabled ? "not-allowed" : "pointer",
+    padding: "8px 10px",
+    borderRadius: "6px",
+    margin: "2px 0",
+    fontSize: "12px",
+    fontFamily: "Roboto, sans-serif",
+    fontWeight: 600,
+    opacity: state.isDisabled ? 0.6 : 1,
+    "&:active": {
+      backgroundColor: state.isDisabled ? "white" : "#f3faff",
+    },
+  }),
+  singleValue: (base) => ({
+    ...base,
+    fontSize: "12px",
+    fontFamily: "Roboto, sans-serif",
+    fontWeight: 600,
+    margin: 0,
   }),
 };
