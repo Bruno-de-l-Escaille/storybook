@@ -1,0 +1,108 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: -10px;
+
+  :global(.ant-pagination-item),
+  :global(.ant-pagination-prev),
+  :global(.ant-pagination-next),
+  :global(.ant-pagination-jump-prev),
+  :global(.ant-pagination-jump-next) {
+    margin-right: 0;
+    font-family: unset;
+  }
+
+  :global(.ant-pagination-item) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: #6d7f92;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-radius: 50%;
+    font-size: 12px;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: 1px solid #e1e4e8;
+
+    a {
+      color: #6d7f92;
+    }
+  }
+
+  :global(.ant-pagination-item-active) {
+    color: #fff;
+    text-shadow: 0 4px 4px #00000040;
+    background: #6d7f92;
+    border: 1px solid #6d7f92;
+
+    a {
+      color: #fff;
+    }
+
+    &:hover {
+      background: #6d7f92;
+      border: 1px solid #6d7f92;
+
+      a {
+        color: #fff;
+      }
+    }
+  }
+
+  :global(.ant-pagination-prev),
+  :global(.ant-pagination-next) {
+    &:global(.ant-pagination-disabled) .navButton {
+      opacity: 0.6;
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: #fff;
+      }
+    }
+  }
+
+  :global(.ant-pagination-jump-prev),
+  :global(.ant-pagination-jump-next) {
+    // empty
+  }
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 116px;
+  height: 32px;
+  padding: 9px 33px;
+  border-radius: 40px;
+  background-color: #fff;
+  border: 1px solid #e1e4e8;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #6d7f92;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500 !important;
+  line-height: normal;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: #0000000f;
+  }
+}
+
+.ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  color: #999;
+}

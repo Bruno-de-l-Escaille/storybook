@@ -650,14 +650,7 @@ export const EventCreationPopup = (props) => {
           />
         )}
         {step === 2 && (
-          <Guests
-            language={language}
-            data={data}
-            setData={setData}
-            validationErrors={validationErrors}
-            setValidationErrors={setValidationErrors}
-            setStep={setStep}
-          />
+          <Guests language={language} data={data} env={env} auth={auth} />
         )}
         {step === 3 && (
           <Tickets

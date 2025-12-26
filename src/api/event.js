@@ -306,3 +306,80 @@ export const deleteSpeaker = ({ apiUrl, token, eventId, authorId }) => {
   console.log("AAAA delete", eventId, authorId);
   return axios.post(requestUrl, formData);
 };
+
+export const fetchGuests = async ({ apiUrl, token, filters }) => {
+  const requestUrl = `${apiUrl}/event/guest`;
+
+  const data = await axios.get(requestUrl, {
+    params: {
+      access_token: token,
+      filter: JSON.stringify(filters),
+      fields: "*",
+      nolimit: 1,
+    },
+  });
+
+  return data.data;
+};
+
+export const forceGuest = async ({
+  apiUrl,
+  token,
+  eventId,
+  userIds,
+  type, // 'register'(accept) or 'decline' or 'add'(invite)
+  fromBackOffice,
+  sendEmail,
+}) => {
+  const requestUrl = `${apiUrl}/event/guest/register/force`;
+
+  var formData = new FormData();
+  formData.append("access_token", token);
+  formData.append("eventId", eventId);
+  formData.append("type", type);
+  formData.append("fromBackOffice", fromBackOffice ? 1 : 0);
+  formData.append("sendEmail", sendEmail ? 1 : 0);
+
+  userIds.forEach((userId) => {
+    formData.append("userIds[]", userId);
+  });
+
+  const data = await axios.post(requestUrl, formData);
+
+  return data.data;
+};
+
+export const confirmGuestStep = async ({
+  // Send step email to guest
+  apiUrl,
+  token,
+  eventId,
+  userId,
+  step,
+}) => {
+  const requestUrl = `${apiUrl}/event/guest/register/confirm-step`;
+
+  var formData = new FormData();
+  formData.append("access_token", token);
+  formData.append("eventId", eventId);
+  formData.append("userId", userId);
+  formData.append("step", step);
+
+  const data = await axios.post(requestUrl, formData);
+
+  return data.data;
+};
+
+export const fetchGuestLogs = async ({ apiUrl, token, guestId }) => {
+  const requestUrl = `${apiUrl}/event/log/get-all-logs-optimized`;
+
+  const data = await axios.get(requestUrl, {
+    params: {
+      access_token: token,
+      objectName: "guest",
+      objectId: guestId,
+    },
+  });
+
+  return data.data;
+};

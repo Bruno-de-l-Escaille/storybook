@@ -1,6 +1,7 @@
 import React from "react";
 import { object, withKnobs } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { EventCreationPopup } from "./EventCreationPopup";
 
 export default {
@@ -14,7 +15,7 @@ export default {
 };
 
 const authLogin = {
-  token: "e2079954df9d5e69ffa28408d1cef006b0bbd60f",
+  token: "13b2f331a02a1abde308682b66690f9bd2db45b1",
   loggedAs: "ADMIN",
   navCommunity: {
     id: 9,
@@ -194,12 +195,17 @@ const authLogin = {
   },
 };
 
+const queryClient = new QueryClient();
+
 export const Default = () => (
-  <EventCreationPopup
-    isOpen={true}
-    language="fr"
-    env="local"
-    auth={object("auth", authLogin)}
-    clientId={4}
-  />
+  <QueryClientProvider client={queryClient}>
+    <EventCreationPopup
+      isOpen={true}
+      language="fr"
+      env="local"
+      auth={object("auth", authLogin)}
+      clientId={4}
+      eventId={2255}
+    />
+  </QueryClientProvider>
 );
