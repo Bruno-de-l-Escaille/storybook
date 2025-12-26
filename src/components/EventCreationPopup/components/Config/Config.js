@@ -11,8 +11,7 @@ import { StatusSelect } from "../StatusSelect";
 import { DatePicker } from "antd";
 import momentGenerateConfig from "rc-picker/lib/generate/moment";
 import moment from "moment";
-import { getTags } from "../../../../api";
-import { getApiUrl, isEmpty } from "../../../../utils";
+import { isEmpty } from "../../../../utils";
 
 const MomentDatePicker = DatePicker.generatePicker(momentGenerateConfig);
 
@@ -23,25 +22,13 @@ export const Config = (props) => {
     setData,
     validationErrors,
     setValidationErrors,
-    env,
-    auth,
+    tags,
   } = props;
-
-  const [tags, setTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
-  const apiUrl = getApiUrl(env);
-
-  useEffect(() => {
-    getTags({ token: auth.token, language, customFilter: null, apiUrl }).then(
-      (resp) => {
-        setTags(resp.data.data || []);
-      }
-    );
-  }, []);
 
   useEffect(() => {
     if (!isEmpty(data.tag)) {
