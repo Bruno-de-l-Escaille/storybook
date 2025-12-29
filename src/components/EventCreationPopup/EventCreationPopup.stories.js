@@ -1,5 +1,5 @@
 import React from "react";
-import { object, withKnobs } from "@storybook/addon-knobs";
+import { boolean, object, withKnobs } from "@storybook/addon-knobs";
 import StoryRouter from "storybook-react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { EventCreationPopup } from "./EventCreationPopup";
@@ -200,7 +200,7 @@ const queryClient = new QueryClient();
 export const Default = () => (
   <QueryClientProvider client={queryClient}>
     <EventCreationPopup
-      isOpen={true}
+      isOpen={boolean("isOpen", true)}
       language="fr"
       env="local"
       auth={object("auth", authLogin)}
