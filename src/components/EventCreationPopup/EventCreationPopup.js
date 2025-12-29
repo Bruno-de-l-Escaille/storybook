@@ -27,7 +27,7 @@ import {
 import { Toast, FlashMessage } from "../ToastContainer/ToastContainer";
 import { ClipLoader } from "react-spinners";
 
-export const EventCreationPopup = (props) => {
+export function EventCreationPopup(props) {
   const { isOpen, language, env, auth, clientId, eventId } = props;
   const [step, setStep] = useState(0);
   const [tags, setTags] = useState([]);
@@ -588,7 +588,19 @@ export const EventCreationPopup = (props) => {
   return (
     <>
       <FlashMessage />
-      <Modal isOpen={isOpen} className={styles.modal}>
+      <Modal
+        isOpen={isOpen}
+        className={{
+          base: styles.modal,
+          afterOpen: styles.modalAfterOpen,
+          beforeClose: styles.modalBeforeClose,
+        }}
+        overlayClassName={{
+          base: styles.overlay,
+          afterOpen: styles.overlayAfterOpen,
+          beforeClose: styles.overlayBeforeClose,
+        }}
+      >
         <div className={styles.header}>
           <span className={styles.header_title}>
             {eventId > 0 || data.eventId > 0
@@ -719,4 +731,4 @@ export const EventCreationPopup = (props) => {
       </Modal>
     </>
   );
-};
+}

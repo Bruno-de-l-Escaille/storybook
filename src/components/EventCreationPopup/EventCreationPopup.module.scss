@@ -1,10 +1,16 @@
 .modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
   padding: 0;
   background: #fff;
   display: flex;
   flex-direction: column;
-  height: 100vh;
   overflow: hidden;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-out;
 
   .header {
     display: flex;
@@ -205,4 +211,32 @@
       }
     }
   }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.overlayAfterOpen {
+  opacity: 1;
+}
+
+.overlayBeforeClose {
+  opacity: 0;
+}
+
+.modalAfterOpen {
+  transform: translateX(0);
+}
+
+.modalBeforeClose {
+  transform: translateX(100%);
 }
