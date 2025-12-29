@@ -303,7 +303,6 @@ export const deleteSpeaker = ({ apiUrl, token, eventId, authorId }) => {
   const requestUrl = `${apiUrl}/event/speaker/delete-author/${eventId}/${authorId}`;
   var formData = new FormData();
   formData.append("access_token", token);
-  console.log("AAAA delete", eventId, authorId);
   return axios.post(requestUrl, formData);
 };
 
