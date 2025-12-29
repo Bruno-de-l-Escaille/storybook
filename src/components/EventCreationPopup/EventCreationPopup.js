@@ -581,7 +581,15 @@ export const EventCreationPopup = (props) => {
           // Save failed, don't advance
         });
     } else {
+      const validated = checkValidations();
+      if (!validated) return;
       setStep((prevStep) => prevStep + 1);
+    }
+  };
+
+  const handleTabClick = (tabId) => () => {
+    if (tabId < step) {
+      setStep(tabId);
     }
   };
 
@@ -628,6 +636,7 @@ export const EventCreationPopup = (props) => {
                 className={`${styles.tab} ${
                   step === tab.id ? styles.tab_active : ""
                 }`}
+                onClick={handleTabClick(tab.id)}
               >
                 <span className={styles.tab_icon}>{tab.icon}</span>
                 <span className={styles.tab_label}>{tab.label}</span>
