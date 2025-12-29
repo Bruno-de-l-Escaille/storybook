@@ -205,7 +205,6 @@ export const Default = () => (
       env="local"
       auth={object("auth", authLogin)}
       clientId={4}
-      eventId={2299}
     />
   </QueryClientProvider>
 );
