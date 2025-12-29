@@ -27,7 +27,7 @@ import {
 import { Toast, FlashMessage } from "../ToastContainer/ToastContainer";
 import { ClipLoader } from "react-spinners";
 
-export default function EventCreationPopup(props) {
+export const EventCreationPopup = (props) => {
   const { isOpen, language, env, auth, clientId, eventId } = props;
   const [step, setStep] = useState(0);
   const [tags, setTags] = useState([]);
@@ -731,4 +731,4 @@ export default function EventCreationPopup(props) {
       </Modal>
     </>
   );
-}
+};
