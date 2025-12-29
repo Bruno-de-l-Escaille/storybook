@@ -15,7 +15,7 @@ export default {
 };
 
 const authLogin = {
-  token: "13b2f331a02a1abde308682b66690f9bd2db45b1",
+  token: "e2079954df9d5e69ffa28408d1cef006b0bbd60f",
   loggedAs: "ADMIN",
   navCommunity: {
     id: 9,

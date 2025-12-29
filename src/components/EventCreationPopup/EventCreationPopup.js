@@ -29,6 +29,7 @@ import { ClipLoader } from "react-spinners";
 
 export const EventCreationPopup = (props) => {
   const { isOpen, language, env, auth, clientId, eventId } = props;
+  const [modalOpen, setIsModalOpen] = useState(isOpen);
   const [step, setStep] = useState(0);
   const [tags, setTags] = useState([]);
   const [speakersToDelete, setSpeakersToDelete] = useState([]);
@@ -550,13 +551,12 @@ export const EventCreationPopup = (props) => {
             apiUrl,
             token: auth.token,
             data: finalDataToSave,
-          });
+          }).then(() => savedEventId);
         }
-        return Promise.resolve({ results: [], savedEventId });
+        return Promise.resolve(savedEventId);
       })
-      .then(({ results, savedEventId }) => {
-        const eventId = savedEventId;
-        return deleteSpeakersMarkedForDeletion(eventId);
+      .then((savedEventId) => {
+        return deleteSpeakersMarkedForDeletion(savedEventId);
       })
       .then(() => {
         Toast.success(I18N[language]["eventSavedSuccessfully"]);
@@ -597,7 +597,7 @@ export const EventCreationPopup = (props) => {
     <>
       <FlashMessage />
       <Modal
-        isOpen={isOpen}
+        isOpen={modalOpen}
         className={{
           base: styles.modal,
           afterOpen: styles.modalAfterOpen,
@@ -624,7 +624,12 @@ export const EventCreationPopup = (props) => {
                 <IconDots />
               </div>
             </div>
-            <IconCloseBlack />
+            <div
+              onClick={() => setIsModalOpen(false)}
+              className={styles.header_close}
+            >
+              <IconCloseBlack />
+            </div>
           </div>
         </div>
 
