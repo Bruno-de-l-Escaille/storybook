@@ -28,8 +28,7 @@ import { Toast, FlashMessage } from "../ToastContainer/ToastContainer";
 import { ClipLoader } from "react-spinners";
 
 export const EventCreationPopup = (props) => {
-  const { isOpen, language, env, auth, clientId, eventId } = props;
-  const [modalOpen, setIsModalOpen] = useState(isOpen);
+  const { isOpen, onClose, language, env, auth, clientId, eventId } = props;
   const [step, setStep] = useState(0);
   const [tags, setTags] = useState([]);
   const [speakersToDelete, setSpeakersToDelete] = useState([]);
@@ -597,7 +596,7 @@ export const EventCreationPopup = (props) => {
     <>
       <FlashMessage />
       <Modal
-        isOpen={modalOpen}
+        isOpen={isOpen}
         className={{
           base: styles.modal,
           afterOpen: styles.modalAfterOpen,
@@ -624,10 +623,7 @@ export const EventCreationPopup = (props) => {
                 <IconDots />
               </div>
             </div>
-            <div
-              onClick={() => setIsModalOpen(false)}
-              className={styles.header_close}
-            >
+            <div onClick={onClose} className={styles.header_close}>
               <IconCloseBlack />
             </div>
           </div>
