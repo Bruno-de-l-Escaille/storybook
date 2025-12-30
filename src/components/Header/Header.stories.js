@@ -563,6 +563,18 @@ export const HeaderLoggedOutOTC = () => (
   />
 );
 
+export const HeaderLoggedOutOTCHideRegister = () => (
+  <Header
+    app={object("app", App)}
+    auth={object("auth", authLogout)}
+    env={text("env", "local")}
+    lng={select("language", ["fr", "nl", "en"], "fr")}
+    onLanguageChange={(langue) => alert(langue)}
+    isOtcAuth={boolean("isOtcAuth", true)}
+    hideRegister={boolean("hideRegister", true)}
+  />
+);
+
 export const HeaderAuthLink = () => (
   <AuthLink
     app={object("app", App)}

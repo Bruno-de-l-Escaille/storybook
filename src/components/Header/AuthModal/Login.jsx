@@ -30,6 +30,7 @@ const Login = ({
   showResetPassword,
   showForgotCheckEmail = false,
   showForgotStep,
+  hideRegister = false,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -202,12 +203,14 @@ const Login = ({
           </svg>
         </span>
       </div>
-      <div className={styles.topBar}>
-        <span>{i18n.auth.new}</span>
-        <span onClick={showRegister} className={styles.topBar_link}>
-          {i18n.auth.signup}
-        </span>
-      </div>
+      {!hideRegister && (
+        <div className={styles.topBar}>
+          <span>{i18n.auth.new}</span>
+          <span onClick={showRegister} className={styles.topBar_link}>
+            {i18n.auth.signup}
+          </span>
+        </div>
+      )}
       <div className={styles.container}>
         <div className={styles.loginContent}>
           {showCheckEmail ? (
