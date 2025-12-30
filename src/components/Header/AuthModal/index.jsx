@@ -120,7 +120,7 @@ const AuthModal = ({ env, lng, app, hideRegister = false }) => {
   return (
     <>
       <div className={styles.signIn} onClick={() => setShowModal(true)}>
-        {hideRegister ? I18N[lng].auth.signin : I18N[lng].auth.signInUp}
+        {I18N[lng].auth.signInUp}
       </div>
 
       <Modal
