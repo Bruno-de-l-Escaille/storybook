@@ -312,9 +312,9 @@ export const Config = (props) => {
     <div className={styles.config}>
       <div className={styles.config_content}>
         <div className={styles.config_section_left}>
-          <label className={styles.config_label}>
+          <span className={styles.config_label}>
             {I18N[language]["speakers"]}
-          </label>
+          </span>
           <div className={styles.config_speakers}>
             <div className={styles.config_speakerList}>
               {selectedSpeakers.map((speaker) => (

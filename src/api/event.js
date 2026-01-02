@@ -383,3 +383,47 @@ export const fetchGuestLogs = async ({ apiUrl, token, guestId, eventId }) => {
 
   return data.data;
 };
+
+export const fetchLabelTemplates = async ({ apiUrl, token }) => {
+  const requestUrl = `${apiUrl}/event/label-template`;
+
+  const data = await axios.get(requestUrl, {
+    params: {
+      access_token: token,
+    },
+  });
+
+  return data.data;
+};
+
+export const printLabels = async ({
+  apiUrl,
+  token,
+  eventId,
+  brand,
+  reference,
+}) => {
+  const requestUrl = `${apiUrl}/event/event/create-labels-pdf/${eventId}`;
+
+  const data = await axios.get(requestUrl, {
+    params: {
+      access_token: token,
+      brand: brand,
+      reference: reference,
+    },
+  });
+
+  return data.data;
+};
+
+export const deleteLabel = async ({ apiUrl, token, eventId, labelName }) => {
+  const requestUrl = `${apiUrl}/event/event/delete-labels-pdf/${eventId}`;
+
+  const formData = new FormData();
+  formData.append("access_token", token);
+  formData.append("document", labelName);
+
+  const data = await axios.post(requestUrl, formData);
+
+  return data.data;
+};
