@@ -23,15 +23,26 @@ import {
   getTags,
   saveEventAuthor,
   deleteSpeaker,
+  fetchLabelTemplates,
 } from "../../api";
 import { Toast, FlashMessage } from "../ToastContainer/ToastContainer";
 import { ClipLoader } from "react-spinners";
 
 export const EventCreationPopup = (props) => {
-  const { isOpen, onClose, language, env, auth, clientId, eventId } = props;
-  const [step, setStep] = useState(0);
+  const {
+    isOpen,
+    onClose,
+    language,
+    env,
+    auth,
+    clientId,
+    eventId,
+    eventStep,
+  } = props;
+  const [step, setStep] = useState(eventStep || 0);
   const [tags, setTags] = useState([]);
   const [speakersToDelete, setSpeakersToDelete] = useState([]);
+  const [labelTemplates, setLabelTemplates] = useState([]);
   const [data, setData] = useState({
     eventId: eventId || 0,
     nameFr: "",
@@ -291,6 +302,15 @@ export const EventCreationPopup = (props) => {
         setTags(resp.data.data || []);
       }
     );
+  }, []);
+
+  useEffect(() => {
+    fetchLabelTemplates({
+      token: auth.token,
+      apiUrl,
+    }).then((resp) => {
+      setLabelTemplates(resp.data || []);
+    });
   }, []);
 
   const checkValidations = () => {
@@ -587,7 +607,7 @@ export const EventCreationPopup = (props) => {
   };
 
   const handleTabClick = (tabId) => () => {
-    if (tabId < step) {
+    if (tabId < step || eventId > 0 || data.eventId > 0) {
       setStep(tabId);
     }
   };
@@ -616,12 +636,12 @@ export const EventCreationPopup = (props) => {
           </span>
           <div className={styles.header_actions}>
             <div className={styles.header_actions_icons}>
-              <div className={styles.header_actions_icon}>
+              {/* <div className={styles.header_actions_icon}>
                 <IconMaximize />
               </div>
               <div className={styles.header_actions_icon}>
                 <IconDots />
-              </div>
+              </div> */}
             </div>
             <div onClick={onClose} className={styles.header_close}>
               <IconCloseBlack />
@@ -689,6 +709,11 @@ export const EventCreationPopup = (props) => {
               validationErrors={validationErrors}
               setValidationErrors={setValidationErrors}
               setStep={setStep}
+              labelTemplates={labelTemplates}
+              env={env}
+              auth={auth}
+              eventId={eventId || data.eventId}
+              clientId={clientId}
             />
           )}
         </div>
