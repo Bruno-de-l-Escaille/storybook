@@ -348,6 +348,7 @@ export const createCompleteAuthState = (
     isSubscribed: false,
     jti: authData.jti,
     jwtToken: authData.jwt,
+    refreshToken: authData.refreshToken,
     navCommunity,
     phone: userData.phone || authData.phone,
     saving: false,

@@ -104,6 +104,7 @@ const GoPeopleAuthHeader = ({
       const baseAuthData = {
         token: data.token || authContext.ttpAccessToken,
         jwt: jwt,
+        refreshToken: data.refresh_token,
         expiresIn:
           data.expiresIn || authContext.exp - Math.floor(Date.now() / 1000),
         createdAt: data.createdAt || Math.floor(Date.now() / 1000),
@@ -146,16 +147,13 @@ const GoPeopleAuthHeader = ({
         userResponse = await getGoPeopleUserProfile(apiBaseUrl, jwt);
         console.log("======== userResponse ==========", userResponse);
 
-        const userData = userResponse?.data?.data?.[0];
-
-        let selectedOrganizationId =
-          userData?.selected_community?.ttp_community_id ?? 4;
+        let selectedOrganizationId = userResponse.selected_community
+          ? userResponse.selected_community.ttp_community_id
+          : 4;
 
         console.log(
           "======== selectedOrganizationId,userResponse  ==========",
           selectedOrganizationId,
-          "test new ",
-          userData,
           userResponse
         );
         console.log(
