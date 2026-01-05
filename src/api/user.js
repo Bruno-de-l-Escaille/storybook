@@ -71,3 +71,31 @@ export const fetchOrganizations = (apiUrl, token, userId) => {
     },
   });
 };
+
+export const searchSpeakers = ({
+  apiUrl,
+  token,
+  searchValue,
+  organizationId,
+}) => {
+  const requestUrl = `${apiUrl}/blog/avatar/avatars-and-authors`;
+  const filter = [{ property: "name", value: searchValue, operator: "like" }];
+  const fields = [
+    "*",
+    "email",
+    "mediaChain",
+    "avatar",
+    "blogRoleInOrganization",
+  ];
+
+  return axios.get(requestUrl, {
+    params: {
+      access_token: token,
+      filter: JSON.stringify(filter),
+      fields: fields.join(","),
+      limit: 5,
+      start: 0,
+      organization_id: organizationId,
+    },
+  });
+};

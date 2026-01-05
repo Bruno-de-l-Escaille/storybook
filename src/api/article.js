@@ -3,6 +3,7 @@ import {
   generateCancellationTokenSource,
   getRequestCancellationToken,
   getRequestConfig,
+  isEmpty,
   throwCatchedError,
 } from "../utils";
 
@@ -55,12 +56,16 @@ export const getArticle = ({ apiUrl, token, articleId }) => {
   });
 };
 
-export const uploadMedia = ({ apiUrl, token, data }) => {
+export const uploadMedia = ({ apiUrl, token, data, filePath = "" }) => {
   const requestUrl = `${apiUrl}/media/media/upload-media`;
 
   var formData = new FormData();
   formData.append("access_token", token);
   formData.append("file", data);
+
+  if (!isEmpty(filePath)) {
+    formData.append("filePath", filePath);
+  }
 
   return axios.post(requestUrl, formData, {
     Warning: "413",

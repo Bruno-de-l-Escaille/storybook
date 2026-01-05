@@ -1,0 +1,184 @@
+.editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &_content {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &_imageUpload {
+    border: 0.5px dashed #b2bcc6;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background-color: #f8f9fa;
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3 / 1;
+    height: 300px;
+
+    &:not(:has(img)) {
+      padding: 60px 40px;
+    }
+
+    &:hover {
+      border-color: #9ca3af;
+      background-color: #f3f4f6;
+    }
+
+    &_dragging {
+      border-color: #18a0fb;
+      background-color: #eff6ff;
+    }
+
+    &_placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    &_icon {
+      margin-bottom: 8px;
+    }
+
+    &_text {
+      color: #6d7f92;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    &_format {
+      color: #6d7f92;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    &_mediaButton {
+      padding: 8px 18px;
+      background: #f1f2f4;
+      border: 0.5px solid #e1e4e8;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #6d7f92;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: #f9fafb;
+        border-color: #9ca3af;
+      }
+    }
+
+    &_image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 5px;
+      display: block;
+      background-color: #f8f9fa;
+    }
+
+    &_removeButton {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      color: #29394d;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        background: white;
+        color: #fc5d2b;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: scale(1.05);
+      }
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  &_titleInput {
+    width: 100%;
+    border: none;
+    outline: none;
+    transition: all 0.2s;
+    color: #6d7f92;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+    padding-bottom: 14px;
+    border-bottom: 0.5px solid #b2bcc6;
+
+    &::placeholder {
+      color: #9ca3af;
+    }
+
+    &_error {
+      border-bottom: 0.5px solid #fc5d2b;
+    }
+  }
+
+  &_errorMessage {
+    display: block;
+    color: #fc5d2b;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 4px;
+  }
+
+  &_descriptionEditor {
+    :global {
+      .sun-editor {
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+
+        .se-toolbar {
+          border-radius: 8px 8px 0 0;
+          background-color: #f9fafb;
+        }
+
+        .se-wrapper {
+          border-radius: 0 0 8px 8px;
+          border: 1px solid #d1d5db;
+        }
+
+        .se-placeholder {
+          color: #9ca3af;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .editor {
+    &_content {
+      padding: 20px;
+    }
+  }
+}

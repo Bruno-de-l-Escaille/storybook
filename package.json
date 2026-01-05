@@ -4,7 +4,7 @@
   "private": true,
   "main": "build/js/main.js",
   "scripts": {
-    "start": "start-storybook -p 3000 -s public",
+    "start": "start-storybook -p 9009 -s public",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "storybook": "start-storybook -p 9009 -s public",

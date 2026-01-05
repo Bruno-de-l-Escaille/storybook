@@ -1,0 +1,154 @@
+.tickets {
+  display: flex;
+  height: 100%;
+
+  &_content {
+    display: flex;
+    gap: 30px;
+    padding: 20px 30px;
+    width: 100%;
+  }
+
+  &_section_left {
+    width: 35%;
+  }
+
+  &_section_right {
+    width: 65%;
+  }
+
+  &_generateTickets {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+    border-radius: 20px;
+    background: #f1f2f4;
+
+    &_title {
+      color: #29394d;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 140%;
+    }
+
+    &_printCountWrapper {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      justify-content: center;
+      align-items: center;
+      align-self: stretch;
+      border-radius: 14px;
+      border: 1px solid #e1e4e8;
+    }
+
+    &_printCount {
+      color: #18a0fb;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 120%;
+      letter-spacing: -0.3px;
+    }
+
+    &_printLabel {
+      color: #29394d;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 140%;
+    }
+
+    &_modelDescription {
+      color: #29394d;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 140%;
+    }
+
+    &_modelSelect {
+      width: 100%;
+      text-align: center;
+    }
+
+    &_actionButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #06d9b1 0%, #18a0fb 100%);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 140%;
+
+      &:hover {
+        background: linear-gradient(90deg, #05c3a3 0%, #2495e1 100%);
+      }
+
+      &:disabled {
+        background: #a0aab8;
+        cursor: not-allowed;
+
+        &:hover {
+          background: #a0aab8;
+        }
+      }
+    }
+
+    &_noLabelsToPrint {
+      color: #6d7f92;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 140%;
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  .selectedModelInfo {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+
+    &_label {
+      color: #6d7f92;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 140%;
+    }
+
+    &_dimension {
+      color: #29394d;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 140%;
+    }
+
+    &_numberPerPage {
+      color: #29394d;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 140%;
+    }
+
+    &_pagesCountInfo {
+      color: #29394d;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 140%;
+    }
+  }
+}
