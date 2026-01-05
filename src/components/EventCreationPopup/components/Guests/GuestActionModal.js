@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import Modal from "react-modal";
 import PropTypes from "prop-types";
 import styles from "./GuestActionModal.module.scss";
@@ -24,12 +24,22 @@ export const GuestActionModal = ({
   guestStats = {},
   language,
   env,
+  guestStatus,
 }) => {
+  const isSingleGuest = guestStats.all === 1;
   const [selectedStatuses, setSelectedStatuses] = useState([]);
   const [sendImmediately, setSendImmediately] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const sendingUrl = getSendingUrl(env);
+
+  useEffect(() => {
+    if (isSingleGuest && isOpen) {
+      setSelectedStatuses(["pending", "invited", "declined", "accepted"]);
+    } else if (!isOpen) {
+      setSelectedStatuses([]);
+    }
+  }, [isSingleGuest, isOpen]);
 
   const handleStatusToggle = useCallback((status) => {
     setSelectedStatuses((prev) => {
@@ -60,9 +70,9 @@ export const GuestActionModal = ({
   }, [selectedStatuses, sendImmediately, onConfirm]);
 
   const handleCancel = useCallback(() => {
+    onClose();
     setSelectedStatuses([]);
     setSendImmediately(false);
-    onClose();
   }, [onClose]);
 
   const config = useMemo(() => {
@@ -70,10 +80,14 @@ export const GuestActionModal = ({
       [MODAL_TYPES.ACCEPT]: {
         icon: <IconUserRoundCheck width={30} height={30} />,
         iconBg: "#EDFAF5",
-        title: I18N[language].changeStatusToAccepted,
+        title: isSingleGuest
+          ? I18N[language].changeGuestStatusToAccepted
+          : I18N[language].changeStatusToAccepted,
         titleHighlight: I18N[language].guestsConfirmed,
         highlightColor: "#02AF8E",
-        description: I18N[language].usersWillBeAutomaticallyRegistered,
+        description: isSingleGuest
+          ? I18N[language].guestWillBeAutomaticallyRegistered
+          : I18N[language].usersWillBeAutomaticallyRegistered,
         statusLabel: I18N[language].specifyStatusesToAccept,
         statuses: [
           {
@@ -100,16 +114,22 @@ export const GuestActionModal = ({
           { value: true, label: I18N[language].sendImmediately },
           { value: false, label: I18N[language].doNotSend },
         ],
-        emailNotice: I18N[language].confirmationEmailWillBeSent,
+        emailNotice: isSingleGuest
+          ? I18N[language].confirmationEmailWillBeSentToGuest
+          : I18N[language].confirmationEmailWillBeSent,
         buttonLabel: I18N[language].apply,
       },
       [MODAL_TYPES.DECLINE]: {
         icon: <IconUserRoundX width={30} height={30} />,
         iconBg: "#FEDFD5",
-        title: I18N[language].changeStatusToDeclined,
+        title: isSingleGuest
+          ? I18N[language].changeGuestStatusToDeclined
+          : I18N[language].changeStatusToDeclined,
         titleHighlight: I18N[language].guestsDeclined,
         highlightColor: "#FC5D2B",
-        description: I18N[language].usersWillBeAutomaticallyUnregistered,
+        description: isSingleGuest
+          ? I18N[language].guestWillBeAutomaticallyUnregistered
+          : I18N[language].usersWillBeAutomaticallyUnregistered,
         statusLabel: I18N[language].specifyStatusesToDecline,
         statuses: [
           {
@@ -125,10 +145,10 @@ export const GuestActionModal = ({
             count: guestStats.invited || 0,
           },
           {
-            key: "confirmed",
+            key: "accepted",
             label: I18N[language].guestsConfirmed,
             color: "#02AF8E",
-            count: guestStats.confirmed || 0,
+            count: guestStats.accepted || 0,
           },
         ],
         confirmationLabel: I18N[language].confirmationRequest,
@@ -136,16 +156,22 @@ export const GuestActionModal = ({
           { value: true, label: I18N[language].sendImmediately },
           { value: false, label: I18N[language].doNotSend },
         ],
-        emailNotice: I18N[language].emailWillBeSentForUnregistration,
+        emailNotice: isSingleGuest
+          ? I18N[language].emailWillBeSentToGuestForUnregistration
+          : I18N[language].emailWillBeSentForUnregistration,
         buttonLabel: I18N[language].apply,
       },
       [MODAL_TYPES.SEND]: {
         icon: <IconSend width={30} height={30} />,
         iconBg: "#F1F2F4",
-        title: I18N[language].sendConfirmationEmails,
+        title: isSingleGuest
+          ? I18N[language].sendConfirmationEmail
+          : I18N[language].sendConfirmationEmails,
         titleHighlight: null,
         highlightColor: null,
-        description: I18N[language].usersWillReceiveAdaptedEmail,
+        description: isSingleGuest
+          ? I18N[language].guestWillReceiveAdaptedEmail
+          : I18N[language].usersWillReceiveAdaptedEmail,
         statusLabel: I18N[language].specifyStatusesForEmail,
         statuses: [
           {
@@ -161,10 +187,10 @@ export const GuestActionModal = ({
             count: guestStats.invited || 0,
           },
           {
-            key: "confirmed",
+            key: "accepted",
             label: I18N[language].guestsConfirmed,
             color: "#02AF8E",
-            count: guestStats.confirmed || 0,
+            count: guestStats.accepted || 0,
           },
         ],
         confirmationLabel: null,
@@ -175,17 +201,20 @@ export const GuestActionModal = ({
     };
 
     return configs[type] || configs[MODAL_TYPES.ACCEPT];
-  }, [type, guestStats, language]);
+  }, [type, guestStats, language, isSingleGuest]);
 
   const totalSelected = useMemo(() => {
+    if (isSingleGuest) {
+      return 1;
+    }
     return selectedStatuses.reduce((total, status) => {
       const statusData = config.statuses.find((s) => s.key === status);
       return total + (statusData?.count || 0);
     }, 0);
-  }, [selectedStatuses, config.statuses]);
+  }, [selectedStatuses, config.statuses, isSingleGuest]);
 
   const renderTitle = () => {
-    if (config.titleHighlight) {
+    if (config.titleHighlight && config.title) {
       const parts = config.title.split(`"${config.titleHighlight}"`);
       return (
         <p className={styles.title}>
@@ -202,6 +231,25 @@ export const GuestActionModal = ({
 
   const showEmailNotices = useMemo(() => {
     if (type === MODAL_TYPES.SEND) {
+      if (isSingleGuest) {
+        let message = I18N[language].guestWillReceiveAdaptedEmail;
+
+        if (guestStatus === "accepted") {
+          message = I18N[language].guestWillReceiveConfirmedEmail;
+        } else if (guestStatus === "invited") {
+          message = I18N[language].guestWillReceiveInvitedEmail;
+        } else if (guestStatus === "declined") {
+          message = I18N[language].guestWillReceiveDeclinedEmail;
+        }
+
+        return [
+          {
+            key: "single",
+            message,
+          },
+        ];
+      }
+
       return selectedStatuses.map((status) => {
         const statusData = config.statuses.find((s) => s.key === status);
         return {
@@ -223,6 +271,8 @@ export const GuestActionModal = ({
     selectedStatuses,
     config.statuses,
     language,
+    isSingleGuest,
+    guestStatus,
   ]);
 
   return (
@@ -256,48 +306,59 @@ export const GuestActionModal = ({
             </div>
           </div>
 
-          <div className={styles.divider} />
+          {!isSingleGuest && (
+            <>
+              <div className={styles.divider} />
 
-          <div className={styles.section}>
-            <p className={styles.sectionTitle}>{config.statusLabel}</p>
-            <div className={styles.statusGrid}>
-              {config.statuses.map((status) => (
-                <button
-                  key={status.key}
-                  className={`${styles.statusCard} ${
-                    selectedStatuses.includes(status.key) ? styles.selected : ""
-                  }`}
-                  onClick={() => handleStatusToggle(status.key)}
-                  disabled={status.count === 0}
-                >
-                  <div className={styles.radioButton}>
-                    <span
-                      className={
+              <div className={styles.section}>
+                <p className={styles.sectionTitle}>{config.statusLabel}</p>
+                <div className={styles.statusGrid}>
+                  {config.statuses.map((status) => (
+                    <button
+                      key={status.key}
+                      className={`${styles.statusCard} ${
                         selectedStatuses.includes(status.key)
-                          ? styles.radioActive
+                          ? styles.selected
                           : ""
-                      }
-                    />
-                  </div>
-                  <div className={styles.statusInfo}>
-                    <div className={styles.statusHeader}>
-                      <span className={styles.statusLabel}>{status.label}</span>
-                      <span
-                        className={styles.statusDot}
-                        style={{ backgroundColor: status.color }}
-                      />
-                    </div>
-                    <span className={styles.statusCount}>
-                      {status.count} {I18N[language].users}
-                    </span>
-                  </div>
-                </button>
-              ))}
-            </div>
-            <p className={styles.totalCount}>
-              {totalSelected} {I18N[language].totalUsers}
-            </p>
-          </div>
+                      }`}
+                      onClick={() => handleStatusToggle(status.key)}
+                      disabled={status.count === 0}
+                    >
+                      <div className={styles.radioButton}>
+                        <span
+                          className={
+                            selectedStatuses.includes(status.key)
+                              ? styles.radioActive
+                              : ""
+                          }
+                        />
+                      </div>
+                      <div className={styles.statusInfo}>
+                        <div className={styles.statusHeader}>
+                          <span className={styles.statusLabel}>
+                            {status.label}
+                          </span>
+                          <span
+                            className={styles.statusDot}
+                            style={{ backgroundColor: status.color }}
+                          />
+                        </div>
+                        <span className={styles.statusCount}>
+                          {status.count} {I18N[language].users}
+                        </span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+                <p className={styles.totalCount}>
+                  {totalSelected}{" "}
+                  {isSingleGuest
+                    ? I18N[language].user
+                    : I18N[language].totalUsers}
+                </p>
+              </div>
+            </>
+          )}
 
           {config.confirmationLabel && (
             <>
@@ -355,28 +416,32 @@ export const GuestActionModal = ({
             </>
           )}
 
-          {type === MODAL_TYPES.SEND && showEmailNotices.length > 0 && (
-            <div className={styles.section}>
-              <div className={styles.emailNoticeWrapper}>
-                {showEmailNotices.map((notice) => (
-                  <div key={notice.key} className={styles.emailNotice}>
-                    <div className={styles.noticeIcon}>
-                      <AlertCircle width={20} height={20} fill="#18A0FB" />
+          {!config.confirmationLabel && showEmailNotices.length > 0 && (
+            <>
+              <div className={styles.divider} />
+
+              <div className={styles.section}>
+                <div className={styles.emailNoticeWrapper}>
+                  {showEmailNotices.map((notice) => (
+                    <div key={notice.key} className={styles.emailNotice}>
+                      <div className={styles.noticeIcon}>
+                        <AlertCircle width={20} height={20} fill="#18A0FB" />
+                      </div>
+                      <div className={styles.noticeText}>
+                        <p>{notice.message}</p>
+                        <a
+                          className={styles.viewEmailLink}
+                          href={`${sendingUrl}`}
+                          target="_blank"
+                        >
+                          {I18N[language].viewEmail}
+                        </a>
+                      </div>
                     </div>
-                    <div className={styles.noticeText}>
-                      <p>{notice.message}</p>
-                      <a
-                        className={styles.viewEmailLink}
-                        href={`${sendingUrl}`}
-                        target="_blank"
-                      >
-                        {I18N[language].viewEmail}
-                      </a>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            </>
           )}
         </div>
 
@@ -413,10 +478,11 @@ GuestActionModal.propTypes = {
   selectedGuests: PropTypes.array,
   guestStats: PropTypes.shape({
     pending: PropTypes.number,
-    confirmed: PropTypes.number,
+    accepted: PropTypes.number,
     declined: PropTypes.number,
   }),
   language: PropTypes.string,
+  guestStatus: PropTypes.string,
 };
 
 export { MODAL_TYPES };
