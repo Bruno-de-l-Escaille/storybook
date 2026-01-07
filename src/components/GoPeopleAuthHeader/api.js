@@ -1,12 +1,19 @@
 // API functions for GoPeopleAuthHeader component
 
-export const initiateAuth = async (apiBaseUrl, identifier, appName = "tamtam", language = "fr") => {
+export const initiateAuth = async (
+  apiBaseUrl,
+  identifier,
+  appName = "tamtam",
+  language = "fr"
+) => {
   const queryParams = new URLSearchParams();
   if (appName) queryParams.append("app_name", appName);
   if (language) queryParams.append("language", language);
 
-  const url = `${apiBaseUrl}/auth/initiate${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
-  
+  const url = `${apiBaseUrl}/auth/initiate${
+    queryParams.toString() ? `?${queryParams.toString()}` : ""
+  }`;
+
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -62,13 +69,20 @@ export const loginWithPassword = async (apiBaseUrl, identifier, password) => {
   }
 };
 
-export const initiateOTPLogin = async (apiBaseUrl, identifier, appName = "tamtam", language = "fr") => {
+export const initiateOTPLogin = async (
+  apiBaseUrl,
+  identifier,
+  appName = "tamtam",
+  language = "fr"
+) => {
   const queryParams = new URLSearchParams();
   if (appName) queryParams.append("app_name", appName);
   if (language) queryParams.append("language", language);
 
-  const url = `${apiBaseUrl}/auth/login-with-otp/initiate${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
-  
+  const url = `${apiBaseUrl}/auth/login-with-otp/initiate${
+    queryParams.toString() ? `?${queryParams.toString()}` : ""
+  }`;
+
   const response = await fetch(url, {
     method: "POST",
     headers: {

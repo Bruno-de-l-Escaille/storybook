@@ -311,7 +311,7 @@ const GoPeopleAuthHeader = ({
     try {
       // Determine app_name from app prop or default to "tamtam"
       const appName = app?.name || "tamtam";
-      
+
       const response = await initiateAuth(apiBaseUrl, identifier, appName, lng);
 
       if (response.message === "Account exists with password") {
@@ -455,12 +455,19 @@ const GoPeopleAuthHeader = ({
     try {
       // Determine app_name from app prop or default to "tamtam"
       const appName = app?.name || "tamtam";
-      
-      const response = await initiateOTPLogin(apiBaseUrl, identifier, appName, lng);
+
+      const response = await initiateOTPLogin(
+        apiBaseUrl,
+        identifier,
+        appName,
+        lng
+      );
 
       if (response.status === "OTP_SENT" || response.message) {
         setStep("OTP");
-        Toast.info(I18N[lng].auth.otp_sent || "OTP has been sent to your identifier");
+        Toast.info(
+          I18N[lng].auth.otp_sent || "OTP has been sent to your identifier"
+        );
       }
     } catch (error) {
       console.error("Error initiating OTP login:", error);
@@ -469,7 +476,8 @@ const GoPeopleAuthHeader = ({
       let errorMessage = I18N[lng].auth.error_occurred || "An error occurred";
 
       if (error.message.includes("400")) {
-        errorMessage = I18N[lng].auth.invalid_identifier || "Invalid identifier format";
+        errorMessage =
+          I18N[lng].auth.invalid_identifier || "Invalid identifier format";
       } else if (error.message.includes("404")) {
         errorMessage = I18N[lng].auth.user_not_found || "User not found";
       } else if (error.message.includes("429")) {
