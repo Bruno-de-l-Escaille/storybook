@@ -934,6 +934,7 @@ export const Guests = ({ language, eventId, env, auth }) => {
         getGuestStatus={getGuestStatus}
         language={language}
         fetchGuestsData={fetchGuestsData}
+        env={env}
       />
     </div>
   );

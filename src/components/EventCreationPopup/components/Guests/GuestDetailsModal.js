@@ -61,6 +61,7 @@ const getActionLabel = (action, language) => {
       text: I18N[language].acceptedWithEmail,
       icon: "check",
       type: "accepted",
+      priority: 10,
     };
   }
   if (action.includes("auto-confirm-step-8")) {
@@ -68,6 +69,7 @@ const getActionLabel = (action, language) => {
       text: I18N[language].declinedWithEmail,
       icon: "x",
       type: "declined",
+      priority: 10,
     };
   }
 
@@ -76,6 +78,7 @@ const getActionLabel = (action, language) => {
       text: I18N[language].sentInvitationEmail,
       icon: "send",
       type: "invited",
+      priority: 10,
     };
   }
   if (action.includes("force-confirm-step-5")) {
@@ -83,6 +86,7 @@ const getActionLabel = (action, language) => {
       text: I18N[language].sentRegistrationEmail,
       icon: "send",
       type: "invited",
+      priority: 10,
     };
   }
   if (action.includes("force-confirm-step-8")) {
@@ -90,6 +94,7 @@ const getActionLabel = (action, language) => {
       text: I18N[language].sentCancellationEmail,
       icon: "send",
       type: "invited",
+      priority: 10,
     };
   }
 
@@ -98,6 +103,7 @@ const getActionLabel = (action, language) => {
       text: I18N[language].acceptedWithoutEmail,
       icon: "check",
       type: "accepted",
+      priority: 8,
     };
   }
   if (action.includes("confirm-step-8-no-email")) {
@@ -105,6 +111,7 @@ const getActionLabel = (action, language) => {
       text: I18N[language].declinedWithoutEmail,
       icon: "x",
       type: "declined",
+      priority: 8,
     };
   }
   if (action.includes("confirm-step-0-no-email")) {
@@ -112,10 +119,81 @@ const getActionLabel = (action, language) => {
       text: I18N[language].invitedWithoutEmail,
       icon: "send",
       type: "invited",
+      priority: 8,
     };
   }
 
-  return { text: action, icon: null, type: "default" };
+  if (action.includes("accept-light") || action === "step5") {
+    return {
+      text: I18N[language].hasAccepted,
+      icon: "check",
+      type: "accepted",
+      priority: 5,
+    };
+  }
+  if (action.includes("decline-light") || action === "step8") {
+    return {
+      text: I18N[language].hasDeclined,
+      icon: "x",
+      type: "declined",
+      priority: 5,
+    };
+  }
+  if (action.includes("add-light") || action === "step0") {
+    return {
+      text: I18N[language].hasInvited,
+      icon: "send",
+      type: "invited",
+      priority: 5,
+    };
+  }
+
+  return { text: action, icon: null, type: "default", priority: 1 };
+};
+
+// Groups logs occurring within a short time interval to prevent duplicates
+// Some activities generate multiple log entries - this consolidates them by keeping the most detailed one
+const groupLogsByTime = (logs, maxTimeDiffSeconds = 1) => {
+  if (!logs?.length) return [];
+
+  const sortedLogs = [...logs].sort(
+    (a, b) =>
+      moment.utc(a.createdAt).valueOf() - moment.utc(b.createdAt).valueOf()
+  );
+
+  const groups = [];
+  let currentGroup = [sortedLogs[0]];
+
+  for (let i = 1; i < sortedLogs.length; i++) {
+    const currentLog = sortedLogs[i];
+    const previousLog = sortedLogs[i - 1];
+
+    const timeDiffSeconds = moment
+      .utc(currentLog.createdAt)
+      .diff(moment.utc(previousLog.createdAt), "seconds");
+
+    const isSameActor = currentLog.actor === previousLog.actor;
+    const isWithinTimeWindow = timeDiffSeconds <= maxTimeDiffSeconds;
+
+    if (isSameActor && isWithinTimeWindow) {
+      currentGroup.push(currentLog);
+    } else {
+      groups.push(currentGroup);
+      currentGroup = [currentLog];
+    }
+  }
+  groups.push(currentGroup);
+
+  return groups.map((group) => {
+    if (group.length === 1) return group[0];
+
+    return group.reduce((bestLog, currentLog) => {
+      const currentPriority = getActionLabel(currentLog.action, "en").priority;
+      const bestPriority = getActionLabel(bestLog.action, "en").priority;
+
+      return currentPriority > bestPriority ? currentLog : bestLog;
+    });
+  });
 };
 
 export const GuestDetailsModal = ({
@@ -171,7 +249,9 @@ export const GuestDetailsModal = ({
         apiUrl,
         token,
       });
-      setLogs((logsResponse.data || []).reverse());
+      const rawLogs = logsResponse.data || [];
+      const groupedLogs = groupLogsByTime(rawLogs, 1);
+      setLogs(groupedLogs);
     } catch (error) {
       setLogs([]);
     } finally {

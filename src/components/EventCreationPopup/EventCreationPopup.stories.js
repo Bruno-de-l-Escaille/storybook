@@ -14,7 +14,7 @@ export default {
 };
 
 const authLogin = {
-  token: "ae1861c84426d473b411268b20667277905a02af",
+  token: "5cf13e6dc2a73e941335f66319b4062de45ec25b",
   loggedAs: "ADMIN",
   navCommunity: {
     id: 9,
@@ -198,7 +198,7 @@ export const Default = () => (
   <EventCreationPopup
     isOpen={boolean("isOpen", true)}
     language="fr"
-    env="local"
+    env="staging"
     auth={object("auth", authLogin)}
     clientId={4}
     eventId={2297}
