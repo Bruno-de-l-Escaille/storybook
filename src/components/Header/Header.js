@@ -325,6 +325,7 @@ export class Header extends Component {
             lng={lng}
             env={env}
             cookieUrl={cookieUrl}
+            app={app}
             onSuccess={(tokenData) => {
               if (this.props.onSuccess) {
                 this.props.onSuccess(tokenData);

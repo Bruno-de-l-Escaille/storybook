@@ -9,21 +9,30 @@ export default {
   decorators: [StoryRouter(), withKnobs],
 };
 
-export const DefaultGoPeopleAuthHeader = () => (
-  <GoPeopleAuthHeader
-    apiBaseUrl={text("API Base URL", "http://localhost:8080")}
-    lng={select("Language", ["fr", "nl", "en"], "fr")}
-    onSuccess={(data) => {
-      console.log("Authentication successful:", data);
-    }}
-    onError={(error) => {
-      console.error("Authentication error:", error);
-    }}
-    onClose={() => {
-      console.log("Modal closed");
-    }}
-  />
-);
+export const DefaultGoPeopleAuthHeader = () => {
+  const appName = text("App Name", "tamtam");
+  const language = select("Language", ["fr", "nl", "en"], "fr");
+  const apiBaseUrl = text("API Base URL", "http://localhost:8080");
+  
+  return (
+    <GoPeopleAuthHeader
+      apiBaseUrl={apiBaseUrl}
+      lng={language}
+      app={{
+        name: appName
+      }}
+      onSuccess={(data) => {
+        console.log("Authentication successful:", data);
+      }}
+      onError={(error) => {
+        console.error("Authentication error:", error);
+      }}
+      onClose={() => {
+        console.log("Modal closed");
+      }}
+    />
+  );
+};
 
 export const GoPeopleAuthHeaderEnglish = () => (
   <GoPeopleAuthHeader
@@ -102,3 +111,82 @@ export const GoPeopleAuthHeaderInHeaderContext = () => (
     </div>
   </div>
 );
+
+// Story to test different app_name values for OTP branding
+export const WithDifferentAppBranding = () => {
+  const appName = text("App Name for Branding", "ua");
+  
+  return (
+    <GoPeopleAuthHeader
+      apiBaseUrl="http://localhost:8080"
+      lng="fr"
+      app={{
+        name: appName
+      }}
+      onSuccess={(data) => {
+        console.log("Authentication successful with custom branding:", data);
+        alert(`Authentication successful with ${appName} branding!`);
+      }}
+      onError={(error) => {
+        console.error("Authentication error:", error);
+      }}
+    />
+  );
+};
+
+// Story to test different language values for OTP email content
+export const WithDifferentLanguages = () => {
+  const language = select("Email Content Language", ["fr", "en", "nl"], "en");
+  
+  return (
+    <GoPeopleAuthHeader
+      apiBaseUrl="http://localhost:8080"
+      lng={language}
+      app={{
+        name: "tamtam"
+      }}
+      onSuccess={(data) => {
+        console.log("Authentication successful:", data);
+      }}
+      onError={(error) => {
+        console.error("Authentication error:", error);
+      }}
+    />
+  );
+};
+
+// Comprehensive story combining all OTP parameters
+export const OTPFlowWithCustomParameters = () => {
+  const appName = text("App Name (for OTP logo)", "tamtam");
+  const language = select("Language (for UI & OTP email)", ["fr", "en", "nl"], "fr");
+  const apiBaseUrl = text("API Base URL", "http://localhost:8080");
+  
+  return (
+    <div style={{ padding: "2rem" }}>
+      <h2>Test OTP Flow with Custom Parameters</h2>
+      <p>This story demonstrates how the OTP email will be customized based on app_name and language.</p>
+      <ul>
+        <li><strong>app_name:</strong> Controls the logo branding in the OTP email</li>
+        <li><strong>language:</strong> Controls the email content language (fr, en, nl)</li>
+      </ul>
+      <GoPeopleAuthHeader
+        apiBaseUrl={apiBaseUrl}
+        lng={language}
+        app={{
+          name: appName
+        }}
+        onSuccess={(data) => {
+          console.log("Authentication successful:", data);
+          alert("Authentication successful! Check console for details.");
+        }}
+        onError={(error) => {
+          console.error("Authentication error:", error);
+          alert(`Error: ${error.message}`);
+        }}
+        onClose={() => {
+          console.log("Modal closed");
+        }}
+      />
+    </div>
+  );
+};

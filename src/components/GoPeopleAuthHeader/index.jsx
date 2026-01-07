@@ -13,6 +13,7 @@ import {
   loginWithPassword,
   verifyOTP,
   requestPasswordReset,
+  initiateOTPLogin,
 } from "./api";
 import {
   validateEmail,
@@ -308,7 +309,10 @@ const GoPeopleAuthHeader = ({
     setErrors({ ...errors, identifier: "" });
 
     try {
-      const response = await initiateAuth(apiBaseUrl, identifier);
+      // Determine app_name from app prop or default to "tamtam"
+      const appName = app?.name || "tamtam";
+      
+      const response = await initiateAuth(apiBaseUrl, identifier, appName, lng);
 
       if (response.message === "Account exists with password") {
         setHasPassword(true);
@@ -449,20 +453,23 @@ const GoPeopleAuthHeader = ({
     setLoading(true);
 
     try {
-      const response = await requestPasswordReset(apiBaseUrl, identifier);
+      // Determine app_name from app prop or default to "tamtam"
+      const appName = app?.name || "tamtam";
+      
+      const response = await initiateOTPLogin(apiBaseUrl, identifier, appName, lng);
 
-      if (response.message) {
+      if (response.status === "OTP_SENT" || response.message) {
         setStep("OTP");
-        Toast.info(I18N[lng].auth.reset_pwd_check_your_email);
+        Toast.info(I18N[lng].auth.otp_sent || "OTP has been sent to your identifier");
       }
     } catch (error) {
-      console.error("Error requesting password reset:", error);
+      console.error("Error initiating OTP login:", error);
 
       // Provide more specific error messages
       let errorMessage = I18N[lng].auth.error_occurred || "An error occurred";
 
       if (error.message.includes("400")) {
-        errorMessage = I18N[lng].auth.invalid_email || "Invalid email address";
+        errorMessage = I18N[lng].auth.invalid_identifier || "Invalid identifier format";
       } else if (error.message.includes("404")) {
         errorMessage = I18N[lng].auth.user_not_found || "User not found";
       } else if (error.message.includes("429")) {
@@ -498,7 +505,7 @@ const GoPeopleAuthHeader = ({
     setErrors({ ...errors, otp: "" });
 
     try {
-      const response = await verifyOTP(apiBaseUrl, otp);
+      const response = await verifyOTP(apiBaseUrl, otp, identifier);
 
       if (response.token) {
         // Decode the token to get the user ID

@@ -1,7 +1,13 @@
 // API functions for GoPeopleAuthHeader component
 
-export const initiateAuth = async (apiBaseUrl, identifier) => {
-  const response = await fetch(`${apiBaseUrl}/auth/initiate`, {
+export const initiateAuth = async (apiBaseUrl, identifier, appName = "tamtam", language = "fr") => {
+  const queryParams = new URLSearchParams();
+  if (appName) queryParams.append("app_name", appName);
+  if (language) queryParams.append("language", language);
+
+  const url = `${apiBaseUrl}/auth/initiate${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
+  
+  const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -56,13 +62,45 @@ export const loginWithPassword = async (apiBaseUrl, identifier, password) => {
   }
 };
 
-export const verifyOTP = async (apiBaseUrl, otp) => {
+export const initiateOTPLogin = async (apiBaseUrl, identifier, appName = "tamtam", language = "fr") => {
+  const queryParams = new URLSearchParams();
+  if (appName) queryParams.append("app_name", appName);
+  if (language) queryParams.append("language", language);
+
+  const url = `${apiBaseUrl}/auth/login-with-otp/initiate${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
+  
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ identifier }),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    return data;
+  } else {
+    try {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message ||
+          errorData.error ||
+          `HTTP ${response.status}: ${response.statusText}`
+      );
+    } catch (jsonError) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+  }
+};
+
+export const verifyOTP = async (apiBaseUrl, otp, identifier) => {
   const response = await fetch(`${apiBaseUrl}/auth/verify-otp`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ otp }),
+    body: JSON.stringify({ otp, identifier }),
   });
 
   if (response.ok) {
