@@ -54,7 +54,6 @@ export const PAGE_SIZE_SELECT_STYLES = {
     color: "#6d7f92",
     fontSize: "12px",
     fontWeight: 500,
-    fontFamily: "Roboto, sans-serif",
     letterSpacing: "0.24px",
     lineHeight: "normal",
     margin: "0",
@@ -86,7 +85,6 @@ export const PAGE_SIZE_SELECT_STYLES = {
     borderRadius: "6px",
     fontSize: "12px",
     fontWeight: state.isSelected ? 600 : 400,
-    fontFamily: "Roboto, sans-serif",
     transition: "all 0.2s ease",
     "&:active": {
       backgroundColor: "#f3faff",
@@ -152,7 +150,6 @@ export const STATUS_SELECT_STYLES = {
     borderRadius: "6px",
     margin: "2px 0",
     fontSize: "12px",
-    fontFamily: "Roboto, sans-serif",
     fontWeight: 600,
     opacity: state.isDisabled ? 0.6 : 1,
     "&:active": {
@@ -162,7 +159,6 @@ export const STATUS_SELECT_STYLES = {
   singleValue: (base) => ({
     ...base,
     fontSize: "12px",
-    fontFamily: "Roboto, sans-serif",
     fontWeight: 600,
     margin: 0,
   }),

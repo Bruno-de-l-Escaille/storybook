@@ -458,6 +458,9 @@ export const I18N = {
     acceptedWithoutEmail: "Accepted (without email)",
     declinedWithoutEmail: "Declined (without email)",
     invitedWithoutEmail: "Invited (without email)",
+    hasAccepted: "Has accepted",
+    hasDeclined: "Has declined",
+    hasInvited: "Has invited",
     invitationNotConfirmed: "Their invitation has not been confirmed",
     registrationNotConfirmed: "Their registration has not been confirmed",
     cancellationNotConfirmed: "Their cancellation has not been confirmed",
@@ -480,27 +483,45 @@ export const I18N = {
     you: "You",
     changeStatusToAccepted:
       'Change the status of selected guests to "Accepted"',
+    changeGuestStatusToAccepted: 'Change the guest status to "Accepted"',
     usersWillBeAutomaticallyRegistered:
       "Users will be automatically registered for the event.",
+    guestWillBeAutomaticallyRegistered:
+      "The guest will be automatically registered for the event.",
     specifyStatusesToAccept: "Please specify the statuses you wish to accept:",
     confirmationRequest: "Confirmation request",
     sendImmediately: "Send immediately",
     doNotSend: "No, do not send",
     confirmationEmailWillBeSent:
       "A confirmation email will be sent to guests to validate their registration for the event.",
+    confirmationEmailWillBeSentToGuest:
+      "A confirmation email will be sent to the guest to validate their registration for the event.",
     apply: "Apply",
     changeStatusToDeclined:
       'Change the status of selected guests to "Declined"',
+    changeGuestStatusToDeclined: 'Change the guest status to "Declined"',
     usersWillBeAutomaticallyUnregistered:
       "Users will be automatically unregistered from the event.",
+    guestWillBeAutomaticallyUnregistered:
+      "The guest will be automatically unregistered from the event.",
     specifyStatusesToDecline:
       "Please specify the statuses you wish to decline:",
     emailWillBeSentForUnregistration:
       "An email will be sent to guests to confirm their unregistration from the event.",
+    emailWillBeSentToGuestForUnregistration:
+      "An email will be sent to the guest to confirm their unregistration from the event.",
     sendConfirmationEmails:
       "Send confirmation emails to your selection of guests",
+    sendConfirmationEmail: "Send confirmation email to the guest",
     usersWillReceiveAdaptedEmail:
       "Users will receive a confirmation email adapted to their status.",
+    guestWillReceiveAdaptedEmail:
+      "The guest will receive a confirmation email adapted to their status.",
+    guestWillReceiveConfirmedEmail:
+      "The guest will receive a confirmation email for their confirmed status.",
+    guestWillReceiveInvitedEmail: "The guest will receive an invitation email.",
+    guestWillReceiveDeclinedEmail:
+      "The guest will receive a notification email regarding their declined status.",
     specifyStatusesForEmail:
       "Please specify the statuses for which you wish to send the email:",
     send: "Send",
@@ -1039,6 +1060,9 @@ export const I18N = {
     acceptedWithoutEmail: "A accepté (sans email)",
     declinedWithoutEmail: "A décliné (sans email)",
     invitedWithoutEmail: "A invité (sans email)",
+    hasAccepted: "A accepté",
+    hasDeclined: "A décliné",
+    hasInvited: "A invité",
     invitationNotConfirmed: "Son invitation n'a pas été confirmée",
     registrationNotConfirmed: "Son inscription n'a pas été confirmée",
     cancellationNotConfirmed: "Son annulation n'a pas été confirmée",
@@ -1061,8 +1085,11 @@ export const I18N = {
     you: "Vous",
     changeStatusToAccepted:
       'Changer le statut des invités sélectionnés en "Accepté"',
+    changeGuestStatusToAccepted: 'Changer le statut de l\'invité en "Accepté"',
     usersWillBeAutomaticallyRegistered:
       "Les utilisateurs seront automatiquement inscrits à l'événement.",
+    guestWillBeAutomaticallyRegistered:
+      "L'invité sera automatiquement inscrit à l'événement.",
     specifyStatusesToAccept:
       "Veuillez spécifier les statuts que vous souhaitez accepter :",
     confirmationRequest: "Demande de confirmation",
@@ -1070,19 +1097,35 @@ export const I18N = {
     doNotSend: "Non, ne pas envoyer",
     confirmationEmailWillBeSent:
       "Un email de confirmation sera envoyé aux invités pour valider leur inscription à l'événement.",
+    confirmationEmailWillBeSentToGuest:
+      "Un email de confirmation sera envoyé à l'invité pour valider son inscription à l'événement.",
     apply: "Appliquer",
     changeStatusToDeclined:
       'Changer le statut des invités sélectionnés en "Décliné"',
+    changeGuestStatusToDeclined: 'Changer le statut de l\'invité en "Décliné"',
     usersWillBeAutomaticallyUnregistered:
       "Les utilisateurs seront automatiquement désinscrits de l'événement.",
+    guestWillBeAutomaticallyUnregistered:
+      "L'invité sera automatiquement désinscrit de l'événement.",
     specifyStatusesToDecline:
       "Veuillez spécifier les statuts que vous souhaitez décliner :",
     emailWillBeSentForUnregistration:
       "Un email sera envoyé aux invités pour confirmer leur désinscription à l'événement.",
+    emailWillBeSentToGuestForUnregistration:
+      "Un email sera envoyé à l'invité pour confirmer sa désinscription à l'événement.",
     sendConfirmationEmails:
       "Envoyer les emails de confirmation à votre sélection d'invités",
+    sendConfirmationEmail: "Envoyer l'email de confirmation à l'invité",
     usersWillReceiveAdaptedEmail:
       "Les utilisateurs recevront un email de confirmation adapté à leur statut.",
+    guestWillReceiveAdaptedEmail:
+      "L'invité recevra un email de confirmation adapté à son statut.",
+    guestWillReceiveConfirmedEmail:
+      "L'invité recevra un email de confirmation de son inscription.",
+    guestWillReceiveInvitedEmail:
+      "L'invité recevra un email de confirmation de son invitation.",
+    guestWillReceiveDeclinedEmail:
+      "L'invité recevra un email de confirmation de son annulation.",
     specifyStatusesForEmail:
       "Veuillez spécifier les statuts pour lesquels vous souhaitez envoyer l'email :",
     send: "Envoyer",
@@ -1620,6 +1663,9 @@ export const I18N = {
     acceptedWithoutEmail: "Geaccepteerd (zonder email)",
     declinedWithoutEmail: "Geweigerd (zonder email)",
     invitedWithoutEmail: "Uitgenodigd (zonder email)",
+    hasAccepted: "Heeft geaccepteerd",
+    hasDeclined: "Heeft geweigerd",
+    hasInvited: "Heeft uitgenodigd",
     invitationNotConfirmed: "Uitnodiging niet bevestigd",
     registrationNotConfirmed: "Registratie niet bevestigd",
     cancellationNotConfirmed: "Annulering niet bevestigd",
@@ -1642,26 +1688,44 @@ export const I18N = {
     you: "U",
     changeStatusToAccepted:
       'Wijzig status van geselecteerde gasten naar "Geaccepteerd"',
+    changeGuestStatusToAccepted: 'Wijzig de gaststatus naar "Geaccepteerd"',
     usersWillBeAutomaticallyRegistered:
       "Gebruikers worden automatisch geregistreerd voor het evenement.",
+    guestWillBeAutomaticallyRegistered:
+      "De gast wordt automatisch geregistreerd voor het evenement.",
     specifyStatusesToAccept: "Geef de statussen op die u wilt accepteren:",
     confirmationRequest: "Bevestigingsverzoek",
     sendImmediately: "Onmiddellijk verzenden",
     doNotSend: "Nee, niet verzenden",
     confirmationEmailWillBeSent:
       "Er wordt een bevestigingsmail verzonden naar gasten om hun registratie voor het evenement te valideren.",
+    confirmationEmailWillBeSentToGuest:
+      "Er wordt een bevestigingsmail verzonden naar de gast om zijn registratie voor het evenement te valideren.",
     apply: "Toepassen",
     changeStatusToDeclined:
       'Wijzig status van geselecteerde gasten naar "Geweigerd"',
+    changeGuestStatusToDeclined: 'Wijzig de gaststatus naar "Geweigerd"',
     usersWillBeAutomaticallyUnregistered:
       "Gebruikers worden automatisch uitgeschreven van het evenement.",
+    guestWillBeAutomaticallyUnregistered:
+      "De gast wordt automatisch uitgeschreven van het evenement.",
     specifyStatusesToDecline: "Geef de statussen op die u wilt weigeren:",
     emailWillBeSentForUnregistration:
       "Er wordt een mail verzonden naar gasten om hun uitschrijving van het evenement te bevestigen.",
+    emailWillBeSentToGuestForUnregistration:
+      "Er wordt een mail verzonden naar de gast om zijn uitschrijving van het evenement te bevestigen.",
     sendConfirmationEmails:
       "Bevestigingsmails verzenden naar uw selectie van gasten",
+    sendConfirmationEmail: "Bevestigingsmail verzenden naar de gast",
     usersWillReceiveAdaptedEmail:
       "Gebruikers ontvangen een bevestigingsmail aangepast aan hun status.",
+    guestWillReceiveAdaptedEmail:
+      "De gast ontvangt een bevestigingsmail aangepast aan zijn status.",
+    guestWillReceiveConfirmedEmail:
+      "De gast ontvangt een bevestigingsmail voor zijn bevestigde status.",
+    guestWillReceiveInvitedEmail: "De gast ontvangt een uitnodigingsmail.",
+    guestWillReceiveDeclinedEmail:
+      "De gast ontvangt een notificatiemail over zijn geweigerde status.",
     specifyStatusesForEmail:
       "Geef de statussen op waarvoor u de mail wilt verzenden:",
     send: "Verzenden",

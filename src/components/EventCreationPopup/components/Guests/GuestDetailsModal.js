@@ -15,7 +15,6 @@ import {
   forceGuest,
   fetchGuests,
 } from "../../../../api";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import moment from "moment";
 import { toast } from "react-toastify";
 import { STATUS_SELECT_STYLES } from "./services";
@@ -62,6 +61,7 @@ const getActionLabel = (action, language) => {
       text: I18N[language].acceptedWithEmail,
       icon: "check",
       type: "accepted",
+      priority: 10,
     };
   }
   if (action.includes("auto-confirm-step-8")) {
@@ -69,6 +69,7 @@ const getActionLabel = (action, language) => {
       text: I18N[language].declinedWithEmail,
       icon: "x",
       type: "declined",
+      priority: 10,
     };
   }
 
@@ -77,6 +78,7 @@ const getActionLabel = (action, language) => {
       text: I18N[language].sentInvitationEmail,
       icon: "send",
       type: "invited",
+      priority: 10,
     };
   }
   if (action.includes("force-confirm-step-5")) {
@@ -84,6 +86,7 @@ const getActionLabel = (action, language) => {
       text: I18N[language].sentRegistrationEmail,
       icon: "send",
       type: "invited",
+      priority: 10,
     };
   }
   if (action.includes("force-confirm-step-8")) {
@@ -91,6 +94,7 @@ const getActionLabel = (action, language) => {
       text: I18N[language].sentCancellationEmail,
       icon: "send",
       type: "invited",
+      priority: 10,
     };
   }
 
@@ -99,6 +103,7 @@ const getActionLabel = (action, language) => {
       text: I18N[language].acceptedWithoutEmail,
       icon: "check",
       type: "accepted",
+      priority: 8,
     };
   }
   if (action.includes("confirm-step-8-no-email")) {
@@ -106,6 +111,7 @@ const getActionLabel = (action, language) => {
       text: I18N[language].declinedWithoutEmail,
       icon: "x",
       type: "declined",
+      priority: 8,
     };
   }
   if (action.includes("confirm-step-0-no-email")) {
@@ -113,10 +119,81 @@ const getActionLabel = (action, language) => {
       text: I18N[language].invitedWithoutEmail,
       icon: "send",
       type: "invited",
+      priority: 8,
     };
   }
 
-  return { text: action, icon: null, type: "default" };
+  if (action.includes("accept-light") || action === "step5") {
+    return {
+      text: I18N[language].hasAccepted,
+      icon: "check",
+      type: "accepted",
+      priority: 5,
+    };
+  }
+  if (action.includes("decline-light") || action === "step8") {
+    return {
+      text: I18N[language].hasDeclined,
+      icon: "x",
+      type: "declined",
+      priority: 5,
+    };
+  }
+  if (action.includes("add-light") || action === "step0") {
+    return {
+      text: I18N[language].hasInvited,
+      icon: "send",
+      type: "invited",
+      priority: 5,
+    };
+  }
+
+  return { text: action, icon: null, type: "default", priority: 1 };
+};
+
+// Groups logs occurring within a short time interval to prevent duplicates
+// Some activities generate multiple log entries - this consolidates them by keeping the most detailed one
+const groupLogsByTime = (logs, maxTimeDiffSeconds = 1) => {
+  if (!logs?.length) return [];
+
+  const sortedLogs = [...logs].sort(
+    (a, b) =>
+      moment.utc(a.createdAt).valueOf() - moment.utc(b.createdAt).valueOf()
+  );
+
+  const groups = [];
+  let currentGroup = [sortedLogs[0]];
+
+  for (let i = 1; i < sortedLogs.length; i++) {
+    const currentLog = sortedLogs[i];
+    const previousLog = sortedLogs[i - 1];
+
+    const timeDiffSeconds = moment
+      .utc(currentLog.createdAt)
+      .diff(moment.utc(previousLog.createdAt), "seconds");
+
+    const isSameActor = currentLog.actor === previousLog.actor;
+    const isWithinTimeWindow = timeDiffSeconds <= maxTimeDiffSeconds;
+
+    if (isSameActor && isWithinTimeWindow) {
+      currentGroup.push(currentLog);
+    } else {
+      groups.push(currentGroup);
+      currentGroup = [currentLog];
+    }
+  }
+  groups.push(currentGroup);
+
+  return groups.map((group) => {
+    if (group.length === 1) return group[0];
+
+    return group.reduce((bestLog, currentLog) => {
+      const currentPriority = getActionLabel(currentLog.action, "en").priority;
+      const bestPriority = getActionLabel(bestLog.action, "en").priority;
+
+      return currentPriority > bestPriority ? currentLog : bestLog;
+    });
+  });
 };
 
 export const GuestDetailsModal = ({
@@ -130,13 +207,14 @@ export const GuestDetailsModal = ({
   getGuestStatus,
   env,
   language,
+  fetchGuestsData,
 }) => {
-  const queryClient = useQueryClient();
-
   const [isLoadingSendEmail, setIsLoadingSendEmail] = useState(false);
   const [isLoadingStatusChange, setIsLoadingStatusChange] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(null);
   const [guest, setGuest] = useState(initialGuest);
+  const [logs, setLogs] = useState([]);
+  const [isLoadingLogs, setIsLoadingLogs] = useState(false);
 
   useEffect(() => {
     setGuest(initialGuest);
@@ -160,21 +238,30 @@ export const GuestDetailsModal = ({
     }
   }, [initialGuest?.id, apiUrl, token]);
 
-  const { data: logsData, isFetching: isLoadingLogs } = useQuery({
-    queryKey: ["guest-logs", guest?.id, apiUrl],
-    queryFn: async () => {
-      const logs = await fetchGuestLogs({
+  const fetchLogsData = useCallback(async () => {
+    if (!guest?.id || !isOpen) return;
+
+    setIsLoadingLogs(true);
+    try {
+      const logsResponse = await fetchGuestLogs({
         guestId: guest.id,
         eventId: guest.event,
         apiUrl,
         token,
       });
-      return { data: (logs.data || []).reverse() };
-    },
-    enabled: Boolean(guest?.id && isOpen),
-  });
+      const rawLogs = logsResponse.data || [];
+      const groupedLogs = groupLogsByTime(rawLogs, 1);
+      setLogs(groupedLogs);
+    } catch (error) {
+      setLogs([]);
+    } finally {
+      setIsLoadingLogs(false);
+    }
+  }, [guest?.id, guest?.event, isOpen, apiUrl, token]);
 
-  const logs = useMemo(() => logsData?.data || [], [logsData]);
+  useEffect(() => {
+    fetchLogsData();
+  }, [fetchLogsData]);
 
   useEffect(() => {
     if (guest) {
@@ -230,13 +317,9 @@ export const GuestDetailsModal = ({
         token,
       });
 
-      queryClient.invalidateQueries({
-        queryKey: ["bo-guests"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["guest-logs", guest.id],
-      });
+      await fetchGuestsData();
       await refetchGuest();
+      await fetchLogsData();
 
       toast.success(I18N[language].confirmationEmailSent);
     } catch (error) {
@@ -244,7 +327,16 @@ export const GuestDetailsModal = ({
     } finally {
       setIsLoadingSendEmail(false);
     }
-  }, [guest, eventId, apiUrl, token, queryClient, language, refetchGuest]);
+  }, [
+    guest,
+    eventId,
+    apiUrl,
+    token,
+    language,
+    refetchGuest,
+    fetchLogsData,
+    fetchGuestsData,
+  ]);
 
   const handleStatusChange = useCallback(
     async (option) => {
@@ -255,15 +347,12 @@ export const GuestDetailsModal = ({
       setIsLoadingStatusChange(true);
       try {
         const userId = guest.user;
-        let type = "register";
-
-        if (newStatus === "declined") {
-          type = "decline";
-        } else if (newStatus === "accepted") {
-          type = "register";
-        } else if (newStatus === "invited") {
-          type = "add";
-        }
+        const statusTypeMap = {
+          declined: "decline",
+          accepted: "register",
+          invited: "add",
+        };
+        const type = statusTypeMap[newStatus] || "register";
 
         await forceGuest({
           userIds: [userId],
@@ -275,17 +364,12 @@ export const GuestDetailsModal = ({
           token,
         });
 
-        queryClient.invalidateQueries({
-          queryKey: ["bo-guests"],
-        });
-        queryClient.invalidateQueries({
-          queryKey: ["guest-logs", guest.id],
-        });
-        await refetchGuest();
+        await Promise.all([fetchGuestsData(), refetchGuest(), fetchLogsData()]);
 
         setSelectedStatus(newStatus);
         toast.success(I18N[language].statusUpdated);
       } catch (error) {
+        console.error("Error updating status:", error);
         toast.error(I18N[language].errorUpdatingStatus);
       } finally {
         setIsLoadingStatusChange(false);
@@ -297,8 +381,9 @@ export const GuestDetailsModal = ({
       eventId,
       apiUrl,
       token,
-      queryClient,
       refetchGuest,
+      fetchLogsData,
+      fetchGuestsData,
       language,
     ]
   );
@@ -354,16 +439,13 @@ export const GuestDetailsModal = ({
   }, [statusOptions, selectedStatus]);
 
   const renderActivityIcon = (actionInfo) => {
-    if (actionInfo.type === "accepted") {
-      return <IconCheck width={12} height={12} />;
-    }
-    if (actionInfo.type === "declined") {
-      return <IconX width={12} height={12} />;
-    }
-    if (actionInfo.type === "sent" || actionInfo.type === "invited") {
-      return <IconSend width={12} height={12} />;
-    }
-    return null;
+    const iconMap = {
+      accepted: <IconCheck width={12} height={12} />,
+      declined: <IconX width={12} height={12} />,
+      sent: <IconSend width={12} height={12} />,
+      invited: <IconSend width={12} height={12} />,
+    };
+    return iconMap[actionInfo.type] || null;
   };
 
   if (!guest) return null;
@@ -457,29 +539,24 @@ export const GuestDetailsModal = ({
                 />
               </div>
 
-              <div className={styles.divider} />
-
               {unconfirmedMessage && (
-                <div className={styles.confirmationSection}>
-                  <div className={styles.confirmationNotice}>
-                    <AlertCircle width={20} height={20} fill="#18A0FB" />
-                    <span>{unconfirmedMessage}</span>
+                <>
+                  <div className={styles.divider} />
+                  <div className={styles.confirmationSection}>
+                    <div className={styles.confirmationNotice}>
+                      <AlertCircle width={20} height={20} fill="#18A0FB" />
+                      <span>{unconfirmedMessage}</span>
+                    </div>
+                    <button
+                      className={styles.sendButton}
+                      onClick={handleSendConfirmation}
+                      disabled={isLoadingSendEmail}
+                    >
+                      <IconSend width={16} height={16} />
+                      <span>{I18N[language].sendConfirmation}</span>
+                    </button>
                   </div>
-                  <button
-                    className={styles.sendButton}
-                    onClick={handleSendConfirmation}
-                    disabled={isLoadingSendEmail}
-                  >
-                    {isLoadingSendEmail ? (
-                      <ClipLoader size={12} color="#29394d" />
-                    ) : (
-                      <>
-                        <IconSend width={16} height={16} />
-                        <span>{I18N[language].sendConfirmation}</span>
-                      </>
-                    )}
-                  </button>
-                </div>
+                </>
               )}
             </div>
           </div>
