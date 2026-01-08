@@ -42,6 +42,7 @@ export const EventCreationPopup = (props) => {
     clientId,
     eventId,
     eventStep,
+    refreshEventsData,
   } = props;
   const [step, setStep] = useState(eventStep || 0);
   const [tags, setTags] = useState([]);
@@ -667,6 +668,7 @@ export const EventCreationPopup = (props) => {
       if (data.deletedId) {
         Toast.success(I18N[language]["eventDeletedSuccessfully"]);
         setShowDeleteConfirm(false);
+        refreshEventsData("delete");
         onClose();
       }
     } catch (error) {
@@ -697,6 +699,7 @@ export const EventCreationPopup = (props) => {
 
       Toast.success(I18N[language]["eventDuplicatedSuccessfully"]);
       setShowDuplicateConfirm(false);
+      refreshEventsData("duplicate");
       onClose();
     } catch (error) {
       console.log("Duplication error:", error);
