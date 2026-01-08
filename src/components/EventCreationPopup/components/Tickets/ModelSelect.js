@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import styles from "./ModelSelect.module.scss";
 import IconArrowDown from "../../../Icons/IconArrowDown";
 import IconArrowUp from "../../../Icons/IconArrowUp";
@@ -42,6 +42,20 @@ export const ModelSelect = (props) => {
     }));
   }, [labelTemplates, language]);
 
+  useEffect(() => {
+    if (localStorage.getItem("selectedTicketModelId")) {
+      const modelId = Number(localStorage.getItem("selectedTicketModelId"));
+      for (const model of models) {
+        const found = model.items.find((item) => item.id === modelId);
+        if (found) {
+          setSelectedModel(found);
+          setInputValue(found.brand + " " + found.reference);
+          break;
+        }
+      }
+    }
+  }, [models]);
+
   const handleChangeInputValue = (e) => {
     const value = e.target.value;
     if (value === "") {
@@ -51,6 +65,7 @@ export const ModelSelect = (props) => {
   };
 
   const handleSelect = (item) => {
+    localStorage.setItem("selectedTicketModelId", item.id);
     setSelectedModel(item);
     setInputValue(item.brand + " " + item.reference);
     setIsOpen(false);

@@ -121,7 +121,6 @@ export const Tickets = (props) => {
       reference: selectedModel.reference,
     })
       .then((response) => {
-        setSelectedModel(null);
         setReload((r) => r + 1);
         setIsProcessing(false);
       })
