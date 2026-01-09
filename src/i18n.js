@@ -567,6 +567,7 @@ export const I18N = {
     confirmDuplicate: "Confirm duplication",
     confirmDuplicateMessage: "Are you sure you want to duplicate this event?",
     duplicate: "Duplicate",
+    eventTitle: "Event title",
   },
   fr: {
     ARTCILES: "Articles",
@@ -1150,6 +1151,7 @@ export const I18N = {
     confirmDuplicateMessage:
       "Êtes-vous sûr de vouloir dupliquer cet événement ?",
     duplicate: "Dupliquer",
+    eventTitle: "Titre de l'évént",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -1730,5 +1732,6 @@ export const I18N = {
     confirmDuplicateMessage:
       "Weet u zeker dat u dit evenement wilt dupliceren?",
     duplicate: "Dupliceren",
+    eventTitle: "Evenementtitel",
   },
 };
