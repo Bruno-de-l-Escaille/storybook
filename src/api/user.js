@@ -99,3 +99,25 @@ export const searchSpeakers = ({
     },
   });
 };
+
+export const createUserByEmail = ({
+  email,
+  firstName,
+  lastName,
+  gender,
+  language,
+  apiUrl,
+  token,
+}) => {
+  const requestUrl = `${apiUrl}/organization/saveUserByEmail`;
+
+  var formData = new FormData();
+  formData.append("access_token", token);
+  formData.append("email", email);
+  formData.append("firstName", firstName);
+  formData.append("lastName", lastName);
+  formData.append("gender", gender);
+  formData.append("language", language);
+
+  return axios.post(requestUrl, formData);
+};

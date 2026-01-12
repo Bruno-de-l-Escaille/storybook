@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function IconX({ ...props }) {
+export default function IconX({
+  stroke = "#FC5D2B",
+  strokeWidth = 1.5,
+  ...props
+}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,8 +15,8 @@ export default function IconX({ ...props }) {
     >
       <path
         d="M9 3L3 9M3 3L9 9"
-        stroke="#FC5D2B"
-        stroke-width="1.5"
+        stroke={stroke}
+        stroke-width={strokeWidth}
         stroke-linecap="round"
         stroke-linejoin="round"
       />

@@ -1,0 +1,573 @@
+@import "../../../../../styles/variables.scss";
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(41, 57, 77, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+
+  &AfterOpen {
+    opacity: 1;
+  }
+
+  &BeforeClose {
+    opacity: 0;
+  }
+}
+
+.modalContent {
+  position: relative;
+  background: white;
+  border-radius: 20px;
+  outline: none;
+  max-width: 1240px;
+  width: 90vw;
+  max-height: 90vh;
+  height: 670px;
+  overflow: hidden;
+  transform: scale(0.95);
+  opacity: 0;
+  transition: all 200ms ease-in-out;
+
+  &AfterOpen {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  &BeforeClose {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+}
+
+
+.headerTitle {
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #29394d;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -17px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 28px;
+    background: #d8dde2;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.content {
+  gap: 30px;
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+  padding-top: 5px;
+  .section{
+    width: 100%;
+    .emailfields{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .textAreaField{
+      outline: none;
+      display: flex;
+      height: 300px;
+      padding: 8px 10px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      align-self: stretch;
+      border-radius: 12px;
+      border: 0.5px solid #29394D;
+      background:  #F1F2F4;
+    }
+
+  }
+  .sectionInvite{
+    display: flex;
+    width: 100%;
+    min-height: 150px;
+    padding: 20px 0px;
+    gap: 30px;
+    .leftPane,.middlePane, .rightPane{
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        .fieldLabel{
+          color: var(--dark-1, #29394D);
+          font-family: Roboto;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 140%;
+          .field{
+            .fieldTitle{
+              color: var(--dark-1, #29394D);
+              font-family: Roboto;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: 140%;
+            }
+
+
+          }
+        }
+      }
+      .infoMessage{
+        color: var(--dark-1, #29394D);
+        font-family: Roboto;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+      }
+    }
+    .middlePane{
+      .infoMessage{
+        display: flex;
+        flex-direction: column;
+        color: var(--dark-3, #6D7F92);
+        gap: 10px;
+      }
+    }
+  }
+}
+.checkboxRows{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.checkboxRow{
+  .checkboxLabel{
+    display: flex;
+    height: 36px;
+    padding: 0 5px;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 12px;
+    border: 0.5px solid var(--gris-1, #B2BCC6);
+    background: var(--blanc, #FFF);
+
+    &:hover {
+      border-radius: 12px;
+      border: 0.5px solid var(--bleu-1-principale, #18A0FB);
+      background: var(--bleu-ciel-1, #F3FAFF);
+    }
+    &.active{
+      border-radius: 12px;
+      border: 0.5px solid var(--bleu-1-principale, #18A0FB);
+      background: var(--bleu-ciel-1, #F3FAFF);
+    }
+    .checkboxText{
+      color: var(--dark-1, #29394D);
+      font-family: Roboto;
+      padding: 10px;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 120%;
+    }
+  }
+  .checkboxDescription{
+    color: var(--dark-3, #6D7F92);
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+    display: flex;
+    gap: 10px;
+    padding: 10px 0px;
+    svg{
+      min-width: 20px;
+    }
+
+  }
+  
+}
+.active{
+  border-radius: 12px;
+  border: 0.5px solid var(--bleu-1-principale, #18A0FB);
+  background: var(--bleu-ciel-1, #F3FAFF);
+}
+
+
+.fieldLabel {
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: #29394d;
+}
+
+.fieldValue {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #29394d;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.copyButton,
+.sendButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: white;
+  border: 0.5px solid #b2bcc6;
+  border-radius: 8px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: #29394d;
+  cursor: pointer;
+  transition: all 0.2s;
+  height: 32px;
+
+  &:hover {
+    background: #f4f7f9;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+  .footer {
+    display: flex;
+    padding: 20px 30px;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+
+    .cancelButton {
+      display: flex;
+      padding: 10px 16px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      border-radius: 8px;
+      border: 0.5px solid #29394d;
+      cursor: pointer;
+      color: #29394d;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 140%;
+      background: #fff;
+      margin-right: auto;
+    }
+
+    .saveButton {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      opacity: 0.5;
+      background: #06d9b1;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 140%;
+      outline: none;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background: #02af8e;
+      }
+
+      &_disabled {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+    }
+    .nextButton {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: #18a0fb;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 140%;
+      outline: none;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background: #0e90e6;
+      }
+    }
+  }
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #e1e4e8;
+}
+.verticalDivider {
+  width: 1px;
+  background-color: #e1e4e8;
+}
+.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.56;
+  box-shadow: none;
+}
+
+.resultContent{
+  display: flex;
+  gap: 30px;
+  color: var(--dark-1, #29394D);
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+  min-height: 520px;
+  flex: 1;
+  overflow: auto;
+  .section{
+    flex: 1;
+    padding: 20px;
+
+    .title{
+      color: rgb(51, 51, 51);
+      font-family: Roboto, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.42857;
+      width: 100%;
+      text-align: center;
+      padding-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .resultHeader{
+      display: flex;
+      font-size: 14px;
+      font-weight: 600;
+      gap: 30px;
+      padding: 10px;
+
+      span{
+        flex: 1;
+      }
+      .errorEmail{
+        width: 40%;
+        flex: none;
+      }
+    }
+    .resultRow{
+      display: flex;
+      gap: 30px;
+      padding: 10px;
+      span{
+        flex: 1;
+      }
+      .errorEmail{
+        width: 40%;
+        flex: none;
+      }
+      .resultCell{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        button {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          padding: 5px 8px;
+          border-radius: 4px;
+          margin-left: auto;
+          outline: none;
+          border: none;
+          cursor: pointer;
+          position: relative;
+
+          &:hover {
+            opacity: 0.8;
+          }
+          &[data-tooltip] {
+            &::before {
+              content: attr(data-tooltip);
+              position: absolute;
+              bottom: calc(100% + 6px);
+              right: -0.5px;
+              background: #ffffff;
+              color: #29394d;
+              padding: 6px 8px;
+              border-radius: 5px;
+              font-size: 12px;
+              font-weight: 400;
+              line-height: 1.4;
+              white-space: nowrap;
+              opacity: 0;
+              visibility: hidden;
+              transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+              pointer-events: none;
+              border: 0.5px solid #b2bcc6;
+              box-shadow: 0px 2px 8px 0px rgba(41, 57, 77, 0.25);
+              z-index: 100;
+            }
+
+            &:hover::before {
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+
+.addUserFormSection {
+  margin-top: 24px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e1e4e8;
+  margin: auto;
+  width: 800px;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #29394d;
+  margin-bottom: 16px;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #29394d;
+  font-family: 'Roboto', sans-serif;
+}
+
+.required {
+  color: #e74c3c;
+}
+
+.input {
+  height: 32px;
+  padding: 0 10px;
+  border: 0.5px solid #29394d;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  color: #29394d;
+  
+  &:focus {
+    outline: none;
+    border-color: #02af8e;
+  }
+  
+  &::placeholder {
+    color: #b2bcc6;
+  }
+}
+
+.disabledInput {
+  background: #f1f2f4;
+  color: #6d7f92;
+  cursor: not-allowed;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e1e4e8;
+}
+.inputError {
+  border-color: #dc3545 !important;
+  
+  &:focus {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+  }
+}
+
+.errorMessage {
+  display: block;
+  color: #dc3545;
+  font-size: 11px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}

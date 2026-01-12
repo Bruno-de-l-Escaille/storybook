@@ -15,7 +15,6 @@ import Select from "react-select";
 import IconUserRoundPlus from "../../../Icons/IconUserRoundPlus";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import moment from "moment";
-import ClipLoader from "react-spinners/ClipLoader";
 import IconCheck from "../../../Icons/IconCheck";
 import IconX from "../../../Icons/IconX";
 import IconSend from "../../../Icons/IconSendV2";
@@ -29,6 +28,7 @@ import { GuestActionModal, MODAL_TYPES } from "./GuestActionModal";
 import { GuestDetailsModal } from "./GuestDetailsModal";
 import { toast } from "react-toastify";
 import { PAGE_SIZE_SELECT_STYLES } from "./services";
+import { AddGuestModal } from "./AddGuestModal/AddGuestModal";
 
 const DropdownIndicator = () => {
   return (
@@ -54,6 +54,7 @@ export const Guests = ({ language, eventId, env, auth }) => {
   const [actionGuestId, setActionGuestId] = useState(null);
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedGuestForEdit, setSelectedGuestForEdit] = useState(null);
 
   const [guests, setGuests] = useState([]);
@@ -270,7 +271,9 @@ export const Guests = ({ language, eventId, env, auth }) => {
 
   // Guest action handlers
 
-  const handleAddGuest = useCallback(() => {}, []);
+  const handleAddGuest = useCallback(() => {
+    setIsAddModalOpen(true);
+  }, []);
 
   const handleEditGuest = useCallback((guest) => {
     setSelectedGuestForEdit(guest);
@@ -934,6 +937,20 @@ export const Guests = ({ language, eventId, env, auth }) => {
         getGuestStatus={getGuestStatus}
         language={language}
         fetchGuestsData={fetchGuestsData}
+        env={env}
+      />
+      <AddGuestModal
+        isOpen={isAddModalOpen}
+        onClose={() => {
+          setIsAddModalOpen(false);
+        }}
+        fetchGuestsData={fetchGuestsData}
+        guest={selectedGuestForEdit}
+        eventId={eventId}
+        apiUrl={apiUrl}
+        token={token}
+        getGuestStatus={getGuestStatus}
+        lang={language}
         env={env}
       />
     </div>
