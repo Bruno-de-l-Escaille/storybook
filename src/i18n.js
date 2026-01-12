@@ -474,7 +474,6 @@ export const I18N = {
     sendConfirmation: "Send confirmation",
     activityHistory: "Activity history",
     user: "User",
-    date: "Date",
     activity: "Activity",
     noActivityRecorded: "No activity recorded",
     you: "You",
@@ -507,7 +506,6 @@ export const I18N = {
     users: "users",
     totalUsers: "user(s) in total",
     viewEmail: "View email",
-    cancel: "Cancel",
     confirmationEmailWillBeSentToStatus:
       "A confirmation email will be sent to guests with status « {{status}} ».",
     // New guest management translations
@@ -524,12 +522,9 @@ export const I18N = {
       "This option allows you to quickly add people to your event.",
     chooseSendConfirmation:
       "You will also be able to choose whether you wish to send a confirmation to your guests.",
-    addGuests: "Add guests",
     noGuestsMatchFilters: "No guests match your filters.",
     search: "Search",
-    name: "Name",
     email: "Email",
-    status: "Status",
     registrationDate: "Registration date",
     acceptGuest: "Accept guest",
     declineGuest: "Decline guest",
@@ -1083,7 +1078,6 @@ export const I18N = {
     sendConfirmation: "Envoyer la confirmation",
     activityHistory: "Historique des activités",
     user: "Utilisateur",
-    date: "Date",
     activity: "Activité",
     noActivityRecorded: "Aucune activité enregistrée",
     you: "Vous",
@@ -1117,7 +1111,6 @@ export const I18N = {
     users: "utilisateurs",
     totalUsers: "utilisateur(s) au total",
     viewEmail: "Voir le mail",
-    cancel: "Annuler",
     confirmationEmailWillBeSentToStatus:
       "Un email de confirmation sera envoyé aux invités en statut « {{status}} ».",
     // New guest management translations
@@ -1134,12 +1127,9 @@ export const I18N = {
       "Cette option vous permet d'ajouter rapidement des personnes à votre événement.",
     chooseSendConfirmation:
       "Il vous sera également possible de choisir si vous souhaitez envoyer une confirmation à vos invités.",
-    addGuests: "Ajouter des invités",
     noGuestsMatchFilters: "Aucun invité ne correspond à vos filtres.",
     search: "Rechercher",
-    name: "Nom",
     email: "Email",
-    status: "Statut",
     registrationDate: "Date d'inscription",
     acceptGuest: "Accepter l'invité",
     declineGuest: "Décliner l'invité",
@@ -1692,7 +1682,6 @@ export const I18N = {
     sendConfirmation: "Bevestiging verzenden",
     activityHistory: "Activiteitengeschiedenis",
     user: "Gebruiker",
-    date: "Datum",
     activity: "Activiteit",
     noActivityRecorded: "Geen activiteit opgenomen",
     you: "U",
@@ -1724,7 +1713,6 @@ export const I18N = {
     users: "gebruikers",
     totalUsers: "gebruiker(s) in totaal",
     viewEmail: "Mail bekijken",
-    cancel: "Annuleren",
     confirmationEmailWillBeSentToStatus:
       "Er wordt een bevestigingsmail verzonden naar gasten met status « {{status}} ».",
     // New guest management translations
@@ -1741,12 +1729,8 @@ export const I18N = {
       "Deze optie stelt u in staat om snel mensen toe te voegen aan uw evenement.",
     chooseSendConfirmation:
       "U kunt ook kiezen of u een bevestiging wilt verzenden naar uw gasten.",
-    addGuests: "Gasten toevoegen",
     noGuestsMatchFilters: "Geen gasten komen overeen met uw filters.",
     search: "Zoeken",
-    name: "Naam",
-    email: "Email",
-    status: "Status",
     registrationDate: "Registratiedatum",
     acceptGuest: "Gast accepteren",
     declineGuest: "Gast weigeren",

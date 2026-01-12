@@ -329,19 +329,19 @@ export const AddGuestModal = ({
       textTransform: "capitalize",
       lineHeight: "140%",
       textOverflow: "ellipsis",
-      color: "#6D7F92",
+      color: state.data.color || "#6D7F92",
 
       "&:active": {
         backgroundColor: state.isDisabled ? "white" : "#F1F2F4",
       },
     }),
-    singleValue: (base) => ({
+    singleValue: (base, state) => ({
       ...base,
       fontSize: "12px",
       fontFamily: "Roboto, sans-serif",
       fontWeight: 600,
       margin: 0,
-      color: (isEmpty(emailToAdd) && selectedGuestsStatus?.color) || "#29394D",
+      color: state.data.color || "#29394D",
     }),
     multiValue: (base) => ({
       ...base,
