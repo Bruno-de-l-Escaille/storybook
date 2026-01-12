@@ -23,7 +23,7 @@ export const AddGuestModal = ({
   env,
   token,
   eventId,
-  queryClient,
+  fetchGuestsData,
 }) => {
   const [selectedGuestsStatus, setSelectedStatus] = useState({
     value: "add",
@@ -53,14 +53,12 @@ export const AddGuestModal = ({
     gender: "",
     language: "",
   });
-  const handleClose = () => {
+  const handleClose = async () => {
     const hasSuccess = Object.entries(forceGuestData).some(
       ([email, data]) => data.result === "ok"
     );
     if (hasSuccess) {
-      queryClient.invalidateQueries({
-        queryKey: ["bo-guests"],
-      });
+      await fetchGuestsData();
     }
     setForceGuestData([]);
     setEmailToAdd("");

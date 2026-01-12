@@ -15,7 +15,6 @@ import Select from "react-select";
 import IconUserRoundPlus from "../../../Icons/IconUserRoundPlus";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import moment from "moment";
-import ClipLoader from "react-spinners/ClipLoader";
 import IconCheck from "../../../Icons/IconCheck";
 import IconX from "../../../Icons/IconX";
 import IconSend from "../../../Icons/IconSendV2";
@@ -945,13 +944,13 @@ export const Guests = ({ language, eventId, env, auth }) => {
         onClose={() => {
           setIsAddModalOpen(false);
         }}
-        queryClient={queryClient}
+        fetchGuestsData={fetchGuestsData}
         guest={selectedGuestForEdit}
         eventId={eventId}
         apiUrl={apiUrl}
         token={token}
         getGuestStatus={getGuestStatus}
-        language={language}
+        lang={language}
         env={env}
       />
     </div>
