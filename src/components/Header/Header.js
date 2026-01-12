@@ -339,6 +339,7 @@ export class Header extends Component {
       gotoUrl,
       env,
       isOtcAuth = false,
+      hideRegister = false,
     } = this.props;
     const { appUrl, homeUrl, withAuthLogin } = app;
     const languages = ["fr", "nl", "en"];
@@ -357,7 +358,13 @@ export class Header extends Component {
           ))}
         </ul>
         {isOtcAuth ? (
-          <AuthModal I18N={I18N} lng={lng} app={app} env={env} />
+          <AuthModal
+            I18N={I18N}
+            lng={lng}
+            app={app}
+            env={env}
+            hideRegister={hideRegister}
+          />
         ) : (
           <a
             className={styles.signIn}

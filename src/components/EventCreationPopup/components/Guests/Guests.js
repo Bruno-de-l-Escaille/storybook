@@ -1,7 +1,12 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import styles from "./Guests.module.scss";
 import { fetchGuests, forceGuest, confirmGuestStep } from "../../../../api";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getApiUrl, isEmpty } from "../../../../utils";
 import { I18N } from "../../../../i18n";
 import cn from "classnames";
@@ -35,7 +40,6 @@ const DropdownIndicator = () => {
 };
 
 export const Guests = ({ language, eventId, env, auth }) => {
-  const queryClient = useQueryClient();
   const guestsRef = useRef(null);
   const [filters, setFilters] = useState({
     tab: "all",
@@ -43,15 +47,19 @@ export const Guests = ({ language, eventId, env, auth }) => {
     page: 1,
     pageSize: 25,
   });
+
   const [selectedGuests, setSelectedGuests] = useState([]);
-  const [loadingActions, setLoadingActions] = useState({});
-  const [modalState, setModalState] = useState({
-    isOpen: false,
-    type: null,
-  });
-  const [selectedGuestForEdit, setSelectedGuestForEdit] = useState(null);
+
+  const [isActionModalOpen, setIsActionModalOpen] = useState(false);
+  const [actionModalType, setActionModalType] = useState(null);
+  const [actionGuestId, setActionGuestId] = useState(null);
+
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [selectedGuestForEdit, setSelectedGuestForEdit] = useState(null);
+
+  const [guests, setGuests] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
 
   const apiUrl = getApiUrl(env);
   const token = auth.token;
@@ -90,9 +98,11 @@ export const Guests = ({ language, eventId, env, auth }) => {
     [language]
   );
 
-  const { data, isFetching } = useQuery({
-    queryKey: ["bo-guests", eventId, apiUrl],
-    queryFn: async () => {
+  const fetchGuestsData = useCallback(async () => {
+    if (!eventId) return;
+
+    setIsFetching(true);
+    try {
       const filters = [
         {
           property: "event.id",
@@ -106,21 +116,24 @@ export const Guests = ({ language, eventId, env, auth }) => {
         token,
       });
 
-      return guestsData;
-    },
-    enabled: Boolean(eventId),
-  });
-  const guests = useMemo(() => data?.data || [], [data]);
+      setGuests(guestsData?.data || []);
+    } catch (error) {
+      console.error("Error fetching guests:", error);
+      setGuests([]);
+    } finally {
+      setIsFetching(false);
+    }
+  }, [eventId, apiUrl, token]);
+
+  useEffect(() => {
+    fetchGuestsData();
+  }, [fetchGuestsData]);
 
   const matchesTab = useCallback(
     (guest, tab) => {
       if (tab === "all") return true;
       const status = getGuestStatus(guest);
-      if (tab === "confirmed") return status.key === "accepted";
-      if (tab === "declined") return status.key === "declined";
-      if (tab === "invited") return status.key === "invited";
-      if (tab === "pending") return status.key === "pending";
-      return false;
+      return tab === status.key;
     },
     [getGuestStatus]
   );
@@ -148,8 +161,7 @@ export const Guests = ({ language, eventId, env, auth }) => {
   const guestStats = useMemo(() => {
     return {
       all: guests.length,
-      confirmed: guests.filter((guest) => matchesTab(guest, "confirmed"))
-        .length,
+      accepted: guests.filter((guest) => matchesTab(guest, "accepted")).length,
       declined: guests.filter((guest) => matchesTab(guest, "declined")).length,
       pending: guests.filter((guest) => matchesTab(guest, "pending")).length,
       invited: guests.filter((guest) => matchesTab(guest, "invited")).length,
@@ -183,28 +195,28 @@ export const Guests = ({ language, eventId, env, auth }) => {
     );
     return {
       all: selected.length,
-      confirmed: selected.filter(
+      accepted: selected.filter(
         (guest) =>
-          matchesTab(guest, "confirmed") &&
-          shouldShowAction(modalState.type, guest)
+          matchesTab(guest, "accepted") &&
+          shouldShowAction(actionModalType, guest)
       ).length,
       declined: selected.filter(
         (guest) =>
           matchesTab(guest, "declined") &&
-          shouldShowAction(modalState.type, guest)
+          shouldShowAction(actionModalType, guest)
       ).length,
       pending: selected.filter(
         (guest) =>
           matchesTab(guest, "pending") &&
-          shouldShowAction(modalState.type, guest)
+          shouldShowAction(actionModalType, guest)
       ).length,
       invited: selected.filter(
         (guest) =>
           matchesTab(guest, "invited") &&
-          shouldShowAction(modalState.type, guest)
+          shouldShowAction(actionModalType, guest)
       ).length,
     };
-  }, [guests, selectedGuests, matchesTab, modalState, shouldShowAction]);
+  }, [guests, selectedGuests, matchesTab, actionModalType, shouldShowAction]);
 
   const tabs = useMemo(() => {
     return [
@@ -231,9 +243,9 @@ export const Guests = ({ language, eventId, env, auth }) => {
         count: guestStats.declined,
       },
       {
-        key: "confirmed",
+        key: "accepted",
         label: I18N[language].guestsConfirmed,
-        count: guestStats.confirmed,
+        count: guestStats.accepted,
       },
     ];
   }, [guestStats, language]);
@@ -370,137 +382,57 @@ export const Guests = ({ language, eventId, env, auth }) => {
     }
   }, [filteredGuests, selectedGuests.length]);
 
-  const handleConfirmGuest = useCallback(
-    async (guest) => {
-      const loadingKey = `confirm_${guest.id}`;
-      try {
-        setLoadingActions((prev) => ({ ...prev, [loadingKey]: true }));
-        const userId = guest.user;
+  const handleConfirmGuest = useCallback((guest) => {
+    setActionGuestId(guest.id);
+    setActionModalType(MODAL_TYPES.ACCEPT);
+    setIsActionModalOpen(true);
+  }, []);
 
-        await forceGuest({
-          userIds: [userId],
-          eventId,
-          fromBackOffice: 1,
-          type: "register",
-          apiUrl,
-          token,
-        });
+  const handleDeclineGuest = useCallback((guest) => {
+    setActionGuestId(guest.id);
+    setActionModalType(MODAL_TYPES.DECLINE);
+    setIsActionModalOpen(true);
+  }, []);
 
-        queryClient.invalidateQueries({
-          queryKey: ["bo-guests"],
-        });
-
-        toast.success(I18N[language]["guestAccepted"]);
-      } catch (error) {
-        toast.error(I18N[language]["errorAcceptingGuest"]);
-      } finally {
-        setLoadingActions((prev) => ({ ...prev, [loadingKey]: false }));
-      }
-    },
-    [eventId, apiUrl, language, queryClient, token]
-  );
-
-  const handleDeclineGuest = useCallback(
-    async (guest) => {
-      const loadingKey = `decline_${guest.id}`;
-      try {
-        setLoadingActions((prev) => ({ ...prev, [loadingKey]: true }));
-
-        const userId = guest.user;
-
-        await forceGuest({
-          userIds: [userId],
-          eventId,
-          fromBackOffice: 1,
-          type: "decline",
-          apiUrl,
-          token,
-        });
-
-        queryClient.invalidateQueries({
-          queryKey: ["bo-guests"],
-        });
-
-        toast.success(I18N[language]["guestDeclined"]);
-      } catch (error) {
-        toast.error(I18N[language]["errorDecliningGuest"]);
-      } finally {
-        setLoadingActions((prev) => ({ ...prev, [loadingKey]: false }));
-      }
-    },
-    [eventId, apiUrl, language, queryClient, token]
-  );
-
-  const handleSendConfirmation = useCallback(
-    async (guest) => {
-      const loadingKey = `send_${guest.id}`;
-      try {
-        setLoadingActions((prev) => ({ ...prev, [loadingKey]: true }));
-
-        await confirmGuestStep({
-          eventId,
-          userId: guest.user,
-          step: guest.step,
-          apiUrl,
-          token,
-        });
-
-        toast.success(I18N[language]["confirmationEmailSent"]);
-
-        queryClient.invalidateQueries({
-          queryKey: ["bo-guests"],
-        });
-      } catch (error) {
-        toast.error(I18N[language]["errorSendingEmail"]);
-      } finally {
-        setLoadingActions((prev) => ({ ...prev, [loadingKey]: false }));
-      }
-    },
-    [eventId, apiUrl, language, queryClient, token]
-  );
+  const handleSendConfirmation = useCallback((guest) => {
+    setActionGuestId(guest.id);
+    setActionModalType(MODAL_TYPES.SEND);
+    setIsActionModalOpen(true);
+  }, []);
 
   const handleOpenModal = useCallback((type) => {
-    setModalState({
-      isOpen: true,
-      type,
-    });
+    setActionModalType(type);
+    setIsActionModalOpen(true);
   }, []);
 
   const handleCloseModal = useCallback(() => {
-    setModalState({
-      isOpen: false,
-      type: null,
-    });
+    setActionGuestId(null);
+    setActionModalType(null);
+    setIsActionModalOpen(false);
   }, []);
 
   const handleBulkAction = useCallback(
     async ({ statuses, sendImmediately }) => {
-      const { type } = modalState;
-
       try {
-        const guestsToProcess = guests.filter(
-          (guest) =>
-            selectedGuests.includes(guest.id) &&
-            statuses.some((status) => {
-              const guestStatus = getGuestStatus(guest);
-              if (status === "pending") {
-                return guestStatus.key === "pending";
-              }
-              if (status === "confirmed") {
-                return guestStatus.key === "accepted";
-              }
-              if (status === "declined") {
-                return guestStatus.key === "declined";
-              }
-              if (status === "invited") {
-                return guestStatus.key === "invited";
-              }
-              return false;
-            }) &&
-            shouldShowAction(type, guest)
-        );
+        let guestsToProcess;
 
-        if (type === MODAL_TYPES.ACCEPT) {
+        if (actionGuestId) {
+          const guest = guests.find((g) => g.id === actionGuestId);
+          if (guest && shouldShowAction(actionModalType, guest)) {
+            guestsToProcess = [guest];
+          } else {
+            guestsToProcess = [];
+          }
+        } else {
+          guestsToProcess = guests.filter(
+            (guest) =>
+              selectedGuests.includes(guest.id) &&
+              statuses.some((status) => status === getGuestStatus(guest).key) &&
+              shouldShowAction(actionModalType, guest)
+          );
+        }
+
+        if (actionModalType === MODAL_TYPES.ACCEPT) {
           const userIds = guestsToProcess.map((guest) => guest.user);
           await forceGuest({
             userIds,
@@ -511,7 +443,7 @@ export const Guests = ({ language, eventId, env, auth }) => {
             apiUrl,
             token,
           });
-        } else if (type === MODAL_TYPES.DECLINE) {
+        } else if (actionModalType === MODAL_TYPES.DECLINE) {
           const userIds = guestsToProcess.map((guest) => guest.user);
           await forceGuest({
             userIds,
@@ -522,7 +454,7 @@ export const Guests = ({ language, eventId, env, auth }) => {
             apiUrl,
             token,
           });
-        } else if (type === MODAL_TYPES.SEND) {
+        } else if (actionModalType === MODAL_TYPES.SEND) {
           const promises = guestsToProcess.map((guest) =>
             confirmGuestStep({
               eventId,
@@ -535,11 +467,11 @@ export const Guests = ({ language, eventId, env, auth }) => {
           await Promise.all(promises);
         }
 
-        queryClient.invalidateQueries({
-          queryKey: ["bo-guests"],
-        });
+        fetchGuestsData();
 
-        setSelectedGuests([]);
+        if (!actionGuestId) {
+          setSelectedGuests([]);
+        }
         handleCloseModal();
 
         const actionMessages = {
@@ -549,24 +481,26 @@ export const Guests = ({ language, eventId, env, auth }) => {
         };
 
         toast.success(
-          actionMessages[type] || I18N[language].actionPerformedSuccessfully
+          actionMessages[actionModalType] ||
+            I18N[language].actionPerformedSuccessfully
         );
       } catch (error) {
         toast.error(I18N[language].anErrorOccurred);
       }
     },
     [
-      modalState,
+      actionModalType,
       selectedGuests,
       guests,
       eventId,
       apiUrl,
       token,
-      queryClient,
+      fetchGuestsData,
       handleCloseModal,
       getGuestStatus,
       shouldShowAction,
       language,
+      actionGuestId,
     ]
   );
 
@@ -626,14 +560,9 @@ export const Guests = ({ language, eventId, env, auth }) => {
               <button
                 className={cn(styles.actionButton, styles.confirmButton)}
                 onClick={() => handleConfirmGuest(guest)}
-                disabled={loadingActions[`confirm_${guest.id}`]}
                 data-tooltip={I18N[language].acceptGuest}
               >
-                {loadingActions[`confirm_${guest.id}`] ? (
-                  <ClipLoader size={10} color="#02AF8E" />
-                ) : (
-                  <IconCheck />
-                )}
+                <IconCheck />
               </button>
             )}
           </td>
@@ -642,14 +571,9 @@ export const Guests = ({ language, eventId, env, auth }) => {
               <button
                 className={cn(styles.actionButton, styles.declineButton)}
                 onClick={() => handleDeclineGuest(guest)}
-                disabled={loadingActions[`decline_${guest.id}`]}
                 data-tooltip={I18N[language].declineGuest}
               >
-                {loadingActions[`decline_${guest.id}`] ? (
-                  <ClipLoader size={10} color="#FC5D2B" />
-                ) : (
-                  <IconX />
-                )}
+                <IconX />
               </button>
             )}
           </td>
@@ -661,7 +585,6 @@ export const Guests = ({ language, eventId, env, auth }) => {
               <button
                 className={styles.actionButton}
                 onClick={() => handleSendConfirmation(guest)}
-                disabled={loadingActions[`send_${guest.id}`]}
                 data-tooltip={
                   status.key === "accepted"
                     ? I18N[language].sendRegistrationEmail
@@ -670,11 +593,7 @@ export const Guests = ({ language, eventId, env, auth }) => {
                     : I18N[language].sendInvitationEmail
                 }
               >
-                {loadingActions[`send_${guest.id}`] ? (
-                  <ClipLoader size={10} color="#29394d" />
-                ) : (
-                  <IconSend />
-                )}
+                <IconSend />
               </button>
             )}
           </td>
@@ -695,7 +614,6 @@ export const Guests = ({ language, eventId, env, auth }) => {
       handleConfirmGuest,
       handleDeclineGuest,
       handleSendConfirmation,
-      loadingActions,
       getGuestStatus,
       handleEditGuest,
       shouldShowAction,
@@ -992,11 +910,16 @@ export const Guests = ({ language, eventId, env, auth }) => {
       )}
 
       <GuestActionModal
-        isOpen={modalState.isOpen}
+        isOpen={isActionModalOpen}
         onClose={handleCloseModal}
         onConfirm={handleBulkAction}
-        type={modalState.type}
-        guestStats={selectedGuestsStats}
+        type={actionModalType}
+        guestStats={actionGuestId ? { all: 1 } : selectedGuestsStats}
+        guestStatus={
+          actionGuestId
+            ? getGuestStatus(guests.find((g) => g.id === actionGuestId))?.key
+            : null
+        }
         language={language}
         env={env}
       />
@@ -1014,6 +937,8 @@ export const Guests = ({ language, eventId, env, auth }) => {
         auth={auth}
         getGuestStatus={getGuestStatus}
         language={language}
+        fetchGuestsData={fetchGuestsData}
+        env={env}
       />
       <AddGuestModal
         isOpen={isAddModalOpen}
