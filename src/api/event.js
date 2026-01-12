@@ -1,4 +1,5 @@
 import axios from "axios";
+import { isEmpty } from "../utils";
 
 export const getEvent = ({ apiUrl, token, eventId }) => {
   const fields = [
@@ -325,7 +326,8 @@ export const forceGuest = async ({
   apiUrl,
   token,
   eventId,
-  userIds,
+  userIds = [],
+  emails = "",
   type, // 'register'(accept) or 'decline' or 'add'(invite)
   fromBackOffice,
   sendEmail,
@@ -339,9 +341,17 @@ export const forceGuest = async ({
   formData.append("fromBackOffice", fromBackOffice ? 1 : 0);
   formData.append("sendEmail", sendEmail ? 1 : 0);
 
-  userIds.forEach((userId) => {
-    formData.append("userIds[]", userId);
-  });
+  if (!isEmpty(userIds)) {
+    userIds.forEach((userId) => {
+      formData.append("userIds[]", userId);
+    });
+  }
+  console.log(emails);
+  if (!isEmpty(emails)) {
+    formData.append("emails", emails);
+  }
+
+  console.log(formData.getAll("emails"));
 
   const data = await axios.post(requestUrl, formData);
 

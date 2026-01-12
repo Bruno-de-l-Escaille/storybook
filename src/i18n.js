@@ -555,6 +555,33 @@ export const I18N = {
     ticketDimension: "Ticket dimension",
     generatedAt: "Generated at",
     chooseAModel: "Choose a model",
+    addGuestManually: "Add guests manually",
+    guestsStatus: "Guest status",
+    yesSendConfirmation: "Send the confirmation email",
+    noDontSend: "Do not send email",
+    notificationEmail:
+      "A notification email will be sent to the guests to inform them of their registration for the event.",
+    fullName1: "fullName",
+    "User with this email does not exists":
+      "User with this email does not exists",
+    invalidEmailAddress: "Invalid email address",
+    toInvite: "to invite",
+    pleaseFillAllFields: "Please fill all fields",
+    errorCreatingUser: "Error creating user",
+    accepted: "Accepted",
+    createNewUser: "Create new user",
+    enterFirstName: "Enter first name",
+    enterLastName: "Enter last name",
+    selectGender: "Select gender",
+    selectLanguage: "Select language",
+    usersWillNeedToConfirmTheirRegistration:
+      "Users will need to confirm their registration.",
+    confirmationEmailMessage:
+      "A notification email will be sent to guests to inform them of their registration for the event.",
+    enterOrPasteAListOfEmailAddresses:
+      "Enter or paste a list of email addresses.",
+    successCreatingUser: "The user has been successfully created and added",
+    fieldRequired: "This field is required",
   },
   fr: {
     ARTCILES: "Articles",
@@ -1125,6 +1152,33 @@ export const I18N = {
     ticketDimension: "Dimension de l'étiquette",
     generatedAt: "Généré le",
     chooseAModel: "Choisissez un modèle",
+    addGuestManually: "Ajouter manuellement des invités",
+    guestsStatus: "Statut d’invité(s)",
+    yesSendConfirmation: "Envoyer le mail de confirmation",
+    noDontSend: "Non, ne pas envoyer d’email",
+    notificationEmail:
+      "Un email de notification sera envoyé aux invités pour les informer de leur inscription à l’événement.",
+    fullName1: "Nom complet",
+    "User with this email does not exists":
+      "Aucun utilisateur avec cet email n'existe",
+    invalidEmailAddress: "Adresse e-mail invalide",
+    toInvite: "à invité",
+    pleaseFillAllFields: "Veuillez remplir tous les champs",
+    errorCreatingUser: "Erreur lors de la création de l'utilisateur",
+    accepted: "Accepté",
+    createNewUser: "Créer un nouvel utilisateur",
+    enterFirstName: "Entrez le prénom",
+    enterLastName: "Entrez le nom",
+    selectGender: "Sélectionner le genre",
+    selectLanguage: "Sélectionner la langue",
+    usersWillNeedToConfirmTheirRegistration:
+      "Les utilisateurs devront confirmer leur inscription.",
+    confirmationEmailMessage:
+      "Un email de notification sera envoyé aux invités pour les informer de leur inscription à l’événement.",
+    enterOrPasteAListOfEmailAddresses:
+      "Introduisez ou collez une liste d'adresse emails.",
+    successCreatingUser: "L’utilisateur a bien été créé et ajouté avec succès",
+    fieldRequired: "Ce champ est obligatoire",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -1692,5 +1746,32 @@ export const I18N = {
     ticketDimension: "Labelafmeting",
     generatedAt: "Gegenereerd op",
     chooseAModel: "Kies een model",
+    addGuestManually: "Gasten handmatig toevoegen",
+    guestsStatus: "Gaststatus",
+    yesSendConfirmation: "Bevestigingsmail onmiddellijk verzenden",
+    noDontSend: "Geen e-mail verzenden",
+    notificationEmail:
+      "Er wordt een notificatie-e-mail naar de gasten gestuurd om hen te informeren over hun inschrijving voor het evenement.",
+    fullName1: "fullName",
+    "User with this email does not exists":
+      "User with this email does not exists",
+    invalidEmailAddress: "Ongeldig e-mailadres",
+    toInvite: "om uit te nodigen",
+    pleaseFillAllFields: "Vul alle velden in",
+    errorCreatingUser: "Fout bij het aanmaken van gebruiker",
+    accepted: "Geaccepteerd",
+    createNewUser: "Nieuwe gebruiker aanmaken",
+    enterFirstName: "Voornaam invoeren",
+    enterLastName: "Achternaam invoeren",
+    selectGender: "Selecteer geslacht",
+    selectLanguage: "Selecteer taal",
+    usersWillNeedToConfirmTheirRegistration:
+      "Gebruikers moeten hun registratie bevestigen.",
+    confirmationEmailMessage:
+      "Er wordt een notificatie-e-mail naar de gasten gestuurd om hen te informeren over hun registratie voor het evenement.",
+    enterOrPasteAListOfEmailAddresses:
+      "Voer een lijst met e-mailadressen in of plak deze.",
+    successCreatingUser: "De gebruiker is succesvol aangemaakt en toegevoegd",
+    fieldRequired: "Dit veld is verplicht",
   },
 };

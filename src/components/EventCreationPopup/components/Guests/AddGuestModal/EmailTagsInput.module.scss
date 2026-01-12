@@ -1,0 +1,235 @@
+.colMd12 {
+  width: 100%;
+}
+
+.bootstrapTagsinput {
+  border-radius: 12px;
+  border: 0.5px solid var(--gris-1, #B2BCC6);
+  background: var(--gris-3, #F1F2F4);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border-radius: 4px;
+  width: 100%;
+  height: 300px;
+  overflow-y: auto;
+  cursor: text;
+  color: var(--dark-1, #29394D);
+  text-align: center;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  &:focus-within {
+    border-radius: 12px;
+    border: 0.5px solid var(--dark-1, #29394D);
+    outline: 0;
+  }
+}
+.colMd12{
+  position: relative;
+}
+.trashIcon{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 99999;
+  cursor: pointer;
+  svg {
+    &:hover{
+      height: 16px; 
+      width: 15px;
+    }
+  }
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 6px;
+  min-height: 0;
+}
+
+.tagsinputTextarea {
+  border: none;
+  box-shadow: none;
+  outline: none;
+  background-color: transparent;
+  padding: 4px;
+  margin: 0;
+  width: 100%;
+  font-size: 14px;
+  font-family: inherit;
+  resize: none;
+  flex-grow: 1;
+  overflow: hidden;
+  min-height: 28px;
+
+  &::-moz-placeholder {
+    color: #777;
+    opacity: 1;
+  }
+
+  &:-ms-input-placeholder {
+    color: #777;
+  }
+
+  &::-webkit-input-placeholder {
+    color: #777;
+  }
+
+  &:focus {
+    border: none;
+    box-shadow: none;
+  }
+}
+
+.tag {
+  margin: 0;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.label {
+  display: inline-flex;
+  padding: .2em .6em .3em;
+  line-height: 1;
+  color: #29394D;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.labelInfo {
+  background-color: #C7E8FE
+}
+
+.labelDanger {
+  background-color: #d9534f;
+  color: #FFFFFF;
+}
+
+.tagRemove {
+  margin-left: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+
+  &::after {
+    content: "×";
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &:hover:active {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.addByListCount {
+  color: var(--dark-1, #29394D);
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+  margin-bottom: 20px;
+  margin-top: 6px;
+  strong {
+    font-weight: 700;
+  }
+}
+
+.buttonContainer {
+  margin-top: 15px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  user-select: none;
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+  }
+
+  &.disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.65;
+    box-shadow: none;
+    pointer-events: none;
+  }
+}
+
+.btnDefault {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+
+  &:hover:not(.disabled):not([disabled]) {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+  }
+
+  &:active:not(.disabled):not([disabled]) {
+    background-color: #d4d4d4;
+    border-color: #8c8c8c;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  }
+}
+
+.btnOk {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+
+  &:hover:not(.disabled):not([disabled]) {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #398439;
+  }
+
+  &:active:not(.disabled):not([disabled]) {
+    background-color: #398439;
+    border-color: #255625;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  }
+}
