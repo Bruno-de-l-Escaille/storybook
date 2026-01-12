@@ -437,3 +437,80 @@ export const deleteLabel = async ({ apiUrl, token, eventId, labelName }) => {
 
   return data.data;
 };
+
+export const searchEventContacts = async ({
+  apiUrl,
+  token,
+  clientId,
+  query = "",
+  language,
+}) => {
+  const requestUrl = `${apiUrl}/event/event/get-contacts-typeahead`;
+
+  const data = await axios.get(requestUrl, {
+    params: {
+      access_token: token,
+      lang: language,
+      name: query,
+      client: clientId,
+    },
+  });
+
+  return data.data.data || [];
+};
+
+export const searchEventPlace = async ({ apiUrl, token, query = "" }) => {
+  const requestUrl = `${apiUrl}/event/event-place`;
+
+  const filters = [];
+  ["Fr", "Nl", "En"].forEach((lang) => {
+    filters.push({
+      property: `place${lang}`,
+      value: `%${query}%`,
+      operator: "like",
+      filter: "or",
+    });
+  });
+
+  const data = await axios.get(requestUrl, {
+    params: {
+      access_token: token,
+      filter: JSON.stringify(filters),
+    },
+  });
+
+  return data.data?.data || [];
+};
+
+export const deleteEvent = async ({ apiUrl, token, eventId }) => {
+  const requestUrl = `${apiUrl}/event/delete-event/${eventId}`;
+
+  const formData = new FormData();
+  formData.append("access_token", token);
+  formData.append("eventId", eventId);
+
+  const data = await axios.post(requestUrl, formData);
+
+  return data;
+};
+
+export const duplicateEvent = async ({ apiUrl, token, eventId, clientId }) => {
+  const requestUrl = `${apiUrl}/event/duplicate-command`;
+
+  const formData = new FormData();
+  formData.append("access_token", token);
+  formData.append("eventId", eventId);
+  formData.append("clientId", clientId);
+
+  const data = await axios.post(requestUrl, formData);
+
+  return data.data;
+};
+
+export const fetchCommand = async ({ apiUrl, token, commandId }) => {
+  const requestUrl = `${apiUrl}/event/command/${commandId}`;
+
+  const data = await axios.get(requestUrl, { params: { access_token: token } });
+
+  return data.data;
+};

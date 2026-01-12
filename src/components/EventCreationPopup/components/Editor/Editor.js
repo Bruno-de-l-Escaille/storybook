@@ -182,7 +182,7 @@ export const Editor = (props) => {
         <div>
           <input
             type="text"
-            placeholder={I18N[language]["eventTitle"] || "Titre de l'event ..."}
+            placeholder={I18N[language]["eventTitle"]}
             value={
               data[
                 `name${language.charAt(0).toUpperCase() + language.slice(1)}`

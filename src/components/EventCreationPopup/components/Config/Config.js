@@ -12,9 +12,14 @@ import { DatePicker } from "antd";
 import momentGenerateConfig from "rc-picker/lib/generate/moment";
 import moment from "moment";
 import { getApiUrl, isEmpty } from "../../../../utils";
-import { searchSpeakers } from "../../../../api";
+import {
+  searchSpeakers,
+  searchEventContacts,
+  searchEventPlace,
+} from "../../../../api";
 import IconPlus from "../../../Icons/IconPlus";
 import IconCloseV2 from "../../../Icons/IconCloseV2";
+import IconAvatar from "../../../Icons/IconAvatar";
 
 const MomentDatePicker = DatePicker.generatePicker(momentGenerateConfig);
 
@@ -47,6 +52,17 @@ export const Config = (props) => {
   const speakerInputRef = useRef(null);
   const apiUrl = getApiUrl(env);
 
+  const [contacts, setContacts] = useState([]);
+  const [contactInputValue, setContactInputValue] = useState("");
+  const [showContactDropdown, setShowContactDropdown] = useState(false);
+  const contactDropdownRef = useRef(null);
+  const contactInputRef = useRef(null);
+
+  const [addresses, setAddresses] = useState([]);
+  const [addressInputValue, setAddressInputValue] = useState("");
+  const [showAddressDropdown, setShowAddressDropdown] = useState(false);
+  const addressDropdownRef = useRef(null);
+  const addressInputRef = useRef(null);
   useEffect(() => {
     if (!isEmpty(data.tag)) {
       setSelectedTags(data.tag);
@@ -70,6 +86,22 @@ export const Config = (props) => {
         !speakerInputRef.current.contains(e.target)
       ) {
         setShowSpeakerDropdown(false);
+      }
+      if (
+        contactDropdownRef.current &&
+        !contactDropdownRef.current.contains(e.target) &&
+        contactInputRef.current &&
+        !contactInputRef.current.contains(e.target)
+      ) {
+        setShowContactDropdown(false);
+      }
+      if (
+        addressDropdownRef.current &&
+        !addressDropdownRef.current.contains(e.target) &&
+        addressInputRef.current &&
+        !addressInputRef.current.contains(e.target)
+      ) {
+        setShowAddressDropdown(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -97,6 +129,51 @@ export const Config = (props) => {
       setShowSpeakerDropdown(false);
     }
   }, [speakerInputValue, auth, env, clientId]);
+
+  useEffect(() => {
+    if (contactInputValue.trim().length > 0 && clientId) {
+      searchEventContacts({
+        apiUrl,
+        token: auth.token,
+        clientId,
+        query: contactInputValue,
+        language,
+      })
+        .then((contactsList) => {
+          setContacts(contactsList);
+          setShowContactDropdown(true);
+        })
+        .catch((err) => {
+          setContacts([]);
+          setShowContactDropdown(false);
+        });
+    } else {
+      setContacts([]);
+      setShowContactDropdown(false);
+    }
+  }, [contactInputValue, auth, clientId, apiUrl, language]);
+
+  useEffect(() => {
+    if (addressInputValue.trim().length > 0) {
+      searchEventPlace({
+        apiUrl,
+        token: auth.token,
+        query: addressInputValue,
+      })
+        .then((placesList) => {
+          setAddresses(placesList);
+          setShowAddressDropdown(true);
+        })
+        .catch((err) => {
+          console.error("Error fetching places:", err);
+          setAddresses([]);
+          setShowAddressDropdown(false);
+        });
+    } else {
+      setAddresses([]);
+      setShowAddressDropdown(false);
+    }
+  }, [addressInputValue, auth, apiUrl]);
 
   const handleDateChange = (date) => {
     const dateStr = date ? date.format("YYYY-MM-DD") : "";
@@ -171,10 +248,13 @@ export const Config = (props) => {
   };
 
   const handleChangeAddress = (e) => {
+    const value = e.target.value;
     const placeField = `place${
       language.charAt(0).toUpperCase() + language.slice(1)
     }`;
-    setData((prevData) => ({ ...prevData, [placeField]: e.target.value }));
+    setData((prevData) => ({ ...prevData, [placeField]: value }));
+    setAddressInputValue(value);
+    setShowAddressDropdown(value.trim().length > 0);
     if (validationErrors.addressError) {
       setValidationErrors((prevErrors) => ({
         ...prevErrors,
@@ -258,24 +338,33 @@ export const Config = (props) => {
   });
 
   const handleContactChange = (e) => {
+    const value = e.target.value;
     const contactField = `contact${
       language.charAt(0).toUpperCase() + language.slice(1)
     }`;
-    setData((prevData) => ({ ...prevData, [contactField]: e.target.value }));
+    setData((prevData) => ({ ...prevData, [contactField]: value }));
+    setContactInputValue(value);
+    setShowContactDropdown(value.trim().length > 0);
   };
 
   const handleEmailContactChange = (e) => {
+    const value = e.target.value;
     const emailField = `emailContact${
       language.charAt(0).toUpperCase() + language.slice(1)
     }`;
-    setData((prevData) => ({ ...prevData, [emailField]: e.target.value }));
+    setData((prevData) => ({ ...prevData, [emailField]: value }));
+    setContactInputValue(value);
+    setShowContactDropdown(value.trim().length > 0);
   };
 
   const handlePhoneContactChange = (e) => {
+    const value = e.target.value;
     const phoneField = `phoneNumberContact${
       language.charAt(0).toUpperCase() + language.slice(1)
     }`;
-    setData((prevData) => ({ ...prevData, [phoneField]: e.target.value }));
+    setData((prevData) => ({ ...prevData, [phoneField]: value }));
+    setContactInputValue(value);
+    setShowContactDropdown(value.trim().length > 0);
   };
 
   const handleSpeakerInput = (e) => {
@@ -308,6 +397,42 @@ export const Config = (props) => {
     setShowSpeakerInput(!showSpeakerInput);
   };
 
+  const handleSelectContact = (contact) => {
+    const langSuffix = language.charAt(0).toUpperCase() + language.slice(1);
+
+    setData((prevData) => ({
+      ...prevData,
+      [`contact${langSuffix}`]: contact[`contact${langSuffix}`] || "",
+      [`emailContact${langSuffix}`]: contact[`emailContact${langSuffix}`] || "",
+      [`phoneNumberContact${langSuffix}`]:
+        contact[`phoneNumberContact${langSuffix}`] || "",
+    }));
+
+    setContactInputValue("");
+    setShowContactDropdown(false);
+  };
+
+  const getFilteredContacts = () => {
+    return contacts.slice(0, 10);
+  };
+
+  const handleSelectAddress = (address) => {
+    const langSuffix = language.charAt(0).toUpperCase() + language.slice(1);
+    const addressName = address[`place${langSuffix}`] || "";
+
+    setData((prevData) => ({
+      ...prevData,
+      [`place${langSuffix}`]: addressName,
+    }));
+
+    setAddressInputValue("");
+    setShowAddressDropdown(false);
+  };
+
+  const getFilteredAddresses = () => {
+    return addresses.slice(0, 10);
+  };
+
   return (
     <div className={styles.config}>
       <div className={styles.config_content}>
@@ -319,13 +444,19 @@ export const Config = (props) => {
             <div className={styles.config_speakerList}>
               {selectedSpeakers.map((speaker) => (
                 <div key={speaker.id} className={styles.config_speakerCard}>
-                  <img
-                    src={speaker.user?.avatar || "/default-avatar.png"}
-                    alt={`${speaker.user?.firstName || ""} ${
-                      speaker.user?.lastName || ""
-                    }`}
-                    className={styles.config_speakerCard_avatar}
-                  />
+                  {!isEmpty(speaker.user?.avatar) ? (
+                    <img
+                      src={speaker.user?.avatar}
+                      alt={`${speaker.user?.firstName || ""} ${
+                        speaker.user?.lastName || ""
+                      }`}
+                      className={styles.config_speakerCard_avatar}
+                    />
+                  ) : (
+                    <div className={styles.config_speakerCard_avatar_icon}>
+                      <IconAvatar />
+                    </div>
+                  )}
                   <div className={styles.config_speakerCard_name}>
                     {speaker.user?.firstName} {speaker.user?.lastName}
                   </div>
@@ -394,15 +525,25 @@ export const Config = (props) => {
                         onClick={() => handleSelectSpeaker(speaker)}
                         className={styles.config_speakerDropdownItem}
                       >
-                        <img
-                          src={speaker.user?.avatar || "/default-avatar.png"}
-                          alt={
-                            speaker.user?.firstName +
-                            " " +
-                            speaker.user?.lastName
-                          }
-                          className={styles.config_speakerDropdownItem_avatar}
-                        />
+                        {!isEmpty(speaker.user?.avatar) ? (
+                          <img
+                            src={speaker.user?.avatar}
+                            alt={
+                              speaker.user?.firstName +
+                              " " +
+                              speaker.user?.lastName
+                            }
+                            className={styles.config_speakerDropdownItem_avatar}
+                          />
+                        ) : (
+                          <div
+                            className={
+                              styles.config_speakerDropdownItem_avatar_icon
+                            }
+                          >
+                            <IconAvatar />
+                          </div>
+                        )}
                         <div className={styles.config_speakerDropdownItem_info}>
                           <div
                             className={styles.config_speakerDropdownItem_name}
@@ -452,11 +593,10 @@ export const Config = (props) => {
                   format="DD/MM/YYYY"
                   className={`${styles.config_input} ${
                     validationErrors.dateError ? styles.config_input_error : ""
-                  }`}
+                  } ${styles.config_datePicker}`}
                   placeholder={I18N[language]["eventDay"]}
                   suffixIcon={null}
                   allowClear={false}
-                  style={{ paddingBottom: "8px" }}
                 />
                 <div className={styles.config_inputSeparator}></div>
                 <IconCalendarV3 />
@@ -527,12 +667,15 @@ export const Config = (props) => {
             </div>
           </div>
 
-          <div className={styles.config_field}>
+          <div
+            className={`${styles.config_field} ${styles.config_contactField_relative}`}
+          >
             <label className={styles.config_label}>
               {I18N[language]["address"]}
             </label>
             <div className={styles.config_inputWithIcon}>
               <input
+                ref={addressInputRef}
                 type="text"
                 placeholder={I18N[language]["eventLocation"]}
                 value={
@@ -550,6 +693,34 @@ export const Config = (props) => {
               <div className={styles.config_inputSeparator}></div>
               <IconLocation />
             </div>
+            {showAddressDropdown && getFilteredAddresses().length > 0 && (
+              <div
+                ref={addressDropdownRef}
+                className={`${styles.config_speakerDropdown} ${styles.config_contactDropdown}`}
+              >
+                <div className={styles.config_speakerDropdown_header}>
+                  {I18N[language]["cities"] || "Cities"}
+                </div>
+                {getFilteredAddresses().map((address, idx) => {
+                  const langSuffix =
+                    language.charAt(0).toUpperCase() + language.slice(1);
+                  const addressName = address[`place${langSuffix}`] || "";
+                  return (
+                    <div
+                      key={`${addressName}-${idx}`}
+                      onClick={() => handleSelectAddress(address)}
+                      className={styles.config_speakerDropdownItem}
+                    >
+                      <div className={styles.config_speakerDropdownItem_info}>
+                        <div className={styles.config_speakerDropdownItem_name}>
+                          {addressName}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
             {validationErrors.addressError && (
               <span className={styles.config_errorMessage}>
                 {I18N[language]["addressRequired"]}
@@ -687,9 +858,12 @@ export const Config = (props) => {
               {I18N[language]["contactPerson"]}
             </label>
             <div className={styles.config_contactFields}>
-              <div className={styles.config_field}>
+              <div
+                className={`${styles.config_field} ${styles.config_contactField_relative}`}
+              >
                 <div className={styles.config_inputWithIcon}>
                   <input
+                    ref={contactInputRef}
                     type="text"
                     placeholder={I18N[language]["fullName"]}
                     value={
@@ -705,6 +879,60 @@ export const Config = (props) => {
                   <div className={styles.config_inputSeparator}></div>
                   <IconPerson />
                 </div>
+                {showContactDropdown && getFilteredContacts().length > 0 && (
+                  <div
+                    ref={contactDropdownRef}
+                    className={`${styles.config_speakerDropdown} ${styles.config_contactDropdown}`}
+                  >
+                    <div className={styles.config_speakerDropdown_header}>
+                      {I18N[language]["contacts"] || "Contacts"}
+                    </div>
+                    {getFilteredContacts().map((contact, idx) => {
+                      const langSuffix =
+                        language.charAt(0).toUpperCase() + language.slice(1);
+                      const contactName = contact[`contact${langSuffix}`] || "";
+                      const email = contact[`emailContact${langSuffix}`] || "";
+                      const phone =
+                        contact[`phoneNumberContact${langSuffix}`] || "";
+
+                      return (
+                        <div
+                          key={`${contactName}-${email}-${idx}`}
+                          onClick={() => handleSelectContact(contact)}
+                          className={styles.config_speakerDropdownItem}
+                        >
+                          <div
+                            className={styles.config_speakerDropdownItem_info}
+                          >
+                            <div
+                              className={styles.config_speakerDropdownItem_name}
+                            >
+                              {contactName}
+                            </div>
+                            {email && (
+                              <div
+                                className={
+                                  styles.config_speakerDropdownItem_role
+                                }
+                              >
+                                {email}
+                              </div>
+                            )}
+                            {phone && (
+                              <div
+                                className={
+                                  styles.config_speakerDropdownItem_role
+                                }
+                              >
+                                {phone}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
 
               <div className={styles.config_row}>

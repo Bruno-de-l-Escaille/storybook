@@ -24,9 +24,13 @@ import {
   saveEventAuthor,
   deleteSpeaker,
   fetchLabelTemplates,
+  deleteEvent,
+  duplicateEvent,
+  fetchCommand,
 } from "../../api";
 import { Toast, FlashMessage } from "../ToastContainer/ToastContainer";
 import { ClipLoader } from "react-spinners";
+import { ModalConfirm } from "../Modal/ModalConfirm";
 
 export const EventCreationPopup = (props) => {
   const {
@@ -38,11 +42,17 @@ export const EventCreationPopup = (props) => {
     clientId,
     eventId,
     eventStep,
+    refreshEventsData,
   } = props;
   const [step, setStep] = useState(eventStep || 0);
   const [tags, setTags] = useState([]);
   const [speakersToDelete, setSpeakersToDelete] = useState([]);
   const [labelTemplates, setLabelTemplates] = useState([]);
+  const [showDotsMenu, setShowDotsMenu] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [showDuplicateConfirm, setShowDuplicateConfirm] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isDuplicating, setIsDuplicating] = useState(false);
   const [data, setData] = useState({
     eventId: eventId || 0,
     nameFr: "",
@@ -136,8 +146,9 @@ export const EventCreationPopup = (props) => {
     maxPlacesError: false,
   });
   const [isSaving, setIsSaving] = useState(false);
+  const [maximize, setMaximize] = useState(false);
   const apiUrl = getApiUrl(env);
-  const s3FolderUrl = `http://s3.tamtam.pro/${
+  const s3FolderUrl = `https://s3.tamtam.pro/${
     env === "v2" ? "production" : env
   }`;
 
@@ -269,7 +280,9 @@ export const EventCreationPopup = (props) => {
               id: Number(speaker.id),
               isExisting: true,
               user: {
-                avatar: speaker.pictureUrl || "/default-avatar.png",
+                avatar: !speaker.pictureUrl.includes("/IMAGE//")
+                  ? speaker.pictureUrl
+                  : "",
                 firstName: speaker.firstName,
                 lastName: speaker.lastName,
               },
@@ -597,7 +610,7 @@ export const EventCreationPopup = (props) => {
           setStep((prevStep) => prevStep + 1);
         })
         .catch(() => {
-          // Save failed, don't advance
+          Toast.error(I18N[language]["errorSavingEvent"]);
         });
     } else {
       const validated = checkValidations();
@@ -612,13 +625,97 @@ export const EventCreationPopup = (props) => {
     }
   };
 
+  const pollCommandStatus = async (commandId) => {
+    const maxAttempts = 60; // 60 attempts (2 minutes)
+    const pollInterval = 2000; // 2 second
+
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      const { data: command } = await fetchCommand({
+        apiUrl,
+        token: auth.token,
+        commandId,
+      });
+      const commandStatus = command.status;
+
+      if (commandStatus === "FINISHED") {
+        return true;
+      }
+      if (commandStatus !== "RUNNING") {
+        throw new Error("Command failed");
+      }
+
+      await new Promise((resolve) => {
+        setTimeout(resolve, pollInterval);
+      });
+    }
+
+    throw new Error("Command timeout");
+  };
+
+  const handleDeleteEvent = async () => {
+    const currentEventId = data.eventId || eventId;
+    if (!currentEventId) return;
+
+    setIsDeleting(true);
+
+    try {
+      const { data } = await deleteEvent({
+        apiUrl,
+        token: auth.token,
+        eventId: currentEventId,
+      });
+
+      if (data.deletedId) {
+        Toast.success(I18N[language]["eventDeletedSuccessfully"]);
+        setShowDeleteConfirm(false);
+        refreshEventsData("delete");
+        onClose();
+      }
+    } catch (error) {
+      Toast.error(I18N[language]["errorDeletingEvent"]);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  const handleDuplicateEvent = async () => {
+    const currentEventId = data.eventId || eventId;
+    if (!currentEventId) return;
+
+    setIsDuplicating(true);
+
+    try {
+      const { data: commandData } = await duplicateEvent({
+        apiUrl,
+        token: auth.token,
+        eventId: currentEventId,
+        clientId,
+      });
+      const commandId = commandData.command.id;
+
+      if (commandId) {
+        await pollCommandStatus(commandId);
+      }
+
+      Toast.success(I18N[language]["eventDuplicatedSuccessfully"]);
+      setShowDuplicateConfirm(false);
+      refreshEventsData("duplicate");
+      onClose();
+    } catch (error) {
+      console.log("Duplication error:", error);
+      Toast.error(I18N[language]["errorDuplicatingEvent"]);
+    } finally {
+      setIsDuplicating(false);
+    }
+  };
+
   return (
     <>
       <FlashMessage />
       <Modal
         isOpen={isOpen}
         className={{
-          base: styles.modal,
+          base: `${styles.modal} ${maximize ? styles.modal_maximize : ""}`,
           afterOpen: styles.modalAfterOpen,
           beforeClose: styles.modalBeforeClose,
         }}
@@ -636,12 +733,55 @@ export const EventCreationPopup = (props) => {
           </span>
           <div className={styles.header_actions}>
             <div className={styles.header_actions_icons}>
-              {/* <div className={styles.header_actions_icon}>
+              <div
+                className={styles.header_actions_icon}
+                onClick={() => setMaximize(!maximize)}
+              >
                 <IconMaximize />
               </div>
-              <div className={styles.header_actions_icon}>
-                <IconDots />
-              </div> */}
+              {(eventId > 0 || data.eventId > 0) && (
+                <div
+                  className={styles.header_actions_icon}
+                  onClick={() => setShowDotsMenu(!showDotsMenu)}
+                  style={{ position: "relative" }}
+                >
+                  <IconDots />
+                  {showDotsMenu && (
+                    <div className={styles.dotsMenu}>
+                      <button
+                        className={styles.dotsMenuItem}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowDotsMenu(false);
+                          setShowDuplicateConfirm(true);
+                        }}
+                        disabled={isDuplicating || isDeleting}
+                      >
+                        {isDuplicating ? (
+                          <ClipLoader size={14} color="#333" />
+                        ) : (
+                          I18N[language]["duplicate"]
+                        )}
+                      </button>
+                      <button
+                        className={styles.dotsMenuItem}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowDotsMenu(false);
+                          setShowDeleteConfirm(true);
+                        }}
+                        disabled={isDuplicating || isDeleting}
+                      >
+                        {isDeleting ? (
+                          <ClipLoader size={14} color="#333" />
+                        ) : (
+                          I18N[language]["delete"]
+                        )}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
             <div onClick={onClose} className={styles.header_close}>
               <IconCloseBlack />
@@ -764,6 +904,30 @@ export const EventCreationPopup = (props) => {
           </div>
         </div>
       </Modal>
+
+      <ModalConfirm
+        type="delete"
+        isOpen={showDeleteConfirm}
+        onCancel={() => !isDeleting && setShowDeleteConfirm(false)}
+        onConfirm={handleDeleteEvent}
+        inProcess={isDeleting}
+        title={I18N[language]["confirmDelete"]}
+        text={I18N[language]["confirmDeleteMessage"]}
+        labelNo={I18N[language]["cancel"]}
+        labelYes={I18N[language]["delete"]}
+      />
+
+      <ModalConfirm
+        type="duplicate"
+        isOpen={showDuplicateConfirm}
+        onCancel={() => !isDuplicating && setShowDuplicateConfirm(false)}
+        onConfirm={handleDuplicateEvent}
+        inProcess={isDuplicating}
+        title={I18N[language]["confirmDuplicate"]}
+        text={I18N[language]["confirmDuplicateMessage"]}
+        labelNo={I18N[language]["cancel"]}
+        labelYes={I18N[language]["duplicate"]}
+      />
     </>
   );
 };

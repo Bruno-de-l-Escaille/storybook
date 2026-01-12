@@ -6,12 +6,17 @@ import IconDownloadV2 from "../../../Icons/IconDownloadV2";
 import { I18N } from "../../../../i18n";
 import { deleteLabel } from "../../../../api/event";
 import { Toast } from "../../../ToastContainer/ToastContainer";
+import { ModalConfirm } from "../../../Modal/ModalConfirm";
 
 export const PrintedTicket = (props) => {
   const { labels, env, language, auth, setReload } = props;
   const [localLabels, setLocalLabels] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedLabel, setSelectedLabel] = useState(null);
+  const [inProcess, setInProcess] = useState(false);
+  const [actionFailed, setActionFailed] = useState(false);
   const apiUrl = getApiUrl(env);
-  const s3FolderUrl = `http://s3.tamtam.pro/${
+  const s3FolderUrl = `https://s3.tamtam.pro/${
     env === "v2" ? "production" : env
   }`;
 
@@ -20,21 +25,45 @@ export const PrintedTicket = (props) => {
   }, [labels]);
 
   const handleDelete = (label) => {
-    setLocalLabels(localLabels.filter((l) => l.labelFile !== label.labelFile));
+    setSelectedLabel(label);
+    setIsModalOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (!selectedLabel) return;
+
+    setInProcess(true);
+    setActionFailed(false);
+
+    setLocalLabels(
+      localLabels.filter((l) => l.labelFile !== selectedLabel.labelFile)
+    );
     deleteLabel({
       apiUrl,
       token: auth.token,
-      eventId: label.eventId,
-      labelName: label.labelFile,
+      eventId: selectedLabel.eventId,
+      labelName: selectedLabel.labelFile,
     })
       .then(() => {
         setReload((r) => r + 1);
         Toast.success(I18N[language]["ticketDeletedSuccessfully"]);
+        setIsModalOpen(false);
+        setSelectedLabel(null);
       })
       .catch((error) => {
         console.error("Error deleting label:", error);
         Toast.error(I18N[language]["errorDeletingTicket"]);
+        setActionFailed(true);
+      })
+      .finally(() => {
+        setInProcess(false);
       });
+  };
+
+  const cancelDelete = () => {
+    setIsModalOpen(false);
+    setSelectedLabel(null);
+    setActionFailed(false);
   };
 
   const handleDownload = (label) => {
@@ -148,6 +177,23 @@ export const PrintedTicket = (props) => {
           </div>
         ))}
       </div>
+      <ModalConfirm
+        type="delete"
+        isOpen={isModalOpen}
+        onCancel={cancelDelete}
+        onConfirm={confirmDelete}
+        inProcess={inProcess}
+        actionFailed={actionFailed}
+        labelError={I18N[language]["errorDeletingTicket"]}
+        labelNo={I18N[language]["cancel"]}
+        labelYes={I18N[language]["delete"]}
+        title={I18N[language]["deleteTicket"]}
+        text={
+          selectedLabel
+            ? `${I18N[language]["confirmDeleteTicket"]} "${selectedLabel.labelFile}"`
+            : ""
+        }
+      />
     </div>
   );
 };
