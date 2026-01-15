@@ -1,9 +1,9 @@
 import React, { useState, useRef } from "react";
-import SunEditor from "suneditor-react";
-import "suneditor/dist/css/suneditor.min.css";
+import { TTPEditor } from "../../../TTPEditor/TTPEditor";
 import styles from "./Editor.module.scss";
 import { I18N } from "../../../../i18n";
 import IconImage from "../../../Icons/IconImage";
+import { APP_ENV } from "../../../../config";
 
 export const Editor = (props) => {
   const {
@@ -12,6 +12,7 @@ export const Editor = (props) => {
     setData,
     validationErrors,
     setValidationErrors,
+    auth,
   } = props;
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef(null);
@@ -104,81 +105,71 @@ export const Editor = (props) => {
     }
   };
 
-  const editorButtonList = [
-    ["undo", "redo"],
-    ["fontSize", "formatBlock"],
-    ["bold", "underline", "italic", "strike"],
-    ["fontColor", "hiliteColor"],
-    ["outdent", "indent"],
-    ["align", "list"],
-    ["link", "image"],
-  ];
-
   return (
     <div className={styles.editor}>
-      <div className={styles.editor_content}>
-        <div
-          className={`${styles.editor_imageUpload} ${
-            isDragging ? styles.editor_imageUpload_dragging : ""
-          }`}
-          onClick={handleImageClick}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-        >
-          {data.image ? (
-            <>
-              <img
-                src={data.image}
-                alt="Event"
-                className={styles.editor_imageUpload_image}
-              />
-              <button
-                className={styles.editor_imageUpload_removeButton}
-                onClick={handleRemoveImage}
-                aria-label="Remove image"
-              >
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path
-                    d="M12 4L4 12M4 4L12 12"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </button>
-            </>
-          ) : (
-            <div className={styles.editor_imageUpload_placeholder}>
-              <div className={styles.editor_imageUpload_icon}>
-                <IconImage />
-              </div>
-              <p className={styles.editor_imageUpload_text}>
-                {I18N[language]["clickOrDragImage"]}
-              </p>
-              <p className={styles.editor_imageUpload_format}>
-                {I18N[language]["imageFormat"]}
-              </p>
-              <button
-                className={styles.editor_imageUpload_mediaButton}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleImageClick();
-                }}
-              >
-                {I18N[language]["fromMedia"]}
-              </button>
+      <div
+        className={`${styles.editor_imageUpload} ${
+          isDragging ? styles.editor_imageUpload_dragging : ""
+        }`}
+        onClick={handleImageClick}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+      >
+        {data.image ? (
+          <>
+            <img
+              src={data.image}
+              alt="Event"
+              className={styles.editor_imageUpload_image}
+            />
+            <button
+              className={styles.editor_imageUpload_removeButton}
+              onClick={handleRemoveImage}
+              aria-label="Remove image"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M12 4L4 12M4 4L12 12"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </button>
+          </>
+        ) : (
+          <div className={styles.editor_imageUpload_placeholder}>
+            <div className={styles.editor_imageUpload_icon}>
+              <IconImage />
             </div>
-          )}
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            style={{ display: "none" }}
-          />
-        </div>
+            <p className={styles.editor_imageUpload_text}>
+              {I18N[language]["clickOrDragImage"]}
+            </p>
+            <p className={styles.editor_imageUpload_format}>
+              {I18N[language]["imageFormat"]}
+            </p>
+            <button
+              className={styles.editor_imageUpload_mediaButton}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleImageClick();
+              }}
+            >
+              {I18N[language]["fromMedia"]}
+            </button>
+          </div>
+        )}
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          style={{ display: "none" }}
+        />
+      </div>
 
+      <div className={styles.editor_content}>
         <div>
           <input
             type="text"
@@ -200,21 +191,18 @@ export const Editor = (props) => {
           )}
         </div>
         <div className={styles.editor_descriptionEditor}>
-          <SunEditor
-            ref={editorRef}
-            setContents={
+          <TTPEditor
+            auth={auth}
+            env={APP_ENV}
+            lng={language}
+            initialContent={
               data[
                 `description${
                   language.charAt(0).toUpperCase() + language.slice(1)
                 }`
               ] || ""
             }
-            onChange={handleDescriptionChange}
-            setOptions={{
-              height: "200",
-              buttonList: editorButtonList,
-              placeholder: `${I18N[language]["description"]}...`,
-            }}
+            setContent={handleDescriptionChange}
           />
         </div>
       </div>

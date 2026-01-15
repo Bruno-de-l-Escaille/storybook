@@ -182,8 +182,7 @@
       gap: 10px;
       padding: 10px 16px;
       border-radius: 8px;
-      opacity: 0.5;
-      background: #06d9b1;
+      background: #02af8e;
       color: #fff;
       font-size: 14px;
       font-weight: 600;
@@ -193,12 +192,13 @@
       cursor: pointer;
 
       &:hover {
-        background: #02af8e;
+        background: #028c74;
       }
 
       &_disabled {
         pointer-events: none;
         opacity: 0.5;
+        background: #06d9b1;
       }
     }
 
