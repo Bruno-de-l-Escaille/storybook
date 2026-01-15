@@ -813,6 +813,7 @@ export const EventCreationPopup = (props) => {
               validationErrors={validationErrors}
               setValidationErrors={setValidationErrors}
               setStep={setStep}
+              auth={auth}
             />
           )}
           {step === 1 && (
@@ -871,9 +872,11 @@ export const EventCreationPopup = (props) => {
           <div className={styles.footer_actions}>
             <button
               className={`${styles.footer_saveButton} ${
-                step === 0 ? styles.footer_saveButton_disabled : ""
+                step === 0 && !(eventId || data.eventId)
+                  ? styles.footer_saveButton_disabled
+                  : ""
               }`}
-              disabled={step === 0 || isSaving}
+              disabled={(step === 0 && !(eventId || data.eventId)) || isSaving}
               onClick={handleSave}
             >
               {isSaving && <ClipLoader size={16} color="#ffffff" />}

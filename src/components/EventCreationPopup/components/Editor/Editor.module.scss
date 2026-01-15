@@ -3,14 +3,6 @@
   flex-direction: column;
   height: 100%;
 
-  &_content {
-    flex: 1;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
   &_imageUpload {
     border: 0.5px dashed #b2bcc6;
     border-radius: 5px;
@@ -22,6 +14,8 @@
     overflow: hidden;
     aspect-ratio: 3 / 1;
     height: 300px;
+    flex-shrink: 0;
+    margin-bottom: 20px;
 
     &:not(:has(img)) {
       padding: 60px 40px;
@@ -119,6 +113,15 @@
         height: 16px;
       }
     }
+  }
+
+  &_content {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 0;
   }
 
   &_titleInput {
