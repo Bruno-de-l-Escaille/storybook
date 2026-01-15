@@ -158,7 +158,7 @@ export function EventLayout({
     ? prepareS3ResourceUrl(s3FolderUrl, banner)
     : `${S3_FOLDER_AWS_URL_WITHOUT_ENV}/image_2024_01_08T20_38_38_750Z.png`;
   const nbMinutes = getEventNbMinutes(event);
-  const isFullWatch = event?.fullWatch ?? 0;
+  const isFullWatch = Number(event?.fullWatch ?? 0);
   const playProgress = playProgressTime(
     event?.playProgress,
     nbMinutes,
