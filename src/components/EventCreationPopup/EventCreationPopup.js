@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import styles from "./EventCreationPopup.module.scss";
 import { I18N } from "../../i18n";
@@ -32,10 +32,6 @@ import { Toast, FlashMessage } from "../ToastContainer/ToastContainer";
 import { ClipLoader } from "react-spinners";
 import { ModalConfirm } from "../Modal/ModalConfirm";
 
-// MODULE-LEVEL lock - shared across ALL component instances
-let globalSaveLock = false;
-let globalSavePromise = null;
-
 export const EventCreationPopup = (props) => {
   const {
     isOpen,
@@ -57,8 +53,6 @@ export const EventCreationPopup = (props) => {
   const [showDuplicateConfirm, setShowDuplicateConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isDuplicating, setIsDuplicating] = useState(false);
-  const savePromiseRef = useRef(null);
-  const isSavingRef = useRef(false);
   const [data, setData] = useState({
     eventId: eventId || 0,
     nameFr: "",
@@ -442,61 +436,6 @@ export const EventCreationPopup = (props) => {
       });
   };
 
-  const saveSpeakersToSlot = (eventId) => {
-    if (!selectedSpeakers || selectedSpeakers.length === 0) {
-      return Promise.resolve();
-    }
-    const newSpeakers = selectedSpeakers.filter(
-      (speaker) =>
-        !speaker.isExisting &&
-        !speakersToDelete.some((s) => s.id === speaker.id)
-    );
-    if (newSpeakers.length === 0) {
-      return Promise.resolve();
-    }
-
-    const eventAuthorPromises = newSpeakers.map((speaker) => {
-      const eventAuthorData = {
-        author: speaker.id,
-        event: eventId,
-        priority: 0,
-        isValid: 1,
-        headLineFr: speaker.headLineFr || "",
-        headLineNl: speaker.headLineNl || "",
-        headLineEn: speaker.headLineEn || "",
-      };
-
-      return saveEventAuthor({
-        apiUrl,
-        token: auth.token,
-        data: eventAuthorData,
-      }).then((resp) => ({
-        eventAuthorId: resp.data.data.id,
-        authorId: speaker.id,
-      }));
-    });
-
-    return Promise.all(eventAuthorPromises)
-      .then((eventAuthors) => {
-        const speakers = eventAuthors.map((eventAuthor) => {
-          return {
-            orateur: {
-              id: eventAuthor.eventAuthorId,
-              author: eventAuthor.authorId,
-            },
-            type: 1,
-            priority: 0,
-          };
-        });
-
-        return { speakers };
-      })
-      .catch((e) => {
-        Toast.error(I18N[language]["errorSavingSpeakers"]);
-        throw e;
-      });
-  };
-
   const deleteSpeakersMarkedForDeletion = (eventId) => {
     if (speakersToDelete.length === 0) {
       return Promise.resolve();
@@ -522,46 +461,56 @@ export const EventCreationPopup = (props) => {
   };
 
   const handleSave = async () => {
-    // GLOBAL lock check - blocks ALL component instances
-    if (globalSaveLock) {
-      console.log("[SAVE] Blocked by GLOBAL lock");
-      return (
-        globalSavePromise || Promise.reject("Save already in progress globally")
-      );
+    // Prevent double-click while saving
+    if (isSaving) {
+      return;
     }
-
-    // INSTANCE lock check
-    if (isSavingRef.current) {
-      console.log("[SAVE] Blocked by instance lock");
-      return (
-        savePromiseRef.current || Promise.reject("Save already in progress")
-      );
-    }
-
-    // Set BOTH locks IMMEDIATELY and SYNCHRONOUSLY
-    globalSaveLock = true;
-    isSavingRef.current = true;
-    console.log("[SAVE] Locks acquired, starting save...");
 
     // Validate before proceeding
     const validated = checkValidations();
     if (!validated) {
-      globalSaveLock = false;
-      isSavingRef.current = false;
-      return Promise.reject("Validation failed");
+      return;
     }
 
-    // Set React state for UI
     setIsSaving(true);
 
-    const saveOperation = async () => {
-      try {
-        // STEP 1: Save event with basic data + slot to get eventId and slotId
-        const processedSlot = processLightSlot(data);
-        const dataToSave = {
-          ...data,
-          slots: [processedSlot],
-        };
+    try {
+      const isNewEvent = !data.eventId && !eventId;
+      const currentEventId = data.eventId || eventId;
+      const currentSlotId = data.slotId;
+
+      let imageResult = null;
+
+      // Get new speakers that need to be added
+      const newSpeakers = selectedSpeakers.filter(
+        (speaker) =>
+          !speaker.isExisting &&
+          !speakersToDelete.some((s) => s.id === speaker.id)
+      );
+
+      // Get existing speakers
+      const existingSpeakers = selectedSpeakers
+        .filter((speaker) => speaker.isExisting && speaker.eventAuthorId)
+        .map((speaker) => ({
+          orateur: { id: speaker.eventAuthorId, author: speaker.id },
+          type: 1,
+          priority: 0,
+        }));
+
+      // Check if we have any speakers to save
+      const hasSpeakers = existingSpeakers.length > 0 || newSpeakers.length > 0;
+
+      if (isNewEvent) {
+        // NEW EVENT CREATION
+
+        // Build data to save (without slot if no speakers)
+        const dataToSave = { ...data };
+
+        if (hasSpeakers) {
+          // Include slot only if we have speakers
+          const processedSlot = processLightSlot(data);
+          dataToSave.slots = [processedSlot];
+        }
 
         const eventResp = await saveEventLight({
           apiUrl,
@@ -569,9 +518,10 @@ export const EventCreationPopup = (props) => {
           data: dataToSave,
         });
 
-        const savedEventId = data.eventId || eventResp.data.data.id;
-        const savedSlotId =
-          data.slotId || eventResp.data.data.slots?.[0]?.data.id;
+        const savedEventId = eventResp.data.data.id;
+        const savedSlotId = hasSpeakers
+          ? eventResp.data.data.slots?.[0]?.data.id
+          : null;
 
         // Update state with IDs
         setData((prevData) => ({
@@ -580,21 +530,8 @@ export const EventCreationPopup = (props) => {
           slotId: savedSlotId,
         }));
 
-        // STEP 2: Upload image if needed (separate endpoint)
-        let imageResult = null;
-        if (data.imageFile) {
-          imageResult = await uploadImage(savedEventId);
-        }
-
-        // STEP 3: Create event-author relationships for NEW speakers
-        let newSpeakersForSlot = [];
-        const newSpeakers = selectedSpeakers.filter(
-          (speaker) =>
-            !speaker.isExisting &&
-            !speakersToDelete.some((s) => s.id === speaker.id)
-        );
-
-        if (newSpeakers.length > 0) {
+        // If we have new speakers, create event-author relationships and update slot
+        if (newSpeakers.length > 0 && savedSlotId) {
           const eventAuthorResults = await Promise.all(
             newSpeakers.map(async (speaker) => {
               const resp = await saveEventAuthor({
@@ -617,14 +554,99 @@ export const EventCreationPopup = (props) => {
             })
           );
 
-          // Build speaker objects for slot
+          const newSpeakersForUpdate = eventAuthorResults.map((ea) => ({
+            orateur: { id: ea.eventAuthorId, author: ea.authorId },
+            type: 1,
+            priority: 0,
+          }));
+
+          // Update selectedSpeakers state
+          const newSpeakersMap = new Map(
+            eventAuthorResults.map((ea) => [ea.authorId, ea.eventAuthorId])
+          );
+          setSelectedSpeakers((prevSpeakers) =>
+            prevSpeakers.map((speaker) => ({
+              ...speaker,
+              isExisting: true,
+              eventAuthorId:
+                speaker.eventAuthorId || newSpeakersMap.get(speaker.id),
+            }))
+          );
+
+          // Update slot with speakers
+          const updateSlot = processLightSlot(data);
+          updateSlot.id = savedSlotId;
+          updateSlot.speakers = [...existingSpeakers, ...newSpeakersForUpdate];
+
+          await saveEventLight({
+            apiUrl,
+            token: auth.token,
+            data: {
+              ...data,
+              eventId: savedEventId,
+              slots: [updateSlot],
+            },
+          });
+        }
+
+        // Upload image if needed
+        if (data.imageFile) {
+          imageResult = await uploadImage(savedEventId);
+
+          const imageDataToSave = {
+            ...data,
+            eventId: savedEventId,
+            [imageResult.urlBannerField]: imageResult.imagePath,
+          };
+
+          // Include slot only if we have one
+          if (savedSlotId) {
+            const imageSlot = processLightSlot(data);
+            imageSlot.id = savedSlotId;
+            imageDataToSave.slots = [imageSlot];
+          }
+
+          await saveEventLight({
+            apiUrl,
+            token: auth.token,
+            data: imageDataToSave,
+          });
+        }
+      } else {
+        // EXISTING EVENT UPDATE
+
+        // Create event-author relationships for new speakers first
+        let newSpeakersForSlot = [];
+        if (newSpeakers.length > 0) {
+          const eventAuthorResults = await Promise.all(
+            newSpeakers.map(async (speaker) => {
+              const resp = await saveEventAuthor({
+                apiUrl,
+                token: auth.token,
+                data: {
+                  author: speaker.id,
+                  event: currentEventId,
+                  priority: 0,
+                  isValid: 1,
+                  headLineFr: speaker.headLineFr || "",
+                  headLineNl: speaker.headLineNl || "",
+                  headLineEn: speaker.headLineEn || "",
+                },
+              });
+              return {
+                eventAuthorId: resp.data.data.id,
+                authorId: speaker.id,
+              };
+            })
+          );
+
           newSpeakersForSlot = eventAuthorResults.map((ea) => ({
             orateur: { id: ea.eventAuthorId, author: ea.authorId },
             type: 1,
             priority: 0,
           }));
 
-          // Update selectedSpeakers state with eventAuthorId
+          // Update selectedSpeakers state
           const newSpeakersMap = new Map(
             eventAuthorResults.map((ea) => [ea.authorId, ea.eventAuthorId])
           );
@@ -638,77 +660,67 @@ export const EventCreationPopup = (props) => {
           );
         }
 
-        // STEP 4: Final save with image URL and ALL speakers
-        const needsFinalSave = imageResult || newSpeakersForSlot.length > 0;
+        // Build slot with speakers (always include slot for existing events)
+        const processedSlot = processLightSlot(data);
+        if (currentSlotId) {
+          processedSlot.id = currentSlotId;
+        }
+        processedSlot.speakers = [...existingSpeakers, ...newSpeakersForSlot];
 
-        if (needsFinalSave) {
-          const finalSlot = processLightSlot(data);
-          const finalDataToSave = {
-            ...data,
-            eventId: savedEventId,
-            slots: [{ id: savedSlotId, ...finalSlot }],
-          };
+        // Save event with slot
+        const dataToSave = {
+          ...data,
+          eventId: currentEventId,
+          slots: [processedSlot],
+        };
 
-          // Add image URL if uploaded
-          if (imageResult) {
-            finalDataToSave[imageResult.urlBannerField] = imageResult.imagePath;
-          }
+        const eventResp = await saveEventLight({
+          apiUrl,
+          token: auth.token,
+          data: dataToSave,
+        });
 
-          // ALWAYS include ALL speakers (existing + new) to slot
-          // Backend deletes speakers not in the array
-          const existingSpeakers = selectedSpeakers
-            .filter((speaker) => speaker.isExisting && speaker.eventAuthorId)
-            .map((speaker) => ({
-              orateur: { id: speaker.eventAuthorId, author: speaker.id },
-              type: 1,
-              priority: 0,
-            }));
+        const savedSlotId =
+          currentSlotId || eventResp.data.data.slots?.[0]?.data.id;
 
-          finalDataToSave.slots[0].speakers = [
-            ...existingSpeakers,
-            ...newSpeakersForSlot,
-          ];
+        // Update state with slot ID
+        setData((prevData) => ({
+          ...prevData,
+          slotId: savedSlotId,
+        }));
+
+        // Upload image if needed
+        if (data.imageFile) {
+          imageResult = await uploadImage(currentEventId);
+
+          const imageSlot = processLightSlot(data);
+          imageSlot.id = savedSlotId;
 
           await saveEventLight({
             apiUrl,
             token: auth.token,
-            data: finalDataToSave,
+            data: {
+              ...data,
+              eventId: currentEventId,
+              [imageResult.urlBannerField]: imageResult.imagePath,
+              slots: [imageSlot],
+            },
           });
         }
-
-        // STEP 5: Delete speakers marked for deletion
-        await deleteSpeakersMarkedForDeletion(savedEventId);
-
-        Toast.success(I18N[language]["eventSavedSuccessfully"]);
-        console.log("[SAVE] Completed successfully");
-      } finally {
-        // Reset ALL locks
-        console.log("[SAVE] Releasing all locks");
-        setIsSaving(false);
-        savePromiseRef.current = null;
-        isSavingRef.current = false;
-        globalSaveLock = false;
-        globalSavePromise = null;
       }
-    };
 
-    // Store and return the promise IMMEDIATELY at both levels
-    const promise = saveOperation().catch((e) => {
-      console.error("[SAVE] Error:", e);
+      // Delete speakers marked for deletion
+      await deleteSpeakersMarkedForDeletion(currentEventId || data.eventId);
+
+      Toast.success(I18N[language]["eventSavedSuccessfully"]);
+    } catch (e) {
       Toast.error(
         e.response?.data?.message || I18N[language]["errorSavingEvent"]
       );
-      // Reset ALL locks on error
-      isSavingRef.current = false;
-      globalSaveLock = false;
-      globalSavePromise = null;
       throw e;
-    });
-
-    savePromiseRef.current = promise;
-    globalSavePromise = promise;
-
-    return promise;
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleContinue = () => {
