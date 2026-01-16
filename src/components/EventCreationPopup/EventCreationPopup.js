@@ -516,29 +516,21 @@ export const EventCreationPopup = (props) => {
 
     setIsSaving(true);
 
-    const processedSlot = processLightSlot(data);
-    const dataToSave = {
-      ...data,
-      slots: [processedSlot],
-    };
-
-    return saveEventLight({ apiUrl, token: auth.token, data: dataToSave })
+    return saveEventLight({ apiUrl, token: auth.token, data: data })
       .then((resp) => {
         const savedEventId = data.eventId || resp.data.data.id;
-        const savedSlotId = data.slotId || resp.data.data.slots?.[0]?.data.id;
 
         setData((prevData) => ({
           ...prevData,
           eventId: savedEventId,
-          slotId: savedSlotId,
         }));
 
         const promises = [];
         if (data.imageFile) {
           promises.push(uploadImage(savedEventId));
         }
-        if (savedSlotId && selectedSpeakers && selectedSpeakers.length > 0) {
-          promises.push(saveSpeakersToSlot(savedEventId, savedSlotId));
+        if (selectedSpeakers && selectedSpeakers.length > 0) {
+          promises.push(saveSpeakersToSlot(savedEventId));
         }
         if (promises.length > 0) {
           return Promise.all(promises).then((results) => ({
