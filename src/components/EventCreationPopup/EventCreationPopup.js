@@ -180,6 +180,10 @@ export const EventCreationPopup = (props) => {
       duration: durationMinutes,
     };
 
+    if (data.slotId > 0) {
+      slot.id = data.slotId;
+    }
+
     return slot;
   };
 
@@ -278,6 +282,7 @@ export const EventCreationPopup = (props) => {
           const mappedSpeakers = retrievedSpeakers.map((speaker) => {
             return {
               id: Number(speaker.id),
+              eventAuthorId: Number(speaker.eventAuthorId), // Preserve eventAuthorId for existing speakers
               isExisting: true,
               user: {
                 avatar: !speaker.pictureUrl.includes("/IMAGE//")
@@ -478,7 +483,11 @@ export const EventCreationPopup = (props) => {
           };
         });
 
-        return { speakers };
+        const eventAuthorMap = new Map(
+          eventAuthors.map((ea) => [ea.authorId, ea.eventAuthorId])
+        );
+
+        return { speakers, eventAuthorMap };
       })
       .catch((e) => {
         Toast.error(I18N[language]["errorSavingSpeakers"]);
@@ -526,7 +535,6 @@ export const EventCreationPopup = (props) => {
       .then((resp) => {
         const savedEventId = data.eventId || resp.data.data.id;
         const savedSlotId = data.slotId || resp.data.data.slots?.[0]?.data.id;
-
         setData((prevData) => ({
           ...prevData,
           eventId: savedEventId,
@@ -538,31 +546,47 @@ export const EventCreationPopup = (props) => {
           promises.push(uploadImage(savedEventId));
         }
         if (savedSlotId && selectedSpeakers && selectedSpeakers.length > 0) {
-          promises.push(saveSpeakersToSlot(savedEventId, savedSlotId));
+          promises.push(saveSpeakersToSlot(savedEventId));
         }
         if (promises.length > 0) {
           return Promise.all(promises).then((results) => ({
             results,
             savedEventId,
+            savedSlotId,
           }));
         }
-        return Promise.resolve({ results: [], savedEventId });
+        return Promise.resolve({ results: [], savedEventId, savedSlotId });
       })
-      .then(({ results, savedEventId }) => {
+      .then(({ results, savedEventId, savedSlotId }) => {
         const hasNewImage = results.some((r) => r && r.urlBannerField);
         const hasNewSpeakers = results.some((r) => r && r.speakers);
 
         if (hasNewSpeakers) {
+          const speakersResult = results.find((r) => r && r.eventAuthorMap);
+          const eventAuthorMap = speakersResult?.eventAuthorMap;
+
           setSelectedSpeakers((prevSpeakers) =>
-            prevSpeakers.map((speaker) => ({
-              ...speaker,
-              isExisting: true,
-            }))
+            prevSpeakers.map((speaker) => {
+              if (eventAuthorMap && eventAuthorMap.has(speaker.id)) {
+                return {
+                  ...speaker,
+                  isExisting: true,
+                  eventAuthorId: eventAuthorMap.get(speaker.id),
+                };
+              }
+              return {
+                ...speaker,
+                isExisting: speaker.isExisting || true,
+              };
+            })
           );
         }
 
         if (hasNewImage || hasNewSpeakers) {
           const processedSlot = processLightSlot(data);
+          if (savedSlotId > 0) {
+            processedSlot.id = savedSlotId;
+          }
           const finalDataToSave = {
             ...data,
             eventId: savedEventId,
@@ -574,9 +598,54 @@ export const EventCreationPopup = (props) => {
             finalDataToSave[imageResult.urlBannerField] = imageResult.imagePath;
           }
 
-          const speakersResult = results.find((r) => r && r.speakers);
-          if (speakersResult) {
-            finalDataToSave.slots[0].speakers = speakersResult.speakers;
+          const allSpeakers = [];
+
+          const speakersResult = results.find(
+            (r) => r && (r.speakers || r.eventAuthorMap)
+          );
+          const eventAuthorMap = speakersResult?.eventAuthorMap;
+
+          const existingSpeakers = selectedSpeakers
+            .filter(
+              (speaker) => !speakersToDelete.some((s) => s.id === speaker.id)
+            )
+            .map((speaker) => {
+              const eventAuthorId =
+                speaker.eventAuthorId ||
+                (eventAuthorMap && eventAuthorMap.get(speaker.id));
+
+              if (!eventAuthorId) {
+                return null;
+              }
+
+              return {
+                orateur: {
+                  id: eventAuthorId,
+                  author: speaker.id,
+                },
+                type: 1,
+                priority: 0,
+              };
+            })
+            .filter((speaker) => speaker !== null);
+
+          allSpeakers.push(...existingSpeakers);
+
+          if (speakersResult && speakersResult.speakers) {
+            speakersResult.speakers.forEach((newSpeaker) => {
+              const alreadyIncluded = allSpeakers.some(
+                (s) =>
+                  s.orateur.id === newSpeaker.orateur.id &&
+                  s.orateur.author === newSpeaker.orateur.author
+              );
+              if (!alreadyIncluded) {
+                allSpeakers.push(newSpeaker);
+              }
+            });
+          }
+
+          if (allSpeakers.length > 0) {
+            finalDataToSave.slots[0].speakers = allSpeakers;
           }
 
           return saveEventLight({
@@ -702,7 +771,6 @@ export const EventCreationPopup = (props) => {
       refreshEventsData("duplicate");
       onClose();
     } catch (error) {
-      console.log("Duplication error:", error);
       Toast.error(I18N[language]["errorDuplicatingEvent"]);
     } finally {
       setIsDuplicating(false);
