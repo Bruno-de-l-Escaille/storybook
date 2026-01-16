@@ -180,6 +180,10 @@ export const EventCreationPopup = (props) => {
       duration: durationMinutes,
     };
 
+    if (data.slotId > 0) {
+      slot.id = data.slotId;
+    }
+
     return slot;
   };
 
@@ -278,6 +282,7 @@ export const EventCreationPopup = (props) => {
           const mappedSpeakers = retrievedSpeakers.map((speaker) => {
             return {
               id: Number(speaker.id),
+              eventAuthorId: speaker.eventAuthorId,
               isExisting: true,
               user: {
                 avatar: !speaker.pictureUrl.includes("/IMAGE//")
@@ -544,19 +549,27 @@ export const EventCreationPopup = (props) => {
           return Promise.all(promises).then((results) => ({
             results,
             savedEventId,
+            savedSlotId,
           }));
         }
-        return Promise.resolve({ results: [], savedEventId });
+        return Promise.resolve({ results: [], savedEventId, savedSlotId });
       })
-      .then(({ results, savedEventId }) => {
+      .then(({ results, savedEventId, savedSlotId }) => {
         const hasNewImage = results.some((r) => r && r.urlBannerField);
         const hasNewSpeakers = results.some((r) => r && r.speakers);
 
         if (hasNewSpeakers) {
+          const speakersResult = results.find((r) => r && r.speakers);
+          const newSpeakersMap = new Map(
+            speakersResult.speakers.map((s) => [s.orateur.author, s.orateur.id])
+          );
+
           setSelectedSpeakers((prevSpeakers) =>
             prevSpeakers.map((speaker) => ({
               ...speaker,
               isExisting: true,
+              eventAuthorId:
+                speaker.eventAuthorId || newSpeakersMap.get(speaker.id),
             }))
           );
         }
@@ -566,7 +579,7 @@ export const EventCreationPopup = (props) => {
           const finalDataToSave = {
             ...data,
             eventId: savedEventId,
-            slots: [processedSlot],
+            slots: [{ id: savedSlotId, ...processedSlot }],
           };
 
           const imageResult = results.find((r) => r && r.urlBannerField);
@@ -576,7 +589,21 @@ export const EventCreationPopup = (props) => {
 
           const speakersResult = results.find((r) => r && r.speakers);
           if (speakersResult) {
-            finalDataToSave.slots[0].speakers = speakersResult.speakers;
+            const existingSpeakers = selectedSpeakers
+              .filter((speaker) => speaker.isExisting)
+              .map((speaker) => ({
+                orateur: {
+                  id: speaker.eventAuthorId,
+                  author: speaker.id,
+                },
+                type: 1,
+                priority: 0,
+              }));
+
+            finalDataToSave.slots[0].speakers = [
+              ...existingSpeakers,
+              ...speakersResult.speakers,
+            ];
           }
 
           return saveEventLight({
