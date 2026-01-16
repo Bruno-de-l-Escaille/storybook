@@ -32,6 +32,10 @@ import { Toast, FlashMessage } from "../ToastContainer/ToastContainer";
 import { ClipLoader } from "react-spinners";
 import { ModalConfirm } from "../Modal/ModalConfirm";
 
+// MODULE-LEVEL lock - shared across ALL component instances
+let globalSaveLock = false;
+let globalSavePromise = null;
+
 export const EventCreationPopup = (props) => {
   const {
     isOpen,
@@ -518,21 +522,31 @@ export const EventCreationPopup = (props) => {
   };
 
   const handleSave = async () => {
-    // SYNCHRONOUS lock check - must happen BEFORE any async operation
-    // This prevents race conditions when multiple calls happen simultaneously
+    // GLOBAL lock check - blocks ALL component instances
+    if (globalSaveLock) {
+      console.log("[SAVE] Blocked by GLOBAL lock");
+      return (
+        globalSavePromise || Promise.reject("Save already in progress globally")
+      );
+    }
+
+    // INSTANCE lock check
     if (isSavingRef.current) {
-      console.log("[SAVE] Blocked by isSavingRef");
+      console.log("[SAVE] Blocked by instance lock");
       return (
         savePromiseRef.current || Promise.reject("Save already in progress")
       );
     }
 
-    // Set lock IMMEDIATELY and SYNCHRONOUSLY
+    // Set BOTH locks IMMEDIATELY and SYNCHRONOUSLY
+    globalSaveLock = true;
     isSavingRef.current = true;
+    console.log("[SAVE] Locks acquired, starting save...");
 
     // Validate before proceeding
     const validated = checkValidations();
     if (!validated) {
+      globalSaveLock = false;
       isSavingRef.current = false;
       return Promise.reject("Validation failed");
     }
@@ -666,26 +680,35 @@ export const EventCreationPopup = (props) => {
         await deleteSpeakersMarkedForDeletion(savedEventId);
 
         Toast.success(I18N[language]["eventSavedSuccessfully"]);
+        console.log("[SAVE] Completed successfully");
       } finally {
         // Reset ALL locks
+        console.log("[SAVE] Releasing all locks");
         setIsSaving(false);
         savePromiseRef.current = null;
         isSavingRef.current = false;
+        globalSaveLock = false;
+        globalSavePromise = null;
       }
     };
 
-    // Store and return the promise IMMEDIATELY
-    savePromiseRef.current = saveOperation().catch((e) => {
-      console.error("Save error:", e);
+    // Store and return the promise IMMEDIATELY at both levels
+    const promise = saveOperation().catch((e) => {
+      console.error("[SAVE] Error:", e);
       Toast.error(
         e.response?.data?.message || I18N[language]["errorSavingEvent"]
       );
-      // Reset lock on error
+      // Reset ALL locks on error
       isSavingRef.current = false;
+      globalSaveLock = false;
+      globalSavePromise = null;
       throw e;
     });
 
-    return savePromiseRef.current;
+    savePromiseRef.current = promise;
+    globalSavePromise = promise;
+
+    return promise;
   };
 
   const handleContinue = () => {
