@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Modal from "react-modal";
 import styles from "./EventCreationPopup.module.scss";
 import { I18N } from "../../i18n";
@@ -53,6 +53,7 @@ export const EventCreationPopup = (props) => {
   const [showDuplicateConfirm, setShowDuplicateConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isDuplicating, setIsDuplicating] = useState(false);
+  const savePromiseRef = useRef(null);
   const [data, setData] = useState({
     eventId: eventId || 0,
     nameFr: "",
@@ -516,6 +517,11 @@ export const EventCreationPopup = (props) => {
   };
 
   const handleSave = () => {
+    // Return existing promise if save is already in progress
+    if (savePromiseRef.current) {
+      return savePromiseRef.current;
+    }
+
     if (isSaving) return Promise.reject("Save already in progress");
 
     const validated = checkValidations();
@@ -529,7 +535,11 @@ export const EventCreationPopup = (props) => {
       slots: [processedSlot],
     };
 
-    return saveEventLight({ apiUrl, token: auth.token, data: dataToSave })
+    const savePromise = saveEventLight({
+      apiUrl,
+      token: auth.token,
+      data: dataToSave,
+    })
       .then((resp) => {
         const savedEventId = data.eventId || resp.data.data.id;
         const savedSlotId = data.slotId || resp.data.data.slots?.[0]?.data.id;
@@ -560,6 +570,7 @@ export const EventCreationPopup = (props) => {
         const hasNewImage = results.some((r) => r && r.urlBannerField);
         const hasNewSpeakers = results.some((r) => r && r.speakers);
 
+        // Update speakers with eventAuthorId from API response
         if (hasNewSpeakers) {
           const speakersResult = results.find((r) => r && r.speakers);
           const newSpeakersMap = new Map(
@@ -576,6 +587,7 @@ export const EventCreationPopup = (props) => {
           );
         }
 
+        // Only do second save if there's new image or new speakers
         if (hasNewImage || hasNewSpeakers) {
           const processedSlot = processLightSlot(data);
           const finalDataToSave = {
@@ -589,10 +601,16 @@ export const EventCreationPopup = (props) => {
             finalDataToSave[imageResult.urlBannerField] = imageResult.imagePath;
           }
 
+          // Include ALL speakers (existing + new) in the final save
+          // so they're all linked to the slot
           const speakersResult = results.find((r) => r && r.speakers);
-          if (speakersResult) {
+          if (
+            hasNewSpeakers &&
+            speakersResult &&
+            speakersResult.speakers.length > 0
+          ) {
             const existingSpeakers = selectedSpeakers
-              .filter((speaker) => speaker.isExisting)
+              .filter((speaker) => speaker.isExisting && speaker.eventAuthorId)
               .map((speaker) => ({
                 orateur: {
                   id: speaker.eventAuthorId,
@@ -622,6 +640,7 @@ export const EventCreationPopup = (props) => {
       .then(() => {
         Toast.success(I18N[language]["eventSavedSuccessfully"]);
         setIsSaving(false);
+        savePromiseRef.current = null;
       })
       .catch((e) => {
         console.error("Save error:", e);
@@ -629,7 +648,12 @@ export const EventCreationPopup = (props) => {
           e.response?.data?.message || I18N[language]["errorSavingEvent"]
         );
         setIsSaving(false);
+        savePromiseRef.current = null;
       });
+
+    // Store the promise so concurrent calls return the same one
+    savePromiseRef.current = savePromise;
+    return savePromise;
   };
 
   const handleContinue = () => {
