@@ -54,6 +54,7 @@ export const EventCreationPopup = (props) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isDuplicating, setIsDuplicating] = useState(false);
   const savePromiseRef = useRef(null);
+  const isSavingRef = useRef(false);
   const [data, setData] = useState({
     eventId: eventId || 0,
     nameFr: "",
@@ -517,19 +518,26 @@ export const EventCreationPopup = (props) => {
   };
 
   const handleSave = async () => {
-    // Prevent concurrent saves
-    if (savePromiseRef.current) {
-      return savePromiseRef.current;
-    }
-    if (isSaving) {
-      return Promise.reject("Save already in progress");
+    // SYNCHRONOUS lock check - must happen BEFORE any async operation
+    // This prevents race conditions when multiple calls happen simultaneously
+    if (isSavingRef.current) {
+      console.log("[SAVE] Blocked by isSavingRef");
+      return (
+        savePromiseRef.current || Promise.reject("Save already in progress")
+      );
     }
 
+    // Set lock IMMEDIATELY and SYNCHRONOUSLY
+    isSavingRef.current = true;
+
+    // Validate before proceeding
     const validated = checkValidations();
     if (!validated) {
+      isSavingRef.current = false;
       return Promise.reject("Validation failed");
     }
 
+    // Set React state for UI
     setIsSaving(true);
 
     const saveOperation = async () => {
@@ -659,17 +667,21 @@ export const EventCreationPopup = (props) => {
 
         Toast.success(I18N[language]["eventSavedSuccessfully"]);
       } finally {
+        // Reset ALL locks
         setIsSaving(false);
         savePromiseRef.current = null;
+        isSavingRef.current = false;
       }
     };
 
-    // Store and return the promise
+    // Store and return the promise IMMEDIATELY
     savePromiseRef.current = saveOperation().catch((e) => {
       console.error("Save error:", e);
       Toast.error(
         e.response?.data?.message || I18N[language]["errorSavingEvent"]
       );
+      // Reset lock on error
+      isSavingRef.current = false;
       throw e;
     });
 
