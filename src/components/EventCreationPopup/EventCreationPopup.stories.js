@@ -201,7 +201,7 @@ export const Default = () => (
     env="local"
     auth={object("auth", authLogin)}
     clientId={9}
-    // eventId={2297}
-    // eventStep={2}
+    //eventId={2297}
+    //eventStep={2}
   />
 );
