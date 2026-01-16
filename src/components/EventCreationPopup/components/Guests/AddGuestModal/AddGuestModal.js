@@ -357,12 +357,22 @@ export const AddGuestModal = ({
     }),
   };
   const renderAddGuestResult = () => {
+    let errorNumber = 0;
+    let successNumber = 0;
+    Object.entries(forceGuestData).map(([email, data], index) => {
+      if (data.result === "ok") {
+        successNumber += 1;
+      } else {
+        errorNumber += 1;
+      }
+    });
+
     return (
       <>
         <div className={styles.resultContent}>
           <div className={styles.section}>
             <div className={styles.title}>
-              Success <IconCheck />
+              <IconCheck width={16} height={16} /> Success ({successNumber})
             </div>
             <div className={styles.divider} />
             <div className={styles.resultHeader}>
@@ -392,7 +402,7 @@ export const AddGuestModal = ({
           </div>
           <div className={styles.section}>
             <div className={styles.title}>
-              Error <IconX />
+              <IconX width={16} height={16} /> Error ({errorNumber})
             </div>
             <div className={styles.divider} />
             <div className={styles.resultHeader}>
@@ -404,9 +414,7 @@ export const AddGuestModal = ({
               >
                 {I18N[lang].email}
               </span>
-              <span className={styles.resultHeaderCell}>
-                {I18N[lang].fullName1}
-              </span>
+              <span className={styles.resultHeaderCell}>Erreur</span>
             </div>
             <div className={styles.divider} />
             {Object.entries(forceGuestData).map(([email, data], index) => {
