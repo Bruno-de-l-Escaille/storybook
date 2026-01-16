@@ -516,6 +516,8 @@ export const EventCreationPopup = (props) => {
   };
 
   const handleSave = () => {
+    if (isSaving) return Promise.reject("Save already in progress");
+
     const validated = checkValidations();
     if (!validated) return Promise.reject("Validation failed");
 
@@ -904,7 +906,11 @@ export const EventCreationPopup = (props) => {
                   : ""
               }`}
               disabled={(step === 0 && !(eventId || data.eventId)) || isSaving}
-              onClick={handleSave}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleSave();
+              }}
             >
               {isSaving && <ClipLoader size={16} color="#ffffff" />}
               {I18N[language]["save"]}
