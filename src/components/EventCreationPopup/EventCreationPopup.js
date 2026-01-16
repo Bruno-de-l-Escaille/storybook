@@ -282,7 +282,7 @@ export const EventCreationPopup = (props) => {
           const mappedSpeakers = retrievedSpeakers.map((speaker) => {
             return {
               id: Number(speaker.id),
-              eventAuthorId: speaker.eventAuthorId,
+              eventAuthorId: Number(speaker.eventAuthorId), // Preserve eventAuthorId for existing speakers
               isExisting: true,
               user: {
                 avatar: !speaker.pictureUrl.includes("/IMAGE//")
@@ -436,6 +436,65 @@ export const EventCreationPopup = (props) => {
       });
   };
 
+  const saveSpeakersToSlot = (eventId) => {
+    if (!selectedSpeakers || selectedSpeakers.length === 0) {
+      return Promise.resolve();
+    }
+    const newSpeakers = selectedSpeakers.filter(
+      (speaker) =>
+        !speaker.isExisting &&
+        !speakersToDelete.some((s) => s.id === speaker.id)
+    );
+    if (newSpeakers.length === 0) {
+      return Promise.resolve();
+    }
+
+    const eventAuthorPromises = newSpeakers.map((speaker) => {
+      const eventAuthorData = {
+        author: speaker.id,
+        event: eventId,
+        priority: 0,
+        isValid: 1,
+        headLineFr: speaker.headLineFr || "",
+        headLineNl: speaker.headLineNl || "",
+        headLineEn: speaker.headLineEn || "",
+      };
+
+      return saveEventAuthor({
+        apiUrl,
+        token: auth.token,
+        data: eventAuthorData,
+      }).then((resp) => ({
+        eventAuthorId: resp.data.data.id,
+        authorId: speaker.id,
+      }));
+    });
+
+    return Promise.all(eventAuthorPromises)
+      .then((eventAuthors) => {
+        const speakers = eventAuthors.map((eventAuthor) => {
+          return {
+            orateur: {
+              id: eventAuthor.eventAuthorId,
+              author: eventAuthor.authorId,
+            },
+            type: 1,
+            priority: 0,
+          };
+        });
+
+        const eventAuthorMap = new Map(
+          eventAuthors.map((ea) => [ea.authorId, ea.eventAuthorId])
+        );
+
+        return { speakers, eventAuthorMap };
+      })
+      .catch((e) => {
+        Toast.error(I18N[language]["errorSavingSpeakers"]);
+        throw e;
+      });
+  };
+
   const deleteSpeakersMarkedForDeletion = (eventId) => {
     if (speakersToDelete.length === 0) {
       return Promise.resolve();
@@ -460,267 +519,157 @@ export const EventCreationPopup = (props) => {
       });
   };
 
-  const handleSave = async () => {
-    // Prevent double-click while saving
-    if (isSaving) {
-      return;
-    }
-
-    // Validate before proceeding
+  const handleSave = () => {
     const validated = checkValidations();
-    if (!validated) {
-      return;
-    }
+    if (!validated) return Promise.reject("Validation failed");
 
     setIsSaving(true);
 
-    try {
-      const isNewEvent = !data.eventId && !eventId;
-      const currentEventId = data.eventId || eventId;
-      const currentSlotId = data.slotId;
+    const processedSlot = processLightSlot(data);
+    const dataToSave = {
+      ...data,
+      slots: [processedSlot],
+    };
 
-      let imageResult = null;
-
-      // Get new speakers that need to be added
-      const newSpeakers = selectedSpeakers.filter(
-        (speaker) =>
-          !speaker.isExisting &&
-          !speakersToDelete.some((s) => s.id === speaker.id)
-      );
-
-      // Get existing speakers
-      const existingSpeakers = selectedSpeakers
-        .filter((speaker) => speaker.isExisting && speaker.eventAuthorId)
-        .map((speaker) => ({
-          orateur: { id: speaker.eventAuthorId, author: speaker.id },
-          type: 1,
-          priority: 0,
-        }));
-
-      // Check if we have any speakers to save
-      const hasSpeakers = existingSpeakers.length > 0 || newSpeakers.length > 0;
-
-      if (isNewEvent) {
-        // NEW EVENT CREATION
-
-        // Build data to save (without slot if no speakers)
-        const dataToSave = { ...data };
-
-        if (hasSpeakers) {
-          // Include slot only if we have speakers
-          const processedSlot = processLightSlot(data);
-          dataToSave.slots = [processedSlot];
-        }
-
-        const eventResp = await saveEventLight({
-          apiUrl,
-          token: auth.token,
-          data: dataToSave,
-        });
-
-        const savedEventId = eventResp.data.data.id;
-        const savedSlotId = hasSpeakers
-          ? eventResp.data.data.slots?.[0]?.data.id
-          : null;
-
-        // Update state with IDs
+    return saveEventLight({ apiUrl, token: auth.token, data: dataToSave })
+      .then((resp) => {
+        const savedEventId = data.eventId || resp.data.data.id;
+        const savedSlotId = data.slotId || resp.data.data.slots?.[0]?.data.id;
         setData((prevData) => ({
           ...prevData,
           eventId: savedEventId,
           slotId: savedSlotId,
         }));
 
-        // If we have new speakers, create event-author relationships and update slot
-        if (newSpeakers.length > 0 && savedSlotId) {
-          const eventAuthorResults = await Promise.all(
-            newSpeakers.map(async (speaker) => {
-              const resp = await saveEventAuthor({
-                apiUrl,
-                token: auth.token,
-                data: {
-                  author: speaker.id,
-                  event: savedEventId,
-                  priority: 0,
-                  isValid: 1,
-                  headLineFr: speaker.headLineFr || "",
-                  headLineNl: speaker.headLineNl || "",
-                  headLineEn: speaker.headLineEn || "",
-                },
-              });
+        const promises = [];
+        if (data.imageFile) {
+          promises.push(uploadImage(savedEventId));
+        }
+        if (savedSlotId && selectedSpeakers && selectedSpeakers.length > 0) {
+          promises.push(saveSpeakersToSlot(savedEventId));
+        }
+        if (promises.length > 0) {
+          return Promise.all(promises).then((results) => ({
+            results,
+            savedEventId,
+            savedSlotId,
+          }));
+        }
+        return Promise.resolve({ results: [], savedEventId, savedSlotId });
+      })
+      .then(({ results, savedEventId, savedSlotId }) => {
+        const hasNewImage = results.some((r) => r && r.urlBannerField);
+        const hasNewSpeakers = results.some((r) => r && r.speakers);
+
+        if (hasNewSpeakers) {
+          const speakersResult = results.find((r) => r && r.eventAuthorMap);
+          const eventAuthorMap = speakersResult?.eventAuthorMap;
+
+          setSelectedSpeakers((prevSpeakers) =>
+            prevSpeakers.map((speaker) => {
+              if (eventAuthorMap && eventAuthorMap.has(speaker.id)) {
+                return {
+                  ...speaker,
+                  isExisting: true,
+                  eventAuthorId: eventAuthorMap.get(speaker.id),
+                };
+              }
               return {
-                eventAuthorId: resp.data.data.id,
-                authorId: speaker.id,
+                ...speaker,
+                isExisting: speaker.isExisting || true,
               };
             })
           );
-
-          const newSpeakersForUpdate = eventAuthorResults.map((ea) => ({
-            orateur: { id: ea.eventAuthorId, author: ea.authorId },
-            type: 1,
-            priority: 0,
-          }));
-
-          // Update selectedSpeakers state
-          const newSpeakersMap = new Map(
-            eventAuthorResults.map((ea) => [ea.authorId, ea.eventAuthorId])
-          );
-          setSelectedSpeakers((prevSpeakers) =>
-            prevSpeakers.map((speaker) => ({
-              ...speaker,
-              isExisting: true,
-              eventAuthorId:
-                speaker.eventAuthorId || newSpeakersMap.get(speaker.id),
-            }))
-          );
-
-          // Update slot with speakers
-          const updateSlot = processLightSlot(data);
-          updateSlot.id = savedSlotId;
-          updateSlot.speakers = [...existingSpeakers, ...newSpeakersForUpdate];
-
-          await saveEventLight({
-            apiUrl,
-            token: auth.token,
-            data: {
-              ...data,
-              eventId: savedEventId,
-              slots: [updateSlot],
-            },
-          });
         }
 
-        // Upload image if needed
-        if (data.imageFile) {
-          imageResult = await uploadImage(savedEventId);
-
-          const imageDataToSave = {
+        if (hasNewImage || hasNewSpeakers) {
+          const processedSlot = processLightSlot(data);
+          if (savedSlotId > 0) {
+            processedSlot.id = savedSlotId;
+          }
+          const finalDataToSave = {
             ...data,
             eventId: savedEventId,
-            [imageResult.urlBannerField]: imageResult.imagePath,
+            slots: [processedSlot],
           };
 
-          // Include slot only if we have one
-          if (savedSlotId) {
-            const imageSlot = processLightSlot(data);
-            imageSlot.id = savedSlotId;
-            imageDataToSave.slots = [imageSlot];
+          const imageResult = results.find((r) => r && r.urlBannerField);
+          if (imageResult) {
+            finalDataToSave[imageResult.urlBannerField] = imageResult.imagePath;
           }
 
-          await saveEventLight({
-            apiUrl,
-            token: auth.token,
-            data: imageDataToSave,
-          });
-        }
-      } else {
-        // EXISTING EVENT UPDATE
+          const allSpeakers = [];
 
-        // Create event-author relationships for new speakers first
-        let newSpeakersForSlot = [];
-        if (newSpeakers.length > 0) {
-          const eventAuthorResults = await Promise.all(
-            newSpeakers.map(async (speaker) => {
-              const resp = await saveEventAuthor({
-                apiUrl,
-                token: auth.token,
-                data: {
-                  author: speaker.id,
-                  event: currentEventId,
-                  priority: 0,
-                  isValid: 1,
-                  headLineFr: speaker.headLineFr || "",
-                  headLineNl: speaker.headLineNl || "",
-                  headLineEn: speaker.headLineEn || "",
-                },
-              });
+          const speakersResult = results.find(
+            (r) => r && (r.speakers || r.eventAuthorMap)
+          );
+          const eventAuthorMap = speakersResult?.eventAuthorMap;
+
+          const existingSpeakers = selectedSpeakers
+            .filter(
+              (speaker) => !speakersToDelete.some((s) => s.id === speaker.id)
+            )
+            .map((speaker) => {
+              const eventAuthorId =
+                speaker.eventAuthorId ||
+                (eventAuthorMap && eventAuthorMap.get(speaker.id));
+
+              if (!eventAuthorId) {
+                return null;
+              }
+
               return {
-                eventAuthorId: resp.data.data.id,
-                authorId: speaker.id,
+                orateur: {
+                  id: eventAuthorId,
+                  author: speaker.id,
+                },
+                type: 1,
+                priority: 0,
               };
             })
-          );
+            .filter((speaker) => speaker !== null);
 
-          newSpeakersForSlot = eventAuthorResults.map((ea) => ({
-            orateur: { id: ea.eventAuthorId, author: ea.authorId },
-            type: 1,
-            priority: 0,
-          }));
+          allSpeakers.push(...existingSpeakers);
 
-          // Update selectedSpeakers state
-          const newSpeakersMap = new Map(
-            eventAuthorResults.map((ea) => [ea.authorId, ea.eventAuthorId])
-          );
-          setSelectedSpeakers((prevSpeakers) =>
-            prevSpeakers.map((speaker) => ({
-              ...speaker,
-              isExisting: true,
-              eventAuthorId:
-                speaker.eventAuthorId || newSpeakersMap.get(speaker.id),
-            }))
-          );
-        }
+          if (speakersResult && speakersResult.speakers) {
+            speakersResult.speakers.forEach((newSpeaker) => {
+              const alreadyIncluded = allSpeakers.some(
+                (s) =>
+                  s.orateur.id === newSpeaker.orateur.id &&
+                  s.orateur.author === newSpeaker.orateur.author
+              );
+              if (!alreadyIncluded) {
+                allSpeakers.push(newSpeaker);
+              }
+            });
+          }
 
-        // Build slot with speakers (always include slot for existing events)
-        const processedSlot = processLightSlot(data);
-        if (currentSlotId) {
-          processedSlot.id = currentSlotId;
-        }
-        processedSlot.speakers = [...existingSpeakers, ...newSpeakersForSlot];
+          if (allSpeakers.length > 0) {
+            finalDataToSave.slots[0].speakers = allSpeakers;
+          }
 
-        // Save event with slot
-        const dataToSave = {
-          ...data,
-          eventId: currentEventId,
-          slots: [processedSlot],
-        };
-
-        const eventResp = await saveEventLight({
-          apiUrl,
-          token: auth.token,
-          data: dataToSave,
-        });
-
-        const savedSlotId =
-          currentSlotId || eventResp.data.data.slots?.[0]?.data.id;
-
-        // Update state with slot ID
-        setData((prevData) => ({
-          ...prevData,
-          slotId: savedSlotId,
-        }));
-
-        // Upload image if needed
-        if (data.imageFile) {
-          imageResult = await uploadImage(currentEventId);
-
-          const imageSlot = processLightSlot(data);
-          imageSlot.id = savedSlotId;
-
-          await saveEventLight({
+          return saveEventLight({
             apiUrl,
             token: auth.token,
-            data: {
-              ...data,
-              eventId: currentEventId,
-              [imageResult.urlBannerField]: imageResult.imagePath,
-              slots: [imageSlot],
-            },
-          });
+            data: finalDataToSave,
+          }).then(() => savedEventId);
         }
-      }
-
-      // Delete speakers marked for deletion
-      await deleteSpeakersMarkedForDeletion(currentEventId || data.eventId);
-
-      Toast.success(I18N[language]["eventSavedSuccessfully"]);
-    } catch (e) {
-      Toast.error(
-        e.response?.data?.message || I18N[language]["errorSavingEvent"]
-      );
-      throw e;
-    } finally {
-      setIsSaving(false);
-    }
+        return Promise.resolve(savedEventId);
+      })
+      .then((savedEventId) => {
+        return deleteSpeakersMarkedForDeletion(savedEventId);
+      })
+      .then(() => {
+        Toast.success(I18N[language]["eventSavedSuccessfully"]);
+        setIsSaving(false);
+      })
+      .catch((e) => {
+        console.error("Save error:", e);
+        Toast.error(
+          e.response?.data?.message || I18N[language]["errorSavingEvent"]
+        );
+        setIsSaving(false);
+      });
   };
 
   const handleContinue = () => {
@@ -822,7 +771,6 @@ export const EventCreationPopup = (props) => {
       refreshEventsData("duplicate");
       onClose();
     } catch (error) {
-      console.log("Duplication error:", error);
       Toast.error(I18N[language]["errorDuplicatingEvent"]);
     } finally {
       setIsDuplicating(false);
@@ -997,11 +945,7 @@ export const EventCreationPopup = (props) => {
                   : ""
               }`}
               disabled={(step === 0 && !(eventId || data.eventId)) || isSaving}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                handleSave();
-              }}
+              onClick={handleSave}
             >
               {isSaving && <ClipLoader size={16} color="#ffffff" />}
               {I18N[language]["save"]}
