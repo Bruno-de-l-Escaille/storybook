@@ -531,13 +531,9 @@ export const EventCreationPopup = (props) => {
       slots: [processedSlot],
     };
 
-    delete dataToSave.imageFile;
-
     if (data.eventId > 0) {
       dataToSave.eventId = Number(data.eventId);
     }
-
-    delete dataToSave.id;
 
     return saveEventLight({ apiUrl, token: auth.token, data: dataToSave })
       .then((resp) => {
@@ -600,10 +596,6 @@ export const EventCreationPopup = (props) => {
             eventId: Number(savedEventId),
             slots: [processedSlot],
           };
-
-          // Remove imageFile and any conflicting id field
-          delete finalDataToSave.imageFile;
-          delete finalDataToSave.id; // API uses eventId, not id
 
           const imageResult = results.find((r) => r && r.urlBannerField);
           if (imageResult) {
