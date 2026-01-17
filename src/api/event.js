@@ -222,39 +222,60 @@ export const saveEventLight = ({ apiUrl, token, data }) => {
   const requestUrl = `${apiUrl}/event/event`;
   var formData = new FormData();
   formData.append("access_token", token);
-  formData.append("nameFr", data.nameFr);
-  formData.append("nameNl", data.nameNl);
-  formData.append("nameEn", data.nameEn);
-  formData.append("descriptionFr", data.descriptionFr);
-  formData.append("descriptionNl", data.descriptionNl);
-  formData.append("descriptionEn", data.descriptionEn);
-  formData.append("client", data.client);
-  formData.append("startDateTime", data.startDateTime);
-  formData.append("endDateTime", data.endDateTime);
-  formData.append("eventDate", data.eventDate);
-  formData.append("placeFr", data.placeFr);
-  formData.append("placeNl", data.placeNl);
-  formData.append("placeEn", data.placeEn);
-  formData.append("status", data.status);
-  formData.append("maxNumber", data.maxPlaces);
-  formData.append("labelFr", data.labelFr);
-  formData.append("labelNl", data.labelNl);
-  formData.append("labelEn", data.labelEn);
-  formData.append("contactFr", data.contactFr);
-  formData.append("contactNl", data.contactNl);
-  formData.append("contactEn", data.contactEn);
-  formData.append("emailContactFr", data.emailContactFr);
-  formData.append("emailContactNl", data.emailContactNl);
-  formData.append("emailContactEn", data.emailContactEn);
-  formData.append("phoneNumberContactFr", data.phoneNumberContactFr);
-  formData.append("phoneNumberContactNl", data.phoneNumberContactNl);
-  formData.append("phoneNumberContactEn", data.phoneNumberContactEn);
-  formData.append("type", data.type);
-  formData.append("isVirtual", data.isVirtual);
-  formData.append("urlBannerFr", data.urlBannerFr);
-  formData.append("urlBannerNl", data.urlBannerNl);
-  formData.append("urlBannerEn", data.urlBannerEn);
-  formData.append("tag", JSON.stringify(data.tag));
+
+  if (data.nameFr !== undefined) formData.append("nameFr", data.nameFr);
+  if (data.nameNl !== undefined) formData.append("nameNl", data.nameNl);
+  if (data.nameEn !== undefined) formData.append("nameEn", data.nameEn);
+  if (data.descriptionFr !== undefined)
+    formData.append("descriptionFr", data.descriptionFr);
+  if (data.descriptionNl !== undefined)
+    formData.append("descriptionNl", data.descriptionNl);
+  if (data.descriptionEn !== undefined)
+    formData.append("descriptionEn", data.descriptionEn);
+  if (data.client !== undefined) formData.append("client", data.client);
+  if (data.startDateTime !== undefined)
+    formData.append("startDateTime", data.startDateTime);
+  if (data.endDateTime !== undefined)
+    formData.append("endDateTime", data.endDateTime);
+  if (data.eventDate !== undefined)
+    formData.append("eventDate", data.eventDate);
+  if (data.placeFr !== undefined) formData.append("placeFr", data.placeFr);
+  if (data.placeNl !== undefined) formData.append("placeNl", data.placeNl);
+  if (data.placeEn !== undefined) formData.append("placeEn", data.placeEn);
+  if (data.status !== undefined) formData.append("status", data.status);
+  if (data.maxPlaces !== undefined)
+    formData.append("maxNumber", data.maxPlaces);
+  if (data.labelFr !== undefined) formData.append("labelFr", data.labelFr);
+  if (data.labelNl !== undefined) formData.append("labelNl", data.labelNl);
+  if (data.labelEn !== undefined) formData.append("labelEn", data.labelEn);
+  if (data.contactFr !== undefined)
+    formData.append("contactFr", data.contactFr);
+  if (data.contactNl !== undefined)
+    formData.append("contactNl", data.contactNl);
+  if (data.contactEn !== undefined)
+    formData.append("contactEn", data.contactEn);
+  if (data.emailContactFr !== undefined)
+    formData.append("emailContactFr", data.emailContactFr);
+  if (data.emailContactNl !== undefined)
+    formData.append("emailContactNl", data.emailContactNl);
+  if (data.emailContactEn !== undefined)
+    formData.append("emailContactEn", data.emailContactEn);
+  if (data.phoneNumberContactFr !== undefined)
+    formData.append("phoneNumberContactFr", data.phoneNumberContactFr);
+  if (data.phoneNumberContactNl !== undefined)
+    formData.append("phoneNumberContactNl", data.phoneNumberContactNl);
+  if (data.phoneNumberContactEn !== undefined)
+    formData.append("phoneNumberContactEn", data.phoneNumberContactEn);
+  if (data.type !== undefined) formData.append("type", data.type);
+  if (data.isVirtual !== undefined)
+    formData.append("isVirtual", data.isVirtual);
+  if (data.urlBannerFr !== undefined)
+    formData.append("urlBannerFr", data.urlBannerFr);
+  if (data.urlBannerNl !== undefined)
+    formData.append("urlBannerNl", data.urlBannerNl);
+  if (data.urlBannerEn !== undefined)
+    formData.append("urlBannerEn", data.urlBannerEn);
+  if (data.tag !== undefined) formData.append("tag", JSON.stringify(data.tag));
 
   if (data.stages) {
     formData.append("stages", JSON.stringify(data.stages));
@@ -269,12 +290,14 @@ export const saveEventLight = ({ apiUrl, token, data }) => {
   }
 
   if (data.eventId > 0) {
-    formData.append("id", data.eventId);
+    formData.append("id", String(data.eventId));
   }
 
   if (data.slots && Array.isArray(data.slots)) {
     data.slots.forEach((slot, index) => {
       Object.keys(slot).forEach((key) => {
+        if (slot[key] === undefined) return;
+
         const value =
           typeof slot[key] === "object" && slot[key] !== null
             ? JSON.stringify(slot[key])
