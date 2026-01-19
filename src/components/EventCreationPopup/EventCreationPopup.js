@@ -832,6 +832,7 @@ export const EventCreationPopup = (props) => {
       .then(() => {
         Toast.success(I18N[language]["eventSavedSuccessfully"]);
         setIsSaving(false);
+        refreshEventsData();
       })
       .catch((e) => {
         console.error("Save error:", e);
