@@ -3,6 +3,7 @@ import {
   generateCancellationTokenSource,
   getRequestCancellationToken,
   getRequestConfig,
+  isEmpty,
   throwCatchedError,
 } from "../utils";
 
@@ -55,12 +56,16 @@ export const getArticle = ({ apiUrl, token, articleId }) => {
   });
 };
 
-export const uploadMedia = ({ apiUrl, token, data }) => {
+export const uploadMedia = ({ apiUrl, token, data, filePath = "" }) => {
   const requestUrl = `${apiUrl}/media/media/upload-media`;
 
   var formData = new FormData();
   formData.append("access_token", token);
   formData.append("file", data);
+
+  if (!isEmpty(filePath)) {
+    formData.append("filePath", filePath);
+  }
 
   return axios.post(requestUrl, formData, {
     Warning: "413",
@@ -153,17 +158,23 @@ export const getThemes = ({
   });
 };
 
-export const saveTag = (token, data, apiUrl) => {
+export const saveTag = (token, data, apiUrl, isSuperTag = false) => {
   const requestUrl = `${apiUrl}/blog/tag`;
 
   var formData = new FormData();
-  formData.append("access_token", token);
-  formData.append("nameFr", data.nameFr);
-  formData.append("nameNl", data.nameNl);
-  formData.append("nameEn", data.nameEn);
-
-  if (data.id) {
+  if (isSuperTag) {
+    formData.append("access_token", token);
     formData.append("id", data.id);
+    formData.append("superTag", data.superTag);
+  } else {
+    formData.append("access_token", token);
+    formData.append("nameFr", data.nameFr);
+    formData.append("nameNl", data.nameNl);
+    formData.append("nameEn", data.nameEn);
+
+    if (data.id) {
+      formData.append("id", data.id);
+    }
   }
 
   return axios.post(requestUrl, formData);

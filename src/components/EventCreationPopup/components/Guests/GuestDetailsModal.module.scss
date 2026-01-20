@@ -1,0 +1,329 @@
+@import "../../../../styles/variables.scss";
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(41, 57, 77, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+
+  &AfterOpen {
+    opacity: 1;
+  }
+
+  &BeforeClose {
+    opacity: 0;
+  }
+}
+
+.modalContent {
+  position: relative;
+  background: white;
+  border-radius: 20px;
+  outline: none;
+  max-width: 1240px;
+  width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+  transform: scale(0.95);
+  opacity: 0;
+  transition: all 200ms ease-in-out;
+
+  &AfterOpen {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  &BeforeClose {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 90vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  flex-shrink: 0;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.headerTitle {
+  font-weight: 600;
+  font-size: 14px;
+  color: #29394d;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -17px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 28px;
+    background: #d8dde2;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.content {
+  display: flex;
+  gap: 30px;
+  flex: 1;
+  min-height: 0;
+  padding: 20px;
+  padding-top: 0;
+
+  p {
+    text-align: left;
+  }
+}
+
+.leftPanel,
+.rightPanel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.leftPanel {
+  flex-shrink: 0;
+  width: 370px;
+}
+
+.rightPanel {
+  flex: 1;
+  min-width: 0;
+}
+
+.section {
+  border: 0.5px solid #e1e4e8;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sectionTitle {
+  font-weight: 600;
+  font-size: 16px;
+  color: #29394d;
+  margin: 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.fieldLabel {
+  font-weight: 600;
+  font-size: 12px;
+  color: #29394d;
+}
+
+.fieldValue {
+  font-weight: 400;
+  font-size: 12px;
+  color: #29394d;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.copyButton,
+.sendButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: white;
+  border: 0.5px solid #b2bcc6;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  color: #29394d;
+  cursor: pointer;
+  transition: all 0.2s;
+  height: 32px;
+  width: fit-content;
+  min-width: 150px;
+
+  &:hover {
+    background: #f4f7f9;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.divider {
+  height: 1px;
+  background: #e1e4e8;
+  width: 100%;
+}
+
+.confirmationSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.confirmationNotice {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: 400;
+  font-size: 12px;
+  color: #6d7f92;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.activityHeader {
+  display: grid;
+  grid-template-columns: 2fr 2fr 3fr;
+  gap: 10px;
+  padding: 10px 5px;
+  border-radius: 5px;
+}
+
+.activityHeaderCell {
+  font-weight: 600;
+  font-size: 12px;
+  color: #29394d;
+  padding: 0 10px;
+}
+
+.activityRow {
+  display: grid;
+  grid-template-columns: 2fr 2fr 3fr;
+  gap: 10px;
+  padding: 10px 5px;
+  border: 1px solid #f1f2f4;
+  border-radius: 5px;
+
+  &Even {
+    background: white;
+  }
+
+  &Odd {
+    background: #f4f7f9;
+  }
+}
+
+.activityCell {
+  font-weight: 400;
+  font-size: 12px;
+  color: #29394d;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.activityCellAction {
+  font-weight: 400;
+  font-size: 12px;
+  color: #29394d;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  svg {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+  }
+}
+
+.activityLoading,
+.activityEmpty {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+
+  p {
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    color: #6d7f92;
+  }
+}
+
+.loadingOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: 20px;
+}

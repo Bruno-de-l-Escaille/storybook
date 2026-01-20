@@ -1,0 +1,108 @@
+.modelSelector {
+  display: flex;
+  flex-direction: column;
+
+  .selectorHeader {
+    display: flex;
+    height: 36px;
+
+    .searchInput {
+      display: flex;
+      height: 36px;
+      padding: 8px 10px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 10px;
+      flex: 1 0 0;
+      border-radius: 12px 0 0 12px;
+      border: 0.5px solid #b2bcc6;
+      background: #f1f2f4;
+
+      &:focus {
+        border-color: #18a0fb;
+        color: #333;
+      }
+    }
+  }
+
+  .modelButton {
+    display: flex;
+    padding: 8px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 0 12px 12px 0;
+    background: #18a0fb;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 140%;
+    outline: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background: #2495e1;
+    }
+  }
+
+  .dropdown {
+    max-height: 450px;
+    overflow-y: auto;
+    text-align: start;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e1e4e8;
+    background: #fff;
+    box-shadow: 0 2px 8px 0 rgba(41, 57, 77, 0.25);
+  }
+
+  .brandSection {
+    border-bottom: 1px solid #e1e4e8;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .brandName {
+    color: #2495e1;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 140%;
+  }
+
+  .modelItem {
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 8px;
+
+    &:hover {
+      background: #f8f9fa;
+    }
+
+    &.selected {
+      background: #f1f2f4;
+    }
+  }
+
+  .modelText {
+    color: #29394d;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 140%;
+  }
+
+  .modelReference {
+    color: #29394d;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 140%;
+  }
+}

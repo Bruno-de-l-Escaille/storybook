@@ -1,0 +1,658 @@
+.config {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &_content {
+    display: flex;
+    gap: 30px;
+    padding: 20px 30px;
+  }
+
+  &_section_left {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 20%;
+  }
+
+  &_section_right {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    flex: 1;
+    width: 80%;
+  }
+
+  &_label {
+    color: #29394d;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  &_speakers {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  &_speakerSearch {
+    position: relative;
+    width: 100%;
+  }
+
+  &_speakerInput {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s;
+
+    &:focus {
+      border-color: #18a0fb;
+      box-shadow: 0 0 0 3px rgba(24, 160, 251, 0.1);
+    }
+
+    &::placeholder {
+      color: #9ca3af;
+    }
+  }
+
+  &_speakerDropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+
+    &_header {
+      padding: 8px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #6d7f92;
+      text-transform: uppercase;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e1e4e8;
+      text-align: center;
+    }
+  }
+
+  &_speakerDropdownItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #f8f9fa;
+    }
+
+    &_avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+
+      &_icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #f1f2f4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border: 1px solid #e1e4e8;
+
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+
+    &_info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    &_name {
+      font-size: 14px;
+      font-weight: 500;
+      color: #29394d;
+    }
+
+    &_role {
+      font-size: 12px;
+      color: #6d7f92;
+    }
+  }
+
+  &_speakerList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    max-height: 600px;
+  }
+
+  &_speakerCard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 10px;
+    background: white;
+    border: 1px solid #e1e4e8;
+    border-radius: 5px;
+    background: #f1f2f4;
+    transition: all 0.2s;
+
+    &:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    &_avatar {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 100px;
+      border: 4px solid #fff;
+
+      &_icon {
+        width: 100px;
+        height: 100px;
+        border-radius: 100px;
+        border: 4px solid #fff;
+        background-color: #f1f2f4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        svg {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+
+    &_name {
+      color: #29394d;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: normal;
+    }
+
+    &_separator {
+      height: 1px;
+      width: 100%;
+      border: none;
+      border-top: 1px solid #e1e4e8;
+      margin: 8px 0;
+    }
+
+    &_role {
+      font-size: 12px;
+      color: #6d7f92;
+      text-align: center;
+    }
+
+    &_remove {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #f8f9fa;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #6d7f92;
+      opacity: 0;
+      transition: all 0.2s;
+
+      &:hover {
+        background: #fee;
+        color: #dc2626;
+      }
+    }
+
+    &:hover &_remove {
+      opacity: 1;
+    }
+  }
+
+  &_speakerAddContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  &_speakersAdd {
+    display: flex;
+    width: 28px;
+    height: 28px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 14px;
+    border: 0.5px solid #b2bcc6;
+    background: #f1f2f4;
+    cursor: pointer;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &_row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+
+    &.dateRow {
+      grid-template-columns: 2fr 1fr 1fr;
+    }
+  }
+
+  &_section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &_contactFields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &_field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &_fieldHint {
+    color: #9ca3af;
+    font-size: 12px;
+    margin-top: -4px;
+  }
+
+  &_input {
+    width: 100%;
+    padding: 8px 8px 14px 8px;
+    font-size: 12px;
+    border: none;
+    outline: none;
+    border-radius: 0%;
+    border-bottom: 0.5px solid #b2bcc6;
+    transition: all 0.2s;
+    color: #29394d;
+    background: white;
+
+    &::placeholder {
+      color: #9ca3af;
+    }
+
+    &:focus {
+      border-bottom: 0.5px solid #18a0fb;
+    }
+
+    &:disabled {
+      background: #f8f9fa;
+      color: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    &[type="number"] {
+      -moz-appearance: textfield;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+
+    &_error {
+      border-bottom-color: #fc5d2b;
+    }
+  }
+
+  &_errorMessage {
+    display: block;
+    color: #fc5d2b;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 4px;
+  }
+
+  &_inputGroup {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  &_inputWithIcon {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    input {
+      padding-right: 40px;
+    }
+
+    input[type="date"] {
+      position: relative;
+
+      &::-webkit-calendar-picker-indicator {
+        display: none;
+        -webkit-appearance: none;
+      }
+
+      &::-webkit-datetime-edit {
+        color: transparent;
+      }
+
+      &:focus::-webkit-datetime-edit,
+      &:valid::-webkit-datetime-edit {
+        color: #29394d;
+      }
+
+      &::before {
+        content: attr(placeholder);
+        color: #9ca3af;
+        position: absolute;
+      }
+
+      &:focus::before,
+      &:valid::before {
+        content: "";
+      }
+    }
+
+    input[type="time"] {
+      position: relative;
+      cursor: pointer;
+
+      &::-webkit-calendar-picker-indicator {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        height: auto;
+        color: transparent;
+        background: transparent;
+        cursor: pointer;
+        z-index: 1;
+      }
+
+      &::-webkit-datetime-edit-fields-wrapper {
+        color: transparent;
+      }
+
+      &:focus::-webkit-datetime-edit-fields-wrapper,
+      &:valid::-webkit-datetime-edit-fields-wrapper {
+        color: #29394d;
+      }
+
+      &[value=""]::-webkit-datetime-edit-fields-wrapper {
+        color: transparent;
+      }
+
+      &::before {
+        content: attr(placeholder);
+        color: #9ca3af;
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      &:focus::before,
+      &:not([value=""])::before {
+        display: none;
+      }
+    }
+
+    svg {
+      position: absolute;
+      right: 12px;
+      pointer-events: none;
+    }
+  }
+
+  &_inputSeparator {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 20px;
+    background-color: #b2bcc6;
+    pointer-events: none;
+  }
+
+  &_inputIcon {
+    position: absolute;
+    right: 12px;
+    pointer-events: none;
+  }
+
+  &_inputLabel {
+    position: absolute;
+    right: 0px;
+    font-size: 12px;
+    color: #6d7f92;
+    pointer-events: none;
+    white-space: nowrap;
+
+    & ~ .config_inputSeparator {
+      right: 60px;
+    }
+  }
+
+  &_selectWrapper {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid #6d7f92;
+      pointer-events: none;
+    }
+  }
+
+  &_select {
+    appearance: none;
+    padding-right: 40px;
+    cursor: pointer;
+
+    &:focus {
+      & + &::after {
+        border-top-color: #18a0fb;
+      }
+    }
+
+    option {
+      padding: 8px 6px;
+      border-radius: 20px;
+    }
+
+    option[value="2"] {
+      background-color: #fff7ec;
+      color: #ffac3a;
+    }
+
+    option[value="3"] {
+      background-color: #e0f2fe;
+      color: #0ea5e9;
+    }
+
+    option[value="1"] {
+      background-color: #edfaf5;
+      color: #02af8e;
+    }
+
+    option[value="4"] {
+      background-color: #feeee9;
+      color: #fc5d2b;
+    }
+  }
+
+  &_tagContainer {
+    position: relative;
+  }
+
+  &_tagInputWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 8px 14px 8px;
+    border-bottom: 0.5px solid #b2bcc6;
+    background: #fff;
+    align-items: center;
+    transition: border-color 0.2s;
+
+    &:focus-within {
+      border-color: #18a0fb;
+    }
+  }
+
+  &_tagBubble {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: #eaeaea;
+    border: none;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #29394d;
+    font-weight: 500;
+  }
+
+  &_tagBubble_close {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #29394d;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  &_tagInput {
+    flex: 1;
+    min-width: 120px;
+    border: none;
+    outline: none;
+    font-size: 12px;
+    color: #29394d;
+    background: transparent;
+
+    &::placeholder {
+      color: #8b98a8;
+    }
+  }
+
+  &_tagDropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4px;
+    background: #fff;
+    border: 1px solid #d6dde6;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+  }
+
+  &_tagDropdownItem {
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #29394d;
+    cursor: pointer;
+    border-bottom: 1px solid #eef2f6;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: #f8f9fa;
+    }
+  }
+
+  &_contactField_relative {
+    position: relative;
+  }
+
+  &_contactDropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    margin-top: 4px;
+  }
+
+  &_datePicker {
+    padding-bottom: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .config {
+    &_content {
+      padding: 20px;
+    }
+
+    &_row {
+      grid-template-columns: 1fr;
+    }
+  }
+}
