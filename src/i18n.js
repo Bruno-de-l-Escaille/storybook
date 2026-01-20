@@ -489,7 +489,7 @@ export const I18N = {
       "The guest will be automatically registered for the event.",
     specifyStatusesToAccept: "Please specify the statuses you wish to accept:",
     confirmationRequest: "Confirmation request",
-    sendImmediately: "Send immediately",
+    sendImmediately: "Send",
     doNotSend: "No, do not send",
     confirmationEmailWillBeSent:
       "A confirmation email will be sent to guests to validate their registration for the event.",
@@ -611,6 +611,8 @@ export const I18N = {
     confirmDuplicateMessage: "Are you sure you want to duplicate this event?",
     duplicate: "Duplicate",
     eventTitle: "Event title",
+    automaticallyGuestEmail:
+      "A confirmation email will be automatically sent to guests, and their status will change to 'Pending'.",
   },
   fr: {
     ARTCILES: "Articles",
@@ -1115,7 +1117,7 @@ export const I18N = {
     specifyStatusesToAccept:
       "Veuillez spécifier les statuts que vous souhaitez accepter :",
     confirmationRequest: "Demande de confirmation",
-    sendImmediately: "Envoyer immédiatement",
+    sendImmediately: "Envoyer",
     doNotSend: "Non, ne pas envoyer",
     confirmationEmailWillBeSent:
       "Un email de confirmation sera envoyé aux invités pour valider leur inscription à l'événement.",
@@ -1239,6 +1241,8 @@ export const I18N = {
       "Êtes-vous sûr de vouloir dupliquer cet événement ?",
     duplicate: "Dupliquer",
     eventTitle: "Titre de l'évént",
+    automaticallyGuestEmail:
+      "Un email de confirmation sera automatiquement envoyé aux invités, et leur statut passera “En attente”.",
   },
   nl: {
     ARTCILES: "Artikelen",
@@ -1740,7 +1744,7 @@ export const I18N = {
       "De gast wordt automatisch geregistreerd voor het evenement.",
     specifyStatusesToAccept: "Geef de statussen op die u wilt accepteren:",
     confirmationRequest: "Bevestigingsverzoek",
-    sendImmediately: "Onmiddellijk verzenden",
+    sendImmediately: "Verzenden",
     doNotSend: "Nee, niet verzenden",
     confirmationEmailWillBeSent:
       "Er wordt een bevestigingsmail verzonden naar gasten om hun registratie voor het evenement te valideren.",
@@ -1862,5 +1866,7 @@ export const I18N = {
       "Weet u zeker dat u dit evenement wilt dupliceren?",
     duplicate: "Dupliceren",
     eventTitle: "Evenementtitel",
+    automaticallyGuestEmail:
+      "Een bevestigingsmail wordt automatisch naar de gasten gestuurd en hun status wordt gewijzigd naar 'In afwachting'.",
   },
 };

@@ -7,7 +7,7 @@ import IconAddGuest from "../../../../Icons/IconAddGuest";
 import Select from "react-select";
 import { I18N } from "../../../../../i18n";
 import IconWarningInfo from "../../../../Icons/IconWarningInfo";
-import { getApiUrl, isEmpty } from "../../../../../utils";
+import { getApiUrl, getSendingUrl, isEmpty } from "../../../../../utils";
 import EmailTagsInput from "./EmailTagsInput";
 import classNames from "classnames";
 import { createUserByEmail, forceGuest } from "../../../../../api";
@@ -117,6 +117,8 @@ export const AddGuestModal = ({
     setValidationErrors(errors);
     return isValid;
   };
+
+  const sendingUrl = getSendingUrl(env);
 
   const genderOptions = [
     { value: "MALE", label: I18N[lang]["auth"]["male"] || "Homme" },
@@ -748,7 +750,27 @@ export const AddGuestModal = ({
                     </div>
                   )}
                 </div>
-                <div className={styles.rightPane}></div>
+                {selectedGuestsStatus.value === "add" &&
+                confirmationChecked === "yes" ? (
+                  <>
+                    <div className={styles.verticalDivider} />
+                    <div className={styles.rightPane}>
+                      <div className={styles.infoMessage}>
+                        <IconWarningInfo />
+                        {I18N[lang]["automaticallyGuestEmail"]}
+                        <a
+                          className={styles.viewEmailLink}
+                          href={`${sendingUrl}`}
+                          target="_blank"
+                        >
+                          {I18N[lang]["viewEmail"]}
+                        </a>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className={styles.rightPane}></div>
+                )}
               </div>
               <div className={styles.divider} />
             </div>

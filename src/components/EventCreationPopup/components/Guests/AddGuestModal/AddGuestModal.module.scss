@@ -174,6 +174,29 @@
         gap: 10px;
       }
     }
+    .rightPane{
+      .infoMessage{
+        display: flex;
+        flex-direction: column;
+        color: var(--dark-3, #6D7F92);
+        gap: 10px;
+        a {
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 1.4;
+          color: #6d7f92;
+          text-decoration: underline;
+          cursor: pointer;
+          background: none;
+          border: none;
+          padding: 0;
+          text-align: left;
+          &:hover {
+            color: #29394d;
+          }
+        }
+      }
+    }
   }
 }
 .checkboxRows{
