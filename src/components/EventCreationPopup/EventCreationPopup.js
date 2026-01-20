@@ -152,7 +152,7 @@ export const EventCreationPopup = (props) => {
     env === "v2" ? "production" : env
   }`;
 
-  const processLightSlot = (eventData) => {
+  const processLightSlot = (eventData, eventId = null) => {
     const languages = {
       Fr: language === "fr" ? "1" : 0,
       Nl: language === "nl" ? "1" : 0,
@@ -179,6 +179,14 @@ export const EventCreationPopup = (props) => {
       activity: "",
       duration: durationMinutes,
     };
+
+    if (eventId && eventId > 0) {
+      slot.event = Number(eventId);
+    }
+
+    if (data.slotId > 0) {
+      slot.id = data.slotId;
+    }
 
     return slot;
   };
@@ -269,15 +277,15 @@ export const EventCreationPopup = (props) => {
             ) || "",
         });
         const retrievedSpeakers =
-          eventData["speakers-abstract"].speakers.map((speaker) => ({
-            ...speaker,
-            isExisting: true,
-          })) || [];
+          eventData["speakers-abstract"]?.speakers || [];
 
         if (retrievedSpeakers.length > 0) {
           const mappedSpeakers = retrievedSpeakers.map((speaker) => {
             return {
               id: Number(speaker.id),
+              eventAuthorId: speaker.slotAuthorId
+                ? Number(speaker.slotAuthorId)
+                : null,
               isExisting: true,
               user: {
                 avatar: !speaker.pictureUrl.includes("/IMAGE//")
@@ -433,15 +441,30 @@ export const EventCreationPopup = (props) => {
 
   const saveSpeakersToSlot = (eventId) => {
     if (!selectedSpeakers || selectedSpeakers.length === 0) {
-      return Promise.resolve();
+      return Promise.resolve({ speakers: [], eventAuthorMap: new Map() });
     }
+
+    const existingEventAuthorMap = new Map();
+    selectedSpeakers.forEach((speaker) => {
+      if (
+        speaker.eventAuthorId &&
+        !speakersToDelete.some((s) => s.id === speaker.id)
+      ) {
+        existingEventAuthorMap.set(speaker.id, speaker.eventAuthorId);
+      }
+    });
+
     const newSpeakers = selectedSpeakers.filter(
       (speaker) =>
-        !speaker.isExisting &&
+        !speaker.eventAuthorId &&
         !speakersToDelete.some((s) => s.id === speaker.id)
     );
+
     if (newSpeakers.length === 0) {
-      return Promise.resolve();
+      return Promise.resolve({
+        speakers: [],
+        eventAuthorMap: existingEventAuthorMap,
+      });
     }
 
     const eventAuthorPromises = newSpeakers.map((speaker) => {
@@ -478,7 +501,15 @@ export const EventCreationPopup = (props) => {
           };
         });
 
-        return { speakers };
+        const eventAuthorMap = new Map(
+          eventAuthors.map((ea) => [ea.authorId, ea.eventAuthorId])
+        );
+
+        existingEventAuthorMap.forEach((eventAuthorId, speakerId) => {
+          eventAuthorMap.set(speakerId, eventAuthorId);
+        });
+
+        return { speakers, eventAuthorMap };
       })
       .catch((e) => {
         Toast.error(I18N[language]["errorSavingSpeakers"]);
@@ -516,67 +547,283 @@ export const EventCreationPopup = (props) => {
 
     setIsSaving(true);
 
-    return saveEventLight({ apiUrl, token: auth.token, data: data })
+    const existingEventId = eventId || data.eventId;
+    const eventDataToSave = {
+      ...data,
+    };
+
+    delete eventDataToSave.slots;
+    delete eventDataToSave.imageFile;
+
+    if (existingEventId > 0) {
+      eventDataToSave.eventId = Number(existingEventId);
+    }
+
+    return saveEventLight({ apiUrl, token: auth.token, data: eventDataToSave })
       .then((resp) => {
-        const savedEventId = data.eventId || resp.data.data.id;
+        const responseEventId = resp.data?.data?.id;
+        const savedEventId =
+          existingEventId > 0
+            ? Number(existingEventId)
+            : Number(responseEventId);
+
+        if (!savedEventId || savedEventId <= 0) {
+          return Promise.reject("Failed to get eventId from save response");
+        }
 
         setData((prevData) => ({
           ...prevData,
           eventId: savedEventId,
         }));
 
-        const promises = [];
-        if (data.imageFile) {
-          promises.push(uploadImage(savedEventId));
-        }
-        if (selectedSpeakers && selectedSpeakers.length > 0) {
-          promises.push(saveSpeakersToSlot(savedEventId));
-        }
-        if (promises.length > 0) {
-          return Promise.all(promises).then((results) => ({
-            results,
-            savedEventId,
-          }));
-        }
-        return Promise.resolve({ results: [], savedEventId });
-      })
-      .then(({ results, savedEventId }) => {
-        const hasNewImage = results.some((r) => r && r.urlBannerField);
-        const hasNewSpeakers = results.some((r) => r && r.speakers);
+        const hasSpeakers = selectedSpeakers && selectedSpeakers.length > 0;
+        const currentSlotId = data.slotId;
 
-        if (hasNewSpeakers) {
-          setSelectedSpeakers((prevSpeakers) =>
-            prevSpeakers.map((speaker) => ({
-              ...speaker,
-              isExisting: true,
-            }))
-          );
+        if (hasSpeakers) {
+          return saveSpeakersToSlot(savedEventId)
+            .then((speakersResult) => {
+              const result = speakersResult || {
+                speakers: [],
+                eventAuthorMap: new Map(),
+              };
+
+              if (result.eventAuthorMap) {
+                const eventAuthorMap = result.eventAuthorMap;
+
+                setSelectedSpeakers((prevSpeakers) =>
+                  prevSpeakers.map((speaker) => {
+                    const newEventAuthorId =
+                      speaker.eventAuthorId ||
+                      (eventAuthorMap && eventAuthorMap.get(speaker.id));
+
+                    return {
+                      ...speaker,
+                      isExisting: speaker.isExisting !== false,
+                      eventAuthorId: newEventAuthorId || speaker.eventAuthorId,
+                    };
+                  })
+                );
+              }
+
+              const processedSlot = processLightSlot(data, savedEventId);
+
+              const slotIdToUse =
+                currentSlotId ||
+                (data.slotId && data.slotId > 0 ? data.slotId : null);
+
+              if (slotIdToUse && slotIdToUse > 0) {
+                processedSlot.id = Number(slotIdToUse);
+              }
+
+              const allSpeakers = [];
+              const eventAuthorMap = result.eventAuthorMap;
+
+              selectedSpeakers
+                .filter(
+                  (speaker) =>
+                    !speakersToDelete.some((s) => s.id === speaker.id)
+                )
+                .forEach((speaker) => {
+                  const eventAuthorId =
+                    speaker.eventAuthorId != null
+                      ? speaker.eventAuthorId
+                      : eventAuthorMap && eventAuthorMap.get(speaker.id);
+
+                  if (!eventAuthorId || eventAuthorId === 0) {
+                    return;
+                  }
+
+                  const alreadyIncluded = allSpeakers.some(
+                    (s) =>
+                      s.orateur.id === eventAuthorId &&
+                      s.orateur.author === speaker.id
+                  );
+                  if (!alreadyIncluded) {
+                    allSpeakers.push({
+                      orateur: {
+                        id: eventAuthorId,
+                        author: speaker.id,
+                      },
+                      type: 1,
+                      priority: 0,
+                    });
+                  }
+                });
+
+              if (result.speakers && result.speakers.length > 0) {
+                result.speakers.forEach((newSpeaker) => {
+                  const alreadyIncluded = allSpeakers.some(
+                    (s) =>
+                      s.orateur.id === newSpeaker.orateur.id &&
+                      s.orateur.author === newSpeaker.orateur.author
+                  );
+                  if (!alreadyIncluded) {
+                    allSpeakers.push(newSpeaker);
+                  }
+                });
+              }
+
+              processedSlot.speakers = allSpeakers;
+
+              const slotDataToSave = {
+                eventId: Number(savedEventId),
+                slots: [processedSlot],
+              };
+
+              return saveEventLight({
+                apiUrl,
+                token: auth.token,
+                data: slotDataToSave,
+              }).then((slotResp) => {
+                const savedSlotId =
+                  currentSlotId ||
+                  slotResp.data?.data?.slots?.[0]?.data?.id ||
+                  null;
+
+                if (savedSlotId) {
+                  setData((prevData) => ({
+                    ...prevData,
+                    slotId: savedSlotId,
+                  }));
+                }
+
+                return {
+                  savedEventId,
+                  savedSlotId,
+                  speakersResult: result,
+                };
+              });
+            })
+            .catch(() => {
+              const existingEventAuthorMap = new Map();
+              selectedSpeakers.forEach((speaker) => {
+                if (speaker.eventAuthorId && speaker.isExisting) {
+                  existingEventAuthorMap.set(speaker.id, speaker.eventAuthorId);
+                }
+              });
+              return {
+                savedEventId,
+                savedSlotId: currentSlotId || null,
+                speakersResult: {
+                  speakers: [],
+                  eventAuthorMap: existingEventAuthorMap,
+                },
+              };
+            });
         }
 
-        if (hasNewImage || hasNewSpeakers) {
-          const processedSlot = processLightSlot(data);
-          const finalDataToSave = {
+        if (currentSlotId > 0) {
+          const deleteSlotData = {
             ...data,
-            eventId: savedEventId,
-            slots: [processedSlot],
+            eventId: Number(savedEventId),
+            slots: [],
           };
-
-          const imageResult = results.find((r) => r && r.urlBannerField);
-          if (imageResult) {
-            finalDataToSave[imageResult.urlBannerField] = imageResult.imagePath;
-          }
-
-          const speakersResult = results.find((r) => r && r.speakers);
-          if (speakersResult) {
-            finalDataToSave.slots[0].speakers = speakersResult.speakers;
-          }
 
           return saveEventLight({
             apiUrl,
             token: auth.token,
-            data: finalDataToSave,
-          }).then(() => savedEventId);
+            data: deleteSlotData,
+          }).then(() => {
+            setData((prevData) => ({
+              ...prevData,
+              slotId: null,
+            }));
+            return { savedEventId, savedSlotId: null, speakersResult: null };
+          });
         }
+
+        return Promise.resolve({
+          savedEventId,
+          savedSlotId: null,
+          speakersResult: null,
+        });
+      })
+      .then(({ savedEventId, savedSlotId, speakersResult }) => {
+        if (data.imageFile) {
+          return uploadImage(savedEventId)
+            .then((imageResult) => {
+              const imageDataToSave = {
+                ...data,
+                eventId: Number(savedEventId),
+                [imageResult.urlBannerField]: imageResult.imagePath,
+              };
+
+              const hasSpeakers =
+                selectedSpeakers && selectedSpeakers.length > 0;
+
+              if (savedSlotId && hasSpeakers) {
+                const imageSlot = processLightSlot(data, savedEventId);
+                imageSlot.id = savedSlotId;
+
+                const eventAuthorMap = speakersResult?.eventAuthorMap;
+                const allSpeakers = selectedSpeakers
+                  .filter(
+                    (speaker) =>
+                      !speakersToDelete.some((s) => s.id === speaker.id)
+                  )
+                  .map((speaker) => {
+                    const eventAuthorId =
+                      speaker.eventAuthorId ||
+                      (eventAuthorMap && eventAuthorMap.get(speaker.id));
+
+                    if (!eventAuthorId) {
+                      return null;
+                    }
+                    return {
+                      orateur: {
+                        id: eventAuthorId,
+                        author: speaker.id,
+                      },
+                      type: 1,
+                      priority: 0,
+                    };
+                  })
+                  .filter((speaker) => speaker !== null);
+
+                if (speakersResult && speakersResult.speakers) {
+                  speakersResult.speakers.forEach((newSpeaker) => {
+                    const alreadyIncluded = allSpeakers.some(
+                      (s) =>
+                        s.orateur.id === newSpeaker.orateur.id &&
+                        s.orateur.author === newSpeaker.orateur.author
+                    );
+                    if (!alreadyIncluded) {
+                      allSpeakers.push(newSpeaker);
+                    }
+                  });
+                }
+
+                if (allSpeakers.length > 0) {
+                  imageSlot.speakers = allSpeakers;
+                  imageDataToSave.slots = [imageSlot];
+                }
+
+                return saveEventLight({
+                  apiUrl,
+                  token: auth.token,
+                  data: imageDataToSave,
+                }).then(() => savedEventId);
+              } else if (savedSlotId && !hasSpeakers) {
+                imageDataToSave.slots = [];
+
+                return saveEventLight({
+                  apiUrl,
+                  token: auth.token,
+                  data: imageDataToSave,
+                }).then(() => savedEventId);
+              } else {
+                return saveEventLight({
+                  apiUrl,
+                  token: auth.token,
+                  data: imageDataToSave,
+                }).then(() => savedEventId);
+              }
+            })
+            .catch(() => {
+              return savedEventId;
+            });
+        }
+
         return Promise.resolve(savedEventId);
       })
       .then((savedEventId) => {
@@ -585,6 +832,7 @@ export const EventCreationPopup = (props) => {
       .then(() => {
         Toast.success(I18N[language]["eventSavedSuccessfully"]);
         setIsSaving(false);
+        refreshEventsData();
       })
       .catch((e) => {
         console.error("Save error:", e);
@@ -694,7 +942,6 @@ export const EventCreationPopup = (props) => {
       refreshEventsData("duplicate");
       onClose();
     } catch (error) {
-      console.log("Duplication error:", error);
       Toast.error(I18N[language]["errorDuplicatingEvent"]);
     } finally {
       setIsDuplicating(false);
