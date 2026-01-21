@@ -760,7 +760,7 @@ export const AddGuestModal = ({
                         {I18N[lang]["automaticallyGuestEmail"]}
                         <a
                           className={styles.viewEmailLink}
-                          href={`${sendingUrl}`}
+                          href={`${sendingUrl}/emails`}
                           target="_blank"
                         >
                           {I18N[lang]["viewEmail"]}

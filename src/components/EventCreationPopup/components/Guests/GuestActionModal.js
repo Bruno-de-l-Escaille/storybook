@@ -402,7 +402,7 @@ export const GuestActionModal = ({
                           <p>{notice.message}</p>
                           <a
                             className={styles.viewEmailLink}
-                            href={`${sendingUrl}`}
+                            href={`${sendingUrl}/emails`}
                             target="_blank"
                           >
                             {I18N[language].viewEmail}
@@ -431,7 +431,7 @@ export const GuestActionModal = ({
                         <p>{notice.message}</p>
                         <a
                           className={styles.viewEmailLink}
-                          href={`${sendingUrl}`}
+                          href={`${sendingUrl}/emails`}
                           target="_blank"
                         >
                           {I18N[language].viewEmail}
