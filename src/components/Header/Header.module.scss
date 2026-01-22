@@ -1314,8 +1314,13 @@ nav {
       }
     }
   }
-}
 
+}
+@media screen and (max-width: 72.1375em) {
+  .helpDeskContact{
+    display: none !important;
+  }
+}
 @media screen and (max-width: 39.9375em) {
   .menuLogo {
     width: 50%;
@@ -1522,6 +1527,14 @@ nav {
       fill: #fff;
     }
   }
+}
+
+.helpDeskContact{
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  padding: 0 20px 0px 0px;
+  text-transform: none;
 }
 
 .iconLoading {

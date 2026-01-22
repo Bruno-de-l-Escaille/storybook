@@ -17,12 +17,17 @@ import AuthModal from "./AuthModal";
 const I18N = {
   en: {
     signIn: "Login / Sign up",
+    helpDeskContact:
+      "For any questions: info@forumforthefuture.be | +32.2.247.39.32",
   },
   fr: {
     signIn: "Connexion / Inscription",
+    helpDeskContact:
+      "Pour toute question: info@forumforthefuture.be | +32.2.247.39.32",
   },
   nl: {
     signIn: "Aanmelden / Inschrijven",
+    helpDeskContact: "Voor vragen: info@forumforthefuture.be | +32.2.247.39.32",
   },
 };
 
@@ -151,6 +156,7 @@ export class Header extends Component {
       showPersonalData,
       personalData,
       onAfterSavePersonal,
+      showHelpDeskContact,
     } = this.props;
     const {
       isFaqWidgetLoaded,
@@ -165,6 +171,11 @@ export class Header extends Component {
 
     return (
       <div className={styles.headerRight}>
+        {showHelpDeskContact && (
+          <div className={styles.helpDeskContact}>
+            {I18N[lng]["helpDeskContact"]}
+          </div>
+        )}
         {switchSpace && (
           <div className={styles.switchSpace}>
             <span
