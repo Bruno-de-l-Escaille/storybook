@@ -14,6 +14,7 @@ import {
   confirmGuestStep,
   forceGuest,
   fetchGuests,
+  deleteGuest,
 } from "../../../../api";
 import moment from "moment";
 import { toast } from "react-toastify";
@@ -23,6 +24,8 @@ import IconKey from "../../../Icons/IconKey";
 import { I18N } from "../../../../i18n";
 import cryptoJs from "crypto-js";
 import { getOfffcourseUrl } from "../../../../utils/event";
+import IconDelete from "../../../Icons/IconDelete";
+import { ModalConfirm } from "../../../Modal/ModalConfirm";
 
 const DropdownIndicator = ({ innerProps, isFocused }) => {
   return (
@@ -215,6 +218,9 @@ export const GuestDetailsModal = ({
   const [guest, setGuest] = useState(initialGuest);
   const [logs, setLogs] = useState([]);
   const [isLoadingLogs, setIsLoadingLogs] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteFailed, setDeleteFailed] = useState(false);
 
   useEffect(() => {
     setGuest(initialGuest);
@@ -452,6 +458,37 @@ export const GuestDetailsModal = ({
 
   const isLoading = isLoadingSendEmail || isLoadingStatusChange;
 
+  const handleDeleteGuest = () => {
+    if (!guest) return;
+    setIsDeleteModalOpen(true);
+  };
+
+  const confirmDeleteGuest = async () => {
+    if (!guest) return;
+
+    setIsDeleting(true);
+    setDeleteFailed(false);
+
+    try {
+      await deleteGuest({ apiUrl, token, guestId: guest.id });
+      toast.success(I18N[language].guestDeletedSuccessfully);
+      await fetchGuestsData();
+      setIsDeleteModalOpen(false);
+      onClose();
+    } catch (error) {
+      console.error("Error deleting guest:", error);
+      toast.error(I18N[language].errorDeletingGuest);
+      setDeleteFailed(true);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  const cancelDeleteGuest = () => {
+    setIsDeleteModalOpen(false);
+    setDeleteFailed(false);
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -481,9 +518,14 @@ export const GuestDetailsModal = ({
               {I18N[language].guestDetails}
             </span>
           </div>
-          <button className={styles.closeButton} onClick={onClose}>
-            <IconCloseBlack />
-          </button>
+          <div className={styles.headerRight}>
+            <button className={styles.deleteButton} onClick={handleDeleteGuest}>
+              <IconDelete />
+            </button>
+            <button className={styles.closeButton} onClick={onClose}>
+              <IconCloseBlack />
+            </button>
+          </div>
         </div>
 
         <div className={styles.content}>
@@ -628,6 +670,28 @@ export const GuestDetailsModal = ({
           </div>
         </div>
       </div>
+      <ModalConfirm
+        type="delete"
+        isOpen={isDeleteModalOpen}
+        onCancel={cancelDeleteGuest}
+        onConfirm={confirmDeleteGuest}
+        inProcess={isDeleting}
+        actionFailed={deleteFailed}
+        labelError={I18N[language]["errorDeletingGuest"]}
+        labelNo={I18N[language]["cancel"]}
+        labelYes={I18N[language]["delete"]}
+        title={I18N[language]["deleteGuest"] || I18N[language]["delete"]}
+        text={
+          guest
+            ? `${
+                I18N[language]["confirmDeleteGuest"] ||
+                I18N[language]["confirmDeleteMessage"]
+              } "${userInscriptionState.firstName} ${
+                userInscriptionState.lastName
+              }"`
+            : ""
+        }
+      />
     </Modal>
   );
 };

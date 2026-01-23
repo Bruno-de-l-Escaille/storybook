@@ -65,6 +65,29 @@
   gap: 9px;
 }
 
+.headerRight {
+  display: flex;
+  align-items: center;
+
+  .deleteButton {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #ff4444;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    margin-right: 20px;
+
+    &:hover {
+      background-color: #fee;
+    }
+  }
+}
+
 .headerTitle {
   font-weight: 600;
   font-size: 14px;

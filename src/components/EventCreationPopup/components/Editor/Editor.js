@@ -4,6 +4,7 @@ import styles from "./Editor.module.scss";
 import { I18N } from "../../../../i18n";
 import IconImage from "../../../Icons/IconImage";
 import { APP_ENV } from "../../../../config";
+import { Toast } from "../../../ToastContainer/ToastContainer";
 
 export const Editor = (props) => {
   const {
@@ -13,10 +14,30 @@ export const Editor = (props) => {
     validationErrors,
     setValidationErrors,
     auth,
+    setHasNewImage,
   } = props;
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef(null);
   const editorRef = useRef();
+
+  const MAX_FILE_SIZE = 12 * 1024 * 1024; // 12MB in bytes
+  const ALLOWED_FORMATS = ["image/png", "image/jpeg", "image/jpg"];
+
+  const validateFile = (file) => {
+    // Check file format
+    if (!ALLOWED_FORMATS.includes(file.type)) {
+      Toast.error(I18N[language]["imageFormatError"]);
+      return false;
+    }
+
+    // Check file size
+    if (file.size > MAX_FILE_SIZE) {
+      Toast.error(I18N[language]["imageSizeError"]);
+      return false;
+    }
+
+    return true;
+  };
 
   const handleImageClick = () => {
     if (fileInputRef.current) {
@@ -26,7 +47,15 @@ export const Editor = (props) => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file && file.type.startsWith("image/")) {
+    if (file) {
+      if (!validateFile(file)) {
+        // Reset file input
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
+        return;
+      }
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setData((prevData) => ({
@@ -34,6 +63,9 @@ export const Editor = (props) => {
           image: reader.result,
           imageFile: file,
         }));
+        if (setHasNewImage) {
+          setHasNewImage(true);
+        }
       };
       reader.readAsDataURL(file);
     }
@@ -53,7 +85,11 @@ export const Editor = (props) => {
     e.preventDefault();
     setIsDragging(false);
     const file = e.dataTransfer.files[0];
-    if (file && file.type.startsWith("image/")) {
+    if (file) {
+      if (!validateFile(file)) {
+        return;
+      }
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setData((prevData) => ({
@@ -61,6 +97,9 @@ export const Editor = (props) => {
           image: reader.result,
           imageFile: file,
         }));
+        if (setHasNewImage) {
+          setHasNewImage(true);
+        }
       };
       reader.readAsDataURL(file);
     }
@@ -102,6 +141,10 @@ export const Editor = (props) => {
 
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
+    }
+
+    if (setHasNewImage) {
+      setHasNewImage(true); // Mark as changed (image removed)
     }
   };
 
@@ -163,7 +206,7 @@ export const Editor = (props) => {
         <input
           ref={fileInputRef}
           type="file"
-          accept="image/*"
+          accept="image/png,image/jpeg,image/jpg"
           onChange={handleImageChange}
           style={{ display: "none" }}
         />

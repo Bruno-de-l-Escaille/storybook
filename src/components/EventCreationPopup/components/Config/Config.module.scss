@@ -395,53 +395,6 @@
       }
     }
 
-    input[type="time"] {
-      position: relative;
-      cursor: pointer;
-
-      &::-webkit-calendar-picker-indicator {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: auto;
-        height: auto;
-        color: transparent;
-        background: transparent;
-        cursor: pointer;
-        z-index: 1;
-      }
-
-      &::-webkit-datetime-edit-fields-wrapper {
-        color: transparent;
-      }
-
-      &:focus::-webkit-datetime-edit-fields-wrapper,
-      &:valid::-webkit-datetime-edit-fields-wrapper {
-        color: #29394d;
-      }
-
-      &[value=""]::-webkit-datetime-edit-fields-wrapper {
-        color: transparent;
-      }
-
-      &::before {
-        content: attr(placeholder);
-        color: #9ca3af;
-        position: absolute;
-        left: 8px;
-        top: 50%;
-        transform: translateY(-50%);
-        pointer-events: none;
-        z-index: 0;
-      }
-
-      &:focus::before,
-      &:not([value=""])::before {
-        display: none;
-      }
-    }
 
     svg {
       position: absolute;
