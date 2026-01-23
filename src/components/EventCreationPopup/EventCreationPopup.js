@@ -19,7 +19,6 @@ import IconArrowBlack from "../Icons/IconArrowBlack";
 import {
   getEvent,
   saveEventLight,
-  uploadMedia,
   getTags,
   saveEventAuthor,
   deleteSpeaker,
@@ -27,6 +26,7 @@ import {
   deleteEvent,
   duplicateEvent,
   fetchCommand,
+  uploadEventImage,
 } from "../../api";
 import { Toast, FlashMessage } from "../ToastContainer/ToastContainer";
 import { ClipLoader } from "react-spinners";
@@ -147,6 +147,7 @@ export const EventCreationPopup = (props) => {
   });
   const [isSaving, setIsSaving] = useState(false);
   const [maximize, setMaximize] = useState(false);
+  const [hasNewImage, setHasNewImage] = useState(false);
   const apiUrl = getApiUrl(env);
   const s3FolderUrl = `https://s3.tamtam.pro/${
     env === "v2" ? "production" : env
@@ -226,6 +227,7 @@ export const EventCreationPopup = (props) => {
           ? eventData.endDateTime.split(" ")[1].slice(0, 5)
           : "";
 
+        setHasNewImage(false); // Reset flag when loading existing event
         setData({
           eventId: eventData.id,
           nameFr: eventData.nameFr || "",
@@ -405,7 +407,7 @@ export const EventCreationPopup = (props) => {
   };
 
   const uploadImage = (eventId) => {
-    return uploadMedia({
+    return uploadEventImage({
       apiUrl,
       token: auth.token,
       data: data.imageFile,
@@ -739,7 +741,7 @@ export const EventCreationPopup = (props) => {
         });
       })
       .then(({ savedEventId, savedSlotId, speakersResult }) => {
-        if (data.imageFile) {
+        if (data.imageFile && hasNewImage) {
           return uploadImage(savedEventId)
             .then((imageResult) => {
               const imageDataToSave = {
@@ -830,9 +832,13 @@ export const EventCreationPopup = (props) => {
         return deleteSpeakersMarkedForDeletion(savedEventId);
       })
       .then(() => {
-        Toast.success(I18N[language]["eventSavedSuccessfully"]);
+        if (eventId > 0 || data.eventId > 0) {
+          Toast.success(I18N[language]["eventEditedSuccessfully"]);
+        } else {
+          Toast.success(I18N[language]["eventSavedSuccessfully"]);
+        }
         setIsSaving(false);
-        refreshEventsData();
+        setHasNewImage(false); // Reset flag after successful save
       })
       .catch((e) => {
         console.error("Save error:", e);
@@ -1053,6 +1059,7 @@ export const EventCreationPopup = (props) => {
               setValidationErrors={setValidationErrors}
               setStep={setStep}
               auth={auth}
+              setHasNewImage={setHasNewImage}
             />
           )}
           {step === 1 && (

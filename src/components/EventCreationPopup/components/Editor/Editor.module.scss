@@ -1,7 +1,6 @@
 .editor {
   display: flex;
   flex-direction: column;
-  height: 100%;
 
   &_imageUpload {
     border: 0.5px dashed #b2bcc6;
@@ -116,7 +115,6 @@
   }
 
   &_content {
-    flex: 1;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -155,6 +153,9 @@
   }
 
   &_descriptionEditor {
+    max-height: 300px;
+    overflow-y: auto;
+    
     :global {
       .sun-editor {
         border: 1px solid #d1d5db;
@@ -168,6 +169,8 @@
         .se-wrapper {
           border-radius: 0 0 8px 8px;
           border: 1px solid #d1d5db;
+          max-height: 200px;
+          overflow-y: auto;
         }
 
         .se-placeholder {

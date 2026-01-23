@@ -20,6 +20,7 @@ import {
 import IconPlus from "../../../Icons/IconPlus";
 import IconCloseV2 from "../../../Icons/IconCloseV2";
 import IconAvatar from "../../../Icons/IconAvatar";
+import { TimePicker } from "../TimePicker";
 
 const MomentDatePicker = DatePicker.generatePicker(momentGenerateConfig);
 
@@ -612,21 +613,12 @@ export const Config = (props) => {
               <label className={styles.config_label}>
                 {I18N[language]["from"]}
               </label>
-              <div className={styles.config_inputWithIcon}>
-                <input
-                  type="time"
-                  placeholder={I18N[language]["hourStart"]}
-                  value={data.startTime || ""}
-                  onChange={handleStartTimeChange}
-                  className={`${styles.config_input} ${
-                    validationErrors.startTimeError
-                      ? styles.config_input_error
-                      : ""
-                  }`}
-                />
-                <div className={styles.config_inputSeparator}></div>
-                <IconClock />
-              </div>
+              <TimePicker
+                value={data.startTime || ""}
+                onChange={handleStartTimeChange}
+                placeholder={I18N[language]["hourStart"]}
+                hasError={validationErrors.startTimeError}
+              />
               {validationErrors.startTimeError && (
                 <span className={styles.config_errorMessage}>
                   {I18N[language]["startTimeRequired"]}
@@ -638,22 +630,15 @@ export const Config = (props) => {
               <label className={styles.config_label}>
                 {I18N[language]["to"]}
               </label>
-              <div className={styles.config_inputWithIcon}>
-                <input
-                  type="time"
-                  placeholder={I18N[language]["hourEnd"]}
-                  value={data.endTime || ""}
-                  onChange={handleEndTimeChange}
-                  className={`${styles.config_input} ${
-                    validationErrors.endTimeError ||
-                    validationErrors.timeComparisonError
-                      ? styles.config_input_error
-                      : ""
-                  }`}
-                />
-                <div className={styles.config_inputSeparator}></div>
-                <IconClock />
-              </div>
+              <TimePicker
+                value={data.endTime || ""}
+                onChange={handleEndTimeChange}
+                placeholder={I18N[language]["hourEnd"]}
+                hasError={
+                  validationErrors.endTimeError ||
+                  validationErrors.timeComparisonError
+                }
+              />
               {validationErrors.endTimeError && (
                 <span className={styles.config_errorMessage}>
                   {I18N[language]["endTimeRequired"]}

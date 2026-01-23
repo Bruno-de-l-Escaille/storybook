@@ -1,0 +1,137 @@
+.timePicker {
+  position: relative;
+  width: 100%;
+
+  &_inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    svg {
+      position: absolute;
+      right: 12px;
+      pointer-events: none;
+    }
+  }
+
+  &_input {
+    width: 100%;
+    padding: 8px 40px 14px 8px;
+    font-size: 12px;
+    border: none;
+    outline: none;
+    border-radius: 0%;
+    border-bottom: 0.5px solid #b2bcc6;
+    transition: all 0.2s;
+    color: #29394d;
+    background: white;
+    cursor: pointer;
+
+    &::placeholder {
+      color: #9ca3af;
+    }
+
+    &:focus {
+      border-bottom-color: #18a0fb;
+    }
+
+    &_error {
+      border-bottom-color: #fc5d2b;
+    }
+  }
+
+  &_separator {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 20px;
+    background-color: #b2bcc6;
+    pointer-events: none;
+  }
+
+  &_dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    background: white;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    z-index: 1000;
+    min-width: 180px;
+  }
+
+  &_column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  &_columnHeader {
+    padding: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6d7f92;
+    text-align: center;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e1e4e8;
+  }
+
+  &_scrollContainer {
+    max-height: 200px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 3px;
+
+      &:hover {
+        background: #a1a1a1;
+      }
+    }
+  }
+
+  &_option {
+    padding: 8px 16px;
+    font-size: 13px;
+    color: #29394d;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #f8f9fa;
+    }
+
+    &_selected {
+      background: #18a0fb;
+      color: white;
+
+      &:hover {
+        background: #1589d4;
+      }
+    }
+  }
+
+  &_columnSeparator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #6d7f92;
+    margin-top: 32px;
+  }
+}

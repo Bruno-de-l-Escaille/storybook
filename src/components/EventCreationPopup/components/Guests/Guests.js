@@ -320,10 +320,9 @@ export const Guests = ({ language, eventId, env, auth }) => {
 
       const guestStatus = getGuestStatus(guest).label;
 
-      const date = moment
-        .utc(guest.purchaseDate)
-        .local()
-        .format("DD/MM/YY HH:mm");
+      const date = guest.purchaseDate
+        ? moment.utc(guest.purchaseDate).local().format("DD/MM/YY HH:mm")
+        : "-";
 
       const row = [
         `"${guest.id}"`,
@@ -333,7 +332,7 @@ export const Guests = ({ language, eventId, env, auth }) => {
         `"\t${phone.replace(/"/g, '""')}"`,
         `"${languages[language] || ""}"`,
         `"${guestStatus}"`,
-        `"\t${date}"`,
+        `"${date}"`,
       ];
 
       csvRows.push(row.join(","));

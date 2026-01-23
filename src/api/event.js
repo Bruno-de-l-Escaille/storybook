@@ -537,3 +537,35 @@ export const fetchCommand = async ({ apiUrl, token, commandId }) => {
 
   return data.data;
 };
+
+export const uploadEventImage = ({ apiUrl, token, data, filePath = "" }) => {
+  const requestUrl = `${apiUrl}/media/media/upload-media`;
+
+  var formData = new FormData();
+  formData.append("access_token", token);
+  formData.append("file", data);
+
+  if (!isEmpty(filePath)) {
+    formData.append("filePath", filePath);
+  }
+
+  return axios.post(requestUrl, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    maxContentLength: Infinity,
+    maxBodyLength: Infinity,
+    timeout: 60000,
+  });
+};
+
+export const deleteGuest = async ({ apiUrl, token, guestId }) => {
+  const requestUrl = `${apiUrl}/event/guest/deleteGuest/${guestId}`;
+
+  const formData = new FormData();
+  formData.append("access_token", token);
+
+  const data = await axios.post(requestUrl, formData);
+
+  return data.data;
+};
