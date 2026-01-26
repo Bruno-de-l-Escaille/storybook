@@ -16,11 +16,13 @@ import {
   searchSpeakers,
   searchEventContacts,
   searchEventPlace,
+  verifyEmailForSES,
 } from "../../../../api";
 import IconPlus from "../../../Icons/IconPlus";
 import IconCloseV2 from "../../../Icons/IconCloseV2";
 import IconAvatar from "../../../Icons/IconAvatar";
 import { TimePicker } from "../TimePicker";
+import { ClipLoader } from "react-spinners";
 
 const MomentDatePicker = DatePicker.generatePicker(momentGenerateConfig);
 
@@ -64,6 +66,7 @@ export const Config = (props) => {
   const [showAddressDropdown, setShowAddressDropdown] = useState(false);
   const addressDropdownRef = useRef(null);
   const addressInputRef = useRef(null);
+  const [isVerifyingEmail, setIsVerifyingEmail] = useState(false);
   useEffect(() => {
     if (!isEmpty(data.tag)) {
       setSelectedTags(data.tag);
@@ -346,6 +349,12 @@ export const Config = (props) => {
     setData((prevData) => ({ ...prevData, [contactField]: value }));
     setContactInputValue(value);
     setShowContactDropdown(value.trim().length > 0);
+    if (validationErrors.contactNameError) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        contactNameError: false,
+      }));
+    }
   };
 
   const handleEmailContactChange = (e) => {
@@ -356,6 +365,61 @@ export const Config = (props) => {
     setData((prevData) => ({ ...prevData, [emailField]: value }));
     setContactInputValue(value);
     setShowContactDropdown(value.trim().length > 0);
+    if (validationErrors.contactEmailError) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        contactEmailError: false,
+      }));
+    }
+    if (validationErrors.contactEmailNotVerifiedError) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        contactEmailNotVerifiedError: false,
+      }));
+    }
+  };
+
+  const handleEmailBlur = async (e) => {
+    const email = e.target.value.trim();
+    const emailField = `emailContact${
+      language.charAt(0).toUpperCase() + language.slice(1)
+    }`;
+
+    if (email && !isEmpty(email)) {
+      setIsVerifyingEmail(true);
+      try {
+        const isVerified = await verifyEmailForSES({
+          apiUrl,
+          token: auth.token,
+          email: email,
+        });
+
+        if (!isVerified) {
+          setValidationErrors((prevErrors) => ({
+            ...prevErrors,
+            contactEmailNotVerifiedError: true,
+          }));
+        } else {
+          setValidationErrors((prevErrors) => ({
+            ...prevErrors,
+            contactEmailNotVerifiedError: false,
+          }));
+        }
+      } catch (error) {
+        console.error("Email verification error:", error);
+        setValidationErrors((prevErrors) => ({
+          ...prevErrors,
+          contactEmailNotVerifiedError: true,
+        }));
+      } finally {
+        setIsVerifyingEmail(false);
+      }
+    } else {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        contactEmailNotVerifiedError: false,
+      }));
+    }
   };
 
   const handlePhoneContactChange = (e) => {
@@ -366,6 +430,12 @@ export const Config = (props) => {
     setData((prevData) => ({ ...prevData, [phoneField]: value }));
     setContactInputValue(value);
     setShowContactDropdown(value.trim().length > 0);
+    if (validationErrors.contactPhoneError) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        contactPhoneError: false,
+      }));
+    }
   };
 
   const handleSpeakerInput = (e) => {
@@ -859,11 +929,20 @@ export const Config = (props) => {
                       ] || ""
                     }
                     onChange={handleContactChange}
-                    className={styles.config_input}
+                    className={`${styles.config_input} ${
+                      validationErrors.contactNameError
+                        ? styles.config_input_error
+                        : ""
+                    }`}
                   />
                   <div className={styles.config_inputSeparator}></div>
                   <IconPerson />
                 </div>
+                {validationErrors.contactNameError && (
+                  <span className={styles.config_errorMessage}>
+                    {I18N[language]["contactNameRequired"]}
+                  </span>
+                )}
                 {showContactDropdown && getFilteredContacts().length > 0 && (
                   <div
                     ref={contactDropdownRef}
@@ -934,11 +1013,32 @@ export const Config = (props) => {
                         ] || ""
                       }
                       onChange={handleEmailContactChange}
-                      className={styles.config_input}
+                      onBlur={handleEmailBlur}
+                      disabled={isVerifyingEmail}
+                      className={`${styles.config_input} ${
+                        validationErrors.contactEmailError ||
+                        validationErrors.contactEmailNotVerifiedError
+                          ? styles.config_input_error
+                          : ""
+                      }`}
                     />
                     <div className={styles.config_inputSeparator}></div>
-                    <IconMail />
+                    {isVerifyingEmail ? (
+                      <ClipLoader size={16} color="#18a0fb" />
+                    ) : (
+                      <IconMail />
+                    )}
                   </div>
+                  {validationErrors.contactEmailError && (
+                    <span className={styles.config_errorMessage}>
+                      {I18N[language]["contactEmailRequired"]}
+                    </span>
+                  )}
+                  {validationErrors.contactEmailNotVerifiedError && (
+                    <span className={styles.config_errorMessage}>
+                      {I18N[language]["emailNotVerifiedForSES"]}
+                    </span>
+                  )}
                 </div>
 
                 <div className={styles.config_field}>
@@ -954,11 +1054,20 @@ export const Config = (props) => {
                         ] || ""
                       }
                       onChange={handlePhoneContactChange}
-                      className={styles.config_input}
+                      className={`${styles.config_input} ${
+                        validationErrors.contactPhoneError
+                          ? styles.config_input_error
+                          : ""
+                      }`}
                     />
                     <div className={styles.config_inputSeparator}></div>
                     <IconPhone />
                   </div>
+                  {validationErrors.contactPhoneError && (
+                    <span className={styles.config_errorMessage}>
+                      {I18N[language]["contactPhoneRequired"]}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>

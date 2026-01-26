@@ -387,6 +387,11 @@ export const I18N = {
     imageFormat: "Optimal format: 1200px x 400px (3:1 ratio)",
     fromMedia: "From media",
     titleRequired: "Title is required",
+    contactNameRequired: "Contact name is required",
+    contactEmailRequired: "Contact email is required",
+    contactPhoneRequired: "Contact phone number is required",
+    emailNotVerifiedForSES:
+      "The contact email address is not validated for sending via Amazon",
     speakers: "Speaker(s)",
     errorSavingSpeakers: "Error saving speakers",
     errorDeletingSpeakers: "Error deleting speakers",
@@ -1018,6 +1023,11 @@ export const I18N = {
     imageFormat: "Format optimale: 1200px x 400px (ratio 3:1)",
     fromMedia: "Depuis média",
     titleRequired: "Le titre est obligatoire",
+    contactNameRequired: "Le nom du contact est obligatoire",
+    contactEmailRequired: "L'email du contact est obligatoire",
+    contactPhoneRequired: "Le numéro de téléphone du contact est obligatoire",
+    emailNotVerifiedForSES:
+      "L'adresse email de contact n'est pas validée pour l'envoi via Amazon",
     speakers: "ORATEUR(S)",
     date: "Date",
     eventDay: "Jour de l'évént",
@@ -1385,6 +1395,11 @@ export const I18N = {
     imageFormat: "Optimaal formaat: 1200px x 400px (3:1 verhouding)",
     fromMedia: "Van media",
     titleRequired: "Titel is verplicht",
+    contactNameRequired: "Contactnaam is verplicht",
+    contactEmailRequired: "Contact e-mail is verplicht",
+    contactPhoneRequired: "Contact telefoonnummer is verplicht",
+    emailNotVerifiedForSES:
+      "Het contact e-mailadres is niet gevalideerd voor verzending via Amazon",
     auth: {
       signInUp: "Inloggen / Registreren",
       authenticate: "Authenticeren",
