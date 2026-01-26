@@ -27,6 +27,7 @@ import {
   duplicateEvent,
   fetchCommand,
   uploadEventImage,
+  verifyEmailForSES,
 } from "../../api";
 import { Toast, FlashMessage } from "../ToastContainer/ToastContainer";
 import { ClipLoader } from "react-spinners";
@@ -144,6 +145,10 @@ export const EventCreationPopup = (props) => {
     timeComparisonError: false,
     addressError: false,
     maxPlacesError: false,
+    contactNameError: false,
+    contactEmailError: false,
+    contactEmailNotVerifiedError: false,
+    contactPhoneError: false,
   });
   const [isSaving, setIsSaving] = useState(false);
   const [maximize, setMaximize] = useState(false);
@@ -397,6 +402,30 @@ export const EventCreationPopup = (props) => {
         hasError = true;
       }
 
+      const contactField = `contact${
+        language.charAt(0).toUpperCase() + language.slice(1)
+      }`;
+      if (isEmpty(data[contactField])) {
+        newErrors.contactNameError = true;
+        hasError = true;
+      }
+
+      const emailField = `emailContact${
+        language.charAt(0).toUpperCase() + language.slice(1)
+      }`;
+      if (isEmpty(data[emailField])) {
+        newErrors.contactEmailError = true;
+        hasError = true;
+      }
+
+      const phoneField = `phoneNumberContact${
+        language.charAt(0).toUpperCase() + language.slice(1)
+      }`;
+      if (isEmpty(data[phoneField])) {
+        newErrors.contactPhoneError = true;
+        hasError = true;
+      }
+
       if (hasError) {
         setValidationErrors(newErrors);
         return false;
@@ -543,9 +572,53 @@ export const EventCreationPopup = (props) => {
       });
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const validated = checkValidations();
     if (!validated) return Promise.reject("Validation failed");
+
+    const emailField = `emailContact${
+      language.charAt(0).toUpperCase() + language.slice(1)
+    }`;
+    const email = data[emailField];
+
+    if (email && !isEmpty(email)) {
+      try {
+        const isVerified = await verifyEmailForSES({
+          apiUrl,
+          token: auth.token,
+          email: email,
+        });
+
+        if (!isVerified) {
+          setValidationErrors((prevErrors) => ({
+            ...prevErrors,
+            contactEmailNotVerifiedError: true,
+          }));
+          setIsSaving(false);
+          Toast.error(I18N[language]["emailNotVerifiedForSES"]);
+          return Promise.reject("Email not verified for SES");
+        } else {
+          setValidationErrors((prevErrors) => ({
+            ...prevErrors,
+            contactEmailNotVerifiedError: false,
+          }));
+        }
+      } catch (error) {
+        console.error("Email verification error:", error);
+        setValidationErrors((prevErrors) => ({
+          ...prevErrors,
+          contactEmailNotVerifiedError: true,
+        }));
+        setIsSaving(false);
+        Toast.error(I18N[language]["emailNotVerifiedForSES"]);
+        return Promise.reject("Email verification failed");
+      }
+    } else {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        contactEmailNotVerifiedError: false,
+      }));
+    }
 
     setIsSaving(true);
 

@@ -569,3 +569,17 @@ export const deleteGuest = async ({ apiUrl, token, guestId }) => {
 
   return data.data;
 };
+
+export const verifyEmailForSES = async ({ apiUrl, token, email }) => {
+  const requestUrl = `${apiUrl}/mailing/registered-mails`;
+
+  const params = new URLSearchParams({
+    email: email,
+    access_token: token,
+  });
+
+  const response = await axios.get(`${requestUrl}?${params.toString()}`);
+  const verified = response?.data?.data?.[email]?.VerificationStatus ?? "error";
+
+  return verified === "Success";
+};
