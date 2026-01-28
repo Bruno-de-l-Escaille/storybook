@@ -528,7 +528,8 @@ const GoPeopleAuthHeader = ({
         setClientToken(response.token);
         setUserId(currentUserId);
 
-        if (!hasPassword) {
+        // Check isNewUser from API response to determine flow
+        if (response.isNewUser === true) {
           // New user path - needs to complete registration
           setShowModal(false);
           setShowRegisterModal(true);
