@@ -141,8 +141,21 @@ export const verifyOTP = async (apiBaseUrl, otp, identifier) => {
   }
 };
 
-export const requestPasswordReset = async (apiBaseUrl, identifier) => {
-  const response = await fetch(`${apiBaseUrl}/auth/request-reset`, {
+export const requestPasswordReset = async (
+  apiBaseUrl,
+  identifier,
+  appName = "tamtam",
+  language = "fr"
+) => {
+  const queryParams = new URLSearchParams();
+  if (appName) queryParams.append("app_name", appName);
+  if (language) queryParams.append("language", language);
+
+  const url = `${apiBaseUrl}/auth/request-reset${
+    queryParams.toString() ? `?${queryParams.toString()}` : ""
+  }`;
+
+  const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

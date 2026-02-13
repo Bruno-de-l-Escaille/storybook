@@ -318,7 +318,6 @@ const menu = [
     title: "auteurs",
     iconUrl:
       "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/icon/header/authors.svg",
-    submenu: "AUTEURS",
     community: false,
     hasSearch: true,
     searchUrl: "http://local.api.tamtam.prp/endpoint",

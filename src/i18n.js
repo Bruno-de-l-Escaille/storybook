@@ -189,6 +189,15 @@ export const I18N = {
       otpSentMessage:
         "Please enter the 6-digit code sent to your email or phone",
       modifyIdentifier: "Modify identifier",
+      resetPassword: "Reset Password",
+      resetPasswordTitle: "Reset your password",
+      resetPasswordMessage: "Enter your email or phone to receive a reset code",
+      sendResetCode: "Send reset code",
+      resetCodeSent: "Reset code sent successfully",
+      enterResetCode: "Enter reset code",
+      verifyResetCode: "Verify reset code",
+      resetCodeMessage:
+        "Please enter the 6-digit code sent to your email or phone",
     },
     on: "on",
     keywords: "Key words",
@@ -413,6 +422,16 @@ export const I18N = {
       otpSentMessage:
         "Veuillez entrer le code à 6 chiffres envoyé à votre email ou téléphone",
       modifyIdentifier: "Modifier l'identifiant",
+      resetPassword: "Réinitialiser le mot de passe",
+      resetPasswordTitle: "Réinitialiser votre mot de passe",
+      resetPasswordMessage:
+        "Entrez votre email ou téléphone pour recevoir un code de réinitialisation",
+      sendResetCode: "Envoyer le code de réinitialisation",
+      resetCodeSent: "Code de réinitialisation envoyé avec succès",
+      enterResetCode: "Entrez le code de réinitialisation",
+      verifyResetCode: "Vérifier le code de réinitialisation",
+      resetCodeMessage:
+        "Veuillez entrer le code à 6 chiffres envoyé à votre email ou téléphone",
     },
     on: "sur",
     keywords: "Mots clés",
@@ -637,6 +656,16 @@ export const I18N = {
       otpSentMessage:
         "Voer de 6-cijferige code in die naar uw e-mail of telefoon is gestuurd",
       modifyIdentifier: "Identificatie wijzigen",
+      resetPassword: "Wachtwoord opnieuw instellen",
+      resetPasswordTitle: "Uw wachtwoord opnieuw instellen",
+      resetPasswordMessage:
+        "Voer uw e-mail of telefoon in om een resetcode te ontvangen",
+      sendResetCode: "Stuur resetcode",
+      resetCodeSent: "Resetcode succesvol verzonden",
+      enterResetCode: "Voer resetcode in",
+      verifyResetCode: "Verifieer resetcode",
+      resetCodeMessage:
+        "Voer de 6-cijferige code in die naar uw e-mail of telefoon is gestuurd",
     },
     on: "op",
     keywords: "Kernwoorden",
