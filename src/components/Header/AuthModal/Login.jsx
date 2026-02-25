@@ -48,7 +48,11 @@ const Login = ({
   useEffect(() => {
     if (showForgot && clientToken === "") {
       setIsSaving(true);
-      getClientCredential(app.apiUrl, app.clientCredential)
+      getClientCredential(
+        app.apiUrl,
+        app.clientCredential,
+        app.authAppName ?? app.appName
+      )
         .then((resp) => {
           const token = resp.data.token.access_token;
           setClientToken(token);
@@ -162,7 +166,12 @@ const Login = ({
     };
 
     setIsSaving(true);
-    postUserCredential(app.apiUrl, data, app.clientCredential)
+    postUserCredential(
+      app.apiUrl,
+      data,
+      app.clientCredential,
+      app.authAppName ?? app.appName
+    )
       .then((resp) => {
         handleAuthTokenUser(resp.data);
 

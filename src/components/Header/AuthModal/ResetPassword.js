@@ -40,6 +40,7 @@ const ResetPassword = ({
       apiUrl: app.apiUrl,
       token: clientToken,
       key: emailKey,
+      appName: app.authAppName ?? app.appName,
     })
       .then((resp) => {
         handleAuthTokenUser(resp.data.data);
@@ -81,7 +82,8 @@ const ResetPassword = ({
         postUserCredential(
           app.apiUrl,
           { email, password },
-          app.clientCredential
+          app.clientCredential,
+          app.authAppName ?? app.appName
         ).then((authResponse) => {
           handleAuthTokenUser(authResponse.data);
           // closeModal();
