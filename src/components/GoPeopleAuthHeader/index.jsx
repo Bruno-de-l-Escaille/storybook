@@ -98,11 +98,6 @@ const GoPeopleAuthHeader = ({
       setPasswordError(I18N[lng].auth.passwords_do_not_match || "Passwords do not match");
       return;
     }
-    // optional centralized strength check if provided
-    if (typeof isStrongPassword === "function" && !isStrongPassword(newPassword)) {
-      setPasswordError(I18N[lng].auth.weak_password || "Password is too weak");
-      return;
-    }
 
     setPasswordSubmitting(true);
     try {
