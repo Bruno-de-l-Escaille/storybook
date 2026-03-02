@@ -14,6 +14,7 @@ import {
   verifyOTP,
   requestPasswordReset,
   initiateOTPLogin,
+  setPassword,           // we will call backend POST /setpassword
 } from "./api";
 import {
   validateEmail,
@@ -50,6 +51,13 @@ const GoPeopleAuthHeader = ({
     password: "",
     otp: "",
   });
+    // --- Set Password modal states ---
+  const [showSetPasswordModal, setShowSetPasswordModal] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordSubmitting, setPasswordSubmitting] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
+
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -65,6 +73,75 @@ const GoPeopleAuthHeader = ({
       otp: "",
     });
     if (onClose) onClose();
+  };
+
+
+    // Open the set-password modal and store token for later use
+  const openSetPasswordModal = (token) => {
+    // store token in clientToken (already used in other flows)
+    setClientToken(token || "");
+    setNewPassword("");
+    setConfirmPassword("");
+    setPasswordError("");
+    setShowSetPasswordModal(true);
+  };
+
+
+  const handleSubmitSetPassword = async () => {
+    // simple frontend validations before calling API
+    setPasswordError("");
+    if (!newPassword) {
+      setPasswordError(I18N[lng].auth.password_required || "Please enter a password");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setPasswordError(I18N[lng].auth.passwords_do_not_match || "Passwords do not match");
+      return;
+    }
+    // optional centralized strength check if provided
+    if (typeof isStrongPassword === "function" && !isStrongPassword(newPassword)) {
+      setPasswordError(I18N[lng].auth.weak_password || "Password is too weak");
+      return;
+    }
+
+    setPasswordSubmitting(true);
+    try {
+      // Call backend endpoint POST /setpassword with token in Authorization
+      const result = await setPassword(apiBaseUrl, clientToken, newPassword);
+
+      // If backend returns an auth token, finalize auth flow
+      if (result && (result.token || result.jwt)) {
+        // Normal flow: handle tokens and user profile
+        Toast.success(I18N[lng].auth.password_set_success || "Password set successfully");
+        await handleAuthSuccess(result);
+        // close both modals
+        setShowSetPasswordModal(false);
+        handleCloseModal();
+        return;
+      }
+
+      // Else, if backend doesn't return token but success, follow spec: redirect to dashboard
+      Toast.success(I18N[lng].auth.password_set_success || "Password set successfully");
+      // If you maintain SPA route:
+      window.location.href = "/dashboard";
+    } catch (err) {
+      // human-friendly error handling
+      console.error("Error setting password:", err);
+      const msg = err.message || I18N[lng].auth.error_occurred;
+      if (err.code === 401 || msg.toLowerCase().includes("401") || msg.toLowerCase().includes("token")) {
+        // token expired or invalid
+        setPasswordError(I18N[lng].auth.token_expired || "Token expired. Please request a new code.");
+        Toast.error(I18N[lng].auth.token_expired || "Token expired. Please request a new code.");
+        // Close modal and ask user to reinitiate flow (could redirect to identifier step)
+        setShowSetPasswordModal(false);
+        setStep("IDENTIFIER");
+      } else {
+        setPasswordError(msg);
+        Toast.error(msg);
+      }
+    } finally {
+      setPasswordSubmitting(false);
+    }
   };
 
   const handleAuthTokenUser = (authData) => {
@@ -511,7 +588,13 @@ const GoPeopleAuthHeader = ({
         if (response.isNewUser === true) {
           setShowModal(false);
           setShowRegisterModal(true);
+        } else if (response.isNewUser === false) {
+          // OTP flow for existing user who needs to define a password:
+          // open the Set Password modal and pass the returned token
+          openSetPasswordModal(response.token || response.jwt);
         } else {
+          // response.isNewUser unknown (null) -> fallback to previous behavior:
+          // keep backward compatibility: process auth success if token exists
           Toast.success(I18N[lng].auth.successfully_saved);
           handleAuthSuccess(response);
           handleCloseModal();
@@ -644,12 +727,9 @@ const GoPeopleAuthHeader = ({
       const response = await verifyOTP(apiBaseUrl, otp, identifier);
 
       if (response.token || response.jwt) {
-        Toast.success(
-          I18N[lng].auth.password_changed_succesfully ||
-            "Password reset successful"
-        );
-        handleAuthSuccess(response);
-        handleCloseModal();
+        // For reset-flow, we expect the user to set their new password.
+        // Open the Set Password modal and pass the token returned by verify.
+        openSetPasswordModal(response.token || response.jwt);
       }
     } catch (error) {
       console.error("Error verifying reset OTP:", error);
@@ -1045,6 +1125,64 @@ const GoPeopleAuthHeader = ({
           {step === "PASSWORD" && renderPasswordStep()}
           {step === "OTP" && renderOTPStep()}
           {step === "RESET_OTP" && renderResetOTPStep()}
+        </div>
+      </Modal>
+
+            {/* ---------------- Set Password Modal ---------------- */}
+      <Modal
+        isOpen={showSetPasswordModal}
+        onRequestClose={() => setShowSetPasswordModal(false)}
+        shouldCloseOnOverlayClick={false}
+        className={styles.modal}
+        overlayClassName={styles.overlay}
+      >
+        <FlashMessage />
+        <div className={styles.modalHeader}>
+          {I18N[lng].auth.set_password_title || "Set your password"}
+          <span className={styles.modalClose} onClick={() => setShowSetPasswordModal(false)}>
+            {/* reuse same close icon as other modals */}
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* ... same svg path as other close icon ... */}
+            </svg>
+          </span>
+        </div>
+
+        <div className={styles.container}>
+          <div className={styles.loginContent}>
+            <FormInput
+              name="newPassword"
+              value={newPassword}
+              label={I18N[lng].auth.new_password || "New password"}
+              type="password"
+              className="sb-ttp-input-lg"
+              labelClassName="sb-ttp-label-lg"
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+
+            <FormInput
+              name="confirmPassword"
+              value={confirmPassword}
+              label={I18N[lng].auth.confirm_password || "Confirm password"}
+              type="password"
+              className="sb-ttp-input-lg"
+              labelClassName="sb-ttp-label-lg"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+
+            {passwordError && <div className={styles.error}>{passwordError}</div>}
+
+            <div className={styles.actions}>
+              {passwordSubmitting ? (
+                <button className={styles.button} disabled>
+                  <Loader style={{ height: "10px" }} color={"#fff"} />
+                </button>
+              ) : (
+                <button className={styles.button} onClick={handleSubmitSetPassword}>
+                  {I18N[lng].auth.save_password || "Save password"}
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </Modal>
 
