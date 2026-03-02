@@ -248,6 +248,29 @@ export const setUserPassword = async (apiBaseUrl, token, password) => {
   }
 };
 
+
+export const setPassword = async (apiBaseUrl, token, newPassword) => {
+  const response = await fetch(`${apiBaseUrl}/setpassword`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ newPassword }),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    return data;
+  } else {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(
+      errorData.message || errorData.error || `HTTP ${response.status}`
+    );
+  }
+};
+
+
 export const authenticateUser = async (apiBaseUrl, email, password) => {
   const response = await fetch(`${apiBaseUrl}/auth/login`, {
     method: "POST",
