@@ -55,7 +55,7 @@ export const getUser = (apiUrl, token, userId) => {
 };
 
 export const fetchOrganizations = (apiUrl, token, userId) => {
-  const requestUrl = `${apiUrl}/organization/user-organizations`;
+  const requestUrl = `${apiUrl}/organization/organization/user-organizations`;
   const fields = [
     "*",
     "url",
