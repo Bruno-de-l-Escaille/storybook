@@ -276,12 +276,12 @@ export const setUserPassword = async (apiBaseUrl, token, password) => {
 };
 
 
-export const setPassword = async (apiBaseUrl, token, newPassword) => {
-  const response = await fetch(`${apiBaseUrl}/setpassword`, {
+export const setPassword = async (apiBaseUrl, newPassword, token, language = "fr") => {
+  const response = await fetch(`${apiBaseUrl}/auth/password`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      "Authorization": `Bearer ${token}`,
     },
     body: JSON.stringify({ newPassword }),
   });
@@ -290,10 +290,16 @@ export const setPassword = async (apiBaseUrl, token, newPassword) => {
     const data = await response.json();
     return data;
   } else {
-    const errorData = await response.json().catch(() => ({}));
-    throw new Error(
-      errorData.message || errorData.error || `HTTP ${response.status}`
-    );
+    try {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message ||
+        errorData.error ||
+        `HTTP ${response.status}: ${response.statusText}`
+      );
+    } catch (jsonError) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
   }
 };
 

@@ -190,3 +190,32 @@ export const OTPFlowWithCustomParameters = () => {
     </div>
   );
 };
+
+// Story to test the set password flow after OTP verification
+export const SetPasswordAfterOTP = () => (
+  <GoPeopleAuthHeader
+    apiBaseUrl="http://localhost:8080"
+    lng="fr"
+    onSuccess={(tokenData) => {
+      console.log("Password set successfully:", tokenData);
+      alert("Mot de passe défini avec succès !");
+    }}
+    onError={(error) => {
+      console.error("Error:", error);
+    }}
+  />
+);
+
+// log in with an existing user without a password, then you should be prompted to set a new password after OTP verification
+export const SetPasswordAfterReset = () => (
+  <GoPeopleAuthHeader
+    apiBaseUrl="http://localhost:8080"
+    lng="fr"
+    onSuccess={(tokenData) => {
+      console.log("Password reset successfully:", tokenData);
+    }}
+    onError={(error) => {
+      console.error("Error:", error);
+    }}
+  />
+);
