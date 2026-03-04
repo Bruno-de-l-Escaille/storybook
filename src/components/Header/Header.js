@@ -291,7 +291,7 @@ export class Header extends Component {
               env={env}
               auth={auth}
               navCommunity={navCommunity}
-              appName={app.appName}
+              app={app}
               isFaqWidgetLoaded={isFaqWidgetLoaded}
             />
           )}

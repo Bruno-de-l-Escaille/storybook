@@ -29,7 +29,7 @@ export default function Notifs({
   lng,
   auth,
   env,
-  appName,
+  app,
   navCommunity,
   isFaqWidgetLoaded,
   selectedApp,
@@ -61,23 +61,25 @@ export default function Notifs({
 
   const fetchNotifications = (activeApp) => {
     setIsFetching(true);
-    const app =
+    const myApp =
       (activeApp && activeApp === "NEWSLETTER") ||
       (selectedApp && selectedApp === "NEWSLETTER")
         ? "E_NEWS"
         : activeApp
         ? activeApp
-        : appName.toUpperCase();
+        : app.appName.toUpperCase();
+    let apiAppName = app.authAppName ?? myApp;
     getNotifications({
       apiUrl,
       token: auth.token,
       userId: auth.user.id,
       navCommunity,
-      appName: app,
+      appName: myApp,
       options: {
         limit: 6,
       },
       loggedAsAdmin,
+      apiAppName: apiAppName.replace(" ", "_"),
     })
       .then((resp) => {
         setIsFetched(true);
@@ -166,7 +168,7 @@ export default function Notifs({
 
   const handleEditClick = () => {
     if (window.showNotifications) {
-      window.showNotifications(appName);
+      window.showNotifications(app.appName);
     }
   };
 
