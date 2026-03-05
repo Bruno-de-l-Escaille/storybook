@@ -86,17 +86,6 @@
   line-height: 25px;
   font-weight: 500;
   margin-bottom: 2rem;
-  cursor: pointer;
-  .titleContainer & {
-    margin-bottom: 0;
-  }
-}
-
-.titleContainer {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-  gap: 2px;
 }
 
 .button {
@@ -155,12 +144,12 @@
   input {
     display: inline-block;
   }
-  
+
   input::-webkit-inner-spin-button {
     -webkit-appearance: none !important;
     margin: 0;
   }
-  
+
   input:nth-child(3),
   input:nth-child(6) {
     margin-left: 0.5rem;
@@ -190,33 +179,12 @@
   border-top: 1px solid #d8dde2;
 }
 
-.backButton {
-  cursor: pointer;
-  color: #6b7280;
-  margin-right: 10px;
-  transform: translateY(3px);
-  &:hover {
-    color: #111827;
-  }
-}
-
-.passwordToggle {
-  display: flex;
-  align-items: center; /* vertical center */
-  height: 100%;
-  position: absolute;
-  margin-bottom: 0.9rem;
-  right: 0.2rem;
-  cursor: pointer;
-  color: #6b7280;
-}
-
 .linkText {
   color: #18a0fb;
   cursor: pointer;
   font-size: 14px;
   text-decoration: underline;
-  
+
   &:hover {
     color: #1595e5;
     text-decoration: none;
@@ -230,12 +198,293 @@
     left: 20px;
     right: 20px;
   }
-  
+
   .container {
     padding-bottom: 2rem;
   }
-  
+
   .loginContent {
     width: 100%;
+  }
+}
+
+
+// Styles pour la sélection de compte (à ajouter dans GoPeopleAuthHeader.module.scss)
+
+.selectionMessage {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 1.5rem 0 2rem;
+  padding: 0 1rem;
+}
+
+.accountsGrid {
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Centre les cartes
+  gap: 0.75rem;
+  max-height: 350px;
+  overflow-y: auto;
+  padding: 0.25rem;
+  margin-bottom: 2rem;
+
+  // Scrollbar styling
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 10px;
+    
+    &:hover {
+      background: #a0aec0;
+    }
+  }
+}
+
+.accountCard {
+  width: 100%;
+  max-width: 400px; // Largeur maximale réduite
+  margin: 0 auto; // Centre la carte
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  animation: slideIn 0.3s ease-out forwards;
+  opacity: 0;
+  transform: translateY(10px);
+
+  &:hover {
+    border-color: #18a0fb;
+    background-color: #f8fafc;
+    box-shadow: 0 2px 8px rgba(24, 160, 251, 0.1);
+  }
+
+  &.selected {
+    border-color: #18a0fb;
+    background-color: #f0f9ff;
+    border-width: 2px;
+    padding: calc(1rem - 1px); // Compenser l'augmentation de la bordure
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.accountCardContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.accountAvatarContainer {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.accountAvatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.accountAvatarFallback {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.accountDetails {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.accountName {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #1f2937;
+  margin: 0 0 0.2rem 0;
+  line-height: 1.4;
+}
+
+.accountEmail {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.selectedBadge {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  background-color: #18a0fb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  animation: scaleIn 0.2s ease-out;
+
+  svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.accountArrow {
+  flex-shrink: 0;
+  color: #9ca3af;
+  transition: color 0.2s ease;
+  
+  .accountCard:hover & {
+    color: #18a0fb;
+  }
+}
+
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: 8px;
+  backdrop-filter: blur(2px);
+}
+
+// Changement de columnActions vers actions pour utiliser le style existant
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0 1rem;
+
+  button {
+    min-width: 120px; // Réduit de 230px à 120px
+    height: 40px;
+    font-size: 0.95rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0 1.5rem;
+  }
+}
+
+.button_secondary {
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  color: #4b5563;
+
+  &:hover:not(:disabled) {
+    background-color: #e5e7eb;
+    border-color: #9ca3af;
+  }
+}
+
+.button {
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  min-width: 120px; // Réduit de 230px à 120px
+  height: 40px;
+  background: #18a0fb;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+// Style pour le message quand il n'y a pas de comptes
+.emptyAccounts {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+// Responsive
+@media screen and (max-width: 768px) {
+  .accountsGrid {
+    max-height: 300px;
+  }
+
+  .accountAvatarContainer {
+    width: 40px;
+    height: 40px;
+  }
+
+  .accountName {
+    font-size: 0.9rem;
+  }
+
+  .accountEmail {
+    font-size: 0.75rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 0.75rem;
+
+    button {
+      min-width: 200px;
+    }
   }
 }
