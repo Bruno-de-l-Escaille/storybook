@@ -304,6 +304,19 @@ export class Header extends Component {
     } = this.props;
     const { appUrl, homeUrl, withAuthLogin } = app;
     const languages = ["fr", "nl", "en"];
+    console.log(
+      "header props for logged out:",
+      lng,
+      app,
+      intendedApp,
+      apiUrl,
+      cookieUrl,
+      apiBaseUrl,
+      env,
+      isOtcAuth,
+      this.props.isOtcAuth ?? true,
+      this.props
+    );
 
     return (
       <div className={styles.headerRight}>
