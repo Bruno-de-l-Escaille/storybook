@@ -469,6 +469,13 @@ export class Header extends Component {
 
     return (
       <>
+        {console.log(
+          "Rendering Header with props:",
+          this.props,
+          auth.user,
+          loadNotifWidget,
+          isFaqWidgetLoaded
+        )}
         {loadNotifWidget && (
           <AppendHead onLoad={this.handleShowFaqWidget.bind(this)}>
             <link
