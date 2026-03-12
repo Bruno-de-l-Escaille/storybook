@@ -133,12 +133,7 @@ const GoPeopleAuthHeader = ({
       let normalizedUserData;
 
       try {
-        const { getGoPeopleUserProfile } = require("./api");
-        console.log("Using GoPeople API for user data", apiBaseUrl, jwt);
-        userResponse = await getGoPeopleUserProfile(apiBaseUrl, jwt);
-        console.log("======== userResponse ==========", userResponse);
-
-        let selectedOrganizationId = userResponse.selected_community
+        let selectedOrganizationId = userResponse?.selected_community
           ? userResponse.selected_community.ttp_community_id
           : 4;
 
@@ -163,7 +158,7 @@ const GoPeopleAuthHeader = ({
       }
 
       if (
-        userResponse.data &&
+        userResponse?.data &&
         userResponse.data.data &&
         userResponse.data.data.length > 0
       ) {
