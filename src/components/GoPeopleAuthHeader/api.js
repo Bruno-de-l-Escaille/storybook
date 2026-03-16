@@ -319,6 +319,26 @@ export const extractAuthContextFromJWT = (jwt) => {
   }
 };
 
+export const getGoPeopleUserProfile = async (apiBaseUrl, jwt) => {
+  const response = await fetch(`${apiBaseUrl}/users/me/complete-profile`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    return { data: { data: [data] } }; // Wrap to match expected structure
+  } else {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(
+      errorData.message || errorData.error || `HTTP ${response.status}`
+    );
+  }
+};
+
 // User data is always fetched from GoPeople API only
 // No TTP API user fetching needed
 
