@@ -103,8 +103,9 @@ const GoPeopleAuthHeader = ({
       const authContext = extractAuthContextFromJWT(jwt);
 
       const baseAuthData = {
-        token: data.token || authContext.ttpAccessToken,
+        token: authContext.ttpAccessToken,
         jwt: jwt,
+        jwtToken: jwt,
         refreshToken: data.refresh_token,
         expiresIn:
           data.expiresIn || authContext.exp - Math.floor(Date.now() / 1000),
