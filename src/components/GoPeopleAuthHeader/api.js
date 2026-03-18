@@ -386,3 +386,22 @@ export const getOrganizationSettings = (
       };
     });
 };
+export const selectAccount = async (apiBaseUrl, selectionToken, userId) => {
+  const response = await fetch(`${apiBaseUrl}/auth/select-account`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      selection_token: selectionToken,
+      user_id: userId,
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}));
+    throw new Error(error.message || `HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
+};
