@@ -988,25 +988,11 @@ const GoPeopleAuthHeader = ({
 
         {/* Barre de force du mot de passe */}
         {newPassword && (
-          <div className={styles.strengthBar}>
-            {[1, 2, 3, 4].map((level) => (
-              <div
-                key={level}
-                style={{
-                  height: "4px",
-                  flex: 1,
-                  borderRadius: "2px",
-                  backgroundColor: level <= passwordStrength
-                    ? strengthColors[passwordStrength]
-                    : "#e2e8f0",
-                  margin: "0 2px",
-                }}
-              />
-            ))}
-            <span style={{ fontSize: "12px", color: strengthColors[passwordStrength], marginLeft: "8px" }}>
-              {strengthLabels[passwordStrength]}
-            </span>
-          </div>
+          <progress
+            className={`${(passwordStrength * 25) > 30 ? "success" : "alert"} ${styles.progress}`}
+            max="100"
+            value={passwordStrength * 25}
+          ></progress>
         )}
 
         <FormInput
