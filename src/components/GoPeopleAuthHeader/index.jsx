@@ -125,8 +125,8 @@ const GoPeopleAuthHeader = ({
       let dtExpire = new Date();
       dtExpire.setTime(dtExpire.getTime() + baseAuthData.expiresIn * 1000);
 
-      const { setCookie } = require("./utils");
-      setCookie(`ttp_auth_${env}`, JSON.stringify(baseAuthData), dtExpire, "/");
+      // const { setCookie } = require("./utils");
+      // setCookie(`ttp_auth_${env}`, JSON.stringify(baseAuthData), dtExpire, "/");
 
       console.log("Fetching user data with available tokens");
       let userResponse;
