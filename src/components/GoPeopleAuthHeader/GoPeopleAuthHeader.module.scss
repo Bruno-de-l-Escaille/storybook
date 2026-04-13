@@ -116,8 +116,7 @@
   font-weight: 500;
   text-transform: none;
   font-size: 0.9rem;
-  line-height: 1;
-  text-transform: uppercase;
+  line-height: 1; 
   cursor: pointer;
   transition: nth($transitions, 2);
 
@@ -321,8 +320,7 @@
 .accountAvatarFallback {
   color: white;
   font-size: 1.1rem;
-  font-weight: 500;
-  text-transform: uppercase;
+  font-weight: 500; 
   line-height: 1;
 }
 
@@ -338,6 +336,7 @@
   color: #1f2937;
   margin: 0 0 0.2rem 0;
   line-height: 1.4;
+  text-transform: none;
 }
 
 .accountEmail {
@@ -348,6 +347,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-transform: none;
 }
 
 .selectedBadge {
