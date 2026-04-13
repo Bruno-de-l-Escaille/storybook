@@ -15,6 +15,7 @@ import OngoingIcon from "./assets/IconOngoing";
 import styles from "./EventLayout.module.scss";
 import {
   capFirstLetterInSentence,
+  encryptAES,
   getApiUrl,
   getByLanguage,
   getCroppedImageUrl,
@@ -31,6 +32,7 @@ import {
   getOfffcourseUrl,
   getSlotReplayUrl,
   isEventFull,
+  isEventLight,
   isEventLive,
   isEventPast,
   isEventRegistrationOpen,
@@ -46,6 +48,7 @@ import { TimeCounter } from "../../common/components/TimeCounter";
 import { Fetching } from "./Fetching";
 import { I18N } from "../../i18n";
 import { EventMask } from "../Masks/EventMask/EventMask";
+import WithoutCertificate from "../Icons/WithoutCertificate";
 
 const REPLAY_UPTIME = 3;
 const S3_FOLDER_AWS_URL_WITHOUT_ENV =
@@ -73,6 +76,7 @@ export function EventLayout({
   Link = "a",
   host,
   onBeforeJoinWebinar,
+  isCertificateNotIncluded = false,
 }) {
   const [hovered, setHovered] = useState(false);
   const [isActionProcessing, setIsActionProcessing] = useState(false);
@@ -132,6 +136,7 @@ export function EventLayout({
   const isPast = isEventPast(event);
   const isLive = isEventLive(event);
   const isFull = isEventFull(event);
+  const isLight = isEventLight(event);
   const isSoldOut = isSoldOutEvent(event);
   const isFree = isFreeEvent(event);
   const hasUniqueSlot = +event.slotsCount === 1;
@@ -153,7 +158,7 @@ export function EventLayout({
     ? prepareS3ResourceUrl(s3FolderUrl, banner)
     : `${S3_FOLDER_AWS_URL_WITHOUT_ENV}/image_2024_01_08T20_38_38_750Z.png`;
   const nbMinutes = getEventNbMinutes(event);
-  const isFullWatch = event?.fullWatch ?? 0;
+  const isFullWatch = Number(event?.fullWatch ?? 0);
   const playProgress = playProgressTime(
     event?.playProgress,
     nbMinutes,
@@ -210,12 +215,35 @@ export function EventLayout({
     +event.slotsCount === 1 && event.slotReplayUrls
       ? getSlotReplayUrl(event.slotReplayUrls, language)
       : undefined;
-  const webinarLink = replayLink
+  let webinarLink = replayLink
     ? replayLink +
       (event.selectedDate
         ? `&selectedDate=${event.selectedDate}&eventDate=${event.startDateTime}`
         : "")
     : undefined;
+  if (webinarLink) {
+    let param = [`token=${token}`];
+    if (userId) {
+      param = [`token=${token}`, `userId=${userId}`];
+    }
+    webinarLink += webinarLink.includes("?") ? "&" : "?";
+    webinarLink += `params=${encodeURIComponent(encryptAES(param.join()))}`;
+  }
+
+  const renderEventCertificate = () => {
+    if (!isCertificateNotIncluded) {
+      return null;
+    }
+    return (
+      <li style={{ marginBottom: "6px" }}>
+        <WithoutCertificate
+          style={{ width: 16, height: 16, fill: "#29394D" }}
+          strokeline="#FFF"
+        />
+        <span>{I18N[language].certificateNotIncluded}</span>
+      </li>
+    );
+  };
 
   const getModeProps = () => {
     if (isPast) {
@@ -337,6 +365,14 @@ export function EventLayout({
       };
     }
 
+    if (isPast && isLight) {
+      return {
+        label: I18N[language]["details"],
+        theme: "default",
+        link: eventLink,
+      };
+    }
+
     if (
       isRegistrationOpen &&
       !isSoldOut &&
@@ -375,7 +411,9 @@ export function EventLayout({
         </div>
       );
     }
-
+    if (isPast && isLight) {
+      return null;
+    }
     if (price) {
       return (
         <div className={styles.price}>
@@ -515,6 +553,7 @@ export function EventLayout({
                 </span>
               </li>
             )}
+            {renderEventCertificate()}
           </ul>
         </div>
         <div className={styles.actions}>

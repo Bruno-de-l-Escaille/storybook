@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import styles from "./EventSlide.module.scss";
 import Slide from "../Common/Slide/Slide";
 import { getEventSideConfig } from "./services";
-import { getByLanguage, prepareS3ResourceUrl } from "../../../utils/common";
+import {
+  getByLanguage,
+  isEmpty,
+  prepareS3ResourceUrl,
+} from "../../../utils/common";
 import {
   filterEventSpeakers,
   formatDateFromTo,
@@ -10,6 +14,7 @@ import {
   getOfffcourseUrl,
   getRegisterButtonTitle,
   isEventFull,
+  isEventLight,
   isEventLive,
   isEventPast,
   isEventReplayable,
@@ -22,11 +27,13 @@ import Price from "../Common/Price/Price";
 import ActionButton from "../Common/ActionButton/ActionButton";
 import IconReplay from "../../../components/Icons/IconReplay";
 import IconCalendar from "../../../components/Icons/IconCalendar2";
+import Presential2Icon from "../../../components/Icons/IconPresential2";
 import { Fetching } from "../Common/Slide/Fetching";
 import { SpeakersSlide } from "../Common/SpeakersSlide/SpeakersSlide";
 import classNames from "classnames";
 import moment from "moment";
 import { EventMask } from "../../Masks/EventMask/EventMask";
+import WithoutCertificate from "../../Icons/WithoutCertificate";
 
 export const EventSlide = ({
   event,
@@ -44,6 +51,8 @@ export const EventSlide = ({
   isOFFFcourse,
   token,
   host,
+  isCertificateNotIncluded = false,
+  handleRegistration,
 }) => {
   const [hovered, setHovered] = useState(false);
   const [showAddTags, setShowAddTags] = useState(false);
@@ -66,7 +75,9 @@ export const EventSlide = ({
   const isFull = isEventFull(event);
   const isFree = isFreeEvent(event);
   const isLive = isEventLive(event);
+  const isLight = isEventLight(event);
 
+  const place = getByLanguage(event.eventPlace, "place", language);
   const showProgram = isEventStageOpen(event, "showProgram");
 
   const { label, secondaryBanner } = getEventSideConfig(event, language);
@@ -139,16 +150,43 @@ export const EventSlide = ({
       : I18N[language].hybrid;
 
     return (
-      <li>
-        <div>
-          <IconCalendar className={classNames(styles.icon, "m-r-xs")} />
-        </div>
-        <div>
-          <strong>
-            {modeLabel} {" : "}
-          </strong>
-          {formatDateFromTo(startDateTime, endDateTime, language)}
-        </div>
+      <>
+        <li>
+          <div>
+            <IconCalendar className={classNames(styles.icon, "m-r-xs")} />
+          </div>
+          <div>
+            <strong>
+              {modeLabel} {" : "}
+            </strong>
+            {formatDateFromTo(startDateTime, endDateTime, language)}
+          </div>
+        </li>
+        {Boolean(!isEmpty(place) && !isVirtual && isLight) && (
+          <li>
+            <div>
+              <Presential2Icon className={classNames(styles.icon, "m-r-xs")} />
+            </div>
+            <div>
+              <span>{place}</span>
+            </div>
+          </li>
+        )}
+      </>
+    );
+  };
+
+  const renderEventCertificate = () => {
+    if (!isCertificateNotIncluded) {
+      return null;
+    }
+    return (
+      <li style={{ marginBottom: "6px" }}>
+        <WithoutCertificate
+          style={{ width: 16, height: 16, fill: "#29394D" }}
+          className={classNames(styles.icon, "m-r-xs")}
+        />
+        <span>{I18N[language].certificateNotIncluded}</span>
       </li>
     );
   };
@@ -195,7 +233,10 @@ export const EventSlide = ({
           />
           <Slide.Body className={styles.slideBody}>
             {showOrateurs && <SpeakersSlide speakers={speakers} />}
-            <ul className={styles.details}>{renderEventMode()}</ul>
+            <ul className={styles.details}>
+              {renderEventMode()}
+              {renderEventCertificate()}
+            </ul>
           </Slide.Body>
           <Slide.Footer className={styles.slideFooter}>
             {showPrice && (
@@ -214,6 +255,8 @@ export const EventSlide = ({
                 link={eventReceptionUrl}
                 isSmall={isSmall}
                 Link={Link}
+                isLightRegistration={isFree && isLight && !isUserRegistered}
+                handleRegistration={handleRegistration}
                 {...(isSoldOut || isUserRegistered
                   ? {
                       name: !isSmall
@@ -263,6 +306,17 @@ export const EventSlide = ({
           className={styles.eventSlide}
           isFetching={isFetching}
           isSmall={isSmall}
+          flag={
+            isSoldOut && !isUserRegistered
+              ? "sold-out"
+              : event.isIncludedPremium === 1
+              ? "premium"
+              : undefined
+          }
+          language={language}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          data-id={event.id}
         >
           <Slide.Header
             label={label}
@@ -281,6 +335,7 @@ export const EventSlide = ({
               style={{ fontSize: !isSmall ? "14px" : "12px" }}
             >
               {renderEventMode()}
+              {renderEventCertificate()}
             </ul>
           </Slide.Body>
           <Slide.Footer className={styles.slideFooter}>
@@ -300,6 +355,8 @@ export const EventSlide = ({
                 link={eventReceptionUrl}
                 isSmall={isSmall}
                 Link={Link}
+                isLightRegistration={isFree && isLight && !isUserRegistered}
+                handleRegistration={handleRegistration}
                 {...(isSoldOut || isUserRegistered
                   ? {
                       name: !isSmall

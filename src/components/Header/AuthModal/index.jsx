@@ -11,7 +11,7 @@ import ResetPassword from "./ResetPassword";
 
 // Modal.setAppElement("#modals");
 
-const AuthModal = ({ env, lng, app }) => {
+const AuthModal = ({ env, lng, app, hideRegister = false }) => {
   const [showModal, setShowModal] = useState(false);
   const [view, setView] = useState("LOGIN"); // LOGIN | REGISTER | RESET_PASSWORD
   const [email, setEmail] = useState("");
@@ -148,6 +148,7 @@ const AuthModal = ({ env, lng, app }) => {
             }}
             showForgotStep={showForgotStep}
             showForgotCheckEmail={showForgotCheckEmail}
+            hideRegister={hideRegister}
           />
         )}
         {view === "REGISTER" && (

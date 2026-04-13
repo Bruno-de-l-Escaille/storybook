@@ -4,6 +4,7 @@ import moment from "moment";
 import "moment/locale/fr";
 import "moment/locale/nl";
 
+import { ReactComponent as RepeatIcon } from "./assets/repeat.svg";
 import styles from "./Article.module.scss";
 import { AuthorAvatar } from "../Avatar/AuthorAvatar";
 import { Fetching } from "./Fetching";
@@ -921,8 +922,9 @@ export const Article = ({
                 <div
                   className={styles.fff_lib}
                   style={{ background: `${category.colorCode}` }}
+                  title="oFFFcourse library"
                 >
-                  {I18N[language].offfcourse_library}
+                  <RepeatIcon width="16" />
                 </div>
               )}
             </div>
@@ -975,8 +977,9 @@ export const Article = ({
                 <div
                   className={styles.fff_lib}
                   style={{ background: `${category.colorCode}` }}
+                  title="oFFFcourse library"
                 >
-                  {I18N[language].offfcourse_library}
+                  <RepeatIcon width="16" />
                 </div>
               )}
             </div>
@@ -1137,8 +1140,9 @@ export const Article = ({
                 <div
                   className={styles.fff_lib}
                   style={{ background: `${category.colorCode}` }}
+                  title="oFFFcourse library"
                 >
-                  {I18N[language].offfcourse_library}
+                  <RepeatIcon width="16" />
                 </div>
               )}
             </div>
@@ -1235,8 +1239,9 @@ export const Article = ({
                 <div
                   className={styles.fff_lib}
                   style={{ background: `${category.colorCode}` }}
+                  title="oFFFcourse library"
                 >
-                  {I18N[language].offfcourse_library}
+                  <RepeatIcon width="16" />
                 </div>
               )}
             </div>
@@ -1348,8 +1353,9 @@ export const Article = ({
                   <div
                     className={styles.fff_lib}
                     style={{ background: `${category.colorCode}` }}
+                    title="oFFFcourse library"
                   >
-                    {I18N[language].offfcourse_library}
+                    <RepeatIcon width="16" />
                   </div>
                 )}
               </div>

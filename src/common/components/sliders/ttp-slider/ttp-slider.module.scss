@@ -1,0 +1,475 @@
+@import '~foundation-sites/scss/util/util';
+
+/* stylelint-disable no-descending-specificity */
+// TODO
+.ttp_slider,
+.ttp_slider_1 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &:hover {
+    .header .titles_title {
+      .seeAllButton {
+        visibility: visible;
+      }
+    }
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .titleContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        cursor: pointer;
+
+        .titles_title .seeAllButton {
+          color: #2c394b;
+        }
+
+        svg {
+          path {
+            fill: #2c394b;
+          }
+        }
+
+        & > div:nth-child(2) {
+          color: #2c394b;
+        }
+      }
+    }
+
+    .titles {
+      display: flex;
+      flex-direction: column;
+
+      &_title {
+        color: #29394d;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+
+        .seeAllButton {
+          visibility: hidden;
+          display: flex;
+          text-transform: lowercase;
+          align-items: center;
+          gap: 6px;
+          font-size: 16px;
+          color: #6d7f92;
+          font-weight: 500;
+          font-style: normal;
+          min-width: 11ch;
+
+          & > div::first-letter {
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+
+      .dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        span {
+          width: 6px;
+          height: 6px;
+          background: #b2bcc6;
+          border-radius: 50%;
+          cursor: pointer;
+          transition: 0.3s all ease;
+
+          &.active {
+            background: #18a0fb;
+            width: 11px;
+            border-radius: 10px;
+          }
+
+          &:not(:last-child) {
+            margin-right: 0.5rem;
+          }
+
+          &:hover {
+            border: 1px solid #2495e1;
+          }
+        }
+
+        &.purple {
+          span {
+            &.active {
+              background: #6f6cec;
+            }
+
+            &:hover {
+              border: 1px solid #7270eb;
+            }
+          }
+        }
+
+        &.orange {
+          span {
+            &.active {
+              background: #f47f4d;
+            }
+
+            &:hover {
+              border: 1px solid #f47f4d;
+            }
+          }
+        }
+
+        &.greenTeal {
+          span {
+            &.active {
+              background: #14b7ad;
+            }
+
+            &:hover {
+              border: 1px solid #14b7ad;
+            }
+          }
+        }
+
+        &.redOrange {
+          span {
+            &.active {
+              background: #cc1c4d;
+            }
+
+            &:hover {
+              border: 1px solid #cc1c4d;
+            }
+          }
+        }
+      }
+
+      .reverse {
+        transform: rotate(-180deg);
+      }
+
+      .button {
+        width: 44px;
+        height: 44px;
+        background: #f1f2f4;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #d8dde2;
+        box-shadow: 0 4px 10px #29394D1A;
+
+        &:hover {
+          box-shadow: 0 2px 5px #29394D1A;
+
+          svg {
+            fill: #6d7f92;
+          }
+        }
+      }
+    }
+  }
+
+  .button.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    box-shadow: none;
+
+    svg path {
+      fill: #919496;
+    }
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      gap: 10px;
+      width: 100%;
+
+      .dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        span {
+          width: 10px;
+          height: 10px;
+          background: #b2bcc6;
+          border-radius: 50%;
+          cursor: pointer;
+          transition: 0.3s all ease;
+
+          &.active {
+            background: #18a0fb;
+            width: 20px;
+            border-radius: 10px;
+          }
+
+          &:not(:last-child) {
+            margin-right: 0.5rem;
+          }
+
+          &:hover {
+            border: 1px solid #2495e1;
+          }
+        }
+
+        &.purple {
+          span {
+            &.active {
+              background: #6f6cec;
+            }
+
+            &:hover {
+              border: 1px solid #7270eb;
+            }
+          }
+        }
+
+        &.orange {
+          span {
+            &.active {
+              background: #f47f4d;
+            }
+
+            &:hover {
+              border: 1px solid #f47f4d;
+            }
+          }
+        }
+
+        &.greenTeal {
+          span {
+            &.active {
+              background: #14b7ad;
+            }
+
+            &:hover {
+              border: 1px solid #14b7ad;
+            }
+          }
+        }
+
+        &.redOrange {
+          span {
+            &.active {
+              background: #cc1c4d;
+            }
+
+            &:hover {
+              border: 1px solid #cc1c4d;
+            }
+          }
+        }
+      }
+
+      .button {
+        width: 44px;
+        height: 44px;
+        background: #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #d8dde2;
+        box-shadow: 0 4px 10px #29394D1A;
+
+        &:hover {
+          box-shadow: 0 2px 5px #29394D1A;
+
+          svg {
+            fill: #6d7f92;
+          }
+        }
+      }
+    }
+  }
+
+  .seeMoreButton {
+    position: relative;
+
+    button {
+      all: unset;
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      padding: 10px 20px;
+      color: #29394d;
+      background-color: white;
+      border-radius: 20px;
+      gap: 10px;
+      box-shadow: 0 4px 10px #29394D1A;
+
+      & > span {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        text-transform: uppercase;
+      }
+
+      & > svg {
+        fill: currentcolor;
+      }
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: calc(50% - 80px);
+      height: 1px;
+      background: #29394d55;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: calc(50% - 80px);
+      height: 1px;
+      background: #29394d55;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+@include breakpoint(small only) {
+  .ttp_slider_1 {
+    & > div:nth-child(2) {
+      max-height: unset !important;
+    }
+
+    .header {
+      .titleContainer {
+        width: 100%;
+      }
+
+      .titles {
+        width: 100%;
+
+        &_title {
+          justify-content: space-between;
+
+          .seeAllButton {
+            visibility: visible;
+            justify-content: end;
+          }
+        }
+      }
+    }
+
+    .swiperWrapper {
+      flex-direction: column;
+      gap: 20px;
+      align-items: unset;
+
+      & > div > div {
+        width: calc(100vw - 20px) !important;
+
+        & > div > div {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .ttp_slider {
+    .swiperWrapper {
+      & > div {
+        & > div > div {
+          width: 100%;
+        }
+      }
+
+      & ~ div {
+        position: relative;
+        margin-top: 30px;
+      }
+
+      &.purple {
+        & ~ div > span {
+          background: #6f6cec;
+        }
+      }
+
+      &.orange {
+        & ~ div > span {
+          background: #f47f4d;
+        }
+      }
+
+      &.greenTeal {
+        & ~ div > span {
+          background: #14b7ad;
+        }
+      }
+
+      &.redOrange {
+        & ~ div > span {
+          background: #cc1c4d;
+        }
+      }
+    }
+  }
+}
+
+@include breakpoint(medium only) {
+  .ttp_slider_1 {
+    .header {
+      .titles {
+        &_title {
+          .seeAllButton {
+            visibility: visible;
+          }
+        }
+      }
+    }
+
+    & > div:nth-child(2) {
+      max-height: unset !important;
+    }
+
+    .swiperWrapper {
+      & > div > div {
+        width: 344px !important;
+
+        & > div > div {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,266 @@
+$blue-color: #18a0fb;
+$blue-light-2-color: "#c7e8fe";
+$blue-light-3-color: "#f3faff";
+$orange-color: #f47f4d;
+$orange-light-2-color: #ffe1cc;
+$orange-light-3-color: #fcfaf3;
+$red-orange-color: #fb1e5b;
+$red-orange-light-2-color: #ffe2dc;
+$red-orange-light-3-color: #fff1f0;
+$purple-color: #6f6cec;
+$purple-light-2-color: #d7cfff;
+$purple-light-3-color: #f4f2ff;
+$green-teal-color: #14b7ad;
+$green-teal-light-color: #6fd3c9;
+$green-teal-light-2-color: #ecfcfb;
+$green-jewel-color: #58e60c;
+$green-jewel-light-color: #e9ffde;
+$green-jewel-light-2-color: #fff;
+$main-color: var(--primary-color);
+$secondary-color: var(--secondary-color);
+$bg-color: var(--bg-color);
+$text-color: var(--text-color, #29394d);
+$gris-color: var(--gris-color, #f1f2f4);
+
+.guestAddress {
+  .title {
+    font-weight: 500;
+    font-size: 16px;
+    color: $text-color;
+    margin-bottom: 0.5rem;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    position: relative;
+
+    .title {
+      margin-bottom: 0;
+    }
+
+    .navTo {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      color: #6d7f92;
+      text-align: right;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 140%;
+
+      span {
+        transition: 0.3s all ease;
+      }
+
+      &:hover {
+        color: #3c4e64;
+
+        span {
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      background: var(--dark-3, #6d7f92);
+      height: 0.5px;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  .inputLabel {
+    width: 150px;
+    flex: unset;
+    text-align: left;
+  }
+
+  .useBillingAddress {
+    position: relative;
+    padding: 12px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      background: #6d7f92;
+      height: 0.5px;
+      bottom: 0;
+      left: 0;
+    }
+
+    & > label > span:last-child {
+      color: $text-color;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 140%; /* 16.8px */
+    }
+  }
+}
+
+.address {
+  --primary-color: #{$blue-color};
+  --secondary-color: #{$blue-light-2-color};
+  --bg-color: #{$blue-light-3-color};
+
+  &.orange {
+    --primary-color: #{$orange-color};
+    --secondary-color: #{$orange-light-2-color};
+    --bg-color: #{$orange-light-3-color};
+  }
+
+  &.redOrange {
+    --primary-color: #{$red-orange-color};
+    --secondary-color: #{$red-orange-light-2-color};
+    --bg-color: #{$red-orange-light-3-color};
+  }
+
+  &.purple {
+    --primary-color: #{$purple-color};
+    --secondary-color: #{$purple-light-2-color};
+    --bg-color: #{$purple-light-3-color};
+  }
+
+  &.greenTeal {
+    --primary-color: #{$green-teal-color};
+    --secondary-color: #{$green-teal-light-color};
+    --bg-color: #{$green-teal-light-2-color};
+  }
+
+  &.greenJewel {
+    --primary-color: #{$green-jewel-color};
+    --secondary-color: #{$green-jewel-light-color};
+    --bg-color: #{$green-jewel-light-2-color};
+    --text-color: #103d47;
+    --gris-color: #f6f8f5;
+  }
+
+  background: $gris-color;
+  border: 0.5px solid #b2bcc6;
+  border-radius: 12px;
+  padding: 10px;
+  transition: 0.3s all ease;
+  min-height: 80px;
+
+  .switchWrapper {
+    font-weight: normal;
+    font-size: 12px;
+    color: #6d7f92;
+  }
+
+  &.active {
+    background: $secondary-color;
+    border: 0.5px solid $main-color;
+
+    .switchWrapper {
+      color: $main-color;
+    }
+  }
+
+  .data {
+    color: $text-color;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+  }
+
+  .actions {
+    .termsAndConditions {
+      display: flex;
+    }
+    & > * {
+      cursor: pointer;
+    }
+  }
+}
+
+.billingOptions {
+  --color-text: #29394d;
+  --color-primary: #18a0fb;
+
+  margin: 8px 0;
+
+  .peppolInfo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 8px;
+
+    .infoIcon {
+      display: grid;
+      place-items: center;
+
+      svg {
+        stroke: var(--color-primary);
+        stroke-width: 0.1;
+      }
+    }
+
+    .infoText {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 140%;
+    }
+  }
+
+  .peppolCheckbox {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+
+    .checkboxIcon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 19px;
+      height: 19px;
+      margin: 0 0.5px;
+      border: 2px solid var(--color-primary);
+      border-radius: 4px;
+      background: #fff;
+      transition: all 0.2s ease;
+
+      svg {
+        opacity: 0;
+        transform: scale(0);
+        transition: all 0.2s ease;
+
+        path {
+          stroke: white;
+          stroke-width: 2;
+        }
+      }
+    }
+
+    .checkboxText {
+      font-size: 12px;
+      color: var(--color-text);
+      line-height: 140%;
+      font-weight: 400;
+    }
+
+    &.checked {
+      .checkboxIcon {
+        background: var(--color-primary);
+        border-color: var(--color-primary);
+
+        svg {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    }
+  }
+}

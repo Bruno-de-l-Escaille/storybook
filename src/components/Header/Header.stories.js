@@ -69,6 +69,9 @@ const rightIcons = {
     url: "https://blog.tamtam.pro/fr",
     clicked: false,
   },
+  gallery: {
+    activated: true,
+  },
 };
 
 const portalRightIcons = {
@@ -555,6 +558,18 @@ export const HeaderLoggedOutOTC = () => (
     onLanguageChange={(langue) => alert(langue)}
     isOtcAuth={boolean("isOtcAuth", true)}
     apiBaseUrl={text("apiBaseUrl", "http://localhost:8081")}
+  />
+);
+
+export const HeaderLoggedOutOTCHideRegister = () => (
+  <Header
+    app={object("app", App)}
+    auth={object("auth", authLogout)}
+    env={text("env", "local")}
+    lng={select("language", ["fr", "nl", "en"], "fr")}
+    onLanguageChange={(langue) => alert(langue)}
+    isOtcAuth={boolean("isOtcAuth", true)}
+    hideRegister={boolean("hideRegister", true)}
   />
 );
 

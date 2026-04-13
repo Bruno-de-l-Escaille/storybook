@@ -138,80 +138,6 @@ export const getTokenExpirationTime = (decodedToken) => {
 };
 
 /**
- * Check if JWT token is valid (not expired and properly formatted)
- * @param {string} jwt - JWT token string
- * @returns {boolean} True if token is valid
- */
-export const isJWTValid = (jwt) => {
-  try {
-    const decodedToken = decodeJWT(jwt);
-    return !isTokenExpired(decodedToken);
-  } catch (error) {
-    return false;
-  }
-};
-
-/**
- * Normalize authentication data to a consistent format
- * @param {object} processedData - Processed token data (from JWT or legacy format)
- * @param {string} env - Environment (e.g., 'dev', 'prod')
- * @param {object} app - Application configuration object
- * @returns {object} Normalized authentication data
- */
-export const normalizeAuthData = (processedData, env, app) => {
-  // Check if the data comes from a JWT with embedded apiTtp_token
-  if (processedData.apiTtpToken) {
-    const { userInfo, apiTtpToken } = processedData;
-    console.log(
-      "Processing JWT token with embedded apiTtp_token",
-      processedData.token
-    );
-    return {
-      id: userInfo.userId,
-      token: apiTtpToken.access_token,
-      expiresIn: apiTtpToken.expires_in,
-      createdAt: userInfo.issuedAt,
-      scope: apiTtpToken.scope,
-      extra: {
-        lang: userInfo.language || "en", // Default to "en" if not provided
-        env,
-      },
-      email: userInfo.email,
-      phone: userInfo.phone,
-      jti: userInfo.jwtId,
-      exp: userInfo.expiresAt,
-      jwt: processedData.token, // Include the JWT token itself
-    };
-  } else {
-    // Legacy opaque token format
-    const { sha256 } = require("js-sha256");
-    const salt = "Aqwxsz32$";
-    const time = Math.floor(Date.now() / 1000);
-
-    return {
-      id: processedData.data.user.id,
-      token: processedData.token.access_token,
-      expiresIn: processedData.token.expires_in,
-      createdAt: processedData.token.createdAt,
-      scope: processedData.token.scope,
-      extra: {
-        lang: processedData.data.user.language || "en",
-        env,
-      },
-      email: processedData.data.user.mainEmail,
-      key: sha256(
-        processedData.data.user.email +
-          time +
-          processedData.token.access_token +
-          salt
-      ),
-      time,
-      app: app.authAppName,
-    };
-  }
-};
-
-/**
  * Process JWT token and extract all relevant information
  * @param {string} token - JWT token string
  * @returns {object} Complete token data object
@@ -237,142 +163,346 @@ export const processJWTToken = (token) => {
   }
 };
 
-// Utility functions for slug generation
-export const toSlug = (text) => {
-  if (!text) return "";
-  return text
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-};
+// Error Mapping Utility Functions
 
-// Cookie utilities
-export const setCookie = (name, value, expires, path = "/", domain = null) => {
-  let cookieString = `${name}=${encodeURIComponent(value)}`;
-
-  if (expires) {
-    cookieString += `; expires=${expires.toUTCString()}`;
+/**
+ * Maps backend error messages to user-friendly error keys for i18n
+ * @param {string} errorMessage - Raw error message from backend
+ * @param {string} context - Context where the error occurred (otp, auth, validation, etc.)
+ * @returns {string} Error key for i18n lookup
+ */
+export const mapBackendErrorToI18nKey = (errorMessage, context = "general") => {
+  if (!errorMessage || typeof errorMessage !== "string") {
+    return "auth.errors.system.server_error";
   }
 
-  cookieString += `; path=${path}`;
+  const lowerErrorMessage = errorMessage.toLowerCase();
 
-  if (domain) {
-    cookieString += `; domain=${domain}`;
+  // OTP-related errors
+  if (context === "otp" || lowerErrorMessage.includes("otp")) {
+    if (
+      lowerErrorMessage.includes("invalid otp") ||
+      (lowerErrorMessage.includes("bad request") &&
+        lowerErrorMessage.includes("otp"))
+    ) {
+      return "auth.errors.otp.invalid";
+    }
+    if (
+      lowerErrorMessage.includes("expired") ||
+      lowerErrorMessage.includes("expire")
+    ) {
+      return "auth.errors.otp.expired";
+    }
+    if (
+      lowerErrorMessage.includes("missing") ||
+      lowerErrorMessage.includes("required")
+    ) {
+      return "auth.errors.otp.missing";
+    }
+    return "auth.errors.otp.network_error";
   }
 
-  document.cookie = cookieString;
-};
-
-export const getCookie = (name) => {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) {
-    return decodeURIComponent(parts.pop().split(";").shift());
-  }
-  return null;
-};
-
-// Navigation community utilities
-export const getUserCurrentNavCommunity = (userData, currentCommunityId) => {
-  if (!userData || !userData.communities) return null;
-
-  const community = userData.communities.find(
-    (c) =>
-      c.id === currentCommunityId ||
-      c.ttp_organization_id === currentCommunityId
-  );
-
-  if (community) {
-    return {
-      id: community.ttp_organization_id || community.id,
-      name: community.short_name || community.name,
-      url:
-        community.url ||
-        `/${toSlug(community.official_name || community.name)}`,
-      uuid: community.uuid,
-      official_name: community.official_name || community.name,
-      blogPreferences: community.blogPreferences || {},
-    };
-  }
-
-  // Return first community if no specific match
-  if (userData.communities.length > 0) {
-    const firstCommunity = userData.communities[0];
-    return {
-      id: firstCommunity.ttp_organization_id || firstCommunity.id,
-      name: firstCommunity.short_name || firstCommunity.name,
-      url:
-        firstCommunity.url ||
-        `/${toSlug(firstCommunity.official_name || firstCommunity.name)}`,
-      uuid: firstCommunity.uuid,
-      official_name: firstCommunity.official_name || firstCommunity.name,
-      blogPreferences: firstCommunity.blogPreferences || {},
-    };
+  // Authentication errors
+  if (
+    context === "auth" ||
+    lowerErrorMessage.includes("credential") ||
+    lowerErrorMessage.includes("password") ||
+    lowerErrorMessage.includes("login")
+  ) {
+    if (
+      lowerErrorMessage.includes("invalid credentials") ||
+      lowerErrorMessage.includes("incorrect") ||
+      lowerErrorMessage.includes("wrong")
+    ) {
+      return "auth.errors.authentication.invalid_credentials";
+    }
+    if (
+      lowerErrorMessage.includes("not found") ||
+      lowerErrorMessage.includes("user not found")
+    ) {
+      return "auth.errors.authentication.account_not_found";
+    }
+    if (
+      lowerErrorMessage.includes("account exists with password") ||
+      lowerErrorMessage.includes("already exists")
+    ) {
+      return "auth.errors.authentication.account_exists_password";
+    }
+    if (
+      lowerErrorMessage.includes("locked") ||
+      lowerErrorMessage.includes("suspended")
+    ) {
+      return "auth.errors.authentication.account_locked";
+    }
+    if (
+      lowerErrorMessage.includes("session") ||
+      lowerErrorMessage.includes("token")
+    ) {
+      return "auth.errors.authentication.session_expired";
+    }
+    return "auth.errors.authentication.invalid_credentials";
   }
 
-  return null;
+  // Validation errors
+  if (
+    context === "validation" ||
+    lowerErrorMessage.includes("format") ||
+    lowerErrorMessage.includes("valid")
+  ) {
+    if (
+      lowerErrorMessage.includes("email") &&
+      (lowerErrorMessage.includes("format") ||
+        lowerErrorMessage.includes("invalid"))
+    ) {
+      if (lowerErrorMessage.includes("domain")) {
+        return "auth.errors.validation.email_domain_invalid";
+      }
+      return "auth.errors.validation.email_format";
+    }
+    if (
+      lowerErrorMessage.includes("phone") &&
+      (lowerErrorMessage.includes("format") ||
+        lowerErrorMessage.includes("invalid"))
+    ) {
+      if (lowerErrorMessage.includes("length")) {
+        return "auth.errors.validation.phone_length";
+      }
+      return "auth.errors.validation.phone_format";
+    }
+    if (
+      lowerErrorMessage.includes("required") ||
+      lowerErrorMessage.includes("missing")
+    ) {
+      if (lowerErrorMessage.includes("identifier")) {
+        return "auth.errors.validation.identifier_required";
+      }
+      if (lowerErrorMessage.includes("password")) {
+        return "auth.errors.validation.password_required";
+      }
+      if (
+        lowerErrorMessage.includes("otp") ||
+        lowerErrorMessage.includes("code")
+      ) {
+        return "auth.errors.validation.otp_required";
+      }
+    }
+    return "auth.errors.validation.email_format";
+  }
+
+  // Password errors
+  if (context === "password" || lowerErrorMessage.includes("password")) {
+    if (
+      lowerErrorMessage.includes("too short") ||
+      lowerErrorMessage.includes("8 characters")
+    ) {
+      return "auth.errors.password.too_short";
+    }
+    if (
+      lowerErrorMessage.includes("digit") ||
+      lowerErrorMessage.includes("number")
+    ) {
+      return "auth.errors.password.missing_digit";
+    }
+    if (lowerErrorMessage.includes("special character")) {
+      return "auth.errors.password.missing_special";
+    }
+    if (lowerErrorMessage.includes("uppercase")) {
+      return "auth.errors.password.missing_uppercase";
+    }
+    if (lowerErrorMessage.includes("lowercase")) {
+      return "auth.errors.password.missing_lowercase";
+    }
+    if (
+      lowerErrorMessage.includes("match") ||
+      lowerErrorMessage.includes("same")
+    ) {
+      return "auth.errors.password.mismatch";
+    }
+    if (
+      lowerErrorMessage.includes("old password") ||
+      lowerErrorMessage.includes("current password")
+    ) {
+      return "auth.errors.password.incorrect_old";
+    }
+    if (
+      lowerErrorMessage.includes("already has") ||
+      lowerErrorMessage.includes("already set")
+    ) {
+      return "auth.errors.password.already_set";
+    }
+    return "auth.errors.password.too_short";
+  }
+
+  // Account errors
+  if (
+    lowerErrorMessage.includes("account") ||
+    lowerErrorMessage.includes("user")
+  ) {
+    if (lowerErrorMessage.includes("not found")) {
+      return "auth.errors.account.not_found";
+    }
+    if (
+      lowerErrorMessage.includes("already exists") ||
+      lowerErrorMessage.includes("exists")
+    ) {
+      return "auth.errors.account.already_exists";
+    }
+    if (
+      lowerErrorMessage.includes("in use") ||
+      lowerErrorMessage.includes("taken")
+    ) {
+      return "auth.errors.account.identifier_in_use";
+    }
+    if (
+      lowerErrorMessage.includes("mismatch") ||
+      lowerErrorMessage.includes("same type")
+    ) {
+      return "auth.errors.account.multiple_identifiers_mismatch";
+    }
+    return "auth.errors.account.not_found";
+  }
+
+  // System errors
+  if (
+    lowerErrorMessage.includes("network") ||
+    lowerErrorMessage.includes("connection")
+  ) {
+    return "auth.errors.system.network_error";
+  }
+  if (
+    lowerErrorMessage.includes("server") ||
+    lowerErrorMessage.includes("500") ||
+    lowerErrorMessage.includes("503")
+  ) {
+    return "auth.errors.system.server_error";
+  }
+  if (
+    lowerErrorMessage.includes("send") &&
+    (lowerErrorMessage.includes("otp") || lowerErrorMessage.includes("code"))
+  ) {
+    return "auth.errors.system.otp_send_failed";
+  }
+  if (
+    lowerErrorMessage.includes("token") ||
+    lowerErrorMessage.includes("jwt")
+  ) {
+    return "auth.errors.system.token_generation_failed";
+  }
+  if (
+    lowerErrorMessage.includes("unavailable") ||
+    lowerErrorMessage.includes("maintenance")
+  ) {
+    return "auth.errors.system.service_unavailable";
+  }
+
+  // Default fallback
+  return "auth.errors.system.server_error";
 };
 
 /**
- * Create complete auth state object matching the required structure
- * @param {object} authData - Raw authentication data
- * @param {object} userData - User profile data
- * @param {object} preferences - Organization preferences
- * @param {string} env - Environment
- * @returns {object} Complete auth state object
+ * Processes an error and returns a user-friendly message
+ * @param {Error|string} error - Error object or error message
+ * @param {object} i18n - Internationalization object
+ * @param {string} language - Current language (en, fr, nl)
+ * @param {string} context - Context where the error occurred
+ * @returns {string} User-friendly error message
  */
-export const createCompleteAuthState = (
-  authData,
-  userData,
-  preferences,
-  env
+export const processErrorMessage = (
+  error,
+  i18n,
+  language = "en",
+  context = "general"
 ) => {
-  const navCommunity = getUserCurrentNavCommunity(
-    userData,
-    userData.selectedOrganization?.ttp_organization_id
-  );
+  let errorMessage = "";
 
-  return {
-    blogPreferences: preferences?.blogPreferences || null,
-    createdAt: authData.createdAt || null,
-    currentCommunity: navCommunity?.id || 4,
-    email: userData.mainEmail || authData.email,
-    error: null,
-    exp: authData.exp,
-    expiresIn: authData.expiresIn,
-    extra: authData.extra,
-    fetched: true,
-    fetching: false,
-    isSubscribed: false,
-    jti: authData.jti,
-    jwtToken: authData.jwt,
-    refreshToken: authData.refreshToken,
-    navCommunity,
-    phone: userData.phone || authData.phone,
-    saving: false,
-    savingError: null,
-    scope: authData.scope,
-    stoken: "",
-    token: authData.token,
-    ttpOrganizationId: navCommunity?.id || null,
-    ttpUserId: userData.id || authData.id,
-    user: {
-      id: userData.id,
-      firstName: userData.firstName,
-      lastName: userData.lastName,
-      mainEmail: userData.mainEmail,
-      phone: userData.phone,
-      language: userData.language,
-      communities: userData.communities || [],
-      roles: userData.roles || [],
-      organizations: userData.organizations || [],
-      selectedOrganization: userData.selectedOrganization,
-      pages: userData.pages || [],
-      socialNetworks: userData.socialNetworks || [],
-      contactSocialNetworks: userData.contactSocialNetworks || [],
-      groups: userData.groups || [],
-    },
-  };
+  if (error instanceof Error) {
+    errorMessage = error.message;
+  } else if (typeof error === "string") {
+    errorMessage = error;
+  } else if (error && error.error) {
+    errorMessage = error.error;
+  } else {
+    errorMessage = "Unknown error occurred";
+  }
+
+  const errorKey = mapBackendErrorToI18nKey(errorMessage, context);
+
+  // Navigate to the nested error message in i18n
+  const keys = errorKey.split(".");
+  let message = i18n[language];
+
+  for (const key of keys) {
+    if (message && message[key]) {
+      message = message[key];
+    } else {
+      // Fallback to generic error message if key not found
+      return i18n[language]?.auth?.error_occurred || "An error occurred";
+    }
+  }
+
+  return typeof message === "string"
+    ? message
+    : i18n[language]?.auth?.error_occurred || "An error occurred";
+};
+
+/**
+ * Enhanced error processing for API responses
+ * @param {Response} response - Fetch response object
+ * @param {object} errorData - Parsed error data from response
+ * @param {object} i18n - Internationalization object
+ * @param {string} language - Current language
+ * @param {string} context - Context where the error occurred
+ * @returns {Error} Enhanced error object with user-friendly message
+ */
+export const processApiError = (
+  response,
+  errorData,
+  i18n,
+  language = "en",
+  context = "general"
+) => {
+  let rawErrorMessage = "";
+
+  // Extract error message from various possible formats
+  if (errorData) {
+    if (typeof errorData === "string") {
+      rawErrorMessage = errorData;
+    } else if (errorData.error) {
+      rawErrorMessage = errorData.error;
+    } else if (errorData.message) {
+      rawErrorMessage = errorData.message;
+    } else if (errorData.detail) {
+      rawErrorMessage = errorData.detail;
+    }
+  }
+
+  // If no specific error message, use HTTP status
+  if (!rawErrorMessage) {
+    if (response.status === 400) {
+      rawErrorMessage = "Bad request";
+    } else if (response.status === 401) {
+      rawErrorMessage = "Unauthorized";
+    } else if (response.status === 403) {
+      rawErrorMessage = "Forbidden";
+    } else if (response.status === 404) {
+      rawErrorMessage = "Not found";
+    } else if (response.status === 500) {
+      rawErrorMessage = "Internal server error";
+    } else {
+      rawErrorMessage = `HTTP ${response.status}`;
+    }
+  }
+
+  const userFriendlyMessage = processErrorMessage(
+    rawErrorMessage,
+    i18n,
+    language,
+    context
+  );
+  const error = new Error(userFriendlyMessage);
+  error.originalMessage = rawErrorMessage;
+  error.status = response.status;
+  error.context = context;
+
+  return error;
 };

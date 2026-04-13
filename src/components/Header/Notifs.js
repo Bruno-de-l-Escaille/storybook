@@ -29,7 +29,7 @@ export default function Notifs({
   lng,
   auth,
   env,
-  appName,
+  app,
   navCommunity,
   isFaqWidgetLoaded,
 }) {
@@ -54,11 +54,12 @@ export default function Notifs({
       token: auth.token,
       userId: auth.user.id,
       navCommunity,
-      appName: appName.toUpperCase(),
+      appName: app.appName.toUpperCase(),
       options: {
         limit: 6,
       },
       loggedAsAdmin,
+      apiAppName: app.authAppName ?? app.appName,
     })
       .then((resp) => {
         setIsFetched(true);
@@ -146,7 +147,7 @@ export default function Notifs({
 
   const handleEditClick = () => {
     if (window.showNotifications) {
-      window.showNotifications(appName);
+      window.showNotifications(app.appName);
     }
   };
 

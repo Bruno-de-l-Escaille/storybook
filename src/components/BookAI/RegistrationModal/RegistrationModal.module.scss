@@ -1,0 +1,25 @@
+.bodyOpen{
+  overflow: hidden !important;
+  height: 100% !important;
+}
+.modal {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  background-color: #fff;
+  color: #103d47;
+  border-radius: 10px;
+  overflow-y: auto
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background-color: rgba(13, 112, 111, 0.5);
+}

@@ -1,0 +1,269 @@
+$flag-select-width: 65px;
+$main-color: var(--primary-color-1);
+$secondary-color: var(--secondary-color-1);
+$text-color: var(--text-color);
+$btn-shadow: var(--btn-shadow);
+$gris-color: var(--gris-color);
+$btn-text-color: var(--btn-text-color);
+
+.wrapper {
+  --primary-color-1: #18a0fb;
+  --secondary-color-1: #2495e1;
+  --btn-shadow: none;
+  --text-color: #29394d;
+  --btn-text-color: #fff;
+
+  &.greenJewel {
+    --primary-color-1: #58e60c;
+    --secondary-color-1: #e9ffde;
+    --btn-shadow: 0px 0px 20px 0px #58e60c;
+    --text-color: #103d47;
+    --btn-text-color: #103d47;
+  }
+
+  &.redOrange {
+    --primary-color-1: #fb1e5b;
+    --secondary-color-1: #de4671;
+    --text-color: #29394d;
+  }
+
+  &.orange {
+    --primary-color-1: #f47f4d;
+    --secondary-color-1: #d76838;
+    --text-color: #29394d;
+  }
+
+  &.greenTeal {
+    --primary-color-1: #14b7ad;
+    --secondary-color-1: #0f9e94;
+    --text-color: #29394d;
+  }
+
+  &.purple {
+    --primary-color-1: #5f5de8;
+    --secondary-color-1: #7b7ae8;
+    --text-color: #29394d;
+  }
+
+  .actions {
+    margin-top: 12px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 12px;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    button {
+      padding: 10px 8px;
+      cursor: pointer;
+      text-transform: capitalize;
+      border: none;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 140%;
+      border-radius: 8px;
+      width: 100%;
+    }
+
+    .cancel {
+      background: #f1f2f4;
+      color: $text-color;
+      border: 0.5px solid $text-color;
+
+      &:hover {
+        background: #d8dde2;
+      }
+    }
+
+    .submit {
+      background: $main-color;
+      color: $btn-text-color;
+
+      &:hover {
+        background: $secondary-color;
+        box-shadow: $btn-shadow;
+      }
+    }
+  }
+}
+
+.fetchingContainer {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0 !important;
+  z-index: 10;
+  flex-direction: column;
+
+  .fetching {
+    display: block;
+    margin: auto;
+    width: 200px;
+    height: 200px;
+  }
+
+  .fetching_text {
+    color: $main-color;
+    font-size: 16px;
+  }
+}
+
+.inputsContainer {
+  label {
+    width: 115px !important;
+    min-width: 60px;
+  }
+
+  p {
+    font-size: 10.8px !important;
+    margin: 0 !important;
+    position: absolute;
+    left: 0;
+    line-height: 120%;
+  }
+
+  div {
+    margin: 0 !important;
+    padding-bottom: 20px !important;
+  }
+
+  div > div {
+    position: relative;
+    margin: 0 !important;
+    padding: 0 !important;
+    margin-left: -20px !important;
+  }
+}
+
+.inputsContainerVertical {
+  p {
+    font-size: 10.8px !important;
+    margin: 0 !important;
+    position: absolute;
+    left: 0;
+    line-height: 120%;
+  }
+
+  div {
+    margin: 0 !important;
+    padding-bottom: 12px !important;
+  }
+
+  div > div {
+    position: relative;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+.streetContainer {
+  position: relative;
+
+  .flagsSelect {
+    width: $flag-select-width;
+    position: absolute;
+    left: 95px;
+    top: -5px;
+    z-index: 4;
+
+    div > div {
+      border-top-right-radius: 0% !important;
+      border-bottom-right-radius: 0% !important;
+    }
+
+    span {
+      display: none;
+    }
+  }
+
+  .streetInputContainer {
+    label {
+      width: 115px !important;
+    }
+
+    p {
+      font-size: 10.8px !important;
+      margin: 0 !important;
+      position: absolute;
+      left: -$flag-select-width;
+      line-height: 120%;
+    }
+
+    div {
+      margin: 0 !important;
+      padding-bottom: 20px !important;
+    }
+
+    div > div {
+      position: relative;
+      margin: 0 !important;
+      padding: 0 !important;
+      margin-left: 38px !important;
+      z-index: 2;
+    }
+
+    input {
+      border-top-left-radius: 0% !important;
+      border-bottom-left-radius: 0% !important;
+    }
+  }
+}
+
+.streetContainerVertical {
+  position: relative;
+
+  .flagsSelectVertical {
+    width: $flag-select-width;
+    position: absolute;
+    left: 0;
+    top: 21px;
+    z-index: 4;
+
+    & > div > div > div > div {
+      border-radius: 8px 0% 0% 8px !important;
+    }
+
+    span {
+      display: none;
+    }
+  }
+
+  .streetInputContainerVertical {
+    label {
+      width: 115px !important;
+    }
+
+    p {
+      font-size: 10.8px !important;
+      margin: 0 !important;
+      position: absolute;
+      left: -$flag-select-width;
+      line-height: 120%;
+    }
+
+    div {
+      margin: 0 !important;
+      padding-bottom: 12px !important;
+    }
+
+    div > div {
+      position: relative;
+      margin: 0 !important;
+      padding: 0 !important;
+      margin-left: $flag-select-width !important;
+      z-index: 2;
+    }
+
+    input {
+      border-top-left-radius: 0% !important;
+      border-bottom-left-radius: 0% !important;
+    }
+  }
+}

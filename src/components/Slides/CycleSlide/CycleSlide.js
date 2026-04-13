@@ -9,6 +9,7 @@ import {
   getCyclePrice,
   getMasterChaineUrl,
   getOfffcourseUrl,
+  isSoldOutCycle,
   totalCycleTrainingHours,
 } from "../../../utils/event";
 import { I18N } from "../../../i18n";
@@ -73,6 +74,7 @@ export const CycleSlide = ({
   const isPremiumIncludedCycle = +cycle.client === 9;
   const isUserRegistered =
     userRegistered || (isPremiumIncludedCycle && isUserPremium);
+  const isSoldOut = isSoldOutCycle(cycle);
 
   const cycleCertifiedTrainingHours = totalCycleTrainingHours(cycle);
   const cycleTrainingHours = formatDecimalHours(cycleCertifiedTrainingHours);
@@ -120,7 +122,13 @@ export const CycleSlide = ({
           bannerSrc={bannerSrc || secondaryBanner}
           className={styles.cycleSlide}
           isSmall={isSmall}
-          flag={isPremiumIncludedCycle ? "premium" : undefined}
+          flag={
+            isSoldOut
+              ? "sold-out"
+              : isPremiumIncludedCycle
+              ? "premium"
+              : undefined
+          }
           language={language}
         >
           <Slide.Header
@@ -158,7 +166,7 @@ export const CycleSlide = ({
                 link={cycleReceptionUrl}
                 isSmall={isSmall}
                 Link={Link}
-                {...(isUserRegistered
+                {...(isSoldOut || isUserRegistered
                   ? { name: I18N[language].moreDetails, theme: "default" }
                   : {
                       name:
@@ -168,12 +176,14 @@ export const CycleSlide = ({
                       theme: "greenTeal",
                     })}
               />
-              <ActionButton
-                name={I18N[language].program}
-                link={cycleProgramUrl}
-                isSmall={isSmall}
-                Link={Link}
-              />
+              {!isSoldOut && (
+                <ActionButton
+                  name={I18N[language].program}
+                  link={cycleProgramUrl}
+                  isSmall={isSmall}
+                  Link={Link}
+                />
+              )}
             </div>
           </Slide.Footer>
         </Slide>
@@ -206,6 +216,14 @@ export const CycleSlide = ({
           bannerSrc={bannerSrc || secondaryBanner}
           className={styles.cycleSlide}
           isSmall={isSmall}
+          flag={
+            isSoldOut
+              ? "sold-out"
+              : isPremiumIncludedCycle
+              ? "premium"
+              : undefined
+          }
+          language={language}
         >
           <Slide.Header
             title={name}
@@ -242,7 +260,7 @@ export const CycleSlide = ({
                 link={cycleReceptionUrl}
                 isSmall={isSmall}
                 Link={Link}
-                {...(isUserRegistered
+                {...(isSoldOut || isUserRegistered
                   ? { name: I18N[language].moreDetails, theme: "default" }
                   : {
                       name: !isSmall ? buyCycleLabel : I18N[language].buy,

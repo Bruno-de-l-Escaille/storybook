@@ -16,6 +16,8 @@ import {
   DotLoader,
   MoonLoader,
 } from "react-spinners";
+import { Help } from "../../Icons/Help";
+import { Image } from "../../Icons/Image";
 
 export const EventMask = ({
   event,
@@ -159,6 +161,32 @@ export const EventMask = ({
               </Tooltip>
             ),
             onClick: () => handleWatchConfigChange(!watchConfig),
+          },
+          {
+            children: (
+              <Tooltip title={I18N[language]["faqConfig"]}>
+                <Help style={{ paddingLeft: "0.25rem" }} />
+              </Tooltip>
+            ),
+            onClick: () => {
+              const url = new URL(window.location.href);
+              url.searchParams.set("appSelected", "EVENT");
+              url.searchParams.set("eventId", event.id);
+              window.history.pushState({}, "", url.toString());
+            },
+          },
+          {
+            children: (
+              <Tooltip title={I18N[language]["galleryConfig"]}>
+                <Image style={{ paddingLeft: "0.25rem" }} />
+              </Tooltip>
+            ),
+            onClick: () => {
+              const url = new URL(window.location.href);
+              url.searchParams.set("openGallery", "1");
+              url.searchParams.set("eventId", event.id);
+              window.history.pushState({}, "", url.toString());
+            },
           },
         ]}
         renderForm={renderForm}

@@ -8,6 +8,7 @@ export const getNotifications = ({
   appName,
   loggedAsAdmin,
   options,
+  apiAppName,
 }) => {
   let filter = [
     {
@@ -58,5 +59,8 @@ export const getNotifications = ({
 
   return axios.get(requestUrl, {
     params,
+    headers: {
+      Accept: "application/json,app=" + apiAppName,
+    },
   });
 };

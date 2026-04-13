@@ -94,7 +94,11 @@ const Register = ({
 
   useEffect(() => {
     if (!clientToken) {
-      getClientCredential(app.apiUrl, app.clientCredential)
+      getClientCredential(
+        app.apiUrl,
+        app.clientCredential,
+        app.authAppName ?? app.appName
+      )
         .then((resp) => {
           const token = resp.data.token.access_token;
           setClientToken(token);
@@ -285,7 +289,8 @@ const Register = ({
         postUserCredential(
           app.apiUrl,
           { email, password },
-          app.clientCredential
+          app.clientCredential,
+          app.authAppName ?? app.appName
         ).then((authResponse) => {
           handleAuthTokenUser(authResponse.data);
           // setIsSaving(false);

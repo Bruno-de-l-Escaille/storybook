@@ -30,6 +30,7 @@ const Login = ({
   showResetPassword,
   showForgotCheckEmail = false,
   showForgotStep,
+  hideRegister = false,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,7 +48,11 @@ const Login = ({
   useEffect(() => {
     if (showForgot && clientToken === "") {
       setIsSaving(true);
-      getClientCredential(app.apiUrl, app.clientCredential)
+      getClientCredential(
+        app.apiUrl,
+        app.clientCredential,
+        app.authAppName ?? app.appName
+      )
         .then((resp) => {
           const token = resp.data.token.access_token;
           setClientToken(token);
@@ -161,7 +166,12 @@ const Login = ({
     };
 
     setIsSaving(true);
-    postUserCredential(app.apiUrl, data, app.clientCredential)
+    postUserCredential(
+      app.apiUrl,
+      data,
+      app.clientCredential,
+      app.authAppName ?? app.appName
+    )
       .then((resp) => {
         handleAuthTokenUser(resp.data);
 
@@ -202,12 +212,14 @@ const Login = ({
           </svg>
         </span>
       </div>
-      <div className={styles.topBar}>
-        <span>{i18n.auth.new}</span>
-        <span onClick={showRegister} className={styles.topBar_link}>
-          {i18n.auth.signup}
-        </span>
-      </div>
+      {!hideRegister && (
+        <div className={styles.topBar}>
+          <span>{i18n.auth.new}</span>
+          <span onClick={showRegister} className={styles.topBar_link}>
+            {i18n.auth.signup}
+          </span>
+        </div>
+      )}
       <div className={styles.container}>
         <div className={styles.loginContent}>
           {showCheckEmail ? (

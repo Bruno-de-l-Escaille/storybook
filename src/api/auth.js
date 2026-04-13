@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getClientCredential = (apiUrl, clientCredential) => {
+export const getClientCredential = (apiUrl, clientCredential, appName) => {
   const requestUrl = `${apiUrl}/token`;
 
   let params = Object.keys(clientCredential)
@@ -17,10 +17,13 @@ export const getClientCredential = (apiUrl, clientCredential) => {
     method: "post",
     url: requestUrl,
     data: params,
+    headers: {
+      Accept: "application/json,app=" + appName,
+    },
   });
 };
 
-export const postUserCredential = (apiUrl, data, clientCredential) => {
+export const postUserCredential = (apiUrl, data, clientCredential, appName) => {
   const requestUrl = `${apiUrl}/token`;
 
   var formData = new FormData();
@@ -31,7 +34,11 @@ export const postUserCredential = (apiUrl, data, clientCredential) => {
   formData.append("client_id", clientCredential.client_id);
   formData.append("client_secret", clientCredential.client_secret);
 
-  return axios.post(requestUrl, formData);
+  return axios.post(requestUrl, formData, {
+    headers: {
+      Accept: "application/json,app=" + appName,
+    },
+  });
 };
 
 export const postUserEmail = (apiUrl, appName, token, email, language) => {
@@ -195,11 +202,15 @@ export const getTTPUser = ({ apiUrl, userId, token }) => {
   });
 };
 
-export const getTokenWithoutPassword = ({ apiUrl, token, key }) => {
+export const getTokenWithoutPassword = ({ apiUrl, token, key, appName }) => {
   let requestUrl = `${apiUrl}/organization/user/tokenWithoutPassword`;
   var formData = new FormData();
   formData.append("access_token", token);
   formData.append("key", key);
 
-  return axios.post(requestUrl, formData);
+  return axios.post(requestUrl, formData, {
+    headers: {
+      Accept: "application/json,app=" + appName,
+    },
+  });
 };

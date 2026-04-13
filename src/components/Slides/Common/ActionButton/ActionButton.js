@@ -12,8 +12,17 @@ export default function ActionButton({
   isSmall = false,
   isPremium,
   Link = "a",
+  handleRegistration,
+  isLightRegistration,
   ...props
 }) {
+  const handleClick = (e) => {
+    if (isLightRegistration && handleRegistration) {
+      e.preventDefault();
+      handleRegistration();
+    }
+  };
+
   return (
     <div
       className={cn(
@@ -26,6 +35,7 @@ export default function ActionButton({
         className={theme && styles[theme]}
         target={isPremium ? "_blank" : "_self"}
         rel={isPremium ? "noopener noreferrer" : undefined}
+        onClick={handleClick}
         {...props}
       >
         {name}

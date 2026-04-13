@@ -1,0 +1,239 @@
+@import '~foundation-sites/scss/util/util';
+
+$blue-color: #18a0fb;
+$orange-color: #f47f4d;
+$orange-royal-color: #f7953e;
+$red-orange-color: #fb1e5b;
+$purple-color: #6f6cec;
+$green-teal-color: #14b7ad;
+$main-color: var(--primary-color);
+$border-color: var(--border-color);
+$gray-color: #3c4e64;
+$white-color: #e9ffde;
+$green-color: #58e60c;
+$blue-gray-color: #b2bcc6;
+
+.ttpField {
+  --primary-color: #{$blue-color};
+  --border-color: #{$blue-color};
+  --main-text-color: #{$gray-color};
+
+  &.greenJewel {
+    --main-text-color: #{$white-color};
+    --border-color: #{$green-color};
+  }
+
+  &.orange {
+    --primary-color: #{$orange-color};
+    --border-color: #{$orange-color};
+  }
+
+  &.orangeRoyal {
+    --primary-color: #{$orange-royal-color};
+    --border-color: #{$orange-royal-color};
+  }
+
+  &.redOrange {
+    --primary-color: #{$red-orange-color};
+    --border-color: #29394d;
+  }
+
+  &.purple {
+    --primary-color: #{$purple-color};
+    --border-color: #{$purple-color};
+  }
+
+  &.greenTeal {
+    --primary-color: #{$green-teal-color};
+    --border-color: #{$green-teal-color};
+  }
+
+  &.blueGray {
+    --primary-color: #{$blue-gray-color};
+    --border-color: #{$blue-gray-color};
+  }
+
+  p {
+    font-size: 12px;
+
+    // margin: 0.2rem 0.5rem;
+    margin-top: 0.2rem;
+    font-weight: normal;
+    line-height: 1.66;
+    letter-spacing: 0.0333em;
+    color: #fe3745;
+  }
+}
+
+.hGroup {
+  display: flex;
+  align-items: center;
+
+  .inputLabel {
+    flex: 1;
+    margin: 0;
+    padding-right: 0.5rem;
+    text-align: right;
+  }
+
+  .inputWrapper,
+  .optionsWrapper {
+    flex: 1;
+  }
+}
+
+.inputLabel {
+  font-weight: 300;
+  font-size: 12px;
+  color: var(--main-text-color);
+  margin-bottom: 0.25rem;
+
+  .required {
+    color: $main-color;
+    font-weight: 500;
+    font-size: 12px;
+    margin-left: 0.15rem;
+  }
+}
+
+.inputWrapper {
+  margin-top: 0.3rem;
+
+  .field {
+    background: #f8f9fa;
+    border: 1px solid #b2bcc6;
+    box-sizing: border-box;
+    border-radius: 4px;
+    width: 100%;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    outline: none;
+    padding-left: 0.5rem;
+    font-size: 14px;
+    color: #29394d;
+    font-weight: normal;
+
+    &.textarea {
+      padding: 0.5rem;
+      height: 100px;
+      resize: none;
+    }
+
+    &::placeholder {
+      font-size: 12px;
+      color: #6d7f92;
+      font-weight: normal;
+    }
+
+    &:focus,
+    &.notEmpty {
+      border-color: $border-color;
+    }
+
+    &.hasError {
+      border-color: #ff5656;
+    }
+  }
+}
+
+.optionsWrapper {
+  display: flex;
+
+  .option {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    font-size: 12px;
+    color: #29394d;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+
+    input {
+      display: none;
+      visibility: hidden;
+      opacity: 0;
+
+      &:checked + .radioButton {
+        background: $main-color;
+        border: 2px solid #f1f1f1;
+      }
+    }
+
+    .radioButton {
+      width: 16px;
+      height: 16px;
+      background: #f1f2f4;
+      border: 2px solid #b2bcc6;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+
+    input {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+.checkbox {
+  --primary-color: #{$blue-color};
+  --border-color: #{$blue-color};
+
+  &.orange {
+    --primary-color: #{$orange-color};
+  }
+
+  &.orangeRoyal {
+    --primary-color: #{$orange-royal-color};
+  }
+
+  &.redOrange {
+    --primary-color: #{$red-orange-color};
+  }
+
+  &.purple {
+    --primary-color: #{$purple-color};
+  }
+
+  &.greenTeal {
+    --primary-color: #{$green-teal-color};
+  }
+
+  &:global(.ant-checkbox-wrapper) {
+    &:hover,
+    &:global(.ant-checkbox-input):focus {
+      :global(.ant-checkbox-inner) {
+        border-color: $main-color;
+      }
+    }
+
+    :global(.ant-checkbox-checked) {
+      :global(.ant-checkbox-inner) {
+        border-color: $main-color;
+        background-color: $main-color;
+      }
+
+      &::after {
+        border-color: $main-color;
+      }
+    }
+  }
+}
+
+.tooltip {
+  max-width: 15rem;
+  line-height: 18px;
+}
+
+@include breakpoint(small only) {
+  .inputWrapper {
+    .field {
+      &::placeholder {
+        font-size: 10px;
+      }
+    }
+  }
+}

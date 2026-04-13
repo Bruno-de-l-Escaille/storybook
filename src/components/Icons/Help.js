@@ -1,8 +1,14 @@
 import React from "react";
 
-export function Help() {
+export function Help(props) {
   return (
-    <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      {...props}
+    >
       <path
         fillRule="evenodd"
         clipRule="evenodd"

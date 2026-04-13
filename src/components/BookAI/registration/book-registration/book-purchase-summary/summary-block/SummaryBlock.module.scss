@@ -1,0 +1,259 @@
+.big_text {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--main-text-color);
+}
+
+.help_icon {
+  &:hover {
+    svg {
+      fill: #f7953e;
+      cursor: pointer;
+    }
+  }
+}
+
+.pack_price {
+  float: right;
+  padding-top: 0.5%;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--main-text-color);
+  width: 70px;
+  height: 24px;
+  background: #fef0e3;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.attribution_bloc {
+  font-weight: normal;
+  font-size: 12px;
+  color: var(--main-text-color);
+  width: 156px;
+  height: 64px;
+  margin-top: 6%;
+  background: #fef0e3;
+  border: 1px solid #fef0e3;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 7% 7% 7% 13%;
+}
+
+.no_weight {
+  font-weight: normal;
+}
+
+.text {
+  font-weight: normal;
+  font-size: 12px;
+  color: var(--main-text-color);
+}
+
+.pack_btn {
+  float: right;
+  width: 200px;
+  height: 28px;
+
+  &:hover {
+    background-color: #f1f2f4 !important;
+    color: #3c4e64 !important;
+
+    svg {
+      fill: #3c4e64;
+    }
+  }
+}
+
+.attribution_btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  color: #6d7f92;
+  border: 1px solid #d8dde2;
+  box-sizing: border-box;
+  border-radius: 15px;
+  padding: 0 0.5rem;
+  height: 28px;
+  width: 185px;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+
+  svg {
+    margin-right: 5%;
+  }
+
+  &:hover {
+    background-color: #f1f2f4 !important;
+    color: #3c4e64;
+
+    svg {
+      margin-right: 5%;
+      fill: #3c4e64;
+    }
+  }
+}
+
+.help_text {
+  font-family: 'Open Sans', Roboto, 'Segoe UI', Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  color: #6d7f92;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+// strong {
+//  font-weight: 500;
+// }
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #6d7f92;
+  gap: 10px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 140%; /* 19.6px */
+
+  svg{
+    fill: #18a0fb;
+    color: #18a0fb;
+   }
+
+  &.passedStep {
+    color: #18a0fb;
+
+    & > svg {
+      fill: #18a0fb;
+    }
+  }
+}
+
+.circle_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #d8dde2;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #f1f2f4;
+  }
+}
+
+.arrow_active {
+  background-color: #f1f2f4;
+  transform: rotate(180deg);
+}
+
+.price_off {
+  position: relative;
+
+  &::after {
+    position: absolute;
+    content: '';
+    width: 80%;
+    height: 2px;
+    border-radius: 5px;
+    background: #fe3745;
+    top: 50%;
+    left: 10%;
+    transform: rotate(-20deg);
+  }
+}
+
+.download {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  color: #6d7f92;
+  border: 1px solid #d8dde2;
+  box-sizing: border-box;
+  border-radius: 15px;
+  padding: 0 0.5rem;
+  height: 28px;
+  width: 162px;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+
+  &:hover {
+    color: #3c4e64;
+
+    svg {
+      fill: #3c4e64;
+    }
+  }
+}
+
+.block {
+  padding: 0 0.75rem;
+  border: 1px solid #d8dde2;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.main_action {
+  a {
+    background: #18a0fb;
+    box-shadow: 0 4px 10px #29394D1A;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    color: #fff;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: #fff;
+      background: #2495e1;
+    }
+
+    &.green {
+      background: #06d9b1;
+
+      &:hover,
+      &:focus {
+        color: #fff;
+        background: #02af8e;
+      }
+    }
+  }
+}
+
+.prices_column {
+  flex-direction: row;
+}
+
+.fiduciaireContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 140%;
+  flex-grow: 1;
+}

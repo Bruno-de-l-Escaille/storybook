@@ -33,3 +33,6 @@ export * from "./components/CycleCard/CycleCard";
 export * from "./components/FocusedBlock/FocusedBlock";
 export * from "./components/Masks/EventMask/EventMask";
 export * from "./components/Masks/CycleMask/CycleMask";
+export * from "./components/GoPeopleAuthHeader/index";
+export * from "./components/BookAI/BookAIList";
+export * from "./components/EventCreationPopup/EventCreationPopup";
