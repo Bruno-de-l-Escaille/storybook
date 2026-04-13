@@ -252,8 +252,7 @@ const authLogin = {
     communities: [
       {
         id: 8,
-        name:
-          "Instituut van de Accountants en de Belastingconsulenten - Institut des Experts-comptables et des Conseils fiscaux",
+        name: "Instituut van de Accountants en de Belastingconsulenten - Institut des Experts-comptables et des Conseils fiscaux",
         abbreviation: "IEC-IAB",
         avatarUrl:
           "https://s3.tamtam.pro/v2/storage/media/IMAGE/2753/AVATAR_a726d59d13c723f15343ae75ead939fdd1f0895f.png",
@@ -274,8 +273,7 @@ const authLogin = {
       },
       {
         id: 8,
-        name:
-          "Instituut van de Accountants en de Belastingconsulenten - Institut des Experts-comptables et des Conseils fiscaux",
+        name: "Instituut van de Accountants en de Belastingconsulenten - Institut des Experts-comptables et des Conseils fiscaux",
         abbreviation: "IEC-IAB",
         avatarUrl:
           "https://s3.tamtam.pro/v2/storage/media/IMAGE/2753/AVATAR_a726d59d13c723f15343ae75ead939fdd1f0895f.png",
@@ -323,7 +321,6 @@ const menu = [
     title: "auteurs",
     iconUrl:
       "https://tamtam.s3.eu-west-1.amazonaws.com/cdn/img/icon/header/authors.svg",
-    submenu: "AUTEURS",
     community: false,
     hasSearch: true,
     searchUrl: "http://local.api.tamtam.prp/endpoint",
@@ -560,6 +557,7 @@ export const HeaderLoggedOutOTC = () => (
     lng={select("language", ["fr", "nl", "en"], "fr")}
     onLanguageChange={(langue) => alert(langue)}
     isOtcAuth={boolean("isOtcAuth", true)}
+    apiBaseUrl={text("apiBaseUrl", "http://localhost:8081")}
   />
 );
 

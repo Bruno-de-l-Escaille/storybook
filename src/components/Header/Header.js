@@ -10,24 +10,18 @@ import MenuProfile from "./MenuProfile";
 import Communities from "./Communities";
 import Notifs from "./Notifs";
 import TTPFaqWidget from "../TTPFaqWidget";
-import TTPGalleryWidget from "../TTPGalleryWidget";
 import * as icons from "../Icons";
-import AuthModal from "./AuthModal";
+import GoPeopleAuthHeader from "../GoPeopleAuthHeader";
 
 const I18N = {
   en: {
     signIn: "Login / Sign up",
-    helpDeskContact:
-      "For any questions: info@forumforthefuture.be | +32.2.247.39.32",
   },
   fr: {
     signIn: "Connexion / Inscription",
-    helpDeskContact:
-      "Pour toute question: info@forumforthefuture.be | +32.2.247.39.32",
   },
   nl: {
     signIn: "Aanmelden / Inschrijven",
-    helpDeskContact: "Voor vragen: info@forumforthefuture.be | +32.2.247.39.32",
   },
 };
 
@@ -37,7 +31,6 @@ export class Header extends Component {
     this.state = {
       showSettings: false,
       isFaqWidgetLoaded: false,
-      isGalleryWidgetLoaded: false,
       portalSwitchCurrent: null,
       isBackOffice: this.props.rightIcons?.backoffice?.clicked || false,
     };
@@ -49,11 +42,6 @@ export class Header extends Component {
       this.setState({ isFaqWidgetLoaded: true });
     }
     // }
-
-    if (window.TTPGalleryWidget !== undefined) {
-      this.setState({ isGalleryWidgetLoaded: true });
-    }
-
     if (this.props.portalSwitch && this.props.currentPortal) {
       this.setState({
         portalSwitchCurrent: this.props.portalSwitch.items.filter(
@@ -67,10 +55,6 @@ export class Header extends Component {
     if (prevProps !== this.props) {
       if (window.TTPFAQWidget !== undefined) {
         this.setState({ isFaqWidgetLoaded: true });
-      }
-
-      if (window.TTPGalleryWidget !== undefined) {
-        this.setState({ isGalleryWidgetLoaded: true });
       }
 
       if (this.props.portalSwitch && this.props.currentPortal) {
@@ -96,19 +80,9 @@ export class Header extends Component {
     setTimeout(() => this.setState({ isFaqWidgetLoaded: true }), 4000);
   };
 
-  handleShowGalleryWidget = () => {
-    setTimeout(() => this.setState({ isGalleryWidgetLoaded: true }), 4000);
-  };
-
   handleOnLoadFAQ = () => {
     if (this.props.onFAQLoad) {
       this.props.onFAQLoad();
-    }
-  };
-
-  handleOnLoadGallery = () => {
-    if (this.props.onGalleryLoad) {
-      this.props.onGalleryLoad();
     }
   };
 
@@ -118,12 +92,6 @@ export class Header extends Component {
       app.currentEvent
         ? window.showFAQ(app.appName.toUpperCase(), app.currentEvent)
         : window.showFAQ(app.appName.toUpperCase());
-    }
-  };
-
-  handleGalleryClick = () => {
-    if (window.showGallery) {
-      window.showGallery();
     }
   };
 
@@ -156,14 +124,8 @@ export class Header extends Component {
       showPersonalData,
       personalData,
       onAfterSavePersonal,
-      showHelpDeskContact,
     } = this.props;
-    const {
-      isFaqWidgetLoaded,
-      portalSwitchCurrent,
-      isBackOffice,
-      isGalleryWidgetLoaded,
-    } = this.state;
+    const { isFaqWidgetLoaded, portalSwitchCurrent, isBackOffice } = this.state;
     const { navCommunity, user } = auth;
 
     const Icon = icons["Portal"];
@@ -171,11 +133,6 @@ export class Header extends Component {
 
     return (
       <div className={styles.headerRight}>
-        {showHelpDeskContact && (
-          <div className={styles.helpDeskContact}>
-            {I18N[lng]["helpDeskContact"]}
-          </div>
-        )}
         {switchSpace && (
           <div className={styles.switchSpace}>
             <span
@@ -291,7 +248,7 @@ export class Header extends Component {
               env={env}
               auth={auth}
               navCommunity={navCommunity}
-              app={app}
+              appName={app.appName}
               isFaqWidgetLoaded={isFaqWidgetLoaded}
             />
           )}
@@ -301,14 +258,6 @@ export class Header extends Component {
               className={!isFaqWidgetLoaded ? styles.iconLoading : ""}
             >
               <MenuItem icon="Help" />
-            </div>
-          )}
-          {rightIcons.gallery?.activated && (
-            <div
-              onClick={this.handleGalleryClick.bind(this)}
-              className={!isGalleryWidgetLoaded ? styles.iconLoading : ""}
-            >
-              <MenuItem icon="Image" />
             </div>
           )}
           {rightIcons.apps?.activated && navCommunity && (
@@ -347,10 +296,11 @@ export class Header extends Component {
       lng,
       app,
       intendedApp,
-      gotoUrl,
+      apiUrl,
+      cookieUrl,
+      apiBaseUrl,
       env,
       isOtcAuth = false,
-      hideRegister = false,
     } = this.props;
     const { appUrl, homeUrl, withAuthLogin } = app;
     const languages = ["fr", "nl", "en"];
@@ -369,25 +319,34 @@ export class Header extends Component {
           ))}
         </ul>
         {isOtcAuth ? (
-          <AuthModal
-            I18N={I18N}
+          <GoPeopleAuthHeader
+            apiUrl={apiUrl}
+            apiBaseUrl={apiBaseUrl}
             lng={lng}
-            app={app}
             env={env}
-            hideRegister={hideRegister}
+            cookieUrl={cookieUrl}
+            app={app}
+            onSuccess={(tokenData) => {
+              if (this.props.onSuccess) {
+                this.props.onSuccess(tokenData);
+              }
+            }}
+            onError={(error) => {
+              console.error("Authentication error:", error);
+            }}
           />
         ) : (
           <a
             className={styles.signIn}
-            href={
-              intendedApp
-                ? `${homeUrl}/?intendedApp=${intendedApp}`
-                : gotoUrl
-                ? `${homeUrl}/?gotoUrl=${gotoUrl}`
-                : withAuthLogin
-                ? `${homeUrl}/?gotoWithAuth=${appUrl}`
-                : `${homeUrl}/?goto=${appUrl}`
-            }
+            // href={
+            //   intendedApp
+            //     ? `${homeUrl}/?intendedApp=${intendedApp}`
+            //     : gotoUrl
+            //     ? `${homeUrl}/?gotoUrl=${gotoUrl}`
+            //     : withAuthLogin
+            //     ? `${homeUrl}/?gotoWithAuth=${appUrl}`
+            //     : `${homeUrl}/?goto=${appUrl}`
+            // }
           >
             {I18N[lng]["signIn"]}
           </a>
@@ -488,14 +447,12 @@ export class Header extends Component {
 
   render() {
     const { auth, app, env, lng, rightIcons } = this.props;
-    const { isFaqWidgetLoaded, isGalleryWidgetLoaded } = this.state;
+    const { isFaqWidgetLoaded } = this.state;
 
     const loadNotifWidget =
       app.appName.toUpperCase() === "EVENT" ||
       (rightIcons &&
         (rightIcons.notifs?.activated || rightIcons.faq?.activated));
-
-    const loadGalleryWidget = rightIcons && rightIcons.gallery?.activated;
 
     return (
       <>
@@ -512,19 +469,6 @@ export class Header extends Component {
             />
           </AppendHead>
         )}
-        {loadGalleryWidget && (
-          <AppendHead onLoad={this.handleShowGalleryWidget.bind(this)}>
-            <link
-              name="gallery-widget"
-              rel="stylesheet"
-              href={`https://tamtam.s3-eu-west-1.amazonaws.com/cdn/gallery/${env}/static/css/widget.css`}
-            />
-            <script
-              name="gallery-widget-script"
-              src={`https://tamtam.s3-eu-west-1.amazonaws.com/cdn/gallery/${env}/static/js/widget.js`}
-            />
-          </AppendHead>
-        )}
         <header className={styles.header}>
           {this.renderLeftSide()}
           {!auth.user ? this.renderLoggedOut() : this.renderLoggedIn()}
@@ -535,14 +479,6 @@ export class Header extends Component {
             auth={auth}
             faq
             onLoadFAQ={this.handleOnLoadFAQ.bind(this)}
-          />
-        )}
-        {loadGalleryWidget && isGalleryWidgetLoaded && (
-          <TTPGalleryWidget
-            language={lng}
-            auth={auth}
-            gallery
-            onLoadGallery={this.handleOnLoadGallery.bind(this)}
           />
         )}
       </>

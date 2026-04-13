@@ -14,9 +14,11 @@ const FormInput = ({
   handleBlur,
   handleKeyUp,
   handleChange,
+  hideLockIcon,
+  rightIcon,
   ...otherProps
 }) => {
-  const { disabled, hideLockIcon } = otherProps;
+  const { disabled } = otherProps;
 
   return (
     <div className={styles.group}>
@@ -29,32 +31,39 @@ const FormInput = ({
           </span>
         ) : null}
       </label>
-      {type === "textarea" ? (
-        <textarea
-          className={classnames(styles.input, className)}
-          ref={inputRef}
-          onChange={handleChange}
-          onKeyUp={handleKeyUp}
-          onBlur={handleBlur}
-          {...otherProps}
-        ></textarea>
-      ) : (
-        <input
-          className={classnames(
-            styles.input,
-            error ? styles.error : "",
-            className
-          )}
-          ref={inputRef}
-          onChange={handleChange}
-          onKeyUp={handleKeyUp}
-          onBlur={handleBlur}
-          type={
-            type === "password" ? "password" : type === "date" ? "date" : "text"
-          }
-          {...otherProps}
-        />
-      )}
+      <div className={styles.inputContainer}>
+        {type === "textarea" ? (
+          <textarea
+            className={classnames(styles.input, className)}
+            ref={inputRef}
+            onChange={handleChange}
+            onKeyUp={handleKeyUp}
+            onBlur={handleBlur}
+            {...otherProps}
+          ></textarea>
+        ) : (
+          <input
+            className={classnames(
+              styles.input,
+              error ? styles.error : "",
+              className
+            )}
+            ref={inputRef}
+            onChange={handleChange}
+            onKeyUp={handleKeyUp}
+            onBlur={handleBlur}
+            type={
+              type === "password"
+                ? "password"
+                : type === "date"
+                ? "date"
+                : "text"
+            }
+            {...otherProps}
+          />
+        )}
+        {rightIcon && <div className={styles.rightIcon}>{rightIcon}</div>}
+      </div>
       <span className={styles.error}>{error}</span>
     </div>
   );
