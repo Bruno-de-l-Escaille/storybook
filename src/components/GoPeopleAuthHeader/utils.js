@@ -333,7 +333,13 @@ export const createCompleteAuthState = (
     userData,
     userData.selectedOrganization?.ttp_organization_id
   );
-
+  console.log("Creating complete auth state with data:====", 
+    {
+      authData,
+      userData,
+      preferences,
+      navCommunity,
+    });
   return {
     blogPreferences: preferences?.blogPreferences || null,
     createdAt: authData.createdAt || null,

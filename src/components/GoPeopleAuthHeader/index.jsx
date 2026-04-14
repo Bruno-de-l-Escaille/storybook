@@ -175,11 +175,15 @@ const GoPeopleAuthHeader = ({
 
         const completeProfile = userData.user ? userData : { user: userData };
         const user = completeProfile.user || userData;
-        const organizations = completeProfile.organizations || [];
-        const organizationRoles = completeProfile.organization_roles || [];
-        const selectedOrganization =
-          completeProfile.selected_organization ||
-          userData.selectedOrganization;
+        const organizations = completeProfile.communities || [];
+        const organizationRoles = completeProfile.roles || [];
+        // const selectedOrganization =
+        //   completeProfile.selected_organization ||
+        //   userData.selected_community_id;
+        const selectedOrganization = organizations.find(
+          (org) => org.uuid === user.selected_community_id
+        );
+        const selectedOrganizationId = user.selected_community_id;
 
         const transformedRoles = organizationRoles.map((orgRole) => {
           const organization = organizations.find(
@@ -226,8 +230,10 @@ const GoPeopleAuthHeader = ({
             ? {
                 ...selectedOrganization,
                 id:
-                  selectedOrganization.ttp_organization_id ||
+                  selectedOrganization.ttp_community_id ||
                   selectedOrganization.id,
+                uuid:
+                  selectedOrganization.uuid,
                 name: selectedOrganization.short_name,
                 url: `/${toSlug(selectedOrganization.official_name)}`,
                 blogPreferences: preferences?.data?.[0]?.blogPreferences || {},
