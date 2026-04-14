@@ -184,7 +184,8 @@ const GoPeopleAuthHeader = ({
           (org) => org.uuid === user.selected_community_id
         );
         const selectedOrganizationId = user.selected_community_id;
-
+        console.log("user ...:", user, organizations, organizationRoles);
+        console.log("user.selected_community_id ==", user.selected_community_id, organizations,user, selectedOrganization );
         const transformedRoles = organizationRoles.map((orgRole) => {
           const organization = organizations.find(
             (org) => org.uuid === orgRole.organization_id
@@ -202,7 +203,7 @@ const GoPeopleAuthHeader = ({
             },
           };
         });
-
+        console.log("transformedRoles ==", transformedRoles);
         normalizedUserData = {
           ...user,
           id: user.id || authContext.ttpUserId,
@@ -245,6 +246,7 @@ const GoPeopleAuthHeader = ({
           groups: completeProfile.groups || [],
         };
 
+        console.log("Normalized user data:", normalizedUserData);
         const { createCompleteAuthState } = require("./utils");
         const completeAuthState = createCompleteAuthState(
           baseAuthData,
