@@ -329,17 +329,17 @@ export const createCompleteAuthState = (
   preferences,
   env
 ) => {
-  console.log("Creating complete auth state with data:====", 
-    {
-      authData,
-      userData,
-      preferences,
-      navCommunity,
-    });
+  console.log(
+    "authDatadata, userData, preferences:====",
+    authData,
+    userData,
+    preferences
+  );
   const navCommunity = getUserCurrentNavCommunity(
     userData,
     userData.selectedOrganization?.ttp_organization_id
   );
+  console.log("navcommunity:====", navCommunity);
   return {
     blogPreferences: preferences?.blogPreferences || null,
     createdAt: authData.createdAt || null,

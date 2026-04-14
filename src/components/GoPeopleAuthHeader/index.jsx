@@ -185,7 +185,13 @@ const GoPeopleAuthHeader = ({
         );
         const selectedOrganizationId = user.selected_community_id;
         console.log("user ...:", user, organizations, organizationRoles);
-        console.log("user.selected_community_id ==", user.selected_community_id, organizations,user, selectedOrganization );
+        console.log(
+          "user.selected_community_id ==",
+          user.selected_community_id,
+          organizations,
+          user,
+          selectedOrganization
+        );
         const transformedRoles = organizationRoles.map((orgRole) => {
           const organization = organizations.find(
             (org) => org.uuid === orgRole.organization_id
@@ -233,8 +239,7 @@ const GoPeopleAuthHeader = ({
                 id:
                   selectedOrganization.ttp_community_id ||
                   selectedOrganization.id,
-                uuid:
-                  selectedOrganization.uuid,
+                uuid: selectedOrganization.uuid,
                 name: selectedOrganization.short_name,
                 url: `/${toSlug(selectedOrganization.official_name)}`,
                 blogPreferences: preferences?.data?.[0]?.blogPreferences || {},

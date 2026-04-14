@@ -36,7 +36,7 @@ export const DefaultGoPeopleAuthHeader = () => {
 
 export const GoPeopleAuthHeaderEnglish = () => (
   <GoPeopleAuthHeader
-    apiBaseUrl="http://localhost:8080"
+    apiBaseUrl={apiBaseUrl}
     lng="en"
     onSuccess={(data) => {
       console.log("Authentication successful:", data);
@@ -52,7 +52,7 @@ export const GoPeopleAuthHeaderEnglish = () => (
 
 export const GoPeopleAuthHeaderDutch = () => (
   <GoPeopleAuthHeader
-    apiBaseUrl="http://localhost:8080"
+    apiBaseUrl={apiBaseUrl}
     lng="nl"
     onSuccess={(data) => {
       console.log("Authentication successful:", data);
@@ -68,7 +68,7 @@ export const GoPeopleAuthHeaderDutch = () => (
 
 export const GoPeopleAuthHeaderWithCustomAPI = () => (
   <GoPeopleAuthHeader
-    apiBaseUrl="https://api.gopeople.com"
+    apiBaseUrl={apiBaseUrl}
     lng="fr"
     onSuccess={(data) => {
       // Custom success handler - could store token in localStorage
@@ -98,7 +98,7 @@ export const GoPeopleAuthHeaderInHeaderContext = () => (
     <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
       <span>Navigation</span>
       <GoPeopleAuthHeader
-        apiBaseUrl="http://localhost:8080"
+        apiBaseUrl={apiBaseUrl}
         lng="fr"
         onSuccess={(data) => {
           console.log("User authenticated in header:", data);
@@ -118,7 +118,7 @@ export const WithDifferentAppBranding = () => {
   
   return (
     <GoPeopleAuthHeader
-      apiBaseUrl="http://localhost:8080"
+      apiBaseUrl={apiBaseUrl}
       lng="fr"
       app={{
         name: appName
@@ -140,7 +140,7 @@ export const WithDifferentLanguages = () => {
   
   return (
     <GoPeopleAuthHeader
-      apiBaseUrl="http://localhost:8080"
+      apiBaseUrl={apiBaseUrl}
       lng={language}
       app={{
         name: "tamtam"
@@ -159,7 +159,7 @@ export const WithDifferentLanguages = () => {
 export const OTPFlowWithCustomParameters = () => {
   const appName = text("App Name (for OTP logo)", "tamtam");
   const language = select("Language (for UI & OTP email)", ["fr", "en", "nl"], "fr");
-  const apiBaseUrl = text("API Base URL", "http://localhost:8080");
+  const apiBaseUrl = text("API Base URL", "https://peopleapi.tamtam.pro");
   
   return (
     <div style={{ padding: "2rem" }}>
