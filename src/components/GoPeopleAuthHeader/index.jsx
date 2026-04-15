@@ -212,7 +212,7 @@ const GoPeopleAuthHeader = ({
         console.log("transformedRoles ==", transformedRoles);
         normalizedUserData = {
           ...user,
-          id: user.id || authContext.ttpUserId,
+          id: user.ttp_user_id,
           firstName: user.firstname || user.firstName,
           lastName: user.lastname || user.lastName,
           mainEmail: user.email || user.mainEmail || authContext.email,
