@@ -123,9 +123,10 @@ var PhoneValidator = function () {
       if (
         !this.isBeNumber(number) &&
         !this.isFrNumber(number) &&
-        "0" !== number[0]
+        "0" === number[0]
       ) {
-        number = "+32" + number.replace("+", "");
+        // Local Belgian format starting with 0 — prefix with +32
+        number = "+32" + number.substr(1);
       }
 
       return number;
@@ -241,7 +242,11 @@ var PhoneValidator = function () {
           return { valid: false, message: this.errorMsgs.INVALID };
         }
       } else {
-        return { valid: false, message: this.errorMsgs.UNKNOWN };
+        // Accept any international number with 7–15 digits after the + (E.164)
+        const digitsOnly = numberWithCountryCode.replace(/^\+/, "");
+        if (digitsOnly.length < 7 || digitsOnly.length > 15) {
+          return { valid: false, message: this.errorMsgs.INVALID };
+        }
       }
 
       return { valid: true, message: "" };

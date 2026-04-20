@@ -72,6 +72,13 @@ const GoPeopleRegistrationModal = ({
   const [agreation, setAgreation] = useState(AGREATION_OPTIONS[0]);
   const [isAccepted, setIsAccepted] = useState(false);
   const [pwdProgressValue, setPwdProgressValue] = useState(0);
+  const [pwdRules, setPwdRules] = useState({
+    minLength: false,
+    hasUppercase: false,
+    hasLowercase: false,
+    hasDigit: false,
+    hasSpecial: false,
+  });
   const [errors, setErrors] = useState({
     firstName: "",
     lastName: "",
@@ -116,7 +123,25 @@ const GoPeopleRegistrationModal = ({
           }
           break;
         case "password":
-          var pwdResult = validatePassword(password, [
+          const rules = {
+            minLength: fieldValue.length >= 8,
+            hasUppercase: /[A-Z]/.test(fieldValue),
+            hasLowercase: /[a-z]/.test(fieldValue),
+            hasDigit: /[0-9]/.test(fieldValue),
+            hasSpecial: /[!@#$%^&*()_+\-=\[\]{}|;:'",.<>?/]/.test(fieldValue),
+          };
+          setPwdRules(rules);
+
+          const allRulesMet = Object.values(rules).every(Boolean);
+          if (!allRulesMet) {
+            value = i18n.auth.password_weak;
+            setPwdProgressValue(
+              Object.values(rules).filter(Boolean).length * 20
+            );
+            break;
+          }
+
+          var pwdResult = validatePassword(fieldValue, [
             email,
             firstName,
             lastName,
@@ -409,6 +434,55 @@ const GoPeopleRegistrationModal = ({
                   ></progress>
                 )}
               </div>
+              {password && !hasPassword && (
+                <ul
+                  style={{
+                    listStyle: "none",
+                    padding: 0,
+                    margin: "8px 0 4px",
+                    fontSize: "12px",
+                  }}
+                >
+                  {[
+                    {
+                      key: "minLength",
+                      label: i18n.auth.pwd_min_length || "Minimum 8 characters",
+                    },
+                    {
+                      key: "hasUppercase",
+                      label:
+                        i18n.auth.pwd_uppercase ||
+                        "At least one uppercase letter (A-Z)",
+                    },
+                    {
+                      key: "hasLowercase",
+                      label:
+                        i18n.auth.pwd_lowercase ||
+                        "At least one lowercase letter (a-z)",
+                    },
+                    {
+                      key: "hasDigit",
+                      label: i18n.auth.pwd_digit || "At least one digit (0-9)",
+                    },
+                    {
+                      key: "hasSpecial",
+                      label:
+                        i18n.auth.pwd_special ||
+                        "At least one special character (!@#$%...)",
+                    },
+                  ].map(({ key, label }) => (
+                    <li
+                      key={key}
+                      style={{
+                        color: pwdRules[key] ? "#06d9b1" : "#fe3745",
+                        marginBottom: "2px",
+                      }}
+                    >
+                      {pwdRules[key] ? "✓" : "✗"} {label}
+                    </li>
+                  ))}
+                </ul>
+              )}
 
               <FormInput
                 name="confirmPassword"
