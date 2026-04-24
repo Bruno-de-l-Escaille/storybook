@@ -51,6 +51,13 @@ const GoPeopleAuthHeader = ({
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordStrength, setPasswordStrength] = useState(0);
   const [authToken, setAuthToken] = useState(""); // store auth token for set password step
+  const [pwdRules, setPwdRules] = useState({
+    minLength: false,
+    hasUppercase: false,
+    hasLowercase: false,
+    hasDigit: false,
+    hasSpecial: false,
+  });
 
   const [errors, setErrors] = useState({
     identifier: "",
@@ -72,6 +79,7 @@ const GoPeopleAuthHeader = ({
     setConfirmPassword("");     // ← added
     setPasswordStrength(0);     // ← added
     setAuthToken("");           // ← added
+    setPwdRules({ minLength: false, hasUppercase: false, hasLowercase: false, hasDigit: false, hasSpecial: false });
     setHasPassword(false);
     setErrors({
       identifier: "",
@@ -517,7 +525,10 @@ const GoPeopleAuthHeader = ({
       const response = await verifyOTP(apiBaseUrl, otp, identifier);
 
       if (response.token) {
-        if (!hasPassword && !isLoginWithoutPassword) {
+        if (response.isNewUser === true) {
+          setShowModal(false);
+          setShowRegisterModal(true);
+        } else if (response.isNewUser === false) {
           setAuthToken(response.token);
           setStep("SET_PASSWORD");
         } else {
@@ -550,7 +561,15 @@ const GoPeopleAuthHeader = ({
   // Handler for new password input change - updates strength meter
   const handleNewPasswordChange = (value) => {
     setNewPassword(value);
-    setPasswordStrength(calculatePasswordStrength(value));
+    const rules = {
+      minLength: value.length >= 8,
+      hasUppercase: /[A-Z]/.test(value),
+      hasLowercase: /[a-z]/.test(value),
+      hasDigit: /[0-9]/.test(value),
+      hasSpecial: /[!@#$%^&*()_+\-=\[\]{}|;:'",.<>?/]/.test(value),
+    };
+    setPwdRules(rules);
+    setPasswordStrength(Object.values(rules).filter(Boolean).length);
   };
 
   // Handler for setting new password after OTP verification
@@ -559,7 +578,8 @@ const GoPeopleAuthHeader = ({
       setErrors({ ...errors, newPassword: I18N[lng].auth.errors?.password?.too_short || "Mot de passe requis" });
       return;
     }
-    if (passwordStrength < 2) {
+    const allRulesMet = Object.values(pwdRules).every(Boolean);
+    if (!allRulesMet) {
       setErrors({ ...errors, newPassword: I18N[lng].auth.errors?.password?.too_weak || "Mot de passe trop faible" });
       return;
     }
@@ -985,14 +1005,21 @@ const GoPeopleAuthHeader = ({
           labelClassName="sb-ttp-label-lg"
           onChange={(e) => handleNewPasswordChange(e.target.value)}
         />
-
-        {/* Barre de force du mot de passe */}
-        {newPassword && (
-          <progress
-            className={`${(passwordStrength * 25) > 30 ? "success" : "alert"} ${styles.progress}`}
-            max="100"
-            value={passwordStrength * 25}
-          ></progress>
+        {/* Règles de validation du mot de passe */}
+        {newPassword && passwordStrength < 5 && (
+          <ul style={{ listStyle: "none", padding: 0, margin: "8px 0 4px", fontSize: "12px" }}>
+            {[
+              { key: "minLength",    label: I18N[lng].auth.pwd_min_length  || "Minimum 8 characters" },
+              { key: "hasUppercase", label: I18N[lng].auth.pwd_uppercase   || "At least one uppercase letter (A-Z)" },
+              { key: "hasLowercase", label: I18N[lng].auth.pwd_lowercase   || "At least one lowercase letter (a-z)" },
+              { key: "hasDigit",     label: I18N[lng].auth.pwd_digit       || "At least one digit (0-9)" },
+              { key: "hasSpecial",   label: I18N[lng].auth.pwd_special     || "At least one special character (!@#$%...)" },
+            ].map(({ key, label }) => (
+              <li key={key} style={{ color: pwdRules[key] ? "#06d9b1" : "#fe3745", marginBottom: "2px" }}>
+                {pwdRules[key] ? "✓" : "✗"} {label}
+              </li>
+            ))}
+          </ul>
         )}
 
         <FormInput
