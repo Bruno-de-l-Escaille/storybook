@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import ReactCodeInput from "react-code-input";
 
@@ -50,6 +50,26 @@ const GoPeopleAuthHeader = ({
     password: "",
     otp: "",
   });
+
+  useEffect(() => {
+    let searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.get("authView")) {
+      if (["REGISTER", "LOGIN"].includes(searchParams.get("authView"))) {
+        setShowModal(true);
+      }
+      searchParams.delete("authView");
+      let searchString =
+        searchParams.toString().length > 0 ? "?" + searchParams.toString() : "";
+      let newUrl =
+        window.location.protocol +
+        "//" +
+        window.location.host +
+        window.location.pathname +
+        searchString +
+        window.location.hash;
+      window.history.replaceState(null, "", newUrl);
+    }
+  }, []);
 
   const handleCloseModal = () => {
     setShowModal(false);

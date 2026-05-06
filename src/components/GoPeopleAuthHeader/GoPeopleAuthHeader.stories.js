@@ -9,17 +9,18 @@ export default {
   decorators: [StoryRouter(), withKnobs],
 };
 
+const apiBaseUrl = text("API Base URL", "http://localhost:8080");
+
 export const DefaultGoPeopleAuthHeader = () => {
   const appName = text("App Name", "tamtam");
   const language = select("Language", ["fr", "nl", "en"], "fr");
-  const apiBaseUrl = text("API Base URL", "http://localhost:8080");
-  
+
   return (
     <GoPeopleAuthHeader
       apiBaseUrl={apiBaseUrl}
       lng={language}
       app={{
-        name: appName
+        name: appName,
       }}
       onSuccess={(data) => {
         console.log("Authentication successful:", data);
@@ -115,13 +116,13 @@ export const GoPeopleAuthHeaderInHeaderContext = () => (
 // Story to test different app_name values for OTP branding
 export const WithDifferentAppBranding = () => {
   const appName = text("App Name for Branding", "ua");
-  
+
   return (
     <GoPeopleAuthHeader
       apiBaseUrl={apiBaseUrl}
       lng="fr"
       app={{
-        name: appName
+        name: appName,
       }}
       onSuccess={(data) => {
         console.log("Authentication successful with custom branding:", data);
@@ -137,13 +138,13 @@ export const WithDifferentAppBranding = () => {
 // Story to test different language values for OTP email content
 export const WithDifferentLanguages = () => {
   const language = select("Email Content Language", ["fr", "en", "nl"], "en");
-  
+
   return (
     <GoPeopleAuthHeader
       apiBaseUrl={apiBaseUrl}
       lng={language}
       app={{
-        name: "tamtam"
+        name: "tamtam",
       }}
       onSuccess={(data) => {
         console.log("Authentication successful:", data);
@@ -158,22 +159,34 @@ export const WithDifferentLanguages = () => {
 // Comprehensive story combining all OTP parameters
 export const OTPFlowWithCustomParameters = () => {
   const appName = text("App Name (for OTP logo)", "tamtam");
-  const language = select("Language (for UI & OTP email)", ["fr", "en", "nl"], "fr");
+  const language = select(
+    "Language (for UI & OTP email)",
+    ["fr", "en", "nl"],
+    "fr"
+  );
   const apiBaseUrl = text("API Base URL", "https://peopleapi.tamtam.pro");
-  
+
   return (
     <div style={{ padding: "2rem" }}>
       <h2>Test OTP Flow with Custom Parameters</h2>
-      <p>This story demonstrates how the OTP email will be customized based on app_name and language.</p>
+      <p>
+        This story demonstrates how the OTP email will be customized based on
+        app_name and language.
+      </p>
       <ul>
-        <li><strong>app_name:</strong> Controls the logo branding in the OTP email</li>
-        <li><strong>language:</strong> Controls the email content language (fr, en, nl)</li>
+        <li>
+          <strong>app_name:</strong> Controls the logo branding in the OTP email
+        </li>
+        <li>
+          <strong>language:</strong> Controls the email content language (fr,
+          en, nl)
+        </li>
       </ul>
       <GoPeopleAuthHeader
         apiBaseUrl={apiBaseUrl}
         lng={language}
         app={{
-          name: appName
+          name: appName,
         }}
         onSuccess={(data) => {
           console.log("Authentication successful:", data);
