@@ -994,6 +994,7 @@ const GoPeopleAuthHeader = ({
     return (
       <div className={styles.loginContent}>
         <h1 className={styles.title}>{I18N[lng].auth.setPassword}</h1>
+        <p className={styles.setPasswordHint}>{I18N[lng].auth.setPasswordHint}</p>
 
         <FormInput
           name="newPassword"
