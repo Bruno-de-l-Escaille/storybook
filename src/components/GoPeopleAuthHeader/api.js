@@ -119,14 +119,41 @@ export const verifyOTP = async (apiBaseUrl, otp, identifier) => {
 
   if (response.ok) {
     const data = await response.json();
-    // The API returns a JWT token in the response
-    // We need to decode it or check additional fields to determine if user is new
-    // For now, we'll assume the API provides this information directly
-    return {
-      ...data,
-      // The API should provide isNewUser flag based on whether this is first-time authentication
-      // This would typically be determined by checking if user has completed registration
-    };
+
+    // --- Extract the JWT token from the response ---
+    // We need this token later to authorize POST /setpassword
+    const token = data.token || data.access_token || data.jwt || null;
+
+    // --- Determine if the user is new or existing ---
+    // This helps the frontend decide whether to show the "Set Password" modal
+    let isNewUser = null; // default null: safe fallback if we can't determine
+
+    if (typeof data.isNewUser !== "undefined") {
+      // If API provides isNewUser, use it directly
+      isNewUser = data.isNewUser;
+    } else if (token) {
+      try {
+        // Decode JWT to check claims (if backend exposes e.g., has_password)
+        const ctx = extractAuthContextFromJWT(token);
+        // Hypothetical: backend could provide `is_new_user` or `has_password`
+        if (typeof ctx.is_new_user !== "undefined") {
+          isNewUser = ctx.is_new_user;
+        } else if (typeof ctx.has_password === "boolean") {
+          // If has_password=false, it's a new user
+          isNewUser = !ctx.has_password;
+        } else {
+          // If claim missing, leave as null → frontend won't auto-open modal
+          isNewUser = null;
+        }
+      } catch (err) {
+        // Decoding failed, safest to leave unknown
+        isNewUser = null;
+      }
+    }
+
+    // --- Return normalized object for frontend ---
+    // frontend can now check: if (isNewUser === false) → show Set Password modal
+    return { data, token, isNewUser };
   } else {
     try {
       const errorData = await response.json();
@@ -247,6 +274,35 @@ export const setUserPassword = async (apiBaseUrl, token, password) => {
     }
   }
 };
+
+
+export const setPassword = async (apiBaseUrl, newPassword, token, language = "fr") => {
+  const response = await fetch(`${apiBaseUrl}/auth/password`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    body: JSON.stringify({ newPassword }),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    return data;
+  } else {
+    try {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message ||
+        errorData.error ||
+        `HTTP ${response.status}: ${response.statusText}`
+      );
+    } catch (jsonError) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+  }
+};
+
 
 export const authenticateUser = async (apiBaseUrl, email, password) => {
   const response = await fetch(`${apiBaseUrl}/auth/login`, {
