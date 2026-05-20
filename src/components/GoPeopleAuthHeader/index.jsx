@@ -49,6 +49,8 @@ const GoPeopleAuthHeader = ({
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
   const [authToken, setAuthToken] = useState(""); // store auth token for set password step
   const [pwdRules, setPwdRules] = useState({
@@ -1000,11 +1002,28 @@ const GoPeopleAuthHeader = ({
           name="newPassword"
           value={newPassword}
           label={I18N[lng].auth.newPassword}
-          type="password"
+          type={showNewPassword ? "text" : "password"}
           error={errors.newPassword}
           className="sb-ttp-input-lg"
           labelClassName="sb-ttp-label-lg"
           onChange={(e) => handleNewPasswordChange(e.target.value)}
+          rightIcon={
+            <button type="button" onClick={() => setShowNewPassword(!showNewPassword)} style={{ background: "none", border: "none", cursor: "pointer", color: "#6d7f92", display: "flex" }}>
+              {showNewPassword ? (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                  <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                  <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                  <line x1="2" x2="22" y1="2" y2="22"></line>
+                </svg>
+              ) : (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              )}
+            </button>
+          }
         />
         {/* Règles de validation du mot de passe */}
         {newPassword && passwordStrength < 5 && (
@@ -1027,12 +1046,29 @@ const GoPeopleAuthHeader = ({
           name="confirmPassword"
           value={confirmPassword}
           label={I18N[lng].auth.confirmPassword}
-          type="password"
+          type={showConfirmPassword ? "text" : "password"}
           error={errors.confirmPassword}
           className="sb-ttp-input-lg"
           labelClassName="sb-ttp-label-lg"
           onChange={(e) => setConfirmPassword(e.target.value)}
           onKeyDown={(e) => { if (e.key === "Enter") handleSetPassword(); }}
+          rightIcon={
+            <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} style={{ background: "none", border: "none", cursor: "pointer", color: "#6d7f92", display: "flex" }}>
+              {showConfirmPassword ? (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                  <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                  <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                  <line x1="2" x2="22" y1="2" y2="22"></line>
+                </svg>
+              ) : (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              )}
+            </button>
+          }
         />
 
         <div className={styles.actions}>
