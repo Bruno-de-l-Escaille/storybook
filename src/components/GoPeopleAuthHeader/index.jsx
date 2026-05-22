@@ -90,17 +90,23 @@ const GoPeopleAuthHeader = ({
     }
   }, []);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = async (currentStep, currentAuthToken) => {
+    if (currentStep === "SET_PASSWORD" && currentAuthToken) {
+      await handleAuthSuccess({
+        token: currentAuthToken,
+        jwt: currentAuthToken,
+      });
+    }
     setShowModal(false);
     setShowRegisterModal(false);
     setStep("IDENTIFIER");
     setIdentifier("");
     setPassword("");
     setOtp("");
-    setNewPassword(""); // ← added
-    setConfirmPassword(""); // ← added
-    setPasswordStrength(0); // ← added
-    setAuthToken(""); // ← added
+    setNewPassword("");
+    setConfirmPassword("");
+    setPasswordStrength(0);
+    setAuthToken("");
     setPwdRules({
       minLength: false,
       hasUppercase: false,
@@ -113,8 +119,8 @@ const GoPeopleAuthHeader = ({
       identifier: "",
       password: "",
       otp: "",
-      newPassword: "", // ← added
-      confirmPassword: "", // ← added
+      newPassword: "",
+      confirmPassword: "",
     });
     if (onClose) onClose();
   };
@@ -557,10 +563,6 @@ const GoPeopleAuthHeader = ({
           setShowRegisterModal(true);
         } else if (response.isNewUser === false) {
           setAuthToken(response.token);
-          await handleAuthSuccess({
-            token: response.token,
-            jwt: response.token,
-          });
           setStep("SET_PASSWORD");
         } else {
           Toast.success(I18N[lng].auth.successfully_saved);
@@ -743,7 +745,6 @@ const GoPeopleAuthHeader = ({
       if (response.token || response.jwt) {
         const token = response.token || response.jwt;
         setAuthToken(token);
-        await handleAuthSuccess({ token, jwt: token });
         setStep("SET_PASSWORD");
       }
     } catch (error) {
@@ -1301,7 +1302,7 @@ const GoPeopleAuthHeader = ({
 
       <Modal
         isOpen={showModal}
-        onRequestClose={handleCloseModal}
+        onRequestClose={() => handleCloseModal(step, authToken)}
         shouldCloseOnOverlayClick={false}
         className={styles.modal}
         overlayClassName={styles.overlay}
@@ -1309,7 +1310,10 @@ const GoPeopleAuthHeader = ({
         <FlashMessage />
         <div className={styles.modalHeader}>
           {I18N[lng].auth.signInUp}
-          <span className={styles.modalClose} onClick={handleCloseModal}>
+          <span
+            className={styles.modalClose}
+            onClick={() => handleCloseModal(step, authToken)}
+          >
             <svg
               width="16"
               height="16"
