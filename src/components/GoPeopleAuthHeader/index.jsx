@@ -557,6 +557,10 @@ const GoPeopleAuthHeader = ({
           setShowRegisterModal(true);
         } else if (response.isNewUser === false) {
           setAuthToken(response.token);
+          await handleAuthSuccess({
+            token: response.token,
+            jwt: response.token,
+          });
           setStep("SET_PASSWORD");
         } else {
           Toast.success(I18N[lng].auth.successfully_saved);
@@ -737,7 +741,9 @@ const GoPeopleAuthHeader = ({
       const response = await verifyOTP(apiBaseUrl, otp, identifier);
 
       if (response.token || response.jwt) {
-        setAuthToken(response.token || response.jwt);
+        const token = response.token || response.jwt;
+        setAuthToken(token);
+        await handleAuthSuccess({ token, jwt: token });
         setStep("SET_PASSWORD");
       }
     } catch (error) {
