@@ -14,7 +14,8 @@ import {
   verifyOTP,
   requestPasswordReset,
   initiateOTPLogin,
-  setPassword as setPasswordAPI,} from "./api"; // API functions for authentication flows: alias setPassword to setPasswordAPI to avoid naming conflict
+  setPassword as setPasswordAPI,
+} from "./api"; // API functions for authentication flows: alias setPassword to setPasswordAPI to avoid naming conflict
 import {
   validateEmail,
   validatePhone,
@@ -36,7 +37,7 @@ const GoPeopleAuthHeader = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
-  const [step, setStep] = useState("IDENTIFIER"); 
+  const [step, setStep] = useState("IDENTIFIER");
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [otp, setOtp] = useState("");
@@ -65,8 +66,8 @@ const GoPeopleAuthHeader = ({
     identifier: "",
     password: "",
     otp: "",
-    newPassword: "",      // ← added
-    confirmPassword: "",  // ← added
+    newPassword: "", // ← added
+    confirmPassword: "", // ← added
   });
 
   useEffect(() => {
@@ -96,22 +97,27 @@ const GoPeopleAuthHeader = ({
     setIdentifier("");
     setPassword("");
     setOtp("");
-    setNewPassword("");         // ← added
-    setConfirmPassword("");     // ← added
-    setPasswordStrength(0);     // ← added
-    setAuthToken("");           // ← added
-    setPwdRules({ minLength: false, hasUppercase: false, hasLowercase: false, hasDigit: false, hasSpecial: false });
+    setNewPassword(""); // ← added
+    setConfirmPassword(""); // ← added
+    setPasswordStrength(0); // ← added
+    setAuthToken(""); // ← added
+    setPwdRules({
+      minLength: false,
+      hasUppercase: false,
+      hasLowercase: false,
+      hasDigit: false,
+      hasSpecial: false,
+    });
     setHasPassword(false);
     setErrors({
       identifier: "",
       password: "",
       otp: "",
-      newPassword: "",      // ← added
-      confirmPassword: "",  // ← added
+      newPassword: "", // ← added
+      confirmPassword: "", // ← added
     });
     if (onClose) onClose();
   };
-
 
   const handleAuthTokenUser = (authData) => {
     try {
@@ -494,7 +500,7 @@ const GoPeopleAuthHeader = ({
       );
 
       if (response.status === "OTP_SENT" || response.message) {
-        setIsLoginWithoutPassword(true);  // ← marquer le flow
+        setIsLoginWithoutPassword(true); // ← marquer le flow
         setStep("OTP");
         Toast.info(
           I18N[lng].auth.otp_sent || "OTP has been sent to your identifier"
@@ -554,7 +560,10 @@ const GoPeopleAuthHeader = ({
           setStep("SET_PASSWORD");
         } else {
           Toast.success(I18N[lng].auth.successfully_saved);
-          await handleAuthSuccess({ token: response.token, jwt: response.token });
+          await handleAuthSuccess({
+            token: response.token,
+            jwt: response.token,
+          });
           handleCloseModal();
         }
       }
@@ -566,16 +575,16 @@ const GoPeopleAuthHeader = ({
     }
   };
 
-/**
- * Calculates password strength on a scale from 0 to 4.
- * Checks for minimum length, uppercase letter, digit, and special character.
- */
+  /**
+   * Calculates password strength on a scale from 0 to 4.
+   * Checks for minimum length, uppercase letter, digit, and special character.
+   */
   const calculatePasswordStrength = (pwd) => {
     let strength = 0;
-    if (pwd.length >= 8) strength++;           
-    if (/[A-Z]/.test(pwd)) strength++;         
-    if (/[0-9]/.test(pwd)) strength++;         
-    if (/[^A-Za-z0-9]/.test(pwd)) strength++; 
+    if (pwd.length >= 8) strength++;
+    if (/[A-Z]/.test(pwd)) strength++;
+    if (/[0-9]/.test(pwd)) strength++;
+    if (/[^A-Za-z0-9]/.test(pwd)) strength++;
     return strength;
   };
 
@@ -596,16 +605,30 @@ const GoPeopleAuthHeader = ({
   // Handler for setting new password after OTP verification
   const handleSetPassword = async () => {
     if (!newPassword) {
-      setErrors({ ...errors, newPassword: I18N[lng].auth.errors?.password?.too_short || "Mot de passe requis" });
+      setErrors({
+        ...errors,
+        newPassword:
+          I18N[lng].auth.errors?.password?.too_short || "Mot de passe requis",
+      });
       return;
     }
     const allRulesMet = Object.values(pwdRules).every(Boolean);
     if (!allRulesMet) {
-      setErrors({ ...errors, newPassword: I18N[lng].auth.errors?.password?.too_weak || "Mot de passe trop faible" });
+      setErrors({
+        ...errors,
+        newPassword:
+          I18N[lng].auth.errors?.password?.too_weak ||
+          "Mot de passe trop faible",
+      });
       return;
     }
     if (newPassword !== confirmPassword) {
-      setErrors({ ...errors, confirmPassword: I18N[lng].auth.errors?.password?.mismatch || "Les mots de passe ne correspondent pas" });
+      setErrors({
+        ...errors,
+        confirmPassword:
+          I18N[lng].auth.errors?.password?.mismatch ||
+          "Les mots de passe ne correspondent pas",
+      });
       return;
     }
 
@@ -1007,7 +1030,6 @@ const GoPeopleAuthHeader = ({
     </div>
   );
 
-
   const renderSetPasswordStep = () => {
     const strengthLabels = ["", "Faible", "Moyen", "Bon", "Fort"];
     const strengthColors = ["", "#ef4444", "#f59e0b", "#3b82f6", "#10b981"];
@@ -1015,7 +1037,9 @@ const GoPeopleAuthHeader = ({
     return (
       <div className={styles.loginContent}>
         <h1 className={styles.title}>{I18N[lng].auth.setPassword}</h1>
-        <p className={styles.setPasswordHint}>{I18N[lng].auth.setPasswordHint}</p>
+        <p className={styles.setPasswordHint}>
+          {I18N[lng].auth.setPasswordHint}
+        </p>
 
         <FormInput
           name="newPassword"
@@ -1027,16 +1051,44 @@ const GoPeopleAuthHeader = ({
           labelClassName="sb-ttp-label-lg"
           onChange={(e) => handleNewPasswordChange(e.target.value)}
           rightIcon={
-            <button type="button" onClick={() => setShowNewPassword(!showNewPassword)} style={{ background: "none", border: "none", cursor: "pointer", color: "#6d7f92", display: "flex" }}>
+            <button
+              type="button"
+              onClick={() => setShowNewPassword(!showNewPassword)}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                color: "#6d7f92",
+                display: "flex",
+              }}
+            >
               {showNewPassword ? (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
                   <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
                   <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
                   <line x1="2" x2="22" y1="2" y2="22"></line>
                 </svg>
               ) : (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
                   <circle cx="12" cy="12" r="3"></circle>
                 </svg>
@@ -1046,15 +1098,49 @@ const GoPeopleAuthHeader = ({
         />
         {/* Règles de validation du mot de passe */}
         {newPassword && passwordStrength < 5 && (
-          <ul style={{ listStyle: "none", padding: 0, margin: "8px 0 4px", fontSize: "12px" }}>
+          <ul
+            style={{
+              listStyle: "none",
+              padding: 0,
+              margin: "8px 0 4px",
+              fontSize: "12px",
+            }}
+          >
             {[
-              { key: "minLength",    label: I18N[lng].auth.pwd_min_length  || "Minimum 8 characters" },
-              { key: "hasUppercase", label: I18N[lng].auth.pwd_uppercase   || "At least one uppercase letter (A-Z)" },
-              { key: "hasLowercase", label: I18N[lng].auth.pwd_lowercase   || "At least one lowercase letter (a-z)" },
-              { key: "hasDigit",     label: I18N[lng].auth.pwd_digit       || "At least one digit (0-9)" },
-              { key: "hasSpecial",   label: I18N[lng].auth.pwd_special     || "At least one special character (!@#$%...)" },
+              {
+                key: "minLength",
+                label: I18N[lng].auth.pwd_min_length || "Minimum 8 characters",
+              },
+              {
+                key: "hasUppercase",
+                label:
+                  I18N[lng].auth.pwd_uppercase ||
+                  "At least one uppercase letter (A-Z)",
+              },
+              {
+                key: "hasLowercase",
+                label:
+                  I18N[lng].auth.pwd_lowercase ||
+                  "At least one lowercase letter (a-z)",
+              },
+              {
+                key: "hasDigit",
+                label: I18N[lng].auth.pwd_digit || "At least one digit (0-9)",
+              },
+              {
+                key: "hasSpecial",
+                label:
+                  I18N[lng].auth.pwd_special ||
+                  "At least one special character (!@#$%...)",
+              },
             ].map(({ key, label }) => (
-              <li key={key} style={{ color: pwdRules[key] ? "#06d9b1" : "#fe3745", marginBottom: "2px" }}>
+              <li
+                key={key}
+                style={{
+                  color: pwdRules[key] ? "#06d9b1" : "#fe3745",
+                  marginBottom: "2px",
+                }}
+              >
                 {pwdRules[key] ? "✓" : "✗"} {label}
               </li>
             ))}
@@ -1070,18 +1156,48 @@ const GoPeopleAuthHeader = ({
           className="sb-ttp-input-lg"
           labelClassName="sb-ttp-label-lg"
           onChange={(e) => setConfirmPassword(e.target.value)}
-          onKeyDown={(e) => { if (e.key === "Enter") handleSetPassword(); }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleSetPassword();
+          }}
           rightIcon={
-            <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} style={{ background: "none", border: "none", cursor: "pointer", color: "#6d7f92", display: "flex" }}>
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                color: "#6d7f92",
+                display: "flex",
+              }}
+            >
               {showConfirmPassword ? (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
                   <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
                   <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
                   <line x1="2" x2="22" y1="2" y2="22"></line>
                 </svg>
               ) : (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
                   <circle cx="12" cy="12" r="3"></circle>
                 </svg>

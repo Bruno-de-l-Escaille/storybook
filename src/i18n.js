@@ -217,7 +217,8 @@ export const I18N = {
       invalid_otp: "Invalid verification code",
       expired_otp: "Verification code has expired",
       setPassword: "Do you want to set a password?",
-      setPasswordHint: "This step is optional. You can always set a password later.",
+      setPasswordHint:
+        "This step is optional. You can always set a password later.",
       newPassword: "New password",
       confirmPassword: "Confirm password",
       definePassword: "Set my password",
@@ -481,7 +482,8 @@ export const I18N = {
       invalid_otp: "Code de vérification invalide",
       expired_otp: "Le code de vérification a expiré",
       setPassword: "Voulez-vous définir un mot de passe ?",
-      setPasswordHint: "Cette étape est optionnelle. Vous pourrez toujours définir un mot de passe plus tard.",
+      setPasswordHint:
+        "Cette étape est optionnelle. Vous pourrez toujours définir un mot de passe plus tard.",
       newPassword: "Nouveau mot de passe",
       confirmPassword: "Confirmer le mot de passe",
       definePassword: "Définir mon mot de passe",
@@ -744,7 +746,8 @@ export const I18N = {
       invalid_otp: "Ongeldige verificatiecode",
       expired_otp: "Verificatiecode is verlopen",
       setPassword: "Wilt u een wachtwoord instellen?",
-      setPasswordHint: "Deze stap is optioneel. U kunt later altijd een wachtwoord instellen.",
+      setPasswordHint:
+        "Deze stap is optioneel. U kunt later altijd een wachtwoord instellen.",
       newPassword: "Nieuw wachtwoord",
       confirmPassword: "Bevestig wachtwoord",
       definePassword: "Mijn wachtwoord instellen",

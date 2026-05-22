@@ -275,13 +275,17 @@ export const setUserPassword = async (apiBaseUrl, token, password) => {
   }
 };
 
-
-export const setPassword = async (apiBaseUrl, newPassword, token, language = "fr") => {
+export const setPassword = async (
+  apiBaseUrl,
+  newPassword,
+  token,
+  language = "fr"
+) => {
   const response = await fetch(`${apiBaseUrl}/auth/password`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ newPassword }),
   });
@@ -294,15 +298,14 @@ export const setPassword = async (apiBaseUrl, newPassword, token, language = "fr
       const errorData = await response.json();
       throw new Error(
         errorData.message ||
-        errorData.error ||
-        `HTTP ${response.status}: ${response.statusText}`
+          errorData.error ||
+          `HTTP ${response.status}: ${response.statusText}`
       );
     } catch (jsonError) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
   }
 };
-
 
 export const authenticateUser = async (apiBaseUrl, email, password) => {
   const response = await fetch(`${apiBaseUrl}/auth/login`, {
