@@ -559,6 +559,19 @@ const GoPeopleAuthHeader = ({
 
       if (response.token) {
         if (response.isNewUser === true) {
+          // The JWT carries the identity we need to complete registration:
+          // `user_id` for the profile update, and the token itself as the
+          // bearer credential for updateUser / setUserPassword.
+          const { userInfo } = processJWTToken(response.token);
+          const newUserId = userInfo.userId || response.data?.user?.id;
+
+          if (!newUserId) {
+            setErrors({ ...errors, otp: I18N[lng].auth.error_occurred });
+            return;
+          }
+
+          setUserId(newUserId);
+          setClientToken(response.token);
           setShowModal(false);
           setShowRegisterModal(true);
         } else if (response.isNewUser === false) {
