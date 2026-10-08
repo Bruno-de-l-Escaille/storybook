@@ -575,8 +575,19 @@ const GoPeopleAuthHeader = ({
           setShowModal(false);
           setShowRegisterModal(true);
         } else if (response.isNewUser === false) {
-          setAuthToken(response.token);
-          setStep("SET_PASSWORD");
+          if (hasPassword) {
+            // Existing user who already has a password and chose OTP login: the
+            // set-password step is optional and pointless here, just complete the login.
+            Toast.success(I18N[lng].auth.successfully_saved);
+            await handleAuthSuccess({
+              token: response.token,
+              jwt: response.token,
+            });
+            handleCloseModal();
+          } else {
+            setAuthToken(response.token);
+            setStep("SET_PASSWORD");
+          }
         } else {
           Toast.success(I18N[lng].auth.successfully_saved);
           await handleAuthSuccess({
