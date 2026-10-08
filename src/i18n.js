@@ -117,6 +117,8 @@ export const I18N = {
       signin: "Log in",
       forgotPassword: "Forgot Password",
       forgot_password: "Forgot?",
+      resetPasswordEmailOnly:
+        "The reset code is sent by email. Change the identifier and enter your email address.",
       must_accept_conditions: "You must accept our terms of use",
       already_member: "Already a member?",
       server_error: "Server unreachable - Try again later",
@@ -378,6 +380,8 @@ export const I18N = {
       signin: "Se connecter",
       forgotPassword: "Mot de passe oublié",
       forgot_password: "Oublié?",
+      resetPasswordEmailOnly:
+        "Le code de réinitialisation est envoyé par e-mail. Modifiez l'identifiant et saisissez votre adresse e-mail.",
       must_accept_conditions:
         "Vous devez accepter nos conditions d'utilisation",
       already_member: "Déjà membre?",
@@ -645,6 +649,8 @@ export const I18N = {
       signin: "Aanmelden",
       forgotPassword: "Uw wachtwoord vergeten",
       forgot_password: "Vergeten?",
+      resetPasswordEmailOnly:
+        "De resetcode wordt per e-mail verzonden. Wijzig de identificatie en voer uw e-mailadres in.",
       must_accept_conditions: "U moet onze gebruiksvoorwaarden accepteren",
       already_member: "Ben je al lid?",
       server_error: "Server onbereikbaar - Probeer het later opnieuw",
