@@ -1023,7 +1023,9 @@ const GoPeopleAuthHeader = ({
     <div className={styles.loginContent}>
       <h1 className={styles.title}>{I18N[lng].auth.enterOTP}</h1>
 
-      <p className={styles.otpMessage}>{I18N[lng].auth.otpSentMessage}</p>
+      <p className={styles.otpMessage}>
+        {I18N[lng].auth.otpSentMessage} {identifier}
+      </p>
 
       <div className={styles.codeBox}>
         <ReactCodeInput
