@@ -117,8 +117,6 @@ export const I18N = {
       signin: "Log in",
       forgotPassword: "Forgot Password",
       forgot_password: "Forgot?",
-      resetPasswordEmailOnly:
-        "The reset code is sent by email. Change the identifier and enter your email address.",
       must_accept_conditions: "You must accept our terms of use",
       already_member: "Already a member?",
       server_error: "Server unreachable - Try again later",
@@ -189,7 +187,7 @@ export const I18N = {
       enterOTP: "Enter verification code",
       verifyOTP: "Verify",
       otpSentMessage:
-        "Please enter the 6-digit code sent to your email or phone",
+        "Please enter the 6-digit code sent to your email",
       modifyIdentifier: "Modify identifier",
       resetPassword: "Reset Password",
       resetPasswordTitle: "Reset your password",
@@ -199,7 +197,7 @@ export const I18N = {
       enterResetCode: "Enter reset code",
       verifyResetCode: "Verify reset code",
       resetCodeMessage:
-        "Please enter the 6-digit code sent to your email or phone",
+        "Please enter the 6-digit code sent to your email",
       phone_conflict:
         "Phone number already exists. Please use a different phone number.",
       email_already_exists: "This email address is already registered",
@@ -380,8 +378,6 @@ export const I18N = {
       signin: "Se connecter",
       forgotPassword: "Mot de passe oublié",
       forgot_password: "Oublié?",
-      resetPasswordEmailOnly:
-        "Le code de réinitialisation est envoyé par e-mail. Modifiez l'identifiant et saisissez votre adresse e-mail.",
       must_accept_conditions:
         "Vous devez accepter nos conditions d'utilisation",
       already_member: "Déjà membre?",
@@ -454,7 +450,7 @@ export const I18N = {
       enterOTP: "Entrez le code de vérification",
       verifyOTP: "Vérifier",
       otpSentMessage:
-        "Veuillez entrer le code à 6 chiffres envoyé à votre email ou téléphone",
+        "Veuillez entrer le code à 6 chiffres envoyé à votre email",
       modifyIdentifier: "Modifier l'identifiant",
       resetPassword: "Réinitialiser le mot de passe",
       resetPasswordTitle: "Réinitialiser votre mot de passe",
@@ -465,7 +461,7 @@ export const I18N = {
       enterResetCode: "Entrez le code de réinitialisation",
       verifyResetCode: "Vérifier le code de réinitialisation",
       resetCodeMessage:
-        "Veuillez entrer le code à 6 chiffres envoyé à votre email ou téléphone",
+        "Veuillez entrer le code à 6 chiffres envoyé à votre email",
       phone_conflict:
         "Ce numéro de téléphone existe déjà. Veuillez utiliser un autre numéro de téléphone.",
       email_already_exists: "Cette adresse email est déjà enregistrée",
@@ -649,8 +645,6 @@ export const I18N = {
       signin: "Aanmelden",
       forgotPassword: "Uw wachtwoord vergeten",
       forgot_password: "Vergeten?",
-      resetPasswordEmailOnly:
-        "De resetcode wordt per e-mail verzonden. Wijzig de identificatie en voer uw e-mailadres in.",
       must_accept_conditions: "U moet onze gebruiksvoorwaarden accepteren",
       already_member: "Ben je al lid?",
       server_error: "Server onbereikbaar - Probeer het later opnieuw",
@@ -721,7 +715,7 @@ export const I18N = {
       enterOTP: "Voer verificatiecode in",
       verifyOTP: "Verifiëren",
       otpSentMessage:
-        "Voer de 6-cijferige code in die naar uw e-mail of telefoon is gestuurd",
+        "Voer de 6-cijferige code in die naar uw e-mail is gestuurd",
       modifyIdentifier: "Identificatie wijzigen",
       resetPassword: "Wachtwoord opnieuw instellen",
       resetPasswordTitle: "Uw wachtwoord opnieuw instellen",
@@ -732,7 +726,7 @@ export const I18N = {
       enterResetCode: "Voer resetcode in",
       verifyResetCode: "Verifieer resetcode",
       resetCodeMessage:
-        "Voer de 6-cijferige code in die naar uw e-mail of telefoon is gestuurd",
+        "Voer de 6-cijferige code in die naar uw e-mail is gestuurd",
       phone_conflict:
         "Dit telefoonnummer bestaat al. Gebruik een ander telefoonnummer.",
       email_conflict:

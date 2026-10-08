@@ -668,16 +668,6 @@ const GoPeopleAuthHeader = ({
   };
 
   const handleForgotPassword = async () => {
-    // Password reset is email-only: the code is emailed, and most UA users' phone is a
-    // landline that never receives it. Login still accepts email or phone.
-    if (!identifier.includes("@") || !validateEmail(identifier)) {
-      const msg =
-        I18N[lng].auth.resetPasswordEmailOnly ||
-        "Le code de réinitialisation est envoyé par e-mail. Modifiez l'identifiant et saisissez votre adresse e-mail.";
-      setErrors({ ...errors, password: msg });
-      Toast.error(msg);
-      return;
-    }
     setLoading(true);
     setErrors({ ...errors, password: "" });
 
@@ -1276,7 +1266,9 @@ const GoPeopleAuthHeader = ({
         </h1>
       </div>
 
-      <p className={styles.otpMessage}>{I18N[lng].auth.resetCodeMessage}</p>
+      <p className={styles.otpMessage}>
+        {I18N[lng].auth.resetCodeMessage} {identifier}
+      </p>
 
       <div className={styles.codeBox}>
         <ReactCodeInput
