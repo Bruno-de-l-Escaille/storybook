@@ -186,8 +186,7 @@ export const I18N = {
       continueWithoutPassword: "Continue without password",
       enterOTP: "Enter verification code",
       verifyOTP: "Verify",
-      otpSentMessage:
-        "Please enter the 6-digit code sent to your email",
+      otpSentMessage: "Please enter the 6-digit code sent to your email",
       modifyIdentifier: "Modify identifier",
       resetPassword: "Reset Password",
       resetPasswordTitle: "Reset your password",
@@ -196,8 +195,7 @@ export const I18N = {
       resetCodeSent: "Reset code sent successfully",
       enterResetCode: "Enter reset code",
       verifyResetCode: "Verify reset code",
-      resetCodeMessage:
-        "Please enter the 6-digit code sent to your email",
+      resetCodeMessage: "Please enter the 6-digit code sent to your email",
       phone_conflict:
         "Phone number already exists. Please use a different phone number.",
       email_already_exists: "This email address is already registered",
