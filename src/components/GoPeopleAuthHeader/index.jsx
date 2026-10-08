@@ -575,8 +575,19 @@ const GoPeopleAuthHeader = ({
           setShowModal(false);
           setShowRegisterModal(true);
         } else if (response.isNewUser === false) {
-          setAuthToken(response.token);
-          setStep("SET_PASSWORD");
+          if (hasPassword) {
+            // Existing user who already has a password and chose OTP login: the
+            // set-password step is optional and pointless here, just complete the login.
+            Toast.success(I18N[lng].auth.successfully_saved);
+            await handleAuthSuccess({
+              token: response.token,
+              jwt: response.token,
+            });
+            handleCloseModal();
+          } else {
+            setAuthToken(response.token);
+            setStep("SET_PASSWORD");
+          }
         } else {
           Toast.success(I18N[lng].auth.successfully_saved);
           await handleAuthSuccess({
@@ -1012,7 +1023,9 @@ const GoPeopleAuthHeader = ({
     <div className={styles.loginContent}>
       <h1 className={styles.title}>{I18N[lng].auth.enterOTP}</h1>
 
-      <p className={styles.otpMessage}>{I18N[lng].auth.otpSentMessage}</p>
+      <p className={styles.otpMessage}>
+        {I18N[lng].auth.otpSentMessage} {identifier}
+      </p>
 
       <div className={styles.codeBox}>
         <ReactCodeInput
@@ -1266,7 +1279,9 @@ const GoPeopleAuthHeader = ({
         </h1>
       </div>
 
-      <p className={styles.otpMessage}>{I18N[lng].auth.resetCodeMessage}</p>
+      <p className={styles.otpMessage}>
+        {I18N[lng].auth.resetCodeMessage} {identifier}
+      </p>
 
       <div className={styles.codeBox}>
         <ReactCodeInput
